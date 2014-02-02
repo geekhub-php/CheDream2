@@ -1,0 +1,3 @@
+geekhub_dream_homepage:
+    pattern:  /
+    defaults: { _controller: GeekhubDreamBundle:Default:index }
