@@ -75,7 +75,6 @@ liip_imagine:
             quality: 60
             filters:
                 relative_resize: { widen: 60 }
-#                thumbnail: { size: [120, 90], mode: outbound }
         filter2:
             quality: 60
             filters:
