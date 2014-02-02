@@ -72,10 +72,6 @@ liip_imagine:
     cache_prefix:          /upload/dream/image/cache
     filter_sets:
         filter1:
-            quality: 60
-            filters:
-                relative_resize: { widen: 60 }
-        filter2:
-            quality: 60
-            filters:
-                relative_resize: { widen: 160 }
+            quality: 90
+            userAvatar:
+                thumbnail: { size: [300, 30], mode: outbound }
