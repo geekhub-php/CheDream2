@@ -67,3 +67,26 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+liip_imagine:
+#    driver:               gd
+#    web_root:             %kernel.root_dir%/../web
+#    data_root:            %kernel.root_dir%/../web/img/blog
+#    cache_mkdir_mode:     0777
+#    cache_prefix:
+    cache_prefix:          /upload/dream/image/cache
+#    cache:                web_path
+#    cache_clearer:        true
+#    data_loader:          filesystem
+#    controller_action:    liip_imagine.controller:filterAction
+#    formats:              []
+    filter_sets:
+        filter1:
+            quality: 60
+            filters:
+                relative_resize: { widen: 60 }
+#                thumbnail: { size: [120, 90], mode: outbound }
+        filter2:
+            quality: 60
+            filters:
+                relative_resize: { widen: 160 }
