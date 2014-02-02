@@ -71,7 +71,7 @@ swiftmailer:
 liip_imagine:
     cache_prefix:          /upload/dream/image/cache
     filter_sets:
-        filter1:
+        userAvatar:
             quality: 90
-            userAvatar:
+            filters:
                 thumbnail: { size: [300, 30], mode: outbound }
