@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/geekhub-php/CheDream2.png?branch=documentation)](https://travis-ci.org/geekhub-php/CheDream2)
+-----
+
 CheDream
 ========
 
