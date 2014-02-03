@@ -1,10 +1,16 @@
 language: php
 
 php:
-  - 5.3.3
   - 5.3
   - 5.4
+  - 5.5
 
-before_script: composer install -n
+env:
+  - SYMFONY_VERSION=2.4.*
 
-script: phpunit -c app
+before_script:
+    - composer self-update
+    - composer install -n
+
+script:
+    - bin/phpunit -c app

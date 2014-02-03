@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Geekhub\DreamBundle\GeekhubDreamBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
