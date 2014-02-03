@@ -1,0 +1,4 @@
+geekhub_dream:
+    resource: "@GeekhubDreamBundle/Resources/config/routing.yml"
+    prefix:   /
+
