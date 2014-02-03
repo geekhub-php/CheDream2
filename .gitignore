@@ -8,7 +8,7 @@
 /build/
 /vendor/
 /bin/*
-!/bin/reload.sh
+!bin/reload.sh
 /composer.phar
 /.idea/
 composer.lock
