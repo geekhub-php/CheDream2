@@ -1,4 +1,7 @@
+_imagine:
+    resource: .
+    type:     imagine
+
 geekhub_dream:
     resource: "@GeekhubDreamBundle/Resources/config/routing.yml"
     prefix:   /
-
