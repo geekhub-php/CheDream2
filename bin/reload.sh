@@ -11,7 +11,6 @@ setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uploa
 setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
 
 #php app/console doctrine:database:drop --force
-
 #php app/console doctrine:database:create
 #php app/console doctrine:generate:entities Geekhub
 #php app/console doctrine:schema:update --force
