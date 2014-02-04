@@ -51,7 +51,7 @@ assetic:
         semantic_ui_js:
             inputs:
                 - %kernel.root_dir%/../vendor/semantic/ui/build/packaged/javascript/semantic.min.js
-                - %kernel.root_dir%/Resources/public/homepage.js
+                - %kernel.root_dir%/Resources/public/js/home.js
             output: js/semantic.min.js
 
 
