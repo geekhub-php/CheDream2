@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\UserBundle\Entity\DreamUserInterface as DreamUserInterface;
 
 /**
  * Users
@@ -14,7 +15,7 @@ use Geekhub\DreamBundle\Entity\Dream;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Geekhub\UserBundle\Entity\UsersRepository")
  */
-class User extends BaseUser
+class User extends BaseUser //implements DreamUserInterface
 {
     /**
      * @var integer
@@ -28,107 +29,102 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=50)
+     * @ORM\Column(name="firstName", type="string", length=50, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="middleName", type="string", length=50)
+     * @ORM\Column(name="middleName", type="string", length=50, nullable=true)
      */
     private $middleName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=50)
+     * @ORM\Column(name="lastName", type="string", length=50, nullable=true)
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="avatar", type="string", length=100)
+     * @ORM\Column(name="avatar", type="string", length=100, nullable=true)
      */
     private $avatar;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime")
+     * @ORM\Column(name="birthday", type="datetime", nullable=true)
      */
     private $birthday;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=45)
+     * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="about", type="text")
+     * @ORM\Column(name="about", type="text", nullable=true)
      */
     private $about;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="skype", type="string", length=45)
+     * @ORM\Column(name="skype", type="string", length=45, nullable=true)
      */
     private $skype;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="vk", type="string", length=45)
+     * @ORM\Column(name="vk", type="string", length=45, nullable=true)
      */
     private $vk;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook", type="string", length=45)
+     * @ORM\Column(name="facebook", type="string", length=45, nullable=true)
      */
     private $facebook;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklasniki", type="string", length=45)
+     * @ORM\Column(name="odnoklasniki", type="string", length=45, nullable=true)
      */
     private $odnoklasniki;
 
-    //!!!! commented!!!!
-    /*
+    /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
      */
     protected  $favoriteDreams;
 
-    //!!!! commented!!!!
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamNeeding", mappedBy="user", cascade={"persist", "remove"})
      */
     protected $userNeedings;
 
-    //!!!! commented!!!!
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Comment", mappedBy="user", cascade={"persist", "remove"})
      */
     protected $userComments;
 
-    //!!!! commented!!!!
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Message", mappedBy="user", cascade={"persist", "remove"})
      */
     protected $userMessages;
 
 
-    //!!!! commented!!!!
-    /*
+    /**
      * @ORM\OneToOne(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="user")
      */
     protected  $dream;
@@ -136,7 +132,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * return integer 
      */
     public function getId()
     {
