@@ -19,28 +19,28 @@ class Faq
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=100)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="question", type="text")
      */
-    private $question;
+    protected $question;
 
     /**
      * @var string
      *
      * @ORM\Column(name="answer", type="text")
      */
-    private $answer;
+    protected $answer;
 
 
     /**

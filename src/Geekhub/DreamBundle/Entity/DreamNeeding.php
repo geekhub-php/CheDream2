@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Dreams_needing
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Entity\DreamNeedingRepository")
+ * @ORM\Table(name="dreamNeeding")
+ * @ORM\Entity()
  */
 class DreamNeeding
 {
@@ -19,63 +19,64 @@ class DreamNeeding
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
+     * @Assert\NotBlank(message = "dreamNeeding.title.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="type", type="smallint")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var float
      *
      * @ORM\Column(name="amount", type="float")
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="amountType", type="smallint")
      */
-    private $amountType;
+    protected $amountType;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="countDays", type="integer")
      */
-    private $countDays;
+    protected $countDays;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="countPeople", type="integer")
      */
-    private $countPeople;
+    protected $countPeople;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hiddenContributor", type="boolean")
      */
-    private $hiddenContributor;
+    protected $hiddenContributor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamNeedings")

@@ -19,28 +19,28 @@ class Message
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=50)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="text")
      */
-    private $text;
+    protected $text;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="readed", type="boolean")
      */
-    private $readed;
+    protected $readed;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamMessages")

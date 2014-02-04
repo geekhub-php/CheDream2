@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Comments
  *
  * @ORM\Table(name="comments")
- * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Entity\CommentRepository")
+ * @ORM\Entity()
  */
 class Comment
 {
@@ -19,21 +19,23 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text")
+     * @Assert\NotBlank(message = "comment.text.not_blank")
+     * @Assert\Length(min = "5", minMessage = "comment.text.length_error_short")
+     * @ORM\Column(name="text", type="text")
      */
-    private $message;
+    protected $text;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamComments")

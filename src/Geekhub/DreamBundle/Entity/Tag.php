@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Tags
@@ -20,14 +21,22 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=50)
      */
-    private $title;
+    protected $title;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=50, unique=true)
+     */
+    protected $slug;
 
     /**
      * @ORM\ManyToMany(targetEntity="Dream", mappedBy="tags")

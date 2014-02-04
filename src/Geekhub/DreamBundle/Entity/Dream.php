@@ -23,36 +23,38 @@ class Dream
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message = "dream.not_blank")
-     * @Assert\Length(min = "5", minMessage = "dream.title.length_error_short")
-     * @ORM\Column(name="title", type="string", length=200)
-     */
-    private $title;
+    protected $id;
 
     /**
      * @var string
      *
+     * @Assert\NotBlank(message = "dream.title.not_blank")
+     * @Assert\Length(min = "5", minMessage = "dream.title.length_error_short")
+     * @ORM\Column(name="title", type="string", length=200)
+     */
+    protected $title;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank(message = "dream.description.not_blank")
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mainPicture", type="string", length=100)
      */
-    private $mainPicture;
+    protected $mainPicture;
 
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=45)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
@@ -60,7 +62,7 @@ class Dream
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(name="slug", type="string", length=200, unique=true)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var \DateTime
@@ -68,7 +70,7 @@ class Dream
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \DateTime
@@ -76,56 +78,56 @@ class Dream
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updatedAt", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
      */
-    private $deletedAt;
+    protected $deletedAt;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="status", type="smallint")
      */
-    private $status;
+    protected $status;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="expiredDate", type="datetime")
      */
-    private $expiredDate;
+    protected $expiredDate;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="financialCompleted", type="smallint")
      */
-    private $financialCompleted;
+    protected $financialCompleted;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="workCompleted", type="smallint")
      */
-    private $workCompleted;
+    protected $workCompleted;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="equipmentCompleted", type="smallint")
      */
-    private $equipmentCompleted;
+    protected $equipmentCompleted;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hiddenPhone", type="boolean")
      */
-    private $hiddenPhone;
+    protected $hiddenPhone;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="dreams")
