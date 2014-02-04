@@ -143,29 +143,7 @@ class User extends BaseUser
         return $this->id;
     }
 
-    /**
-     * Set userName
-     *
-     * @param string $userName
-     * @return Users
-     */
-    public function setUserName($userName)
-    {
-        $this->userName = $userName;
-
-        return $this;
-    }
-
-    /**
-     * Get userName
-     *
-     * @return string 
-     */
-    public function getUserName()
-    {
-        return $this->userName;
-    }
-
+    
     /**
      * Set firstName
      *
