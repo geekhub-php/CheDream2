@@ -15,6 +15,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
     </head>
     <body>
+        {#{{ include(':include:menu.html.twig') }}#}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('js/semantic.min.js') }}"></script>
