@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Geekhub\DreamBundle\GeekhubDreamBundle(),
+            new Geekhub\UserBundle\GeekhubUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
