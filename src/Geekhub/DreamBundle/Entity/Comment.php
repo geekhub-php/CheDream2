@@ -100,4 +100,50 @@ class Comment
     {
         return $this->createdAt;
     }
+
+    /**
+     * Set dream
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @return Comment
+     */
+    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
+    {
+        $this->dream = $dream;
+
+        return $this;
+    }
+
+    /**
+     * Get dream
+     *
+     * @return \Geekhub\DreamBundle\Entity\Dream 
+     */
+    public function getDream()
+    {
+        return $this->dream;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Geekhub\UserBundle\Entity\User $user
+     * @return Comment
+     */
+    public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Geekhub\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

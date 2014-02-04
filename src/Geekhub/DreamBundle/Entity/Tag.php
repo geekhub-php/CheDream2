@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tags
@@ -32,6 +33,14 @@ class Tag
      * @ORM\ManyToMany(targetEntity="Dream", mappedBy="tags")
      */
     protected $dreams;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dreams = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -64,5 +73,38 @@ class Tag
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Add dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @return Tag
+     */
+    public function addDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams[] = $dreams;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     */
+    public function removeDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams->removeElement($dreams);
+    }
+
+    /**
+     * Get dreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreams()
+    {
+        return $this->dreams;
     }
 }
