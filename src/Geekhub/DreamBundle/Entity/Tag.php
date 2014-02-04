@@ -1,0 +1,110 @@
+<?php
+
+namespace Geekhub\DreamBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Tags
+ *
+ * @ORM\Table(name="tags")
+ * @ORM\Entity
+ */
+class Tag
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=50)
+     */
+    private $title;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dream", mappedBy="tags")
+     */
+    protected $dreams;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dreams = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Tags
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Add dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @return Tag
+     */
+    public function addDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams[] = $dreams;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     */
+    public function removeDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams->removeElement($dreams);
+    }
+
+    /**
+     * Get dreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreams()
+    {
+        return $this->dreams;
+    }
+}
