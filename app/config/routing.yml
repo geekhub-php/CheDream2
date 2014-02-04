@@ -5,3 +5,7 @@ _imagine:
 geekhub_dream:
     resource: "@GeekhubDreamBundle/Resources/config/routing.yml"
     prefix:   /
+
+geekhub_resource:
+    resource: "@GeekhubResourceBundle/Resources/config/routing.yml"
+    prefix:   /theme
