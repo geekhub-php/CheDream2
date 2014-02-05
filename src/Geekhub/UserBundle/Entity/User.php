@@ -106,7 +106,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
      */
-    protected  $favoriteDreams;
+    protected $favoriteDreams;
 
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamNeeding", mappedBy="user", cascade={"persist", "remove"})
@@ -127,7 +127,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
-    protected  $dreams;
+    protected $dreams;
 
     /**
      * Get id
@@ -207,29 +207,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getLastName()
     {
         return $this->lastName;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Users
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
