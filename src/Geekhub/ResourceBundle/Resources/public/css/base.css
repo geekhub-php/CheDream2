@@ -163,10 +163,36 @@ body {
     width: 220px;
 }
 
-/*.navbar-inverse {*/
-    /*background-color: #336600;*/
-/*}*/
+.navbar-inverse {
+    background-color: floralwhite;
+}
 
-/*nav>.active>a {*/
-    /*background-color: #336600;*/
-/*}*/
+.navbar-inverse .navbar-nav>.active>a {
+    background-color: inherit;
+    color: #000000;
+}
+
+.navbar-inverse .navbar-nav>.active>a:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: block;
+    content: " ";
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    vertical-align: middle;
+    border-right:  5px solid transparent;
+    border-left:   5px solid transparent;
+    border-bottom: 5px solid;
+}
+
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>li>a:hover {
+    background-color: grey;
+}
+
+.img-responsive {
+    max-width: 20px;
+    max-height: 20px;
+}

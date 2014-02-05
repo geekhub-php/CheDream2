@@ -61,14 +61,26 @@
                                 Авторизуватися
                         </a></li>
 
-                        {#<li><a href="#contact">#}
-                                {#{% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'#}
-                                {#output='images/facebook.ico' %}#}
-                                {#<img src="{{ asset_url }}" alt="facebook"/>#}
-                                {#{% endimage %}#}
-                        {#</a></li>#}
+                        <li><a href="#contact">
+                            {% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'
+                            output='images/facebook.ico' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="facebook"/>
+                            {% endimage %}
+                        </a></li>
 
+                        <li><a href="#contact">
+                                {% image '@GeekhubResourceBundle/Resources/public/images/odnoklassniki.ico'
+                                output='images/odnoklassniki.ico' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="odnoklassniki"/>
+                                {% endimage %}
+                        </a></li>
 
+                        <li><a href="#contact">
+                                {% image '@GeekhubResourceBundle/Resources/public/images/vk.ico'
+                                output='images/vk.ico' %}
+                                <img class="img-responsive" src="{{ asset_url }}" alt="vk"/>
+                                {% endimage %}
+                        </a></li>
 
                     </ul>
 
