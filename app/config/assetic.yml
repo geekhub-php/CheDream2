@@ -16,12 +16,8 @@ assetic:
     assets:
         jquery:
             inputs:
-                - %kernel.root_dir%/../components/jquery/jquery.min.js
+                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.min.js
             output: js/jquery.min.js
-        jquery_map:
-            inputs:
-                - %kernel.root_dir%/../components/jquery/jquery.min.map
-            output: js/jquery.min.map
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
