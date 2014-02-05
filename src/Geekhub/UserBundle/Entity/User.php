@@ -130,6 +130,16 @@ class User extends BaseUser //implements DreamUserInterface
     protected  $dreams;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userResources = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userComments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userMessages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * return integer 
@@ -414,15 +424,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getOdnoklasniki()
     {
         return $this->odnoklasniki;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->userResources = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userComments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userMessages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
