@@ -1,6 +1,6 @@
 <div class="navbar-wrapper">
     <div class="container">
-        <div class="navbar navbar-inner navbar-inverse navbar-static-top" role="navigation">
+        <div class="navbar navbar-inner navbar-inverse{# navbar-static-top#}" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button"
@@ -69,24 +69,26 @@
                             <a class="disabled">Авторизуватися</a>
                         </li>
 
-                        <li class="inline"><a href="#">
+                        <li><a href="#">
+                                {#<span style="max-height: 20px">#}
                             {% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'
                             output='images/facebook.ico' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="facebook"/>
+                            <img style="max-height: 18px" src="{{ asset_url }}" alt="facebook"/>
                             {% endimage %}
+                            {#</span>#}
                         </a></li>
 
-                        <li class="inline"><a href="#">
+                        <li><a href="#">
                             {% image '@GeekhubResourceBundle/Resources/public/images/odnoklassniki.ico'
                             output='images/odnoklassniki.ico' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="odnoklassniki"/>
+                            <img style="max-height: 18px" src="{{ asset_url }}" alt="odnoklassniki"/>
                             {% endimage %}
                         </a></li>
 
-                        <li class="inline"><a href="#">
+                        <li><a href="#">
                             {% image '@GeekhubResourceBundle/Resources/public/images/vk.ico'
                             output='images/vk.ico' %}
-                            <img class="img-responsive" src="{{ asset_url }}" alt="vk"/>
+                            <img style="max-height: 18px" src="{{ asset_url }}" alt="vk"/>
                             {% endimage %}
                         </a></li>
                     </ul>

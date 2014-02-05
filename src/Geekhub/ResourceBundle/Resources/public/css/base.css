@@ -154,6 +154,9 @@ body {
 .navbar-form > .input-group {
     width: 150px;
 }
+.dropdown-menu .navbar-form {
+    margin-left: 10px;
+}
 
 .navbar-inverse {
     background-color: floralwhite;
@@ -180,19 +183,28 @@ body {
 }
 
 .navbar-inverse .navbar-nav>.active>a:hover,
-.navbar-inverse .navbar-nav>li>a:hover {
+.navbar-inverse .navbar-nav>li>a:hover,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus,
+button .navbar-toggle {
     background-color: grey;
+}
+
+.navbar-toggle {
+    background-color: #808080;
 }
 
 .navbar-inverse .navbar-nav>li>a:focus {
     color: inherit;
 }
 
-.img-responsive {
+li > a > .img-responsive {
     max-width: 20px;
     max-height: 20px;
     float: left;
 }
+
 
 .container-fluid {
     margin: 0;
