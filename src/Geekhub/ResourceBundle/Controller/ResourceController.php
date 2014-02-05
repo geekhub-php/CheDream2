@@ -16,4 +16,4 @@ class ResourceController extends Controller
     {
         return $this->render('GeekhubResourceBundle:Resource:index.html.twig');
     }
-} 
+}
