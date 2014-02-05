@@ -4,7 +4,7 @@ namespace Geekhub\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Geekhub\DreamBundle\Entity\Dream;
 //use Geekhub\UserBundle\Entity\DreamUserInterface as DreamUserInterface;
@@ -111,7 +111,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamResources", mappedBy="user", cascade={"persist", "remove"})
      */
-    protected $userResources;
+    protected $contributions;
 
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Comment", mappedBy="user", cascade={"persist", "remove"})
@@ -134,9 +134,9 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
-        $this->userResources = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userComments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->userMessages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contributions = new ArrayCollection();
+        $this->userComments = new ArrayCollection();
+        $this->userMessages = new ArrayCollection();
     }
 
     /**
@@ -217,6 +217,29 @@ class User extends BaseUser //implements DreamUserInterface
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Users
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -404,36 +427,36 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Add userResources
+     * Add contribution
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $userResources
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $contributions
      * @return User
      */
-    public function addUserResource(\Geekhub\DreamBundle\Entity\DreamResources $userResources)
+    public function addContribution(\Geekhub\DreamBundle\Entity\DreamResources $contribution)
     {
-        $this->userResources[] = $userResources;
+        $this->contributions[] = $contribution;
 
         return $this;
     }
 
     /**
-     * Remove userResources
+     * Remove contribution
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $userResources
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $contributions
      */
-    public function removeUserResource(\Geekhub\DreamBundle\Entity\DreamResources $userResources)
+    public function removeContribution(\Geekhub\DreamBundle\Entity\DreamResources $contribution)
     {
-        $this->userResources->removeElement($userResources);
+        $this->contributions->removeElement($contribution);
     }
 
     /**
-     * Get userResources
+     * Get contributions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUserResources()
+    public function getContributions()
     {
-        return $this->userResources;
+        return $this->contributions;
     }
 
     /**
