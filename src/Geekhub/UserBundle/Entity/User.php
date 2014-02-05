@@ -109,9 +109,9 @@ class User extends BaseUser //implements DreamUserInterface
     protected $favoriteDreams;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamNeeding", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamResources", mappedBy="user", cascade={"persist", "remove"})
      */
-    protected $userNeedings;
+    protected $userResources;
 
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Comment", mappedBy="user", cascade={"persist", "remove"})
@@ -128,6 +128,16 @@ class User extends BaseUser //implements DreamUserInterface
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
     protected $dreams;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userResources = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userComments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userMessages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -391,5 +401,193 @@ class User extends BaseUser //implements DreamUserInterface
     public function getOdnoklasniki()
     {
         return $this->odnoklasniki;
+    }
+
+    /**
+     * Add userResources
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $userResources
+     * @return User
+     */
+    public function addUserResource(\Geekhub\DreamBundle\Entity\DreamResources $userResources)
+    {
+        $this->userResources[] = $userResources;
+
+        return $this;
+    }
+
+    /**
+     * Remove userResources
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $userResources
+     */
+    public function removeUserResource(\Geekhub\DreamBundle\Entity\DreamResources $userResources)
+    {
+        $this->userResources->removeElement($userResources);
+    }
+
+    /**
+     * Get userResources
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserResources()
+    {
+        return $this->userResources;
+    }
+
+    /**
+     * Add userComments
+     *
+     * @param \Geekhub\DreamBundle\Entity\Comment $userComments
+     * @return User
+     */
+    public function addUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
+    {
+        $this->userComments[] = $userComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove userComments
+     *
+     * @param \Geekhub\DreamBundle\Entity\Comment $userComments
+     */
+    public function removeUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
+    {
+        $this->userComments->removeElement($userComments);
+    }
+
+    /**
+     * Get userComments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserComments()
+    {
+        return $this->userComments;
+    }
+
+    /**
+     * Add userMessages
+     *
+     * @param \Geekhub\DreamBundle\Entity\Message $userMessages
+     * @return User
+     */
+    public function addUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
+    {
+        $this->userMessages[] = $userMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove userMessages
+     *
+     * @param \Geekhub\DreamBundle\Entity\Message $userMessages
+     */
+    public function removeUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
+    {
+        $this->userMessages->removeElement($userMessages);
+    }
+
+    /**
+     * Get userMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserMessages()
+    {
+        return $this->userMessages;
+    }
+
+    /**
+     * Set dream
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @return User
+     */
+    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
+    {
+        $this->dream = $dream;
+
+        return $this;
+    }
+
+    /**
+     * Get dream
+     *
+     * @return \Geekhub\DreamBundle\Entity\Dream 
+     */
+    public function getDream()
+    {
+        return $this->dream;
+    }
+
+    /**
+     * Add favoriteDreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
+     * @return User
+     */
+    public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
+    {
+        $this->favoriteDreams[] = $favoriteDreams;
+
+        return $this;
+    }
+
+    /**
+     * Remove favoriteDreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
+     */
+    public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
+    {
+        $this->favoriteDreams->removeElement($favoriteDreams);
+    }
+
+    /**
+     * Get favoriteDreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteDreams()
+    {
+        return $this->favoriteDreams;
+    }
+
+    /**
+     * Add dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @return User
+     */
+    public function addDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams[] = $dreams;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreams
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     */
+    public function removeDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    {
+        $this->dreams->removeElement($dreams);
+    }
+
+    /**
+     * Get dreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreams()
+    {
+        return $this->dreams;
     }
 }
