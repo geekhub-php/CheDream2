@@ -82,7 +82,6 @@ liip_imagine:
             filters:
                 thumbnail: { size: [300, 30], mode: outbound }
 
-
 stof_doctrine_extensions:
     default_locale: en_US
     orm:

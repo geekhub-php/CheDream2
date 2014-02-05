@@ -134,9 +134,11 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
+        $this->favoriteDreams = new ArrayCollection();
         $this->contributions = new ArrayCollection();
         $this->userComments = new ArrayCollection();
         $this->userMessages = new ArrayCollection();
+        $this->dreams = new ArrayCollection();
     }
 
     /**
