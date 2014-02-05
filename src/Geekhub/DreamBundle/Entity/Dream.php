@@ -88,13 +88,6 @@ class Dream
     protected $deletedAt;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="status", type="smallint")
-     */
-    protected $status;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="expiredDate", type="datetime")
@@ -174,6 +167,11 @@ class Dream
      * @ORM\Column(name="rejected", type="boolean")
      */
     protected $rejected;
+
+    /**
+     * @OneToOne(targetEntity="Status", mappedBy="dream")
+     */
+    protected $status;
 
     /**
      * Constructor
@@ -379,29 +377,6 @@ class Dream
     public function getDeletedAt()
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Dreams
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
