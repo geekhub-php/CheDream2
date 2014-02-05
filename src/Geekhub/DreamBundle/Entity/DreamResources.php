@@ -61,7 +61,7 @@ class DreamResources
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantityType", type="smallint")
+     * @ORM\Column(name="quantityType", type="string", length=15)
      */
     protected $quantityType;
 
@@ -86,13 +86,15 @@ class DreamResources
      */
     protected $hiddenContributor;
 
+
+
     /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamNeedings")
+     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamResources")
      */
     protected $dream;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="userNeedings")
+     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="userResources")
      */
     protected $user;
 
