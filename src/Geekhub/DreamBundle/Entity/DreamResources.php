@@ -14,6 +14,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class DreamResources
 {
+    const FINANCIAL     = 'financial';
+    const EQUIPMENT     = 'equipment';
+    const WORK          = 'work';
+    const OTHER         = 'other';
+
     /**
      * @var integer
      *
@@ -42,7 +47,7 @@ class DreamResources
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="smallint")
+     * @ORM\Column(name="type", type="string", length=30)
      */
     protected $type;
 

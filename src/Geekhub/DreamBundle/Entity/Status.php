@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Status
  *
- * @ORM\Table()
+ * @ORM\Table(name="status")
  * @ORM\Entity
  */
 class Status
@@ -33,7 +33,7 @@ class Status
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="string")
+     * @ORM\Column(name="status", type="string", length=30)
      */
     protected  $status;
 
@@ -50,7 +50,6 @@ class Status
      * @ORM\JoinColumn(name="dream_id", referencedColumnName="id")
      */
     protected  $dream;
-
 
     /**
      * Get id
