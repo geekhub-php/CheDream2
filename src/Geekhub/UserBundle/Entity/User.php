@@ -30,77 +30,77 @@ class User extends BaseUser //implements DreamUserInterface
      *
      * @ORM\Column(name="firstName", type="string", length=50, nullable=true)
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="middleName", type="string", length=50, nullable=true)
      */
-    private $middleName;
+    protected $middleName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=50, nullable=true)
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="avatar", type="string", length=100, nullable=true)
      */
-    private $avatar;
+    protected $avatar;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="datetime", nullable=true)
      */
-    private $birthday;
+    protected $birthday;
 
     /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string
      *
      * @ORM\Column(name="about", type="text", nullable=true)
      */
-    private $about;
+    protected $about;
 
     /**
      * @var string
      *
      * @ORM\Column(name="skype", type="string", length=45, nullable=true)
      */
-    private $skype;
+    protected $skype;
 
     /**
      * @var string
      *
      * @ORM\Column(name="vk", type="string", length=45, nullable=true)
      */
-    private $vk;
+    protected $vk;
 
     /**
      * @var string
      *
      * @ORM\Column(name="facebook", type="string", length=45, nullable=true)
      */
-    private $facebook;
+    protected $facebook;
 
     /**
      * @var string
      *
      * @ORM\Column(name="odnoklasniki", type="string", length=45, nullable=true)
      */
-    private $odnoklasniki;
+    protected $odnoklasniki;
 
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
