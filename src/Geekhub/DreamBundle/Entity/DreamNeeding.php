@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Dreams_needing
@@ -21,6 +22,14 @@ class DreamNeeding
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
 
     /**
      * @var string
@@ -327,5 +336,28 @@ class DreamNeeding
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return DreamNeeding
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

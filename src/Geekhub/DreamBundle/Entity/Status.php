@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Status
@@ -31,9 +32,10 @@ class Status
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
-    protected  $date;
+    protected $createdAt;
 
     /**
      * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
@@ -76,26 +78,26 @@ class Status
     }
 
     /**
-     * Set date
+     * Set createdAt
      *
-     * @param \DateTime $date
+     * @param \DateTime $createdAt
      * @return Status
      */
-    public function setDate($date)
+    public function setCreatedAt($createdAt)
     {
-        $this->date = $date;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDate()
+    public function getCreatedAt()
     {
-        return $this->date;
+        return $this->createdAt;
     }
 
     /**
