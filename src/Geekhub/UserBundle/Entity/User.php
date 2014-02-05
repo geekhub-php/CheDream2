@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Geekhub\DreamBundle\Entity\Dream;
-use Geekhub\UserBundle\Entity\DreamUserInterface as DreamUserInterface;
+//use Geekhub\UserBundle\Entity\DreamUserInterface as DreamUserInterface;
 
 /**
  * Users
@@ -125,9 +125,9 @@ class User extends BaseUser //implements DreamUserInterface
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
-    protected  $dream;
+    protected  $dreams;
 
     /**
      * Get id
