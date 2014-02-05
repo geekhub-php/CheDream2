@@ -36,8 +36,8 @@ class Status
     protected  $date;
 
     /**
-     * @OneToOne(targetEntity="Dream", inversedBy="status")
-     * @JoinColumn(name="dream_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
+     * @ORM\JoinColumn(name="dream_id", referencedColumnName="id")
      */
     protected  $dream;
 
@@ -96,5 +96,28 @@ class Status
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set dream
+     *
+     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @return Status
+     */
+    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
+    {
+        $this->dream = $dream;
+
+        return $this;
+    }
+
+    /**
+     * Get dream
+     *
+     * @return \Geekhub\DreamBundle\Entity\Dream 
+     */
+    public function getDream()
+    {
+        return $this->dream;
     }
 }

@@ -169,7 +169,7 @@ class Dream
     protected $rejected;
 
     /**
-     * @OneToOne(targetEntity="Status", mappedBy="dream")
+     * @ORM\OneToOne(targetEntity="Status", mappedBy="dream")
      */
     protected $status;
 
@@ -726,5 +726,28 @@ class Dream
     public function getRejected()
     {
         return $this->rejected;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \Geekhub\DreamBundle\Entity\Status $status
+     * @return Dream
+     */
+    public function setStatus(\Geekhub\DreamBundle\Entity\Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Geekhub\DreamBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
