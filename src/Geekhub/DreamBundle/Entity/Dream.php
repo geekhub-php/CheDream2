@@ -134,7 +134,12 @@ class Dream
     protected $usersWhoFavorites;
 
     /**
-     * @ORM\OneToMany(targetEntity="DreamResources", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="DreamContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamContributes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DreamResource", mappedBy="dream", cascade={"persist", "remove"})
      */
     protected $dreamResources;
 
@@ -180,6 +185,7 @@ class Dream
     {
         $this->tags = new ArrayCollection();
         $this->usersWhoFavorites = new ArrayCollection();
+        $this->dreamContributes = new ArrayCollection();
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->dreamMessages = new ArrayCollection();
@@ -199,7 +205,7 @@ class Dream
      * Set title
      *
      * @param string $title
-     * @return Dreams
+     * @return Dream
      */
     public function setTitle($title)
     {
@@ -222,7 +228,7 @@ class Dream
      * Set description
      *
      * @param string $description
-     * @return Dreams
+     * @return Dream
      */
     public function setDescription($description)
     {
@@ -245,7 +251,7 @@ class Dream
      * Set mainPicture
      *
      * @param string $mainPicture
-     * @return Dreams
+     * @return Dream
      */
     public function setMainPicture($mainPicture)
     {
@@ -268,7 +274,7 @@ class Dream
      * Set phone
      *
      * @param string $phone
-     * @return Dreams
+     * @return Dream
      */
     public function setPhone($phone)
     {
@@ -291,7 +297,7 @@ class Dream
      * Set slug
      *
      * @param string $slug
-     * @return Dreams
+     * @return Dream
      */
     public function setSlug($slug)
     {
@@ -314,7 +320,7 @@ class Dream
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Dreams
+     * @return Dream
      */
     public function setCreatedAt($createdAt)
     {
@@ -337,7 +343,7 @@ class Dream
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return Dreams
+     * @return Dream
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -360,7 +366,7 @@ class Dream
      * Set deletedAt
      *
      * @param \DateTime $deletedAt
-     * @return Dreams
+     * @return Dream
      */
     public function setDeletedAt($deletedAt)
     {
@@ -383,7 +389,7 @@ class Dream
      * Set expiredDate
      *
      * @param \DateTime $expiredDate
-     * @return Dreams
+     * @return Dream
      */
     public function setExpiredDate($expiredDate)
     {
@@ -406,7 +412,7 @@ class Dream
      * Set financialCompleted
      *
      * @param integer $financialCompleted
-     * @return Dreams
+     * @return Dream
      */
     public function setFinancialCompleted($financialCompleted)
     {
@@ -429,7 +435,7 @@ class Dream
      * Set workCompleted
      *
      * @param integer $workCompleted
-     * @return Dreams
+     * @return Dream
      */
     public function setWorkCompleted($workCompleted)
     {
@@ -452,7 +458,7 @@ class Dream
      * Set equipmentCompleted
      *
      * @param integer $equipmentCompleted
-     * @return Dreams
+     * @return Dream
      */
     public function setEquipmentCompleted($equipmentCompleted)
     {
@@ -475,7 +481,7 @@ class Dream
      * Set hiddenPhone
      *
      * @param boolean $hiddenPhone
-     * @return Dreams
+     * @return Dream
      */
     public function setHiddenPhone($hiddenPhone)
     {
@@ -492,6 +498,52 @@ class Dream
     public function getHiddenPhone()
     {
         return $this->hiddenPhone;
+    }
+
+    /**
+     * Set submitted
+     *
+     * @param boolean $submitted
+     * @return Dream
+     */
+    public function setSubmitted($submitted)
+    {
+        $this->submitted = $submitted;
+
+        return $this;
+    }
+
+    /**
+     * Get submitted
+     *
+     * @return boolean 
+     */
+    public function getSubmitted()
+    {
+        return $this->submitted;
+    }
+
+    /**
+     * Set rejected
+     *
+     * @param boolean $rejected
+     * @return Dream
+     */
+    public function setRejected($rejected)
+    {
+        $this->rejected = $rejected;
+
+        return $this;
+    }
+
+    /**
+     * Get rejected
+     *
+     * @return boolean 
+     */
+    public function getRejected()
+    {
+        return $this->rejected;
     }
 
     /**
@@ -561,12 +613,45 @@ class Dream
     }
 
     /**
-     * Add dreamResources
+     * Add dreamContributes
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $dreamResources
+     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
      * @return Dream
      */
-    public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResources $dreamResources)
+    public function addDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
+    {
+        $this->dreamContributes[] = $dreamContributes;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamContributes
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
+     */
+    public function removeDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
+    {
+        $this->dreamContributes->removeElement($dreamContributes);
+    }
+
+    /**
+     * Get dreamContributes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreamContributes()
+    {
+        return $this->dreamContributes;
+    }
+
+    /**
+     * Add dreamResources
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
+     * @return Dream
+     */
+    public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
     {
         $this->dreamResources[] = $dreamResources;
 
@@ -576,9 +661,9 @@ class Dream
     /**
      * Remove dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $dreamResources
+     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
      */
-    public function removeDreamResource(\Geekhub\DreamBundle\Entity\DreamResources $dreamResources)
+    public function removeDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
     {
         $this->dreamResources->removeElement($dreamResources);
     }
@@ -586,7 +671,7 @@ class Dream
     /**
      * Get dreamResources
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getDreamResources()
     {
@@ -680,52 +765,6 @@ class Dream
     public function getAuthor()
     {
         return $this->author;
-    }
-
-    /**
-     * Set submitted
-     *
-     * @param boolean $submitted
-     * @return Dream
-     */
-    public function setSubmitted($submitted)
-    {
-        $this->submitted = $submitted;
-
-        return $this;
-    }
-
-    /**
-     * Get submitted
-     *
-     * @return boolean 
-     */
-    public function getSubmitted()
-    {
-        return $this->submitted;
-    }
-
-    /**
-     * Set rejected
-     *
-     * @param boolean $rejected
-     * @return Dream
-     */
-    public function setRejected($rejected)
-    {
-        $this->rejected = $rejected;
-
-        return $this;
-    }
-
-    /**
-     * Get rejected
-     *
-     * @return boolean 
-     */
-    public function getRejected()
-    {
-        return $this->rejected;
     }
 
     /**

@@ -4,9 +4,8 @@ namespace Geekhub\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Geekhub\DreamBundle\Entity\Dream;
 //use Geekhub\UserBundle\Entity\DreamUserInterface as DreamUserInterface;
 
 /**
@@ -109,7 +108,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $favoriteDreams;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamResources", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamContribute", mappedBy="user", cascade={"persist", "remove"})
      */
     protected $contributions;
 
@@ -144,19 +143,18 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get id
      *
-     * return integer 
+     * @return integer 
      */
     public function getId()
     {
         return $this->id;
     }
 
-    
     /**
      * Set firstName
      *
      * @param string $firstName
-     * @return Users
+     * @return User
      */
     public function setFirstName($firstName)
     {
@@ -179,7 +177,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set middleName
      *
      * @param string $middleName
-     * @return Users
+     * @return User
      */
     public function setMiddleName($middleName)
     {
@@ -202,7 +200,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set lastName
      *
      * @param string $lastName
-     * @return Users
+     * @return User
      */
     public function setLastName($lastName)
     {
@@ -222,33 +220,10 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     * @return Users
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Set avatar
      *
      * @param string $avatar
-     * @return Users
+     * @return User
      */
     public function setAvatar($avatar)
     {
@@ -271,7 +246,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set birthday
      *
      * @param \DateTime $birthday
-     * @return Users
+     * @return User
      */
     public function setBirthday($birthday)
     {
@@ -294,7 +269,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set phone
      *
      * @param string $phone
-     * @return Users
+     * @return User
      */
     public function setPhone($phone)
     {
@@ -317,7 +292,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set about
      *
      * @param string $about
-     * @return Users
+     * @return User
      */
     public function setAbout($about)
     {
@@ -340,7 +315,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set skype
      *
      * @param string $skype
-     * @return Users
+     * @return User
      */
     public function setSkype($skype)
     {
@@ -363,7 +338,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set vk
      *
      * @param string $vk
-     * @return Users
+     * @return User
      */
     public function setVk($vk)
     {
@@ -386,7 +361,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set facebook
      *
      * @param string $facebook
-     * @return Users
+     * @return User
      */
     public function setFacebook($facebook)
     {
@@ -409,7 +384,7 @@ class User extends BaseUser //implements DreamUserInterface
      * Set odnoklasniki
      *
      * @param string $odnoklasniki
-     * @return Users
+     * @return User
      */
     public function setOdnoklasniki($odnoklasniki)
     {
@@ -429,32 +404,65 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Add contribution
+     * Add favoriteDreams
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $contributions
+     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
      * @return User
      */
-    public function addContribution(\Geekhub\DreamBundle\Entity\DreamResources $contribution)
+    public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
-        $this->contributions[] = $contribution;
+        $this->favoriteDreams[] = $favoriteDreams;
 
         return $this;
     }
 
     /**
-     * Remove contribution
+     * Remove favoriteDreams
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResources $contributions
+     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
      */
-    public function removeContribution(\Geekhub\DreamBundle\Entity\DreamResources $contribution)
+    public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
-        $this->contributions->removeElement($contribution);
+        $this->favoriteDreams->removeElement($favoriteDreams);
+    }
+
+    /**
+     * Get favoriteDreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteDreams()
+    {
+        return $this->favoriteDreams;
+    }
+
+    /**
+     * Add contributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamContribute $contributions
+     * @return User
+     */
+    public function addContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
+    {
+        $this->contributions[] = $contributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove contributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\DreamContribute $contributions
+     */
+    public function removeContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
+    {
+        $this->contributions->removeElement($contributions);
     }
 
     /**
      * Get contributions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getContributions()
     {
@@ -525,62 +533,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getUserMessages()
     {
         return $this->userMessages;
-    }
-
-    /**
-     * Set dream
-     *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
-     * @return User
-     */
-    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
-    {
-        $this->dream = $dream;
-
-        return $this;
-    }
-
-    /**
-     * Get dream
-     *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
-     */
-    public function getDream()
-    {
-        return $this->dream;
-    }
-
-    /**
-     * Add favoriteDreams
-     *
-     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
-     * @return User
-     */
-    public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
-    {
-        $this->favoriteDreams[] = $favoriteDreams;
-
-        return $this;
-    }
-
-    /**
-     * Remove favoriteDreams
-     *
-     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
-     */
-    public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
-    {
-        $this->favoriteDreams->removeElement($favoriteDreams);
-    }
-
-    /**
-     * Get favoriteDreams
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFavoriteDreams()
-    {
-        return $this->favoriteDreams;
     }
 
     /**

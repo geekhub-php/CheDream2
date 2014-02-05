@@ -7,21 +7,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Dreams_needing
+ * DreamResource
  *
- * @ORM\Table(name="dreamResources")
- * @ORM\Entity()
+ * @ORM\Table(name="dreamResource")
+ * @ORM\Entity
  */
-class DreamResources
+class DreamResource
 {
-    const FINANCIAL     = 'financial';
-    const EQUIPMENT     = 'equipment';
-    const WORK          = 'work';
-    const OTHER         = 'other';
-    const TON           = 'ton';
-    const KG            = 'kg';
-    const PIECE         = 'piece';
-
     /**
      * @var integer
      *
@@ -29,7 +21,7 @@ class DreamResources
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var \DateTime
@@ -37,69 +29,48 @@ class DreamResources
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dreamResources.title.not_blank")
+     * @Assert\NotBlank(message = "dreamResource.title.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
-    protected $title;
+    private $title;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="type", type="string", length=30)
      */
-    protected $type;
+    private $type;
 
     /**
      * @var float
      *
      * @ORM\Column(name="quantity", type="float")
      */
-    protected $quantity;
+    private $quantity;
 
     /**
-     * @var integer
+     * @var string
      *
      * @ORM\Column(name="quantityType", type="string", length=15)
      */
-    protected $quantityType;
+    private $quantityType;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="quantityDays", type="integer")
      */
-    protected $quantityDays;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    protected $description;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="hiddenContributor", type="boolean")
-     */
-    protected $hiddenContributor;
-
-
+    private $quantityDays;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamResources")
      */
     protected $dream;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="contributions")
-     */
-    protected $user;
 
     /**
      * Get id
@@ -111,12 +82,11 @@ class DreamResources
         return $this->id;
     }
 
-
     /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return DreamResources
+     * @return DreamResource
      */
     public function setCreatedAt($createdAt)
     {
@@ -139,7 +109,7 @@ class DreamResources
      * Set title
      *
      * @param string $title
-     * @return DreamResources
+     * @return DreamResource
      */
     public function setTitle($title)
     {
@@ -161,8 +131,8 @@ class DreamResources
     /**
      * Set type
      *
-     * @param integer $type
-     * @return DreamResources
+     * @param string $type
+     * @return DreamResource
      */
     public function setType($type)
     {
@@ -174,7 +144,7 @@ class DreamResources
     /**
      * Get type
      *
-     * @return integer 
+     * @return string 
      */
     public function getType()
     {
@@ -185,7 +155,7 @@ class DreamResources
      * Set quantity
      *
      * @param float $quantity
-     * @return DreamResources
+     * @return DreamResource
      */
     public function setQuantity($quantity)
     {
@@ -207,8 +177,8 @@ class DreamResources
     /**
      * Set quantityType
      *
-     * @param integer $quantityType
-     * @return DreamResources
+     * @param string $quantityType
+     * @return DreamResource
      */
     public function setQuantityType($quantityType)
     {
@@ -220,7 +190,7 @@ class DreamResources
     /**
      * Get quantityType
      *
-     * @return integer 
+     * @return string 
      */
     public function getQuantityType()
     {
@@ -231,7 +201,7 @@ class DreamResources
      * Set quantityDays
      *
      * @param integer $quantityDays
-     * @return DreamResources
+     * @return DreamResource
      */
     public function setQuantityDays($quantityDays)
     {
@@ -251,56 +221,10 @@ class DreamResources
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return DreamResources
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set hiddenContributor
-     *
-     * @param boolean $hiddenContributor
-     * @return DreamResources
-     */
-    public function setHiddenContributor($hiddenContributor)
-    {
-        $this->hiddenContributor = $hiddenContributor;
-
-        return $this;
-    }
-
-    /**
-     * Get hiddenContributor
-     *
-     * @return boolean 
-     */
-    public function getHiddenContributor()
-    {
-        return $this->hiddenContributor;
-    }
-
-    /**
      * Set dream
      *
      * @param \Geekhub\DreamBundle\Entity\Dream $dream
-     * @return DreamResources
+     * @return DreamResource
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
     {
@@ -317,28 +241,5 @@ class DreamResources
     public function getDream()
     {
         return $this->dream;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Geekhub\UserBundle\Entity\User $user
-     * @return DreamResources
-     */
-    public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Geekhub\UserBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }
