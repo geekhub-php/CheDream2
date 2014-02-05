@@ -13,6 +13,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Status
 {
+    const SUBMITTED   = 'submitted';
+    const REJECTED    = 'rejected';
+    const NEW_DREAM   = 'new-dream';
+    const IN_PROGRESS = 'in-progress';
+    const COMPLETED   = 'completed';
+    const SUCCESS     = 'success';
+    const FAIL        = 'fail';
+
     /**
      * @var integer
      *
@@ -25,7 +33,7 @@ class Status
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="smallint")
+     * @ORM\Column(name="status", type="string")
      */
     protected  $status;
 
