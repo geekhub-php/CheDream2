@@ -156,10 +156,10 @@ class Dream
     protected $dreamMessages;
 
     /**
-     * @ORM\OneToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dream")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
-    protected $user;
+    protected $author;
 
     /**
      * Constructor
@@ -671,25 +671,25 @@ class Dream
     }
 
     /**
-     * Set user
+     * Set author
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param \Geekhub\UserBundle\Entity\User $author
      * @return Dream
      */
-    public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
+    public function setAuthor(\Geekhub\UserBundle\Entity\User $author = null)
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get author
      *
      * @return \Geekhub\UserBundle\Entity\User 
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 }

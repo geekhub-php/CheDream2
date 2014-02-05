@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comments
@@ -58,26 +59,26 @@ class Comment
     }
 
     /**
-     * Set message
+     * Set text
      *
-     * @param string $message
-     * @return Comments
+     * @param string $text
+     * @return Comment
      */
-    public function setMessage($message)
+    public function setText($text)
     {
-        $this->message = $message;
+        $this->text = $text;
 
         return $this;
     }
 
     /**
-     * Get message
+     * Get text
      *
-     * @return string 
+     * @return string
      */
-    public function getMessage()
+    public function getText()
     {
-        return $this->message;
+        return $this->text;
     }
 
     /**
