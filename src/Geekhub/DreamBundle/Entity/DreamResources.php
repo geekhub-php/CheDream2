@@ -18,6 +18,9 @@ class DreamResources
     const EQUIPMENT     = 'equipment';
     const WORK          = 'work';
     const OTHER         = 'other';
+    const TON           = 'ton';
+    const KG            = 'kg';
+    const PIECE         = 'piece';
 
     /**
      * @var integer
@@ -39,7 +42,7 @@ class DreamResources
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dreamNeeding.title.not_blank")
+     * @Assert\NotBlank(message = "dreamResources.title.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
     protected $title;
