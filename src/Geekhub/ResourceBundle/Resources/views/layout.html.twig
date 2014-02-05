@@ -8,10 +8,12 @@
     <meta name="author" content="">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>{% block title %}Carousel Template for Bootstrap{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="{{ asset('js/ie8.js') }}"></script><![endif]-->
