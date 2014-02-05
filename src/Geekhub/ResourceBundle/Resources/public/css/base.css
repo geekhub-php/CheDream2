@@ -8,7 +8,6 @@ body {
 }
 
 
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -156,11 +155,11 @@ body {
 }
 
 .navbar-form.navbar-right:last-child {
-    margin-right: 15px;
+    margin-right: 0;
 }
 
 .navbar-form > .input-group {
-    width: 220px;
+    width: 150px;
 }
 
 .navbar-inverse {
@@ -199,4 +198,16 @@ body {
 .img-responsive {
     max-width: 20px;
     max-height: 20px;
+    float: left;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    margin: 2px 0;
+    border-style: solid none;
+    border-width: 1px 0;
 }

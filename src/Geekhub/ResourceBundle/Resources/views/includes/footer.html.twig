@@ -1,0 +1,32 @@
+<!-- FOOTER -->
+<div id="footer">
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                Черькаська мрія &copy; 2014
+                &nbsp;<a href="#">Мрії</a>
+                &nbsp;<a href="#">Регламент і поради</a>
+                &nbsp;<a href="#">Контакти</a>
+                &nbsp;<a href="#">Підписатися на оновлення</a>
+            </div>
+            <div class="col-md-1">Follow us</div>
+            <div class="col-md-2">
+                {% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'
+                output='images/facebook.ico' %}
+                <img class="img-responsive" style="position: relative" src="{{ asset_url }}" alt="facebook"/>
+                {% endimage %}
+                {% image '@GeekhubResourceBundle/Resources/public/images/odnoklassniki.ico'
+                output='images/odnoklassniki.ico' %}
+                <img class="img-responsive" style="position: relative" src="{{ asset_url }}" alt="odnoklassniki"/>
+                {% endimage %}
+                {% image '@GeekhubResourceBundle/Resources/public/images/vk.ico'
+                output='images/vk.ico' %}
+                <img class="img-responsive" style="position: relative" src="{{ asset_url }}" alt="vk"/>
+                {% endimage %}
+            </div>
+            <div class="col-md-2">Розробка <a href="#">geekhub team</a></div>
+        </div>
+    </div>
+
+</div>

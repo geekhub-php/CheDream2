@@ -2,6 +2,16 @@
 
 {% block body %}
     {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
-    {% include 'GeekhubResourceBundle:includes:carousel.html.twig' %}
 
+
+    {% if app.request.attributes.get('_route') == 'geekhub_resource_home' %}
+        {% include 'GeekhubResourceBundle:includes:carousel.html.twig' %}
+    {% endif %}
+
+    <div class="container marketing">
+        {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
+
+    </div>
+
+    {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
 {% endblock %}

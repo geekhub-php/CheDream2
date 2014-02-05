@@ -1,8 +1,8 @@
 <div class="navbar-wrapper">
     <div class="container">
 
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation" {# data-spy="affix" data-offset-top="100"#}>
-            <div class="container">
+        <div class="navbar navbar-inner navbar-inverse navbar-static-top" role="navigation" {# data-spy="affix" data-offset-top="100"#}>
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -60,21 +60,21 @@
                                 <a class="disabled">Авторизуватися</a>
                         </li>
 
-                        <li><a href="#">
+                        <li class="inline"><a href="#">
                                 {% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'
                                 output='images/facebook.ico' %}
                                 <img class="img-responsive" src="{{ asset_url }}" alt="facebook"/>
                                 {% endimage %}
                             </a></li>
 
-                        <li><a href="#">
+                        <li class="inline"><a href="#">
                                 {% image '@GeekhubResourceBundle/Resources/public/images/odnoklassniki.ico'
                                 output='images/odnoklassniki.ico' %}
                                 <img class="img-responsive" src="{{ asset_url }}" alt="odnoklassniki"/>
                                 {% endimage %}
                         </a></li>
 
-                        <li><a href="#">
+                        <li class="inline"><a href="#">
                                 {% image '@GeekhubResourceBundle/Resources/public/images/vk.ico'
                                 output='images/vk.ico' %}
                                 <img class="img-responsive" src="{{ asset_url }}" alt="vk"/>
@@ -95,7 +95,8 @@
                         </div>
                     </form>
                 </div>
-            </div>        </div>
+            </div>
+        </div>
 
     </div>
 </div>
