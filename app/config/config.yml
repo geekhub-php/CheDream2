@@ -56,14 +56,25 @@ assetic:
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
+                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
             filters:
                 - cssrewrite
-#                - yui_css
             output: css/bootstrap.min.css
+#        base_css:
+#            inputs:
+#                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
+#            filters:
+#                - cssrewrite
+#            output: css/base.css
         bootstrap_js:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/docs.min.js
             output: js/bootstrap.min.js
+        ie8:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js
+            output: js/ie8.js
 
 
 # Doctrine Configuration
