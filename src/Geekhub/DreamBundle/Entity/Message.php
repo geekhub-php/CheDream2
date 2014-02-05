@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Messages
@@ -51,6 +52,14 @@ class Message
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="userMessages")
      */
     protected $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
 
     /**
      * Get id
@@ -175,5 +184,28 @@ class Message
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Message
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }
