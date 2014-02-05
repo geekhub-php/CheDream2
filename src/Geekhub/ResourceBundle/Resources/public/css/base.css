@@ -192,6 +192,10 @@ body {
     background-color: grey;
 }
 
+.navbar-inverse .navbar-nav>li>a:focus {
+    color: inherit;
+}
+
 .img-responsive {
     max-width: 20px;
     max-height: 20px;
