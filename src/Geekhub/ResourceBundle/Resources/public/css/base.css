@@ -206,7 +206,7 @@ body {
     padding: 0;
 }
 
-hr {
+#footer > hr {
     margin: 2px 0;
     border-style: solid none;
     border-width: 1px 0;
