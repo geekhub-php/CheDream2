@@ -24,6 +24,7 @@ assetic:
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
             filters:
                 - cssrewrite
+                - yui_css
             output: css/bootstrap.min.css
         bootstrap_js:
             inputs:

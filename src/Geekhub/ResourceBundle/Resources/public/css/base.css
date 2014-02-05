@@ -7,7 +7,6 @@ body {
     color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -29,7 +28,6 @@ body {
     padding-left: 0;
     padding-right: 0;
 }
-
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -57,8 +55,6 @@ body {
     height: 500px;
 }
 
-
-
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
@@ -81,7 +77,6 @@ body {
     margin-right: 10px;
 }
 
-
 /* Featurettes
 ------------------------- */
 
@@ -95,8 +90,6 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
-
-
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -210,4 +203,8 @@ body {
     margin: 2px 0;
     border-style: solid none;
     border-width: 1px 0;
+}
+
+.progress {
+    margin-bottom: 0;
 }
