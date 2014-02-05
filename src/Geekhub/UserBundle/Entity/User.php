@@ -122,7 +122,6 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $userMessages;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */

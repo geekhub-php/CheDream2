@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Comments
@@ -34,6 +35,7 @@ class Comment
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
