@@ -94,7 +94,7 @@ class DreamResources
     protected $dream;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="userResources")
+     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="contributions")
      */
     protected $user;
 
