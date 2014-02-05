@@ -9,10 +9,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Dreams_needing
  *
- * @ORM\Table(name="dreamNeeding")
+ * @ORM\Table(name="dreamResources")
  * @ORM\Entity()
  */
-class DreamNeeding
+class DreamResources
 {
     /**
      * @var integer
@@ -49,16 +49,23 @@ class DreamNeeding
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\Column(name="quantity", type="float")
      */
-    protected $amount;
+    protected $quantity;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="amountType", type="smallint")
+     * @ORM\Column(name="quantityType", type="smallint")
      */
-    protected $amountType;
+    protected $quantityType;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantityDays", type="integer")
+     */
+    protected $quantityDays;
 
     /**
      * @var string
@@ -66,20 +73,6 @@ class DreamNeeding
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="countDays", type="integer")
-     */
-    protected $countDays;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="countPeople", type="integer")
-     */
-    protected $countPeople;
 
     /**
      * @var boolean
@@ -108,11 +101,35 @@ class DreamNeeding
         return $this->id;
     }
 
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return DreamResources
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
     /**
      * Set title
      *
      * @param string $title
-     * @return Dreams_needing
+     * @return DreamResources
      */
     public function setTitle($title)
     {
@@ -135,7 +152,7 @@ class DreamNeeding
      * Set type
      *
      * @param integer $type
-     * @return Dreams_needing
+     * @return DreamResources
      */
     public function setType($type)
     {
@@ -155,56 +172,79 @@ class DreamNeeding
     }
 
     /**
-     * Set amount
+     * Set quantity
      *
-     * @param float $amount
-     * @return Dreams_needing
+     * @param float $quantity
+     * @return DreamResources
      */
-    public function setAmount($amount)
+    public function setQuantity($quantity)
     {
-        $this->amount = $amount;
+        $this->quantity = $quantity;
 
         return $this;
     }
 
     /**
-     * Get amount
+     * Get quantity
      *
      * @return float 
      */
-    public function getAmount()
+    public function getQuantity()
     {
-        return $this->amount;
+        return $this->quantity;
     }
 
     /**
-     * Set amountType
+     * Set quantityType
      *
-     * @param integer $amountType
-     * @return Dreams_needing
+     * @param integer $quantityType
+     * @return DreamResources
      */
-    public function setAmountType($amountType)
+    public function setQuantityType($quantityType)
     {
-        $this->amountType = $amountType;
+        $this->quantityType = $quantityType;
 
         return $this;
     }
 
     /**
-     * Get amountType
+     * Get quantityType
      *
      * @return integer 
      */
-    public function getAmountType()
+    public function getQuantityType()
     {
-        return $this->amountType;
+        return $this->quantityType;
+    }
+
+    /**
+     * Set quantityDays
+     *
+     * @param integer $quantityDays
+     * @return DreamResources
+     */
+    public function setQuantityDays($quantityDays)
+    {
+        $this->quantityDays = $quantityDays;
+
+        return $this;
+    }
+
+    /**
+     * Get quantityDays
+     *
+     * @return integer 
+     */
+    public function getQuantityDays()
+    {
+        return $this->quantityDays;
     }
 
     /**
      * Set description
      *
      * @param string $description
-     * @return Dreams_needing
+     * @return DreamResources
      */
     public function setDescription($description)
     {
@@ -224,56 +264,10 @@ class DreamNeeding
     }
 
     /**
-     * Set countDays
-     *
-     * @param integer $countDays
-     * @return Dreams_needing
-     */
-    public function setCountDays($countDays)
-    {
-        $this->countDays = $countDays;
-
-        return $this;
-    }
-
-    /**
-     * Get countDays
-     *
-     * @return integer 
-     */
-    public function getCountDays()
-    {
-        return $this->countDays;
-    }
-
-    /**
-     * Set countPeople
-     *
-     * @param integer $countPeople
-     * @return Dreams_needing
-     */
-    public function setCountPeople($countPeople)
-    {
-        $this->countPeople = $countPeople;
-
-        return $this;
-    }
-
-    /**
-     * Get countPeople
-     *
-     * @return integer 
-     */
-    public function getCountPeople()
-    {
-        return $this->countPeople;
-    }
-
-    /**
      * Set hiddenContributor
      *
      * @param boolean $hiddenContributor
-     * @return Dreams_needing
+     * @return DreamResources
      */
     public function setHiddenContributor($hiddenContributor)
     {
@@ -296,7 +290,7 @@ class DreamNeeding
      * Set dream
      *
      * @param \Geekhub\DreamBundle\Entity\Dream $dream
-     * @return DreamNeeding
+     * @return DreamResources
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
     {
@@ -319,7 +313,7 @@ class DreamNeeding
      * Set user
      *
      * @param \Geekhub\UserBundle\Entity\User $user
-     * @return DreamNeeding
+     * @return DreamResources
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
     {
@@ -336,28 +330,5 @@ class DreamNeeding
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return DreamNeeding
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

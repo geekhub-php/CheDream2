@@ -134,9 +134,9 @@ class Dream
     protected $usersWhoFavorites;
 
     /**
-     * @ORM\OneToMany(targetEntity="DreamNeeding", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="DreamResources", mappedBy="dream", cascade={"persist", "remove"})
      */
-    protected $dreamNeedings;
+    protected $dreamResources;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="dream", cascade={"persist", "remove"})
@@ -180,7 +180,7 @@ class Dream
     {
         $this->tags = new ArrayCollection();
         $this->usersWhoFavorites = new ArrayCollection();
-        $this->dreamNeedings = new ArrayCollection();
+        $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->dreamMessages = new ArrayCollection();
     }
@@ -561,36 +561,36 @@ class Dream
     }
 
     /**
-     * Add dreamNeedings
+     * Add dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamNeeding $dreamNeedings
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $dreamResources
      * @return Dream
      */
-    public function addDreamNeeding(\Geekhub\DreamBundle\Entity\DreamNeeding $dreamNeedings)
+    public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResources $dreamResources)
     {
-        $this->dreamNeedings[] = $dreamNeedings;
+        $this->dreamResources[] = $dreamResources;
 
         return $this;
     }
 
     /**
-     * Remove dreamNeedings
+     * Remove dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamNeeding $dreamNeedings
+     * @param \Geekhub\DreamBundle\Entity\DreamResources $dreamResources
      */
-    public function removeDreamNeeding(\Geekhub\DreamBundle\Entity\DreamNeeding $dreamNeedings)
+    public function removeDreamResource(\Geekhub\DreamBundle\Entity\DreamResources $dreamResources)
     {
-        $this->dreamNeedings->removeElement($dreamNeedings);
+        $this->dreamResources->removeElement($dreamResources);
     }
 
     /**
-     * Get dreamNeedings
+     * Get dreamResources
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDreamNeedings()
+    public function getDreamResources()
     {
-        return $this->dreamNeedings;
+        return $this->dreamResources;
     }
 
     /**
