@@ -21,7 +21,7 @@ class DreamResource
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -29,7 +29,7 @@ class DreamResource
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var string
@@ -37,35 +37,35 @@ class DreamResource
      * @Assert\NotBlank(message = "dreamResource.title.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=30)
      */
-    private $type;
+    protected $type;
 
     /**
      * @var float
      *
      * @ORM\Column(name="quantity", type="float")
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var string
      *
      * @ORM\Column(name="quantityType", type="string", length=15)
      */
-    private $quantityType;
+    protected $quantityType;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="quantityDays", type="integer")
      */
-    private $quantityDays;
+    protected $quantityDays;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamResources")
