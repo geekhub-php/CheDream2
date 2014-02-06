@@ -18,4 +18,3 @@ php app/console doctrine:schema:update --force
 #php app/console assets:install --symlink
 #php app/console assetic:dump
 #php app/console cache:clear
-
