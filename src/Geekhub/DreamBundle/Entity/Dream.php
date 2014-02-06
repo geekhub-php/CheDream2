@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use DoctrineExtensions\Taggable\Taggable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Entity\DreamRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
-class Dream
+class Dream implements Taggable
 {
     /**
      * @var integer
@@ -122,9 +123,6 @@ class Dream
      */
     protected $hiddenPhone;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="dreams")
-     */
     protected $tags;
 
     /**
@@ -183,7 +181,6 @@ class Dream
      */
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
         $this->usersWhoFavorites = new ArrayCollection();
         $this->dreamContributes = new ArrayCollection();
         $this->dreamResources = new ArrayCollection();
@@ -547,36 +544,25 @@ class Dream
     }
 
     /**
-     * Add tags
-     *
-     * @param \Geekhub\DreamBundle\Entity\Tag $tags
-     * @return Dream
-     */
-    public function addTag(\Geekhub\DreamBundle\Entity\Tag $tags)
-    {
-        $this->tags[] = $tags;
-
-        return $this;
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param \Geekhub\DreamBundle\Entity\Tag $tags
-     */
-    public function removeTag(\Geekhub\DreamBundle\Entity\Tag $tags)
-    {
-        $this->tags->removeElement($tags);
-    }
-
-    /**
      * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
     public function getTags()
     {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
         return $this->tags;
+    }
+
+    public function getTaggableType()
+    {
+        return 'dream_tag';
+    }
+
+    public function getTaggableId()
+    {
+        return $this->getId();
     }
 
     /**
