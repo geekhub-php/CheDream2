@@ -16,7 +16,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ path('geekhub_resource_home') }}">
                         {#{% image '@GeekhubResourceBundle/Resources/public/images/logo.png'#}
                         {#output='/images/logo.png' %}#}
                         {#<img src="{{ asset_url }}" alt="LOGO"/>#}
@@ -27,7 +27,7 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">
+                        <li class="active"><a href="{{ path('geekhub_resource_allDreams') }}">
                             {#<span class="glyphicon glyphicon-eye-open"></span>#}
                             Мрії
                         </a></li>
