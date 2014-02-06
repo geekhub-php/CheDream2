@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DreamResource
  *
- * @ORM\Table(name="dreamResource")
+ * @ORM\Table(name="dream_resources")
  * @ORM\Entity
  */
 class DreamResource extends AbstractContributeResource
