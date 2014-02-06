@@ -7,8 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Acme\TagBundle\Entity\Tagging
- *
  * @ORM\Table(name="tagging", uniqueConstraints={@UniqueConstraint(name="tagging_idx", columns={"tag_id", "resource_type", "resource_id"})})
  * @ORM\Entity
  */

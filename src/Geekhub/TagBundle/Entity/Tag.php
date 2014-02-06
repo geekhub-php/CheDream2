@@ -6,8 +6,6 @@ use \FPN\TagBundle\Entity\Tag as BaseTag;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* Acme\TagBundle\Entity\Tag
-*
 * @ORM\Table(name="tag")
 * @ORM\Entity
 */
