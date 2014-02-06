@@ -51,6 +51,21 @@ class Comment
     protected $user;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="parent")
+     **/
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     **/
+    protected $parent;
+
+    public function __construct() {
+        $this->children = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -150,5 +165,61 @@ class Comment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Geekhub\DreamBundle\Entity\Comment $children
+     * @return Comment
+     */
+    public function addChild(\Geekhub\DreamBundle\Entity\Comment $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Geekhub\DreamBundle\Entity\Comment $children
+     */
+    public function removeChild(\Geekhub\DreamBundle\Entity\Comment $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Geekhub\DreamBundle\Entity\Comment $parent
+     * @return Comment
+     */
+    public function setParent(\Geekhub\DreamBundle\Entity\Comment $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Geekhub\DreamBundle\Entity\Comment 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

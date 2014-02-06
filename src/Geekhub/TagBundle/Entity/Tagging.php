@@ -26,4 +26,5 @@ class Tagging extends BaseTagging
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
      **/
     protected $tag;
+
 }
