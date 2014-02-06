@@ -2,22 +2,26 @@
 {% block title %}Мрії{% endblock %}
 
 {% block body %}
-    {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+    <div id="wrap">
+        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
 
-    <div class="container marketing">
-        <h1>Черкаські мрії</h1>
-        <hr/>
-        <ul class="list-inline">
-          <li><a href="#" >Нові <span class="badge">42</span></a></li>
-          <li><a href="#" >Популярні <span class="badge">42</span></a></li>
-          <li><a href="#" >На стадії втілення <span class="badge">42</span></a></li>
-          <li><a href="#" >Втілені <span class="badge">42</span></a></li>
-        </ul>
+        <div class="container">
+            <div class="marketing">
+                <h1>Черкаські мрії</h1>
+                <hr/>
+                <ul class="list-inline">
+                  <li><a href="#" >Нові <span class="badge">42</span></a></li>
+                  <li><a href="#" >Популярні <span class="badge">42</span></a></li>
+                  <li><a href="#" >На стадії втілення <span class="badge">42</span></a></li>
+                  <li><a href="#" >Втілені <span class="badge">42</span></a></li>
+                </ul>
 
-        {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
-        <p>
-            <button type="button" class="btn btn-link btn-lg">Show More</button>
-        </p>
+                {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
+                <p>
+                    <button type="button" class="btn btn-link btn-lg">Show More</button>
+                </p>
+            </div>
+        </div>
     </div>
 
     {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}

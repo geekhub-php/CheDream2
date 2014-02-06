@@ -1,98 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-    <title>{% block title %}Carousel Template for Bootstrap{% endblock %}</title>
+        <title>{% block title %}Carousel Template for Bootstrap{% endblock %}</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}{% endblock %}
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="{{ asset('js/ie8.js') }}"></script><![endif]-->
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src="{{ asset('js/ie8.js') }}"></script><![endif]-->
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
 
-<body>
-{% block body %}
-{% endblock %}
+    <body>
+        {% block body %}
+        {% endblock %}
 
-
-
-
-
-
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
-
-
-
-
-    {#<!-- START THE FEATURETTES -->#}
-
-    {#<hr class="featurette-divider">#}
-
-    {#<div class="row featurette">#}
-        {#<div class="col-md-7">#}
-            {#<h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>#}
-            {#<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>#}
-        {#</div>#}
-        {#<div class="col-md-5">#}
-            {#<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">#}
-        {#</div>#}
-    {#</div>#}
-
-    {#<hr class="featurette-divider">#}
-
-    {#<div class="row featurette">#}
-        {#<div class="col-md-5">#}
-            {#<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">#}
-        {#</div>#}
-        {#<div class="col-md-7">#}
-            {#<h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>#}
-            {#<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>#}
-        {#</div>#}
-    {#</div>#}
-
-    {#<hr class="featurette-divider">#}
-
-    {#<div class="row featurette">#}
-        {#<div class="col-md-7">#}
-            {#<h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>#}
-            {#<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>#}
-        {#</div>#}
-        {#<div class="col-md-5">#}
-            {#<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">#}
-        {#</div>#}
-    {#</div>#}
-
-    {#<hr class="featurette-divider">#}
-
-    {#<!-- /END THE FEATURETTES -->#}
-
-
-
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-{#<script src="{{ asset('js/docs.min.js') }}"></script>#}
-</body>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% block javascript %}
+        {% endblock %}
+    </body>
 </html>

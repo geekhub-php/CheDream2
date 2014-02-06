@@ -2,10 +2,29 @@
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
 
-body {
-    padding-bottom: 40px;
-    color: #5a5a5a;
+html, body {
+    height: 100%;
 }
+#wrap {
+    min-height: 100%;
+    /* Negative indent footer by it's height */
+    padding-bottom: 62px;
+}
+
+#footer {
+    height: 60px;
+    position: relative;
+    margin-top: -62px;
+    clear:both;
+}
+
+#footer > hr {
+    margin: 2px 0;
+    border-style: solid none;
+    border-width: 1px 0;
+}
+
+
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -39,7 +58,7 @@ body {
 /* Carousel base class */
 .carousel {
     height: 500px;
-    margin-bottom: -50px;
+    margin-bottom: 20px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -66,7 +85,7 @@ body {
 .marketing {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 120px;
+    /*padding-top: 60px;*/
 }
 
 /* Center align the text within the three columns below the carousel */
@@ -105,6 +124,7 @@ body {
     .marketing {
         padding-left: 0;
         padding-right: 0;
+        margin-bottom: 20px;
     }
 
     /* Navbar positioning foo */
@@ -164,12 +184,12 @@ body {
 }
 
 .navbar-inverse {
-    background-color: floralwhite;
+    background-color: #777;
 }
 
 .navbar-inverse .navbar-nav>.active>a {
     background-color: inherit;
-    color: #000000;
+    /*color: #000000;*/
 }
 
 .navbar-inverse .navbar-nav>.active>a:after {
@@ -200,8 +220,8 @@ button .navbar-toggle {
     background-color: #808080;
 }
 
-.navbar-inverse .navbar-nav>li>a:focus {
-    color: inherit;
+.navbar-inverse .navbar-nav>li>a {
+    color: #bbb;
 }
 
 li > a > .img-responsive {
@@ -210,16 +230,9 @@ li > a > .img-responsive {
     float: left;
 }
 
-
 .container-fluid {
     margin: 0;
     padding: 0;
-}
-
-#footer > hr {
-    margin: 2px 0;
-    border-style: solid none;
-    border-width: 1px 0;
 }
 
 .progress {
