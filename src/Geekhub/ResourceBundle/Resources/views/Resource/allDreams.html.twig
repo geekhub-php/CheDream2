@@ -1,15 +1,23 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
-{% block title %}Головна{% endblock %}
+{% block title %}Мрії{% endblock %}
 
 {% block body %}
     {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
 
-
-    {#<div class="carousel"></div>#}
-
     <div class="container marketing">
-        {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
+        <h1>Черкаські мрії</h1>
+        <hr/>
+        <ul class="list-inline">
+          <li><a href="#" >Нові <span class="badge">42</span></a></li>
+          <li><a href="#" >Популярні <span class="badge">42</span></a></li>
+          <li><a href="#" >На стадії втілення <span class="badge">42</span></a></li>
+          <li><a href="#" >Втілені <span class="badge">42</span></a></li>
+        </ul>
 
+        {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
+        <p>
+            <button type="button" class="btn btn-link btn-lg">Show More</button>
+        </p>
     </div>
 
     {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
