@@ -60,11 +60,11 @@ class User extends BaseUser //implements DreamUserInterface
     protected $birthday;
 
     /**
-     * @var string
+     * @var Contacts
      *
-     * @ORM\Column(name="phone", type="string", length=45, nullable=true)
+     * @ORM\Column(name="contacts", type="object")
      */
-    protected $phone;
+    protected $contacts;
 
     /**
      * @var string
@@ -72,13 +72,6 @@ class User extends BaseUser //implements DreamUserInterface
      * @ORM\Column(name="about", type="text", nullable=true)
      */
     protected $about;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="skype", type="string", length=45, nullable=true)
-     */
-    protected $skype;
 
     /**
      * @var string
@@ -131,11 +124,12 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
+        $this->contacts       = new Contacts();
         $this->favoriteDreams = new ArrayCollection();
-        $this->contributions = new ArrayCollection();
-        $this->userComments = new ArrayCollection();
-        $this->userMessages = new ArrayCollection();
-        $this->dreams = new ArrayCollection();
+        $this->contributions  = new ArrayCollection();
+        $this->userComments   = new ArrayCollection();
+        $this->userMessages   = new ArrayCollection();
+        $this->dreams         = new ArrayCollection();
     }
 
     /**
@@ -264,26 +258,26 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Set phone
+     * Set contacts
      *
-     * @param string $phone
+     * @param Contacts $contacts
      * @return User
      */
-    public function setPhone($phone)
+    public function setContacts($contacts)
     {
-        $this->phone = $phone;
+        $this->contacts = $contacts;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get contacts
      *
-     * @return string 
+     * @return Contacts
      */
-    public function getPhone()
+    public function getContacts()
     {
-        return $this->phone;
+        return $this->contacts;
     }
 
     /**
@@ -307,29 +301,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getAbout()
     {
         return $this->about;
-    }
-
-    /**
-     * Set skype
-     *
-     * @param string $skype
-     * @return User
-     */
-    public function setSkype($skype)
-    {
-        $this->skype = $skype;
-
-        return $this;
-    }
-
-    /**
-     * Get skype
-     *
-     * @return string 
-     */
-    public function getSkype()
-    {
-        return $this->skype;
     }
 
     /**
