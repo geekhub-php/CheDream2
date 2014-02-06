@@ -1,0 +1,16 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+{% block title %}Головна{% endblock %}
+
+{% block body %}
+    {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+
+
+    {#<div class="carousel"></div>#}
+
+    <div class="container marketing">
+        {% include 'GeekhubResourceBundle:includes:content.html.twig' %}
+
+    </div>
+
+    {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
+{% endblock %}

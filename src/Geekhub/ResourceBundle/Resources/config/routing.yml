@@ -1,3 +1,11 @@
 geekhub_resource_home:
     pattern:  /
     defaults: { _controller: GeekhubResourceBundle:Resource:index }
+
+geekhub_resource_profile:
+    pattern:  /profile
+    defaults: { _controller: GeekhubResourceBundle:Resource:profile }
+
+geekhub_resource_allDreams:
+    pattern:  /alldreams
+    defaults: { _controller: GeekhubResourceBundle:Resource:allDreams }

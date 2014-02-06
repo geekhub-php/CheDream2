@@ -16,4 +16,14 @@ class ResourceController extends Controller
     {
         return $this->render('GeekhubResourceBundle:Resource:index.html.twig');
     }
+
+    public function profileAction()
+        {
+            return $this->render('GeekhubResourceBundle:Resource:profile.html.twig');
+        }
+
+    public function allDreamsAction()
+    {
+        return $this->render('GeekhubResourceBundle:Resource:allDreams.html.twig');
+    }
 }
