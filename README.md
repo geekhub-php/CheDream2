@@ -1,4 +1,4 @@
-CheDream
+CheDream [![Build Status](https://travis-ci.org/geekhub-php/CheDream2.png?branch=develop)](https://travis-ci.org/geekhub-php/CheDream2)
 ========
 
 Chedream - This is an open source project for the Cherkasy city administration.
