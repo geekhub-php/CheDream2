@@ -1,25 +1,127 @@
 <div class="row ">
-    <div class="col-lg-3">
-        <img data-src="holder.js/200x200" alt="...">
+    <div class="col-md-3">
+        <div class="row">
+            <img class="center-block" data-src="holder.js/200x200" alt="...">
+        </div>
+
+        <br/>
+        <div class="row">
+            <div class="span6 offset6">
+                {% image '@GeekhubResourceBundle/Resources/public/images/facebook.ico'
+                output='images/facebook.ico' %}
+                <img  src="{{ asset_url }}" alt="facebook"/>
+                {% endimage %}
+                {% image '@GeekhubResourceBundle/Resources/public/images/odnoklassniki.ico'
+                output='images/odnoklassniki.ico' %}
+                <img src="{{ asset_url }}" alt="odnoklassniki"/>
+                {% endimage %}
+                {% image '@GeekhubResourceBundle/Resources/public/images/vk.ico'
+                output='images/vk.ico' %}
+                <img  src="{{ asset_url }}" alt="vk"/>
+                {% endimage %}
+            </div>
+        </div>
+        <br/>
+
+        <div class="row">
+            <strong class="text-danger">ПОВІДОМЛЕННЯ</strong>
+        </div>
+
+        {% for i in 0..2 %}
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="alert-danger">!!!</div>
+                </div>
+                <div class="col-sm-10">
+                    <p>Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя...</p>
+                </div>
+            </div>
+        {% endfor %}
 
 
     </div>
-    <div class="col-lg-9">
+    <div class="col-md-9">
         <div class="row panel">
             <div class="col-lg-3">
                 <p>Кононенко Алексей</p>
             </div>
             <div class="col-lg-7">
-                <p>(1) Сервісне повідомлення</p>
+                <p >12.01.2000p.</p>
             </div>
             <div class="col-lg-2">
                 <p>вийти</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row panel">
+            <p>
+                Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною. Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.
+            </p>
+        </div>
+        <div class="row panel">
+            <strong class="text-danger">АВТОР ПРОЕКТІВ</strong><hr>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+
+        </div>
+        <div class="row panel">
+            <strong class="text-danger">УЧАСНИК ПРОЕКТІВ</strong><hr>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
 
         </div>
         <div class="row">
+            <strong class="text-danger">FAVORITE</strong><hr>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
+            <div class="media">
+                <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Media heading</h4>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>
 
         </div>
     </div>

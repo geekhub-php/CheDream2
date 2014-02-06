@@ -238,3 +238,9 @@ li > a > .img-responsive {
 .progress {
     margin-bottom: 0;
 }
+
+.nav>li>a {
+    padding-left: 8px;
+    padding-right: 8px;
+
+}
