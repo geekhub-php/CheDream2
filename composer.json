@@ -19,11 +19,14 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
+
         "liip/imagine-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "doctrine/doctrine-fixtures-bundle": "2.2.*@dev",
         "stof/doctrine-extensions-bundle": "1.1.*@dev",
         "hwi/oauth-bundle": "0.3.*@dev",
+        "fpn/doctrine-extensions-taggable": "dev-master",
+        "fpn/tag-bundle":"dev-master",
         "semantic/ui": "dev-master"
     },
     "require-dev": {
