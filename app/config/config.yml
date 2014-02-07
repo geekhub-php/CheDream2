@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: sonata_projects_configuration.yml }
 
 framework:
     #esi:             ~
@@ -55,12 +56,17 @@ doctrine:
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
                 auto_mapping: true
+                mappings:
+                    SonataMediaBundle: ~
+                    ApplicationSonataMediaBundle: ~
                 filters:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
@@ -91,7 +97,7 @@ stof_doctrine_extensions:
             softdeleteable: true
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel' 
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Geekhub\UserBundle\Entity\User
 
