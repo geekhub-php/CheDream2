@@ -13,13 +13,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Status
 {
-    const SUBMITTED   = 'submitted';
-    const REJECTED    = 'rejected';
-    const NEW_DREAM   = 'new-dream';
-    const IN_PROGRESS = 'in-progress';
-    const COMPLETED   = 'completed';
-    const SUCCESS     = 'success';
-    const FAIL        = 'fail';
+    const SUBMITTED            = 'submitted';
+    const REJECTED             = 'rejected';
+    const COLLECTING_RESOURCES = 'collecting-resources';
+    const IMPLEMENTING         = 'implementing';
+    const COMPLETED            = 'completed';
+    const SUCCESS              = 'success';
+    const FAIL                 = 'fail';
 
     /**
      * @var integer

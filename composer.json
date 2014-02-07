@@ -30,6 +30,9 @@
         "nervo/yuicompressor": "dev-master",
         "fpn/doctrine-extensions-taggable": "dev-master",
         "fpn/tag-bundle":"dev-master",
+        "sonata-project/admin-bundle": "2.2.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
+        "sonata-project/media-bundle": "2.2.*@dev"
         "ahonymous/fontello": "dev-master"
     },
     "require-dev": {
