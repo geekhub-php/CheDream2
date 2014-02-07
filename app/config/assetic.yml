@@ -22,6 +22,7 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
+                - %kernel.root_dir%/../vendor/excelwebzone/fontello-bundle/EWZ/Bundle/FontelloBundle/Resources/public/css/fontello.css
             filters:
                 - cssrewrite
                 - yui_css
