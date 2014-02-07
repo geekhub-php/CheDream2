@@ -5,7 +5,7 @@
     <div id="wrap">
         {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
 
-        <div class="container">
+        <div id="main" class="container">
             {% if app.request.attributes.get('_route') == 'geekhub_resource_home' %}
                 {% include 'GeekhubResourceBundle:includes:carousel.html.twig' %}
             {% endif %}
