@@ -1,20 +1,15 @@
 html, body {
     height: 100%;
 }
+
 #wrap {
     min-height: 100%;
-    padding-bottom: 62px;
+    padding-bottom: 60px;
 }
 
 #footer {
     height: 60px;
     position: relative;
-    margin-top: -62px;
+    margin-top: -60px;
     clear:both;
-}
-
-.carousel {
-    height: 500px;
-    margin-bottom: 20px;
-    background-color: #777;
 }
