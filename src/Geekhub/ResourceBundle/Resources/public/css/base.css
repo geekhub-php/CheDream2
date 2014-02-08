@@ -18,3 +18,22 @@ html, body {
     margin-top: -170px;
     clear:both;
 }
+
+.nav>.vkontakte>a:hover {
+    background-color: #2B587A;
+    color: #FFFFFF;
+}
+
+.nav>.odnoklassniki>a:hover {
+    background-color: #f2720c;
+    color: #FFFFFF;
+}
+
+.nav>.facebook>a:hover {
+    background-color: #3b5998;
+    color: #FFFFFF;
+}
+
+.icon {
+    font-size: 18px;
+}
