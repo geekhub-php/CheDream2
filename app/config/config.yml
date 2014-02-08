@@ -99,3 +99,24 @@ fpn_tag:
     model:
         tag_class:     Geekhub\TagBundle\Entity\Tag
         tagging_class: Geekhub\TagBundle\Entity\Tagging
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_app_secret%"
+            scope:               "email, user_photos, user_website"
+        vkontakte:
+            type:                vkontakte
+            client_id:           "%vkontakte_app_id%"
+            client_secret:       "%vkontakte_app_secret%"
+            scope:               "photos"
+        odnoklassniki:
+            type:                odnoklassniki
+            client_id:           "%odnoklassniki_app_id%"
+            client_secret:       "%odnoklassniki_app_secret%"
+            scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
+            options:
+                application_key:    "%odnoklassniki_app_key%"

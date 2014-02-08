@@ -130,6 +130,7 @@ class User extends BaseUser //implements DreamUserInterface
         $this->userComments   = new ArrayCollection();
         $this->userMessages   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
+        parent::__construct();
     }
 
     /**
