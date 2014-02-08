@@ -35,7 +35,7 @@ class Contacts
      * Set skype
      *
      * @param string $skype
-     * @return User
+     * @return Contacts
      */
     public function setSkype($skype)
     {
