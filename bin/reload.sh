@@ -1,5 +1,6 @@
 #!/bin/bash
 
+php composer.phar update
 php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
 rm -rf app/cache/*
