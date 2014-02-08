@@ -1,18 +1,30 @@
 html, body {
     background-color: #eee;
 }
-.nav>.vkontakte>a:hover {
+.vkontakte:hover, .navbar-default .navbar-nav>.vkontakte>a:hover {
     background-color: #2B587A;
     color: #FFFFFF;
 }
-.nav>.odnoklassniki>a:hover {
+.odnoklassniki:hover, .navbar-default .navbar-nav>.odnoklassniki>a:hover {
     background-color: #f2720c;
     color: #FFFFFF;
 }
-.nav>.facebook>a:hover {
+.facebook:hover, .navbar-default .navbar-nav>.facebook>a:hover{
     background-color: #3b5998;
     color: #FFFFFF;
 }
+
+.navbar-nav>li>a:hover {
+    background-color: #FFFFFF;
+}
 .icon {
     font-size: 18px;
+}
+.navbar-default {
+    background-color: #eee;
+    border-style: none;
+}
+.search-query {
+    border: none;
+    background: transparent;
 }
