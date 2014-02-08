@@ -26,12 +26,12 @@ assetic:
             filters:
                 - cssrewrite
 #                - yui_css/
-            output: css/bootstrap.min.css
+            output: css/style.min.css
         bootstrap_js:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/docs.min.js
-            output: js/bootstrap.min.js
+            output: js/scripts.min.js
         ie8:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js
