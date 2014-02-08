@@ -7,10 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use DoctrineExtensions\Taggable\Taggable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Geekhub\UserBundle\Entity\User;
 
 /**
- * Dreams
- *
  * @ORM\Table(name="dreams")
  * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Entity\DreamRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
@@ -568,10 +567,10 @@ class Dream implements Taggable
     /**
      * Add usersWhoFavorites
      *
-     * @param \Geekhub\UserBundle\Entity\User $usersWhoFavorites
+     * @param User $usersWhoFavorites
      * @return Dream
      */
-    public function addUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
+    public function addUsersWhoFavorite(User $usersWhoFavorites)
     {
         $this->usersWhoFavorites[] = $usersWhoFavorites;
 
@@ -581,9 +580,9 @@ class Dream implements Taggable
     /**
      * Remove usersWhoFavorites
      *
-     * @param \Geekhub\UserBundle\Entity\User $usersWhoFavorites
+     * @param  $usersWhoFavorites
      */
-    public function removeUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
+    public function removeUsersWhoFavorite(User $usersWhoFavorites)
     {
         $this->usersWhoFavorites->removeElement($usersWhoFavorites);
     }
@@ -601,10 +600,10 @@ class Dream implements Taggable
     /**
      * Add dreamContributes
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
+     * @param DreamContribute $dreamContributes
      * @return Dream
      */
-    public function addDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
+    public function addDreamContribute(DreamContribute $dreamContributes)
     {
         $this->dreamContributes[] = $dreamContributes;
 
@@ -614,9 +613,9 @@ class Dream implements Taggable
     /**
      * Remove dreamContributes
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
+     * @param DreamContribute $dreamContributes
      */
-    public function removeDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
+    public function removeDreamContribute(DreamContribute $dreamContributes)
     {
         $this->dreamContributes->removeElement($dreamContributes);
     }
@@ -634,10 +633,10 @@ class Dream implements Taggable
     /**
      * Add dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
+     * @param DreamResource $dreamResources
      * @return Dream
      */
-    public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
+    public function addDreamResource(DreamResource $dreamResources)
     {
         $this->dreamResources[] = $dreamResources;
 
@@ -647,9 +646,9 @@ class Dream implements Taggable
     /**
      * Remove dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
+     * @param DreamResource $dreamResources
      */
-    public function removeDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
+    public function removeDreamResource(DreamResource $dreamResources)
     {
         $this->dreamResources->removeElement($dreamResources);
     }
@@ -667,10 +666,10 @@ class Dream implements Taggable
     /**
      * Add dreamComments
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $dreamComments
+     * @param Comment $dreamComments
      * @return Dream
      */
-    public function addDreamComment(\Geekhub\DreamBundle\Entity\Comment $dreamComments)
+    public function addDreamComment(Comment $dreamComments)
     {
         $this->dreamComments[] = $dreamComments;
 
@@ -680,9 +679,9 @@ class Dream implements Taggable
     /**
      * Remove dreamComments
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $dreamComments
+     * @param Comment $dreamComments
      */
-    public function removeDreamComment(\Geekhub\DreamBundle\Entity\Comment $dreamComments)
+    public function removeDreamComment(Comment $dreamComments)
     {
         $this->dreamComments->removeElement($dreamComments);
     }
@@ -700,10 +699,10 @@ class Dream implements Taggable
     /**
      * Add dreamMessages
      *
-     * @param \Geekhub\DreamBundle\Entity\Message $dreamMessages
+     * @param Message $dreamMessages
      * @return Dream
      */
-    public function addDreamMessage(\Geekhub\DreamBundle\Entity\Message $dreamMessages)
+    public function addDreamMessage(Message $dreamMessages)
     {
         $this->dreamMessages[] = $dreamMessages;
 
@@ -713,9 +712,9 @@ class Dream implements Taggable
     /**
      * Remove dreamMessages
      *
-     * @param \Geekhub\DreamBundle\Entity\Message $dreamMessages
+     * @param Message $dreamMessages
      */
-    public function removeDreamMessage(\Geekhub\DreamBundle\Entity\Message $dreamMessages)
+    public function removeDreamMessage(Message $dreamMessages)
     {
         $this->dreamMessages->removeElement($dreamMessages);
     }
@@ -733,10 +732,10 @@ class Dream implements Taggable
     /**
      * Set author
      *
-     * @param \Geekhub\UserBundle\Entity\User $author
+     * @param User $author
      * @return Dream
      */
-    public function setAuthor(\Geekhub\UserBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
 
@@ -746,7 +745,7 @@ class Dream implements Taggable
     /**
      * Get author
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return User
      */
     public function getAuthor()
     {
@@ -756,10 +755,10 @@ class Dream implements Taggable
     /**
      * Set status
      *
-     * @param \Geekhub\DreamBundle\Entity\Status $status
+     * @param Status $status
      * @return Dream
      */
-    public function setStatus(\Geekhub\DreamBundle\Entity\Status $status = null)
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -769,7 +768,7 @@ class Dream implements Taggable
     /**
      * Get status
      *
-     * @return \Geekhub\DreamBundle\Entity\Status 
+     * @return Status
      */
     public function getStatus()
     {
