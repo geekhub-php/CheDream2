@@ -7,35 +7,18 @@
 html, body {
     background-color: #eee;
 }
-.vkontakte:hover, .navbar-default .navbar-nav>.vkontakte>a:hover {
+.navbar-nav>li.vkontakte>a:hover {
     background-color: #2B587A;
     color: #FFFFFF;
 }
-.odnoklassniki:hover, .navbar-default .navbar-nav>.odnoklassniki>a:hover {
+.navbar-nav>li.odnoklassniki>a:hover {
     background-color: #f2720c;
     color: #FFFFFF;
 }
-.facebook:hover, .navbar-default .navbar-nav>.facebook>a:hover{
+.navbar-nav>li.facebook>a:hover {
     background-color: #3b5998;
     color: #FFFFFF;
 }
-.navbar-nav>li>a:hover {
-    background-color: #FFFFFF;
-}
 .icon {
     font-size: 18px;
-}
-.navbar-default {
-    background-color: #eee;
-    border-style: none;
-}
-.search-query {
-    border: none;
-    background: transparent;
-    max-width: 60px;
-}
-
-.navbar-nav>li>a {
-    padding-left: 8px;
-    padding-right: 8px;
 }
