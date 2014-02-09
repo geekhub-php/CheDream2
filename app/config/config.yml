@@ -101,6 +101,17 @@ fpn_tag:
         tagging_class: Geekhub\TagBundle\Entity\Tagging
 
 hwi_oauth:
+    connect:
+        account_connector: gh_fosuser.oauth_user_provider
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            vkontakte: vkontakte_id
+            odnoklassniki: odnoklassniki_id
     firewall_name: main
     resource_owners:
         facebook:

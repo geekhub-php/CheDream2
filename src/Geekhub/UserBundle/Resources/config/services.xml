@@ -6,10 +6,21 @@
 
 <parameters>
         <parameter key="gh_user.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\OAuthUserProvider</parameter>
-    </parameters>
+        <parameter key="gh_fosuser.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\MyFOSUBUserProvider</parameter>
+
+</parameters>
+
  
-    <services>
+<services>
         <service id="gh_user.oauth_user_provider" class="%gh_user.oauth_user_provider.class%">            
-        </service>
-    </services>
+    </service>
+    <service id="gh_fosuser.oauth_user_provider" class="%gh_fosuser.oauth_user_provider.class%"> 
+     	<argument type="service" id="fos_user.user_manager" />
+        <argument type="collection">
+         	<argument key="facebook">facebook_id</argument>
+         	<argument key="vkontakte">vkontakte_id</argument>
+         	<argument key="odnoklassniki">odnoklassniki_id</argument>
+        </argument>
+    </service>
+</services>
 </container>

@@ -76,23 +76,44 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vk", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
      */
-    protected $vk;
+    protected $vkontakte_id;
+
+    /** 
+     * @var string
+     *
+     * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) 
+     */
+    protected $vkontakte_access_token;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
      */
-    protected $facebook;
+    protected $facebook_id;
+
+    /** 
+     * @var string
+     *
+     *  @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) 
+     */
+    protected $facebook_access_token;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklasniki", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklasniki_id", type="string", length=45, nullable=true)
      */
-    protected $odnoklasniki;
+    protected $odnoklasniki_id;
+
+    /** 
+     * @var string
+     *
+     * @ORM\Column(name="odnoklassniki_access_token", type="string", length=255, nullable=true) 
+     */
+    protected $odnoklassniki_access_token;
 
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")

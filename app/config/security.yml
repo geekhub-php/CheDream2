@@ -10,7 +10,7 @@ security:
         fos_userbundle:
             id: fos_user.user_provider.username
         my_custom_hwi_provider:
-            id: gh_user.oauth_user_provider
+            id: gh_fosuser.oauth_user_provider # hwi_oauth.user.provider.fosub_bridge #gh_fosuser.oauth_user_provider
 
     firewalls:
         main:
@@ -23,7 +23,7 @@ security:
             oauth:
                 resource_owners:
                     facebook: "/login-social/check-facebook"
-                    vkontakte: "/login-social/check-vk"
+                    vkontakte: "/login-social/check-vkontakte"
                     odnoklassniki: "/login-social/check-odnoklassniki"
                 login_path:   /login-social
                 failure_path: /login3
