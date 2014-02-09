@@ -1,15 +1,15 @@
 html, body {
     background-color: #eee;
 }
-.nav>.vkontakte>a:hover {
+.navbar-nav>li.vkontakte>a:hover {
     background-color: #2B587A;
     color: #FFFFFF;
 }
-.nav>.odnoklassniki>a:hover {
+.navbar-nav>li.odnoklassniki>a:hover {
     background-color: #f2720c;
     color: #FFFFFF;
 }
-.nav>.facebook>a:hover {
+.navbar-nav>li.facebook>a:hover {
     background-color: #3b5998;
     color: #FFFFFF;
 }
