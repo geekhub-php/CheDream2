@@ -46,7 +46,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "cp -r vendor/twbs/bootstrap/dist/fonts/ web/fonts/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "cp -r vendor/ahonymous/fontello/fonts/ web/",
+            "sed -i 's/min-width: 768px/min-width: 1100px/g' vendor/twbs/bootstrap/dist/css/bootstrap.css",
+            "sed -i 's/max-width: 767px/max-width: 1099px/g' vendor/twbs/bootstrap/dist/css/bootstrap.css"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -55,7 +57,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "cp -r vendor/twbs/bootstrap/dist/fonts/ web/fonts/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "cp -r vendor/ahonymous/fontello/fonts/ web/",
+            "sed -i 's/min-width: 768px/min-width: 1100px/g' vendor/twbs/bootstrap/dist/css/bootstrap.css",
+            "sed -i 's/max-width: 767px/max-width: 1099px/g' vendor/twbs/bootstrap/dist/css/bootstrap.css"
         ]
     },
     "config": {
