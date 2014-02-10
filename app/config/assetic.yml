@@ -20,7 +20,7 @@ assetic:
             output: js/jquery.min.js
         bootstrap_css:
             inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
                 - %kernel.root_dir%/../vendor/ahonymous/fontello/css/fontello.css
             filters:
