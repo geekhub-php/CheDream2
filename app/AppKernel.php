@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Geekhub\DreamBundle\GeekhubDreamBundle(),
+            new Geekhub\ResourceBundle\GeekhubResourceBundle(),
             new Geekhub\UserBundle\GeekhubUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FPN\TagBundle\FPNTagBundle(),

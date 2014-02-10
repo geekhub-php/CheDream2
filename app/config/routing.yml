@@ -1,7 +1,3 @@
-geekhub_user:
-    resource: "@GeekhubUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 _imagine:
     resource: .
     type:     imagine

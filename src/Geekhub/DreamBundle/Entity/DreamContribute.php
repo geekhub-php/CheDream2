@@ -48,7 +48,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string          $description
      * @return DreamContribute
      */
     public function setDescription($description)
@@ -71,7 +71,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -81,7 +81,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Set hiddenContributor
      *
-     * @param boolean $hiddenContributor
+     * @param  boolean         $hiddenContributor
      * @return DreamContribute
      */
     public function setHiddenContributor($hiddenContributor)
@@ -94,7 +94,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Get hiddenContributor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenContributor()
     {
@@ -104,7 +104,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return DreamContribute
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -117,7 +117,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -127,7 +127,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return DreamContribute
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -140,7 +140,7 @@ class DreamContribute extends AbstractContributeResource
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {

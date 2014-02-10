@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block description %}CheDream - Open source crowdfunding system{% endblock %}">
+        <meta name="author" content="{% block author %}Geekhub PHP Developers Team{% endblock %}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Welcome{% endblock %}</title>
+
+        <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+
+        {% block stylesheets %}{% endblock %}
+
+        <!--[if lt IE 9]><script src="{{ asset('js/ie8.js') }}"></script><![endif]-->
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        {% block body %}
+        {% endblock %}
+
+        <script src="{{ asset('js/scripts.min.js') }}"></script>
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>
