@@ -75,7 +75,7 @@ class Message
      * Set title
      *
      * @param string $title
-     * @return Messages
+     * @return Message
      */
     public function setTitle($title)
     {
@@ -98,7 +98,7 @@ class Message
      * Set text
      *
      * @param string $text
-     * @return Messages
+     * @return Message
      */
     public function setText($text)
     {
@@ -121,7 +121,7 @@ class Message
      * Set readed
      *
      * @param boolean $readed
-     * @return Messages
+     * @return Message
      */
     public function setReaded($readed)
     {

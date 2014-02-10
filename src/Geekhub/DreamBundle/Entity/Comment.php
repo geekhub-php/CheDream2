@@ -102,7 +102,7 @@ class Comment
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Comments
+     * @return Comment
      */
     public function setCreatedAt($createdAt)
     {

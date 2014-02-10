@@ -158,20 +158,6 @@ class Dream implements Taggable
     protected $author;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="submitted", type="boolean")
-     */
-    protected $submitted;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="rejected", type="boolean")
-     */
-    protected $rejected;
-
-    /**
      * @ORM\OneToOne(targetEntity="Status", mappedBy="dream")
      */
     protected $status;
@@ -495,52 +481,6 @@ class Dream implements Taggable
     public function getHiddenPhone()
     {
         return $this->hiddenPhone;
-    }
-
-    /**
-     * Set submitted
-     *
-     * @param boolean $submitted
-     * @return Dream
-     */
-    public function setSubmitted($submitted)
-    {
-        $this->submitted = $submitted;
-
-        return $this;
-    }
-
-    /**
-     * Get submitted
-     *
-     * @return boolean 
-     */
-    public function getSubmitted()
-    {
-        return $this->submitted;
-    }
-
-    /**
-     * Set rejected
-     *
-     * @param boolean $rejected
-     * @return Dream
-     */
-    public function setRejected($rejected)
-    {
-        $this->rejected = $rejected;
-
-        return $this;
-    }
-
-    /**
-     * Get rejected
-     *
-     * @return boolean 
-     */
-    public function getRejected()
-    {
-        return $this->rejected;
     }
 
     /**
