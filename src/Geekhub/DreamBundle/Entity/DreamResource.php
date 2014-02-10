@@ -29,7 +29,7 @@ class DreamResource extends AbstractContributeResource
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -39,7 +39,7 @@ class DreamResource extends AbstractContributeResource
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return DreamResource
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -52,7 +52,7 @@ class DreamResource extends AbstractContributeResource
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {

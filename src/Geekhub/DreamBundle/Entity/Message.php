@@ -64,7 +64,7 @@ class Message
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +74,7 @@ class Message
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Message
      */
     public function setTitle($title)
@@ -87,7 +87,7 @@ class Message
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -97,7 +97,7 @@ class Message
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string  $text
      * @return Message
      */
     public function setText($text)
@@ -110,7 +110,7 @@ class Message
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -120,7 +120,7 @@ class Message
     /**
      * Set readed
      *
-     * @param boolean $readed
+     * @param  boolean $readed
      * @return Message
      */
     public function setReaded($readed)
@@ -133,7 +133,7 @@ class Message
     /**
      * Get readed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getReaded()
     {
@@ -143,7 +143,7 @@ class Message
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return Message
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -156,7 +156,7 @@ class Message
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -166,7 +166,7 @@ class Message
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return Message
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -179,7 +179,7 @@ class Message
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -189,7 +189,7 @@ class Message
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Message
      */
     public function setCreatedAt($createdAt)
@@ -202,7 +202,7 @@ class Message
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {

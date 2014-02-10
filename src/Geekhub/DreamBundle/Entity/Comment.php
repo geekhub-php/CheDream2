@@ -61,14 +61,15 @@ class Comment
      **/
     protected $parent;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->children = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +79,7 @@ class Comment
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string  $text
      * @return Comment
      */
     public function setText($text)
@@ -101,7 +102,7 @@ class Comment
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Comment
      */
     public function setCreatedAt($createdAt)
@@ -114,7 +115,7 @@ class Comment
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -124,7 +125,7 @@ class Comment
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return Comment
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -137,7 +138,7 @@ class Comment
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -147,7 +148,7 @@ class Comment
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return Comment
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -160,7 +161,7 @@ class Comment
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -170,7 +171,7 @@ class Comment
     /**
      * Add children
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $children
+     * @param  \Geekhub\DreamBundle\Entity\Comment $children
      * @return Comment
      */
     public function addChild(\Geekhub\DreamBundle\Entity\Comment $children)
@@ -193,7 +194,7 @@ class Comment
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
@@ -203,7 +204,7 @@ class Comment
     /**
      * Set parent
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $parent
+     * @param  \Geekhub\DreamBundle\Entity\Comment $parent
      * @return Comment
      */
     public function setParent(\Geekhub\DreamBundle\Entity\Comment $parent = null)
@@ -216,7 +217,7 @@ class Comment
     /**
      * Get parent
      *
-     * @return \Geekhub\DreamBundle\Entity\Comment 
+     * @return \Geekhub\DreamBundle\Entity\Comment
      */
     public function getParent()
     {

@@ -66,7 +66,7 @@ abstract class AbstractContributeResource
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime     $createdAt
      * @return DreamResource
      */
     public function setCreatedAt($createdAt)
@@ -89,7 +89,7 @@ abstract class AbstractContributeResource
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string        $title
      * @return DreamResource
      */
     public function setTitle($title)
@@ -112,7 +112,7 @@ abstract class AbstractContributeResource
     /**
      * Set type
      *
-     * @param string $type
+     * @param  string        $type
      * @return DreamResource
      */
     public function setType($type)
@@ -135,7 +135,7 @@ abstract class AbstractContributeResource
     /**
      * Set quantity
      *
-     * @param float $quantity
+     * @param  float         $quantity
      * @return DreamResource
      */
     public function setQuantity($quantity)
@@ -158,7 +158,7 @@ abstract class AbstractContributeResource
     /**
      * Set quantityType
      *
-     * @param string $quantityType
+     * @param  string        $quantityType
      * @return DreamResource
      */
     public function setQuantityType($quantityType)
@@ -181,7 +181,7 @@ abstract class AbstractContributeResource
     /**
      * Set quantityDays
      *
-     * @param integer $quantityDays
+     * @param  integer       $quantityDays
      * @return DreamResource
      */
     public function setQuantityDays($quantityDays)

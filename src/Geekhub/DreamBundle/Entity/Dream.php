@@ -177,7 +177,7 @@ class Dream implements Taggable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -187,7 +187,7 @@ class Dream implements Taggable
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Dream
      */
     public function setTitle($title)
@@ -200,7 +200,7 @@ class Dream implements Taggable
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -210,7 +210,7 @@ class Dream implements Taggable
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Dream
      */
     public function setDescription($description)
@@ -223,7 +223,7 @@ class Dream implements Taggable
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -233,7 +233,7 @@ class Dream implements Taggable
     /**
      * Set mainPicture
      *
-     * @param string $mainPicture
+     * @param  string $mainPicture
      * @return Dream
      */
     public function setMainPicture($mainPicture)
@@ -246,7 +246,7 @@ class Dream implements Taggable
     /**
      * Get mainPicture
      *
-     * @return string 
+     * @return string
      */
     public function getMainPicture()
     {
@@ -256,7 +256,7 @@ class Dream implements Taggable
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string $phone
      * @return Dream
      */
     public function setPhone($phone)
@@ -269,7 +269,7 @@ class Dream implements Taggable
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -279,7 +279,7 @@ class Dream implements Taggable
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Dream
      */
     public function setSlug($slug)
@@ -292,7 +292,7 @@ class Dream implements Taggable
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -302,7 +302,7 @@ class Dream implements Taggable
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Dream
      */
     public function setCreatedAt($createdAt)
@@ -315,7 +315,7 @@ class Dream implements Taggable
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -325,7 +325,7 @@ class Dream implements Taggable
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Dream
      */
     public function setUpdatedAt($updatedAt)
@@ -338,7 +338,7 @@ class Dream implements Taggable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -348,7 +348,7 @@ class Dream implements Taggable
     /**
      * Set deletedAt
      *
-     * @param \DateTime $deletedAt
+     * @param  \DateTime $deletedAt
      * @return Dream
      */
     public function setDeletedAt($deletedAt)
@@ -361,7 +361,7 @@ class Dream implements Taggable
     /**
      * Get deletedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeletedAt()
     {
@@ -371,7 +371,7 @@ class Dream implements Taggable
     /**
      * Set expiredDate
      *
-     * @param \DateTime $expiredDate
+     * @param  \DateTime $expiredDate
      * @return Dream
      */
     public function setExpiredDate($expiredDate)
@@ -384,7 +384,7 @@ class Dream implements Taggable
     /**
      * Get expiredDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getExpiredDate()
     {
@@ -394,7 +394,7 @@ class Dream implements Taggable
     /**
      * Set financialCompleted
      *
-     * @param integer $financialCompleted
+     * @param  integer $financialCompleted
      * @return Dream
      */
     public function setFinancialCompleted($financialCompleted)
@@ -407,7 +407,7 @@ class Dream implements Taggable
     /**
      * Get financialCompleted
      *
-     * @return integer 
+     * @return integer
      */
     public function getFinancialCompleted()
     {
@@ -417,7 +417,7 @@ class Dream implements Taggable
     /**
      * Set workCompleted
      *
-     * @param integer $workCompleted
+     * @param  integer $workCompleted
      * @return Dream
      */
     public function setWorkCompleted($workCompleted)
@@ -430,7 +430,7 @@ class Dream implements Taggable
     /**
      * Get workCompleted
      *
-     * @return integer 
+     * @return integer
      */
     public function getWorkCompleted()
     {
@@ -440,7 +440,7 @@ class Dream implements Taggable
     /**
      * Set equipmentCompleted
      *
-     * @param integer $equipmentCompleted
+     * @param  integer $equipmentCompleted
      * @return Dream
      */
     public function setEquipmentCompleted($equipmentCompleted)
@@ -453,7 +453,7 @@ class Dream implements Taggable
     /**
      * Get equipmentCompleted
      *
-     * @return integer 
+     * @return integer
      */
     public function getEquipmentCompleted()
     {
@@ -463,7 +463,7 @@ class Dream implements Taggable
     /**
      * Set hiddenPhone
      *
-     * @param boolean $hiddenPhone
+     * @param  boolean $hiddenPhone
      * @return Dream
      */
     public function setHiddenPhone($hiddenPhone)
@@ -476,7 +476,7 @@ class Dream implements Taggable
     /**
      * Get hiddenPhone
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenPhone()
     {
@@ -486,7 +486,7 @@ class Dream implements Taggable
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -508,7 +508,7 @@ class Dream implements Taggable
     /**
      * Add usersWhoFavorites
      *
-     * @param \Geekhub\UserBundle\Entity\User $usersWhoFavorites
+     * @param  \Geekhub\UserBundle\Entity\User $usersWhoFavorites
      * @return Dream
      */
     public function addUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
@@ -531,7 +531,7 @@ class Dream implements Taggable
     /**
      * Get usersWhoFavorites
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsersWhoFavorites()
     {
@@ -541,7 +541,7 @@ class Dream implements Taggable
     /**
      * Add dreamContributes
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
+     * @param  \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
      * @return Dream
      */
     public function addDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
@@ -564,7 +564,7 @@ class Dream implements Taggable
     /**
      * Get dreamContributes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamContributes()
     {
@@ -574,7 +574,7 @@ class Dream implements Taggable
     /**
      * Add dreamResources
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
+     * @param  \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
      * @return Dream
      */
     public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
@@ -597,7 +597,7 @@ class Dream implements Taggable
     /**
      * Get dreamResources
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamResources()
     {
@@ -607,7 +607,7 @@ class Dream implements Taggable
     /**
      * Add dreamComments
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $dreamComments
+     * @param  \Geekhub\DreamBundle\Entity\Comment $dreamComments
      * @return Dream
      */
     public function addDreamComment(\Geekhub\DreamBundle\Entity\Comment $dreamComments)
@@ -630,7 +630,7 @@ class Dream implements Taggable
     /**
      * Get dreamComments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamComments()
     {
@@ -640,7 +640,7 @@ class Dream implements Taggable
     /**
      * Add dreamMessages
      *
-     * @param \Geekhub\DreamBundle\Entity\Message $dreamMessages
+     * @param  \Geekhub\DreamBundle\Entity\Message $dreamMessages
      * @return Dream
      */
     public function addDreamMessage(\Geekhub\DreamBundle\Entity\Message $dreamMessages)
@@ -663,7 +663,7 @@ class Dream implements Taggable
     /**
      * Get dreamMessages
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamMessages()
     {
@@ -673,7 +673,7 @@ class Dream implements Taggable
     /**
      * Set author
      *
-     * @param \Geekhub\UserBundle\Entity\User $author
+     * @param  \Geekhub\UserBundle\Entity\User $author
      * @return Dream
      */
     public function setAuthor(\Geekhub\UserBundle\Entity\User $author = null)
@@ -686,7 +686,7 @@ class Dream implements Taggable
     /**
      * Get author
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getAuthor()
     {
@@ -696,7 +696,7 @@ class Dream implements Taggable
     /**
      * Set status
      *
-     * @param \Geekhub\DreamBundle\Entity\Status $status
+     * @param  \Geekhub\DreamBundle\Entity\Status $status
      * @return Dream
      */
     public function setStatus(\Geekhub\DreamBundle\Entity\Status $status = null)
@@ -709,7 +709,7 @@ class Dream implements Taggable
     /**
      * Get status
      *
-     * @return \Geekhub\DreamBundle\Entity\Status 
+     * @return \Geekhub\DreamBundle\Entity\Status
      */
     public function getStatus()
     {

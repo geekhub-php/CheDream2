@@ -42,11 +42,10 @@ class Faq
      */
     protected $answer;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,7 +55,7 @@ class Faq
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Faq
      */
     public function setTitle($title)
@@ -69,7 +68,7 @@ class Faq
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -79,7 +78,7 @@ class Faq
     /**
      * Set question
      *
-     * @param string $question
+     * @param  string $question
      * @return Faq
      */
     public function setQuestion($question)
@@ -92,7 +91,7 @@ class Faq
     /**
      * Get question
      *
-     * @return string 
+     * @return string
      */
     public function getQuestion()
     {
@@ -102,7 +101,7 @@ class Faq
     /**
      * Set answer
      *
-     * @param string $answer
+     * @param  string $answer
      * @return Faq
      */
     public function setAnswer($answer)
@@ -115,7 +114,7 @@ class Faq
     /**
      * Get answer
      *
-     * @return string 
+     * @return string
      */
     public function getAnswer()
     {
