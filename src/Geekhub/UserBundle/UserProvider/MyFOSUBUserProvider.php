@@ -17,8 +17,8 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-        var_dump("in connect");
-        var_dump($user);
+        //var_dump("in connect");
+        //var_dump($user);
         $property = $this->getProperty($response);
         $username = $response->getUsername();
  

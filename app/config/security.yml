@@ -29,7 +29,7 @@ security:
                 failure_path: /login3
 
                 oauth_user_provider:
-                    service: "hwi_oauth.user.provider" # hwi_oauth.user.provider.fosub_bridge  my.oauth_aware.user_provider.service
+                    service: gh_fosuser.oauth_user_provider 
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
