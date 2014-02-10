@@ -9,11 +9,7 @@ assetic:
         yui_css:
             jar: %kernel.root_dir%/../vendor/nervo/yuicompressor/yuicompressor.jar
     assets:
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.min.js
-            output: js/jquery.min.js
-        bootstrap_css:
+        css_style:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
@@ -22,8 +18,9 @@ assetic:
                 - cssrewrite
                 - yui_css
             output: css/style.min.css
-        bootstrap_js:
+        javascript:
             inputs:
+                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.min.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/docs.min.js
             output: js/scripts.min.js
