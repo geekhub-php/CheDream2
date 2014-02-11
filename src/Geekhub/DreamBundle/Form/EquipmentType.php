@@ -26,15 +26,13 @@ class EquipmentType extends AbstractType
         $builder
             ->add('title', 'text', array('label' => 'назва'))
             ->add('quantity', 'text', array('label' => 'колличество'))
-            ->add('quantityType', 'collection', array(
-                'type' => 'choice',
-                'options' => array(
-                    'choices' => array(
-                        AbstractContributeResource::PIECE   => 'штук',
-                        AbstractContributeResource::KG      => 'кг',
-                        AbstractContributeResource::TON     => 'тон'
-                    ),
+            ->add('quantityType', 'choice', array(
+                'choices' => array(
+                    AbstractContributeResource::PIECE => 'шт.',
+                    AbstractContributeResource::KG => 'кг',
+                    AbstractContributeResource::TON => 'тон'
                 ),
+                'preferred_choices' => array(AbstractContributeResource::PIECE),
             ));
     }
 

@@ -35,5 +35,4 @@ class FinancialType extends AbstractType
             )
         );
     }
-
-} 
+}

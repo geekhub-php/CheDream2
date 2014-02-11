@@ -35,9 +35,12 @@ class DreamType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'expireData fff ',
             ))
+//            ->add('financialResources', 'collection', array('type' => new FinancialType()))
+//            ->add('equipmentResources', 'collection', array('type' => new EquipmentType()))
+//            ->add('workResources', 'collection', array('type' => new WorkType()));
             ->add('financialResources', 'collection', array(
                 'type' => new FinancialType(),
-                'mapped' => false,
+//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
@@ -45,7 +48,7 @@ class DreamType extends AbstractType
             ))
             ->add('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
-                'mapped' => false,
+//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
@@ -53,7 +56,7 @@ class DreamType extends AbstractType
             ))
             ->add('workResources', 'collection', array(
                 'type' => new WorkType(),
-                'mapped' => false,
+//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,

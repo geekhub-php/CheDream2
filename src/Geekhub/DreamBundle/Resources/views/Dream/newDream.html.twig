@@ -14,19 +14,22 @@
                     {{ form_row(form.hiddenPhone) }}
                     <br>
 
+                    <p>Finance</p>
                     <ul>
                     {% for finance in form.financialResources %}
                         <li> {{ form_row(finance.title) }}</li>
                         <li> {{ form_row(finance.quantity) }}</li>
                     {% endfor %}
                     </ul>
+                    <p>Equipment</p>
                     <ul>
                         {% for equipment in form.equipmentResources %}
                             <li> {{ form_row(equipment.title) }}</li>
                             <li> {{ form_row(equipment.quantity) }}</li>
-                            <li> {{ form_row(equipment.quantityType) }}</li>
+                            <li> {{ form_row(equipment.quantityType, { 'separator': none }) }}</li>
                         {% endfor %}
                     </ul>
+                    <p>Work</p>
                     <ul>
                         {% for work in form.workResources %}
                             <li> {{ form_row(work.title) }}</li>
