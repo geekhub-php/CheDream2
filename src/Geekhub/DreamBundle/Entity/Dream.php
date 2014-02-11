@@ -162,6 +162,10 @@ class Dream implements Taggable
      */
     protected $status;
 
+    protected $financialResources;
+    protected $equipmentResources;
+    protected $workResources;
+
     /**
      * Constructor
      */
@@ -172,7 +176,36 @@ class Dream implements Taggable
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->dreamMessages = new ArrayCollection();
+
+        $this->financialResources = new ArrayCollection();
+        $this->equipmentResources = new ArrayCollection();
+        $this->workResources = new ArrayCollection();
     }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEquipmentResources()
+    {
+        return $this->equipmentResources;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFinancialResources()
+    {
+        return $this->financialResources;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getWorkResources()
+    {
+        return $this->workResources;
+    }
+
 
     /**
      * Get id

@@ -6,20 +6,37 @@
 
                 <div style="margin-top: 50px;">
 
+                {{ form_start(form) }}
                     {{ form_row(form.title) }}
                     {{ form_row(form.description) }}
                     {{ form_row(form.phone) }}
                     {{ form_row(form.expiredDate) }}
+                    {{ form_row(form.hiddenPhone) }}
+                    <br>
 
-                    {{ form_row(form.dreamResources.vars.prototype) }}
+                    <ul>
+                    {% for finance in form.financialResources %}
+                        <li> {{ form_row(finance.title) }}</li>
+                        <li> {{ form_row(finance.quantity) }}</li>
+                    {% endfor %}
+                    </ul>
+                    <ul>
+                        {% for equipment in form.equipmentResources %}
+                            <li> {{ form_row(equipment.title) }}</li>
+                            <li> {{ form_row(equipment.quantity) }}</li>
+                            <li> {{ form_row(equipment.quantityType) }}</li>
+                        {% endfor %}
+                    </ul>
+                    <ul>
+                        {% for work in form.workResources %}
+                            <li> {{ form_row(work.title) }}</li>
+                            <li> {{ form_row(work.quantity) }}</li>
+                            <li> {{ form_row(work.quantityDays) }}</li>
+                        {% endfor %}
+                    </ul>
 
 
-                    {#<ul class="financial" data-prototype="{{ form_widget(form.dreamResources.vars.prototype)|e }}">#}
-                        {#{{ form_row(form.dreamResources) }}#}
-                    {#</ul>#}
-
-
-                    {#{{ form_row(form.dreamResources)|e }}#}
+                {{ form_end(form) }}
 
 
                 </div>

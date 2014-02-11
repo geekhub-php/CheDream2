@@ -23,42 +23,42 @@ class DreamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array('label' => 'назва'))
-            ->add('description', 'textarea', array('label' => 'опис'))
-            ->add('phone', 'text', array('label' => 'телефон'))
+            ->add('title', 'text', array('label' => 'назва '))
+            ->add('description', 'textarea', array('label' => 'опис '))
+            ->add('phone', 'text', array('label' => 'телефон' ))
+            ->add('hiddenPhone', 'checkbox', array(
+                'label'     => 'скрытый телефон ',
+                'required'  => false,
+            ))
             ->add('expiredDate', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
-                'label' => 'expireData fff',
+                'label' => 'expireData fff ',
             ))
-            ->add('dreamResources', 'collection', array(
+            ->add('financialResources', 'collection', array(
                 'type' => new FinancialType(),
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'by_reference'  => false,
-                'label' => 'фінанси'
+                'mapped' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference'  => false,
+                'label' => 'фінанси '
             ))
-            ->add('dreamResources', 'collection', array(
+            ->add('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'by_reference'  => false,
-                'label' => 'обладнання'
+                'mapped' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference'  => false,
+                'label' => 'обладнання '
             ))
-            ->add('dreamResources', 'collection', array(
+            ->add('workResources', 'collection', array(
                 'type' => new WorkType(),
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'by_reference'  => false,
-                'label' => 'робота'
+                'mapped' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference'  => false,
+                'label' => 'робота '
             ));
-//            ->add('tag', 'collection', array(
-//                'type' => new TagType(),
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//                'by_reference'  => false,
-//                'label' => 'tags'
-//            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
