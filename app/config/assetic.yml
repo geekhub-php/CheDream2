@@ -8,11 +8,15 @@ assetic:
         cssrewrite: ~
         yui_css:
             jar: %kernel.root_dir%/../vendor/nervo/yuicompressor/yuicompressor.jar
+        lessphp:
+            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+            apply_to: "\.less$"
+            formatter: "compressed"
+            preserve_comments: false
     assets:
         css_style:
             inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
-                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.css
+                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.less
                 - %kernel.root_dir%/../vendor/ahonymous/fontello/css/fontello.css
             filters:
                 - cssrewrite
@@ -20,7 +24,7 @@ assetic:
             output: css/style.min.css
         javascript:
             inputs:
-                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.min.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/docs.min.js
+                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
             output: js/scripts.min.js
