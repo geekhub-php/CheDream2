@@ -8,9 +8,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseOAuthUserProvider;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Doctrine\DBAL\Types\DateTimeType;
  
 class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
+    protected $kernelWebDir='/var/www/CheDream2/app';
+
+    protected $imgPath = '/uploads/';
+
+    protected $appKeys = array('odnoklassniki_app_secret' => '76AC4887F3CB8B97A7754E3F', 'odnoklassniki_app_key' => 'CBAIJJPNABABABABA');
  
     /**
      * {@inheritDoc}
@@ -48,25 +54,29 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        var_dump("in loadUserByOAuthUserResponse");
-        var_dump($response);
+        //var_dump("in loadUserByOAuthUserResponse");
+        //var_dump($response);
 
         $username = $response->getUsername();
+
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
-            $setter_id = $setter.'Id';
-            $setter_token = $setter.'AccessToken';
+            $setterId = $setter.'Id';
+            $setterToken = $setter.'AccessToken';
+            $setterUser = $setter.'User';
             // create new user here
             $user = $this->userManager->createUser();
-            $user->$setter_id($username);
-            $user->$setter_token($response->getAccessToken());
-            //I have set all requested data with the user's username
-            //modify here with relevant data
+            $user->$setterId($username);
+            $user->$setterToken($response->getAccessToken());
+            // I use different setters setters for each type of oath providers:
+            // for example setVkontakteUser(...),  setFacebookUser(...)
+            // the actual name of setter is in the variable $setterUser.
+            $user = $this->$setterUser($user, $response);
             $user->setUsername($username);
-            $user->setEmail($username);
+            //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
@@ -83,5 +93,134 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $user->$setter($response->getAccessToken());
  
         return $user;
+    }
+
+    private function setFacebookUser($user, $response)
+    {
+        $responseArray = $response->getResponse();
+        $user->setFirstName($responseArray['first_name']);
+        $user->setMiddleName('');
+        $user->setLastName($responseArray['last_name']);
+        $user->setEmail($responseArray['email']);
+        //  $user->setBirthday(new DateTimeType('1901-01-01'));
+        $remoteImg = 'http://graph.facebook.com/'.$user->getFacebookId().'/picture?width=200&height=200';
+        $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
+        $user->setAvatar($profilePicture);
+       
+        return $user;
+    }
+
+    private function setVkontakteUser(UserInterface $user, UserResponseInterface $response)
+    {
+        $responseArray = $response->getResponse();
+        $user->setFirstName($responseArray['response'][0]['first_name']);
+        $user->setMiddleName('');
+        $user->setLastName($responseArray['response'][0]['last_name']);
+        $user->setEmail('');
+        //$user->setBirthday('0000-00-00');
+        $profilePicture = null;
+        if ($remoteImg = $this->callVkontakteUsersGet($user->GetVkontakteId(), $user->getVkontakteAccessToken(), 'photo_big')) {
+            $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
+        }
+        $user->setAvatar($profilePicture);
+       
+        return $user;
+    }
+
+   private function setOdnoklassnikiUser(UserInterface $user, UserResponseInterface $response)
+    {
+        $responseArray = $response->getResponse();
+        $user->setFirstName($responseArray['first_name']);
+        $user->setMiddleName('');
+        $user->setLastName($responseArray['last_name']);
+        $user->setEmail('');
+        //$user->setBirthday('0000-00-00');
+
+        $token = $response->getAccessToken();
+        $tokenArray = str_split($token, rand(5, 10));
+        $result = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);
+        $resultObj = json_decode($result);
+
+        $profilePicture = null;
+     
+        if ((array_key_exists('photos',$resultObj)) &&($resultObj->photos[0]->standard_url)) {
+            $profilePicture = $this->copyImgFromRemote($resultObj->photos[0]->standard_url, md5('ok'.$uid).'.jpg');
+        }
+        $user->setAvatar($profilePicture);
+       
+        return $user;
+    }
+
+    private function copyImgFromRemote($remoteImg, $localFileName)
+    {
+        $content = file_get_contents($remoteImg);
+        $destination = $this->kernelWebDir.'/../web'.$this->imgPath;
+
+        if (!is_dir($destination)) {
+            mkdir($destination);
+        }
+
+        $localImg = $destination.$localFileName;
+
+        $fp = fopen($localImg, "w");
+        fwrite($fp, $content);
+        fclose($fp);
+
+        return $this->imgPath.$localFileName;
+    }
+
+        /**
+     * Wrapper for Vk api - http://vk.com/developers.php?oid=-1&p=users.get
+     *
+     * @string $uid
+     * @string $token
+     * @string $field
+     * @return string or null
+     */
+    private function callVkontakteUsersGet($uid, $token, $field)
+    {
+        $result = file_get_contents('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
+        $result = json_decode($result, true);
+
+        if (isset($result['response'][0][$field])) {
+            return $firstName = $result['response'][0][$field];
+        }
+
+        return null;
+    }
+
+        /**
+     * @param string $method Method from Odnoklassniki REST API http://dev.odnoklassniki.ru/wiki/display/ok/Odnoklassniki+REST+API+ru
+     * @param string $token Security token
+     * @param array  $parameters Array parameters for current method
+     */
+    private function doOdnoklassnikiApiRequest($method, $token, $parameters = array())
+    {
+        $odnoklassniki_app_secret = $this->appKeys['odnoklassniki_app_secret'];
+        $odnoklassniki_app_key = $this->appKeys['odnoklassniki_app_key'];
+
+        $url = 'http://api.odnoklassniki.ru/fb.do?method='.$method;
+        $sig = md5(
+            'application_key=' . $odnoklassniki_app_key .
+            'method=' . $method .
+            md5($token . $odnoklassniki_app_secret)
+        );
+ 
+        $arrayParameters = array(
+            'access_token' => $token,
+            'application_key' => $odnoklassniki_app_key,
+            'sig' => $sig,
+        ); 
+
+        $arrayParameters = array_merge($parameters, $arrayParameters);
+
+        $url .= '&' . http_build_query($arrayParameters);
+        //var_dump($url);
+        return file_get_contents($url);
+    }
+
+        public function setKernelWebDir($kernelWebDir)
+    {
+        $this->kernelWebDir = $kernelWebDir;
     }
 }

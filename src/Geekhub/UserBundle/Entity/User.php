@@ -85,7 +85,7 @@ class User extends BaseUser //implements DreamUserInterface
      *
      * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) 
      */
-    protected $vkontakte_access_token;
+    protected $vkontakteAccessToken;
 
     /**
      * @var string
@@ -99,7 +99,7 @@ class User extends BaseUser //implements DreamUserInterface
      *
      *  @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) 
      */
-    protected $facebook_access_token;
+    protected $facebookAccessToken;
 
     /**
      * @var string
@@ -354,9 +354,9 @@ class User extends BaseUser //implements DreamUserInterface
      * @param string $vk
      * @return User
      */
-    public function setVkontakteAccessToken($vkontakteAccesToken)
+    public function setVkontakteAccessToken($vkontakteAccessToken)
     {
-        $this->vkontakte_access_token = $vkontakteAccesToken;
+        $this->vkontakteAccessToken = $vkontakteAccessToken;
 
         return $this;
     }
@@ -368,7 +368,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function getVkontakteAccessToken()
     {
-        return $this->vkontakte_access_token;
+        return $this->vkontakteAccessToken;
     }
 
     /**
@@ -402,7 +402,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function setFacebookAccessToken($facebookAccessToken)
     {
-        $this->facebook_access_token = $facebookAccessToken;
+        $this->facebookAccessToken = $facebookAccessToken;
 
         return $this;
     }
@@ -414,7 +414,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function getFacebookAccessToken()
     {
-        return $this->facebook_access_token;
+        return $this->facebookAccessToken;
     }
 
     /**
@@ -441,7 +441,7 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Set odnoklasnikiId
+     * Set odnoklassnikiAccessToken
      *
      * @param string $odnoklasnikiId
      * @return User
@@ -454,7 +454,7 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Get odnoklasnikiId
+     * Get odnoklassnikiAccessToken
      *
      * @return string 
      */
