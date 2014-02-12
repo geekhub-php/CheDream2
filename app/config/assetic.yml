@@ -27,4 +27,5 @@ assetic:
                 - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/Public/createDream.js
             output: js/scripts.min.js
