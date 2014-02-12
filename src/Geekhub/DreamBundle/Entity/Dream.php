@@ -190,12 +190,36 @@ class Dream implements Taggable
         return $this->equipmentResources;
     }
 
+    public function addEquipmentResource($equipmentResource)
+    {
+        $this->equipmentResources[] = $equipmentResource;
+
+        return $this;
+    }
+
+    public function removeEquipmentResource($equipmentResource)
+    {
+        $this->equipmentResources->removeElement($equipmentResource);
+    }
+
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getFinancialResources()
     {
         return $this->financialResources;
+    }
+
+    public function addFinancialResource($financialResource)
+    {
+        $this->financialResources[] = $financialResource;
+
+        return $this;
+    }
+
+    public function removeFinancialResource($financialResource)
+    {
+        $this->financialResources->removeElement($financialResource);
     }
 
     /**
@@ -206,6 +230,17 @@ class Dream implements Taggable
         return $this->workResources;
     }
 
+    public function addWorkResource($workResource)
+    {
+        $this->workResources[] = $workResource;
+
+        return $this;
+    }
+
+    public function removeWorkResource($workResource)
+    {
+        $this->workResources->removeElement($workResource);
+    }
 
     /**
      * Get id

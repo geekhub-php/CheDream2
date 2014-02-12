@@ -52,7 +52,7 @@ class DreamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
+            $data = $form->getData();
         }
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
