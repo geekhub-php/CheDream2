@@ -190,14 +190,14 @@ class Dream implements Taggable
         return $this->equipmentResources;
     }
 
-    public function addEquipmentResource($equipmentResource)
+    public function addEquipmentResource(DreamResource $equipmentResource)
     {
         $this->equipmentResources[] = $equipmentResource;
 
         return $this;
     }
 
-    public function removeEquipmentResource($equipmentResource)
+    public function removeEquipmentResource(DreamResource $equipmentResource)
     {
         $this->equipmentResources->removeElement($equipmentResource);
     }
@@ -212,10 +212,9 @@ class Dream implements Taggable
 
     public function addFinancialResource(DreamResource $financialResource)
     {
-        $this->financialResources->add($financialResource);
-//        $this->financialResources[] = $financialResource;
-//
-//        return $this;
+        $this->financialResources[] = $financialResource;
+
+        return $this;
     }
 
     public function removeFinancialResource(DreamResource $financialResource)
@@ -231,14 +230,14 @@ class Dream implements Taggable
         return $this->workResources;
     }
 
-    public function addWorkResource($workResource)
+    public function addWorkResource(DreamResource $workResource)
     {
         $this->workResources[] = $workResource;
 
         return $this;
     }
 
-    public function removeWorkResource($workResource)
+    public function removeWorkResource(DreamResource $workResource)
     {
         $this->workResources->removeElement($workResource);
     }

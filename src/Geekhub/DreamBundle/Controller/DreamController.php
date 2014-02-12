@@ -31,11 +31,39 @@ class DreamController extends Controller
 
         if ($form->isValid()) {
             $data = $form->getData();
+
             var_dump($data->getFinancialResources());
             echo "****************************************";
             var_dump($data->getEquipmentResources());
             echo "****************************************";
             var_dump($data->getWorkResources());
+            echo "****************************************<br>";
+            echo "*********** after del null *************<br>";
+            echo "****************************************<br>";
+
+            foreach ($data->getEquipmentResources() as $equip) {
+                if (is_null($equip->getTitle())) {
+                    $data->getEquipmentResources()->removeElement($equip);
+                }
+            }
+            foreach ($data->getFinancialResources() as $finance) {
+                if (is_null($finance->getTitle())) {
+                    $data->getFinancialResources()->removeElement($finance);
+                }
+            }
+            foreach ($data->getWorkResources() as $work) {
+                if (is_null($work->getTitle())) {
+                    $data->getWorkResources()->removeElement($work);
+                }
+            }
+
+            var_dump($data->getFinancialResources());
+            echo "****************************************";
+            var_dump($data->getEquipmentResources());
+            echo "****************************************";
+            var_dump($data->getWorkResources());
+            echo "****************************************";
+
             exit;
         }
 
