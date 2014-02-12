@@ -32,7 +32,8 @@ class EquipmentType extends AbstractType
                     AbstractContributeResource::KG => 'кг',
                     AbstractContributeResource::TON => 'тон'
                 ),
-                'preferred_choices' => array(AbstractContributeResource::PIECE),
+//                'preferred_choices' => array(AbstractContributeResource::PIECE),
+                'label' => 'Тип'
             ));
     }
 

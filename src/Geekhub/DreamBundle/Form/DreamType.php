@@ -44,7 +44,7 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'label' => 'фінанси '
+//                'label' => 'фінанси '
             ))
             ->add('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
@@ -52,7 +52,7 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'label' => 'обладнання '
+//                'label' => 'обладнання '
             ))
             ->add('workResources', 'collection', array(
                 'type' => new WorkType(),
@@ -60,7 +60,7 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'label' => 'робота '
+//                'label' => 'робота '
             ));
     }
 

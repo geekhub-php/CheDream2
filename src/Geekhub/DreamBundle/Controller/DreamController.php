@@ -25,34 +25,18 @@ class DreamController extends Controller
     {
         $dream = new Dream();
 
-        $fin = new DreamResource();
-        $fin->setTitle('fdfdfsd');
-        $fin->setQuantity(43442);
-        $dream->getFinancialResources()->add($fin);
-
-        $fin2 = new DreamResource();
-        $fin2->setTitle('fin2 t');
-        $fin2->setQuantity(333333);
-        $dream->getFinancialResources()->add($fin2);
-
-        $eq = new DreamResource();
-        $eq->setTitle('eq 1');
-        $eq->setQuantity(123);
-        $eq->setQuantityType(AbstractContributeResource::KG);
-        $dream->getEquipmentResources()->add($eq);
-
-        $w = new DreamResource();
-        $w->setTitle('work1');
-        $w->setQuantity(777);
-        $w->setQuantityDays(7);
-        $dream->getWorkResources()->add($w);
-
         $form = $this->createForm(new DreamType(), $dream);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $data = $form->getData();
+            var_dump($data->getFinancialResources());
+            echo "****************************************";
+            var_dump($data->getEquipmentResources());
+            echo "****************************************";
+            var_dump($data->getWorkResources());
+            exit;
         }
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(

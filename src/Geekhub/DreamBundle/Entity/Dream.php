@@ -210,14 +210,15 @@ class Dream implements Taggable
         return $this->financialResources;
     }
 
-    public function addFinancialResource($financialResource)
+    public function addFinancialResource(DreamResource $financialResource)
     {
-        $this->financialResources[] = $financialResource;
-
-        return $this;
+        $this->financialResources->add($financialResource);
+//        $this->financialResources[] = $financialResource;
+//
+//        return $this;
     }
 
-    public function removeFinancialResource($financialResource)
+    public function removeFinancialResource(DreamResource $financialResource)
     {
         $this->financialResources->removeElement($financialResource);
     }
