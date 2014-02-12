@@ -12,7 +12,7 @@
 
  
 <services>
-        <service id="gh_user.oauth_user_provider" class="%gh_user.oauth_user_provider.class%">            
+        <service id="gh_user.oauth_user_provider" class="%gh_user.oauth_user_provider.class%"> 
     </service>
     <service id="gh_fosuser.oauth_user_provider" class="%gh_fosuser.oauth_user_provider.class%"> 
      	<argument type="service" id="fos_user.user_manager" />
@@ -21,6 +21,15 @@
          	<argument key="vkontakte">vkontakte_id</argument>
          	<argument key="odnoklassniki">odnoklassniki_id</argument>
         </argument>
+            <call method="setKernelWebDir">
+                <argument type="string">%kernel.root_dir%</argument>
+            </call>
+             <call method="setAppKeys">
+                <argument type="collection">
+                    <argument key="odnoklassniki_app_key">%odnoklassniki_app_key% </argument>
+                    <argument key="odnoklassniki_app_secret">%odnoklassniki_app_secret%</argument>
+                </argument>
+            </call>
     </service>
 </services>
 </container>

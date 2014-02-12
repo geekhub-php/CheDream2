@@ -12,11 +12,11 @@ use Doctrine\DBAL\Types\DateTimeType;
  
 class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
-    protected $kernelWebDir='/var/www/CheDream2/app';
+    protected $kernelWebDir;
 
     protected $imgPath = '/uploads/';
 
-    protected $appKeys = array('odnoklassniki_app_secret' => '76AC4887F3CB8B97A7754E3F', 'odnoklassniki_app_key' => 'CBAIJJPNABABABABA');
+    protected $appKeys;
  
     /**
      * {@inheritDoc}
@@ -56,6 +56,8 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
     {
         //var_dump("in loadUserByOAuthUserResponse");
         //var_dump($response);
+        var_dump($this->kernelWebDir);
+        var_dump($this->appKeys);
 
         $username = $response->getUsername();
 
@@ -133,7 +135,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $user->setFirstName($responseArray['first_name']);
         $user->setMiddleName('');
         $user->setLastName($responseArray['last_name']);
-        $user->setEmail('');
+        $user->setEmail('dumb@mail.ru'); //!error with same emails and different social networks
         //$user->setBirthday('0000-00-00');
 
         $token = $response->getAccessToken();
@@ -219,8 +221,13 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         return file_get_contents($url);
     }
 
-        public function setKernelWebDir($kernelWebDir)
+    public function setKernelWebDir($kernelWebDir)
     {
         $this->kernelWebDir = $kernelWebDir;
+    }
+
+    public function setAppKeys($appKeys)
+    {
+        $this->appKeys = $appKeys;
     }
 }
