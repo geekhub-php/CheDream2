@@ -35,8 +35,6 @@ class DreamController extends Controller
 
             $data = $form->getData();
 
-            $dream->setMainPicture('pict');
-
 //            var_dump($data->getFinancialResources());
 //            echo "****************************************";
 //            var_dump($data->getEquipmentResources());
@@ -45,6 +43,13 @@ class DreamController extends Controller
 //            echo "****************************************<br>";
 //            echo "*********** after del null *************<br>";
 //            echo "****************************************<br>";
+//            var_dump($data->getFinancialResources());
+//            echo "****************************************";
+//            var_dump($data->getEquipmentResources());
+//            echo "****************************************";
+//            var_dump($data->getWorkResources());
+//            echo "****************************************";
+//            exit;
 
             foreach ($data->getEquipmentResources() as $equip) {
                 if (is_null($equip->getTitle())) {
@@ -80,15 +85,6 @@ class DreamController extends Controller
             $newDream->flush();
 
             return $this->redirect($this->generateUrl('dream_list'));
-
-//            var_dump($data->getFinancialResources());
-//            echo "****************************************";
-//            var_dump($data->getEquipmentResources());
-//            echo "****************************************";
-//            var_dump($data->getWorkResources());
-//            echo "****************************************";
-//
-//            exit;
         }
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
