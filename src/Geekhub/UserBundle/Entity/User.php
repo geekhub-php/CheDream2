@@ -109,11 +109,6 @@ class User extends BaseUser //implements DreamUserInterface
     protected $userComments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Message", mappedBy="user", cascade={"persist", "remove"})
-     */
-    protected $userMessages;
-
-    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
     protected $dreams;
@@ -127,7 +122,6 @@ class User extends BaseUser //implements DreamUserInterface
         $this->favoriteDreams = new ArrayCollection();
         $this->contributions  = new ArrayCollection();
         $this->userComments   = new ArrayCollection();
-        $this->userMessages   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
     }
 
@@ -468,39 +462,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getUserComments()
     {
         return $this->userComments;
-    }
-
-    /**
-     * Add userMessages
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Message $userMessages
-     * @return User
-     */
-    public function addUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
-    {
-        $this->userMessages[] = $userMessages;
-
-        return $this;
-    }
-
-    /**
-     * Remove userMessages
-     *
-     * @param \Geekhub\DreamBundle\Entity\Message $userMessages
-     */
-    public function removeUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
-    {
-        $this->userMessages->removeElement($userMessages);
-    }
-
-    /**
-     * Get userMessages
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserMessages()
-    {
-        return $this->userMessages;
     }
 
     /**
