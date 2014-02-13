@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseOAuthUserProvider;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Doctrine\DBAL\Types\DateTimeType;
+use Doctrine\DBAL\Types;
  
 class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
@@ -56,8 +56,6 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
     {
         //var_dump("in loadUserByOAuthUserResponse");
         //var_dump($response);
-        var_dump($this->kernelWebDir);
-        var_dump($this->appKeys);
 
         $username = $response->getUsername();
 
@@ -82,6 +80,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             $user->setPassword($username);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
+
             return $user;
         }
  
@@ -108,7 +107,17 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $remoteImg = 'http://graph.facebook.com/'.$user->getFacebookId().'/picture?width=200&height=200';
         $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
         $user->setAvatar($profilePicture);
-       
+        $userInfo = $this->getFacebookUserInfo($response->getAccessToken());
+        //var_dump($userInfo);
+        if (array_key_exists('birthday',$userInfo)) {
+            $birthday=$userInfo['birthday'];
+            $birthdayMonth=substr($birthday,0,2);
+            $birthdayDay=substr($birthday,3,2);
+            $birthdayYear=substr($birthday,6,4);
+            $birthday=$birthdayYear.'-'.$birthdayMonth.'-'.$birthdayDay;
+            $user->setBirthday(new \DateTime($birthday));
+        }
+
         return $user;
     }
 
@@ -116,7 +125,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
     {
         $responseArray = $response->getResponse();
         $user->setFirstName($responseArray['response'][0]['first_name']);
-        $user->setMiddleName('');
+        $user->setMiddleName($responseArray['response'][0]['nickname']);
         $user->setLastName($responseArray['response'][0]['last_name']);
         $user->setEmail('');
         //$user->setBirthday('0000-00-00');
@@ -125,18 +134,37 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
         }
         $user->setAvatar($profilePicture);
+        $birthday = null;
+        if ($userInfo = $this->callVkontakteUsersGet($user->GetVkontakteId(), $user->getVkontakteAccessToken(), 'bdate')) {
+            $birthday = $userInfo;
+            // the date is DD.MM.YYYY or DD.MM if there is no year
+            $birthdayArray=explode('.',$birthday);
+            $birthdayDay=$birthdayArray[0];
+            if (strlen($birthdayDay)<2)$birthdayDay='0'.$birthdayDay;
+            $birthdayMonth=$birthdayArray[1];
+            if (strlen($birthdayMonth)<2)$birthdayMonth='0'.$birthdayMonth;
+            if (array_key_exists(2, $birthdayArray)) {
+                $birthdayYear=$birthdayArray[2];
+            }
+            else {
+                $birthdayYear='0000';
+            }
+            $birthday=$birthdayYear.'-'.$birthdayMonth.'-'.$birthdayDay;
+        }
+        $user->setBirthday(new \DateTime($birthday));
        
         return $user;
     }
 
-   private function setOdnoklassnikiUser(UserInterface $user, UserResponseInterface $response)
+    private function setOdnoklassnikiUser(UserInterface $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
         $user->setFirstName($responseArray['first_name']);
         $user->setMiddleName('');
         $user->setLastName($responseArray['last_name']);
         $user->setEmail('dumb@mail.ru'); //!error with same emails and different social networks
-        //$user->setBirthday('0000-00-00');
+        $birthday=$responseArray['birthday'];
+        $user->setBirthday(new \DateTime($birthday));
 
         $token = $response->getAccessToken();
         $tokenArray = str_split($token, rand(5, 10));
@@ -191,7 +219,16 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         return null;
     }
 
-        /**
+    private function getFacebookUserInfo($token)
+    {
+        $result = file_get_contents('https://graph.facebook.com/me?access_token='.$token);
+        $result = json_decode($result, true);
+
+        return $result;
+    }
+
+
+    /**
      * @param string $method Method from Odnoklassniki REST API http://dev.odnoklassniki.ru/wiki/display/ok/Odnoklassniki+REST+API+ru
      * @param string $token Security token
      * @param array  $parameters Array parameters for current method

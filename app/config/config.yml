@@ -118,7 +118,7 @@ hwi_oauth:
             type:                facebook
             client_id:           "%facebook_app_id%"
             client_secret:       "%facebook_app_secret%"
-            scope:               "email, user_photos, user_website"
+            scope:               "email, user_photos, user_website, user_birthday"
         vkontakte:
             type:                vkontakte
             client_id:           "%vkontakte_app_id%"
