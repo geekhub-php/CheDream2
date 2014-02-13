@@ -5,7 +5,6 @@ namespace Geekhub\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Users
@@ -131,11 +130,6 @@ class User extends BaseUser //implements DreamUserInterface
     protected $userComments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Message", mappedBy="user", cascade={"persist", "remove"})
-     */
-    protected $userMessages;
-
-    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
     protected $dreams;
@@ -149,7 +143,6 @@ class User extends BaseUser //implements DreamUserInterface
         $this->favoriteDreams = new ArrayCollection();
         $this->contributions  = new ArrayCollection();
         $this->userComments   = new ArrayCollection();
-        $this->userMessages   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
         parent::__construct();
     }
@@ -157,7 +150,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -167,7 +160,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set firstName
      *
-     * @param string $firstName
+     * @param  string $firstName
      * @return User
      */
     public function setFirstName($firstName)
@@ -180,7 +173,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -190,7 +183,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set middleName
      *
-     * @param string $middleName
+     * @param  string $middleName
      * @return User
      */
     public function setMiddleName($middleName)
@@ -203,7 +196,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get middleName
      *
-     * @return string 
+     * @return string
      */
     public function getMiddleName()
     {
@@ -213,7 +206,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set lastName
      *
-     * @param string $lastName
+     * @param  string $lastName
      * @return User
      */
     public function setLastName($lastName)
@@ -226,7 +219,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -236,7 +229,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set avatar
      *
-     * @param string $avatar
+     * @param  string $avatar
      * @return User
      */
     public function setAvatar($avatar)
@@ -249,7 +242,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get avatar
      *
-     * @return string 
+     * @return string
      */
     public function getAvatar()
     {
@@ -259,7 +252,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set birthday
      *
-     * @param \DateTime $birthday
+     * @param  \DateTime $birthday
      * @return User
      */
     public function setBirthday($birthday)
@@ -272,7 +265,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get birthday
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getBirthday()
     {
@@ -282,7 +275,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set contacts
      *
-     * @param Contacts $contacts
+     * @param  Contacts $contacts
      * @return User
      */
     public function setContacts($contacts)
@@ -305,7 +298,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set about
      *
-     * @param string $about
+     * @param  string $about
      * @return User
      */
     public function setAbout($about)
@@ -318,7 +311,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get about
      *
-     * @return string 
+     * @return string
      */
     public function getAbout()
     {
@@ -328,7 +321,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set vk
      *
-     * @param string $vk
+     * @param  string $vk
      * @return User
      */
     public function setVkontakteId($vk)
@@ -364,7 +357,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get vkontakte_id
      *
-     * @return string 
+     * @return string
      */
     public function getVkontakteAccessToken()
     {
@@ -374,7 +367,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set facebook
      *
-     * @param string $facebook
+     * @param  string $facebook
      * @return User
      */
     public function setFacebookId($facebook)
@@ -387,7 +380,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get facebook
      *
-     * @return string 
+     * @return string
      */
     public function getFacebookId()
     {
@@ -443,7 +436,6 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set odnoklassnikiAccessToken
      *
-     * @param string $odnoklasnikiId
      * @return User
      */
     public function setOdnoklassnikiAccessToken($odnoklassnikiAccessToken)
@@ -456,7 +448,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get odnoklassnikiAccessToken
      *
-     * @return string 
+     * @return string
      */
     public function getOdnoklassnikiAccessToken()
     {
@@ -466,7 +458,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add favoriteDreams
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
+     * @param  \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
      * @return User
      */
     public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
@@ -489,7 +481,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get favoriteDreams
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFavoriteDreams()
     {
@@ -499,7 +491,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add contributions
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $contributions
+     * @param  \Geekhub\DreamBundle\Entity\DreamContribute $contributions
      * @return User
      */
     public function addContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
@@ -522,7 +514,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get contributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getContributions()
     {
@@ -532,7 +524,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add userComments
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $userComments
+     * @param  \Geekhub\DreamBundle\Entity\Comment $userComments
      * @return User
      */
     public function addUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
@@ -555,7 +547,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get userComments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserComments()
     {
@@ -563,42 +555,9 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Add userMessages
-     *
-     * @param \Geekhub\DreamBundle\Entity\Message $userMessages
-     * @return User
-     */
-    public function addUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
-    {
-        $this->userMessages[] = $userMessages;
-
-        return $this;
-    }
-
-    /**
-     * Remove userMessages
-     *
-     * @param \Geekhub\DreamBundle\Entity\Message $userMessages
-     */
-    public function removeUserMessage(\Geekhub\DreamBundle\Entity\Message $userMessages)
-    {
-        $this->userMessages->removeElement($userMessages);
-    }
-
-    /**
-     * Get userMessages
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUserMessages()
-    {
-        return $this->userMessages;
-    }
-
-    /**
      * Add dreams
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dreams
      * @return User
      */
     public function addDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
@@ -621,7 +580,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get dreams
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreams()
     {

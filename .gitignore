@@ -9,6 +9,10 @@
 /vendor/
 /bin/*
 !bin/reload.sh
-/composer.phar
 /.idea/
 composer.lock
+/web/upload/*
+/web/css/
+/web/js/
+/web/font/
+/web/fonts/

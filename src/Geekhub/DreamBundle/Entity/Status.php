@@ -13,13 +13,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Status
 {
-    const SUBMITTED   = 'submitted';
-    const REJECTED    = 'rejected';
-    const NEW_DREAM   = 'new-dream';
-    const IN_PROGRESS = 'in-progress';
-    const COMPLETED   = 'completed';
-    const SUCCESS     = 'success';
-    const FAIL        = 'fail';
+    const SUBMITTED            = 'submitted';
+    const REJECTED             = 'rejected';
+    const COLLECTING_RESOURCES = 'collecting-resources';
+    const IMPLEMENTING         = 'implementing';
+    const COMPLETED            = 'completed';
+    const SUCCESS              = 'success';
+    const FAIL                 = 'fail';
 
     /**
      * @var integer
@@ -28,14 +28,14 @@ class Status
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected  $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="status", type="string", length=30)
      */
-    protected  $status;
+    protected $status;
 
     /**
      * @var \DateTime
@@ -49,12 +49,12 @@ class Status
      * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
      * @ORM\JoinColumn(name="dream_id", referencedColumnName="id")
      */
-    protected  $dream;
+    protected $dream;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -64,7 +64,7 @@ class Status
     /**
      * Set status
      *
-     * @param integer $status
+     * @param  integer $status
      * @return Status
      */
     public function setStatus($status)
@@ -77,7 +77,7 @@ class Status
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -87,7 +87,7 @@ class Status
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Status
      */
     public function setCreatedAt($createdAt)
@@ -110,7 +110,7 @@ class Status
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return Status
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -123,7 +123,7 @@ class Status
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {

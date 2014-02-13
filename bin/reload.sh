@@ -1,5 +1,6 @@
 #!/bin/bash
 
+php composer.phar update
 php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
 rm -rf app/cache/*
@@ -13,8 +14,8 @@ setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/uplo
 php app/console doctrine:database:drop --force
 php app/console doctrine:database:create
 php app/console doctrine:schema:update --force
-#php app/console cache:clear
+php app/console cache:clear
 #php app/console doctrine:fixtures:load --no-interaction
-#php app/console assets:install --symlink
-#php app/console assetic:dump
-#php app/console cache:clear
+php app/console assets:install --symlink
+php app/console assetic:dump
+php app/console cache:clear

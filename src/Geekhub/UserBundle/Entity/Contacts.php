@@ -11,7 +11,7 @@ class Contacts
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string   $phone
      * @return Contacts
      */
     public function setPhone($phone)
@@ -34,8 +34,8 @@ class Contacts
     /**
      * Set skype
      *
-     * @param string $skype
-     * @return User
+     * @param  string   $skype
+     * @return Contacts
      */
     public function setSkype($skype)
     {
