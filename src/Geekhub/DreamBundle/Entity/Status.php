@@ -31,11 +31,11 @@ class Status
     protected $id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="status", type="string", length=30)
+     * @ORM\Column(name="title", type="string", length=30)
      */
-    protected $status;
+    protected $title;
 
     /**
      * @var \DateTime
@@ -62,26 +62,26 @@ class Status
     }
 
     /**
-     * Set status
+     * Set title
      *
-     * @param  integer $status
+     * @param  string $title
      * @return Status
      */
-    public function setStatus($status)
+    public function setTitle($title)
     {
-        $this->status = $status;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get title
      *
      * @return integer
      */
-    public function getStatus()
+    public function getTitle()
     {
-        return $this->status;
+        return $this->title;
     }
 
     /**
