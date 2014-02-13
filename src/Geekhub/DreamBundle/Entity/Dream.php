@@ -146,9 +146,9 @@ class Dream implements Taggable
     protected $author;
 
     /**
-     * @ORM\OneToOne(targetEntity="Status", mappedBy="dream")
+     * @ORM\OneToMany(targetEntity="Status", mappedBy="dream", cascade={"persist", "remove"})
      */
-    protected $status;
+    protected $statuses;
 
     protected $financialResources;
     protected $equipmentResources;
@@ -163,6 +163,7 @@ class Dream implements Taggable
         $this->dreamContributes = new ArrayCollection();
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
+        $this->statuses = new ArrayCollection();
         $this->financialResources = new ArrayCollection();
         $this->equipmentResources = new ArrayCollection();
         $this->workResources = new ArrayCollection();
@@ -691,26 +692,5 @@ class Dream implements Taggable
         return $this->author;
     }
 
-    /**
-     * Set status
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Status $status
-     * @return Dream
-     */
-    public function setStatus(\Geekhub\DreamBundle\Entity\Status $status = null)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return \Geekhub\DreamBundle\Entity\Status
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
+   
 }

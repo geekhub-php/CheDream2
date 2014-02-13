@@ -34,9 +34,9 @@ class Status
      * @var integer
      * @return string
      *
-     * @ORM\Column(name="status", type="string", length=30)
+     * @ORM\Column(name="state", type="string", length=30)
      */
-    protected $status;
+    protected $state;
 
     /**
      * @var \DateTime
@@ -47,8 +47,8 @@ class Status
     protected $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
-     * @ORM\JoinColumn(name="dream_id", referencedColumnName="id")
+     *
+     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="statuses")
      */
     protected $dream;
 
@@ -65,12 +65,12 @@ class Status
     /**
      * Set status
      *
-     * @param  integer $status
+     * @param  string $status
      * @return Status
      */
-    public function setStatus($status)
+    public function setState($status)
     {
-        $this->status = $status;
+        $this->state = $status;
 
         return $this;
     }
@@ -79,9 +79,9 @@ class Status
      * Get status
      *
      */
-    public function getStatus()
+    public function getState()
     {
-        return $this->status;
+        return $this->state;
     }
 
     /**
