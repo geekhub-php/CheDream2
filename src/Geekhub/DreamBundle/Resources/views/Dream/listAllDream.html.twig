@@ -13,11 +13,7 @@
                     <p>descr = {{ dream.description }}</p>
                     <p>phone = {{ dream.phone }}</p>
                     <p>exp data = {{ dream.expiredDate|date('d.m.Y') }}</p>
-                    <p>
-                        status = {% for status in dream.statuses %}
-                                    {{ status.state }} {{ status.createdAt|date('d.m.Y') }}
-                                 {% endfor %}
-                    </p>
+                    <p>status = {{ dream.currentStatus }}</p>
 
                     <div class=" well well-sm">
                     {% for resources in dream.dreamResources %}

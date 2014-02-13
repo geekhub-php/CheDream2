@@ -34,9 +34,9 @@ class Status
      * @var integer
      * @return string
      *
-     * @ORM\Column(name="state", type="string", length=30)
+     * @ORM\Column(name="title", type="string", length=30)
      */
-    protected $state;
+    protected $title;
 
     /**
      * @var \DateTime
@@ -52,6 +52,11 @@ class Status
      */
     protected $dream;
 
+    public function __construct($title)
+    {
+        $this->title = $title;
+    }
+
     /**
      * Get id
      *
@@ -63,25 +68,26 @@ class Status
     }
 
     /**
-     * Set status
+     * Set title
      *
-     * @param  string $status
+     * @param  string $title
      * @return Status
      */
-    public function setState($status)
+    public function setTitle($title)
     {
-        $this->state = $status;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get title
      *
+     * @return integer
      */
-    public function getState()
+    public function getTitle()
     {
-        return $this->state;
+        return $this->title;
     }
 
     /**

@@ -155,6 +155,13 @@ class Dream implements Taggable
     protected $workResources;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="currentStatus", type="string", length=30)
+     */
+    protected $currentStatus;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -701,6 +708,7 @@ class Dream implements Taggable
     public function addStatus(\Geekhub\DreamBundle\Entity\Status $statuses)
     {
         $this->statuses[] = $statuses;
+        $statuses->setDream($this);
 
         return $this;
     }
@@ -723,5 +731,28 @@ class Dream implements Taggable
     public function getStatuses()
     {
         return $this->statuses;
+    }
+
+    /**
+     * Set currentStatus
+     *
+     * @param string $currentStatus
+     * @return Dream
+     */
+    public function setCurrentStatus($currentStatus)
+    {
+        $this->currentStatus = $currentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get currentStatus
+     *
+     * @return string 
+     */
+    public function getCurrentStatus()
+    {
+        return $this->currentStatus;
     }
 }

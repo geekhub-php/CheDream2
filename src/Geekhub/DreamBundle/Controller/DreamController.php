@@ -76,10 +76,8 @@ class DreamController extends Controller
                 $dream->addDreamResource($work);
             }
 
-            $status = new Status();
-            $status->setState(Status::SUBMITTED);
-            $status->setDream($dream);
-            $dream->addStatus($status);
+            $dream->addStatus(new Status(Status::SUBMITTED));
+            $dream->setCurrentStatus(Status::SUBMITTED);
 
             $newDream->persist($dream);
             $newDream->flush();
