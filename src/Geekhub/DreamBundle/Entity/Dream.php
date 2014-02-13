@@ -116,13 +116,6 @@ class Dream implements Taggable
      */
     protected $equipmentCompleted;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="hiddenPhone", type="boolean")
-     */
-    protected $hiddenPhone;
-
     protected $tags;
 
     /**
@@ -145,11 +138,6 @@ class Dream implements Taggable
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="dream", cascade={"persist", "remove"})
      */
     protected $dreamComments;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="dream", cascade={"persist", "remove"})
-     */
-    protected $dreamMessages;
 
     /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
@@ -175,8 +163,6 @@ class Dream implements Taggable
         $this->dreamContributes = new ArrayCollection();
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
-        $this->dreamMessages = new ArrayCollection();
-
         $this->financialResources = new ArrayCollection();
         $this->equipmentResources = new ArrayCollection();
         $this->workResources = new ArrayCollection();
@@ -529,29 +515,6 @@ class Dream implements Taggable
     }
 
     /**
-     * Set hiddenPhone
-     *
-     * @param  boolean $hiddenPhone
-     * @return Dream
-     */
-    public function setHiddenPhone($hiddenPhone)
-    {
-        $this->hiddenPhone = $hiddenPhone;
-
-        return $this;
-    }
-
-    /**
-     * Get hiddenPhone
-     *
-     * @return boolean
-     */
-    public function getHiddenPhone()
-    {
-        return $this->hiddenPhone;
-    }
-
-    /**
      * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -703,39 +666,6 @@ class Dream implements Taggable
     public function getDreamComments()
     {
         return $this->dreamComments;
-    }
-
-    /**
-     * Add dreamMessages
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Message $dreamMessages
-     * @return Dream
-     */
-    public function addDreamMessage(\Geekhub\DreamBundle\Entity\Message $dreamMessages)
-    {
-        $this->dreamMessages[] = $dreamMessages;
-
-        return $this;
-    }
-
-    /**
-     * Remove dreamMessages
-     *
-     * @param \Geekhub\DreamBundle\Entity\Message $dreamMessages
-     */
-    public function removeDreamMessage(\Geekhub\DreamBundle\Entity\Message $dreamMessages)
-    {
-        $this->dreamMessages->removeElement($dreamMessages);
-    }
-
-    /**
-     * Get dreamMessages
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDreamMessages()
-    {
-        return $this->dreamMessages;
     }
 
     /**
