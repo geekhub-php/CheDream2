@@ -130,8 +130,4 @@ class Status
         return $this->dream;
     }
 
-    public function __toString()
-    {
-        return $this->getStatus();
-    }
 }

@@ -1,14 +1,14 @@
 jQuery(document).ready(function() {
     var $collectionFinHolder, $collectionEquipHolder, $collectionWorkHolder;
 
-    var $addFinLink = $('<a href="#" class="add_fin_link">Add a fin</a>');
+    var $addFinLink = $('<a href="#" class="add_fin_link btn btn-xs btn-default text-left">Add a fin</a>');
     var $newFinLinkLi = $('<li></li>').append($addFinLink);
 
 
-    var $addEquipLink = $('<a href="#" class="add_equip_link">Add a equip</a>');
+    var $addEquipLink = $('<a href="#" class="add_equip_link btn btn-xs btn-default text-left">Add a equip</a>');
     var $newEquipLinkLi = $('<li></li>').append($addEquipLink);
 
-    var $addWorkLink = $('<a href="#" class="add_work_link">Add a work</a>');
+    var $addWorkLink = $('<a href="#" class="add_work_link btn btn-xs btn-default text-left">Add a work</a>');
     var $newWorkLinkLi = $('<li></li>').append($addWorkLink);
 
     $collectionFinHolder = $('ul.financialResources');
@@ -94,7 +94,7 @@ function addWorkForm($collectionHolder, $newLinkLi) {
 }
 
 function addFinFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_fin_link">delete this item</a>');
+    var $removeFormA = $('<a href="#" class="delete_fin_link btn btn-xs btn-danger pull-right">delete this item</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -104,7 +104,7 @@ function addFinFormDeleteLink($finFormLi) {
 }
 
 function addEquipFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_equip_link">delete this item</a>');
+    var $removeFormA = $('<a href="#" class="delete_equip_link btn btn-xs btn-danger pull-right">delete this item</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -114,7 +114,7 @@ function addEquipFormDeleteLink($finFormLi) {
 }
 
 function addWorkFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_work_link">delete this item</a>');
+    var $removeFormA = $('<a href="#" class="delete_work_link btn btn-xs btn-danger pull-right">delete this item</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
