@@ -32,6 +32,7 @@ class Status
 
     /**
      * @var integer
+     * @return string
      *
      * @ORM\Column(name="status", type="string", length=30)
      */
@@ -77,7 +78,6 @@ class Status
     /**
      * Get status
      *
-     * @return integer
      */
     public function getStatus()
     {
@@ -128,5 +128,10 @@ class Status
     public function getDream()
     {
         return $this->dream;
+    }
+
+    public function __toString()
+    {
+        return $this->getStatus();
     }
 }

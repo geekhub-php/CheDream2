@@ -12,6 +12,7 @@ namespace Geekhub\DreamBundle\Controller;
 use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\DreamResource;
+use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Entity\Tag;
 use Geekhub\DreamBundle\Entity\Task;
 use Geekhub\DreamBundle\Form\DreamType;
@@ -30,45 +31,78 @@ class DreamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $newDream = $this->getDoctrine()->getManager();
+
             $data = $form->getData();
 
-            var_dump($data->getFinancialResources());
-            echo "****************************************";
-            var_dump($data->getEquipmentResources());
-            echo "****************************************";
-            var_dump($data->getWorkResources());
-            echo "****************************************<br>";
-            echo "*********** after del null *************<br>";
-            echo "****************************************<br>";
+            $dream->setMainPicture('pict');
+
+//            var_dump($data->getFinancialResources());
+//            echo "****************************************";
+//            var_dump($data->getEquipmentResources());
+//            echo "****************************************";
+//            var_dump($data->getWorkResources());
+//            echo "****************************************<br>";
+//            echo "*********** after del null *************<br>";
+//            echo "****************************************<br>";
 
             foreach ($data->getEquipmentResources() as $equip) {
                 if (is_null($equip->getTitle())) {
                     $data->getEquipmentResources()->removeElement($equip);
                 }
+
+                $equip->setDream($dream);
+                $dream->addDreamResource($equip);
             }
             foreach ($data->getFinancialResources() as $finance) {
                 if (is_null($finance->getTitle())) {
                     $data->getFinancialResources()->removeElement($finance);
                 }
+
+                $finance->setDream($dream);
+                $dream->addDreamResource($finance);
             }
             foreach ($data->getWorkResources() as $work) {
                 if (is_null($work->getTitle())) {
                     $data->getWorkResources()->removeElement($work);
                 }
+
+                $work->setDream($dream);
+                $dream->addDreamResource($work);
             }
 
-            var_dump($data->getFinancialResources());
-            echo "****************************************";
-            var_dump($data->getEquipmentResources());
-            echo "****************************************";
-            var_dump($data->getWorkResources());
-            echo "****************************************";
+//            $status = new Status();
+//            $status->setStatus(Status::SUBMITTED);
+//            $status->setDream($dream);
+//            $dream->setStatus($status);
 
-            exit;
+            $newDream->persist($dream);
+            $newDream->flush();
+
+            return $this->redirect($this->generateUrl('dream_list'));
+
+//            var_dump($data->getFinancialResources());
+//            echo "****************************************";
+//            var_dump($data->getEquipmentResources());
+//            echo "****************************************";
+//            var_dump($data->getWorkResources());
+//            echo "****************************************";
+//
+//            exit;
         }
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    public function listAllDreamAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+        return  $this->render('GeekhubDreamBundle:Dream:listAllDream.html.twig', array(
+            'dreams' => $dreams
         ));
     }
 

@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Form;
 
+use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,7 +26,10 @@ class WorkType extends AbstractType
         $builder
             ->add('title', 'text', array('label' => 'назва'))
             ->add('quantity', 'text', array('label' => 'человек'))
-            ->add('quantityDays', 'text', array('label' => 'дней'));
+            ->add('quantityDays', 'text', array('label' => 'дней'))
+            ->add('type', 'hidden', array(
+                'data' => AbstractContributeResource::WORK,
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

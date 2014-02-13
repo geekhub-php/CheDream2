@@ -26,10 +26,6 @@ class DreamType extends AbstractType
             ->add('title', 'text', array('label' => 'назва '))
             ->add('description', 'textarea', array('label' => 'опис '))
             ->add('phone', 'text', array('label' => 'телефон' ))
-            ->add('hiddenPhone', 'checkbox', array(
-                'label'     => 'скрытый телефон ',
-                'required'  => false,
-            ))
             ->add('expiredDate', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',

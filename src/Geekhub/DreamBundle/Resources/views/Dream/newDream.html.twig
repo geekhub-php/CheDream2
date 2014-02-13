@@ -12,32 +12,56 @@
                     {{ form_row(form.description, {'attr': {'class': 'form-control'} }) }}
                     {{ form_row(form.phone, {'attr': {'value': 'phone number', 'class': 'form-control'} }) }}
                     {{ form_row(form.expiredDate, {'attr': {'class': 'form-control'} }) }}
-                    <div class="checkbox">
-                        {{ form_row(form.hiddenPhone) }}
-                    </div>
                     <br>
 
                     <p>Finance</p>
                     <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
                     {% for finance in form.financialResources %}
-                        <li> {{ form_row(finance.title, {'attr': {'class': 'form-control'} }) }}</li>
-                        <li> {{ form_row(finance.quantity, {'attr': {'class': 'form-control'} }) }}</li>
+                        <li>
+                            {{ form_label(finance.title, 'title l') }}
+                            {{ form_widget(finance.title, {'attr': {'class': 'form-control'} }) }}
+                        </li>
+                        <li>
+                            {{ form_label(finance.quantity, 'quantity l') }}
+                            {{ form_widget(finance.quantity, {'attr': {'class': 'form-control'} }) }}
+                        </li>
+                        <li>{{ form_widget(finance.type) }}</li>
                     {% endfor %}
                     </ul>
                     <p>Equipment</p>
                     <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
                         {% for equipment in form.equipmentResources %}
-                            <li> {{ form_row(equipment.title, {'attr': {'class': 'form-control'} }) }}</li>
-                            <li> {{ form_row(equipment.quantity, {'attr': {'class': 'form-control'} }) }}</li>
-                            <li> {{ form_row(equipment.quantityType, {'attr': {'class': 'form-control'} }) }}</li>
+                            <li>
+                                {{ form_label(equipment.title, 'title l') }}
+                                {{ form_widget(equipment.title, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(equipment.quantity, 'quantity l') }}
+                                {{ form_widget(equipment.quantity, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(equipment.quantityType, 'quantityType l') }}
+                                {{ form_widget(equipment.quantityType, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>{{ form_widget(equipment.type) }}</li>
                         {% endfor %}
                     </ul>
                     <p>Work</p>
                     <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
                         {% for work in form.workResources %}
-                            <li> {{ form_row(work.title, {'attr': {'class': 'form-control'} }) }}</li>
-                            <li> {{ form_row(work.quantity, {'attr': {'class': 'form-control'} }) }}</li>
-                            <li> {{ form_row(work.quantityDays, {'attr': {'class': 'form-control'} }) }}</li>
+                            <li>
+                                {{ form_label(work.title, 'title l') }}
+                                {{ form_widget(work.title, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(work.quantity, 'quantity l') }}
+                                {{ form_widget(work.quantity, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(work.quantityDays, 'quantityDays l') }}
+                                {{ form_widget(work.quantityDays, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>{{ form_widget(work.type) }}</li>
                         {% endfor %}
                     </ul>
 

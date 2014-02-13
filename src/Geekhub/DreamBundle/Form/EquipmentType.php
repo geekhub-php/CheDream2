@@ -34,6 +34,9 @@ class EquipmentType extends AbstractType
                 ),
 //                'preferred_choices' => array(AbstractContributeResource::PIECE),
                 'label' => 'Тип'
+            ))
+            ->add('type', 'hidden', array(
+                'data' => AbstractContributeResource::EQUIPMENT,
             ));
     }
 

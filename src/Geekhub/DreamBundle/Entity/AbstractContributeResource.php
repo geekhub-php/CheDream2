@@ -45,21 +45,21 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
-     * @ORM\Column(name="quantity", type="float")
+     * @ORM\Column(name="quantity", type="float", nullable=true)
      */
     protected $quantity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="quantityType", type="string", length=15)
+     * @ORM\Column(name="quantityType", type="string", length=15, nullable=true)
      */
     protected $quantityType;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantityDays", type="integer")
+     * @ORM\Column(name="quantityDays", type="integer", nullable=true)
      */
     protected $quantityDays;
 
