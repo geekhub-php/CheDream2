@@ -5,7 +5,6 @@ geekhub_dream_homepage:
 new_dream:
     pattern:  /dream/new
     defaults: { _controller: GeekhubDreamBundle:Dream:newDream }
-    requirements: { _method: post }
 
 dream_list:
     pattern:  /dream/list

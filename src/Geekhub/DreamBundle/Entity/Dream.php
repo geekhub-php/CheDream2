@@ -692,5 +692,36 @@ class Dream implements Taggable
         return $this->author;
     }
 
-   
+    /**
+     * Add statuses
+     *
+     * @param \Geekhub\DreamBundle\Entity\Status $statuses
+     * @return Dream
+     */
+    public function addStatus(\Geekhub\DreamBundle\Entity\Status $statuses)
+    {
+        $this->statuses[] = $statuses;
+
+        return $this;
+    }
+
+    /**
+     * Remove statuses
+     *
+     * @param \Geekhub\DreamBundle\Entity\Status $statuses
+     */
+    public function removeStatus(\Geekhub\DreamBundle\Entity\Status $statuses)
+    {
+        $this->statuses->removeElement($statuses);
+    }
+
+    /**
+     * Get statuses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getStatuses()
+    {
+        return $this->statuses;
+    }
 }
