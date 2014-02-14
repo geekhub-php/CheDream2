@@ -80,11 +80,12 @@ class DreamController extends Controller
 
             $tagManager = $this->get('fpn_tag.tag_manager');
 
-            $tags = $tagManager->loadOrCreateTag($data->getTagsInput());
-
-            $tagManager->addTag($tags, $dream);
-
-            // after flushing the post, tell the tag manager to actually save the tags
+            $tags = explode(',', $data->getTagsInput());
+            foreach($tags as $tag)
+            {
+                $tagItem = $tagManager->loadOrCreateTag($tag);
+                $tagManager->addTag($tagItem, $dream);
+            }
 
             $newDream->persist($dream);
             $newDream->flush();
@@ -130,39 +131,18 @@ class DreamController extends Controller
         ));
     }
 
-    public function createTagsAction()
-    {
-
-//        $tagManager = $this->get('fpn_tag.tag_manager');
-//
-//        // ask the tag manager to create a Tag object
-//        $fooTag = $tagManager->loadOrCreateTag('foo');
-//
-//        // assign the foo tag to the post
-//        $tagManager->addTag($fooTag, $post);
-//
-//        $em = $this->getDoctrine()->getEntityManager();
-//
-//        // persist and flush the new post
-//        $em->persist($post);
-//        $em->flush();
-//
-//        // after flushing the post, tell the tag manager to actually save the tags
-//        $tagManager->saveTagging($post);
-//
-//        // ...
-//
-//        // Load tagging ...
-//        $tagManager->loadTagging($post);
-    }
-
     public function loadTagsAction()
     {
+        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->findAll();
 
-        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->loadTags();
+        $arrayTags = array();
+        foreach($tags as $tag)
+        {
+            $arrayTags[] = $tag->getName();
+        }
+//        var_dump($tags, $arrayTags); exit;
+//        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->loadTags();
 
-        return new Response(json_encode(["tags" => $tags]));
-//        return new Response(json_encode(["tags" => $tags]));
+        return new Response(json_encode(["tags" => $arrayTags]));
     }
-
 }

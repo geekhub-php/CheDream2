@@ -9,9 +9,9 @@
 
 namespace Geekhub\TagBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+use DoctrineExtensions\Taggable\Entity\TagRepository as BaseTagRepository;
 
-class TagRepository extends EntityRepository
+class TagRepository extends BaseTagRepository
 {
     public function loadTags()
     {
@@ -19,5 +19,4 @@ class TagRepository extends EntityRepository
             ->createQuery('SELECT t.name FROM TagBundle:Tag t')
             ->getArrayResult();
     }
-
-} 
+}

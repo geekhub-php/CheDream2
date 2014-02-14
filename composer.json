@@ -6,6 +6,19 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "aehlke/tag-it",
+                "version": "master",
+                "dist": {
+                    "url": "https://github.com/aehlke/tag-it/archive/master.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
@@ -35,7 +48,8 @@
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
         "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
-        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
+        "aehlke/tag-it": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
