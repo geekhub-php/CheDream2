@@ -84,7 +84,7 @@ class DreamController extends Controller
             return $this->redirect($this->generateUrl('dream_list'));
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
+        return $this->render('GeekhubDreamBundle:Dream:new.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -94,7 +94,7 @@ class DreamController extends Controller
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
-        return  $this->render('GeekhubDreamBundle:Dream:listAllDream.html.twig', array(
+        return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams
         ));
     }
