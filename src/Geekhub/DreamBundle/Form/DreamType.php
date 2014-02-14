@@ -26,14 +26,12 @@ class DreamType extends AbstractType
             ->add('title', 'text', array('label' => 'назва '))
             ->add('description', 'textarea', array('label' => 'опис '))
             ->add('phone', 'text', array('label' => 'телефон' ))
+            ->add('tagsInput', 'hidden')
             ->add('expiredDate', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
                 'label' => 'expireData fff ',
             ))
-//            ->add('financialResources', 'collection', array('type' => new FinancialType()))
-//            ->add('equipmentResources', 'collection', array('type' => new EquipmentType()))
-//            ->add('workResources', 'collection', array('type' => new WorkType()));
             ->add('financialResources', 'collection', array(
                 'type' => new FinancialType(),
 //                'mapped' => false,

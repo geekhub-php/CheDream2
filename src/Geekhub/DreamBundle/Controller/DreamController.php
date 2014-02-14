@@ -17,6 +17,7 @@ use Geekhub\DreamBundle\Form\DreamType;
 use Geekhub\DreamBundle\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DreamController extends Controller
 {
@@ -33,6 +34,7 @@ class DreamController extends Controller
 
             $data = $form->getData();
 
+//            var_dump($data); exit;
 //            var_dump($data->getFinancialResources());
 //            echo "****************************************";
 //            var_dump($data->getEquipmentResources());
@@ -76,8 +78,18 @@ class DreamController extends Controller
 
             $dream->addStatus(new Status(Status::SUBMITTED));
 
+            $tagManager = $this->get('fpn_tag.tag_manager');
+
+            $tags = $tagManager->loadOrCreateTag($data->getTagsInput());
+
+            $tagManager->addTag($tags, $dream);
+
+            // after flushing the post, tell the tag manager to actually save the tags
+
             $newDream->persist($dream);
             $newDream->flush();
+
+            $tagManager->saveTagging($dream);
 
             return $this->redirect($this->generateUrl('dream_list'));
         }
@@ -91,6 +103,11 @@ class DreamController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        foreach ($dreams as $dream) {
+            $tagManager->loadTagging($dream);
+        }
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams
@@ -111,6 +128,41 @@ class DreamController extends Controller
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams
         ));
+    }
+
+    public function createTagsAction()
+    {
+
+//        $tagManager = $this->get('fpn_tag.tag_manager');
+//
+//        // ask the tag manager to create a Tag object
+//        $fooTag = $tagManager->loadOrCreateTag('foo');
+//
+//        // assign the foo tag to the post
+//        $tagManager->addTag($fooTag, $post);
+//
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        // persist and flush the new post
+//        $em->persist($post);
+//        $em->flush();
+//
+//        // after flushing the post, tell the tag manager to actually save the tags
+//        $tagManager->saveTagging($post);
+//
+//        // ...
+//
+//        // Load tagging ...
+//        $tagManager->loadTagging($post);
+    }
+
+    public function loadTagsAction()
+    {
+
+        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->loadTags();
+
+        return new Response(json_encode(["tags" => $tags]));
+//        return new Response(json_encode(["tags" => $tags]));
     }
 
 }

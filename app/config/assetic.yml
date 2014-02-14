@@ -31,3 +31,17 @@ assetic:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
             output: js/scripts.min.js
+        dream_css:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/jquery.tagit.css
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/tagit.ui-zendesk.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output: css/dream.min.css
+        dream_js:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/jquery-ui.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tag-it.js
+#                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
+            output: js/dream_js.min.js

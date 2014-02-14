@@ -154,6 +154,8 @@ class Dream implements Taggable
     protected $equipmentResources;
     protected $workResources;
 
+    protected $tagsInput;
+
     /**
      * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
@@ -172,6 +174,22 @@ class Dream implements Taggable
         $this->financialResources = new ArrayCollection();
         $this->equipmentResources = new ArrayCollection();
         $this->workResources = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $tagsInput
+     */
+    public function setTagsInput($tagsInput)
+    {
+        $this->tagsInput = $tagsInput;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTagsInput()
+    {
+        return $this->tagsInput;
     }
 
     /**

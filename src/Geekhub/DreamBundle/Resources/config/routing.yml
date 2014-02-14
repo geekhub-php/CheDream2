@@ -5,11 +5,21 @@ geekhub_dream_homepage:
 new_dream:
     pattern:  /dream/new
     defaults: { _controller: GeekhubDreamBundle:Dream:newDream }
+    options:
+        expose: true
 
 dream_list:
     pattern:  /dream/list
     defaults: { _controller: GeekhubDreamBundle:Dream:listAllDream }
+    options:
+        expose: true
 
 dream_change_status:
     pattern:  /dream/chst
     defaults: { _controller: GeekhubDreamBundle:Dream:changeStatus }
+
+dream_load_tags:
+    pattern:  /dream/loadTag
+    defaults: { _controller: GeekhubDreamBundle:Dream:loadTags }
+    options:
+        expose: true

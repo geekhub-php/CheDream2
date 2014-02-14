@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
 * @ORM\Table(name="tag")
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="Geekhub\TagBundle\Entity\TagRepository")
 */
 class Tag extends BaseTag
 {
