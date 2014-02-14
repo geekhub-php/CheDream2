@@ -34,7 +34,8 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
-        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b"
+        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
+        "hautelook/alice-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"

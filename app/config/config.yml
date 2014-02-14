@@ -93,3 +93,7 @@ fpn_tag:
     model:
         tag_class:     Geekhub\TagBundle\Entity\Tag
         tagging_class: Geekhub\TagBundle\Entity\Tagging
+
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # de
