@@ -9,12 +9,18 @@
             {% for dream in dreams %}
                 <div>
 
+                    {{ dump(dream.tags) }}
+
                     <p>title = {{ dream.title }}</p>
                     <p>descr = {{ dream.description }}</p>
                     <p>phone = {{ dream.phone }}</p>
                     <p>exp data = {{ dream.expiredDate|date('d.m.Y') }}</p>
                     <p>status = {{ dream.currentStatus.title }}</p>
-                    <p>Tags = {{ dream.tags }}</p>
+                    <p>Tags =
+                        {% for tag in dream.tags %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </p>
 
                     <div class=" well well-sm">
                     {% for resources in dream.dreamResources %}
