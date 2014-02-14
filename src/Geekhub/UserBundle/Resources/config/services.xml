@@ -26,7 +26,7 @@
             </call>
              <call method="setAppKeys">
                 <argument type="collection">
-                    <argument key="odnoklassniki_app_key">%odnoklassniki_app_key% </argument>
+                    <argument key="odnoklassniki_app_key">%odnoklassniki_app_key%</argument>
                     <argument key="odnoklassniki_app_secret">%odnoklassniki_app_secret%</argument>
                 </argument>
             </call>

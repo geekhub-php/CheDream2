@@ -124,4 +124,4 @@ hwi_oauth:
             client_secret:       "%odnoklassniki_app_secret%"
             scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
             options:
-                application_key:    "%odnoklassniki_app_key%"
+                application_key: "%odnoklassniki_app_key%"

@@ -23,8 +23,6 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-        //var_dump("in connect");
-        //var_dump($user);
         $property = $this->getProperty($response);
         $username = $response->getUsername();
  
@@ -108,7 +106,6 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
         $user->setAvatar($profilePicture);
         $userInfo = $this->getFacebookUserInfo($response->getAccessToken());
-        //var_dump($userInfo);
         if (array_key_exists('birthday',$userInfo)) {
             $birthday=$userInfo['birthday'];
             $birthdayMonth=substr($birthday,0,2);
@@ -174,8 +171,9 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $profilePicture = null;
      
         if ((array_key_exists('photos',$resultObj)) &&($resultObj->photos[0]->standard_url)) {
-            $profilePicture = $this->copyImgFromRemote($resultObj->photos[0]->standard_url, md5('ok'.$uid).'.jpg');
+            $profilePicture = $this->copyImgFromRemote($resultObj->photos[0]->standard_url, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
         }
+
         $user->setAvatar($profilePicture);
        
         return $user;
@@ -254,7 +252,6 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         $arrayParameters = array_merge($parameters, $arrayParameters);
 
         $url .= '&' . http_build_query($arrayParameters);
-        //var_dump($url);
         return file_get_contents($url);
     }
 
