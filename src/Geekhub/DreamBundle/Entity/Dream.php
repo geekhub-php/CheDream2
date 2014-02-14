@@ -155,9 +155,7 @@ class Dream implements Taggable
     protected $workResources;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="currentStatus", type="string", length=30)
+     * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
     protected $currentStatus;
 
@@ -705,11 +703,11 @@ class Dream implements Taggable
      * @param \Geekhub\DreamBundle\Entity\Status $statuses
      * @return Dream
      */
-    public function addStatus(\Geekhub\DreamBundle\Entity\Status $statuses)
+    public function addStatus(\Geekhub\DreamBundle\Entity\Status $status)
     {
-        $this->statuses[] = $statuses;
-        $statuses->setDream($this);
-        $this->currentStatus = Status::SUBMITTED;
+        $this->statuses[] = $status;
+        $status->setDream($this);
+        $this->currentStatus = $status;
 
         return $this;
     }

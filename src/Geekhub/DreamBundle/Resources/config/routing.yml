@@ -10,3 +10,6 @@ dream_list:
     pattern:  /dream/list
     defaults: { _controller: GeekhubDreamBundle:Dream:listAllDream }
 
+dream_change_status:
+    pattern:  /dream/chst
+    defaults: { _controller: GeekhubDreamBundle:Dream:changeStatus }

@@ -9,9 +9,7 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
-use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Geekhub\DreamBundle\Entity\Dream;
-use Geekhub\DreamBundle\Entity\DreamResource;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Entity\Tag;
 use Geekhub\DreamBundle\Entity\Task;
@@ -92,6 +90,22 @@ class DreamController extends Controller
     public function listAllDreamAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+        return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
+            'dreams' => $dreams
+        ));
+    }
+
+    public function changeStatusAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById(1);
+
+        $dream->addStatus(new Status(Status::COMPLETED));
+
+        $em->flush();
+
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(

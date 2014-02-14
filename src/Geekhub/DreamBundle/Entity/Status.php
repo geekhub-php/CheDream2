@@ -31,7 +31,7 @@ class Status
     protected $id;
 
     /**
-     * @var integer
+     * @var string
      * @return string
      *
      * @ORM\Column(name="title", type="string", length=30)
@@ -83,7 +83,7 @@ class Status
     /**
      * Get title
      *
-     * @return integer
+     * @return string
      */
     public function getTitle()
     {
@@ -135,5 +135,4 @@ class Status
     {
         return $this->dream;
     }
-
 }
