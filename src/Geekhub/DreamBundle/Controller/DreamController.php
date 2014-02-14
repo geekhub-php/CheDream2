@@ -77,7 +77,6 @@ class DreamController extends Controller
             }
 
             $dream->addStatus(new Status(Status::SUBMITTED));
-            $dream->setCurrentStatus(Status::SUBMITTED);
 
             $newDream->persist($dream);
             $newDream->flush();

@@ -709,6 +709,7 @@ class Dream implements Taggable
     {
         $this->statuses[] = $statuses;
         $statuses->setDream($this);
+        $this->currentStatus = Status::SUBMITTED;
 
         return $this;
     }
