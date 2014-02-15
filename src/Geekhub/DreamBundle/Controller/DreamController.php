@@ -142,6 +142,7 @@ class DreamController extends Controller
         }
 //        var_dump($tags, $arrayTags); exit;
 //        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->loadTags();
+//        return array('tags' => $tags);
 
         return new Response(json_encode(["tags" => $arrayTags]));
     }
