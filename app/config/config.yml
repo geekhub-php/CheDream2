@@ -93,3 +93,12 @@ fpn_tag:
     model:
         tag_class:     Geekhub\TagBundle\Entity\Tag
         tagging_class: Geekhub\TagBundle\Entity\Tagging
+
+h4cc_alice_fixtures:
+    locale: en_US                               # default
+    seed: 1                                     # default
+    do_flush: true                              # default
+
+    object_manager: null                        # default
+    schema_tool: null                           # default
+    doctrine: orm                               # default
