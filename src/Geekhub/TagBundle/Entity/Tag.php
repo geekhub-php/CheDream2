@@ -6,7 +6,7 @@ use \FPN\TagBundle\Entity\Tag as BaseTag;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Table(name="tag")
+* @ORM\Table(name="tags")
 * @ORM\Entity()
 */
 class Tag extends BaseTag
