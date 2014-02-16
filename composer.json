@@ -49,6 +49,7 @@
         "ahonymous/fontello": "dev-master",
         "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
+        "jms/serializer-bundle": "0.13.*@dev",
         "aehlke/tag-it": "*",
         "bmatzner/jquery-ui-bundle": "1.10.0"
     },
@@ -63,8 +64,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "cp -r vendor/twbs/bootstrap/dist/fonts/ web/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "mkdir -p web/fonts && cp -u vendor/twbs/bootstrap/dist/fonts/* web/fonts/",
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -72,8 +73,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "cp -r vendor/twbs/bootstrap/dist/fonts/ web/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "mkdir -p web/fonts && cp -u vendor/twbs/bootstrap/dist/fonts/* web/fonts/",
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ]
     },
     "config": {
