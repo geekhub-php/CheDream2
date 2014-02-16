@@ -5,31 +5,60 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 <parameters>
-        <parameter key="gh_user.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\OAuthUserProvider</parameter>
-        <parameter key="gh_fosuser.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\MyFOSUBUserProvider</parameter>
+        <parameter key="geekhub_user.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\OAuthUserProvider</parameter>
+        <parameter key="geekhub_oauth_user_provider.class">Geekhub\UserBundle\UserProvider\MyFOSUBUserProvider</parameter>
+        <parameter key="geekhub_facebook_user_data_service.class">Geekhub\UserBundle\UserProvider\FacebookUserDataService</parameter>
+        <parameter key="geekhub_vkontakte_user_data_service.class">Geekhub\UserBundle\UserProvider\VkontakteUserDataService</parameter>
+        <parameter key="geekhub_odnoklassniki_user_data_service.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService</parameter>
 
 </parameters>
 
  
 <services>
-        <service id="gh_user.oauth_user_provider" class="%gh_user.oauth_user_provider.class%"> 
+    <service id="geekhub_user.oauth_user_provider" class="%geekhub_user.oauth_user_provider.class%"> 
     </service>
-    <service id="gh_fosuser.oauth_user_provider" class="%gh_fosuser.oauth_user_provider.class%"> 
+
+    <service id="geekhub_oauth_user_provider" class="%geekhub_oauth_user_provider.class%"> 
      	<argument type="service" id="fos_user.user_manager" />
         <argument type="collection">
          	<argument key="facebook">facebook_id</argument>
          	<argument key="vkontakte">vkontakte_id</argument>
          	<argument key="odnoklassniki">odnoklassniki_id</argument>
         </argument>
+            <call method="setFacebookUserDataService">
+                <argument type="service" id="geekhub_facebook_user_data_service" />
+            </call>
+            <call method="setVkontakteUserDataService">
+                <argument type="service" id="geekhub_vkontakte_user_data_service" />
+            </call>
+            <call method="setOdnoklassnikiUserDataService">
+                <argument type="service" id="geekhub_odnoklassniki_user_data_service" />
+            </call>
+    </service>
+
+    <service id="geekhub_facebook_user_data_service" class="%geekhub_facebook_user_data_service.class%"> 
             <call method="setKernelWebDir">
                 <argument type="string">%kernel.root_dir%</argument>
             </call>
-             <call method="setAppKeys">
+    </service>
+
+    <service id="geekhub_vkontakte_user_data_service" class="%geekhub_vkontakte_user_data_service.class%"> 
+            <call method="setKernelWebDir">
+                <argument type="string">%kernel.root_dir%</argument>
+            </call>
+    </service>
+
+    <service id="geekhub_odnoklassniki_user_data_service" class="%geekhub_odnoklassniki_user_data_service.class%"> 
+            <call method="setKernelWebDir">
+                <argument type="string">%kernel.root_dir%</argument>
+            </call>
+            <call method="setAppKeys">
                 <argument type="collection">
                     <argument key="odnoklassniki_app_key">%odnoklassniki_app_key%</argument>
                     <argument key="odnoklassniki_app_secret">%odnoklassniki_app_secret%</argument>
                 </argument>
             </call>
+
     </service>
 </services>
 </container>

@@ -96,7 +96,7 @@ fpn_tag:
 
 hwi_oauth:
     connect:
-        account_connector: gh_fosuser.oauth_user_provider
+        account_connector: geekhub_oauth_user_provider
     # name of the firewall in which this bundle is active, this setting MUST be set
     firewall_name: main
     fosub:
@@ -106,7 +106,6 @@ hwi_oauth:
             facebook: facebook_id
             vkontakte: vkontakte_id
             odnoklassniki: odnoklassniki_id
-    firewall_name: main
     resource_owners:
         facebook:
             type:                facebook
