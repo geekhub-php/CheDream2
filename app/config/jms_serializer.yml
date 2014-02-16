@@ -1,0 +1,7 @@
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            TaggableDoctrineExtensions:
+                namespace_prefix: "DoctrineExtensions\\Taggable"
+                path: "@TagBundle/Resources/config/serializer/DoctrineExtensions"

@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: assetic.yml }
     - { resource: sonata.yml }
+    - { resource: jms_serializer.yml }
 
 framework:
     #esi:             ~
