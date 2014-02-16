@@ -24,11 +24,13 @@ assetic:
                 - cssrewrite
                 - yui_css
             output: css/style.min.css
-        javascript:
+        scripts:
             inputs:
                 - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
+                - %kernel.root_dir%/../vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/js/router.js
+            filters: [yui_js]
             output: js/scripts.min.js
         dream_css:
             inputs:
@@ -44,7 +46,5 @@ assetic:
                 - %kernel.root_dir%/../vendor/aehlke/tag-it/js/tag-it.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
-            filters:
-                - cssrewrite
-                - yui_js
-            output: js/dream_js.min.js
+            filters: [yui_js]
+            output: js/dream.min.js

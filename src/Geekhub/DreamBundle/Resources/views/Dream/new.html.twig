@@ -87,6 +87,7 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('js/dream_js.min.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/dream.min.js') }}"></script>
 {% endblock %}
 
