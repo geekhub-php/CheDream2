@@ -23,6 +23,11 @@
 
     <body>
         {% block body %}
+            <div class="container" id="wrap">
+                {% block menu %}{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}{% endblock %}
+                {% block content %}{% endblock content %}
+            </div>
+            {% block footer %}{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}{% endblock %}
         {% endblock %}
 
         <script src="{{ asset('js/scripts.min.js') }}"></script>

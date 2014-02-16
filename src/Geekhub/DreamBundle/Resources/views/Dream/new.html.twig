@@ -3,92 +3,87 @@
 {% block stylesheets %}
     <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
 {% endblock %}
-{% block body %}
-    <div class="container" id="wrap">
-        {#{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}#}
+{% block content %}
 
-            <div style="margin-top: 50px;">
+    <div style="margin-top: 50px;">
 
-                <div class="col-md-8 col-md-offset-2">
-                {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
-                    {{ form_row(form.title, {'attr': {'value': 'new title dream', 'class': 'form-control'} }) }}
-                    {{ form_row(form.description, {'attr': {'class': 'form-control'} }) }}
-                    {{ form_row(form.phone, {'attr': {'value': 'phone number', 'class': 'form-control'} }) }}
-                    {{ form_row(form.expiredDate, {'attr': {'class': 'form-control'} }) }}
-                    {{ form_widget(form.tagsInput) }}
-                    {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
-                    <br>
-                    <ul id="singleFieldTags"></ul>
+        <div class="col-md-8 col-md-offset-2">
+        {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
+            {{ form_row(form.title, {'attr': {'value': 'new title dream', 'class': 'form-control'} }) }}
+            {{ form_row(form.description, {'attr': {'class': 'form-control'} }) }}
+            {{ form_row(form.phone, {'attr': {'value': 'phone number', 'class': 'form-control'} }) }}
+            {{ form_row(form.expiredDate, {'attr': {'class': 'form-control'} }) }}
+            {{ form_widget(form.tagsInput) }}
+            {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
+            <br>
+            <ul id="singleFieldTags"></ul>
 
+            <div class="row">
+                <div class="col-md-4">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="row">
-                            <p>Finance</p>
-                            <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
-                                {% for finance in form.financialResources %}
-                                    <li>
-                                        {{ form_label(finance.title, 'title l') }}
-                                        {{ form_widget(finance.title, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_label(finance.quantity, 'quantity l') }}
-                                        {{ form_widget(finance.quantity, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>{{ form_widget(finance.type) }}</li>
-                                {% endfor %}
-                            </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Equipment</p>
-                            <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
-                                {% for equipment in form.equipmentResources %}
-                                    <li>
-                                        {{ form_label(equipment.title, 'title l') }}
-                                        {{ form_widget(equipment.title, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_label(equipment.quantity, 'quantity l') }}
-                                        {{ form_widget(equipment.quantity, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_label(equipment.quantityType, 'quantityType l') }}
-                                        {{ form_widget(equipment.quantityType, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>{{ form_widget(equipment.type) }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <p>Work</p>
-                            <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
-                                {% for work in form.workResources %}
-                                    <li>
-                                        {{ form_label(work.title, 'title l') }}
-                                        {{ form_widget(work.title, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_label(work.quantity, 'quantity l') }}
-                                        {{ form_widget(work.quantity, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_label(work.quantityDays, 'quantityDays l') }}
-                                        {{ form_widget(work.quantityDays, {'attr': {'class': 'form-control'} }) }}
-                                    </li>
-                                    <li>{{ form_widget(work.type) }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                    <p>Finance</p>
+                    <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
+                        {% for finance in form.financialResources %}
+                            <li>
+                                {{ form_label(finance.title, 'title l') }}
+                                {{ form_widget(finance.title, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(finance.quantity, 'quantity l') }}
+                                {{ form_widget(finance.quantity, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>{{ form_widget(finance.type) }}</li>
+                        {% endfor %}
+                    </ul>
                     </div>
-
-                    <br>
-                     <input type="submit" value="Ok" class="text-center btn btn-default">
-                {{ form_end(form) }}
                 </div>
-
+                <div class="col-md-4">
+                    <p>Equipment</p>
+                    <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
+                        {% for equipment in form.equipmentResources %}
+                            <li>
+                                {{ form_label(equipment.title, 'title l') }}
+                                {{ form_widget(equipment.title, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(equipment.quantity, 'quantity l') }}
+                                {{ form_widget(equipment.quantity, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(equipment.quantityType, 'quantityType l') }}
+                                {{ form_widget(equipment.quantityType, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>{{ form_widget(equipment.type) }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <p>Work</p>
+                    <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
+                        {% for work in form.workResources %}
+                            <li>
+                                {{ form_label(work.title, 'title l') }}
+                                {{ form_widget(work.title, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(work.quantity, 'quantity l') }}
+                                {{ form_widget(work.quantity, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>
+                                {{ form_label(work.quantityDays, 'quantityDays l') }}
+                                {{ form_widget(work.quantityDays, {'attr': {'class': 'form-control'} }) }}
+                            </li>
+                            <li>{{ form_widget(work.type) }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
+
+            <br>
+             <input type="submit" value="Ok" class="text-center btn btn-default">
+        {{ form_end(form) }}
+        </div>
     </div>
-    {#{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}#}
 {% endblock %}
 
 {% block javascript %}
