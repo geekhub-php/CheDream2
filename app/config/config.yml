@@ -95,10 +95,10 @@ fpn_tag:
         tagging_class: Geekhub\TagBundle\Entity\Tagging
 
 h4cc_alice_fixtures:
-    locale: en_US                               # default
-    seed: 1                                     # default
-    do_flush: true                              # default
+    locale:         en_US
+    seed: 1
+    do_flush:       true
 
-    object_manager: null                        # default
-    schema_tool: null                           # default
-    doctrine: orm                               # default
+    object_manager: null
+    schema_tool:    null
+    doctrine:       orm
