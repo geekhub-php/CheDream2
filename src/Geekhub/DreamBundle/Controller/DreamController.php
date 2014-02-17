@@ -11,10 +11,7 @@ namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
-use Geekhub\DreamBundle\Entity\Tag;
-use Geekhub\DreamBundle\Entity\Task;
 use Geekhub\DreamBundle\Form\DreamType;
-use Geekhub\DreamBundle\Form\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
