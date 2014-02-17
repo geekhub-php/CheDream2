@@ -8,11 +8,11 @@
     <div style="margin-top: 50px;">
 
         <div class="col-md-8 col-md-offset-2">
-        {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}
-            {{ form_row(form.title, {'attr': {'value': 'new title dream', 'class': 'form-control'} }) }}
-            {{ form_row(form.description, {'attr': {'class': 'form-control'} }) }}
-            {{ form_row(form.phone, {'attr': {'value': 'phone number', 'class': 'form-control'} }) }}
-            {{ form_row(form.expiredDate, {'attr': {'class': 'form-control'} }) }}
+        {{ form_start(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.phone) }}
+            {{ form_row(form.expiredDate) }}
             {{ form_widget(form.tagsInput) }}
             {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
             <br>
@@ -26,11 +26,11 @@
                         {% for finance in form.financialResources %}
                             <li>
                                 {{ form_label(finance.title, 'title l') }}
-                                {{ form_widget(finance.title, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(finance.title) }}
                             </li>
                             <li>
                                 {{ form_label(finance.quantity, 'quantity l') }}
-                                {{ form_widget(finance.quantity, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(finance.quantity) }}
                             </li>
                             <li>{{ form_widget(finance.type) }}</li>
                         {% endfor %}
@@ -43,15 +43,15 @@
                         {% for equipment in form.equipmentResources %}
                             <li>
                                 {{ form_label(equipment.title, 'title l') }}
-                                {{ form_widget(equipment.title, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(equipment.title) }}
                             </li>
                             <li>
                                 {{ form_label(equipment.quantity, 'quantity l') }}
-                                {{ form_widget(equipment.quantity, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(equipment.quantity) }}
                             </li>
                             <li>
                                 {{ form_label(equipment.quantityType, 'quantityType l') }}
-                                {{ form_widget(equipment.quantityType, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(equipment.quantityType) }}
                             </li>
                             <li>{{ form_widget(equipment.type) }}</li>
                         {% endfor %}
@@ -63,15 +63,15 @@
                         {% for work in form.workResources %}
                             <li>
                                 {{ form_label(work.title, 'title l') }}
-                                {{ form_widget(work.title, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(work.title) }}
                             </li>
                             <li>
                                 {{ form_label(work.quantity, 'quantity l') }}
-                                {{ form_widget(work.quantity, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(work.quantity) }}
                             </li>
                             <li>
                                 {{ form_label(work.quantityDays, 'quantityDays l') }}
-                                {{ form_widget(work.quantityDays, {'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(work.quantityDays) }}
                             </li>
                             <li>{{ form_widget(work.type) }}</li>
                         {% endfor %}
