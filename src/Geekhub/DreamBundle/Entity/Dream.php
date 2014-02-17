@@ -561,6 +561,14 @@ class Dream implements Taggable
     }
 
     /**
+     * @param mixed $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
      * Add usersWhoFavorites
      *
      * @param  \Geekhub\UserBundle\Entity\User $usersWhoFavorites

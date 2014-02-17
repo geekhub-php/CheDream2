@@ -77,12 +77,16 @@ class DreamController extends Controller
 
             $tagManager = $this->get('fpn_tag.tag_manager');
 
-            $tags = explode(',', $data->getTagsInput());
-            foreach($tags as $tag)
-            {
-                $tagItem = $tagManager->loadOrCreateTag($tag);
-                $tagManager->addTag($tagItem, $dream);
-            }
+            $tagsA = $tagManager->loadOrCreateTags($data->getTags());
+//            var_dump($tagsA); exit;
+            $tagManager->addTags($tagsA, $dream);
+
+//            $tags = explode(',', $data->getTagsInput());
+//            foreach($tags as $tag)
+//            {
+//                $tagItem = $tagManager->loadOrCreateTag($tag);
+//                $tagManager->addTag($tagItem, $dream);
+//            }
 
             $newDream->persist($dream);
             $newDream->flush();

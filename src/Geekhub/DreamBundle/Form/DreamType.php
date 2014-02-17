@@ -22,11 +22,15 @@ class DreamType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $transformer = new TagTransformer();
         $builder
             ->add('title', 'text', array('label' => 'назва '))
             ->add('description', 'textarea', array('label' => 'опис '))
             ->add('phone', 'text', array('label' => 'телефон' ))
-            ->add('tagsInput', 'hidden')
+            ->add($builder->create('tags', 'text', array(
+                'attr' => array('class' => 'form-control'),
+                'required'  => false,
+            ))->addModelTransformer($transformer))
             ->add('expiredDate', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
