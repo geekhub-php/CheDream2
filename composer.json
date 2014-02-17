@@ -6,6 +6,19 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
@@ -27,6 +40,7 @@
         "hwi/oauth-bundle": "0.3.*@dev",
         "twbs/bootstrap": "v3.0.0",
         "frameworks/jquery": "dev-master",
+        "jquery/jquery":  "1.10.*",
         "nervo/yuicompressor": "dev-master",
         "fpn/doctrine-extensions-taggable": "dev-master",
         "fpn/tag-bundle":"dev-master",
@@ -34,7 +48,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
-        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
+        "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "jms/serializer-bundle": "0.13.*@dev"
     },
     "require-dev": {
