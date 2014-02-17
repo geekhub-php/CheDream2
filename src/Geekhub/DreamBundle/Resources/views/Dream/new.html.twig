@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="row">
-                    <p>Finance</p>
+                    <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
                     <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
                         {% for finance in form.financialResources %}
                             <li>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p>Equipment</p>
+                    <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
                     <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
                         {% for equipment in form.equipmentResources %}
                             <li>
@@ -58,7 +58,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <p>Work</p>
+                    <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
                     <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
                         {% for work in form.workResources %}
                             <li>
@@ -80,8 +80,9 @@
             </div>
 
             <br>
-             <input type="submit" value="Ok" class="text-center btn btn-default">
-        {{ form_end(form) }}
+             <input type="submit" value="Create Dream" class="text-center btn btn-primary">
+            {{ form_row(form._token) }}
+        </form>
         </div>
     </div>
 {% endblock %}
