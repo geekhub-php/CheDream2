@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Form;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Geekhub\DreamBundle\Entity\Dream;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -21,10 +22,24 @@ class EquipmentTransformer implements DataTransformerInterface
         $this->dream = $dream;
     }
 
-    public function transform($equipmentObjects)
+    public function transform($t)
     {
-//        var_dump($equipmentObjects); exit;
-//        return null;
+        $resources = $this->dream->getDreamResources();
+        $equipmentResources = new ArrayCollection;
+
+        foreach($resources as $resource) {
+            switch ($resource->getType()) {
+                case $resource::FINANCIAL:
+                    break;
+                case $resource::EQUIPMENT:
+                    $equipmentResources->add($resource);
+                    break;
+                case $resource::WORK:
+                    break;
+            }
+        }
+
+        return $equipmentResources;
     }
 
     public function reverseTransform($equipmentArrayCollection)

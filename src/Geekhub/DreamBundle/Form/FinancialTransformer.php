@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Form;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Geekhub\DreamBundle\Entity\Dream;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -21,9 +22,24 @@ class FinancialTransformer implements DataTransformerInterface
         $this->dream = $dream;
     }
 
-    public function transform($tags)
+    public function transform($t)
     {
-        return null;
+        $resources = $this->dream->getDreamResources();
+        $financeResources = new ArrayCollection;
+
+        foreach($resources as $resource) {
+            switch ($resource->getType()) {
+                case $resource::FINANCIAL:
+                    $financeResources->add($resource);
+                    break;
+                case $resource::EQUIPMENT:
+                    break;
+                case $resource::WORK:
+                    break;
+            }
+        }
+
+        return $financeResources;
     }
 
     public function reverseTransform($financialArrayCollection)
