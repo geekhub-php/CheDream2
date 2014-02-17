@@ -10,7 +10,6 @@
 namespace Geekhub\DreamBundle\Form;
 
 use Geekhub\DreamBundle\Entity\Dream;
-use Geekhub\DreamBundle\Entity\DreamResource;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class FinancialTransformer implements DataTransformerInterface

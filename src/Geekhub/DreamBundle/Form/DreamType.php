@@ -22,8 +22,8 @@ class DreamType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformerTag = new TagTransformer();
         $dream = $options['dream'];
+        $transformerTag = new TagTransformer();
         $transformerFinance = new FinancialTransformer($dream);
         $transformerEquipment = new EquipmentTransformer($dream);
         $transformerWork = new WorkTransformer($dream);
