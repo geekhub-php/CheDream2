@@ -21,11 +21,11 @@
         {
             "type": "package",
             "package": {
-                "name": "aehlke/tag-it",
-                "version": "master",
+                "name": "jquery/jquery",
+                "version": "1.10.2",
                 "dist": {
-                    "url": "https://github.com/aehlke/tag-it/archive/master.zip",
-                    "type": "zip"
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
                 }
             }
         },
