@@ -65,7 +65,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             $setter = 'set'.ucfirst($service);
             $setterId = $setter.'Id';
             $setterToken = $setter.'AccessToken';
-            $userDataServiceName = ucfirst($service).'UserDataService';
+            $userDataServiceName = lcfirst($service).'UserDataService';
             // create new user here
             $user = $this->userManager->createUser();
             $user->$setterId($username);
@@ -73,7 +73,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             // I use different setters setters for each type of oath providers:
             // for example setVkontakteUser(...),  setFacebookUser(...)
             // the actual name of setter is in the variable $setterUser.
-            $user = $this->get($userDataServiceName)->setUserData($user, $response);
+            $user = $this->$userDataServiceName->setUserData($user, $response);
             $user->setUsername($username);
             //$user->setEmail($username);
             $user->setPassword($username);

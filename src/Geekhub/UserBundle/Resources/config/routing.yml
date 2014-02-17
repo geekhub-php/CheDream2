@@ -29,11 +29,20 @@ hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix:   /login-social
 
-facebook_login:
+facebook_check:
     pattern: /login-social/check-facebook
 
-vk_login:
+vkontakte_check:
     pattern: /login-social/check-vkontakte
 
-odnoklassniki_login:
+odnoklassniki_check:
     pattern: /login-social/check-odnoklassniki
+
+facebook_login:
+    pattern: /connect/facebook
+
+vkontakte_login:
+    pattern: /connect/vkontakte
+
+odnoklassniki_login:
+    pattern: /connect/odnoklassniki

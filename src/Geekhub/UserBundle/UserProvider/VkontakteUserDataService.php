@@ -5,10 +5,18 @@ namespace Geekhub\UserBundle\UserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
+use Guzzle\Http\Client;
+use Geekhub\UserBundle\Model\VkontakteResponse;
 
 class VkontakteUserDataService extends AbstractUserDataService
 {
-	
+    protected $serializer;
+
+    public function __construct($serializer)
+    {
+        $this->serializer=$serializer;
+    }
+
     public function setUserData(UserInterface $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
@@ -30,7 +38,9 @@ class VkontakteUserDataService extends AbstractUserDataService
             $birthdayDay=$birthdayArray[0];
             if (strlen($birthdayDay)<2)$birthdayDay='0'.$birthdayDay;
             $birthdayMonth=$birthdayArray[1];
-            if (strlen($birthdayMonth)<2)$birthdayMonth='0'.$birthdayMonth;
+            if (strlen($birthdayMonth)<2) {
+                $birthdayMonth='0'.$birthdayMonth;
+            }
             if (array_key_exists(2, $birthdayArray)) {
                 $birthdayYear=$birthdayArray[2];
             }
@@ -46,11 +56,18 @@ class VkontakteUserDataService extends AbstractUserDataService
 
     private function callVkontakteUsersGet($uid, $token, $field)
     {
-        $result = file_get_contents('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $result = json_decode($result, true);
+        //$result = file_get_contents('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
+        $client = new Client();
+        $response = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);//, [//', [
+        $responceBody = $response->getBody();
+        //$result = json_decode($result, true);
+        $result = $this->serializer->deserialize($responceBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 
-        if (isset($result['response'][0][$field])) {
-            return $firstName = $result['response'][0][$field];
+        //if (isset($result['response'][0][$field])) {
+        //    return $firstName = $result['response'][0][$field];
+        //}
+        if ($result) {
+            return $firstName = $result->getResponse()[0][$field];
         }
 
         return null;
