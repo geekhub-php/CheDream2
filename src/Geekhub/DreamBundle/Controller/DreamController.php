@@ -21,39 +21,14 @@ class DreamController extends Controller
     {
         $dream = new Dream();
 
-        $form = $this->createForm(new DreamType(), $dream);
+        $form = $this->createForm(new DreamType(), $dream, array(
+            'dream' => $dream
+        ));
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $newDream = $this->getDoctrine()->getManager();
-
-            $data = $form->getData();
-
-            foreach ($data->getEquipmentResources() as $equip) {
-                if (is_null($equip->getTitle())) {
-                    $data->getEquipmentResources()->removeElement($equip);
-                }
-
-                $equip->setDream($dream);
-                $dream->addDreamResource($equip);
-            }
-            foreach ($data->getFinancialResources() as $finance) {
-                if (is_null($finance->getTitle())) {
-                    $data->getFinancialResources()->removeElement($finance);
-                }
-
-                $finance->setDream($dream);
-                $dream->addDreamResource($finance);
-            }
-            foreach ($data->getWorkResources() as $work) {
-                if (is_null($work->getTitle())) {
-                    $data->getWorkResources()->removeElement($work);
-                }
-
-                $work->setDream($dream);
-                $dream->addDreamResource($work);
-            }
 
             $dream->addStatus(new Status(Status::SUBMITTED));
 

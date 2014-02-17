@@ -22,7 +22,12 @@ class DreamType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new TagTransformer();
+        $transformerTag = new TagTransformer();
+        $dream = $options['dream'];
+        $transformerFinance = new FinancialTransformer($dream);
+        $transformerEquipment = new EquipmentTransformer($dream);
+        $transformerWork = new WorkTransformer($dream);
+
         $builder
             ->add('title', 'text', array('label' => 'назва '))
             ->add('description', 'textarea', array('label' => 'опис '))
@@ -30,44 +35,47 @@ class DreamType extends AbstractType
             ->add($builder->create('tags', 'text', array(
                 'attr' => array('class' => 'form-control'),
                 'required'  => false,
-            ))->addModelTransformer($transformer))
+            ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
                 'input'  => 'datetime',
                 'widget' => 'single_text',
                 'label' => 'expireData fff ',
             ))
-            ->add('financialResources', 'collection', array(
+            ->add($builder->create('financialResources', 'collection', array(
                 'type' => new FinancialType(),
-//                'mapped' => false,
+                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
 //                'label' => 'фінанси '
-            ))
-            ->add('equipmentResources', 'collection', array(
+            ))->addModelTransformer($transformerFinance))
+            ->add($builder->create('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
-//                'mapped' => false,
+                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
 //                'label' => 'обладнання '
-            ))
-            ->add('workResources', 'collection', array(
+            ))->addModelTransformer($transformerEquipment))
+            ->add($builder->create('workResources', 'collection', array(
                 'type' => new WorkType(),
-//                'mapped' => false,
+                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
 //                'label' => 'робота '
-            ));
+            ))->addModelTransformer($transformerWork));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(
-            array(
+        $resolver->setDefaults(array(
                 'data_class' => 'Geekhub\DreamBundle\Entity\Dream'
-            )
-        );
+            ))
+            ->setRequired(array('dream'))
+            ->setAllowedTypes(array(
+                'dream' => 'Geekhub\DreamBundle\Entity\Dream'
+            ));
+
     }
 }

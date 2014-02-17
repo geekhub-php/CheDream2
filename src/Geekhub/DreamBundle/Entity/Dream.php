@@ -150,10 +150,6 @@ class Dream implements Taggable
      */
     protected $statuses;
 
-    protected $financialResources;
-    protected $equipmentResources;
-    protected $workResources;
-
        /**
      * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
@@ -169,69 +165,6 @@ class Dream implements Taggable
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->statuses = new ArrayCollection();
-        $this->financialResources = new ArrayCollection();
-        $this->equipmentResources = new ArrayCollection();
-        $this->workResources = new ArrayCollection();
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getEquipmentResources()
-    {
-        return $this->equipmentResources;
-    }
-
-    public function addEquipmentResource($equipmentResource)
-    {
-        $this->equipmentResources[] = $equipmentResource;
-
-        return $this;
-    }
-
-    public function removeEquipmentResource($equipmentResource)
-    {
-        $this->equipmentResources->removeElement($equipmentResource);
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getFinancialResources()
-    {
-        return $this->financialResources;
-    }
-
-    public function addFinancialResource($financialResource)
-    {
-        $this->financialResources[] = $financialResource;
-
-        return $this;
-    }
-
-    public function removeFinancialResource($financialResource)
-    {
-        $this->financialResources->removeElement($financialResource);
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getWorkResources()
-    {
-        return $this->workResources;
-    }
-
-    public function addWorkResource($workResource)
-    {
-        $this->workResources[] = $workResource;
-
-        return $this;
-    }
-
-    public function removeWorkResource($workResource)
-    {
-        $this->workResources->removeElement($workResource);
     }
 
     /**
@@ -625,6 +558,7 @@ class Dream implements Taggable
     public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
     {
         $this->dreamResources[] = $dreamResources;
+        $dreamResources->setDream($this);
 
         return $this;
     }
