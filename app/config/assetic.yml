@@ -30,7 +30,6 @@ assetic:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
-                - %kernel.root_dir%/../vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/js/router.js
             filters: [yui_js]
             output: js/scripts.min.js
         dream_css:
