@@ -4,86 +4,91 @@
     <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-
-    <div style="margin-top: 50px;">
-
-        <div class="col-md-8 col-md-offset-2">
-        {{ form_start(form) }}
-            {{ form_row(form.title) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.phone) }}
-            {{ form_row(form.expiredDate) }}
-            {{ form_widget(form.tagsInput) }}
-            {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
-            <br>
-            <ul id="singleFieldTags"></ul>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="row">
-                    <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
-                    <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
-                        {% for finance in form.financialResources %}
-                            <li>
-                                {{ form_label(finance.title, 'title l') }}
-                                {{ form_widget(finance.title) }}
-                            </li>
-                            <li>
-                                {{ form_label(finance.quantity, 'quantity l') }}
-                                {{ form_widget(finance.quantity) }}
-                            </li>
-                            <li>{{ form_widget(finance.type) }}</li>
-                        {% endfor %}
-                    </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
-                    <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
-                        {% for equipment in form.equipmentResources %}
-                            <li>
-                                {{ form_label(equipment.title, 'title l') }}
-                                {{ form_widget(equipment.title) }}
-                            </li>
-                            <li>
-                                {{ form_label(equipment.quantity, 'quantity l') }}
-                                {{ form_widget(equipment.quantity) }}
-                            </li>
-                            <li>
-                                {{ form_label(equipment.quantityType, 'quantityType l') }}
-                                {{ form_widget(equipment.quantityType) }}
-                            </li>
-                            <li>{{ form_widget(equipment.type) }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
-                    <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
-                        {% for work in form.workResources %}
-                            <li>
-                                {{ form_label(work.title, 'title l') }}
-                                {{ form_widget(work.title) }}
-                            </li>
-                            <li>
-                                {{ form_label(work.quantity, 'quantity l') }}
-                                {{ form_widget(work.quantity) }}
-                            </li>
-                            <li>
-                                {{ form_label(work.quantityDays, 'quantityDays l') }}
-                                {{ form_widget(work.quantityDays) }}
-                            </li>
-                            <li>{{ form_widget(work.type) }}</li>
-                        {% endfor %}
-                    </ul>
+    <div class="page-header">
+        <h1>New Dream <small>create or edit your dream</small></h1>
+    </div>
+    <div class="col-md-4">
+        <a href="#" class="thumbnail">
+            <img data-src="holder.js/100%x200" alt="main image">
+        </a>
+    </div>
+    <div class="col-md-8">
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.expiredDate) }}
+        {{ form_widget(form.tagsInput) }}
+        {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
+        <br>
+        <ul id="singleFieldTags"></ul>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
+                <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
+                    {% for finance in form.financialResources %}
+                        <li>
+                            {{ form_label(finance.title, 'title l') }}
+                            {{ form_widget(finance.title) }}
+                        </li>
+                        <li>
+                            {{ form_label(finance.quantity, 'quantity l') }}
+                            {{ form_widget(finance.quantity) }}
+                        </li>
+                        <li>{{ form_widget(finance.type) }}</li>
+                    {% endfor %}
+                </ul>
                 </div>
             </div>
-
-            <br>
-             <input type="submit" value="Create Dream" class="text-center btn btn-primary">
-            {{ form_row(form._token) }}
-        </form>
+            <div class="col-md-4">
+                <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
+                <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
+                    {% for equipment in form.equipmentResources %}
+                        <li>
+                            {{ form_label(equipment.title, 'title l') }}
+                            {{ form_widget(equipment.title) }}
+                        </li>
+                        <li>
+                            {{ form_label(equipment.quantity, 'quantity l') }}
+                            {{ form_widget(equipment.quantity) }}
+                        </li>
+                        <li>
+                            {{ form_label(equipment.quantityType, 'quantityType l') }}
+                            {{ form_widget(equipment.quantityType) }}
+                        </li>
+                        <li>{{ form_widget(equipment.type) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
+                <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
+                    {% for work in form.workResources %}
+                        <li>
+                            {{ form_label(work.title, 'title l') }}
+                            {{ form_widget(work.title) }}
+                        </li>
+                        <li>
+                            {{ form_label(work.quantity, 'quantity l') }}
+                            {{ form_widget(work.quantity) }}
+                        </li>
+                        <li>
+                            {{ form_label(work.quantityDays, 'quantityDays l') }}
+                            {{ form_widget(work.quantityDays) }}
+                        </li>
+                        <li>{{ form_widget(work.type) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
+
+        <br>
+         <input type="submit" value="Create Dream" class="text-center btn btn-primary">
+        {{ form_row(form._token) }}
+    </form>
     </div>
 {% endblock %}
 
