@@ -5,7 +5,7 @@ namespace Geekhub\UserBundle\UserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use Geekhub\UserBundle\Model\VkontakteResponse;
 
 class VkontakteUserDataService extends AbstractUserDataService
@@ -57,7 +57,7 @@ class VkontakteUserDataService extends AbstractUserDataService
     private function callVkontakteUsersGet($uid, $token, $field)
     {
         //$result = file_get_contents('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $client = new Client();
+        $client = new Client(); 
         $response = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);//, [//', [
         $responceBody = $response->getBody();
         //$result = json_decode($result, true);
@@ -67,7 +67,7 @@ class VkontakteUserDataService extends AbstractUserDataService
         //    return $firstName = $result['response'][0][$field];
         //}
         if ($result) {
-            return $firstName = $result->getResponse()[0][$field];
+            return $firstName = $result->getResponse($field);
         }
 
         return null;

@@ -37,6 +37,7 @@
     </service>
 
     <service id="geekhub_facebook_user_data_service" class="%geekhub_facebook_user_data_service.class%"> 
+            <argument type="service" id="jms_serializer" />
             <call method="setKernelWebDir">
                 <argument type="string">%kernel.root_dir%</argument>
             </call>
@@ -50,6 +51,7 @@
     </service>
 
     <service id="geekhub_odnoklassniki_user_data_service" class="%geekhub_odnoklassniki_user_data_service.class%"> 
+            <argument type="service" id="jms_serializer" />
             <call method="setKernelWebDir">
                 <argument type="string">%kernel.root_dir%</argument>
             </call>

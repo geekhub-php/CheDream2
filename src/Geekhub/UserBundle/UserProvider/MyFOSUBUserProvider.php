@@ -55,9 +55,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
     {
         //var_dump("in loadUserByOAuthUserResponse");
         //var_dump($response);
-
         $username = $response->getUsername();
-
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {

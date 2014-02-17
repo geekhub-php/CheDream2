@@ -5,11 +5,20 @@ namespace Geekhub\UserBundle\UserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
+use GuzzleHttp\Client;
+use Geekhub\UserBundle\Model\VkontakteResponse;
 
 class OdnoklassnikiUserDataService extends AbstractUserDataService
 {
     protected $appKeys;
 	
+    protected $serializer;
+
+    public function __construct($serializer)
+    {
+        $this->serializer=$serializer;
+    }
+
     public function setUserData(UserInterface $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
@@ -22,13 +31,12 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
 
         $token = $response->getAccessToken();
         $tokenArray = str_split($token, rand(5, 10));
-        $result = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);
-        $resultObj = json_decode($result);
+        $photoUrl = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);
 
         $profilePicture = null;
      
-        if ((array_key_exists('photos',$resultObj)) &&($resultObj->photos[0]->standard_url)) {
-            $profilePicture = $this->copyImgFromRemote($resultObj->photos[0]->standard_url, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
+        if ($photoUrl) {
+            $profilePicture = $this->copyImgFromRemote($photoUrl, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
         }
 
         $user->setAvatar($profilePicture);
@@ -62,7 +70,16 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
         $arrayParameters = array_merge($parameters, $arrayParameters);
 
         $url .= '&' . http_build_query($arrayParameters);
-        return file_get_contents($url);
+        //$result = file_get_contents($url);
+        $client = new Client();
+        $response = $client->get($url);
+        $responseBody = $response->getBody();
+        //echo $responseBody;
+        $resultObj = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse', 'json');
+        //$resultObj = json_decode($result);
+        //var_dump($resultObj);
+
+        return $resultObj->getPhoto();
     }
 
     public function setAppKeys($appKeys)

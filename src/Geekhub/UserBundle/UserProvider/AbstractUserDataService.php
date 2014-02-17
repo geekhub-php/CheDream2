@@ -17,6 +17,11 @@ abstract class AbstractUserDataService
         $this->kernelWebDir = $kernelWebDir;
     }
 
+    public function setImgPath($imgPath)
+    {
+        $this->imgPath = $imgPath;
+    }
+
     public function copyImgFromRemote($remoteImg, $localFileName)
     {
         $content = file_get_contents($remoteImg);

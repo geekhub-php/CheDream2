@@ -5,9 +5,18 @@ namespace Geekhub\UserBundle\UserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
+use GuzzleHttp\Client;
+use Geekhub\UserBundle\Model\VkontakteResponse;
+
 
 class FacebookUserDataService extends AbstractUserDataService
 {
+    protected $serializer;
+
+    public function __construct($serializer)
+    {
+        $this->serializer=$serializer;
+    }
 	
     public function setUserData(UserInterface $user, UserResponseInterface $response)
     {
@@ -21,8 +30,7 @@ class FacebookUserDataService extends AbstractUserDataService
         $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
         $user->setAvatar($profilePicture);
         $userInfo = $this->getFacebookUserInfo($response->getAccessToken());
-        if (array_key_exists('birthday',$userInfo)) {
-            $birthday=$userInfo['birthday'];
+        if ($birthday=$userInfo->getBirthday()) {
             $birthdayMonth=substr($birthday,0,2);
             $birthdayDay=substr($birthday,3,2);
             $birthdayYear=substr($birthday,6,4);
@@ -35,8 +43,15 @@ class FacebookUserDataService extends AbstractUserDataService
 
     private function getFacebookUserInfo($token)
     {
-        $result = file_get_contents('https://graph.facebook.com/me?access_token='.$token);
-        $result = json_decode($result, true);
+        //$result = file_get_contents('https://graph.facebook.com/me?access_token='.$token);
+        $client = new Client();
+        $response = $client->get('https://graph.facebook.com/me?access_token='.$token);
+        $responceBody = $response->getBody();
+        //$result = json_decode($result, true);
+        echo $responceBody;
+        $result = $this->serializer->deserialize($responceBody, 'Geekhub\UserBundle\Model\FacebookUserInfoResponse', 'json');
+        var_dump($result);
+        //exit;
 
         return $result;
     }

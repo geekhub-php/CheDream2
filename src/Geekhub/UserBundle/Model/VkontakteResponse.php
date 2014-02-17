@@ -9,11 +9,11 @@ class VkontakteResponse
 {
     /**
      * @Type("array")
-    */
+     */
 	protected $response;
 
-	public function getResponse()
+	public function getResponse($field)
 	{
-		return $this->response;
+		return $this->response[0][$field];
 	}
 }
