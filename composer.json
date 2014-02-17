@@ -17,6 +17,28 @@
                     "type": "zip"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.10.2.js",
+                    "type": "file"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "blueimp/jQuery-File-Upload",
+                "version": "9.5.6",
+                "dist": {
+                    "url": "https://github.com/blueimp/jQuery-File-Upload/archive/9.5.6.zip",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "require": {
@@ -40,6 +62,8 @@
         "hwi/oauth-bundle": "0.3.*@dev",
         "twbs/bootstrap": "v3.0.0",
         "frameworks/jquery": "dev-master",
+        "jquery/jquery":  "1.10.*",
+        "blueimp/jQuery-File-Upload": "9.5.6",
         "nervo/yuicompressor": "dev-master",
         "fpn/doctrine-extensions-taggable": "dev-master",
         "fpn/tag-bundle":"dev-master",
@@ -47,8 +71,9 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
-        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
+        "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
+        "jms/serializer-bundle": "0.13.*@dev",
         "aehlke/tag-it": "*",
         "bmatzner/jquery-ui-bundle": "1.10.0"
     },
@@ -63,8 +88,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "cp -r vendor/twbs/bootstrap/dist/fonts/ web/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "mkdir -p web/fonts && cp -u vendor/twbs/bootstrap/dist/fonts/* web/fonts/",
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -72,8 +97,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "cp -r vendor/twbs/bootstrap/dist/fonts/ web/",
-            "cp -r vendor/ahonymous/fontello/fonts/ web/"
+            "mkdir -p web/fonts && cp -u vendor/twbs/bootstrap/dist/fonts/* web/fonts/",
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ]
     },
     "config": {

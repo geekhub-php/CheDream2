@@ -2,14 +2,14 @@ jQuery(document).ready(function() {
     var $collectionFinHolder, $collectionEquipHolder, $collectionWorkHolder;
 
     var $addFinLink = $('<a href="#" class="add_fin_link btn btn-xs btn-default text-left">Add a fin</a>');
-    var $newFinLinkLi = $('<li></li>').append($addFinLink);
+    var $newFinLinkLi = $('<li class="list-unstyled"></li>').append($addFinLink);
 
 
     var $addEquipLink = $('<a href="#" class="add_equip_link btn btn-xs btn-default text-left">Add a equip</a>');
-    var $newEquipLinkLi = $('<li></li>').append($addEquipLink);
+    var $newEquipLinkLi = $('<li class="list-unstyled"></li>').append($addEquipLink);
 
     var $addWorkLink = $('<a href="#" class="add_work_link btn btn-xs btn-default text-left">Add a work</a>');
-    var $newWorkLinkLi = $('<li></li>').append($addWorkLink);
+    var $newWorkLinkLi = $('<li class="list-unstyled"></li>').append($addWorkLink);
 
     $collectionFinHolder = $('ul.financialResources');
     $collectionEquipHolder = $('ul.equipmentResources');
@@ -53,7 +53,7 @@ function addFinForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });
@@ -66,7 +66,7 @@ function addEquipForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });
@@ -83,7 +83,7 @@ function addWorkForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });

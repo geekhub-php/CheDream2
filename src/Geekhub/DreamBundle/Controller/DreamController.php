@@ -127,20 +127,4 @@ class DreamController extends Controller
             'dreams' => $dreams
         ));
     }
-
-    public function loadTagsAction()
-    {
-        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->findAll();
-
-        $arrayTags = array();
-        foreach($tags as $tag)
-        {
-            $arrayTags[] = $tag->getName();
-        }
-//        var_dump($tags, $arrayTags); exit;
-//        $tags = $this->getDoctrine()->getRepository('TagBundle:Tag')->loadTags();
-//        return array('tags' => $tags);
-
-        return new Response(json_encode(["tags" => $arrayTags]));
-    }
 }

@@ -6,6 +6,10 @@ geekhub_dream:
     resource: "@GeekhubDreamBundle/Resources/config/routing.yml"
     prefix:   /
 
+geekhub_tag:
+    resource: "@TagBundle/Resources/config/routing.yml"
+    prefix:   /tags
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

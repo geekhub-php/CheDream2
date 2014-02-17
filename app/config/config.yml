@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: assetic.yml }
     - { resource: sonata.yml }
+    - { resource: jms_serializer.yml }
+    - { resource: twig.yml }
 
 framework:
     #esi:             ~
@@ -25,11 +27,6 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
-
-# Twig Configuration
-twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
 
 # Doctrine Configuration
 doctrine:

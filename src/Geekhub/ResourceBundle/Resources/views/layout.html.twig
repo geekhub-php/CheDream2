@@ -23,13 +23,16 @@
 
     <body>
         {% block body %}
+            <div class="container" id="wrap">
+                {% block menu %}{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}{% endblock %}
+                {% block content %}{% endblock content %}
+            </div>
+            {% block footer %}{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}{% endblock %}
         {% endblock %}
 
-        <script src="{{ asset('js/scripts.min.js') }}"></script>
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-
         {% block javascript %}
+            <script src="{{ asset('js/scripts.min.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
         {% endblock %}
     </body>
 </html>
