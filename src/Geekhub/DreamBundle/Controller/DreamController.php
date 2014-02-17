@@ -14,7 +14,6 @@ use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class DreamController extends Controller
 {
@@ -30,23 +29,6 @@ class DreamController extends Controller
             $newDream = $this->getDoctrine()->getManager();
 
             $data = $form->getData();
-
-//            var_dump($data); exit;
-//            var_dump($data->getFinancialResources());
-//            echo "****************************************";
-//            var_dump($data->getEquipmentResources());
-//            echo "****************************************";
-//            var_dump($data->getWorkResources());
-//            echo "****************************************<br>";
-//            echo "*********** after del null *************<br>";
-//            echo "****************************************<br>";
-//            var_dump($data->getFinancialResources());
-//            echo "****************************************";
-//            var_dump($data->getEquipmentResources());
-//            echo "****************************************";
-//            var_dump($data->getWorkResources());
-//            echo "****************************************";
-//            exit;
 
             foreach ($data->getEquipmentResources() as $equip) {
                 if (is_null($equip->getTitle())) {
@@ -76,17 +58,9 @@ class DreamController extends Controller
             $dream->addStatus(new Status(Status::SUBMITTED));
 
             $tagManager = $this->get('fpn_tag.tag_manager');
-
-            $tagsA = $tagManager->loadOrCreateTags($data->getTags());
-//            var_dump($tagsA); exit;
-            $tagManager->addTags($tagsA, $dream);
-
-//            $tags = explode(',', $data->getTagsInput());
-//            foreach($tags as $tag)
-//            {
-//                $tagItem = $tagManager->loadOrCreateTag($tag);
-//                $tagManager->addTag($tagItem, $dream);
-//            }
+            $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
+            $dream->setTags(null);
+            $tagManager->addTags($tagsObjArray, $dream);
 
             $newDream->persist($dream);
             $newDream->flush();

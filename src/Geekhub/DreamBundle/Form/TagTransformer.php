@@ -9,7 +9,6 @@
 
 namespace Geekhub\DreamBundle\Form;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class TagTransformer implements DataTransformerInterface
@@ -37,6 +36,5 @@ class TagTransformer implements DataTransformerInterface
         }
 
         return $tagObjects;
-//        return new ArrayCollection($tagObjects);
     }
 }

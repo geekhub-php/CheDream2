@@ -7,6 +7,8 @@
     <div class="page-header">
         <h1>New Dream <small>create or edit your dream</small></h1>
     </div>
+    {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
+    {{ form_start(form) }}
     <div class="row">
         <div class="col-md-4">
             <a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">
@@ -14,18 +16,14 @@
             </a>
         </div>
         <div class="col-md-8">
-        {{ form_start(form) }}
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
-            {#{{ form_widget(form.tagsInput) }}#}
-            {#{{ form_widget(form.tagsInput, {'attr': {'value': 'php, apple, zz'} }) }}#}
-            <br>
-            {#<ul id="singleFieldTags"></ul>#}
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
@@ -90,8 +88,7 @@
         <br>
          <input type="submit" value="Create Dream" class="text-center btn btn-primary">
         {{ form_row(form._token) }}
-    </form>
-    </div>
+    {{ form_end(form) }}
     {% include 'GeekhubDreamBundle:includes:dreamMainImageModal.html.twig' %}
 {% endblock %}
 

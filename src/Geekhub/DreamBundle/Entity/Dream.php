@@ -154,9 +154,7 @@ class Dream implements Taggable
     protected $equipmentResources;
     protected $workResources;
 
-    protected $tagsInput;
-
-    /**
+       /**
      * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
     protected $currentStatus;
@@ -177,22 +175,6 @@ class Dream implements Taggable
     }
 
     /**
-     * @param mixed $tagsInput
-     */
-    public function setTagsInput($tagsInput)
-    {
-        $this->tagsInput = $tagsInput;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTagsInput()
-    {
-        return $this->tagsInput;
-    }
-
-    /**
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getEquipmentResources()
@@ -200,14 +182,14 @@ class Dream implements Taggable
         return $this->equipmentResources;
     }
 
-    public function addEquipmentResource(DreamResource $equipmentResource)
+    public function addEquipmentResource($equipmentResource)
     {
         $this->equipmentResources[] = $equipmentResource;
 
         return $this;
     }
 
-    public function removeEquipmentResource(DreamResource $equipmentResource)
+    public function removeEquipmentResource($equipmentResource)
     {
         $this->equipmentResources->removeElement($equipmentResource);
     }
@@ -220,14 +202,14 @@ class Dream implements Taggable
         return $this->financialResources;
     }
 
-    public function addFinancialResource(DreamResource $financialResource)
+    public function addFinancialResource($financialResource)
     {
         $this->financialResources[] = $financialResource;
 
         return $this;
     }
 
-    public function removeFinancialResource(DreamResource $financialResource)
+    public function removeFinancialResource($financialResource)
     {
         $this->financialResources->removeElement($financialResource);
     }
@@ -240,14 +222,14 @@ class Dream implements Taggable
         return $this->workResources;
     }
 
-    public function addWorkResource(DreamResource $workResource)
+    public function addWorkResource($workResource)
     {
         $this->workResources[] = $workResource;
 
         return $this;
     }
 
-    public function removeWorkResource(DreamResource $workResource)
+    public function removeWorkResource($workResource)
     {
         $this->workResources->removeElement($workResource);
     }
