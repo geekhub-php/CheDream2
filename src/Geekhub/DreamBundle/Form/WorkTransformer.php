@@ -34,6 +34,6 @@ class WorkTransformer implements DataTransformerInterface
             $this->dream->addDreamResource($work);
         }
 
-        return null;
+        return;
     }
 }

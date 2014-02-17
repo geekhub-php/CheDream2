@@ -21,9 +21,10 @@ class EquipmentTransformer implements DataTransformerInterface
         $this->dream = $dream;
     }
 
-    public function transform($tags)
+    public function transform($equipmentObjects)
     {
-        return null;
+//        var_dump($equipmentObjects); exit;
+//        return null;
     }
 
     public function reverseTransform($equipmentArrayCollection)
@@ -34,6 +35,6 @@ class EquipmentTransformer implements DataTransformerInterface
             $this->dream->addDreamResource($equipment);
         }
 
-        return null;
+        return;
     }
 }

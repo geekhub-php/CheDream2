@@ -34,6 +34,6 @@ class FinancialTransformer implements DataTransformerInterface
             $this->dream->addDreamResource($finance);
         }
 
-        return null;
+        return;
     }
 }
