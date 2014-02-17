@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <a href="#" class="thumbnail">
+            <a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">
                 <img data-src="holder.js/100%x200/text:Main Image">
             </a>
         </div>
@@ -91,6 +91,7 @@
         {{ form_row(form._token) }}
     </form>
     </div>
+    {% include 'GeekhubDreamBundle:includes:dreamMainImageModal.html.twig' %}
 {% endblock %}
 
 {% block javascript %}
