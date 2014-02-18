@@ -153,3 +153,7 @@ jms_serializer:
     visitors:
         json:
             options: 0 # json_encode options bitmask
+
+geekhub_user:
+    image:
+        upload_directory: /uploads/

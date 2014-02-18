@@ -41,6 +41,9 @@
             <call method="setKernelWebDir">
                 <argument type="string">%kernel.root_dir%</argument>
             </call>
+            <call method="setImgPath">
+                <argument type="string">%geekhub_user.image.upload_directory%</argument>
+            </call>
     </service>
 
     <service id="geekhub_vkontakte_user_data_service" class="%geekhub_vkontakte_user_data_service.class%"> 
