@@ -61,7 +61,7 @@
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
-        "jms/serializer-bundle": "0.13.*@dev"
+        "jms/serializer-bundle": "0.13.*@dev",
         "h4cc/alice-fixtures-bundle": "dev-master"
     },
     "require-dev": {
