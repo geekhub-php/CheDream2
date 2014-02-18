@@ -34,3 +34,23 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+hwi_oauth:
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           1529076047316529
+            client_secret:       8b0a196bb4ce28cc8d3f4fac80b47821
+            scope:               "email, user_photos, user_website, user_birthday"
+        vkontakte:
+            type:                vkontakte
+            client_id:           4186214
+            client_secret:       4r2xAkztrOuAFJanL7XI
+            scope:               "photos"
+        odnoklassniki:
+            type:                odnoklassniki
+            client_id:           217618176
+            client_secret:       76AC4887F3CB8B97A7754E3F
+            scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
+            options:
+                application_key: CBAIJJPNABABABABA
