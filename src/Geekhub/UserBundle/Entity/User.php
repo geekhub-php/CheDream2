@@ -118,6 +118,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->contacts       = new Contacts();
         $this->favoriteDreams = new ArrayCollection();
         $this->contributions  = new ArrayCollection();
