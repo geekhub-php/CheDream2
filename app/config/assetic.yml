@@ -36,6 +36,7 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/aehlke/tag-it/css/jquery.tagit.css
                 - %kernel.root_dir%/../vendor/aehlke/tag-it/css/tagit.ui-zendesk.css
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/dream-style.css
             filters:
                 - cssrewrite
                 - yui_css
@@ -46,5 +47,9 @@ assetic:
                 - %kernel.root_dir%/../vendor/aehlke/tag-it/js/tag-it.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
+                - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/vendor/jquery.ui.widget.js
+                - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/jquery.iframe-transport.js
+                - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/jquery.fileupload.js
             filters: [yui_js]
             output: js/dream.min.js

@@ -4,7 +4,8 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "src/" },
+        "classmap": ["vendor/blueimp/jQuery-File-Upload/server/php/"]
     },
     "repositories": [
         {

@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
+use Doctrine\Tests\DBAL\Driver\AbstractDriverTest;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;

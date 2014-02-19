@@ -23,3 +23,9 @@ dream_load_tags:
     defaults: { _controller: GeekhubDreamBundle:Dream:loadTags }
     options:
         expose: true
+
+dream_ajax_load_image:
+    pattern:  /dream/ajaxLoadImage
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamImageLoader }
+    options:
+        expose: true
