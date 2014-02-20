@@ -7,6 +7,7 @@
  */
 
 namespace Geekhub\DreamBundle\Service;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DreamImageHandler
 {

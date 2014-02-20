@@ -21,7 +21,7 @@
             <span class="btn btn-success fileinput-button btn-xs" id="load-input">
             {#<span class="btn btn-success fileinput-button btn-xs" onclick="loadFile()">#}
             <span>Select files...</span>
-                <input id="fileupload" type="file" name="files" multiple>
+                <input id="fileuploadz" type="file" name="files" multiple>
             </span>
 
             <p>Files uploaded:</p>
@@ -122,19 +122,19 @@
 //    console.log('files was choosen!');
 //    });
 
-    $('#fileupload').change(function() {
+    $('#fileuploadz').change(function() {
         var path = Routing.generate('dream_ajax_load_image');
 
-        $("#t1").html("<img src='http://stars.mmotorg.ru/img/loader.gif'>").fadeOut(500, function() {  //  <---  картинка пока идет загрузка
+        $("#files").append("<img src='http://stars.mmotorg.ru/img/loader.gif'>").fadeOut(500, function() {  //  <---  картинка пока идет загрузка
             $.ajax({
                 type: "POST",
                 url: path,
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
+                    console.log(JSON.stringify(data));
                 },
                 error: function(msg) {
-                    console.log('error = ' + msg);
+                    console.log('error = ' + JSON.parse(msg));
                 }
             });
         });
