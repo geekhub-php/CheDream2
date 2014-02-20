@@ -2,5 +2,5 @@ Application\Sonata\MediaBundle\Model\UploadFileResponse:
     properties:
         errors:
             type: array
-        preview:
-            type: string
+        previews:
+            type: array
