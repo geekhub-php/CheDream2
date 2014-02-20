@@ -1,26 +1,27 @@
-;$(function () {
-    'use strict';
+loadImageGallery = function (typeMediaIn) {
+//            'use strict';
 
-    // Define the url to send the image data to
-    var url = Routing.generate('dream_ajax_load_image');
+    var url = 'ajax.php';
+    var typeMedia = typeMediaIn;
 
-    // Call the fileupload widget and set some parameters
     $('#fileupload').fileupload({
         url: url,
         dataType: 'json',
         done: function (e, data) {
-            // Add each uploaded file name to the #files list
             $.each(data.result.files, function (index, file) {
+                console.log(file);
+
+                if(file.error){
+                    $('<li/>').text(file.error).appendTo('#files');
+
+                    return;
+                }
+
                 $('<li/>').text(file.name).appendTo('#files');
+                $('#dream-gallery').append('<img src="' + file.thumbnail_url + '">');
+                $('#dto').get(0).value += ',upload/' + file.name;
+
             });
-        },
-        progressall: function (e, data) {
-            // Update the progress bar while files are being uploaded
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .bar').css(
-                'width',
-                progress + '%'
-            );
         }
     });
-});
+};

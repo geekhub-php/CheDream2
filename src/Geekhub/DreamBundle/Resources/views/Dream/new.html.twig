@@ -16,69 +16,34 @@
             <a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">
                 <img data-src="holder.js/100%x200/text:Main Image">
             </a>
-            <div id="files" class="files"></div>
-            <br>
-            <span class="btn btn-success fileinput-button btn-xs">
+
+
+            {# ************************************************* #}
+
+            <input type="hidden" id="dto">
+
+            <br><br>
+            <!-- Button to select & upload files -->
+              <span class="btn btn-success fileinput-button btn-xs" onclick="loadImageGallery('img')">
                 <span>Select files...</span>
                 <!-- The file input field used as target for the file upload widget -->
                 <input id="fileupload" type="file" name="files[]" multiple>
-            </span>
-
-            <!-- The global progress bar -->
-            <p>Upload progress</p>
-            <div id="progress" class="progress progress-success progress-striped">
-                <div class="bar"></div>
-            </div>
-
-
+              </span>
 
             <!-- The list of files uploaded -->
             <p>Files uploaded:</p>
             <ul id="files"></ul>
 
+            <p>Preview:</p>
+            <div id="dream-gallery"></div>
 
+            <!-- The global progress bar -->
+            {#<p>Upload progress</p>#}
+            {#<div id="progress" class="progress progress-success progress-striped">#}
+                {#<div class="bar"></div>#}
+            {#</div>#}
 
-
-
-            {##}
-            {#<a href="#" class="well-sm" data-toggle="modal" data-target="#uploadImages">#}
-                {#+ image#}
-            {#</a>#}
-
-            {#&#123;&#35;***************************************************************************************************************************&#35;&#125;#}
-            {#<div class="modal fade" id="uploadImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
-                {#<div class="modal-dialog">#}
-                    {#<div class="modal-content">#}
-                        {#<div class="modal-header">#}
-                            {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
-                            {#<h4 class="modal-title">Upload main image</h4>#}
-                        {#</div>#}
-                        {#<div class="modal-body">#}
-                            {#<div class="form-group">#}
-
-                                {#<span class="btn btn-success fileinput-button">#}
-                                    {#<i class="glyphicon glyphicon-plus"></i>#}
-                                {#<span>Select files...</span>#}
-                                {#<!-- The file input field used as target for the file upload widget -->#}
-                                {#<input id="fileupload" type="file" name="files[]" multiple">#}
-                                {#</span>#}
-                                {#<br>#}
-                                {#<br>#}
-                                {#<!-- The global progress bar -->#}
-                                {#<div id="progress" class="progress">#}
-                                    {#<div class="progress-bar progress-bar-success"></div>#}
-                                {#</div>#}
-                                {#<!-- The container for the uploaded files -->#}
-                                {#<div id="files" class="files"></div>#}
-
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div><!-- /.modal-content -->#}
-                {#</div><!-- /.modal-dialog -->#}
-            {#</div><!-- /.modal -->#}
-            {#&#123;&#35;***************************************************************************************************************************&#35;&#125;#}
-
-
+            {# ************************************************* #}
 
         </div>
         <div class="col-md-8">
@@ -165,34 +130,35 @@
     {{ parent() }}
     <script src="{{ asset('js/dream.min.js') }}"></script>
 
-{#<script>#}
+<script>
+    loadImageGallery = function (typeMediaIn) {
+//            'use strict';
 
-{#//#}
-{#//#}
-{#//    /*jslint unparam: true */#}
-{#//    /*global window, $ */#}
-{#//    $(function () {#}
-{#//        'use strict';#}
-{#//        // Change this to the location of your server-side upload handler:#}
-{#//        var url = Routing.generate('dream_ajax_load_image');#}
-{#//        $('#fileupload').fileupload({#}
-{#//            url: url,#}
-{#//            dataType: 'json',#}
-{#//            done: function (e, data) {#}
-{#//                $.each(data.result.files, function (index, file) {#}
-{#//                    $('<p/>').text(file.name).appendTo('#files');#}
-{#//                });#}
-{#//            },#}
-{#//            progressall: function (e, data) {#}
-{#//                var progress = parseInt(data.loaded / data.total * 100, 10);#}
-{#//                $('#progress .progress-bar').css(#}
-{#//                        'width',#}
-{#//                        progress + '%'#}
-{#//                );#}
-{#//            }#}
-{#//        }).prop('disabled', !$.support.fileInput)#}
-{#//                .parent().addClass($.support.fileInput ? undefined : 'disabled');#}
-{#//    });#}
-{#</script>#}
+        var url = Routing.generate('ajaxLoadImage');;
+//        var url = 'ajax.php';
+        var typeMedia = typeMediaIn;
+
+        $('#fileupload').fileupload({
+            url: url,
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    console.log(file);
+
+                    if(file.error){
+                        $('<li/>').text(file.error).appendTo('#files');
+
+                        return;
+                    }
+
+                    $('<li/>').text(file.name).appendTo('#files');
+                    $('#dream-gallery').append('<img src="' + file.thumbnail_url + '">');
+                    $('#dto').get(0).value += ',upload/' + file.name;
+
+                });
+            }
+        });
+    };
+</script>
 
 {% endblock %}
