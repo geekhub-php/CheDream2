@@ -46,6 +46,10 @@ media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
 
+media_internal_api:
+    resource: '@ApplicationSonataMediaBundle/Resources/config/api.yml'
+    prefix: /internal-api/media
+
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
