@@ -8,7 +8,7 @@
     </parameters>
 
     <services>
-        <service id="dream_loader_images" class="%dream-image-loader%">
+        <service id="dream_file_uploader" class="%dream-image-loader%">
         </service>
     </services>
 

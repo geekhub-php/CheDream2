@@ -9,5 +9,6 @@ class UploadFileResponse
     use PropertyAccessor;
 
     protected $errors;
-    protected $previews;
+    protected $src;
+    protected $type;
 }
