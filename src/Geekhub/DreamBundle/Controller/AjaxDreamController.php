@@ -9,22 +9,15 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use UploadHandler;
+use Symfony\Component\HttpFoundation\Response;
 
 class AjaxDreamController extends Controller
 {
     public function DreamImageLoaderAction()
     {
-//        $handler = new UploadHandler();
-        $imageHandler = $this->get('dream_loader_images');
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->load();
 
-//        $imageHandler->generate_response();
-
-//        var_dump($imageHandler);
-
-//        return $handler;
-        return $imageHandler;
-
+        return new Response(json_encode($imageHandler));
     }
-
-} 
+}
