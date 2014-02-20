@@ -18,9 +18,10 @@
 
             <input id="dto" type="hidden">
             <br>
-            <span class="btn btn-success fileinput-button btn-xs" onclick="loadFile()">
+            <span class="btn btn-success fileinput-button btn-xs" id="load-input">
+            {#<span class="btn btn-success fileinput-button btn-xs" onclick="loadFile()">#}
             <span>Select files...</span>
-                <input id="fileupload" type="file" name="files[]" multiple>
+                <input id="fileupload" type="file" name="files" multiple>
             </span>
 
             <p>Files uploaded:</p>
@@ -116,33 +117,58 @@
 <script src="{{ asset('js/dream.min.js') }}"></script>
 
 <script>
-    loadFile = function () {
+
+//    $('#fileupload').change(function() {
+//    console.log('files was choosen!');
+//    });
+
+    $('#fileupload').change(function() {
+        var path = Routing.generate('dream_ajax_load_image');
+
+        $("#t1").html("<img src='http://stars.mmotorg.ru/img/loader.gif'>").fadeOut(500, function() {  //  <---  картинка пока идет загрузка
+            $.ajax({
+                type: "POST",
+                url: path,
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(msg) {
+                    console.log('error = ' + msg);
+                }
+            });
+        });
+
+    });
+
+
+
+//    loadFile = function () {
 //            'use strict';
 //        var url = Routing.generate('media_upload_images');
-        var url = Routing.generate('dream_ajax_load_image');
-
-        $('#fileupload').fileupload({
-            url: url,
-            dataType: 'json',
-            done: function (e, data) {
-                console.log(data);
-                $.each(data.result.files, function (index, file) {
-                    console.log(index);
-
-                    if(file.error){
-                        $('<li/>').text(file.error).appendTo('#files');
-
-                        return;
-                    }
-
-                    $('<li/>').text(file.name).appendTo('#files');
-                    $('#dream-gallery').append('<img src="' + file.src + '">');
-//                    $('#dto').get(0).value += ',upload/' + file.name;
-
-                });
-            }
-        });
-    };
+//        var url = Routing.generate('dream_ajax_load_image');
+//        $('#fileupload').fileupload({
+//            url: url,
+//            dataType: 'json',
+//            done: function (e, data) {
+//                console.log(data);
+//                $.each(data.result.files, function (index, file) {
+//                    console.log(index);
+//
+//                    if(file.error){
+//                        $('<li/>').text(file.error).appendTo('#files');
+//
+//                        return;
+//                    }
+//
+//                    $('<li/>').text(file.name).appendTo('#files');
+//                    $('#dream-gallery').append('<img src="' + file.src + '">');
+////                    $('#dto').get(0).value += ',upload/' + file.name;
+//
+//                });
+//            }
+//        });
+//    };
 </script>
 
 {% endblock %}

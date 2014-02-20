@@ -16,8 +16,9 @@ class AjaxDreamController extends Controller
     public function DreamImageLoaderAction()
     {
         $imageHandler = $this->get('dream_file_uploader');
-        $imageHandler->load();
 
-        return new Response(json_encode($imageHandler));
+        $result['json'] = $imageHandler->load();
+
+        return new Response(json_encode($result));
     }
 }
