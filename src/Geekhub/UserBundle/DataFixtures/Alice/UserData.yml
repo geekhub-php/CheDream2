@@ -1,0 +1,6 @@
+\Geekhub\UserBundle\Entity\User:
+    user{yoda, dart vaider, chubaka, 3pio}:
+        username:   <current()>
+        email:      <current()>@example.com
+        enabled:    true
+        plainPassword: <current()>
