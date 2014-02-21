@@ -1,5 +1,5 @@
 \Geekhub\UserBundle\Entity\User:
-    user{yoda, dart vaider, chubaka, 3pio}:
+    user{yoda, dart vaider, chubaka, c3pio}:
         username:   <current()>
         email:      <current()>@example.com
         enabled:    true
