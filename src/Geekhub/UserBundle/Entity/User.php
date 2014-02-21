@@ -79,13 +79,6 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $vkontakte_id;
 
-    /** 
-     * @var string
-     *
-     * @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) 
-     */
-    protected $vkontakteAccessToken;
-
     /**
      * @var string
      *
@@ -93,26 +86,12 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $facebook_id;
 
-    /** 
-     * @var string
-     *
-     *  @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) 
-     */
-    protected $facebookAccessToken;
-
     /**
      * @var string
      *
      * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
      */
     protected $odnoklassniki_id;
-
-    /** 
-     * @var string
-     *
-     * @ORM\Column(name="odnoklassniki_access_token", type="string", length=255, nullable=true) 
-     */
-    protected $odnoklassnikiAccessToken;
 
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
@@ -342,29 +321,6 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Set vkontakteAccessToken
-     *
-     * @param string $vk
-     * @return User
-     */
-    public function setVkontakteAccessToken($vkontakteAccessToken)
-    {
-        $this->vkontakteAccessToken = $vkontakteAccessToken;
-
-        return $this;
-    }
-
-    /**
-     * Get vkontakte_id
-     *
-     * @return string
-     */
-    public function getVkontakteAccessToken()
-    {
-        return $this->vkontakteAccessToken;
-    }
-
-    /**
      * Set facebook
      *
      * @param  string $facebook
@@ -388,29 +344,6 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Set facebook
-     *
-     * @param string $facebook
-     * @return User
-     */
-    public function setFacebookAccessToken($facebookAccessToken)
-    {
-        $this->facebookAccessToken = $facebookAccessToken;
-
-        return $this;
-    }
-
-    /**
-     * Get facebook
-     *
-     * @return string 
-     */
-    public function getFacebookAccessToken()
-    {
-        return $this->facebookAccessToken;
-    }
-
-    /**
      * Set odnoklasnikiId
      *
      * @param string $odnoklasnikiId
@@ -431,28 +364,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getOdnoklassnikiId()
     {
         return $this->odnoklassniki_id;
-    }
-
-    /**
-     * Set odnoklassnikiAccessToken
-     *
-     * @return User
-     */
-    public function setOdnoklassnikiAccessToken($odnoklassnikiAccessToken)
-    {
-        $this->odnoklassnikiAccessToken = $odnoklassnikiAccessToken;
-
-        return $this;
-    }
-
-    /**
-     * Get odnoklassnikiAccessToken
-     *
-     * @return string
-     */
-    public function getOdnoklassnikiAccessToken()
-    {
-        return $this->odnoklassnikiAccessToken;
     }
 
     /**

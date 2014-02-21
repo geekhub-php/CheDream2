@@ -26,12 +26,12 @@ class VkontakteUserDataService extends AbstractUserDataService
         $user->setEmail('');
         //$user->setBirthday('0000-00-00');
         $profilePicture = null;
-        if ($remoteImg = $this->callVkontakteUsersGet($user->GetVkontakteId(), $user->getVkontakteAccessToken(), 'photo_big')) {
+        if ($remoteImg = $this->callVkontakteUsersGet($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {
             $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
         }
         $user->setAvatar($profilePicture);
         $birthday = null;
-        if ($userInfo = $this->callVkontakteUsersGet($user->GetVkontakteId(), $user->getVkontakteAccessToken(), 'bdate')) {
+        if ($userInfo = $this->callVkontakteUsersGet($user->GetVkontakteId(), $response->getAccessToken(), 'bdate')) {
             $birthday = $userInfo;
             // the date is DD.MM.YYYY or DD.MM if there is no year
             $birthdayArray=explode('.',$birthday);
