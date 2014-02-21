@@ -69,12 +69,12 @@ swiftmailer:
     spool:     { type: memory }
 
 liip_imagine:
-    cache_prefix:          /upload/dream/image/cache
+    cache_prefix:          /uploads/dream/image/cache
     filter_sets:
         userAvatar:
             quality: 90
             filters:
-                thumbnail: { size: [300, 30], mode: outbound }
+                thumbnail: { size: [30, 30], mode: outbound }
 
 stof_doctrine_extensions:
     default_locale: en_US

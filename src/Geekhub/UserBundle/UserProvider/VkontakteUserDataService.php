@@ -23,7 +23,7 @@ class VkontakteUserDataService extends AbstractUserDataService
         $user->setFirstName($responseArray['response'][0]['first_name']);
         $user->setMiddleName($responseArray['response'][0]['nickname']);
         $user->setLastName($responseArray['response'][0]['last_name']);
-        $user->setEmail('');
+        $user->setEmail('id'.$user->GetVkontakteId().'@vk.com'); //is not real, but unique email is required for authorization
         //$user->setBirthday('0000-00-00');
         $profilePicture = null;
         if ($remoteImg = $this->callVkontakteUsersGet($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {

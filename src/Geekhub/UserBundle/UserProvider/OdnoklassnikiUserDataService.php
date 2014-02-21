@@ -25,7 +25,8 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
         $user->setFirstName($responseArray['first_name']);
         $user->setMiddleName('');
         $user->setLastName($responseArray['last_name']);
-        $user->setEmail('dumb@mail.ru'); //!error with same emails and different social networks
+        // uncommented email setter for setting users with different social networks but the same email
+        //$user->setEmail('dumb@mail.ru'); //!error with same emails and different social networks
         $birthday=$responseArray['birthday'];
         $user->setBirthday(new \DateTime($birthday));
 

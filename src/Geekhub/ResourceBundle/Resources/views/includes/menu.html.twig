@@ -66,6 +66,7 @@
                 <a>Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
             </li>
 
+            {% if app.user is null %}
             <li>
                 <p class="navbar-text">Увійти через</p>
             </li>
@@ -87,6 +88,22 @@
                     <i class="icon icon-vkontakte"></i>
                 </a>
             </li>
+            {% else %}
+
+            <li>
+                <img src="{{ app.user.getAvatar() | imagine_filter('userAvatar') }}">
+            </li>
+
+            <li>
+                {{ app.user.getFirstName() }} {{ app.user.getMiddleName() }} {{ app.user.getLastName() }}
+            </li>
+            <li>
+                <a href="{{ path('_logout') }}">
+                    Вийти
+                </a>
+            </li>
+
+            {% endif %}
         </ul>
 
         <form class="navbar-form " role="search">

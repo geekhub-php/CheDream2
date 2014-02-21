@@ -46,3 +46,6 @@ vkontakte_login:
 
 odnoklassniki_login:
     pattern: /connect/odnoklassniki
+
+_logout:
+    pattern: /logout
