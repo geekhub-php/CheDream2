@@ -45,9 +45,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $lastName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=100, nullable=true)
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     protected $avatar;
 
