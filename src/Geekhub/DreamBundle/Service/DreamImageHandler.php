@@ -8,21 +8,34 @@
 
 namespace Geekhub\DreamBundle\Service;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 
 class DreamImageHandler
 {
+    protected $file;
+    protected $liipimage;
+
+    public function __construct(CacheManager $cacheManager)
+    {
+        $this->liipimage = $cacheManager;
+    }
+    public function init(UploadedFile $file)
+    {
+        $this->file = $file;
+    }
+
     public function load()
     {
-        $uploader = new FileUploader();
-        $uploader->setPicturesTypeAllowed(array('jpg', 'jpeg', 'png', 'gif'));
-        $uploader->setFileTypeAllowed(array('doc', 'docx', 'pdf', 'xls', 'xlsx'));
-        $uploader->setPictureSizeAllowed(2 * 1024 * 1024);
-        $uploader->setFileSizeAllowed(3 * 1024 * 1024);
-        $uploader->setUploadPathForFiles('upload/files/');
-        $uploader->setUploadPathForPictures('upload/image/');
-        $response = $uploader->init();
+        $uploader = new SymfonyFileUploader($this->file, $this->liipimage);
+        $uploader->setUploadPathForPictures('upload/tmp/image/');
+        $uploader->setUploadPathForFiles('upload/tmp/files/');
+        $uploader->setAllowedSizeForPictures(2*1024*1024);
+        $uploader->setAllowedSizeForFile(3*1024*1024);
+        $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
+        $uploader->setAllowedFilesTypes(array('doc', 'docx', 'pdf', 'xls', 'xlsx'));
 
-//        return json_encode($response);
-        return $response;
+        $result = $uploader->load();
+
+        return $result;
     }
 }

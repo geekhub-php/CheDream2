@@ -76,6 +76,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [300, 30], mode: outbound }
+        dream_thumb:
+            filters:
+                relative_resize: { widen: 80 }
+
 
 stof_doctrine_extensions:
     default_locale: en_US

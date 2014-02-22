@@ -9,6 +9,7 @@
 
     <services>
         <service id="dream_file_uploader" class="%dream-image-loader%">
+            <argument type="service" id="liip_imagine.cache.manager"/>
         </service>
     </services>
 

@@ -156,6 +156,11 @@ class Dream implements Taggable
     protected $currentStatus;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    protected $media;
+
+    /**
      * Constructor
      */
     public function __construct()

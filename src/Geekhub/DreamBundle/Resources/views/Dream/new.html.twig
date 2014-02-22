@@ -18,18 +18,17 @@
 
             <input id="dto" type="hidden">
             <br>
-            <span class="btn btn-success fileinput-button btn-xs" id="load-input">
-            {#<span class="btn btn-success fileinput-button btn-xs" onclick="loadFile()">#}
+            <span class="btn btn-success fileinput-button btn-xs" id="load-input" onclick="loadFile()">
             <span>Select files...</span>
                 <input id="fileuploadz" type="file" name="files" multiple>
             </span>
 
-            <p>Files uploaded:</p>
-            {#<div id="files" class="files"></div>#}
-            <ul id="files" class="files"></ul>
-
             <p>Preview:</p>
             <div id="dream-gallery"></div>
+
+            <p>Errors:</p>
+            {#<div id="files" class="files"></div>#}
+            <ul id="files" class="files"></ul>
 
         </div>
         <div class="col-md-8">
@@ -117,58 +116,45 @@
 <script src="{{ asset('js/dream.min.js') }}"></script>
 
 <script>
-
-//    $('#fileupload').change(function() {
-//    console.log('files was choosen!');
-//    });
-
-    $('#fileuploadz').change(function() {
-        var path = Routing.generate('dream_ajax_load_image');
-
-        $("#files").append("<img src='http://stars.mmotorg.ru/img/loader.gif'>").fadeOut(500, function() {  //  <---  картинка пока идет загрузка
-            $.ajax({
-                type: "POST",
-                url: path,
-                dataType: "json",
-                success: function(data) {
-                    console.log(JSON.stringify(data));
-                },
-                error: function(msg) {
-                    console.log('error = ' + JSON.parse(msg));
-                }
-            });
-        });
-
-    });
-
-
-
-//    loadFile = function () {
+    loadFile = function () {
 //            'use strict';
 //        var url = Routing.generate('media_upload_images');
-//        var url = Routing.generate('dream_ajax_load_image');
-//        $('#fileupload').fileupload({
-//            url: url,
-//            dataType: 'json',
-//            done: function (e, data) {
-//                console.log(data);
-//                $.each(data.result.files, function (index, file) {
-//                    console.log(index);
-//
-//                    if(file.error){
-//                        $('<li/>').text(file.error).appendTo('#files');
-//
-//                        return;
-//                    }
-//
-//                    $('<li/>').text(file.name).appendTo('#files');
-//                    $('#dream-gallery').append('<img src="' + file.src + '">');
-////                    $('#dto').get(0).value += ',upload/' + file.name;
-//
-//                });
-//            }
-//        });
-//    };
+        var url = Routing.generate('dream_ajax_load_image');
+        $('#fileuploadz').fileupload({
+            url: url,
+            dataType: 'json',
+            done: function (e, data) {
+//                console.dir(data);
+                var responseArr = JSON.parse(data.jqXHR.responseText);
+//                console.log(responseArr);
+
+                $.each(responseArr, function (index, file) {
+                    console.log('type = ' + file.type);
+                    console.log('srcPreview = ' + file.srcPreview);
+                    console.log('src = ' + file.src);
+                    console.log('error = ' + file.error);
+
+                    if(file.error){
+                        $('<li5/>').text(file.error).appendTo('#files');
+
+                        return;
+                    }
+                    if(file.type == 'image') {
+                        $('#dream-gallery').append('<img src="' + file.srcPreview + '">');
+                    }
+
+
+//                    $('<li/>').text(file.src).appendTo('#files');
+//                    $('#dto').get(0).value += ',upload/' + file.name;
+
+                });
+            },
+            error: function(msg) {
+                console.log('error = ' + msg);
+                console.dir(msg);
+            }
+        });
+    };
 </script>
 
 {% endblock %}

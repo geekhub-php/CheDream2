@@ -16,23 +16,12 @@ class AjaxDreamController extends Controller
 {
     public function DreamImageLoaderAction(Request $request)
     {
-//        $file = $request->files->all();
-//        var_dump($file);
-//        var_dump($_FILES['files']);
-//        exit;
-////        $file = $request->files->get('files');
+        $file = $request->files->get('files');
 
-//        $imageHandler = $this->get('dream_file_uploader');
-//
-//
-//        $result = $imageHandler->load();
-//        var_dump($_POST, $_FILES); exit;
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->init($file);
+        $result = $imageHandler->load();
 
-        $result = array(
-            array('name' => 'qqq', 'src' => 'www', 'error' => 'eee'),
-            array('name' => 'aaa', 'src' => 'sss', 'error' => 'ddd'),
-            array('name' => 'zzz', 'src' => 'xxx', 'error' => 'ccc')
-        );
         return new Response(json_encode($result));
     }
 }
