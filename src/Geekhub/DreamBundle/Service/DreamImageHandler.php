@@ -29,7 +29,7 @@ class DreamImageHandler
         $uploader = new SymfonyFileUploader($this->file, $this->liipimage);
         $uploader->setUploadPathForPictures('upload/tmp/image/');
         $uploader->setUploadPathForFiles('upload/tmp/files/');
-        $uploader->setAllowedSizeForPictures(2*1024*1024);
+        $uploader->setAllowedSizeForPictures(1*1024*1024);
         $uploader->setAllowedSizeForFile(3*1024*1024);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
         $uploader->setAllowedFilesTypes(array('doc', 'docx', 'pdf', 'xls', 'xlsx'));

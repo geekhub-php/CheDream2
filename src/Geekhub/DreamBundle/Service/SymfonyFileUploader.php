@@ -198,9 +198,10 @@ class SymfonyFileUploader
 
     public function setData()
     {
-        $randInt = mt_rand(1, 999999);
+//        $randInt = mt_rand(1, 999999);
         $this->fileType = $this->file->getMimeType();
-        $this->fileName = $randInt.'-'.$this->file->getClientOriginalName();
+//        $this->fileName = $randInt.'-'.$this->file->getClientOriginalName();
+        $this->fileName = $this->file->getClientOriginalName();
         $this->fileSize = $this->file->getSize();
     }
 
@@ -234,7 +235,7 @@ class SymfonyFileUploader
                     'type'          =>  'image',
                     'srcPreview'    =>  null,
                     'src'           =>  $this->getUploadPath().$file,
-                    'error'         =>  'the image is too big'
+                    'error'         =>  'файл зображення занадто великий.'
                 );
 
                 return false;
@@ -256,7 +257,7 @@ class SymfonyFileUploader
                     'type'          =>  'file',
                     'srcPreview'    =>  null,
                     'src'           =>  $this->getUploadPath().$file,
-                    'error'         =>  'the file is too big'
+                    'error'         =>  'файл занадто великий.'
                 );
 
                 return false;
@@ -267,7 +268,7 @@ class SymfonyFileUploader
             'type'          => 'file',
             'srcPreview'    =>  null,
             'src'           => $file,
-            'error'         => 'the file type is not allowed'
+            'error'         => 'недопустимий тип файлу.'
         );
 
         return false;

@@ -12,23 +12,29 @@
     {{ form_start(form) }}
     <div class="row">
         <div class="col-md-4">
-            <a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">
-                <img data-src="holder.js/100%x200/text:Main Image">
-            </a>
+
+            <img data-src="holder.js/360x200/text:Main Image" class="img-thumbnail">
+
+            {#<a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">#}
+                {#<img data-src="holder.js/100%x200/text:Main Image">#}
+            {#</a>#}
 
             <input id="dto" type="hidden">
             <br>
+
+            <div id="dream-gallery"></div>
+            <br/>
+            <div id="dream-files"></div>
+
+            <br/>
             <span class="btn btn-success fileinput-button btn-xs" id="load-input" onclick="loadFile()">
-            <span>Select files...</span>
+               <span>Додати файли...</span>
                 <input id="fileuploadz" type="file" name="files" multiple>
             </span>
+            <br/>
 
-            <p>Preview:</p>
-            <div id="dream-gallery"></div>
-
-            <p>Errors:</p>
-            {#<div id="files" class="files"></div>#}
-            <ul id="files" class="files"></ul>
+            <br/>
+            <div id="errors" class="files"></div>
 
         </div>
         <div class="col-md-8">
@@ -135,12 +141,23 @@
                     console.log('error = ' + file.error);
 
                     if(file.error){
-                        $('<li5/>').text(file.error).appendTo('#files');
+                        $('#errors').append(
+                                '<div class="alert alert-danger">' + file.src + ' ' +file.error +
+                                '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
+                                '</div>'
+                        );
 
                         return;
                     }
-                    if(file.type == 'image') {
-                        $('#dream-gallery').append('<img src="' + file.srcPreview + '">');
+                    if(file.type == 'image' && file.error == null) {
+                        $('#dream-gallery').append('<img src="' + file.srcPreview + '" class="img-thumbnail">');
+                    }
+                    if(file.type == 'file' && file.error == null) {
+                        $('#dream-files').append(
+                                '<div class="alert alert-info">' +
+                                '<i class="icon icon-file"></i>' + file.src +
+                                '</div>'
+                                );
                     }
 
 
