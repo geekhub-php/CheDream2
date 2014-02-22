@@ -90,15 +90,18 @@
             </li>
             {% else %}
 
+            {#
             <li>
                 <img src="{{ app.user.getAvatar() | imagine_filter('userAvatar') }}">
             </li>
+            #}
 
             <li>
                 {{ app.user.getFirstName() }} {{ app.user.getMiddleName() }} {{ app.user.getLastName() }}
             </li>
             <li>
                 <a href="{{ path('_logout') }}">
+                    <span class="glyphicon glyphicon-log-out"></span>
                     Вийти
                 </a>
             </li>

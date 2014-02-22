@@ -75,7 +75,13 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
-            $this->userManager->updateUser($user);
+            try {
+                $this->userManager->updateUser($user);
+            }
+            catch (DBALException $e) {
+                var_dump("dbal exception");
+                //exit; /// !!! doesn't work
+            }
 
             return $user;
         }
