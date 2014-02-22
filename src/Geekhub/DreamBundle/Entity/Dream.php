@@ -170,6 +170,7 @@ class Dream implements Taggable
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->statuses = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     /**
@@ -700,5 +701,39 @@ class Dream implements Taggable
     public function getCurrentStatus()
     {
         return $this->currentStatus;
+    }
+
+    /**
+     * Add media
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     *
+     * @return Dream
+     */
+    public function addMedia(\Application\Sonata\MediaBundle\Entity\Media $media)
+    {
+        $this->media[] = $media;
+
+        return $this;
+    }
+
+    /**
+     * Remove media
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $media
+     */
+    public function removeMedia(\Application\Sonata\MediaBundle\Entity\Media $media)
+    {
+        $this->media->removeElement($media);
+    }
+
+    /**
+     * Get media
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }
