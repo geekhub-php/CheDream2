@@ -3,7 +3,11 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\DependencyInjection\Container;
+use JMS\Serializer\Serializer;
+use Sonata\MediaBundle\Entity\MediaManager,
+    Sonata\MediaBundle\Provider\ImageProvider;
+use Geekhub\UserBundle\Entity\User;
 
 abstract class AbstractUserDataService
 {
@@ -11,15 +15,22 @@ abstract class AbstractUserDataService
 
     protected $imgPath = '/uploads/';
 
+    /** @var Serializer $serializer */
+    protected $serializer;
 
-    public function setKernelWebDir($kernelWebDir)
-    {
-        $this->kernelWebDir = $kernelWebDir;
-    }
+    /** @var MediaManager $mediaManager */
+    protected $mediaManager;
 
-    public function setImgPath($imgPath)
+    /** @var ImageProvider $mediaImageProvider */
+    protected $mediaImageProvider;
+
+    public function __construct(Container $container, $kernelWebDir, $imgPath)
     {
-        $this->imgPath = $imgPath;
+        $this->serializer         = $container->get('jms_serializer');
+        $this->mediaManager       = $container->get('sonata.media.manager.media');
+        $this->mediaImageProvider = $container->get('sonata.media.provider.image');
+        $this->kernelWebDir       = $kernelWebDir;
+        $this->imgPath            = $imgPath;
     }
 
     public function copyImgFromRemote($remoteImg, $localFileName)
@@ -40,5 +51,5 @@ abstract class AbstractUserDataService
         return $this->imgPath.$localFileName;
     }
 
-    abstract function setUserData(UserInterface $user, UserResponseInterface $response);
+    abstract function setUserData(User $user, UserResponseInterface $response);
 }

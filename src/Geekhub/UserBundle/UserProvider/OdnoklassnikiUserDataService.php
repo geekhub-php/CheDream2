@@ -6,20 +6,23 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
-use Geekhub\UserBundle\Model\VkontakteResponse;
+use Geekhub\UserBundle\Entity\User;
 
 class OdnoklassnikiUserDataService extends AbstractUserDataService
 {
     protected $appKeys;
-	
     protected $serializer;
+    protected $mediaManager;
+    protected $mediaImageProvider;
 
-    public function __construct($serializer)
+    public function __construct($serializer, $mediaManager, $mediaImageProvider)
     {
         $this->serializer=$serializer;
+        $this->mediaManager = $mediaManager;
+        $this->mediaImageProvider = $mediaImageProvider;
     }
 
-    public function setUserData(UserInterface $user, UserResponseInterface $response)
+    public function setUserData(User $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
         $user->setFirstName($responseArray['first_name']);

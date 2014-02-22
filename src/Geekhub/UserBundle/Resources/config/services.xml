@@ -7,15 +7,20 @@
 <parameters>
         <parameter key="geekhub_user.oauth_user_provider.class">Geekhub\UserBundle\UserProvider\OAuthUserProvider</parameter>
         <parameter key="geekhub_oauth_user_provider.class">Geekhub\UserBundle\UserProvider\MyFOSUBUserProvider</parameter>
+        <parameter key="geekhub_abstract_user_data_service.class">Geekhub\UserBundle\UserProvider\AbstractUserDataService</parameter>
         <parameter key="geekhub_facebook_user_data_service.class">Geekhub\UserBundle\UserProvider\FacebookUserDataService</parameter>
         <parameter key="geekhub_vkontakte_user_data_service.class">Geekhub\UserBundle\UserProvider\VkontakteUserDataService</parameter>
         <parameter key="geekhub_odnoklassniki_user_data_service.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService</parameter>
-
 </parameters>
 
  
 <services>
-    <service id="geekhub_user.oauth_user_provider" class="%geekhub_user.oauth_user_provider.class%"> 
+    <service id="geekhub_user.oauth_user_provider" class="%geekhub_user.oauth_user_provider.class%" />
+
+    <service id="geekhub_user.geekhub_abstract_user_data_service" class="%geekhub_abstract_user_data_service.class%" abstract="true">
+        <argument type="service" id="service_container" />
+        <argument type="string">%kernel.root_dir%</argument>
+        <argument type="string">%geekhub_user.image.upload_directory%</argument>
     </service>
 
     <service id="geekhub_oauth_user_provider" class="%geekhub_oauth_user_provider.class%"> 
@@ -36,28 +41,11 @@
             </call>
     </service>
 
-    <service id="geekhub_facebook_user_data_service" class="%geekhub_facebook_user_data_service.class%"> 
-            <argument type="service" id="jms_serializer" />
-            <call method="setKernelWebDir">
-                <argument type="string">%kernel.root_dir%</argument>
-            </call>
-            <call method="setImgPath">
-                <argument type="string">%geekhub_user.image.upload_directory%</argument>
-            </call>
-    </service>
+    <service id="geekhub_facebook_user_data_service" class="%geekhub_facebook_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service" />
 
-    <service id="geekhub_vkontakte_user_data_service" class="%geekhub_vkontakte_user_data_service.class%"> 
-            <argument type="service" id="jms_serializer" />
-            <call method="setKernelWebDir">
-                <argument type="string">%kernel.root_dir%</argument>
-            </call>
-    </service>
+    <service id="geekhub_vkontakte_user_data_service" class="%geekhub_vkontakte_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service" />
 
-    <service id="geekhub_odnoklassniki_user_data_service" class="%geekhub_odnoklassniki_user_data_service.class%"> 
-            <argument type="service" id="jms_serializer" />
-            <call method="setKernelWebDir">
-                <argument type="string">%kernel.root_dir%</argument>
-            </call>
+    <service id="geekhub_odnoklassniki_user_data_service" class="%geekhub_odnoklassniki_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service">
             <call method="setAppKeys">
                 <argument type="collection">
                     <argument key="odnoklassniki_app_key">%odnoklassniki_app_key%</argument>

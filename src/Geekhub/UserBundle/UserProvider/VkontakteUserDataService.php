@@ -6,18 +6,11 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
-use Geekhub\UserBundle\Model\VkontakteResponse;
+use Geekhub\UserBundle\Entity\User;
 
 class VkontakteUserDataService extends AbstractUserDataService
 {
-    protected $serializer;
-
-    public function __construct($serializer)
-    {
-        $this->serializer=$serializer;
-    }
-
-    public function setUserData(UserInterface $user, UserResponseInterface $response)
+    public function setUserData(User $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
         $user->setFirstName($responseArray['response'][0]['first_name']);
