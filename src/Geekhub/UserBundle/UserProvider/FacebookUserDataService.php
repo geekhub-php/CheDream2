@@ -12,10 +12,11 @@ class FacebookUserDataService extends AbstractUserDataService
 {
     protected $serializer;
 
+    /*
     public function __construct($serializer)
     {
         $this->serializer=$serializer;
-    }
+    }*/
 	
     public function setUserData(User $user, UserResponseInterface $response)
     {

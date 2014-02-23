@@ -15,8 +15,6 @@ abstract class AbstractUserDataService
 
     protected $imgPath = '/upload/';
 
-    protected $mediaManager;
-
     /** @var Serializer $serializer */
     protected $serializer;
 
@@ -26,10 +24,14 @@ abstract class AbstractUserDataService
     /** @var ImageProvider $mediaImageProvider */
     protected $mediaImageProvider;
 
+    /** @var Container $container */
+    protected $container;
+
     public function __construct(Container $container, $kernelWebDir, $imgPath)
     {
+        $this->container          = $container;
         $this->serializer         = $container->get('jms_serializer');
-        $this->mediaManager       = $container->get('sonata.media.manager.media');
+        $this->mediaManager       = 0;//$container->get('sonata.media.manager.media');
         $this->mediaImageProvider = $container->get('sonata.media.provider.image');
         $this->kernelWebDir       = $kernelWebDir;
         $this->imgPath            = $imgPath;
@@ -43,17 +45,9 @@ abstract class AbstractUserDataService
 
     public function copyImgFromRemote($remoteImg, $localFileName)
     {
-        $media = new Media;
-        $media->setBinaryContent($remoteImg);
-        $media->setProviderName('sonata.media.provider.image');
- 
-        //$mediaManager = $this->get('sonata.media.manager.media'); // don't need. Injected
-        //$this->mediaManager->save($media); // !!! error! Doesnt work 
- 
-        return $media;
-        /*
         $content = file_get_contents($remoteImg);
         $destination = $this->kernelWebDir.'/../web'.$this->imgPath;
+        var_dump($destination);
 
         if (!is_dir($destination)) {
             mkdir($destination);
@@ -65,8 +59,15 @@ abstract class AbstractUserDataService
         fwrite($fp, $content);
         fclose($fp);
 
-        return $this->imgPath.$localFileName;
-        */
+        // return $this->imgPath.$localFileName; // version without SonataMediaBundle (file path)
+        $media = new Media;
+        $media->setBinaryContent($localImg);
+        $media->setProviderName('sonata.media.provider.image');
+ 
+        $mediaManager = $this->container->get('sonata.media.manager.media'); // don't need. Injected
+        $mediaManager->save($media); // !!! error! Doesnt work 
+ 
+        return $media;
     }
 
     abstract function setUserData(User $user, UserResponseInterface $response);

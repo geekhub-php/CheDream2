@@ -10,6 +10,7 @@ use Geekhub\UserBundle\Entity\User;
 
 class OdnoklassnikiUserDataService extends AbstractUserDataService
 {
+    /*
     protected $appKeys;
     protected $serializer;
     protected $mediaManager;
@@ -20,7 +21,7 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
         $this->serializer=$serializer;
         $this->mediaManager = $mediaManager;
         $this->mediaImageProvider = $mediaImageProvider;
-    }
+    }*/
 
     public function setUserData(User $user, UserResponseInterface $response)
     {
