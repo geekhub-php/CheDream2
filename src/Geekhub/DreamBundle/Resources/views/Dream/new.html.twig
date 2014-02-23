@@ -36,8 +36,26 @@
 
             <div class="row">
                 <div class="col-md-11">
+
+                    <div id="dream-add-video">
+                        <div class="row">
+                            <div class="col-md-9 col-md-offset-1">
+                                <div>
+                                    <div id="dream-add-video-error"></div>
+                                    <input type="text" class="form-control" id="dream-add-video-text-input">
+                                </div>
+                                <br/>
+                                <div class="text-center">
+                                    <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="add video">
+                                    <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="cancel">
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+
                     <span class="btn btn-success fileinput-button btn-xs pull-left" id="load-input" onclick="loadFile()">
-                       <span>Додати файли...</span>
+                       <span> Додати файли...</span>
                         <input id="fileuploadz" type="file" name="files" multiple>
                     </span>
 
@@ -46,24 +64,6 @@
             </div>
 
             <br/>
-
-            <br/>
-            <div id="dream-add-video">
-                <div class="row">
-                    <div class="col-md-9 col-md-offset-1">
-                        <div>
-                            <div id="dream-add-video-error"></div>
-                            <input type="text" class="form-control" id="dream-add-video-text-input">
-                        </div>
-                        <br/>
-                        <div class="text-center">
-                            <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="add video">
-                            <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="cancel">
-                        </div>
-                        <br/>
-                    </div>
-                </div>
-            </div>
 
             <div id="errors" class="files"></div>
 
@@ -74,7 +74,7 @@
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
-            {{ form_widget(form.dream_pictures) }}
+            {{ form_widget(form.dreamPictures) }}
             {{ form_widget(form.dream_files) }}
             {{ form_widget(form.dream_videos) }}
             {{ form_widget(form.dream_poster) }}
@@ -214,7 +214,7 @@
                     }
                     if(file.type == 'image' && file.error == null) {
                         $('#dream-gallery').append('<img src="' + file.srcPreview + '" class="img-thumbnail">');
-                        $('#newDreamForm_dream_pictures').get(0).value += ',' + file.src;
+                        $('#newDreamForm_dreamPictures').get(0).value += ',' + file.src;
                     }
                     if(file.type == 'file' && file.error == null) {
                         $('#dream-files').append(
@@ -246,7 +246,7 @@
 
         $('#dream-videos').append(
                 '<div class="alert alert-warning">' +
-                        '<span class="glyphicon glyphicon-film"></span>' + ' ' + videoSrc +
+                        '<i class="icon icon-youtube"></i>' + ' ' + '<a href="'+ videoSrc +'" target="_blank" >' + 'Youtube video' + '</a>' +
                         '</div>'
         );
             $('#dream-add-video-error').html('');

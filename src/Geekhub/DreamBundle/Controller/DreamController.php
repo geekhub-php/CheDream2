@@ -9,21 +9,24 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
-use Doctrine\Tests\DBAL\Driver\AbstractDriverTest;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Application\Sonata\MediaBundle\Entity\Media;
 
 class DreamController extends Controller
 {
     public function newDreamAction(Request $request)
     {
         $dream = new Dream();
+        $mediaManager = $this->get('sonata.media.manager.media');
 
         $form = $this->createForm(new DreamType(), $dream, array(
-            'dream' => $dream
+            'dream' => $dream,
+            'media-manager' => $mediaManager
         ));
 
         $form->handleRequest($request);
@@ -37,6 +40,26 @@ class DreamController extends Controller
             $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
             $dream->setTags(null);
             $tagManager->addTags($tagsObjArray, $dream);
+
+
+            foreach($dream->getDreamPictures() as $pictureSrc)
+            {
+            $media = new Media();
+
+            $file = new File($pictureSrc);
+            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath());
+
+//            $media->setBinaryContent('/var/www/chedream2/web/upload/tmp/image/Image_433.jpg');
+//            $media->setBinaryContent($pictureSrc);
+//            $media->setProviderName('sonata.media.provider.image');
+//
+//            $mediaManager->save($media);
+//
+//            $dream->addMedia($media);
+//            unlink($file);
+            }
+            exit;
+
 
             $newDream->persist($dream);
             $newDream->flush();

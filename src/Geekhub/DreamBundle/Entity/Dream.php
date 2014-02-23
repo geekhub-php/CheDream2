@@ -160,6 +160,8 @@ class Dream implements Taggable
      */
     protected $media;
 
+    protected $dreamPictures;
+
     /**
      * Constructor
      */
@@ -736,4 +738,22 @@ class Dream implements Taggable
     {
         return $this->media;
     }
+
+    /**
+     * @param mixed $dreamPictures
+     */
+    public function setDreamPictures($dreamPictures)
+    {
+        $this->dreamPictures = $dreamPictures;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDreamPictures()
+    {
+        return $this->dreamPictures;
+    }
+
+
 }

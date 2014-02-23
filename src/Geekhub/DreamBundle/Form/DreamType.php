@@ -23,10 +23,12 @@ class DreamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $dream = $options['dream'];
+        $mediaManager = $options['media-manager'];
         $transformerTag = new TagTransformer();
         $transformerFinance = new FinancialTransformer($dream);
         $transformerEquipment = new EquipmentTransformer($dream);
         $transformerWork = new WorkTransformer($dream);
+        $transformerPicture = new DreamPicturesTransformer($dream, $mediaManager);
 
         $builder
             ->add('title', 'text', array('label' => 'назва '))
@@ -65,7 +67,7 @@ class DreamType extends AbstractType
                 'by_reference'  => false,
 //                'label' => 'робота '
             ))->addModelTransformer($transformerWork))
-            ->add('dream_pictures', 'hidden', array('mapped' => false))
+            ->add($builder->create('dreamPictures', 'hidden')->addModelTransformer($transformerPicture))
             ->add('dream_poster', 'hidden', array('mapped' => false))
             ->add('dream_files', 'hidden', array('mapped' => false))
             ->add('dream_videos', 'hidden', array('mapped' => false));
@@ -76,9 +78,10 @@ class DreamType extends AbstractType
         $resolver->setDefaults(array(
                 'data_class' => 'Geekhub\DreamBundle\Entity\Dream'
             ))
-            ->setRequired(array('dream'))
+            ->setRequired(array('dream', 'media-manager'))
             ->setAllowedTypes(array(
-                'dream' => 'Geekhub\DreamBundle\Entity\Dream'
+                'dream' => 'Geekhub\DreamBundle\Entity\Dream',
+                'media-manager' => 'Sonata\MediaBundle\Entity\MediaManager'
             ));
 
     }

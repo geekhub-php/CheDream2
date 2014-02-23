@@ -34,6 +34,5 @@ class AjaxDreamController extends Controller
         $result = $imageHandler->loadPoster();
 
         return new Response(json_encode($result));
-
     }
 }
