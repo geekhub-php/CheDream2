@@ -81,6 +81,10 @@ liip_imagine:
 #                thumbnail: { size: [80, 80], mode: inset }
                 thumbnail: { size: [80, 80], mode: outbound }
 #                relative_resize: { heighten: 80 }
+        dream_poster:
+            filters:
+#                thumbnail: { size: [440, 260], mode: inset }
+                thumbnail: { size: [440, 260], mode: outbound }
 
 
 stof_doctrine_extensions:

@@ -13,12 +13,20 @@
     <div class="row">
         <div class="col-md-5">
 
-            <div>
-                <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
-            </div>
+            {#<div id="dream-poster-image">#}
+                {#<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">#}
+            {#</div>#}
+
             {#<a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">#}
                 {#<img data-src="holder.js/100%x200/text:Main Image">#}
             {#</a>#}
+
+            <span class="fileinput-button" id="dream-poster-image">
+                <div id="dream-poster-container">
+                    <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+                    <input id="fileupload-poster" type="file" name="dream-poster">
+                </div>
+            </span>
 
             <br>
             <div id="dream-gallery"></div>
@@ -69,6 +77,7 @@
             {{ form_widget(form.dream_pictures) }}
             {{ form_widget(form.dream_files) }}
             {{ form_widget(form.dream_videos) }}
+            {{ form_widget(form.dream_poster) }}
         </div>
     </div>
 
@@ -152,7 +161,37 @@
         $('#dream-add-video').hide();
     });
 
+    $('#dream-poster-image').click(function() {
+        var url = Routing.generate('dream_ajax_load_poster');
+        $('#fileupload-poster').fileupload({
+            url: url,
+            dataType: 'json',
+            done: function (e, data) {
+                var responseArr = JSON.parse(data.jqXHR.responseText);
+                $.each(responseArr, function (index, file) {
+                    if(file.error){
+                        $('#errors').append(
+                                '<div class="alert alert-danger">' + file.src + ' <strong>' +file.error + '</strong>' +
+                                        '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
+                                        '</div>'
+                        );
 
+                        return;
+                    }
+                    if(file.type == 'image' && file.error == null) {
+                        $('#dream-poster-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
+                                '<input id="fileupload-poster" type="file" name="dream-poster">');
+                        $('#newDreamForm_dream_poster').get(0).value = file.src;
+                    }
+                });
+
+            },
+            error: function(msg) {
+                console.log('error = ' + msg);
+                console.dir(msg);
+            }
+        });
+    });
 
     loadFile = function () {
 //            'use strict';
@@ -162,17 +201,8 @@
             url: url,
             dataType: 'json',
             done: function (e, data) {
-//                console.dir(data);
                 var responseArr = JSON.parse(data.jqXHR.responseText);
-//                console.log(responseArr);
-
                 $.each(responseArr, function (index, file) {
-                    console.log('type = ' + file.type);
-                    console.log('srcPreview = ' + file.srcPreview);
-                    console.log('src = ' + file.src);
-                    console.log('name = ' + file.name);
-                    console.log('error = ' + file.error);
-
                     if(file.error){
                         $('#errors').append(
                                 '<div class="alert alert-danger">' + file.src + ' <strong>' +file.error + '</strong>' +
@@ -232,6 +262,7 @@
 
     $('#add-video-button-cancel').click(function() {
         $('#dream-add-video-error').html('');
+        $('#dream-add-video-text-input').get(0).value = '';
         $('#dream-add-video').fadeOut(500).hide();
     });
 

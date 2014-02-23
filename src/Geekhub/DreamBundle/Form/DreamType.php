@@ -66,6 +66,7 @@ class DreamType extends AbstractType
 //                'label' => 'робота '
             ))->addModelTransformer($transformerWork))
             ->add('dream_pictures', 'hidden', array('mapped' => false))
+            ->add('dream_poster', 'hidden', array('mapped' => false))
             ->add('dream_files', 'hidden', array('mapped' => false))
             ->add('dream_videos', 'hidden', array('mapped' => false));
     }

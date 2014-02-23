@@ -24,12 +24,13 @@ class DreamImageHandler
         $this->file = $file;
     }
 
-    public function load()
+    public function loadFiles()
     {
         $uploader = new SymfonyFileUploader($this->file, $this->liipimage);
+        $uploader->setLiipImagineFilter('dream_thumb');
         $uploader->setUploadPathForPictures('upload/tmp/image/');
         $uploader->setUploadPathForFiles('upload/tmp/files/');
-        $uploader->setAllowedSizeForPictures(1*1024*1024);
+        $uploader->setAllowedSizeForPictures(2*1024*1024);
         $uploader->setAllowedSizeForFile(3*1024*1024);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
         $uploader->setAllowedFilesTypes(array('doc', 'docx', 'pdf', 'xls', 'xlsx'));
@@ -37,5 +38,22 @@ class DreamImageHandler
         $result = $uploader->load();
 
         return $result;
+    }
+
+    public function loadPoster()
+    {
+        $uploader = new SymfonyFileUploader($this->file, $this->liipimage);
+        $uploader->setLiipImagineFilter('dream_poster');
+        $uploader->setUploadPathForPictures('upload/tmp/poster/');
+        $uploader->setUploadPathForFiles('');
+        $uploader->setAllowedSizeForPictures(2*1024*1024);
+        $uploader->setAllowedSizeForFile(0);
+        $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
+        $uploader->setAllowedFilesTypes(array(''));
+
+        $result = $uploader->load();
+
+        return $result;
+
     }
 }

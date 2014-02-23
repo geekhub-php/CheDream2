@@ -27,6 +27,7 @@ class SymfonyFileUploader
     protected $allowedSizeForFile;
     protected $allowedPictureTypes;
     protected $allowedFilesTypes;
+    protected $liipImagineFilter;
 
     public function __construct(UploadedFile $file, CacheManager $cacheManager)
     {
@@ -196,6 +197,22 @@ class SymfonyFileUploader
         $this->fileName = $fileName;
     }
 
+    /**
+     * @param mixed $liipImagineFilter
+     */
+    public function setLiipImagineFilter($liipImagineFilter)
+    {
+        $this->liipImagineFilter = $liipImagineFilter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLiipImagineFilter()
+    {
+        return $this->liipImagineFilter;
+    }
+
     public function setData()
     {
 //        $randInt = mt_rand(1, 999999);
@@ -221,7 +238,7 @@ class SymfonyFileUploader
         if(in_array($rash, $this->getAllowedPictureTypes())) {
             if($size < $this->getAllowedSizeForPictures()) {
                 $this->setUploadPath($this->getUploadPathForPictures());
-                $srcThumb = $this->liip->getBrowserPath($this->getUploadPath().$file, 'dream_thumb', true);
+                $srcThumb = $this->liip->getBrowserPath($this->getUploadPath().$file, $this->getLiipImagineFilter(), true);
                 $this->response[] = array(
                     'type'          =>  'image',
                     'srcPreview'    =>  $srcThumb,

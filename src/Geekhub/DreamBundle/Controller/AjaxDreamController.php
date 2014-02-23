@@ -20,8 +20,20 @@ class AjaxDreamController extends Controller
 
         $imageHandler = $this->get('dream_file_uploader');
         $imageHandler->init($file);
-        $result = $imageHandler->load();
+        $result = $imageHandler->loadFiles();
 
         return new Response(json_encode($result));
+    }
+
+    public function DreamPosterLoaderAction(Request $request)
+    {
+        $file = $request->files->get('dream-poster');
+
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->init($file);
+        $result = $imageHandler->loadPoster();
+
+        return new Response(json_encode($result));
+
     }
 }

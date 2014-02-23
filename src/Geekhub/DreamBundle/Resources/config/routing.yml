@@ -18,14 +18,14 @@ dream_change_status:
     pattern:  /dream/chst
     defaults: { _controller: GeekhubDreamBundle:Dream:changeStatus }
 
-dream_load_tags:
-    pattern:  /dream/loadTag
-    defaults: { _controller: GeekhubDreamBundle:Dream:loadTags }
-    options:
-        expose: true
-
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamImageLoader }
+    options:
+        expose: true
+
+dream_ajax_load_poster:
+    pattern:  /dream/ajaxLoadPoster
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPosterLoader }
     options:
         expose: true
