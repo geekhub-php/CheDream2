@@ -226,6 +226,7 @@ class SymfonyFileUploader
                     'type'          =>  'image',
                     'srcPreview'    =>  $srcThumb,
                     'src'           =>  $this->getUploadPath().$file,
+                    'name'          =>  $file,
                     'error'         =>  null
                 );
 
@@ -234,7 +235,7 @@ class SymfonyFileUploader
                 $this->response[] = array(
                     'type'          =>  'image',
                     'srcPreview'    =>  null,
-                    'src'           =>  $this->getUploadPath().$file,
+                    'src'           =>  $file,
                     'error'         =>  'файл зображення занадто великий.'
                 );
 
@@ -248,6 +249,7 @@ class SymfonyFileUploader
                     'type'          =>  'file',
                     'srcPreview'    =>  null,
                     'src'           =>  $this->getUploadPath().$file,
+                    'name'          =>  $file,
                     'error'         =>  null
                 );
 
@@ -256,7 +258,7 @@ class SymfonyFileUploader
                 $this->response[] = array(
                     'type'          =>  'file',
                     'srcPreview'    =>  null,
-                    'src'           =>  $this->getUploadPath().$file,
+                    'src'           =>  $file,
                     'error'         =>  'файл занадто великий.'
                 );
 

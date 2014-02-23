@@ -11,38 +11,64 @@
     {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
     {{ form_start(form) }}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
 
-            <img data-src="holder.js/360x200/text:Main Image" class="img-thumbnail">
-
+            <div>
+                <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+            </div>
             {#<a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">#}
                 {#<img data-src="holder.js/100%x200/text:Main Image">#}
             {#</a>#}
 
-            <input id="dto" type="hidden">
             <br>
-
             <div id="dream-gallery"></div>
             <br/>
             <div id="dream-files"></div>
+            <div id="dream-videos"></div>
+
+            <div class="row">
+                <div class="col-md-11">
+                    <span class="btn btn-success fileinput-button btn-xs pull-left" id="load-input" onclick="loadFile()">
+                       <span>Додати файли...</span>
+                        <input id="fileuploadz" type="file" name="files" multiple>
+                    </span>
+
+                    <span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()"> Add video</span>
+                </div>
+            </div>
 
             <br/>
-            <span class="btn btn-success fileinput-button btn-xs" id="load-input" onclick="loadFile()">
-               <span>Додати файли...</span>
-                <input id="fileuploadz" type="file" name="files" multiple>
-            </span>
-            <br/>
 
             <br/>
+            <div id="dream-add-video">
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1">
+                        <div>
+                            <div id="dream-add-video-error"></div>
+                            <input type="text" class="form-control" id="dream-add-video-text-input">
+                        </div>
+                        <br/>
+                        <div class="text-center">
+                            <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="add video">
+                            <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="cancel">
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+
             <div id="errors" class="files"></div>
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
+            {{ form_widget(form.dream_pictures) }}
+            {{ form_widget(form.dream_files) }}
+            {{ form_widget(form.dream_videos) }}
         </div>
     </div>
 
@@ -122,6 +148,12 @@
 <script src="{{ asset('js/dream.min.js') }}"></script>
 
 <script>
+    $(document).ready(function() {
+        $('#dream-add-video').hide();
+    });
+
+
+
     loadFile = function () {
 //            'use strict';
 //        var url = Routing.generate('media_upload_images');
@@ -138,11 +170,12 @@
                     console.log('type = ' + file.type);
                     console.log('srcPreview = ' + file.srcPreview);
                     console.log('src = ' + file.src);
+                    console.log('name = ' + file.name);
                     console.log('error = ' + file.error);
 
                     if(file.error){
                         $('#errors').append(
-                                '<div class="alert alert-danger">' + file.src + ' ' +file.error +
+                                '<div class="alert alert-danger">' + file.src + ' <strong>' +file.error + '</strong>' +
                                 '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
                                 '</div>'
                         );
@@ -151,19 +184,16 @@
                     }
                     if(file.type == 'image' && file.error == null) {
                         $('#dream-gallery').append('<img src="' + file.srcPreview + '" class="img-thumbnail">');
+                        $('#newDreamForm_dream_pictures').get(0).value += ',' + file.src;
                     }
                     if(file.type == 'file' && file.error == null) {
                         $('#dream-files').append(
                                 '<div class="alert alert-info">' +
-                                '<i class="icon icon-file"></i>' + file.src +
+                                '<span class="glyphicon glyphicon-file"></span>' + ' ' + file.name +
                                 '</div>'
                                 );
+                        $('#newDreamForm_dream_files').get(0).value += ',' + file.src;
                     }
-
-
-//                    $('<li/>').text(file.src).appendTo('#files');
-//                    $('#dto').get(0).value += ',upload/' + file.name;
-
                 });
             },
             error: function(msg) {
@@ -172,6 +202,40 @@
             }
         });
     };
+
+    addDreamVideo = function() {
+        $('#dream-add-video').fadeIn(500).show();
+    };
+
+    $('#add-video-button').click(function() {
+        var videoSrc = $('#dream-add-video-text-input').get(0).value;
+        if (videoSrc != '' ) {
+        $('#newDreamForm_dream_videos').get(0).value += ',' + videoSrc;
+        $('#dream-add-video-text-input').get(0).value = '';
+        $('#dream-add-video').fadeOut(500).hide();
+
+        $('#dream-videos').append(
+                '<div class="alert alert-warning">' +
+                        '<span class="glyphicon glyphicon-film"></span>' + ' ' + videoSrc +
+                        '</div>'
+        );
+            $('#dream-add-video-error').html('');
+        } else {
+            $('#dream-add-video-error').html(
+                    '<div class="alert alert-warning alert-dismissable">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+                    '<strong>Увага!</strong> Ви не додали адресу на відео' +
+                    '</div>'
+            );
+        }
+    });
+
+    $('#add-video-button-cancel').click(function() {
+        $('#dream-add-video-error').html('');
+        $('#dream-add-video').fadeOut(500).hide();
+    });
+
+
 </script>
 
 {% endblock %}

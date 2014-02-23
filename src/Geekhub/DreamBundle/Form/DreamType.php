@@ -64,7 +64,10 @@ class DreamType extends AbstractType
                 'allow_delete' => true,
                 'by_reference'  => false,
 //                'label' => 'робота '
-            ))->addModelTransformer($transformerWork));
+            ))->addModelTransformer($transformerWork))
+            ->add('dream_pictures', 'hidden', array('mapped' => false))
+            ->add('dream_files', 'hidden', array('mapped' => false))
+            ->add('dream_videos', 'hidden', array('mapped' => false));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
