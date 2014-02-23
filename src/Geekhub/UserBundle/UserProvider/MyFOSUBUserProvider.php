@@ -9,14 +9,19 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseOAuthUserProvider;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Doctrine\DBAL\Types;
+use Geekhub\UserBundle\UserProvider\FacebookUserDataService,
+    Geekhub\UserBundle\UserProvider\VkontakteUserDataService,
+    Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService;
  
 class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
-
+    /** @var FacebookUserDataService $facebookUserDataService */
     protected $facebookUserDataService;
 
+    /** @var VkontakteUserDataService $vkontakteUserDataService */
     protected $vkontakteUserDataService;
 
+    /** @var OdnoklassnikiUserDataService $odnoklassnikiUserDataService */
     protected $odnoklassnikiUserDataService;
  
     /**
@@ -53,20 +58,18 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        //var_dump("in loadUserByOAuthUserResponse");
-        //var_dump($response);
         $username = $response->getUsername();
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
-        //when the user is registrating
+
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
             $setterId = $setter.'Id';
-            $setterToken = $setter.'AccessToken';
             $userDataServiceName = lcfirst($service).'UserDataService';
-            // create new user here
+
             $user = $this->userManager->createUser();
             $user->$setterId($username);
+
             // I use different setters setters for each type of oath providers:
             // for example setVkontakteUser(...),  setFacebookUser(...)
             // the actual name of setter is in the variable $setterUser.
@@ -80,31 +83,27 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             }
             catch (DBALException $e) {
                 var_dump("dbal exception");
-                //exit; /// !!! doesn't work
             }
 
             return $user;
         }
  
-        //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
- 
-        $serviceName = $response->getResourceOwner()->getName();
- 
+
         return $user;
     }
 
-    public function setFacebookUserDataService($service)
+    public function setFacebookUserDataService(FacebookUserDataService $service)
     {
         $this->facebookUserDataService = $service;
     }
 
-    public function setVkontakteUserDataService($service)
+    public function setVkontakteUserDataService(VkontakteUserDataService $service)
     {
         $this->vkontakteUserDataService = $service;
     }
 
-    public function setOdnoklassnikiUserDataService($service)
+    public function setOdnoklassnikiUserDataService(OdnoklassnikiUserDataService $service)
     {
         $this->odnoklassnikiUserDataService = $service;
     }
