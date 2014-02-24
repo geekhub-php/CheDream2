@@ -75,7 +75,7 @@ liip_imagine:
         userAvatar:
             quality: 90
             filters:
-                thumbnail: { size: [300, 30], mode: outbound }
+                thumbnail: { size: [30, 30], mode: outbound }
         dream_thumb:
             filters:
 #                thumbnail: { size: [80, 80], mode: inset }
@@ -85,7 +85,6 @@ liip_imagine:
             filters:
 #                thumbnail: { size: [440, 260], mode: inset }
                 thumbnail: { size: [440, 260], mode: outbound }
-
 
 stof_doctrine_extensions:
     default_locale: en_US
@@ -118,3 +117,38 @@ fos_rest:
         view_response_listener: force
 
 nelmio_api_doc: ~
+
+hwi_oauth:
+    connect:
+        account_connector: geekhub.user.dream_user_provider
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            vkontakte: vkontakte_id
+            odnoklassniki: odnoklassniki_id
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_app_secret%"
+            scope:               "email, user_photos, user_website, user_birthday"
+        vkontakte:
+            type:                vkontakte
+            client_id:           "%vkontakte_app_id%"
+            client_secret:       "%vkontakte_app_secret%"
+            scope:               "photos"
+        odnoklassniki:
+            type:                odnoklassniki
+            client_id:           "%odnoklassniki_app_id%"
+            client_secret:       "%odnoklassniki_app_secret%"
+            scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
+            options:
+                application_key: "%odnoklassniki_app_key%"
+
+geekhub_user:
+    image:
+        upload_directory: /upload/

@@ -1,0 +1,3 @@
+Geekhub\UserBundle\Model\VkontakteResponse:
+    properties:
+        response: array

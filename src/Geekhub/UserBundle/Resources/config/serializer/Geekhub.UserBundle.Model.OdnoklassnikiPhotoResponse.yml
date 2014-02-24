@@ -1,0 +1,3 @@
+Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse:
+    properties:
+        photos: array

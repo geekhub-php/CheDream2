@@ -25,7 +25,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FPN\TagBundle\FPNTagBundle(),
             new Geekhub\TagBundle\TagBundle(),
-
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),

@@ -10,6 +10,10 @@ geekhub_tag:
     resource: "@TagBundle/Resources/config/routing.yml"
     prefix:   /tags
 
+geekhub_user:
+    resource: "@GeekhubUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

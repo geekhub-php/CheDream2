@@ -13,3 +13,11 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    facebook_app_id: 1
+    facebook_app_secret: 1
+    vkontakte_app_id: 1
+    vkontakte_app_secret: 1
+    odnoklassniki_app_id: 1
+    odnoklassniki_app_secret: 1
+    odnoklassniki_app_key: 1
