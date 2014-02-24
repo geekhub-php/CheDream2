@@ -13,20 +13,22 @@ use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractUserDataService
 {
+    /** @var  string $kernelWebDir */
     protected $kernelWebDir;
 
-    protected $uploadDir = '/upload/';
+    /** @var  string $kernelWebDir */
+    protected $uploadDir;
 
-    /** @var Serializer $serializer */
+    /** @var  Serializer $serializer */
     protected $serializer;
 
-    /** @var MediaManager $mediaManager */
+    /** @var  MediaManager $mediaManager */
     protected $mediaManager;
 
-    /** @var ImageProvider $mediaImageProvider */
+    /** @var  ImageProvider $mediaImageProvider */
     protected $mediaImageProvider;
 
-    /** @var Container $container */
+    /** @var  Container $container */
     protected $container;
 
     public function __construct(Container $container, $kernelWebDir, $uploadDir)
@@ -35,7 +37,7 @@ abstract class AbstractUserDataService
         $this->serializer         = $container->get('jms_serializer');
         $this->mediaImageProvider = $container->get('sonata.media.provider.image');
         $this->kernelWebDir       = $kernelWebDir;
-        $this->uploadDir            = $uploadDir;
+        $this->uploadDir          = $uploadDir;
     }
 
     public function setMediaManager($mediaManager)
