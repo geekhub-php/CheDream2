@@ -6,7 +6,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -93,3 +93,12 @@ fpn_tag:
     model:
         tag_class:     Geekhub\TagBundle\Entity\Tag
         tagging_class: Geekhub\TagBundle\Entity\Tagging
+
+h4cc_alice_fixtures:
+    locale:         en_US
+    seed: 1
+    do_flush:       true
+
+    object_manager: null
+    schema_tool:    null
+    doctrine:       orm
