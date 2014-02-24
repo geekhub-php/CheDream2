@@ -3,51 +3,32 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
 use Geekhub\UserBundle\Entity\User;
 
 class OdnoklassnikiUserDataService extends AbstractUserDataService
 {
-    /*
     protected $appKeys;
-    protected $serializer;
-    protected $mediaManager;
-    protected $mediaImageProvider;
-
-    public function __construct($serializer, $mediaManager, $mediaImageProvider)
-    {
-        $this->serializer=$serializer;
-        $this->mediaManager = $mediaManager;
-        $this->mediaImageProvider = $mediaImageProvider;
-    }*/
 
     public function setUserData(User $user, UserResponseInterface $response)
     {
         $responseArray = $response->getResponse();
+
         $user->setFirstName($responseArray['first_name']);
         $user->setMiddleName('');
         $user->setLastName($responseArray['last_name']);
         $user->setEmail($user->getOdnoklassnikiId().'@odnoklassniki.ru');
-        // uncommented email setter for setting users with different social networks but the same email
-        //$user->setEmail('chdn6026@mail.ru'); //!error with same emails and different social networks
-        $birthday=$responseArray['birthday'];
-        $user->setBirthday(new \DateTime($birthday));
+        $user->setBirthday(new \DateTime($responseArray['birthday']));
 
         $token = $response->getAccessToken();
-        $tokenArray = str_split($token, rand(5, 10));
         $photoUrl = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);
 
-        $profilePicture = null;
-     
         if ($photoUrl) {
             $profilePicture = $this->getMediaFromRemoteImg($photoUrl, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
+            $user->setAvatar($profilePicture);
         }
 
-        $user->setAvatar($profilePicture);
-        $email = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);
-       
         return $user;
     }
 
@@ -58,33 +39,30 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
      */
     private function doOdnoklassnikiApiRequest($method, $token, $parameters = array())
     {
-        $odnoklassniki_app_secret = $this->appKeys['odnoklassniki_app_secret'];
-        $odnoklassniki_app_key = $this->appKeys['odnoklassniki_app_key'];
+        $odnoklassnikiAppSecret = $this->appKeys['odnoklassniki_app_secret'];
+        $odnoklassnikiAppKey = $this->appKeys['odnoklassniki_app_key'];
 
         $url = 'http://api.odnoklassniki.ru/fb.do?method='.$method;
         $sig = md5(
-            'application_key=' . $odnoklassniki_app_key .
+            'application_key=' . $odnoklassnikiAppKey .
             'method=' . $method .
-            md5($token . $odnoklassniki_app_secret)
+            md5($token . $odnoklassnikiAppSecret)
         );
- 
         $arrayParameters = array(
             'access_token' => $token,
-            'application_key' => $odnoklassniki_app_key,
+            'application_key' => $odnoklassnikiAppKey,
             'sig' => $sig,
         ); 
 
         $arrayParameters = array_merge($parameters, $arrayParameters);
 
         $url .= '&' . http_build_query($arrayParameters);
-        //$result = file_get_contents($url);
+
         $client = new Client();
         $response = $client->get($url);
         $responseBody = $response->getBody();
-        //echo $responseBody;
+
         $resultObj = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse', 'json');
-        //$resultObj = json_decode($result);
-        //var_dump($resultObj);
 
         return $resultObj->getPhoto();
     }

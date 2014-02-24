@@ -42,19 +42,8 @@
     </service>
 
     <service id="geekhub_facebook_user_data_service" class="%geekhub_facebook_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service" />
-            <!--
-            <call method="setMediaManager">
-                <argument type="service" id="sonata.media.manager.media" />
-            </call>
-             -->
 
     <service id="geekhub_vkontakte_user_data_service" class="%geekhub_vkontakte_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service" />
-            <!--
-            <call method="setMediaManager">
-                <argument type="service" id="sonata.media.manager.media" />
-            </call>
-            -->
-
 
     <service id="geekhub_odnoklassniki_user_data_service" class="%geekhub_odnoklassniki_user_data_service.class%" parent="geekhub_user.geekhub_abstract_user_data_service">
             <call method="setAppKeys">
@@ -63,12 +52,6 @@
                     <argument key="odnoklassniki_app_secret">%odnoklassniki_app_secret%</argument>
                 </argument>
             </call>
-            <!--
-            <call method="setMediaManager">
-                <argument type="service" id="sonata.media.manager.media" />
-            </call>
-            -->
-
     </service>
 </services>
 </container>
