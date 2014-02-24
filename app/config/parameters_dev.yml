@@ -1,0 +1,9 @@
+# This file is auto-generated during the composer install
+parameters:
+    facebook_app_id: 1529076047316529
+    facebook_app_secret: 8b0a196bb4ce28cc8d3f4fac80b47821
+    vkontakte_app_id: 4186214
+    vkontakte_app_secret: 4r2xAkztrOuAFJanL7XI
+    odnoklassniki_app_id: 217618176
+    odnoklassniki_app_secret: 76AC4887F3CB8B97A7754E3F
+    odnoklassniki_app_key: CBAIJJPNABABABABA

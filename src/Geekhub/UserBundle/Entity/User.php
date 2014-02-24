@@ -45,9 +45,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $lastName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=100, nullable=true)
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     protected $avatar;
 
@@ -75,23 +73,23 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vk", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
      */
-    protected $vk;
+    protected $vkontakteId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
      */
-    protected $facebook;
+    protected $facebookId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklasniki", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
      */
-    protected $odnoklasniki;
+    protected $odnoklassnikiId;
 
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
@@ -118,12 +116,13 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
-        parent::__construct();
         $this->contacts       = new Contacts();
         $this->favoriteDreams = new ArrayCollection();
         $this->contributions  = new ArrayCollection();
         $this->userComments   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
+
+        parent::__construct();
     }
 
     /**
@@ -303,21 +302,21 @@ class User extends BaseUser //implements DreamUserInterface
      * @param  string $vk
      * @return User
      */
-    public function setVk($vk)
+    public function setVkontakteId($vk)
     {
-        $this->vk = $vk;
+        $this->vkontakteId = $vk;
 
         return $this;
     }
 
     /**
-     * Get vk
+     * Get vkontakte_id
      *
      * @return string
      */
-    public function getVk()
+    public function getVkontakteId()
     {
-        return $this->vk;
+        return $this->vkontakteId;
     }
 
     /**
@@ -326,9 +325,9 @@ class User extends BaseUser //implements DreamUserInterface
      * @param  string $facebook
      * @return User
      */
-    public function setFacebook($facebook)
+    public function setFacebookId($facebook)
     {
-        $this->facebook = $facebook;
+        $this->facebookId = $facebook;
 
         return $this;
     }
@@ -338,32 +337,32 @@ class User extends BaseUser //implements DreamUserInterface
      *
      * @return string
      */
-    public function getFacebook()
+    public function getFacebookId()
     {
-        return $this->facebook;
+        return $this->facebookId;
     }
 
     /**
-     * Set odnoklasniki
+     * Set odnoklasnikiId
      *
-     * @param  string $odnoklasniki
-     * @return User
+     * @param  string $odnoklasnikiId
+     * @return string
      */
-    public function setOdnoklasniki($odnoklasniki)
+    public function setOdnoklassnikiId($odnoklassnikiId)
     {
-        $this->odnoklasniki = $odnoklasniki;
+        $this->odnoklassnikiId = $odnoklassnikiId;
 
         return $this;
     }
 
     /**
-     * Get odnoklasniki
+     * Get odnoklasnikiId
      *
      * @return string
      */
-    public function getOdnoklasniki()
+    public function getOdnoklassnikiId()
     {
-        return $this->odnoklasniki;
+        return $this->odnoklassnikiId;
     }
 
     /**

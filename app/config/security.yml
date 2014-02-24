@@ -9,6 +9,8 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        my_custom_hwi_provider:
+            id: geekhub.user.dream_user_provider
 
     firewalls:
         main:
@@ -18,6 +20,16 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            oauth:
+                resource_owners:
+                    facebook: "/login-social/check-facebook"
+                    vkontakte: "/login-social/check-vkontakte"
+                    odnoklassniki: "/login-social/check-odnoklassniki"
+                login_path:   /login-social
+                failure_path: /login3
+
+                oauth_user_provider:
+                    service: geekhub.user.dream_user_provider
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
