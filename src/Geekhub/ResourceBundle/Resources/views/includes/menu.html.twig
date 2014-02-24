@@ -88,14 +88,8 @@
                     <i class="icon icon-vkontakte"></i>
                 </a>
             </li>
+
             {% else %}
-
-            {#
-            <li>
-                <img src="{{ app.user.getAvatar() | imagine_filter('userAvatar') }}">
-            </li>
-            #}
-
             <li>
                 <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
             </li>
@@ -105,8 +99,8 @@
                     Вийти
                 </a>
             </li>
-
             {% endif %}
+
         </ul>
 
         <form class="navbar-form " role="search">
