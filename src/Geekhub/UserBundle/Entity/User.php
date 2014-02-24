@@ -59,7 +59,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var Contacts
      *
-     * @ORM\Column(name="contacts", type="object")
+     * @ORM\Column(name="contacts", type="object", nullable=true)
      */
     protected $contacts;
 
