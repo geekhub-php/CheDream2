@@ -59,7 +59,6 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "ahonymous/fontello": "dev-master",
-        "leafo/lessphp": "dev-master#85bd4557920d5f4fcbf41beb621e91b842e3621b",
         "guzzle/guzzle": "dev-guzzle4",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "jms/serializer-bundle": "0.13.*@dev"
