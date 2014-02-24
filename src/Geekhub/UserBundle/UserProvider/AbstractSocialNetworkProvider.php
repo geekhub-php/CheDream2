@@ -4,12 +4,10 @@ namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use JMS\Serializer\Serializer;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\Container,
+    Symfony\Component\Filesystem\Filesystem;
 use Application\Sonata\MediaBundle\Entity\Media;
-use Sonata\MediaBundle\Entity\MediaManager,
-    Sonata\MediaBundle\Provider\ImageProvider;
 use Geekhub\UserBundle\Entity\User;
-use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractSocialNetworkProvider
 {
@@ -22,12 +20,6 @@ abstract class AbstractSocialNetworkProvider
     /** @var  Serializer $serializer */
     protected $serializer;
 
-    /** @var  MediaManager $mediaManager */
-    protected $mediaManager;
-
-    /** @var  ImageProvider $mediaImageProvider */
-    protected $mediaImageProvider;
-
     /** @var  Container $container */
     protected $container;
 
@@ -35,14 +27,8 @@ abstract class AbstractSocialNetworkProvider
     {
         $this->container          = $container;
         $this->serializer         = $container->get('jms_serializer');
-        $this->mediaImageProvider = $container->get('sonata.media.provider.image');
         $this->kernelWebDir       = $kernelWebDir;
         $this->uploadDir          = $uploadDir;
-    }
-
-    public function setMediaManager($mediaManager)
-    {
-        $this->mediaManager = $mediaManager;
     }
 
     public function getMediaFromRemoteImg($remoteImg, $localFileName)
