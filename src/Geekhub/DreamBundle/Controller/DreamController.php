@@ -42,23 +42,23 @@ class DreamController extends Controller
             $tagManager->addTags($tagsObjArray, $dream);
 
 
-            foreach($dream->getDreamPictures() as $pictureSrc)
-            {
-            $media = new Media();
-
-            $file = new File($pictureSrc);
-            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath());
-
-//            $media->setBinaryContent('/var/www/chedream2/web/upload/tmp/image/Image_433.jpg');
-//            $media->setBinaryContent($pictureSrc);
+//            foreach($dream->getDreamPictures() as $pictureSrc)
+//            {
+//            $media = new Media();
+//
+//            $file = new File($pictureSrc);
+////            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath());
+//
+////            $media->setBinaryContent('/var/www/chedream2/web/upload/tmp/image/Image_433.jpg');
+//            $media->setBinaryContent($file->getRealPath());
 //            $media->setProviderName('sonata.media.provider.image');
 //
 //            $mediaManager->save($media);
 //
 //            $dream->addMedia($media);
-//            unlink($file);
-            }
-            exit;
+////            unlink($file);
+//            }
+////            exit;
 
 
             $newDream->persist($dream);

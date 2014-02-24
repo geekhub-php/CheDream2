@@ -156,7 +156,7 @@ class Dream implements Taggable
     protected $currentStatus;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
      */
     protected $media;
 
