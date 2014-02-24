@@ -1,7 +1,7 @@
 <?php
 
 namespace Geekhub\UserBundle\UserProvider;
- 
+
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
@@ -12,7 +12,7 @@ use Doctrine\DBAL\Types,
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
     Geekhub\UserBundle\UserProvider\VkontakteProvider,
     Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider;
- 
+
 class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
     /** @var FacebookProvider $facebookProvider */
@@ -23,7 +23,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     /** @var OdnoklassnikiProvider $odnoklassnikiProvider */
     protected $odnoklassnikiProvider;
- 
+
     /**
      * {@inheritDoc}
      */
@@ -31,10 +31,10 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     {
         $property = $this->getProperty($response);
         $username = $response->getUsername();
- 
+
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
- 
+
         $setter = 'set'.ucfirst($service);
         $setterId = $setter.'Id';
 
@@ -43,13 +43,13 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             $previousUser->$setterId(null);
             $this->userManager->updateUser($previousUser);
         }
- 
+
         //we connect current user
         $user->$setterId($username);
 
         $this->userManager->updateUser($user);
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -77,14 +77,13 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             $user->setEnabled(true);
             try {
                 $this->userManager->updateUser($user);
-            }
-            catch (DBALException $e) {
+            } catch (DBALException $e) {
                 var_dump("dbal exception");
             }
 
             return $user;
         }
- 
+
         $user = parent::loadUserByOAuthUserResponse($response);
 
         return $user;

@@ -3,7 +3,6 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
 use Geekhub\UserBundle\Entity\User;
 
@@ -33,8 +32,8 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
     }
 
      /**
-     * @param string $method Method from Odnoklassniki REST API http://dev.odnoklassniki.ru/wiki/display/ok/Odnoklassniki+REST+API+ru
-     * @param string $token Security token
+     * @param string $method     Method from Odnoklassniki REST API http://dev.odnoklassniki.ru/wiki/display/ok/Odnoklassniki+REST+API+ru
+     * @param string $token      Security token
      * @param array  $parameters Array parameters for current method
      */
     private function doOdnoklassnikiApiRequest($method, $token, $parameters = array())
@@ -52,7 +51,7 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
             'access_token' => $token,
             'application_key' => $odnoklassnikiAppKey,
             'sig' => $sig,
-        ); 
+        );
 
         $arrayParameters = array_merge($parameters, $arrayParameters);
 

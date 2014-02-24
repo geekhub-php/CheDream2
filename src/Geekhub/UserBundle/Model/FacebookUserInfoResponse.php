@@ -2,9 +2,7 @@
 
 namespace Geekhub\UserBundle\Model;
 
-use Geekhub\UserBundle\Model\VkontakteRequestUserData;
 use JMS\Serializer\Annotation\Type;
-use Geekhub\UserBundle\Model\FacebookUserInfoLanguageType;
 
 class FacebookUserInfoResponse
 {
@@ -61,7 +59,7 @@ class FacebookUserInfoResponse
     /**
      * @Type("array")
      */
-	protected $response;
+    protected $response;
 
     /**
      * @Type("string")
@@ -88,10 +86,10 @@ class FacebookUserInfoResponse
      */
     protected $username;
 
-	public function getBirthday()
-	{
-		return $this->birthday;
-	}
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
 
     /**
      * @param mixed $email

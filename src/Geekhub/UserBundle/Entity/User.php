@@ -121,6 +121,7 @@ class User extends BaseUser //implements DreamUserInterface
         $this->contributions  = new ArrayCollection();
         $this->userComments   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
+
         parent::__construct();
     }
 
@@ -311,7 +312,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get vkontakte_id
      *
-     * @return string 
+     * @return string
      */
     public function getVkontakteId()
     {
@@ -344,7 +345,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set odnoklasnikiId
      *
-     * @param string $odnoklasnikiId
+     * @param  string $odnoklasnikiId
      * @return string
      */
     public function setOdnoklassnikiId($odnoklassnikiId)
@@ -357,7 +358,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get odnoklasnikiId
      *
-     * @return string 
+     * @return string
      */
     public function getOdnoklassnikiId()
     {

@@ -2,7 +2,6 @@
 
 namespace Geekhub\UserBundle\Model;
 
-use Geekhub\UserBundle\Model\VkontakteRequestUserData;
 use JMS\Serializer\Annotation\Type;
 
 class VkontakteResponse
@@ -10,10 +9,10 @@ class VkontakteResponse
     /**
      * @Type("array")
      */
-	protected $response;
+    protected $response;
 
-	public function getResponse($field)
-	{
-		return $this->response[0][$field];
-	}
+    public function getResponse($field)
+    {
+        return $this->response[0][$field];
+    }
 }

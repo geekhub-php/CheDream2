@@ -3,7 +3,6 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
 use Geekhub\UserBundle\Entity\User;
 

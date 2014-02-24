@@ -2,7 +2,6 @@
 
 namespace Geekhub\UserBundle\Model;
 
-use Geekhub\UserBundle\Model\VkontakteRequestUserData;
 use JMS\Serializer\Annotation\Type;
 
 class FacebookUserInfoLanguageType
@@ -10,12 +9,12 @@ class FacebookUserInfoLanguageType
     /**
      * @Type("integer")
      */
-	protected $id;
+    protected $id;
 
     /**
      * @Type("string")
      */
-	protected $name;
+    protected $name;
 
     /**
      * @param mixed $id
@@ -48,5 +47,4 @@ class FacebookUserInfoLanguageType
     {
         return $this->name;
     }
-
 }

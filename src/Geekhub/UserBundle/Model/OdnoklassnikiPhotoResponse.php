@@ -2,7 +2,6 @@
 
 namespace Geekhub\UserBundle\Model;
 
-use Geekhub\UserBundle\Model\VkontakteRequestUserData;
 use JMS\Serializer\Annotation\Type;
 
 class OdnoklassnikiPhotoResponse
@@ -10,15 +9,15 @@ class OdnoklassnikiPhotoResponse
     /**
      * @Type("array")
      */
-	protected $photoArray;
+    protected $photoArray;
 
     /**
      * @Type("array")
      */
-	protected $photos;
+    protected $photos;
 
-	public function getPhoto()
-	{
-		return $this->photos[0]['standard_url'];
-	}
+    public function getPhoto()
+    {
+        return $this->photos[0]['standard_url'];
+    }
 }

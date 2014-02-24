@@ -45,7 +45,6 @@ abstract class AbstractSocialNetworkProvider
         $this->mediaManager = $mediaManager;
     }
 
-
     public function getMediaFromRemoteImg($remoteImg, $localFileName)
     {
         $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;
@@ -57,12 +56,12 @@ abstract class AbstractSocialNetworkProvider
         $media = new Media;
         $media->setBinaryContent($localImg);
         $media->setProviderName('sonata.media.provider.image');
- 
+
         $mediaManager = $this->container->get('sonata.media.manager.media');
         $mediaManager->save($media);
 
         return $media;
     }
 
-    abstract function setUserData(User $user, UserResponseInterface $response);
+    abstract public function setUserData(User $user, UserResponseInterface $response);
 }
