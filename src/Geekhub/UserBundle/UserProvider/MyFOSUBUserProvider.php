@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseOAuthUserProvider;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Doctrine\DBAL\Types;
+use Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookUserDataService,
     Geekhub\UserBundle\UserProvider\VkontakteUserDataService,
     Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService;

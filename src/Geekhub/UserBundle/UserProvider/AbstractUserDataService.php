@@ -8,12 +8,13 @@ use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Entity\MediaManager,
     Sonata\MediaBundle\Provider\ImageProvider;
 use Geekhub\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractUserDataService
 {
     protected $kernelWebDir;
 
-    protected $imgPath = '/upload/';
+    protected $uploadDir = '/upload/';
 
     /** @var Serializer $serializer */
     protected $serializer;
@@ -27,14 +28,14 @@ abstract class AbstractUserDataService
     /** @var Container $container */
     protected $container;
 
-    public function __construct(Container $container, $kernelWebDir, $imgPath)
+    public function __construct(Container $container, $kernelWebDir, $uploadDir)
     {
         $this->container          = $container;
         $this->serializer         = $container->get('jms_serializer');
         $this->mediaManager       = 0;//$container->get('sonata.media.manager.media');
         $this->mediaImageProvider = $container->get('sonata.media.provider.image');
         $this->kernelWebDir       = $kernelWebDir;
-        $this->imgPath            = $imgPath;
+        $this->uploadDir            = $uploadDir;
     }
 
     public function setMediaManager($mediaManager)
@@ -45,28 +46,30 @@ abstract class AbstractUserDataService
 
     public function copyImgFromRemote($remoteImg, $localFileName)
     {
-        $content = file_get_contents($remoteImg);
-        $destination = $this->kernelWebDir.'/../web'.$this->imgPath;
-        var_dump($destination);
+        $filesystem = new Filesystem();
+//        $content = file_get_contents($remoteImg);
 
-        if (!is_dir($destination)) {
-            mkdir($destination);
-        }
+        $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;
+//        var_dump($destination);
+
+//        $filesystem->mkdir($destination);
 
         $localImg = $destination.$localFileName;
 
-        $fp = fopen($localImg, "w");
-        fwrite($fp, $content);
-        fclose($fp);
+        $filesystem->copy($remoteImg, $localImg);
 
-        // return $this->imgPath.$localFileName; // version without SonataMediaBundle (file path)
+//        $fp = fopen($localImg, "w");
+//        fwrite($fp, $content);
+//        fclose($fp);
+
+        // return $this->uploadDir.$localFileName; // version without SonataMediaBundle (file path)
         $media = new Media;
         $media->setBinaryContent($localImg);
         $media->setProviderName('sonata.media.provider.image');
  
         $mediaManager = $this->container->get('sonata.media.manager.media'); // don't need. Injected
         $mediaManager->save($media); // !!! error! Doesnt work 
- 
+ var_dump($media); exit;
         return $media;
     }
 
