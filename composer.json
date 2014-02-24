@@ -61,7 +61,8 @@
         "ahonymous/fontello": "dev-master",
         "guzzle/guzzle": "dev-guzzle4",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
-        "jms/serializer-bundle": "0.13.*@dev"
+        "jms/serializer-bundle": "0.13.*@dev",
+        "hautelook/alice-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
