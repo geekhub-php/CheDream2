@@ -3,6 +3,7 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use JMS\Serializer\Serializer;
 use Symfony\Component\DependencyInjection\Container;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Entity\MediaManager,
@@ -32,7 +33,6 @@ abstract class AbstractUserDataService
     {
         $this->container          = $container;
         $this->serializer         = $container->get('jms_serializer');
-        $this->mediaManager       = 0;//$container->get('sonata.media.manager.media');
         $this->mediaImageProvider = $container->get('sonata.media.provider.image');
         $this->kernelWebDir       = $kernelWebDir;
         $this->uploadDir            = $uploadDir;
@@ -46,30 +46,19 @@ abstract class AbstractUserDataService
 
     public function getMediaFromRemoteImg($remoteImg, $localFileName)
     {
-        $filesystem = new Filesystem();
-//        $content = file_get_contents($remoteImg);
-
         $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;
-//        var_dump($destination);
-
-//        $filesystem->mkdir($destination);
-
         $localImg = $destination.$localFileName;
 
+        $filesystem = new Filesystem();
         $filesystem->copy($remoteImg, $localImg);
 
-//        $fp = fopen($localImg, "w");
-//        fwrite($fp, $content);
-//        fclose($fp);
-
-        // return $this->uploadDir.$localFileName; // version without SonataMediaBundle (file path)
         $media = new Media;
         $media->setBinaryContent($localImg);
         $media->setProviderName('sonata.media.provider.image');
  
-        $mediaManager = $this->container->get('sonata.media.manager.media'); // don't need. Injected
-        $mediaManager->save($media); // !!! error! Doesnt work 
- var_dump($media); exit;
+        $mediaManager = $this->container->get('sonata.media.manager.media');
+        $mediaManager->save($media);
+
         return $media;
     }
 
