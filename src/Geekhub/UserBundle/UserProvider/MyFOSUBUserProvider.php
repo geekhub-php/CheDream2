@@ -2,14 +2,13 @@
 
 namespace Geekhub\UserBundle\UserProvider;
  
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider as BaseOAuthUserProvider;
-use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Doctrine\DBAL\Types;
-use Doctrine\DBAL\DBALException;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
+    HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface,
+    HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use Symfony\Component\Security\Core\User\UserInterface,
+    Symfony\Component\Security\Core\User\UserProviderInterface;
+use Doctrine\DBAL\Types,
+    Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookUserDataService,
     Geekhub\UserBundle\UserProvider\VkontakteUserDataService,
     Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService;

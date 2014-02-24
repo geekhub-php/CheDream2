@@ -332,5 +332,4 @@ class FacebookUserInfoResponse
     {
         return $this->verified;
     }
-	
 }

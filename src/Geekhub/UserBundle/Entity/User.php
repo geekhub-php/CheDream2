@@ -75,21 +75,21 @@ class User extends BaseUser //implements DreamUserInterface
      *
      * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
      */
-    protected $vkontakte_id;
+    protected $vkontakteId;
 
     /**
      * @var string
      *
      * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
      */
-    protected $facebook_id;
+    protected $facebookId;
 
     /**
      * @var string
      *
      * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
      */
-    protected $odnoklassniki_id;
+    protected $odnoklassnikiId;
 
     /**
      * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
@@ -303,7 +303,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function setVkontakteId($vk)
     {
-        $this->vkontakte_id = $vk;
+        $this->vkontakteId = $vk;
 
         return $this;
     }
@@ -315,7 +315,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function getVkontakteId()
     {
-        return $this->vkontakte_id;
+        return $this->vkontakteId;
     }
 
     /**
@@ -326,7 +326,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function setFacebookId($facebook)
     {
-        $this->facebook_id = $facebook;
+        $this->facebookId = $facebook;
 
         return $this;
     }
@@ -338,7 +338,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function getFacebookId()
     {
-        return $this->facebook_id;
+        return $this->facebookId;
     }
 
     /**
@@ -349,7 +349,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function setOdnoklassnikiId($odnoklassnikiId)
     {
-        $this->odnoklassniki_id = $odnoklassnikiId;
+        $this->odnoklassnikiId = $odnoklassnikiId;
 
         return $this;
     }
@@ -361,7 +361,7 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function getOdnoklassnikiId()
     {
-        return $this->odnoklassniki_id;
+        return $this->odnoklassnikiId;
     }
 
     /**
