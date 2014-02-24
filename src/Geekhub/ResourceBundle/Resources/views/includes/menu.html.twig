@@ -67,38 +67,37 @@
             </li>
 
             {% if app.user is null %}
-            <li>
-                <p class="navbar-text">Увійти через</p>
-            </li>
+                <li>
+                    <p class="navbar-text">Увійти через</p>
+                </li>
 
-            <li class="facebook">
-                <a href="{{ path('facebook_login') }}">
-                    <i class="icon icon-facebook"></i>
-                </a>
-            </li>
+                <li class="facebook">
+                    <a href="{{ path('facebook_login') }}">
+                        <i class="icon icon-facebook"></i>
+                    </a>
+                </li>
 
-            <li class="odnoklassniki">
-                <a href="{{ path('odnoklassniki_login') }}">
-                    <i class="icon icon-odnoklassniki"></i>
-                </a>
-            </li>
+                <li class="odnoklassniki">
+                    <a href="{{ path('odnoklassniki_login') }}">
+                        <i class="icon icon-odnoklassniki"></i>
+                    </a>
+                </li>
 
-            <li class="vkontakte">
-                <a href="{{ path('vkontakte_login') }}">
-                    <i class="icon icon-vkontakte"></i>
-                </a>
-            </li>
-
+                <li class="vkontakte">
+                    <a href="{{ path('vkontakte_login') }}">
+                        <i class="icon icon-vkontakte"></i>
+                    </a>
+                </li>
             {% else %}
-            <li>
-                <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
-            </li>
-            <li>
-                <a href="{{ path('_logout') }}">
-                    <span class="glyphicon glyphicon-log-out"></span>
-                    Вийти
-                </a>
-            </li>
+                <li>
+                    <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('_logout') }}">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                        Вийти
+                    </a>
+                </li>
             {% endif %}
 
         </ul>
