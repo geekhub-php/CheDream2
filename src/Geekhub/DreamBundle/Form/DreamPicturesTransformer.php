@@ -39,26 +39,26 @@ class DreamPicturesTransformer implements DataTransformerInterface
         $picturesSrcArray = explode (',', $picturesString);
         array_shift($picturesSrcArray);
 
+//
+////        var_dump($picturesSrcArray);
+//        foreach($picturesSrcArray as $pictureSrc)
+//        {
+//            $media = new Media();
+//
+//            $file = new File($pictureSrc);
+//
+////            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
+//            $media->setBinaryContent($file->getRealPath());
+////            $media->setBinaryContent($pictureSrc);
+//            $media->setProviderName('sonata.media.provider.image');
+//
+//            $this->dream->addMedia($media);
+////            unlink($file);
+//        }
+//
 
-//        var_dump($picturesSrcArray);
-        foreach($picturesSrcArray as $pictureSrc)
-        {
-            $media = new Media();
 
-            $file = new File($pictureSrc);
-
-//            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
-            $media->setBinaryContent($file->getRealPath());
-//            $media->setBinaryContent($pictureSrc);
-            $media->setProviderName('sonata.media.provider.image');
-
-            $this->dream->addMedia($media);
-//            unlink($file);
-        }
-
-
-
-//        return $picturesSrcArray;
-        return;
+        return $picturesSrcArray;
+//        return;
     }
 }

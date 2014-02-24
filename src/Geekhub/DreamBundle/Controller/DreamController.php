@@ -42,6 +42,15 @@ class DreamController extends Controller
             $tagManager->addTags($tagsObjArray, $dream);
 
 
+            $media = new Media();
+            $media->setBinaryContent('/var/wwwGeek/chedr/web/upload/tmp/image/q.png');
+            $media->setProviderName('sonata.media.provider.image');
+
+
+            $mediaManager->save($media);
+
+            $dream->addMedia($media);
+
 //            foreach($dream->getDreamPictures() as $pictureSrc)
 //            {
 //            $media = new Media();
