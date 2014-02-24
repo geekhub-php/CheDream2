@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 24.02.14
- * Time: 22:14
+ * Time: 22:59
  */
 
-namespace Geekhub\DreamBundle\DataFixtures\ORM;
+namespace Geekhub\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 
-class FAQLoader extends DataFixtureLoader implements OrderedFixtureInterface
+class UserLoader extends DataFixtureLoader implements OrderedFixtureInterface
 {
 
     /**
@@ -22,7 +22,7 @@ class FAQLoader extends DataFixtureLoader implements OrderedFixtureInterface
     protected function getFixtures()
     {
         return  array(
-            __DIR__ . '/../Alice/FAQData.yml',
+            __DIR__ . '/../Alice/UserData.yml',
         );
     }
 
@@ -31,8 +31,8 @@ class FAQLoader extends DataFixtureLoader implements OrderedFixtureInterface
      *
      * @return integer
      */
-    public function getOrder()
+    function getOrder()
     {
-        return 1;
+        return 2;
     }
 }
