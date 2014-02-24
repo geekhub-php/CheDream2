@@ -11,7 +11,7 @@ use Sonata\MediaBundle\Entity\MediaManager,
 use Geekhub\UserBundle\Entity\User;
 use Symfony\Component\Filesystem\Filesystem;
 
-abstract class AbstractUserDataService
+abstract class AbstractSocialNetworkProvider
 {
     /** @var  string $kernelWebDir */
     protected $kernelWebDir;

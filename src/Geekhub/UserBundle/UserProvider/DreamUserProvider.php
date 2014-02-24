@@ -9,20 +9,20 @@ use Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
-use Geekhub\UserBundle\UserProvider\FacebookUserDataService,
-    Geekhub\UserBundle\UserProvider\VkontakteUserDataService,
-    Geekhub\UserBundle\UserProvider\OdnoklassnikiUserDataService;
+use Geekhub\UserBundle\UserProvider\FacebookProvider,
+    Geekhub\UserBundle\UserProvider\VkontakteProvider,
+    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider;
  
-class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
+class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
-    /** @var FacebookUserDataService $facebookUserDataService */
-    protected $facebookUserDataService;
+    /** @var FacebookProvider $facebookProvider */
+    protected $facebookProvider;
 
-    /** @var VkontakteUserDataService $vkontakteUserDataService */
-    protected $vkontakteUserDataService;
+    /** @var VkontakteProvider $vkontakteProvider */
+    protected $vkontakteProvider;
 
-    /** @var OdnoklassnikiUserDataService $odnoklassnikiUserDataService */
-    protected $odnoklassnikiUserDataService;
+    /** @var OdnoklassnikiProvider $odnoklassnikiProvider */
+    protected $odnoklassnikiProvider;
  
     /**
      * {@inheritDoc}
@@ -37,19 +37,16 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
  
         $setter = 'set'.ucfirst($service);
         $setterId = $setter.'Id';
-        $setterToken = $setter.'AccessToken';
- 
+
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setterId(null);
-            $previousUser->$setterToken(null);
             $this->userManager->updateUser($previousUser);
         }
  
         //we connect current user
         $user->$setterId($username);
-        $user->$setterToken($response->getAccessToken());
- 
+
         $this->userManager->updateUser($user);
     }
  
@@ -65,7 +62,7 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
             $setterId = $setter.'Id';
-            $userDataServiceName = lcfirst($service).'UserDataService';
+            $userDataServiceName = lcfirst($service).'Provider';
 
             $user = $this->userManager->createUser();
             $user->$setterId($username);
@@ -93,18 +90,18 @@ class MyFOSUBUserProvider extends BaseClass implements UserProviderInterface, OA
         return $user;
     }
 
-    public function setFacebookUserDataService(FacebookUserDataService $service)
+    public function setFacebookProvider(FacebookProvider $facebookProvider)
     {
-        $this->facebookUserDataService = $service;
+        $this->facebookProvider = $facebookProvider;
     }
 
-    public function setVkontakteUserDataService(VkontakteUserDataService $service)
+    public function setVkontakteProvider(VkontakteProvider $vkontakteProvider)
     {
-        $this->vkontakteUserDataService = $service;
+        $this->vkontakteProvider = $vkontakteProvider;
     }
 
-    public function setOdnoklassnikiUserDataService(OdnoklassnikiUserDataService $service)
+    public function setOdnoklassnikiProvider(OdnoklassnikiProvider $odnoklassnikiProvider)
     {
-        $this->odnoklassnikiUserDataService = $service;
+        $this->odnoklassnikiProvider = $odnoklassnikiProvider;
     }
 }

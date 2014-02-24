@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
 use Geekhub\UserBundle\Entity\User;
 
-class OdnoklassnikiUserDataService extends AbstractUserDataService
+class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
 {
     protected $appKeys;
 
@@ -32,15 +32,15 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
         return $user;
     }
 
-        /**
+     /**
      * @param string $method Method from Odnoklassniki REST API http://dev.odnoklassniki.ru/wiki/display/ok/Odnoklassniki+REST+API+ru
      * @param string $token Security token
      * @param array  $parameters Array parameters for current method
      */
     private function doOdnoklassnikiApiRequest($method, $token, $parameters = array())
     {
-        $odnoklassnikiAppSecret = $this->appKeys['odnoklassniki_app_secret'];
-        $odnoklassnikiAppKey = $this->appKeys['odnoklassniki_app_key'];
+        $odnoklassnikiAppSecret = $this->appKeys['odnoklassnikiAppSecret'];
+        $odnoklassnikiAppKey = $this->appKeys['odnoklassnikiAppKey'];
 
         $url = 'http://api.odnoklassniki.ru/fb.do?method='.$method;
         $sig = md5(

@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types;
 use GuzzleHttp\Client;
 use Geekhub\UserBundle\Entity\User;
 
-class FacebookUserDataService extends AbstractUserDataService
+class FacebookProvider extends AbstractSocialNetworkProvider
 {
     public function setUserData(User $user, UserResponseInterface $response)
     {
