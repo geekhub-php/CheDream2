@@ -1,0 +1,8 @@
+\Geekhub\DreamBundle\Entity\Dream:
+    Dream1:
+#        author_id:    @yoda
+        title:        Політ на Місяць
+        description:  Показати малим джедаям Місяць.
+#        mainPicture:  /upload/images/dream/moon.jpg
+        phone:        0979999999
+        expiredDate:  <dateTime()>
