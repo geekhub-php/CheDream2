@@ -42,7 +42,7 @@ class OdnoklassnikiUserDataService extends AbstractUserDataService
         $profilePicture = null;
      
         if ($photoUrl) {
-            $profilePicture = $this->copyImgFromRemote($photoUrl, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
+            $profilePicture = $this->getMediaFromRemoteImg($photoUrl, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
         }
 
         $user->setAvatar($profilePicture);

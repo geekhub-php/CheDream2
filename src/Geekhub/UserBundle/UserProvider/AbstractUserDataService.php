@@ -44,7 +44,7 @@ abstract class AbstractUserDataService
     }
 
 
-    public function copyImgFromRemote($remoteImg, $localFileName)
+    public function getMediaFromRemoteImg($remoteImg, $localFileName)
     {
         $filesystem = new Filesystem();
 //        $content = file_get_contents($remoteImg);

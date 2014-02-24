@@ -18,7 +18,8 @@ class FacebookUserDataService extends AbstractUserDataService
         $user->setEmail($responseArray['email']);
 
         $remoteImg = 'http://graph.facebook.com/'.$user->getFacebookId().'/picture?width=200&height=200';
-        $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
+        $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');
+
         $user->setAvatar($profilePicture);
         $userInfo = $this->getFacebookUserInfo($response->getAccessToken());
 

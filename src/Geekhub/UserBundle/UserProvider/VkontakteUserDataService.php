@@ -20,7 +20,7 @@ class VkontakteUserDataService extends AbstractUserDataService
         //$user->setBirthday('0000-00-00');
         $profilePicture = null;
         if ($remoteImg = $this->callVkontakteUsersGet($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {
-            $profilePicture = $this->copyImgFromRemote($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
+            $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
         }
         $user->setAvatar($profilePicture);
         $birthday = null;
