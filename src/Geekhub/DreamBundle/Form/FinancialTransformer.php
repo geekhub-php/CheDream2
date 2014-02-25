@@ -27,7 +27,7 @@ class FinancialTransformer implements DataTransformerInterface
         $resources = $this->dream->getDreamResources();
         $financeResources = new ArrayCollection;
 
-        foreach($resources as $resource) {
+        foreach ($resources as $resource) {
             switch ($resource->getType()) {
                 case $resource::FINANCIAL:
                     $financeResources->add($resource);
@@ -44,8 +44,7 @@ class FinancialTransformer implements DataTransformerInterface
 
     public function reverseTransform($financialArrayCollection)
     {
-        foreach($financialArrayCollection as $finance)
-        {
+        foreach ($financialArrayCollection as $finance) {
             $finance->setDream($this->dream);
             $this->dream->addDreamResource($finance);
         }

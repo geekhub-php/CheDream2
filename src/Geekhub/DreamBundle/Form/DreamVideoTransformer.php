@@ -39,8 +39,7 @@ class DreamVideoTransformer implements DataTransformerInterface
         $videosSrcArray = explode (',', $videosString);
         array_shift($videosSrcArray);
 
-        foreach($videosSrcArray as $videoSrc)
-        {
+        foreach ($videosSrcArray as $videoSrc) {
             $media = new Media();
             $media->setBinaryContent($videoSrc);
             $media->setProviderName('sonata.media.provider.youtube');

@@ -44,8 +44,7 @@ class DreamFilesTransformer implements DataTransformerInterface
         $filesSrcArray = explode (',', $filesString);
         array_shift($filesSrcArray);
 
-        foreach($filesSrcArray as $fileSrc)
-        {
+        foreach ($filesSrcArray as $fileSrc) {
             $media = new Media();
 
             $file = new File($fileSrc);

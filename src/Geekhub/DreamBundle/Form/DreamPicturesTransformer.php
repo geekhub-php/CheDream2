@@ -43,8 +43,7 @@ class DreamPicturesTransformer implements DataTransformerInterface
         $picturesSrcArray = explode (',', $picturesString);
         array_shift($picturesSrcArray);
 
-        foreach($picturesSrcArray as $pictureSrc)
-        {
+        foreach ($picturesSrcArray as $pictureSrc) {
             $media = new Media();
 
             $file = new File($pictureSrc);

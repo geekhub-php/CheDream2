@@ -643,7 +643,7 @@ class Dream implements Taggable
     /**
      * Add statuses
      *
-     * @param \Geekhub\DreamBundle\Entity\Status $statuses
+     * @param  \Geekhub\DreamBundle\Entity\Status $statuses
      * @return Dream
      */
     public function addStatus(\Geekhub\DreamBundle\Entity\Status $status)
@@ -668,7 +668,7 @@ class Dream implements Taggable
     /**
      * Get statuses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getStatuses()
     {
@@ -678,7 +678,7 @@ class Dream implements Taggable
     /**
      * Set currentStatus
      *
-     * @param string $currentStatus
+     * @param  string $currentStatus
      * @return Dream
      */
     public function setCurrentStatus($currentStatus)
@@ -691,7 +691,7 @@ class Dream implements Taggable
     /**
      * Get currentStatus
      *
-     * @return string 
+     * @return string
      */
     public function getCurrentStatus()
     {
@@ -789,7 +789,7 @@ class Dream implements Taggable
     /**
      * Get mediaPictures
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMediaPictures()
     {
@@ -813,7 +813,7 @@ class Dream implements Taggable
     /**
      * Get mediaPoster
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getMediaPoster()
     {
@@ -847,7 +847,7 @@ class Dream implements Taggable
     /**
      * Get mediaFiles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMediaFiles()
     {
@@ -881,7 +881,7 @@ class Dream implements Taggable
     /**
      * Get mediaVideos
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMediaVideos()
     {

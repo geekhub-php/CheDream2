@@ -27,7 +27,7 @@ class EquipmentTransformer implements DataTransformerInterface
         $resources = $this->dream->getDreamResources();
         $equipmentResources = new ArrayCollection;
 
-        foreach($resources as $resource) {
+        foreach ($resources as $resource) {
             switch ($resource->getType()) {
                 case $resource::FINANCIAL:
                     break;
@@ -44,8 +44,7 @@ class EquipmentTransformer implements DataTransformerInterface
 
     public function reverseTransform($equipmentArrayCollection)
     {
-        foreach($equipmentArrayCollection as $equipment)
-        {
+        foreach ($equipmentArrayCollection as $equipment) {
             $equipment->setDream($this->dream);
             $this->dream->addDreamResource($equipment);
         }

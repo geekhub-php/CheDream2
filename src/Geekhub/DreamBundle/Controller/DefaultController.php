@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Entity\MediaManager;
 
-
 class DefaultController extends Controller
 {
     public function indexAction(Request $request)
@@ -36,8 +35,6 @@ class DefaultController extends Controller
 //        $files = $dream->getMedia();
 //
 //        var_dump($files->first()); exit;
-
-
         return $this->render('GeekhubDreamBundle:Default:index.html.twig');
     }
 }

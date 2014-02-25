@@ -166,4 +166,4 @@ hwi_oauth:
 
 geekhub_user:
     image:
-        upload_directory: /upload/
+        upload_directory:  /upload/users/avatars/

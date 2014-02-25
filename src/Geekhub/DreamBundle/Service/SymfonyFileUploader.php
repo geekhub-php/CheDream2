@@ -224,7 +224,7 @@ class SymfonyFileUploader
 
     public function load()
     {
-        if($this->check($this->getFileName(), $this->getFileSize())) {
+        if ($this->check($this->getFileName(), $this->getFileSize())) {
             $this->file->move($this->getUploadPath(), $this->getFileName());
         }
 
@@ -235,8 +235,8 @@ class SymfonyFileUploader
     {
         $rash = $this->get_mimetype($file);
 
-        if(in_array($rash, $this->getAllowedPictureTypes())) {
-            if($size < $this->getAllowedSizeForPictures()) {
+        if (in_array($rash, $this->getAllowedPictureTypes())) {
+            if ($size < $this->getAllowedSizeForPictures()) {
                 $this->setUploadPath($this->getUploadPathForPictures());
                 $srcThumb = $this->liip->getBrowserPath($this->getUploadPath().$file, $this->getLiipImagineFilter(), true);
                 $this->response[] = array(
@@ -248,7 +248,7 @@ class SymfonyFileUploader
                 );
 
                 return true;
-            }   else {
+            } else {
                 $this->response[] = array(
                     'type'          =>  'image',
                     'srcPreview'    =>  null,
@@ -260,7 +260,7 @@ class SymfonyFileUploader
             }
         }
         if (in_array($rash, $this->getAllowedFilesTypes())) {
-            if($size < $this->getAllowedSizeForFile()) {
+            if ($size < $this->getAllowedSizeForFile()) {
                 $this->setUploadPath($this->getUploadPathForFiles());
                 $this->response[] = array(
                     'type'          =>  'file',
@@ -271,7 +271,7 @@ class SymfonyFileUploader
                 );
 
                 return true;
-            }   else {
+            } else {
                 $this->response[] = array(
                     'type'          =>  'file',
                     'srcPreview'    =>  null,

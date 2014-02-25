@@ -27,7 +27,7 @@ class WorkTransformer implements DataTransformerInterface
         $resources = $this->dream->getDreamResources();
         $workResources = new ArrayCollection;
 
-        foreach($resources as $resource) {
+        foreach ($resources as $resource) {
             switch ($resource->getType()) {
                 case $resource::FINANCIAL:
                     break;
@@ -44,8 +44,7 @@ class WorkTransformer implements DataTransformerInterface
 
     public function reverseTransform($workArrayCollection)
     {
-        foreach($workArrayCollection as $work)
-        {
+        foreach ($workArrayCollection as $work) {
             $work->setDream($this->dream);
             $this->dream->addDreamResource($work);
         }

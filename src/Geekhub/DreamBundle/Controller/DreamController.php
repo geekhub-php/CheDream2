@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Application\Sonata\MediaBundle\Entity\Media;
-use Gaufrette\Adapter;
 
 class DreamController extends Controller
 {
@@ -51,7 +50,6 @@ class DreamController extends Controller
 
 //            var_dump($filesm->first()->getBinaryContent()->getRealPath()); exit;
 //            var_dump($filesm->first()->getBinaryContent()); exit;
-
             return $this->redirect($this->generateUrl('dream_list'));
         }
 
@@ -78,7 +76,6 @@ class DreamController extends Controller
 
 //        $mediaManager = $this->get('sonata.media.manager.media');
 //        $media = $mediaManager->findBy(array('context' => 'pictures'));
-
 
         $tagManager = $this->get('fpn_tag.tag_manager');
         foreach ($dreams as $dream) {
