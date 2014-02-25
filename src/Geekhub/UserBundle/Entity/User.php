@@ -52,7 +52,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime", nullable=true)
+     * @ORM\Column(name="birthday", type="date", nullable=true)
      */
     protected $birthday;
 

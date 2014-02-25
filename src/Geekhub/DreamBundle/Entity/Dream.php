@@ -46,14 +46,14 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @ORM\Column(name="mainPicture", type="string", length=100)
+     * @ORM\Column(name="mainPicture", type="string", length=100, nullable=true)
      */
     protected $mainPicture;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=45)
+     * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;
 
@@ -91,28 +91,28 @@ class Dream implements Taggable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expiredDate", type="datetime")
+     * @ORM\Column(name="expiredDate", type="datetime", nullable=true)
      */
     protected $expiredDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="financialCompleted", type="smallint")
+     * @ORM\Column(name="financialCompleted", type="smallint", nullable=true)
      */
     protected $financialCompleted;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="workCompleted", type="smallint")
+     * @ORM\Column(name="workCompleted", type="smallint", nullable=true)
      */
     protected $workCompleted;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="equipmentCompleted", type="smallint")
+     * @ORM\Column(name="equipmentCompleted", type="smallint", nullable=true)
      */
     protected $equipmentCompleted;
 
