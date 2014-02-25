@@ -1,6 +1,6 @@
 \Geekhub\DreamBundle\Entity\Dream:
-    Dream1:
-#        author_id:    @yoda
+    dream1:
+        author:       @useryoda
         title:        Політ на Місяць
         description:  Показати малим джедаям Місяць.
 #        mainPicture:  /upload/images/dream/moon.jpg
