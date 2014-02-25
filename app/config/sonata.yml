@@ -19,25 +19,30 @@ sonata_media:
                 - sonata.media.provider.youtube
                 - sonata.media.provider.image
                 - sonata.media.provider.file
-
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
 
-        gallery:
+        pictures:
             providers:
                 - sonata.media.provider.image
-
             formats:
-                small: { width: 150 , quality: 95}
-                big:   { width: 500 , quality: 90}
+                big:   { width: 150 , quality: 90}
+                small: { width: 80 , quality: 90}
+
+        poster:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                big:   { width: 440 , quality: 90}
+        video:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                norm:   { width: 100 , quality: 90}
     cdn:
         server:
-            path: /upload/media
-
-    providers :
-        file:
-            allowed_extensions: ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pttx']
+            path: ../upload/media
 
     filesystem:
         local:

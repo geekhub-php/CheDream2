@@ -56,7 +56,7 @@ class DreamFilesTransformer implements DataTransformerInterface
             $media->setProviderName('sonata.media.provider.file');
             $media->setContext('files');
             $this->mediaManager->save($media);
-            $this->dream->addMedia($media);
+            $this->dream->addMediaFile($media);
 
 //            try {
 //                $fs->remove($file);

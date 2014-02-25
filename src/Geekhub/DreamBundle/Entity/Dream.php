@@ -46,13 +46,6 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @ORM\Column(name="mainPicture", type="string", length=100, nullable=true)
-     */
-    protected $mainPicture;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;
@@ -157,8 +150,26 @@ class Dream implements Taggable
 
     /**
      * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="mediaPictures_media")
      */
-    protected $media;
+    protected $mediaPictures;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     */
+    protected $mediaPoster;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="mediaFiles_media")
+     */
+    protected $mediaFiles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="mediaVideos_media")
+     */
+    protected $mediaVideos;
 
     protected $dreamPictures;
     protected $dreamPoster;
@@ -175,7 +186,9 @@ class Dream implements Taggable
         $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->statuses = new ArrayCollection();
-        $this->media = new ArrayCollection();
+        $this->mediaPictures = new ArrayCollection();
+        $this->mediaFiles = new ArrayCollection();
+        $this->mediaVideos = new ArrayCollection();
     }
 
     /**
@@ -232,29 +245,6 @@ class Dream implements Taggable
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set mainPicture
-     *
-     * @param  string $mainPicture
-     * @return Dream
-     */
-    public function setMainPicture($mainPicture)
-    {
-        $this->mainPicture = $mainPicture;
-
-        return $this;
-    }
-
-    /**
-     * Get mainPicture
-     *
-     * @return string
-     */
-    public function getMainPicture()
-    {
-        return $this->mainPicture;
     }
 
     /**
@@ -709,40 +699,6 @@ class Dream implements Taggable
     }
 
     /**
-     * Add media
-     *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media
-     *
-     * @return Dream
-     */
-    public function addMedia(\Application\Sonata\MediaBundle\Entity\Media $media)
-    {
-        $this->media[] = $media;
-
-        return $this;
-    }
-
-    /**
-     * Remove media
-     *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $media
-     */
-    public function removeMedia(\Application\Sonata\MediaBundle\Entity\Media $media)
-    {
-        $this->media->removeElement($media);
-    }
-
-    /**
-     * Get media
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMedia()
-    {
-        return $this->media;
-    }
-
-    /**
      * @param mixed $dreamPictures
      */
     public function setDreamPictures($dreamPictures)
@@ -804,5 +760,131 @@ class Dream implements Taggable
     public function getDreamVideos()
     {
         return $this->dreamVideos;
+    }
+
+    /**
+     * Add mediaPictures
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaPictures
+     *
+     * @return Dream
+     */
+    public function addMediaPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaPictures)
+    {
+        $this->mediaPictures[] = $mediaPictures;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaPictures
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaPictures
+     */
+    public function removeMediaPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaPictures)
+    {
+        $this->mediaPictures->removeElement($mediaPictures);
+    }
+
+    /**
+     * Get mediaPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMediaPictures()
+    {
+        return $this->mediaPictures;
+    }
+
+    /**
+     * Set mediaPoster
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaPoster
+     *
+     * @return Dream
+     */
+    public function setMediaPoster(\Application\Sonata\MediaBundle\Entity\Media $mediaPoster = null)
+    {
+        $this->mediaPoster = $mediaPoster;
+
+        return $this;
+    }
+
+    /**
+     * Get mediaPoster
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getMediaPoster()
+    {
+        return $this->mediaPoster;
+    }
+
+    /**
+     * Add mediaFiles
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaFiles
+     *
+     * @return Dream
+     */
+    public function addMediaFile(\Application\Sonata\MediaBundle\Entity\Media $mediaFiles)
+    {
+        $this->mediaFiles[] = $mediaFiles;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaFiles
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaFiles
+     */
+    public function removeMediaFile(\Application\Sonata\MediaBundle\Entity\Media $mediaFiles)
+    {
+        $this->mediaFiles->removeElement($mediaFiles);
+    }
+
+    /**
+     * Get mediaFiles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMediaFiles()
+    {
+        return $this->mediaFiles;
+    }
+
+    /**
+     * Add mediaVideos
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaVideos
+     *
+     * @return Dream
+     */
+    public function addMediaVideo(\Application\Sonata\MediaBundle\Entity\Media $mediaVideos)
+    {
+        $this->mediaVideos[] = $mediaVideos;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaVideos
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaVideos
+     */
+    public function removeMediaVideo(\Application\Sonata\MediaBundle\Entity\Media $mediaVideos)
+    {
+        $this->mediaVideos->removeElement($mediaVideos);
+    }
+
+    /**
+     * Get mediaVideos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMediaVideos()
+    {
+        return $this->mediaVideos;
     }
 }

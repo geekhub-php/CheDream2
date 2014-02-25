@@ -6,6 +6,9 @@
 
         <div style="margin-top: 50px;">
 
+
+            {#{% thumbnail app.user.avatar, 'default_big' %}#}
+            {#{{ app.user.avatar }}#}
             {% for dream in dreams %}
                 <div>
 
@@ -21,20 +24,34 @@
                             {{ tag.name }}
                         {% endfor %}
                     </p>
-
-                    <div>
-                        {#{{ dump(dream.media) }}#}
-                        {% thumbnail dream.media, 'pictures_small' %}
-                        {% for mediaItem in dream.media %}
-
-                            {#<a href="{{ path('dream_media_info', {'id': mediaItem.id }) }}"> {{ mediaItem.id }}</a>#}
-
-                            {#{% thumbnail mediaItem, 'pictures_small' %}#}
-                            {#{% media mediaItem, 'default_format' %}#}
-
-                            {#{{ dump(mediaItem) }}#}
-                        {% endfor %}
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Poster #}
+                        {% thumbnail dream.mediaPoster, 'poster_big' %}
                     </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Pictures #}
+                    {% for picture in dream.mediaPictures %}
+                        {% thumbnail picture, 'pictures_big' %}
+                        {#{% path picture, 'pictures_big' %}#}
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Files #}
+                    {% for file in dream.mediaFiles %}
+                        {{ loop.index }}
+                        <a href="{% path file, 'reference' %}" > {{ file }} </a>
+
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Videos #}
+                    {% for video in dream.mediaVideos %}
+                        {% media video, 'reference' %}
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    {#<a href="{{ path('dream_media_info', {'id': mediaItem.id }) }}"> {{ mediaItem.id }}</a>#}
+                    {#{% thumbnail mediaItem, 'pictures_small' %}#}
 
                     <div class=" well well-sm">
                     {% for resources in dream.dreamResources %}

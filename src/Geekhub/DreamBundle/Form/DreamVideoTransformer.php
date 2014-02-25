@@ -46,7 +46,7 @@ class DreamVideoTransformer implements DataTransformerInterface
             $media->setProviderName('sonata.media.provider.youtube');
             $media->setContext('video');
             $this->mediaManager->save($media);
-            $this->dream->addMedia($media);
+            $this->dream->addMediaVideo($media);
         }
 
         return;

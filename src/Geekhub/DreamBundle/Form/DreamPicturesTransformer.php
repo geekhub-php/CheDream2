@@ -55,7 +55,7 @@ class DreamPicturesTransformer implements DataTransformerInterface
             $media->setProviderName('sonata.media.provider.image');
             $media->setContext('pictures');
             $this->mediaManager->save($media);
-            $this->dream->addMedia($media);
+            $this->dream->addMediaPicture($media);
 
 //            try {
 //                $fs->remove($file);

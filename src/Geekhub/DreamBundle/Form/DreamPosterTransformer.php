@@ -51,7 +51,7 @@ class DreamPosterTransformer implements DataTransformerInterface
         $media->setProviderName('sonata.media.provider.image');
         $media->setContext('poster');
         $this->mediaManager->save($media);
-        $this->dream->addMedia($media);
+        $this->dream->setMediaPoster($media);
 
 //        try {
 //            $fs->remove($file);
