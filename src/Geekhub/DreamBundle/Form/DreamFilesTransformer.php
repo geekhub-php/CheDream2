@@ -58,10 +58,10 @@ class DreamFilesTransformer implements DataTransformerInterface
             $this->mediaManager->save($media);
             $this->dream->addMediaFile($media);
 
-//            try {
-//                $fs->remove($file);
-//            } catch (IOExceptionInterface $e) {
-//            }
+            try {
+                $fs->remove($file);
+            } catch (IOExceptionInterface $e) {
+            }
         }
 
         return;

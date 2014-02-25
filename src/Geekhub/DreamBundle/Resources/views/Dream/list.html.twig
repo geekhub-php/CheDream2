@@ -6,13 +6,8 @@
 
         <div style="margin-top: 50px;">
 
-
-            {#{% thumbnail app.user.avatar, 'default_big' %}#}
-            {#{{ app.user.avatar }}#}
             {% for dream in dreams %}
                 <div>
-
-                    {#{{ dump(dream.tags) }}#}
 
                     <p>title = {{ dream.title }}</p>
                     <p>descr = {{ dream.description }}</p>
@@ -31,27 +26,28 @@
                     {# ------------------------------------------------------------------- #}
                     <div>    {# Pictures #}
                     {% for picture in dream.mediaPictures %}
-                        {% thumbnail picture, 'pictures_big' %}
+                        {% thumbnail picture, 'pictures_prew' %}
                         {#{% path picture, 'pictures_big' %}#}
                     {% endfor %}
                     </div>
                     {# ------------------------------------------------------------------- #}
                     <div>    {# Files #}
                     {% for file in dream.mediaFiles %}
-                        {{ loop.index }}
+                        {#{{ loop.index }}#}
+                        {#{{ dump(file) }}#}
+                        {#{% path file, 'reference' %}#}
                         <a href="{% path file, 'reference' %}" > {{ file }} </a>
-
                     {% endfor %}
                     </div>
                     {# ------------------------------------------------------------------- #}
                     <div>    {# Videos #}
                     {% for video in dream.mediaVideos %}
+                        {% thumbnail video, 'video_prew' %}
                         {% media video, 'reference' %}
+                        <br/>
                     {% endfor %}
                     </div>
                     {# ------------------------------------------------------------------- #}
-                    {#<a href="{{ path('dream_media_info', {'id': mediaItem.id }) }}"> {{ mediaItem.id }}</a>#}
-                    {#{% thumbnail mediaItem, 'pictures_small' %}#}
 
                     <div class=" well well-sm">
                     {% for resources in dream.dreamResources %}

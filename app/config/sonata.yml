@@ -28,7 +28,7 @@ sonata_media:
                 - sonata.media.provider.image
             formats:
                 big:   { width: 150 , quality: 90}
-                small: { width: 80 , quality: 90}
+                prew: { width: 80 , quality: 90}
 
         poster:
             providers:
@@ -37,9 +37,9 @@ sonata_media:
                 big:   { width: 440 , quality: 90}
         video:
             providers:
-                - sonata.media.provider.image
+                - sonata.media.provider.youtube
             formats:
-                norm:   { width: 100 , quality: 90}
+                prew:   { width: 100 , quality: 90}
     cdn:
         server:
             path: ../upload/media

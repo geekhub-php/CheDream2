@@ -85,6 +85,21 @@ liip_imagine:
             filters:
 #                thumbnail: { size: [440, 260], mode: inset }
                 thumbnail: { size: [440, 260], mode: outbound }
+        poster_big:
+            quality: 85
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [440, 260], mode: outbound }
+        pictures_prew:
+            quality: 85
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [80, 80], mode: outbound }
+        video_prew:
+            quality: 85
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [100, 80], mode: outbound }
 
 stof_doctrine_extensions:
     default_locale: en_US

@@ -57,10 +57,10 @@ class DreamPicturesTransformer implements DataTransformerInterface
             $this->mediaManager->save($media);
             $this->dream->addMediaPicture($media);
 
-//            try {
-//                $fs->remove($file);
-//            } catch (IOExceptionInterface $e) {
-//            }
+            try {
+                $fs->remove($file);
+            } catch (IOExceptionInterface $e) {
+            }
         }
 
         return;
