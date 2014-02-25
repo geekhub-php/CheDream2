@@ -29,3 +29,8 @@ dream_ajax_load_poster:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPosterLoader }
     options:
         expose: true
+
+dream_media_info:
+    pattern:  /dream/media/{id}
+    defaults: { _controller: GeekhubDreamBundle:Dream:MediaInfo }
+

@@ -29,6 +29,9 @@ class DreamType extends AbstractType
         $transformerEquipment = new EquipmentTransformer($dream);
         $transformerWork = new WorkTransformer($dream);
         $transformerPicture = new DreamPicturesTransformer($dream, $mediaManager);
+        $transformerPoster = new DreamPosterTransformer($dream, $mediaManager);
+        $transformerFile = new DreamFilesTransformer($dream, $mediaManager);
+        $transformerVideo = new DreamVideoTransformer($dream, $mediaManager);
 
         $builder
             ->add('title', 'text', array('label' => 'назва '))
@@ -49,7 +52,6 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-//                'label' => 'фінанси '
             ))->addModelTransformer($transformerFinance))
             ->add($builder->create('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
@@ -57,7 +59,6 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-//                'label' => 'обладнання '
             ))->addModelTransformer($transformerEquipment))
             ->add($builder->create('workResources', 'collection', array(
                 'type' => new WorkType(),
@@ -65,24 +66,22 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-//                'label' => 'робота '
             ))->addModelTransformer($transformerWork))
             ->add($builder->create('dreamPictures', 'hidden')->addModelTransformer($transformerPicture))
-            ->add('dream_poster', 'hidden', array('mapped' => false))
-            ->add('dream_files', 'hidden', array('mapped' => false))
-            ->add('dream_videos', 'hidden', array('mapped' => false));
+            ->add($builder->create('dreamPoster', 'hidden')->addModelTransformer($transformerPoster))
+            ->add($builder->create('dreamFiles', 'hidden')->addModelTransformer($transformerFile))
+            ->add($builder->create('dreamVideos', 'hidden')->addModelTransformer($transformerVideo));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-                'data_class' => 'Geekhub\DreamBundle\Entity\Dream'
+            'data_class' => 'Geekhub\DreamBundle\Entity\Dream'
             ))
             ->setRequired(array('dream', 'media-manager'))
             ->setAllowedTypes(array(
                 'dream' => 'Geekhub\DreamBundle\Entity\Dream',
                 'media-manager' => 'Sonata\MediaBundle\Entity\MediaManager'
             ));
-
     }
 }

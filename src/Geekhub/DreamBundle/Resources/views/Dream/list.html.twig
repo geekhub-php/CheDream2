@@ -22,6 +22,20 @@
                         {% endfor %}
                     </p>
 
+                    <div>
+                        {#{{ dump(dream.media) }}#}
+                        {% thumbnail dream.media, 'pictures_small' %}
+                        {% for mediaItem in dream.media %}
+
+                            {#<a href="{{ path('dream_media_info', {'id': mediaItem.id }) }}"> {{ mediaItem.id }}</a>#}
+
+                            {#{% thumbnail mediaItem, 'pictures_small' %}#}
+                            {#{% media mediaItem, 'default_format' %}#}
+
+                            {#{{ dump(mediaItem) }}#}
+                        {% endfor %}
+                    </div>
+
                     <div class=" well well-sm">
                     {% for resources in dream.dreamResources %}
                         <p>title = {{ resources.title }}</p>

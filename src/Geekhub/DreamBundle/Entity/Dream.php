@@ -156,11 +156,14 @@ class Dream implements Taggable
     protected $currentStatus;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     protected $media;
 
     protected $dreamPictures;
+    protected $dreamPoster;
+    protected $dreamFiles;
+    protected $dreamVideos;
 
     /**
      * Constructor
@@ -656,7 +659,7 @@ class Dream implements Taggable
     public function addStatus(\Geekhub\DreamBundle\Entity\Status $status)
     {
         $this->statuses[] = $status;
-        $status->setDream($this);
+//        $status->setDream($this);
         $this->currentStatus = $status;
 
         return $this;
@@ -755,5 +758,51 @@ class Dream implements Taggable
         return $this->dreamPictures;
     }
 
+    /**
+     * @param mixed $dreamFiles
+     */
+    public function setDreamFiles($dreamFiles)
+    {
+        $this->dreamFiles = $dreamFiles;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getDreamFiles()
+    {
+        return $this->dreamFiles;
+    }
+
+    /**
+     * @param mixed $dreamPoster
+     */
+    public function setDreamPoster($dreamPoster)
+    {
+        $this->dreamPoster = $dreamPoster;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDreamPoster()
+    {
+        return $this->dreamPoster;
+    }
+
+    /**
+     * @param mixed $dreamVideos
+     */
+    public function setDreamVideos($dreamVideos)
+    {
+        $this->dreamVideos = $dreamVideos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDreamVideos()
+    {
+        return $this->dreamVideos;
+    }
 }

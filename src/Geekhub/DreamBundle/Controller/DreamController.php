@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Application\Sonata\MediaBundle\Entity\Media;
+use Gaufrette\Adapter;
 
 class DreamController extends Controller
 {
@@ -32,7 +33,7 @@ class DreamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $newDream = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
 
             $dream->addStatus(new Status(Status::SUBMITTED));
 
@@ -41,39 +42,15 @@ class DreamController extends Controller
             $dream->setTags(null);
             $tagManager->addTags($tagsObjArray, $dream);
 
-
-            $media = new Media();
-            $media->setBinaryContent('/var/wwwGeek/chedr/web/upload/tmp/image/q.png');
-            $media->setProviderName('sonata.media.provider.image');
-
-
-            $mediaManager->save($media);
-
-            $dream->addMedia($media);
-
-//            foreach($dream->getDreamPictures() as $pictureSrc)
-//            {
-//            $media = new Media();
-//
-//            $file = new File($pictureSrc);
-////            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath());
-//
-////            $media->setBinaryContent('/var/www/chedream2/web/upload/tmp/image/Image_433.jpg');
-//            $media->setBinaryContent($file->getRealPath());
-//            $media->setProviderName('sonata.media.provider.image');
-//
-//            $mediaManager->save($media);
-//
-//            $dream->addMedia($media);
-////            unlink($file);
-//            }
-////            exit;
-
-
-            $newDream->persist($dream);
-            $newDream->flush();
+            $em->persist($dream);
+            $em->flush();
 
             $tagManager->saveTagging($dream);
+
+//            $filesm = $dream->getMedia();
+
+//            var_dump($filesm->first()->getBinaryContent()->getRealPath()); exit;
+//            var_dump($filesm->first()->getBinaryContent()); exit;
 
             return $this->redirect($this->generateUrl('dream_list'));
         }
@@ -83,10 +60,25 @@ class DreamController extends Controller
         ));
     }
 
+    public function MediaInfoAction($id)
+    {
+        $mediaManager = $this->get('sonata.media.manager.media');
+        $media = $mediaManager->findOneBy(array('id' => $id));
+
+        return $this->render('GeekhubDreamBundle:Dream:mediaInfo.html.twig', array(
+            'media' => $media
+        ));
+//        echo $media->getMetadataValue('title', 'if none use this string');
+    }
+
     public function listAllDreamAction()
     {
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+//        $mediaManager = $this->get('sonata.media.manager.media');
+//        $media = $mediaManager->findBy(array('context' => 'pictures'));
+
 
         $tagManager = $this->get('fpn_tag.tag_manager');
         foreach ($dreams as $dream) {
@@ -94,7 +86,8 @@ class DreamController extends Controller
         }
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
-            'dreams' => $dreams
+            'dreams' => $dreams,
+//            'mmm'   => $media
         ));
     }
 

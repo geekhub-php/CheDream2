@@ -1,9 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
+ * File: DreamPosterTransformer.php
  * User: Yuriy Tarnavskiy
- * Date: 23.02.14
- * Time: 22:18
+ * Date: 24.02.14
+ * Time: 22:48
  */
 
 namespace Geekhub\DreamBundle\Form;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-class DreamPicturesTransformer implements DataTransformerInterface
+class DreamPosterTransformer implements DataTransformerInterface
 {
     protected $dream;
     protected $mediaManager;
@@ -40,28 +41,22 @@ class DreamPicturesTransformer implements DataTransformerInterface
 
         $fs = new Filesystem();
 
-        $picturesSrcArray = explode (',', $picturesString);
-        array_shift($picturesSrcArray);
+        $media = new Media();
 
-        foreach($picturesSrcArray as $pictureSrc)
-        {
-            $media = new Media();
+        $file = new File($picturesString);
 
-            $file = new File($pictureSrc);
+//        var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
+        $media->setBinaryContent($file->getRealPath());
+//        $media->setBinaryContent($picturesString);
+        $media->setProviderName('sonata.media.provider.image');
+        $media->setContext('poster');
+        $this->mediaManager->save($media);
+        $this->dream->addMedia($media);
 
-//            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
-            $media->setBinaryContent($file->getRealPath());
-//            $media->setBinaryContent($pictureSrc);
-            $media->setProviderName('sonata.media.provider.image');
-            $media->setContext('pictures');
-            $this->mediaManager->save($media);
-            $this->dream->addMedia($media);
-
-//            try {
-//                $fs->remove($file);
-//            } catch (IOExceptionInterface $e) {
-//            }
-        }
+//        try {
+//            $fs->remove($file);
+//        } catch (IOExceptionInterface $e) {
+//        }
 
         return;
     }

@@ -75,9 +75,9 @@
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
             {{ form_widget(form.dreamPictures) }}
-            {{ form_widget(form.dream_files) }}
-            {{ form_widget(form.dream_videos) }}
-            {{ form_widget(form.dream_poster) }}
+            {{ form_widget(form.dreamFiles) }}
+            {{ form_widget(form.dreamVideos) }}
+            {{ form_widget(form.dreamPoster) }}
         </div>
     </div>
 
@@ -181,7 +181,7 @@
                     if(file.type == 'image' && file.error == null) {
                         $('#dream-poster-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
                                 '<input id="fileupload-poster" type="file" name="dream-poster">');
-                        $('#newDreamForm_dream_poster').get(0).value = file.src;
+                        $('#newDreamForm_dreamPoster').get(0).value = file.src;
                     }
                 });
 
@@ -222,7 +222,7 @@
                                 '<span class="glyphicon glyphicon-file"></span>' + ' ' + file.name +
                                 '</div>'
                                 );
-                        $('#newDreamForm_dream_files').get(0).value += ',' + file.src;
+                        $('#newDreamForm_dreamFiles').get(0).value += ',' + file.src;
                     }
                 });
             },
@@ -240,7 +240,7 @@
     $('#add-video-button').click(function() {
         var videoSrc = $('#dream-add-video-text-input').get(0).value;
         if (videoSrc != '' ) {
-        $('#newDreamForm_dream_videos').get(0).value += ',' + videoSrc;
+        $('#newDreamForm_dreamVideos').get(0).value += ',' + videoSrc;
         $('#dream-add-video-text-input').get(0).value = '';
         $('#dream-add-video').fadeOut(500).hide();
 
