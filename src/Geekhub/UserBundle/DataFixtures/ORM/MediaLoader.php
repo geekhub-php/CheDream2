@@ -8,28 +8,12 @@
 
 namespace Geekhub\UserBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Application\Sonata\MediaBundle\DataFixtures\AbstractImageLoader;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Application\Sonata\MediaBundle\Entity\Media;
 
-class MediaLoader extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class MediaLoader extends AbstractImageLoader implements OrderedFixtureInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -38,14 +22,7 @@ class MediaLoader extends AbstractFixture implements OrderedFixtureInterface, Co
         $images = $this->getImage();
 
         foreach ($images as $image) {
-            $media = new Media;
-            $media->setBinaryContent(__DIR__.'/../Data/'.$image.'.jpg');
-            $media->setProviderName('sonata.media.provider.image');
-
-            $mediaManager = $this->container->get('sonata.media.manager.media');
-            $mediaManager->save($media);
-
-            $this->addReference('avatar'.$image, $media);
+            $this->setMediaImage($image, __DIR__.'/../Data/');
         }
         $this->setUserAvatar();
     }
