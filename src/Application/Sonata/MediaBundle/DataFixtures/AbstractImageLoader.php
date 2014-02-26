@@ -28,6 +28,10 @@ abstract class AbstractImageLoader extends AbstractFixture implements ContainerA
         $this->container = $container;
     }
 
+    /**
+     * @param string $image
+     * @param string $src
+     */
     protected function setMediaImage($image, $src)
     {
         $media = new Media;

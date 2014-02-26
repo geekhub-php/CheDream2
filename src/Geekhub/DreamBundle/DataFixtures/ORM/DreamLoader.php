@@ -17,7 +17,7 @@ class DreamLoader extends DataFixtureLoader implements OrderedFixtureInterface
     /**
      * Returns an array of file paths to fixtures
      *
-     * @return array<string>
+     * @return string[]
      */
     protected function getFixtures()
     {
