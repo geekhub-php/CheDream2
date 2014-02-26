@@ -10,7 +10,6 @@ namespace Application\Sonata\MediaBundle\DataFixtures;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
