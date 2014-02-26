@@ -41,7 +41,7 @@ class AbstractImageLoader extends AbstractFixture implements ContainerAwareInter
         $this->addReference('avatar'.$image, $media);
     }
 
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         return array();
     }
