@@ -1,4 +1,0 @@
-\Application\Sonata\MediaBundle\Entity\Media:
-    avatar{yoda, dartvaider, chewbacca, c3pio}:
-        binaryContent:  ../Data/<current()>.jpg
-        providerName:   sonata.media.provider.image
