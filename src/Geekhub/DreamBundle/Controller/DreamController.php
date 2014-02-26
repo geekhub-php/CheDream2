@@ -23,6 +23,7 @@ class DreamController extends Controller
     {
         $dream = new Dream();
         $mediaManager = $this->get('sonata.media.manager.media');
+        $user = $this->getUser();
 
         $form = $this->createForm(new DreamType(), $dream, array(
             'dream' => $dream,
@@ -40,6 +41,10 @@ class DreamController extends Controller
             $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
             $dream->setTags(null);
             $tagManager->addTags($tagsObjArray, $dream);
+
+            if (!is_null($user)) {
+                $dream->setAuthor($user);
+            }
 
             $em->persist($dream);
             $em->flush();

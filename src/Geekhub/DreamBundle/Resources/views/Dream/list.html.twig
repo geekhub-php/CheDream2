@@ -10,6 +10,12 @@
                 <div>
 
                     <p>title = {{ dream.title }}</p>
+                    {% if dream.author != null %}
+                        <p>author name = {{ dream.author.firstName }}</p>
+                        <p>author surname = {{ dream.author.lastName }}</p>
+                        {% thumbnail dream.author.avatar, 'avatar_small' with {'class': 'img-thumbnail'} %}
+                    {% endif %}
+
                     <p>descr = {{ dream.description }}</p>
                     <p>phone = {{ dream.phone }}</p>
                     <p>exp data = {{ dream.expiredDate|date('d.m.Y') }}</p>
@@ -27,7 +33,7 @@
                     <div>    {# Pictures #}
                     {% for picture in dream.mediaPictures %}
                         {% thumbnail picture, 'pictures_prew' %}
-                        {% path picture, 'pictures_big' %}
+                        {#{% path picture, 'pictures_big' %}#}
                     {% endfor %}
                     </div>
                     {# ------------------------------------------------------------------- #}
@@ -36,7 +42,7 @@
                         {#{{ loop.index }}#}
                         {#{{ dump(file) }}#}
                         {#{% path file, 'reference' %}#}
-                        <a href="{% path file.contentType, 'reference' %}" > {{ file }} </a>
+                        <a href="{% path file, 'reference' %}" > {{ file }} </a>
                     {% endfor %}
                     </div>
                     {# ------------------------------------------------------------------- #}
