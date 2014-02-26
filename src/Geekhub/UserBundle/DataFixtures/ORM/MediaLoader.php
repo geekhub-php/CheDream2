@@ -56,7 +56,6 @@ class MediaLoader extends AbstractFixture implements OrderedFixtureInterface, Co
         $users = $em->getRepository('GeekhubUserBundle:User')->findAll();
 
         foreach ($users as $user) {
-            $reference = $this->getReference('avatar'.$user->getUsername());
             $user->setAvatar($this->getReference('avatar'.$user->getUsername()));
             $em->persist($user);
         }
