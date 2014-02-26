@@ -30,6 +30,11 @@ class FacebookProvider extends AbstractSocialNetworkProvider
         return $user;
     }
 
+    /**
+     * @param string $token
+     *
+     * @return mixed
+     */
     private function getFacebookUserInfo($token)
     {
         $client = new Client();

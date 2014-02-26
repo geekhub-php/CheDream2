@@ -5,6 +5,9 @@ namespace Geekhub\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Geekhub\DreamBundle\Entity\Comment;
+use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\DreamContribute;
 
 /**
  * Users
@@ -345,8 +348,8 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Set odnoklasnikiId
      *
-     * @param  string $odnoklasnikiId
-     * @return string
+     * @param  string $odnoklassnikiId
+     * @return User
      */
     public function setOdnoklassnikiId($odnoklassnikiId)
     {
@@ -368,10 +371,10 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add favoriteDreams
      *
-     * @param  \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
+     * @param  Dream $favoriteDreams
      * @return User
      */
-    public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
+    public function addFavoriteDream(Dream $favoriteDreams)
     {
         $this->favoriteDreams[] = $favoriteDreams;
 
@@ -381,9 +384,9 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Remove favoriteDreams
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $favoriteDreams
+     * @param Dream $favoriteDreams
      */
-    public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
+    public function removeFavoriteDream(Dream $favoriteDreams)
     {
         $this->favoriteDreams->removeElement($favoriteDreams);
     }
@@ -401,10 +404,10 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add contributions
      *
-     * @param  \Geekhub\DreamBundle\Entity\DreamContribute $contributions
+     * @param  DreamContribute $contributions
      * @return User
      */
-    public function addContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
+    public function addContribution(DreamContribute $contributions)
     {
         $this->contributions[] = $contributions;
 
@@ -414,9 +417,9 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Remove contributions
      *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $contributions
+     * @param DreamContribute $contributions
      */
-    public function removeContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
+    public function removeContribution(DreamContribute $contributions)
     {
         $this->contributions->removeElement($contributions);
     }
@@ -434,10 +437,10 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add userComments
      *
-     * @param  \Geekhub\DreamBundle\Entity\Comment $userComments
+     * @param  Comment $userComments
      * @return User
      */
-    public function addUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
+    public function addUserComment(Comment $userComments)
     {
         $this->userComments[] = $userComments;
 
@@ -447,9 +450,9 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Remove userComments
      *
-     * @param \Geekhub\DreamBundle\Entity\Comment $userComments
+     * @param Comment $userComments
      */
-    public function removeUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
+    public function removeUserComment(Comment $userComments)
     {
         $this->userComments->removeElement($userComments);
     }
@@ -467,10 +470,10 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add dreams
      *
-     * @param  \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @param  Dream $dreams
      * @return User
      */
-    public function addDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    public function addDream(Dream $dreams)
     {
         $this->dreams[] = $dreams;
 
@@ -480,9 +483,9 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Remove dreams
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dreams
+     * @param Dream $dreams
      */
-    public function removeDream(\Geekhub\DreamBundle\Entity\Dream $dreams)
+    public function removeDream(Dream $dreams)
     {
         $this->dreams->removeElement($dreams);
     }
