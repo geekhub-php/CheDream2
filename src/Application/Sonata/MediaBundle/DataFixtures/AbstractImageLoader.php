@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class AbstractImageLoader extends AbstractFixture implements ContainerAwareInterface
+abstract class AbstractImageLoader extends AbstractFixture implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -39,10 +39,5 @@ class AbstractImageLoader extends AbstractFixture implements ContainerAwareInter
         $mediaManager->save($media);
 
         $this->addReference('avatar'.$image, $media);
-    }
-
-    public function load(ObjectManager $manager)
-    {
-        return array();
     }
 }
