@@ -47,6 +47,21 @@ class MediaLoader extends AbstractFixture implements OrderedFixtureInterface, Co
 
             $this->addReference('avatar'.$image, $media);
         }
+        $this->setUserAvatar();
+    }
+
+    private function setUserAvatar()
+    {
+        $em = $this->container->get('doctrine')->getManager();
+        $users = $em->getRepository('GeekhubUserBundle:User')->findAll();
+
+        foreach ($users as $user) {
+            $reference = $this->getReference('avatar'.$user->getUsername());
+            $user->setAvatar($this->getReference('avatar'.$user->getUsername()));
+            $em->persist($user);
+        }
+
+        $em->flush();
     }
 
     /**
@@ -54,7 +69,7 @@ class MediaLoader extends AbstractFixture implements OrderedFixtureInterface, Co
      *
      * @return integer
      */
-    function getOrder()
+    public function getOrder()
     {
         return 4;
     }
