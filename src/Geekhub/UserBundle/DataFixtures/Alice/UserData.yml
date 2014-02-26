@@ -4,6 +4,5 @@
         email:          <current()>@example.com
         enabled:        true
         plainPassword:  <current()>
-#        avatar:         /upload/images/user/<current()>.jpg
         firstName:      <firstName()>
         lastName:       <lastName()>
