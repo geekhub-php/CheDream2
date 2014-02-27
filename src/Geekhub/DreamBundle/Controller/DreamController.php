@@ -30,28 +30,30 @@ class DreamController extends Controller
             'media-manager' => $mediaManager
         ));
 
-        $form->handleRequest($request);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
 
-            $dream->addStatus(new Status(Status::SUBMITTED));
+                $dream->addStatus(new Status(Status::SUBMITTED));
 
-            $tagManager = $this->get('fpn_tag.tag_manager');
-            $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
-            $dream->setTags(null);
-            $tagManager->addTags($tagsObjArray, $dream);
+                $tagManager = $this->get('fpn_tag.tag_manager');
+                $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
+                $dream->setTags(null);
+                $tagManager->addTags($tagsObjArray, $dream);
 
-            if (!is_null($user)) {
-                $dream->setAuthor($user);
+                if (!is_null($user)) {
+                    $dream->setAuthor($user);
+                }
+
+                $em->persist($dream);
+                $em->flush();
+
+                $tagManager->saveTagging($dream);
+
+                return $this->redirect($this->generateUrl('dream_list'));
             }
-
-            $em->persist($dream);
-            $em->flush();
-
-            $tagManager->saveTagging($dream);
-
-            return $this->redirect($this->generateUrl('dream_list'));
         }
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
@@ -63,8 +65,10 @@ class DreamController extends Controller
     {
         $user = $this->getUser();
         $mediaManager = $this->get('sonata.media.manager.media');
+        $tagManager = $this->get('fpn_tag.tag_manager');
         $em = $this->getDoctrine()->getManager();
         $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
+        $tagManager->loadTagging($dream);
 
         if ($user->getId() != $dream->getAuthor()->getId()) {
             throw new AccessDeniedException();
@@ -80,8 +84,12 @@ class DreamController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
+                $dream->setTags(null);
+                $tagManager->addTags($tagsObjArray, $dream);
 
                 $em->flush();
+                $tagManager->saveTagging($dream);
 
                 return $this->redirect($this->generateUrl('dream_list'));
             }

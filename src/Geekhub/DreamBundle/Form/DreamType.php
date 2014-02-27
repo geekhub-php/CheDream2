@@ -54,8 +54,8 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'data_class' => null,
-                'data' => $dream->getDreamResources(),
+//                'data_class' => null,
+//                'data' => $dream->getDreamResources(),
             ))->addModelTransformer($transformerFinance))
             ->add($builder->create('equipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
@@ -63,8 +63,8 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'data_class' => null,
-                'data' => $dream->getDreamResources(),
+//                'data_class' => null,
+//                'data' => $dream->getDreamResources(),
             ))->addModelTransformer($transformerEquipment))
             ->add($builder->create('workResources', 'collection', array(
                 'type' => new WorkType(),
@@ -72,8 +72,8 @@ class DreamType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
-                'data_class' => null,
-                'data' => $dream->getDreamResources(),
+//                'data_class' => null,
+//                'data' => $dream->getDreamResources(),
             ))->addModelTransformer($transformerWork))
             ->add($builder->create('dreamPictures', 'hidden')->addModelTransformer($transformerPicture))
             ->add($builder->create('dreamPoster', 'hidden')->addModelTransformer($transformerPoster))

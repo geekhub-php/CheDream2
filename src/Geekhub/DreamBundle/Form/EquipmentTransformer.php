@@ -44,7 +44,6 @@ class EquipmentTransformer implements DataTransformerInterface
 
     public function reverseTransform($equipmentArrayCollection)
     {
-        $hello = 'hello';
         foreach ($equipmentArrayCollection as $equipment) {
             $equipment->setDream($this->dream);
             $this->dream->addDreamResource($equipment);
