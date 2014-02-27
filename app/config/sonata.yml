@@ -56,3 +56,10 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/upload/media
             create:     false
+
+#   for liipimagine integration --------------------------------
+#    providers:
+#        image:
+#            thumbnail:  sonata.media.thumbnail.liip_imagine
+#        youtube:
+#            thumbnail:  sonata.media.thumbnail.liip_imagine
