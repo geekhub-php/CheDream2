@@ -31,12 +31,6 @@ abstract class AbstractSocialNetworkProvider
         $this->uploadDir          = $uploadDir;
     }
 
-    /**
-     * @param $remoteImg
-     * @param string $localFileName
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
     public function getMediaFromRemoteImg($remoteImg, $localFileName)
     {
         $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;

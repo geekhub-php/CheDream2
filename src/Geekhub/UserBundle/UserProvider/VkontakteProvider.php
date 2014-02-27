@@ -37,13 +37,6 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         return $user;
     }
 
-    /**
-     * @param string $uid
-     * @param string $token
-     * @param string $field
-     *
-     * @return null
-     */
     private function vkontakteGetProfileField($uid, $token, $field)
     {
         $client = new Client();
