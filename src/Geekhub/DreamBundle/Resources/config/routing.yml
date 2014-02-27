@@ -8,6 +8,11 @@ new_dream:
     options:
         expose: true
 
+edit_dream:
+    pattern:  /dream/edit/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:editDream }
+
+
 dream_list:
     pattern:  /dream/list
     defaults: { _controller: GeekhubDreamBundle:Dream:listAllDream }

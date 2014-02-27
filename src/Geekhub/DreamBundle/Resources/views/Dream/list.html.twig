@@ -9,7 +9,7 @@
             {% for dream in dreams %}
                 <div>
 
-                    <p>title = {{ dream.title }}</p>
+                    <p>title = {{ dream.title }} <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a> </p>
                     {% if dream.author != null %}
                         <p>author name = {{ dream.author.firstName }}</p>
                         <p>author surname = {{ dream.author.lastName }}</p>

@@ -12,10 +12,10 @@ namespace Geekhub\DreamBundle\Controller;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;
+use Geekhub\DreamBundle\Form\EquipmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
-use Application\Sonata\MediaBundle\Entity\Media;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DreamController extends Controller
 {
@@ -51,16 +51,50 @@ class DreamController extends Controller
 
             $tagManager->saveTagging($dream);
 
-//            $filesm = $dream->getMedia();
-
-//            var_dump($filesm->first()->getBinaryContent()->getRealPath()); exit;
-//            var_dump($filesm->first()->getBinaryContent()); exit;
             return $this->redirect($this->generateUrl('dream_list'));
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:new.html.twig', array(
+        return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    public function editDreamAction($slug, Request $request)
+    {
+        $user = $this->getUser();
+        $mediaManager = $this->get('sonata.media.manager.media');
+        $em = $this->getDoctrine()->getManager();
+        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
+
+        if ($user->getId() != $dream->getAuthor()->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $form = $this->createForm(new DreamType(), $dream, array(
+            'dream' => $dream,
+            'media-manager' => $mediaManager
+        ));
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('dream_list'));
+            }
+        }
+
+
+        return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
+            'form' => $form->createView(),
+            'formRes' => $form->createView(),
+            'eqv'   => $dream->getDreamResources()
+        ));
+
+
     }
 
     public function MediaInfoAction($id)

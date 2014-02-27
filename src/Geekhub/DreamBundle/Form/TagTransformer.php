@@ -15,6 +15,7 @@ class TagTransformer implements DataTransformerInterface
 {
     public function transform($tags)
     {
+
         if ($tags->isEmpty()) {
             return "";
         }
