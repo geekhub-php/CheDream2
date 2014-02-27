@@ -77,7 +77,7 @@ class Status
     /**
      * Get title
      *
-     * @return integer
+     * @return string
      */
     public function getTitle()
     {

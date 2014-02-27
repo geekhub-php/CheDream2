@@ -4,8 +4,8 @@ namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use JMS\Serializer\Serializer;
-use Symfony\Component\DependencyInjection\Container,
-    Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Filesystem\Filesystem;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Geekhub\UserBundle\Entity\User;
 
