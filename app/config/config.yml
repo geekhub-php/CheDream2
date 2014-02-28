@@ -75,6 +75,11 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [30, 30], mode: outbound }
+        userAvatarBig:
+            quality: 90
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+
 
 stof_doctrine_extensions:
     default_locale: en_US

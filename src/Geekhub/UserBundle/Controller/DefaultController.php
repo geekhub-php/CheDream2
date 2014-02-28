@@ -3,11 +3,38 @@
 namespace Geekhub\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Geekhub\UserBundle\Form\UserType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     public function indexAction($name)
     {
         return $this->render('GeekhubUserBundle:Default:index.html.twig', array('name' => $name));
+    }
+
+    public function userEditAction(Request $request)
+    {
+        $userAuth=$this->getUser();
+        if (!$userAuth) {
+        	return $this->redirect($this->generateUrl('_login'));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
+
+        $form = $this->CreateForm(new UserType(), $user);
+
+        $form->handleRequest($request);
+
+        if ($form -> isValid()) {
+        	//$em->persist($user->getContacts());
+        	$em->flush();
+        	var_dump($user);
+        	//exit;
+            //return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+        }
+
+        return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user));
     }
 }

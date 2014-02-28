@@ -1,0 +1,43 @@
+{% extends "GeekhubResourceBundle::layout.html.twig" %}
+
+{% block body %}
+    <div class="container" id="wrap">
+        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+
+        <div style="padding: 5% 0;">
+          <div class="row">
+           <form method="POST" action="{{ path('profile_edit') }}">
+            <div class="col-md-5">
+             <img src="{{ user.avatar | imagine_filter('userAvatarBig') }}">
+             {{ form_widget(form.contacts) }}
+             {{ form_label(form.email) }}
+             {{ form_widget(form.email) }}
+             {{ form_label(form.facebookId) }}
+             {{ form_widget(form.facebookId) }}
+             {{ form_label(form.vkontakteId) }}
+             {{ form_widget(form.vkontakteId) }}
+            </div>
+            <div class="col-md-7">
+             <input type="submit" value ="Зберегти">            
+              <p>Імя та прізвище</p>
+               <div class="row">
+                <div class="col-md-6">
+                  {{ form_widget(form.firstName) }}
+                </div>
+                <div class="col-md-6">
+                  {{ form_widget(form.lastName) }}
+                </div>
+              </div>  
+              {{ form_label(form.birthday) }}
+              {{ form_widget(form.birthday) }}
+              {{ form_label(form.about) }}
+              {{ form_widget(form.about) }}
+              {{ form_rest(form) }}
+            </div>
+            </form> 
+          </div>
+        </div>
+    </div>
+
+    {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
+{% endblock body %}
