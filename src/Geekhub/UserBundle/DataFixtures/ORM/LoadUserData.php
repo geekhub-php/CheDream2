@@ -12,7 +12,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\UserBundle\Entity\User;
-use Symfony\Component\Yaml\Yaml;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
