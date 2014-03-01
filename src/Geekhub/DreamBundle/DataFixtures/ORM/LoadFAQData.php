@@ -49,6 +49,9 @@ class LoadFAQData extends AbstractFixture implements OrderedFixtureInterface
         return 1;
     }
 
+    /**
+     * @return string
+     */
     protected function getYmlFile()
     {
         return __DIR__ . '/Data/FAQ.yml';
