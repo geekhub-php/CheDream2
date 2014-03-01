@@ -64,7 +64,8 @@
         "jms/serializer-bundle": "0.13.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [
