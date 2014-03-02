@@ -10,17 +10,6 @@
         {
             "type": "package",
             "package": {
-                "name": "aehlke/tag-it",
-                "version": "master",
-                "dist": {
-                    "url": "https://github.com/aehlke/tag-it/archive/master.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "jquery/jquery",
                 "version": "1.10.2",
                 "dist": {
@@ -66,20 +55,18 @@
         "nervo/yuicompressor": "dev-master",
         "fpn/doctrine-extensions-taggable": "dev-master",
         "fpn/tag-bundle":"dev-master",
-        "sonata-project/admin-bundle": "2.2.*@dev",
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-        "sonata-project/media-bundle": "2.2.*@dev",
+        "sonata-project/admin-bundle": "2.2.*",
+        "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
+        "sonata-project/media-bundle": "2.2.*",
         "ahonymous/fontello": "dev-master",
         "guzzle/guzzle": "dev-guzzle4",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
-        "jms/serializer-bundle": "0.13.*@dev",
-        "aehlke/tag-it": "*",
+        "jms/serializer-bundle": "0.13.*",
         "bmatzner/jquery-ui-bundle": "1.10.0",
         "friendsofsymfony/rest-bundle": "1.3.*@dev",
-        "nelmio/api-doc-bundle": "2.5.*@dev"
+        "nelmio/api-doc-bundle": "2.5.*"
     },
-    "minimum-stability": "dev",
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
