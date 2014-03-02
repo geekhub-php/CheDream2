@@ -5,33 +5,37 @@
 {% endblock %}
 {% block content %}
     <div class="page-header">
-        <h1>Edit Dream <small>create or edit your dream</small></h1>
+        <h1>New Dream <small>create or edit your dream</small></h1>
     </div>
     {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
     {{ form_start(form) }}
     <div class="row">
         <div class="col-md-5">
 
-            {#<div id="dream-poster-image">#}
-            {#<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">#}
-            {#</div>#}
-
-            {#<a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">#}
-            {#<img data-src="holder.js/100%x200/text:Main Image">#}
-            {#</a>#}
-
             <span class="fileinput-button" id="dream-poster-image">
                 <div id="dream-poster-container">
-                    <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+                    <img src="../{% path poster, 'poster_big' %}" class="img-thumbnail">
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
             </span>
 
             <br>
-            <div id="dream-gallery"></div>
+            <div id="dream-gallery">
+                {% for picture in dreamPictures %}
+                    <img src="../{% path picture, 'pictures_prew' %}" class="img-thumbnail">
+                {% endfor %}
+            </div>
             <br/>
-            <div id="dream-files"></div>
-            <div id="dream-videos"></div>
+            <div id="dream-files">
+                {% for file in dreamFiles %}
+                    <a href="{% path file, 'reference' %}" > {{ file }} </a>
+                {% endfor %}
+            </div>
+            <div id="dream-videos">
+                {% for video in dreamVideos %}
+                    <img src="../{% path video, 'video_prew' %}" class="img-thumbnail">
+                {% endfor %}
+            </div>
 
             <div class="row">
                 <div class="col-md-11">
@@ -84,57 +88,53 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
-                <ul class="financialResources" data-prototype="{{ form_widget(form.financialResources.vars.prototype)|e }}">
-                    {% for finance in form.financialResources %}
+                <ul class="financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                    {% for finance in form.dreamFinancialResources %}
                         <li>
-                            {{ form_label(finance.title, 'title l') }}
+                            {{ form_label(finance.title) }}
                             {{ form_widget(finance.title) }}
-                        </li>
-                        <li>
-                            {{ form_label(finance.quantity, 'quantity l') }}
+
+                            {{ form_label(finance.quantity) }}
                             {{ form_widget(finance.quantity) }}
-                        </li>
-                        <li>{{ form_widget(finance.type) }}</li>
+                        </li><br/>
                     {% endfor %}
                 </ul>
             </div>
+
+
+
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
-                <ul class="equipmentResources" data-prototype="{{ form_widget(form.equipmentResources.vars.prototype)|e }}">
-                    {% for equipment in form.equipmentResources %}
+                <ul class="equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                    {% for equipment in form.dreamEquipmentResources %}
                         <li>
-                            {{ form_label(equipment.title, 'title l') }}
+                            {{ form_label(equipment.title) }}
                             {{ form_widget(equipment.title) }}
-                        </li>
-                        <li>
-                            {{ form_label(equipment.quantity, 'quantity l') }}
+
+                            {{ form_label(equipment.quantity) }}
                             {{ form_widget(equipment.quantity) }}
-                        </li>
-                        <li>
-                            {{ form_label(equipment.quantityType, 'quantityType l') }}
+
+                            {{ form_label(equipment.quantityType) }}
                             {{ form_widget(equipment.quantityType) }}
-                        </li>
-                        <li>{{ form_widget(equipment.type) }}</li>
+                        </li><br/>
                     {% endfor %}
                 </ul>
             </div>
+
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
-                <ul class="workResources" data-prototype="{{ form_widget(form.workResources.vars.prototype)|e }}">
-                    {% for work in form.workResources %}
+                <ul class="workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                    {% for work in form.dreamWorkResources %}
                         <li>
-                            {{ form_label(work.title, 'title l') }}
+                            {{ form_label(work.title) }}
                             {{ form_widget(work.title) }}
-                        </li>
-                        <li>
-                            {{ form_label(work.quantity, 'quantity l') }}
+
+                            {{ form_label(work.quantity) }}
                             {{ form_widget(work.quantity) }}
-                        </li>
-                        <li>
-                            {{ form_label(work.quantityDays, 'quantityDays l') }}
+
+                            {{ form_label(work.quantityDays) }}
                             {{ form_widget(work.quantityDays) }}
-                        </li>
-                        <li>{{ form_widget(work.type) }}</li>
+                        </li><br/>
                     {% endfor %}
                 </ul>
             </div>

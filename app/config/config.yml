@@ -78,8 +78,8 @@ liip_imagine:
                 thumbnail: { size: [30, 30], mode: outbound }
         dream_thumb:
             filters:
-#                thumbnail: { size: [80, 80], mode: inset }
-                thumbnail: { size: [80, 80], mode: outbound }
+#                thumbnail: { size: [80, 50], mode: inset }
+                thumbnail: { size: [80, 50], mode: outbound }
 #                relative_resize: { heighten: 80 }
         dream_poster:
             filters:

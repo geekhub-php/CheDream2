@@ -12,14 +12,6 @@
     <div class="row">
         <div class="col-md-5">
 
-            {#<div id="dream-poster-image">#}
-                {#<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">#}
-            {#</div>#}
-
-            {#<a href="#" class="thumbnail" data-toggle="modal" data-target="#uploadMainImage">#}
-                {#<img data-src="holder.js/100%x200/text:Main Image">#}
-            {#</a>#}
-
             <span class="fileinput-button" id="dream-poster-image">
                 <div id="dream-poster-container">
                     <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
@@ -90,12 +82,10 @@
                         <li>
                             {{ form_label(finance.title) }}
                             {{ form_widget(finance.title) }}
-                        {#</li>#}
-                        {#<li>#}
+
                             {{ form_label(finance.quantity) }}
                             {{ form_widget(finance.quantity) }}
                         </li><br/>
-                        {#<li>{{ form_widget(finance.type) }}</li>#}
                     {% endfor %}
                 </ul>
             </div>
@@ -109,16 +99,13 @@
                         <li>
                             {{ form_label(equipment.title) }}
                             {{ form_widget(equipment.title) }}
-                        {#</li>#}
-                        {#<li>#}
+
                             {{ form_label(equipment.quantity) }}
                             {{ form_widget(equipment.quantity) }}
-                        {#</li>#}
-                        {#<li>#}
+
                             {{ form_label(equipment.quantityType) }}
                             {{ form_widget(equipment.quantityType) }}
                         </li><br/>
-                        {#<li>{{ form_widget(equipment.type) }}</li>#}
                     {% endfor %}
                 </ul>
             </div>
@@ -130,16 +117,13 @@
                         <li>
                             {{ form_label(work.title) }}
                             {{ form_widget(work.title) }}
-                        {#</li>#}
-                        {#<li>#}
+
                             {{ form_label(work.quantity) }}
                             {{ form_widget(work.quantity) }}
-                        {#</li>#}
-                        {#<li>#}
+
                             {{ form_label(work.quantityDays) }}
                             {{ form_widget(work.quantityDays) }}
                         </li><br/>
-                        {#<li>{{ form_widget(work.type) }}</li>#}
                     {% endfor %}
                 </ul>
             </div>

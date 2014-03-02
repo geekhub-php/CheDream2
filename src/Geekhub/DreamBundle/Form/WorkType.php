@@ -27,9 +27,6 @@ class WorkType extends AbstractType
             ->add('title', 'text', array('label' => 'назва'))
             ->add('quantity', 'text', array('label' => 'человек'))
             ->add('quantityDays', 'text', array('label' => 'дней'));
-//            ->add('type', 'hidden', array(
-//                'data' => AbstractContributeResource::WORK,
-//            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

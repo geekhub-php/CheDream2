@@ -12,7 +12,6 @@ namespace Geekhub\DreamBundle\Controller;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;
-use Geekhub\DreamBundle\Form\EquipmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -109,25 +108,6 @@ class DreamController extends Controller
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);
 
-                $finRes = $dream->getDreamFinancialResources();
-
-                $equipRes = $dream->getDreamEquipmentResources();
-
-                $workRes = $dream->getDreamWorkResources();
-
-                foreach ($finRes as $fin)
-                {
-                    $fin->setDream($dream);
-                }
-                foreach ($equipRes as $equip)
-                {
-                    $equip->setDream($dream);
-                }
-                foreach ($workRes as $work)
-                {
-                    $work->setDream($dream);
-                }
-
                 $em->flush();
                 $tagManager->saveTagging($dream);
 
@@ -135,9 +115,13 @@ class DreamController extends Controller
             }
         }
 
-
-        return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
+        /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
+        return $this->render('GeekhubDreamBundle:Dream:editDream.html.twig', array(
             'form' => $form->createView(),
+            'poster' => $dream->getMediaPoster(),
+            'dreamPictures' => $dream->getMediaPictures(),
+            'dreamFiles' => $dream->getMediaFiles(),
+            'dreamVideos'   => $dream->getMediaVideos()
         ));
 
 
@@ -151,16 +135,12 @@ class DreamController extends Controller
         return $this->render('GeekhubDreamBundle:Dream:mediaInfo.html.twig', array(
             'media' => $media
         ));
-//        echo $media->getMetadataValue('title', 'if none use this string');
     }
 
     public function listAllDreamAction()
     {
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
-
-//        $mediaManager = $this->get('sonata.media.manager.media');
-//        $media = $mediaManager->findBy(array('context' => 'pictures'));
 
         $tagManager = $this->get('fpn_tag.tag_manager');
         foreach ($dreams as $dream) {
@@ -169,7 +149,6 @@ class DreamController extends Controller
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams,
-//            'mmm'   => $media
         ));
     }
 
