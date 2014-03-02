@@ -95,6 +95,7 @@ class DreamController extends Controller
         }
 
         /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
+
         return $this->render('GeekhubDreamBundle:Dream:editDream.html.twig', array(
             'form' => $form->createView(),
             'poster' => $dream->getMediaPoster(),
@@ -102,7 +103,6 @@ class DreamController extends Controller
             'dreamFiles' => $dream->getMediaFiles(),
             'dreamVideos'   => $dream->getMediaVideos()
         ));
-
 
     }
 

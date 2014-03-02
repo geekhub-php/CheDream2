@@ -52,7 +52,7 @@ class WorkResource extends AbstractContributeResource
     /**
      * Set dream
      *
-     * @param  Dream $dream
+     * @param  Dream         $dream
      * @return DreamResource
      */
     public function setDream(Dream $dream = null)

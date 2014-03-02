@@ -9,8 +9,6 @@
 
 namespace Geekhub\DreamBundle\Form;
 
-use FPN\TagBundle\Entity\TagManager;
-use Geekhub\DreamBundle\Entity\Dream;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class TagTransformer implements DataTransformerInterface
@@ -18,7 +16,6 @@ class TagTransformer implements DataTransformerInterface
     public function transform($tags)
     {
         if ($tags->isEmpty()) {
-
             return "";
         }
 

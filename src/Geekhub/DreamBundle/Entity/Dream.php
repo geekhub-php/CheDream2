@@ -186,8 +186,6 @@ class Dream implements Taggable
      */
     protected $dreamWorkResources;
 
-
-
     /**
      * Constructor
      */
@@ -871,7 +869,7 @@ class Dream implements Taggable
     /**
      * Add dreamFinancialResources
      *
-     * @param FinancialResource $dreamFinancialResources
+     * @param  FinancialResource $dreamFinancialResources
      * @return Dream
      */
     public function addDreamFinancialResource(FinancialResource $dreamFinancialResources)
@@ -896,7 +894,7 @@ class Dream implements Taggable
     /**
      * Get dreamFinancialResources
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamFinancialResources()
     {
@@ -906,7 +904,7 @@ class Dream implements Taggable
     /**
      * Add dreamEquipmentResources
      *
-     * @param EquipmentResource $dreamEquipmentResources
+     * @param  EquipmentResource $dreamEquipmentResources
      * @return Dream
      */
     public function addDreamEquipmentResource(EquipmentResource $dreamEquipmentResources)
@@ -931,7 +929,7 @@ class Dream implements Taggable
     /**
      * Get dreamEquipmentResources
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamEquipmentResources()
     {
@@ -941,7 +939,7 @@ class Dream implements Taggable
     /**
      * Add dreamWorkResources
      *
-     * @param WorkResource $dreamWorkResources
+     * @param  WorkResource $dreamWorkResources
      * @return Dream
      */
     public function addDreamWorkResource(WorkResource $dreamWorkResources)
@@ -966,7 +964,7 @@ class Dream implements Taggable
     /**
      * Get dreamWorkResources
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamWorkResources()
     {
