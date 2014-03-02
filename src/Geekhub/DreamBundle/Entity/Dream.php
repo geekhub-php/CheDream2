@@ -890,6 +890,7 @@ class Dream implements Taggable
     public function removeDreamFinancialResource(FinancialResource $dreamFinancialResources)
     {
         $this->dreamFinancialResources->removeElement($dreamFinancialResources);
+        $dreamFinancialResources->setDream(null);
     }
 
     /**
@@ -924,6 +925,7 @@ class Dream implements Taggable
     public function removeDreamEquipmentResource(EquipmentResource $dreamEquipmentResources)
     {
         $this->dreamEquipmentResources->removeElement($dreamEquipmentResources);
+        $dreamEquipmentResources->setDream(null);
     }
 
     /**
@@ -958,6 +960,7 @@ class Dream implements Taggable
     public function removeDreamWorkResource(WorkResource $dreamWorkResources)
     {
         $this->dreamWorkResources->removeElement($dreamWorkResources);
+        $dreamWorkResources->setDream(null);
     }
 
     /**
