@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use DoctrineExtensions\Taggable\Taggable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Geekhub\ResourceBundle\Entity\Sluggable,
+    Geekhub\ResourceBundle\Entity\Timestampable,
+    Geekhub\ResourceBundle\Entity\SoftDeleteable;
 
 /**
  * Dreams
@@ -17,6 +20,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Dream implements Taggable
 {
+    use Sluggable, Timestampable, SoftDeleteable;
+
     /**
      * @var integer
      *
@@ -49,37 +54,6 @@ class Dream implements Taggable
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;
-
-    /**
-     * @var string
-     *
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(name="slug", type="string", length=200, unique=true)
-     */
-    protected $slug;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(name="updatedAt", type="datetime")
-     */
-    protected $updatedAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
-     */
-    protected $deletedAt;
 
     /**
      * @var \DateTime
@@ -268,98 +242,6 @@ class Dream implements Taggable
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param  string $slug
-     * @return Dream
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  \DateTime $createdAt
-     * @return Dream
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param  \DateTime $updatedAt
-     * @return Dream
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set deletedAt
-     *
-     * @param  \DateTime $deletedAt
-     * @return Dream
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
     }
 
     /**
