@@ -46,25 +46,6 @@ class DreamController extends Controller
                     $dream->setAuthor($user);
                 }
 
-                $finRes = $dream->getDreamFinancialResources();
-
-                $equipRes = $dream->getDreamEquipmentResources();
-
-                $workRes = $dream->getDreamWorkResources();
-
-                foreach ($finRes as $fin)
-                {
-                    $fin->setDream($dream);
-                }
-                foreach ($equipRes as $equip)
-                {
-                    $equip->setDream($dream);
-                }
-                foreach ($workRes as $work)
-                {
-                    $work->setDream($dream);
-                }
-
                 $em->persist($dream);
                 $em->flush();
 
@@ -102,8 +83,6 @@ class DreamController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $data = $form->getData();
-//                var_dump($data->getDreamFinancialResources()); exit;
                 $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);
