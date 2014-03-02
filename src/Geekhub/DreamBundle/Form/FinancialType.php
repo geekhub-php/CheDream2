@@ -9,7 +9,7 @@
 
 namespace Geekhub\DreamBundle\Form;
 
-use Geekhub\DreamBundle\Entity\AbstractContributeResource;
+//use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,17 +25,17 @@ class FinancialType extends AbstractType
     {
         $builder
             ->add('title', 'text', array('label' => 'назва'))
-            ->add('quantity', 'text', array('label' => 'сума'))
-            ->add('type', 'hidden', array(
-                'data' => AbstractContributeResource::FINANCIAL,
-            ));
+            ->add('quantity', 'text', array('label' => 'сума'));
+//            ->add('type', 'hidden', array(
+//                'data' => AbstractContributeResource::FINANCIAL,
+//            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Geekhub\DreamBundle\Entity\DreamResource'
+                'data_class' => 'Geekhub\DreamBundle\Entity\FinancialResource'
             )
         );
     }

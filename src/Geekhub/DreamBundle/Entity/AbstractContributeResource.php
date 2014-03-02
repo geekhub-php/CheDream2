@@ -36,32 +36,11 @@ abstract class AbstractContributeResource
     protected $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=30)
-     */
-    protected $type;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="quantity", type="float", nullable=true)
      */
     protected $quantity;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="quantityType", type="string", length=15, nullable=true)
-     */
-    protected $quantityType;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="quantityDays", type="integer", nullable=true)
-     */
-    protected $quantityDays;
 
     /**
      * Set createdAt
@@ -110,29 +89,6 @@ abstract class AbstractContributeResource
     }
 
     /**
-     * Set type
-     *
-     * @param  string        $type
-     * @return DreamResource
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set quantity
      *
      * @param  float         $quantity
@@ -153,51 +109,5 @@ abstract class AbstractContributeResource
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * Set quantityType
-     *
-     * @param  string        $quantityType
-     * @return DreamResource
-     */
-    public function setQuantityType($quantityType)
-    {
-        $this->quantityType = $quantityType;
-
-        return $this;
-    }
-
-    /**
-     * Get quantityType
-     *
-     * @return string
-     */
-    public function getQuantityType()
-    {
-        return $this->quantityType;
-    }
-
-    /**
-     * Set quantityDays
-     *
-     * @param  integer       $quantityDays
-     * @return DreamResource
-     */
-    public function setQuantityDays($quantityDays)
-    {
-        $this->quantityDays = $quantityDays;
-
-        return $this;
-    }
-
-    /**
-     * Get quantityDays
-     *
-     * @return integer
-     */
-    public function getQuantityDays()
-    {
-        return $this->quantityDays;
     }
 }

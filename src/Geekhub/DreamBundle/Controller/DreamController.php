@@ -47,6 +47,25 @@ class DreamController extends Controller
                     $dream->setAuthor($user);
                 }
 
+                $finRes = $dream->getDreamFinancialResources();
+
+                $equipRes = $dream->getDreamEquipmentResources();
+
+                $workRes = $dream->getDreamWorkResources();
+
+                foreach ($finRes as $fin)
+                {
+                    $fin->setDream($dream);
+                }
+                foreach ($equipRes as $equip)
+                {
+                    $equip->setDream($dream);
+                }
+                foreach ($workRes as $work)
+                {
+                    $work->setDream($dream);
+                }
+
                 $em->persist($dream);
                 $em->flush();
 
@@ -84,9 +103,30 @@ class DreamController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $data = $form->getData();
+//                var_dump($data->getDreamFinancialResources()); exit;
                 $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);
+
+                $finRes = $dream->getDreamFinancialResources();
+
+                $equipRes = $dream->getDreamEquipmentResources();
+
+                $workRes = $dream->getDreamWorkResources();
+
+                foreach ($finRes as $fin)
+                {
+                    $fin->setDream($dream);
+                }
+                foreach ($equipRes as $equip)
+                {
+                    $equip->setDream($dream);
+                }
+                foreach ($workRes as $work)
+                {
+                    $work->setDream($dream);
+                }
 
                 $em->flush();
                 $tagManager->saveTagging($dream);
@@ -98,8 +138,6 @@ class DreamController extends Controller
 
         return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
             'form' => $form->createView(),
-            'formRes' => $form->createView(),
-            'eqv'   => $dream->getDreamResources()
         ));
 
 

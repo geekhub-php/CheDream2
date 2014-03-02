@@ -56,23 +56,35 @@
                     {# ------------------------------------------------------------------- #}
 
                     <div class=" well well-sm">
-                    {% for resources in dream.dreamResources %}
-                        <p>title = {{ resources.title }}</p>
-                        <p>type = {{ resources.type }}</p>
-                        {% if resources.quantity is not null %}
-                            <p>quantity = {{ resources.quantity }}</p>
-                        {% endif %}
-
-                        {% if resources.quantityType is not null %}
-                            <p>quantityType = {{ resources.quantityType }}</p>
-                        {% endif %}
-
-                        {% if resources.quantityDays is not null %}
-                            <p>quantityDays = {{ resources.quantityDays }}</p>
-                        {% endif %}
-                        <hr>
-
-                    {% endfor %}
+                        <p> Financial </p>
+                        {% for resources in dream.dreamFinancialResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <hr/>
+                        <p> Equipment </p>
+                        {% for resources in dream.dreamEquipmentResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                            {% if resources.quantityType is not null %}
+                                <p>quantityType = {{ resources.quantityType }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <hr/>
+                        <p> Work </p>
+                        {% for resources in dream.dreamWorkResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                            {% if resources.quantityDays is not null %}
+                                <p>quantityDays = {{ resources.quantityDays }}</p>
+                            {% endif %}
+                        {% endfor %}
                     </div>
 
                 </div>
