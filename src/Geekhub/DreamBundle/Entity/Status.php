@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Geekhub\ResourceBundle\Entity\Timestampable;
 
 /**
  * Status
@@ -13,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Status
 {
+    use Timestampable;
+
     const SUBMITTED            = 'submitted';
     const REJECTED             = 'rejected';
     const COLLECTING_RESOURCES = 'collecting-resources';
@@ -36,14 +39,6 @@ class Status
      * @ORM\Column(name="title", type="string", length=30)
      */
     protected $title;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
@@ -82,29 +77,6 @@ class Status
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  \DateTime $createdAt
-     * @return Status
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**

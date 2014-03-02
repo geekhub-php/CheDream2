@@ -5,12 +5,15 @@ namespace Geekhub\DreamBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Geekhub\ResourceBundle\Entity\Timestampable;
 
 /**
  * @ORM\MappedSuperclass
  */
 abstract class AbstractContributeResource
 {
+    use Timestampable;
+
     const FINANCIAL     = 'financial';
     const EQUIPMENT     = 'equipment';
     const WORK          = 'work';
@@ -18,14 +21,6 @@ abstract class AbstractContributeResource
     const TON           = 'ton';
     const KG            = 'kg';
     const PIECE         = 'piece';
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @var string
@@ -62,29 +57,6 @@ abstract class AbstractContributeResource
      * @ORM\Column(name="quantityDays", type="integer")
      */
     protected $quantityDays;
-
-    /**
-     * Set createdAt
-     *
-     * @param  \DateTime     $createdAt
-     * @return DreamResource
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
 
     /**
      * Set title

@@ -5,6 +5,7 @@ namespace Geekhub\DreamBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Geekhub\ResourceBundle\Entity\Timestampable;
 
 /**
  * Comments
@@ -14,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Comment
 {
+    use Timestampable;
     /**
      * @var integer
      *
@@ -31,14 +33,6 @@ class Comment
      * @ORM\Column(name="text", type="text")
      */
     protected $text;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamComments")
@@ -97,29 +91,6 @@ class Comment
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  \DateTime $createdAt
-     * @return Comment
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**
