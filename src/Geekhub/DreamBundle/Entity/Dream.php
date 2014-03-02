@@ -877,6 +877,7 @@ class Dream implements Taggable
     public function addDreamFinancialResource(FinancialResource $dreamFinancialResources)
     {
         $this->dreamFinancialResources[] = $dreamFinancialResources;
+        $dreamFinancialResources->setDream($this);
 
         return $this;
     }
@@ -910,6 +911,7 @@ class Dream implements Taggable
     public function addDreamEquipmentResource(EquipmentResource $dreamEquipmentResources)
     {
         $this->dreamEquipmentResources[] = $dreamEquipmentResources;
+        $dreamEquipmentResources->setDream($this);
 
         return $this;
     }
@@ -943,6 +945,7 @@ class Dream implements Taggable
     public function addDreamWorkResource(WorkResource $dreamWorkResources)
     {
         $this->dreamWorkResources[] = $dreamWorkResources;
+        $dreamWorkResources->setDream($this);
 
         return $this;
     }
