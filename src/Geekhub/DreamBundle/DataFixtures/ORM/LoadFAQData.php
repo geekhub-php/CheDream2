@@ -22,19 +22,17 @@ class LoadFAQData extends AbstractFixture implements OrderedFixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $FAQ = Yaml::parse($this->getYmlFile());
 
-        foreach($FAQ as $item) {
+        foreach ($FAQ as $item) {
             $faq = new Faq();
             $faq->setTitle($item['title']);
             $faq->setQuestion($item['question']);
             $faq->setAnswer($item['answer']);
             $manager->persist($faq);
         }
-
-//        var_dump($faq, $item);
 
         $manager->flush();
     }
@@ -44,7 +42,7 @@ class LoadFAQData extends AbstractFixture implements OrderedFixtureInterface
      *
      * @return integer
      */
-    function getOrder()
+    public function getOrder()
     {
         return 1;
     }

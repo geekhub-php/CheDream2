@@ -8,27 +8,52 @@
 
 namespace Geekhub\UserBundle\DataFixtures\ORM;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\UserBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    protected $container;
+
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     *
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
-        foreach($this->getUserArray() as $item) {
+        $mediaManager = $this->container->get('sonata.media.manager.media');
+
+        foreach ($this->getUserArray() as $item) {
+            $media = new Media();
+            $media->setBinaryContent(__DIR__.'/images/'.$item.'.jpg');
+            $media->setProviderName('sonata.media.provider.image');
+            $mediaManager->save($media);
+
             $user = new User();
             $user->setUsername($item);
             $user->setEmail($item.'@example.com');
             $user->setEnabled(true);
             $user->setPassword($item);
             $user->setFirstName($item);
+            $user->setAvatar($media);
             $manager->persist($user);
         }
 
@@ -40,13 +65,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
      *
      * @return integer
      */
-    function getOrder()
+    public function getOrder()
     {
         return 2;
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     protected function getUserArray()
     {
