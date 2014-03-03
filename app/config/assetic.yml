@@ -52,3 +52,9 @@ assetic:
                 - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/jquery.fileupload.js
             filters: [yui_js]
             output: js/dream.min.js
+        dream_js_remove_media:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
+            filters: [yui_js]
+            output: js/dream_remove_media.min.js
+

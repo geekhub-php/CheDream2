@@ -22,18 +22,18 @@
             <br>
             <div id="dream-gallery">
                 {% for picture in dreamPictures %}
-                    <img src="../{% path picture, 'pictures_prew' %}" class="img-thumbnail">
+                    <img src="../{% path picture, 'pictures_prew' %}" class="img-thumbnail" data-idmedia="{{ picture.id }}">
                 {% endfor %}
             </div>
             <br/>
             <div id="dream-files">
                 {% for file in dreamFiles %}
-                    <a href="{% path file, 'reference' %}" > {{ file }} </a>
+                    <a href="{% path file, 'reference' %}"  data-idmedia="{{ file.id }}"> {{ file }} </a>
                 {% endfor %}
             </div>
             <div id="dream-videos">
                 {% for video in dreamVideos %}
-                    <img src="../{% path video, 'video_prew' %}" class="img-thumbnail">
+                    <img src="../{% path video, 'video_prew' %}" class="img-thumbnail"  data-idmedia="{{ video.id }}">
                 {% endfor %}
             </div>
 
@@ -49,8 +49,8 @@
                                 </div>
                                 <br/>
                                 <div class="text-center">
-                                    <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="add video">
-                                    <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="cancel">
+                                    <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="Додати">
+                                    <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="Відміна">
                                 </div>
                                 <br/>
                             </div>
@@ -58,11 +58,11 @@
                     </div>
 
                     <span class="btn btn-success fileinput-button btn-xs pull-left" id="load-input" onclick="loadFile()">
-                       <span> Додати файли...</span>
+                       <span> Додати файли </span>
                         <input id="fileuploadz" type="file" name="files" multiple>
                     </span>
 
-                    <span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()"> Add video</span>
+                    <span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()"> Додати відео </span>
                 </div>
             </div>
 
@@ -154,9 +154,6 @@
 {% block javascript %}
     {{ parent() }}
     <script src="{{ asset('js/dream.min.js') }}"></script>
-
-    <script>
-        var d = 5;
-    </script>
+    <script src="{{ asset('js/dream_remove_media.min.js') }}"></script>
 
 {% endblock %}

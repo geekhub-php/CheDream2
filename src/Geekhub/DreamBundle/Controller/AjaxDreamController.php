@@ -35,4 +35,14 @@ class AjaxDreamController extends Controller
 
         return new Response(json_encode($result));
     }
+
+    public function DreamPictureRemoveAction(Request$request)
+    {
+        $idMedia = $request->get('id');
+        $mediaManager = $this->get('sonata.media.manager.media');
+        $media = $mediaManager->findOneBy(array('id' => $idMedia));
+        $mediaManager->delete($media);
+
+        return new Response('ok');
+    }
 }
