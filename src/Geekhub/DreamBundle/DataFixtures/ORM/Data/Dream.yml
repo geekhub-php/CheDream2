@@ -4,9 +4,11 @@ dream1:
     description:  Показати малим джедаям Місяць.
     phone:        380979999999
     expiredDate:  01.01.2015
+    mediaPoster:  moon
 dream2:
     author:       chewbacca
     title:        Новенький зореліт.
     description:  Придбати ще один зореліт для контрабанди різного товару в міжгалактисному суспільстві.
     phone:        380939999999
     expiredDate:  25.01.2015
+    mediaPoster:  starship
