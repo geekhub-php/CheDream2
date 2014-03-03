@@ -30,9 +30,9 @@ abstract class AbstractMediaLoader extends AbstractFixture implements ContainerA
     }
 
     /**
-     * @param $src
-     * @param $provider
-     * @param $nameReference
+     * @param string $src
+     * @param string $provider
+     * @param string $nameReference
      */
     protected function setMediaContent($src, $provider, $nameReference)
     {
