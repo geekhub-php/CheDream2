@@ -5,6 +5,7 @@ namespace Geekhub\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
+use Geekhub\UserBundle\Entity\Contacts;
 
 class DefaultController extends Controller
 {
@@ -28,13 +29,22 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form -> isValid()) {
-        	//$em->persist($user->getContacts());
+            // !!!Object type are compared by reference, not by value. 
+            // Doctrine updates this values if the reference changes
+            $contacts =  new Contacts();
+            $contacts->setPhone($user->getContacts()->getPhone());
+            $contacts->setSkype($user->getContacts()->getSkype());
+            $user->setContacts($contacts);
+            if ($user->getAvatar()) {
+                $mediaManager = $this->container->get('sonata.media.manager.media');
+                $mediaManager->save($user->getAvatar());
+            }
+
         	$em->flush();
-        	var_dump($user);
-        	//exit;
-            //return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+
+            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
         }
 
-        return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user));
+        return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
     }
 }

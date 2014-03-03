@@ -1,14 +1,17 @@
 {% extends "GeekhubResourceBundle::layout.html.twig" %}
 
+{% block title %}Edit profile{% endblock %}
+
 {% block body %}
     <div class="container" id="wrap">
         {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
 
         <div style="padding: 5% 0;">
           <div class="row">
-           <form method="POST" action="{{ path('profile_edit') }}">
+           <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
             <div class="col-md-5">
-             <img src="{{ user.avatar | imagine_filter('userAvatarBig') }}">
+             {% media avatar, 'big' %}
+             {{ form_widget(form.avatar) }}             
              {{ form_widget(form.contacts) }}
              {{ form_label(form.email) }}
              {{ form_widget(form.email) }}
@@ -29,7 +32,18 @@
                 </div>
               </div>  
               {{ form_label(form.birthday) }}
-              {{ form_widget(form.birthday) }}
+               <div class="row">
+                <div class="col-md-3">
+                    {{ form_widget(form.birthday.day) }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form_widget(form.birthday.month) }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form_widget(form.birthday.year) }}
+                  </div>
+                </div>
+
               {{ form_label(form.about) }}
               {{ form_widget(form.about) }}
               {{ form_rest(form) }}

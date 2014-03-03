@@ -42,6 +42,7 @@ abstract class AbstractSocialNetworkProvider
         $media = new Media;
         $media->setBinaryContent($localImg);
         $media->setProviderName('sonata.media.provider.image');
+        $media->setContext('avatar');
 
         $mediaManager = $this->container->get('sonata.media.manager.media');
         $mediaManager->save($media);

@@ -15,7 +15,7 @@ class ContactsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('phone', 'text', array('label' => 'телефон ' ))
-            ->add('skype', 'text', array('label' => 'Skype ' ));
+            ->add('phone', 'text', array('label' => 'телефон ', 'required' => false ))
+            ->add('skype', 'text', array('label' => 'Skype ', 'required' => false ));
     }
 }
