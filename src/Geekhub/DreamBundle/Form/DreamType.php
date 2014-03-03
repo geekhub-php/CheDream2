@@ -44,9 +44,9 @@ class DreamType extends AbstractType
                 'required'  => false,
             ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
-                'input'  => 'datetime',
                 'widget' => 'single_text',
-                'label' => 'expireData fff ',
+                'format' => 'yyyy-MM-dd',
+                'label' => 'Кінцева дата: ',
             ))
             ->add('dreamFinancialResources', 'collection', array(
                 'type' => new FinancialType(),
