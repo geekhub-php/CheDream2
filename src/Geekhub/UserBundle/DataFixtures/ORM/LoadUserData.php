@@ -8,30 +8,13 @@
 
 namespace Geekhub\UserBundle\DataFixtures\ORM;
 
-use Application\Sonata\MediaBundle\Entity\Media;
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Application\Sonata\MediaBundle\DataFixtures\ORM\AbstractMediaLoader;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\UserBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterface
 {
-    protected $container;
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
-     *
-     * @api
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -39,13 +22,12 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $mediaManager = $this->container->get('sonata.media.manager.media');
-
         foreach ($this->getUserArray() as $item) {
-            $media = new Media();
-            $media->setBinaryContent(__DIR__.'/images/'.$item.'.jpg');
-            $media->setProviderName('sonata.media.provider.image');
-            $mediaManager->save($media);
+            $this->setMediaContent(
+                __DIR__.'/images/'.$item.'.jpg',
+                'sonata.media.provider.image',
+                'avatar'.$item
+            );
 
             $user = new User();
             $user->setUsername($item);
@@ -53,7 +35,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $user->setEnabled(true);
             $user->setPassword($item);
             $user->setFirstName($item);
-            $user->setAvatar($media);
+            $user->setAvatar($this->getReference('avatar'.$item));
             $manager->persist($user);
         }
 
