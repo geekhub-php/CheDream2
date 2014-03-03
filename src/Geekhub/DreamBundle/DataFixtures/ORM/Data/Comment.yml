@@ -1,0 +1,9 @@
+comment1:
+    dream:  dream1
+    user:   c3pio
+    text:   Привіт!!! Це дісно перша мрія?
+comment2:
+    dream:  dream1
+    user:   yoda
+    text:   Привіт!!! Так, це дісно перша мрія?
+    parent: comment1
