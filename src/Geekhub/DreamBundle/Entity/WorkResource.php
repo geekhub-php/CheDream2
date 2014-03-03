@@ -9,6 +9,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * DreamResource
@@ -30,6 +31,7 @@ class WorkResource extends AbstractContributeResource
     /**
      * @var integer
      *
+     * @Assert\Regex(pattern="/^[0-9.]+$/", message="допустимі лише цифри")
      * @ORM\Column(name="quantityDays", type="integer", nullable=true)
      */
     protected $quantityDays;

@@ -29,8 +29,8 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dream.title.not_blank")
-     * @Assert\Length(min = "5", minMessage = "dream.title.length_error_short")
+     * @Assert\NotBlank(message = "Поле не повинно бути порожнім.")
+     * @Assert\Length(min = "5", minMessage = "Мінімальна довжина заголовку - {{ limit }} символів")
      * @ORM\Column(name="title", type="string", length=200)
      */
     protected $title;
@@ -46,6 +46,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
+     * @Assert\Regex(pattern="/^[+0-9()-]+$/", message="допустимі лише цифри")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;
