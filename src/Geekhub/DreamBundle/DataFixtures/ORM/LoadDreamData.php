@@ -30,13 +30,13 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
         foreach ($dreams as $key => $dreamData) {
             $dream = new Dream();
             $this->setMediaContent(
-                __DIR__.'/images/' . $dreamData['mediaPoster'] . '.jpg',
+                __DIR__.'/images/'.$dreamData['mediaPoster'].'.jpg',
                 'sonata.media.provider.image',
                 'dream' . $key
             );
 
-            $dream->setMediaPoster($this->getReference('dream' . $key));
-            $dream->setAuthor($this->getReference('user-' . $dreamData['author']));
+            $dream->setMediaPoster($this->getReference('dream'.$key));
+            $dream->setAuthor($this->getReference('user-'.$dreamData['author']));
             $dream->setTitle($dreamData['title']);
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
@@ -64,6 +64,6 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
      */
     protected function getYmlFile()
     {
-        return __DIR__ . '/Data/Dream.yml';
+        return __DIR__.'/Data/Dream.yml';
     }
 }

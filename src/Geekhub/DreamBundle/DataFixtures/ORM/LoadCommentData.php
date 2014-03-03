@@ -30,7 +30,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
             $comment = new Comment();
 
             $comment->setDream($this->getReference($commentData['dream']));
-            $comment->setUser($this->getReference('user-' . $commentData['user']));
+            $comment->setUser($this->getReference('user-'.$commentData['user']));
             $comment->setText($commentData['text']);
             if (isset($commentData['parent'])) {
                 $comment->setParent($this->getReference($commentData['parent']));
@@ -58,6 +58,6 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
      */
     protected function getYmlFile()
     {
-        return __DIR__ . '/Data/Comment.yml';
+        return __DIR__.'/Data/Comment.yml';
     }
 }
