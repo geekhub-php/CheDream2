@@ -42,6 +42,7 @@ class DreamType extends AbstractType
             ->add($builder->create('tags', 'text', array(
                 'attr' => array('class' => 'form-control'),
                 'required'  => false,
+                'label' => 'Ключові слова'
             ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
                 'widget' => 'single_text',

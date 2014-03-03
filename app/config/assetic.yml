@@ -47,7 +47,7 @@ assetic:
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tag-it.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
-#                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
                 - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/vendor/jquery.ui.widget.js
                 - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/jquery.fileupload.js
             filters: [yui_js]
