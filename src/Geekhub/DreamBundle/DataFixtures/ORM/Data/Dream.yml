@@ -1,0 +1,12 @@
+dream1:
+    author:       yoda
+    title:        Політ на Місяць
+    description:  Показати малим джедаям Місяць.
+    phone:        380979999999
+    expiredDate:  01.01.2015
+dream2:
+    author:       chewbacca
+    title:        Новенький зореліт.
+    description:  Придбати ще один зореліт для контрабанди різного товару в міжгалактисному суспільстві.
+    phone:        380939999999
+    expiredDate:  25.01.2015

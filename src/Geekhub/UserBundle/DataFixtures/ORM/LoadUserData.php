@@ -38,7 +38,7 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             $user->setAvatar($this->getReference('avatar' . $item));
             $manager->persist($user);
 
-            $this->addReference('user' . $item, $user);
+            $this->addReference('user-' . $item, $user);
         }
 
         $manager->flush();

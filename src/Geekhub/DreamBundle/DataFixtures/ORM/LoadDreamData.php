@@ -9,9 +9,11 @@
 namespace Geekhub\DreamBundle\DataFixtures\ORM;
 
 use Application\Sonata\MediaBundle\DataFixtures\ORM\AbstractMediaLoader;
-use Doctrine\Common\DataFixtures\Doctrine;
+use DateTime;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Geekhub\DreamBundle\Entity\Dream;
+use Symfony\Component\Yaml\Yaml;
 
 class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterface
 {
@@ -23,7 +25,22 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        // TODO: Implement load() method.
+        $dreams = Yaml::parse($this->getYmlFile());
+
+        foreach ($dreams as $key => $dreamData) {
+            $dream = new Dream();
+
+            $dream->setAuthor($this->getReference('user-' . $dreamData['author']));
+            $dream->setTitle($dreamData['title']);
+            $dream->setDescription($dreamData['description']);
+            $dream->setPhone($dreamData['phone']);
+            $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
+            $manager->persist($dream);
+
+            $this->addReference($key, $dream);
+        }
+
+        $manager->flush();
     }
 
     /**
@@ -34,5 +51,13 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     public function getOrder()
     {
         return 3;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getYmlFile()
+    {
+        return __DIR__ . '/Data/Dream.yml';
     }
 }
