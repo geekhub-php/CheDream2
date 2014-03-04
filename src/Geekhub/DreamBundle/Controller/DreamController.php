@@ -36,15 +36,12 @@ class DreamController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $dream->addStatus(new Status(Status::SUBMITTED));
+                $dream->setAuthor($user);
 
                 $tagManager = $this->get('fpn_tag.tag_manager');
                 $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);
-
-                if (!is_null($user)) {
-                    $dream->setAuthor($user);
-                }
 
                 $em->persist($dream);
                 $em->flush();
