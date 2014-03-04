@@ -24,7 +24,20 @@ class LoadFavoriteData extends AbstractFixture implements OrderedFixtureInterfac
     function load(ObjectManager $manager)
     {
         $favorites = Yaml::parse($this->getYmlFile());
-        var_dump($favorites);
+
+        foreach($favorites as $favoriteData) {
+            $user = $manager->getRepository('GeekhubUserBundle:User')
+                ->findOneBy(['username' => $favoriteData['user']]);
+
+            foreach($favoriteData['dreams'] as $dreamData) {
+                $dream = $this->getReference($dreamData);
+                $user->addFavoriteDream($dream);
+            }
+
+            $manager->persist($user);
+        }
+
+        $manager->flush();
     }
 
     /**
