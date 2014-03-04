@@ -24,12 +24,9 @@ class DreamType extends AbstractType
     {
         /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
         $dream = $options['dream'];
-//        var_dump(get_class($dream->getDreamResources())); exit;
         $mediaManager = $options['media-manager'];
+
         $transformerTag = new TagTransformer();
-//        $transformerFinance = new FinancialTransformer($dream);
-//        $transformerEquipment = new EquipmentTransformer($dream);
-//        $transformerWork = new WorkTransformer($dream);
         $transformerPicture = new DreamPicturesTransformer($dream, $mediaManager);
         $transformerPoster = new DreamPosterTransformer($dream, $mediaManager);
         $transformerFile = new DreamFilesTransformer($dream, $mediaManager);
