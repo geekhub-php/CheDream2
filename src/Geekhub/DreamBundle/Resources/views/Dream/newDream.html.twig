@@ -76,10 +76,10 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
-                <ul class="financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
                     {% for finance in form.dreamFinancialResources %}
                         <li>
-                            {{ form_row(finance) }}
+                            {{ form_widget(finance) }}
                             {{ form_errors(finance) }}
                         </li><br/>
                     {% endfor %}
@@ -88,10 +88,10 @@
 
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
-                <ul class="equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                     {% for equipment in form.dreamEquipmentResources %}
                         <li>
-                            {{ form_row(equipment) }}
+                            {{ form_widget(equipment) }}
                             {{ form_errors(equipment) }}
                         </li><br/>
                     {% endfor %}
@@ -100,10 +100,10 @@
 
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
-                <ul class="workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
                     {% for work in form.dreamWorkResources %}
                         <li>
-                            {{ form_row(work) }}
+                            {{ form_widget(work) }}
                             {{ form_errors(work) }}
                         </li><br/>
                     {% endfor %}
@@ -131,6 +131,10 @@
         });
         $(document).ready(function() {
             $('ul.help-block li a').hide();
+            $('#newDreamForm_dreamPictures').get(0).value = '';
+            $('#newDreamForm_dreamFiles').get(0).value = '';
+            $('#newDreamForm_dreamVideos').get(0).value = '';
+            $('#newDreamForm_dreamPoster').get(0).value = '';
         });
     </script>
 {% endblock %}

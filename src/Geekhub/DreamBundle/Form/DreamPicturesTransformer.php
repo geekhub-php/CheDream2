@@ -48,7 +48,6 @@ class DreamPicturesTransformer implements DataTransformerInterface
 
             $file = new File($pictureSrc);
 
-//            var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
             $media->setBinaryContent($file->getRealPath());
 //            $media->setBinaryContent($pictureSrc);
             $media->setProviderName('sonata.media.provider.image');
@@ -56,10 +55,10 @@ class DreamPicturesTransformer implements DataTransformerInterface
             $this->mediaManager->save($media);
             $this->dream->addMediaPicture($media);
 
-            try {
-                $fs->remove($file);
-            } catch (IOExceptionInterface $e) {
-            }
+//            try {
+//                $fs->remove($file);
+//            } catch (IOExceptionInterface $e) {
+//            }
         }
 
         return;

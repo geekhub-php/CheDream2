@@ -45,7 +45,6 @@ class DreamPosterTransformer implements DataTransformerInterface
 
         $file = new File($picturesString);
 
-//        var_dump($file->getBasename(), $file->getPath(), $file->getRealPath()); exit;
         $media->setBinaryContent($file->getRealPath());
 //        $media->setBinaryContent($picturesString);
         $media->setProviderName('sonata.media.provider.image');
@@ -53,10 +52,10 @@ class DreamPosterTransformer implements DataTransformerInterface
         $this->mediaManager->save($media);
         $this->dream->setMediaPoster($media);
 
-        try {
-            $fs->remove($file);
-        } catch (IOExceptionInterface $e) {
-        }
+//        try {
+//            $fs->remove($file);
+//        } catch (IOExceptionInterface $e) {
+//        }
 
         return;
     }
