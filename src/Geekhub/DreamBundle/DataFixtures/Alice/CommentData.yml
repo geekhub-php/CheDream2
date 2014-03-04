@@ -1,0 +1,10 @@
+\Geekhub\DreamBundle\Entity\Comment:
+    comment1:
+        dream:  @dream1
+        user:   @userc3pio
+        text:   Привіт!!! Це дісно перша мрія?
+    comment2:
+        dream:  @dream1
+        user:   @useryoda
+        text:   Привіт!!! Так, це дісно перша мрія?
+        parent: @comment1

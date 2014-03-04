@@ -128,3 +128,7 @@ hwi_oauth:
 geekhub_user:
     image:
         upload_directory: /upload/
+
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # default
