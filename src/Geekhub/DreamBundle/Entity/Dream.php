@@ -38,7 +38,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dream.description.not_blank")
+     * @Assert\NotBlank(message = "Поле не повинно бути порожнім.")
      * @ORM\Column(name="description", type="text")
      */
     protected $description;

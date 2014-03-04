@@ -8,7 +8,7 @@
         <h1>New Dream <small>create or edit your dream</small></h1>
     </div>
     {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}
     <div class="row">
         <div class="col-md-5">
 
@@ -134,14 +134,19 @@
     </div>
 
         <br>
-         <input type="submit" value="Create Dream" class="text-center btn btn-primary">
+        <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">Створити</button>
+        {#<input type="submit" value="Create Dream" class="text-center btn btn-primary">#}
         {{ form_row(form._token) }}
     {{ form_end(form) }}
-    {% include 'GeekhubDreamBundle:includes:dreamMainImageModal.html.twig' %}
+    {% include 'GeekhubDreamBundle:includes:dreamConfirmModal.html.twig' %}
 {% endblock %}
 
 {% block javascript %}
 {{ parent() }}
 <script src="{{ asset('js/dream.min.js') }}"></script>
-
+    <script>
+        $('#btnDreamSubmit').click(function(){
+            $('#create-dream-form').get(0).submit();
+        });
+    </script>
 {% endblock %}
