@@ -15,6 +15,7 @@ use Geekhub\DreamBundle\Form\DreamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DreamController extends Controller
 {
@@ -103,7 +104,7 @@ class DreamController extends Controller
 
     }
 
-    public function listAllDreamAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();

@@ -15,7 +15,7 @@ edit_dream:
 
 dream_list:
     pattern:  /dream/list
-    defaults: { _controller: GeekhubDreamBundle:Dream:listAllDream }
+    defaults: { _controller: GeekhubDreamBundle:Dream:list }
     options:
         expose: true
 
