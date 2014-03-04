@@ -106,16 +106,6 @@ class DreamController extends Controller
 
     }
 
-    public function MediaInfoAction($id)
-    {
-        $mediaManager = $this->get('sonata.media.manager.media');
-        $media = $mediaManager->findOneBy(array('id' => $id));
-
-        return $this->render('GeekhubDreamBundle:Dream:mediaInfo.html.twig', array(
-            'media' => $media
-        ));
-    }
-
     public function listAllDreamAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -128,22 +118,6 @@ class DreamController extends Controller
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams,
-        ));
-    }
-
-    public function changeStatusAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById(1);
-
-        $dream->addStatus(new Status(Status::COMPLETED));
-
-        $em->flush();
-
-        $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
-
-        return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
-            'dreams' => $dreams
         ));
     }
 }

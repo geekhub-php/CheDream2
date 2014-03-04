@@ -19,10 +19,6 @@ dream_list:
     options:
         expose: true
 
-dream_change_status:
-    pattern:  /dream/chst
-    defaults: { _controller: GeekhubDreamBundle:Dream:changeStatus }
-
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamImageLoader }
@@ -40,7 +36,3 @@ dream_ajax_remove_media:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPictureRemove }
     options:
         expose: true
-
-dream_media_info:
-    pattern:  /dream/media/{id}
-    defaults: { _controller: GeekhubDreamBundle:Dream:MediaInfo }
