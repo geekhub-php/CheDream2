@@ -24,13 +24,13 @@ class EquipmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array('label' => 'назва'))
-            ->add('quantity', 'text', array('label' => 'колличество'))
+            ->add('title', 'text', array('label' => 'dream.resource.title'))
+            ->add('quantity', 'text', array('label' => 'dream.equipment.quantity'))
             ->add('quantityType', 'choice', array(
                 'choices' => array(
-                    AbstractContributeResource::PIECE => 'шт.',
-                    AbstractContributeResource::KG => 'кг',
-                    AbstractContributeResource::TON => 'тон'
+                    AbstractContributeResource::PIECE => 'dream.equipment.piece',
+                    AbstractContributeResource::KG => 'dream.equipment.kg',
+                    AbstractContributeResource::TON => 'dream.equipment.ton'
                 ),
 //                'preferred_choices' => array(AbstractContributeResource::PIECE),
                 'label' => 'Тип'

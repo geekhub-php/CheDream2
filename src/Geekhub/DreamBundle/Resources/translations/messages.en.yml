@@ -1,0 +1,24 @@
+dream:
+    add: Додати
+    cancel: Відміна
+    files_add: Додати файли
+    videos_add: Додати відео
+    title: Назва
+    description: Описання
+    phone: Телефон
+    expiredate: Кінцева дата
+    tags: Ключові слова
+    create: Створити
+    edit: Редагувати
+    resource:
+        title: Назва статті
+    financial:
+        quantity: Сумма
+    equipment:
+        quantity: Кількість
+        piece: штук
+        kg: кг.
+        ton: тон
+    work:
+        quantity: Людей
+        days: Днів

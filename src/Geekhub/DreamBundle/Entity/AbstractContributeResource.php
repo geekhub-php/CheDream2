@@ -30,7 +30,7 @@ abstract class AbstractContributeResource
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "Поле не повинно бути порожнім.")
+     * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
     protected $title;
@@ -38,8 +38,8 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
-     * @Assert\NotBlank(message = "Поле не повинно бути порожнім.")
-     * @Assert\Regex(pattern="/^[0-9.]+$/", message="допустимі лише цифри")
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
      * @ORM\Column(name="quantity", type="float", nullable=true)
      */
     protected $quantity;
