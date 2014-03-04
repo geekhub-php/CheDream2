@@ -38,6 +38,7 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
+     * @Assert\NotBlank(message = "Поле не повинно бути порожнім.")
      * @Assert\Regex(pattern="/^[0-9.]+$/", message="допустимі лише цифри")
      * @ORM\Column(name="quantity", type="float", nullable=true)
      */

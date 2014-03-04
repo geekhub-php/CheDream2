@@ -46,7 +46,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @Assert\Regex(pattern="/^[+0-9()-]+$/", message="допустимі лише цифри")
+     * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="допустимі лише цифри")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;

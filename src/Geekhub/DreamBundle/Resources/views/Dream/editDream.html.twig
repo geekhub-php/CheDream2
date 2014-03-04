@@ -7,8 +7,8 @@
     <div class="page-header">
         <h1>New Dream <small>create or edit your dream</small></h1>
     </div>
-    {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+    {#{{ form_start(form) }}#}
     <div class="row">
         <div class="col-md-5">
 
@@ -91,11 +91,8 @@
                 <ul class="financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
                     {% for finance in form.dreamFinancialResources %}
                         <li>
-                            {{ form_label(finance.title) }}
-                            {{ form_widget(finance.title) }}
-
-                            {{ form_label(finance.quantity) }}
-                            {{ form_widget(finance.quantity) }}
+                            {{ form_row(finance) }}
+                            {{ form_errors(finance) }}
                         </li><br/>
                     {% endfor %}
                 </ul>
@@ -108,14 +105,8 @@
                 <ul class="equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                     {% for equipment in form.dreamEquipmentResources %}
                         <li>
-                            {{ form_label(equipment.title) }}
-                            {{ form_widget(equipment.title) }}
-
-                            {{ form_label(equipment.quantity) }}
-                            {{ form_widget(equipment.quantity) }}
-
-                            {{ form_label(equipment.quantityType) }}
-                            {{ form_widget(equipment.quantityType) }}
+                            {{ form_row(equipment) }}
+                            {{ form_errors(equipment) }}
                         </li><br/>
                     {% endfor %}
                 </ul>
@@ -126,14 +117,8 @@
                 <ul class="workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
                     {% for work in form.dreamWorkResources %}
                         <li>
-                            {{ form_label(work.title) }}
-                            {{ form_widget(work.title) }}
-
-                            {{ form_label(work.quantity) }}
-                            {{ form_widget(work.quantity) }}
-
-                            {{ form_label(work.quantityDays) }}
-                            {{ form_widget(work.quantityDays) }}
+                            {{ form_row(work) }}
+                            {{ form_errors(work) }}
                         </li><br/>
                     {% endfor %}
                 </ul>
@@ -154,5 +139,10 @@
     {{ parent() }}
     <script src="{{ asset('js/dream.min.js') }}"></script>
     <script src="{{ asset('js/dream_remove_media.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('ul.help-block li a').hide();
+        });
+    </script>
 
 {% endblock %}
