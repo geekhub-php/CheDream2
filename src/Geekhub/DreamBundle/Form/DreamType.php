@@ -24,12 +24,9 @@ class DreamType extends AbstractType
     {
         /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
         $dream = $options['dream'];
-//        var_dump(get_class($dream->getDreamResources())); exit;
         $mediaManager = $options['media-manager'];
+
         $transformerTag = new TagTransformer();
-//        $transformerFinance = new FinancialTransformer($dream);
-//        $transformerEquipment = new EquipmentTransformer($dream);
-//        $transformerWork = new WorkTransformer($dream);
         $transformerPicture = new DreamPicturesTransformer($dream, $mediaManager);
         $transformerPoster = new DreamPosterTransformer($dream, $mediaManager);
         $transformerFile = new DreamFilesTransformer($dream, $mediaManager);
@@ -40,7 +37,6 @@ class DreamType extends AbstractType
             ->add('description', 'textarea', array('label' => 'опис '))
             ->add('phone', 'text', array('label' => 'телефон' ))
             ->add($builder->create('tags', 'text', array(
-                'attr' => array('class' => 'form-control'),
                 'required'  => false,
                 'label' => 'Ключові слова'
             ))->addModelTransformer($transformerTag))
@@ -51,21 +47,18 @@ class DreamType extends AbstractType
             ))
             ->add('dreamFinancialResources', 'collection', array(
                 'type' => new FinancialType(),
-//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
             ))
             ->add('dreamEquipmentResources', 'collection', array(
                 'type' => new EquipmentType(),
-//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,
             ))
             ->add('dreamWorkResources', 'collection', array(
                 'type' => new WorkType(),
-//                'mapped' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference'  => false,

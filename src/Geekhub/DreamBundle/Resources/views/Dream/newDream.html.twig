@@ -77,7 +77,6 @@
             <div class="col-md-4">
                 <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
                 <ul class="financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
-                    {#{{ dump(form.financialResources) }}#}
                     {% for finance in form.dreamFinancialResources %}
                         <li>
                             {{ form_label(finance.title) }}
@@ -138,7 +137,6 @@
 
         <br>
         <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">Створити</button>
-        {#<input type="submit" value="Create Dream" class="text-center btn btn-primary">#}
         {{ form_row(form._token) }}
     {{ form_end(form) }}
     {% include 'GeekhubDreamBundle:includes:dreamConfirmModal.html.twig' %}

@@ -15,6 +15,7 @@ use Geekhub\DreamBundle\Form\DreamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DreamController extends Controller
 {
@@ -36,15 +37,12 @@ class DreamController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $dream->addStatus(new Status(Status::SUBMITTED));
+                $dream->setAuthor($user);
 
                 $tagManager = $this->get('fpn_tag.tag_manager');
                 $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);
-
-                if (!is_null($user)) {
-                    $dream->setAuthor($user);
-                }
 
                 $em->persist($dream);
                 $em->flush();
@@ -107,17 +105,7 @@ class DreamController extends Controller
 
     }
 
-    public function MediaInfoAction($id)
-    {
-        $mediaManager = $this->get('sonata.media.manager.media');
-        $media = $mediaManager->findOneBy(array('id' => $id));
-
-        return $this->render('GeekhubDreamBundle:Dream:mediaInfo.html.twig', array(
-            'media' => $media
-        ));
-    }
-
-    public function listAllDreamAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
@@ -129,22 +117,6 @@ class DreamController extends Controller
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams,
-        ));
-    }
-
-    public function changeStatusAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById(1);
-
-        $dream->addStatus(new Status(Status::COMPLETED));
-
-        $em->flush();
-
-        $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
-
-        return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
-            'dreams' => $dreams
         ));
     }
 }
