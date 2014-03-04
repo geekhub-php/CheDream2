@@ -84,7 +84,7 @@ class Dream implements Taggable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expiredDate", type="datetime", nullable=true)
+     * @ORM\Column(name="expiredDate", type="date", nullable=true)
      */
     protected $expiredDate;
 
@@ -123,11 +123,6 @@ class Dream implements Taggable
     protected $dreamContributes;
 
     /**
-     * @ORM\OneToMany(targetEntity="DreamResource", mappedBy="dream", cascade={"persist", "remove"})
-     */
-    protected $dreamResources;
-
-    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="dream", cascade={"persist", "remove"})
      */
     protected $dreamComments;
@@ -143,7 +138,7 @@ class Dream implements Taggable
      */
     protected $statuses;
 
-    /**
+       /**
      * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
     protected $currentStatus;
@@ -177,18 +172,35 @@ class Dream implements Taggable
     protected $dreamVideos;
 
     /**
+     * @ORM\OneToMany(targetEntity="FinancialResource", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamFinancialResources;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EquipmentResource", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamEquipmentResources;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkResource", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamWorkResources;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->usersWhoFavorites = new ArrayCollection();
         $this->dreamContributes = new ArrayCollection();
-        $this->dreamResources = new ArrayCollection();
         $this->dreamComments = new ArrayCollection();
         $this->statuses = new ArrayCollection();
         $this->mediaPictures = new ArrayCollection();
         $this->mediaFiles = new ArrayCollection();
         $this->mediaVideos = new ArrayCollection();
+        $this->dreamFinancialResources = new ArrayCollection();
+        $this->dreamEquipmentResources = new ArrayCollection();
+        $this->dreamWorkResources = new ArrayCollection();
     }
 
     /**
@@ -551,40 +563,6 @@ class Dream implements Taggable
     }
 
     /**
-     * Add dreamResources
-     *
-     * @param  \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
-     * @return Dream
-     */
-    public function addDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
-    {
-        $this->dreamResources[] = $dreamResources;
-        $dreamResources->setDream($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove dreamResources
-     *
-     * @param \Geekhub\DreamBundle\Entity\DreamResource $dreamResources
-     */
-    public function removeDreamResource(\Geekhub\DreamBundle\Entity\DreamResource $dreamResources)
-    {
-        $this->dreamResources->removeElement($dreamResources);
-    }
-
-    /**
-     * Get dreamResources
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDreamResources()
-    {
-        return $this->dreamResources;
-    }
-
-    /**
      * Add dreamComments
      *
      * @param  \Geekhub\DreamBundle\Entity\Comment $dreamComments
@@ -641,12 +619,12 @@ class Dream implements Taggable
     }
 
     /**
-     * Add statuses
+     * Add status
      *
-     * @param  \Geekhub\DreamBundle\Entity\Status $statuses
+     * @param  Status $status
      * @return Dream
      */
-    public function addStatus(\Geekhub\DreamBundle\Entity\Status $status)
+    public function addStatus(Status $status)
     {
         $this->statuses[] = $status;
 //        $status->setDream($this);
@@ -886,5 +864,110 @@ class Dream implements Taggable
     public function getMediaVideos()
     {
         return $this->mediaVideos;
+    }
+
+    /**
+     * Add dreamFinancialResources
+     *
+     * @param  FinancialResource $dreamFinancialResources
+     * @return Dream
+     */
+    public function addDreamFinancialResource(FinancialResource $dreamFinancialResources)
+    {
+        $this->dreamFinancialResources[] = $dreamFinancialResources;
+        $dreamFinancialResources->setDream($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamFinancialResources
+     *
+     * @param FinancialResource $dreamFinancialResources
+     */
+    public function removeDreamFinancialResource(FinancialResource $dreamFinancialResources)
+    {
+        $this->dreamFinancialResources->removeElement($dreamFinancialResources);
+        $dreamFinancialResources->setDream(null);
+    }
+
+    /**
+     * Get dreamFinancialResources
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamFinancialResources()
+    {
+        return $this->dreamFinancialResources;
+    }
+
+    /**
+     * Add dreamEquipmentResources
+     *
+     * @param  EquipmentResource $dreamEquipmentResources
+     * @return Dream
+     */
+    public function addDreamEquipmentResource(EquipmentResource $dreamEquipmentResources)
+    {
+        $this->dreamEquipmentResources[] = $dreamEquipmentResources;
+        $dreamEquipmentResources->setDream($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamEquipmentResources
+     *
+     * @param EquipmentResource $dreamEquipmentResources
+     */
+    public function removeDreamEquipmentResource(EquipmentResource $dreamEquipmentResources)
+    {
+        $this->dreamEquipmentResources->removeElement($dreamEquipmentResources);
+        $dreamEquipmentResources->setDream(null);
+    }
+
+    /**
+     * Get dreamEquipmentResources
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamEquipmentResources()
+    {
+        return $this->dreamEquipmentResources;
+    }
+
+    /**
+     * Add dreamWorkResources
+     *
+     * @param  WorkResource $dreamWorkResources
+     * @return Dream
+     */
+    public function addDreamWorkResource(WorkResource $dreamWorkResources)
+    {
+        $this->dreamWorkResources[] = $dreamWorkResources;
+        $dreamWorkResources->setDream($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamWorkResources
+     *
+     * @param WorkResource $dreamWorkResources
+     */
+    public function removeDreamWorkResource(WorkResource $dreamWorkResources)
+    {
+        $this->dreamWorkResources->removeElement($dreamWorkResources);
+        $dreamWorkResources->setDream(null);
+    }
+
+    /**
+     * Get dreamWorkResources
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamWorkResources()
+    {
+        return $this->dreamWorkResources;
     }
 }
