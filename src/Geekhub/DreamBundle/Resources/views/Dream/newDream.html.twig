@@ -81,7 +81,7 @@
                         <li>
                             {{ form_widget(finance) }}
                             {{ form_errors(finance) }}
-                        </li><br/>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -93,7 +93,7 @@
                         <li>
                             {{ form_widget(equipment) }}
                             {{ form_errors(equipment) }}
-                        </li><br/>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -105,7 +105,7 @@
                         <li>
                             {{ form_widget(work) }}
                             {{ form_errors(work) }}
-                        </li><br/>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -123,8 +123,10 @@
 {% endblock %}
 
 {% block javascript %}
-{{ parent() }}
-<script src="{{ asset('js/dream.min.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+    <script src="{{ asset('js/dream.min.js') }}"></script>
     <script>
         $('#btnDreamSubmit').click(function(){
             $('#create-dream-form').get(0).submit();

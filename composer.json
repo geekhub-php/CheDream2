@@ -65,7 +65,8 @@
         "jms/serializer-bundle": "0.13.*",
         "bmatzner/jquery-ui-bundle": "1.10.0",
         "friendsofsymfony/rest-bundle": "1.3.*@dev",
-        "nelmio/api-doc-bundle": "2.5.*"
+        "nelmio/api-doc-bundle": "2.5.*",
+        "willdurand/js-translation-bundle": "2.0.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"

@@ -60,3 +60,6 @@ fos_js_routing:
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"

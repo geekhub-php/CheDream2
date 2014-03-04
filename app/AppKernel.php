@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

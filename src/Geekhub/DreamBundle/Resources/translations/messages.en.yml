@@ -10,6 +10,7 @@ dream:
     tags: Ключові слова
     create: Створити
     edit: Редагувати
+    test: js trans test ыз ії
     resource:
         title: Назва статті
     financial:
@@ -22,3 +23,8 @@ dream:
     work:
         quantity: Людей
         days: Днів
+    js:
+        add_financial: Додати фінансові витрати
+        add_equipment: Додати абладнання та інструменти
+        add_work: Додати робочі ресурси
+        delete_resource: Видалити ресурс

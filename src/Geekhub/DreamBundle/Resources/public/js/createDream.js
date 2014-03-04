@@ -1,14 +1,16 @@
 jQuery(document).ready(function() {
     var $collectionFinHolder, $collectionEquipHolder, $collectionWorkHolder;
 
-    var $addFinLink = $('<a href="#" class="add_fin_link btn btn-xs btn-default text-left">Add a fin</a>');
+    var add_fin = Translator.trans("dream.js.add_financial");
+    var $addFinLink = $('<a href="#" class="add_fin_link btn btn-xs btn-default text-left">' + add_fin + '</a>');
     var $newFinLinkLi = $('<li class="list-unstyled"></li>').append($addFinLink);
 
-
-    var $addEquipLink = $('<a href="#" class="add_equip_link btn btn-xs btn-default text-left">Add a equip</a>');
+    var add_equip = Translator.trans("dream.js.add_equipment");
+    var $addEquipLink = $('<a href="#" class="add_equip_link btn btn-xs btn-default text-left">' + add_equip + '</a>');
     var $newEquipLinkLi = $('<li class="list-unstyled"></li>').append($addEquipLink);
 
-    var $addWorkLink = $('<a href="#" class="add_work_link btn btn-xs btn-default text-left">Add a work</a>');
+    var add_work = Translator.trans("dream.js.add_work");
+    var $addWorkLink = $('<a href="#" class="add_work_link btn btn-xs btn-default text-left">' + add_work + '</a>');
     var $newWorkLinkLi = $('<li class="list-unstyled"></li>').append($addWorkLink);
 
     $collectionFinHolder = $('ul.financialResources');
@@ -53,7 +55,7 @@ function addFinForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append('<br>' + newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });
@@ -66,7 +68,7 @@ function addEquipForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append('<br>' + newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });
@@ -83,7 +85,7 @@ function addWorkForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li class="list-unstyled"></li>').append(newForm);
+    var $newFormLi = $('<li class="list-unstyled"></li>').append('<br>' + newForm);
     $newFormLi.find('input').each(function(){
         $(this).addClass('form-control');
     });
@@ -94,7 +96,8 @@ function addWorkForm($collectionHolder, $newLinkLi) {
 }
 
 function addFinFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_fin_link btn btn-xs btn-danger pull-right">delete this item</a>');
+    var delete_resource = Translator.trans("dream.js.delete_resource");
+    var $removeFormA = $('<a href="#" class="delete_fin_link btn btn-xs btn-danger pull-right">' + delete_resource + '</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -104,7 +107,8 @@ function addFinFormDeleteLink($finFormLi) {
 }
 
 function addEquipFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_equip_link btn btn-xs btn-danger pull-right">delete this item</a>');
+    var delete_resource = Translator.trans("dream.js.delete_resource");
+    var $removeFormA = $('<a href="#" class="delete_equip_link btn btn-xs btn-danger pull-right">' + delete_resource + '</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -114,7 +118,8 @@ function addEquipFormDeleteLink($finFormLi) {
 }
 
 function addWorkFormDeleteLink($finFormLi) {
-    var $removeFormA = $('<a href="#" class="delete_work_link btn btn-xs btn-danger pull-right">delete this item</a>');
+    var delete_resource = Translator.trans("dream.js.delete_resource");
+    var $removeFormA = $('<a href="#" class="delete_work_link btn btn-xs btn-danger pull-right">' + delete_resource + '</a>');
     $finFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
