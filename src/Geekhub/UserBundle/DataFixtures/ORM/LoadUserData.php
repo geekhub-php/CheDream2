@@ -23,10 +23,11 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
     public function load(ObjectManager $manager)
     {
         foreach ($this->getUserArray() as $item) {
+            $reference = 'avatar-'.$item;
             $this->setMediaContent(
                 __DIR__.'/images/'.$item.'.jpg',
                 'sonata.media.provider.image',
-                'avatar'.$item
+                $reference
             );
 
             $user = new User();
@@ -35,7 +36,7 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             $user->setEnabled(true);
             $user->setPassword($item);
             $user->setFirstName($item);
-            $user->setAvatar($this->getReference('avatar'.$item));
+            $user->setAvatar($this->getReference($reference));
             $manager->persist($user);
 
             $this->addReference('user-'.$item, $user);
