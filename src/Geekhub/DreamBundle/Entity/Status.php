@@ -32,6 +32,7 @@ class Status
 
     /**
      * @var string
+     * @return string
      *
      * @ORM\Column(name="title", type="string", length=30)
      */
@@ -46,10 +47,15 @@ class Status
     protected $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dream", inversedBy="status")
-     * @ORM\JoinColumn(name="dream_id", referencedColumnName="id")
+     *
+     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="statuses")
      */
     protected $dream;
+
+    public function __construct($title)
+    {
+        $this->title = $title;
+    }
 
     /**
      * Get id
@@ -77,7 +83,7 @@ class Status
     /**
      * Get title
      *
-     * @return integer
+     * @return string
      */
     public function getTitle()
     {
