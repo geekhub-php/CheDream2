@@ -83,6 +83,7 @@ class DreamController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
                 $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
                 $dream->setTags(null);
                 $tagManager->addTags($tagsObjArray, $dream);

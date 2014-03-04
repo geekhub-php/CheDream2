@@ -79,7 +79,8 @@ class DreamType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Geekhub\DreamBundle\Entity\Dream'
+            'data_class' => 'Geekhub\DreamBundle\Entity\Dream',
+            'cascade_validation' => true,
             ))
             ->setRequired(array('dream', 'media-manager'))
             ->setAllowedTypes(array(

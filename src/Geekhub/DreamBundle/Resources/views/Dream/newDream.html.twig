@@ -7,8 +7,8 @@
     <div class="page-header">
         <h1>New Dream <small>create or edit your dream</small></h1>
     </div>
-    {#{{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' }}) }}#}
-    {{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}
+    {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'id': 'create-dream-form' }}) }}
+    {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
     <div class="row">
         <div class="col-md-5">
 
@@ -97,14 +97,17 @@
                 <ul class="equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                     {% for equipment in form.dreamEquipmentResources %}
                         <li>
-                            {{ form_label(equipment.title) }}
-                            {{ form_widget(equipment.title) }}
 
-                            {{ form_label(equipment.quantity) }}
-                            {{ form_widget(equipment.quantity) }}
+                            {{ form_row(equipment) }}
 
-                            {{ form_label(equipment.quantityType) }}
-                            {{ form_widget(equipment.quantityType) }}
+                            {#{{ form_label(equipment.title) }}#}
+                            {#{{ form_widget(equipment.title) }}#}
+
+                            {#{{ form_label(equipment.quantity) }}#}
+                            {#{{ form_widget(equipment.quantity) }}#}
+
+                            {#{{ form_label(equipment.quantityType) }}#}
+                            {#{{ form_widget(equipment.quantityType) }}#}
                         </li><br/>
                     {% endfor %}
                 </ul>

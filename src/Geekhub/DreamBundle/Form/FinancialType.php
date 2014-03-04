@@ -26,9 +26,6 @@ class FinancialType extends AbstractType
         $builder
             ->add('title', 'text', array('label' => 'назва'))
             ->add('quantity', 'text', array('label' => 'сума'));
-//            ->add('type', 'hidden', array(
-//                'data' => AbstractContributeResource::FINANCIAL,
-//            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
