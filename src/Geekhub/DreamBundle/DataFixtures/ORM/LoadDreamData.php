@@ -17,7 +17,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterface
 {
-
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -26,6 +25,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     public function load(ObjectManager $manager)
     {
         $dreams = Yaml::parse($this->getYmlFile());
+        $tagManager = $this->container->get('fpn_tag.tag_manager');
 
         foreach ($dreams as $key => $dreamData) {
             $dream = new Dream();
@@ -41,12 +41,20 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
+            $tagsObjArray = $tagManager->loadOrCreateTags($dreamData['tags']);
+            $dream->setTags(null);
+            $tagManager->addTags($tagsObjArray, $dream);
             $manager->persist($dream);
 
             $this->addReference($key, $dream);
         }
 
         $manager->flush();
+
+        foreach ($dreams as $key => $dreamData) {
+            $dream = $this->getReference($key);
+            $tagManager->saveTagging($dream);
+        }
     }
 
     /**
