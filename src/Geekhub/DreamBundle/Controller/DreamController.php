@@ -21,12 +21,10 @@ class DreamController extends Controller
     public function newDreamAction(Request $request)
     {
         $dream = new Dream();
-        $mediaManager = $this->get('sonata.media.manager.media');
-        $user = $this->getUser();
 
         $form = $this->createForm(new DreamType(), $dream, array(
             'dream' => $dream,
-            'media-manager' => $mediaManager
+            'media-manager' => $this->get('sonata.media.manager.media')
         ));
 
         if ($request->isMethod('POST')) {
@@ -35,13 +33,8 @@ class DreamController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
-                $dream->addStatus(new Status(Status::SUBMITTED));
-                $dream->setAuthor($user);
-
-                $tagManager = $this->get('fpn_tag.tag_manager');
-                $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
-                $dream->setTags(null);
-                $tagManager->addTags($tagsObjArray, $dream);
+                $tagManager = $this->get('geekhub.tag.tag_manager');
+                $tagManager->addTagsToEntity($dream);
 
                 $em->persist($dream);
                 $em->flush();
