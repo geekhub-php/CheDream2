@@ -21,18 +21,29 @@ class DreamSubscriber implements EventSubscriber
     {
         return array(
             'prePersist',
+            'postLoad'
         );
     }
 
     public function prePersist(LifecycleEventArgs $args)
     {
-        $dream = $args->getObject();
+        $object = $args->getObject();
 
-        if ($dream instanceof Dream) {
+        if ($object instanceof Dream) {
             $user = $this->container->get('security.context')->getToken()->getUser();
 
-            $dream->setAuthor($user);
-            $dream->addStatus(new Status(Status::SUBMITTED));
+            $object->setAuthor($user);
+            $object->addStatus(new Status(Status::SUBMITTED));
+        }
+    }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+
+        if ($object instanceof Dream) {
+            $tagManager = $this->container->get('geekhub.tag.tag_manager');
+            $tagManager->loadTagging($object);
         }
     }
 }

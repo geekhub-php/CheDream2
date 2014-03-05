@@ -10,9 +10,9 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
-use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Form\DreamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -50,48 +50,41 @@ class DreamController extends Controller
         ));
     }
 
-    public function editDreamAction($slug, Request $request)
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     */
+    public function editDreamAction(Dream $dream, Request $request)
     {
-        $user = $this->getUser();
-        $mediaManager = $this->get('sonata.media.manager.media');
-        $tagManager = $this->get('fpn_tag.tag_manager');
-        $em = $this->getDoctrine()->getManager();
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
-        $tagManager->loadTagging($dream);
-
-        if ($user->getId() != $dream->getAuthor()->getId()) {
+        if ($this->getUser()->getId() != $dream->getAuthor()->getId()) {
             throw new AccessDeniedException();
         }
 
         $form = $this->createForm(new DreamType(), $dream, array(
             'dream' => $dream,
-            'media-manager' => $mediaManager
+            'media-manager' => $this->get('sonata.media.manager.media')
         ));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                $tagManager = $this->get('geekhub.tag.tag_manager');
+                $tagManager->addTagsToEntity($dream);
+
                 $em = $this->getDoctrine()->getManager();
-
-                $tagsObjArray = $tagManager->loadOrCreateTags($dream->getTags());
-                $dream->setTags(null);
-                $tagManager->addTags($tagsObjArray, $dream);
-
                 $em->flush();
+
                 $tagManager->saveTagging($dream);
 
                 return $this->redirect($this->generateUrl('dream_list'));
             }
         }
 
-        /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
-
         return $this->render('GeekhubDreamBundle:Dream:editDream.html.twig', array(
-            'form' => $form->createView(),
-            'poster' => $dream->getMediaPoster(),
+            'form'          => $form->createView(),
+            'poster'        => $dream->getMediaPoster(),
             'dreamPictures' => $dream->getMediaPictures(),
-            'dreamFiles' => $dream->getMediaFiles(),
+            'dreamFiles'    => $dream->getMediaFiles(),
             'dreamVideos'   => $dream->getMediaVideos()
         ));
 
@@ -99,13 +92,7 @@ class DreamController extends Controller
 
     public function listAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $dreams = $em->getRepository('GeekhubDreamBundle:Dream')->findAll();
-
-        $tagManager = $this->get('fpn_tag.tag_manager');
-        foreach ($dreams as $dream) {
-            $tagManager->loadTagging($dream);
-        }
+        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams,
