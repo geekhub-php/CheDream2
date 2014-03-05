@@ -11,14 +11,17 @@ namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Form\DreamType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\Annotations\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DreamController extends Controller
 {
-
+    /**
+     * @View(templateVar="form")
+     */
     public function newDreamAction(Request $request)
     {
         $dream = new Dream();
@@ -46,13 +49,12 @@ class DreamController extends Controller
             }
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:newDream.html.twig', array(
-            'form' => $form->createView()
-        ));
+        return $form->createView();
     }
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @View()
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
@@ -81,23 +83,21 @@ class DreamController extends Controller
             }
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:editDream.html.twig', array(
+        return array(
             'form'          => $form->createView(),
             'poster'        => $dream->getMediaPoster(),
             'dreamPictures' => $dream->getMediaPictures(),
             'dreamFiles'    => $dream->getMediaFiles(),
             'dreamVideos'   => $dream->getMediaVideos()
-        ));
-
+        );
     }
 
+    /**
+     * @View(templateVar="dreams")
+     */
     public function listAction()
     {
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
-
-        return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
-            'dreams' => $dreams,
-        ));
+        return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
     }
 
     public function viewAction($slug)
