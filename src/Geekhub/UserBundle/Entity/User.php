@@ -52,7 +52,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday", type="datetime", nullable=true)
+     * @ORM\Column(name="birthday", type="date", nullable=true)
      */
     protected $birthday;
 
@@ -374,6 +374,7 @@ class User extends BaseUser //implements DreamUserInterface
     public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
         $this->favoriteDreams[] = $favoriteDreams;
+        $favoriteDreams->addUsersWhoFavorite($this);
 
         return $this;
     }

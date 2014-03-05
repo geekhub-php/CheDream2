@@ -40,7 +40,7 @@ abstract class AbstractContributeResource
      *
      * @Assert\NotBlank(message = "dream.not_blank")
      * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
-     * @ORM\Column(name="quantity", type="float", nullable=true)
+     * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;
 
