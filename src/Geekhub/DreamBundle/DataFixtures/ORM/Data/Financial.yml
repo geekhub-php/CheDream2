@@ -1,0 +1,12 @@
+finance1:
+    dream:    dream1
+    title:    фінанс1
+    quantity: 100
+finance2:
+    dream:    dream1
+    title:    фінанс2
+    quantity: 200
+finance3:
+    dream:    dream2
+    title:    фінанс1
+    quantity: 50
