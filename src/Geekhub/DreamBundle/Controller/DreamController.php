@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DreamController extends Controller
 {
+
     public function newDreamAction(Request $request)
     {
         $dream = new Dream();
@@ -56,7 +57,7 @@ class DreamController extends Controller
             'form' => $form->createView()
         ));
     }
-
+    /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
     public function editDreamAction($slug, Request $request)
     {
         $user = $this->getUser();
@@ -117,5 +118,29 @@ class DreamController extends Controller
         return  $this->render('GeekhubDreamBundle:Dream:list.html.twig', array(
             'dreams' => $dreams,
         ));
+    }
+
+    public function viewAction($slug)
+    {
+        /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
+        $em = $this->getDoctrine()->getManager();
+        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
+
+        $dreamPosterMedia = $dream->getMediaPoster();
+
+        $mediaPool = $this->get('sonata.media.pool');
+
+        $provider = $mediaPool->getProvider($dreamPosterMedia->getProviderName());
+
+        $format = $provider->getFormatName($dreamPosterMedia, 'reference');
+        $posterSrc = $provider->generatePublicUrl($dreamPosterMedia, $format);
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        $tagManager->loadTagging($dream);
+
+        return  $this->render('GeekhubDreamBundle:Dream:showDream.html.twig', array(
+            'dream' => $dream,
+            'poster'    => $posterSrc
+        ));
+
     }
 }
