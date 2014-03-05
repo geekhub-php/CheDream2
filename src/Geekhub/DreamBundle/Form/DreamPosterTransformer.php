@@ -56,7 +56,6 @@ class DreamPosterTransformer implements DataTransformerInterface
 //            $fs->remove($file);
 //        } catch (IOExceptionInterface $e) {
 //        }
-
         return;
     }
 }
