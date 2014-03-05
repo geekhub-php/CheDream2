@@ -11,13 +11,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractContributeResource
 {
-    const FINANCIAL     = 'financial';
-    const EQUIPMENT     = 'equipment';
-    const WORK          = 'work';
-    const OTHER         = 'other';
-    const TON           = 'ton';
-    const KG            = 'kg';
-    const PIECE         = 'piece';
+    const TON   = 'ton';
+    const KG    = 'kg';
+    const PIECE = 'piece';
+
+    static public function getReadableQuantityTypes()
+    {
+        return array(
+            self::PIECE => 'dream.equipment.piece',
+            self::KG    => 'dream.equipment.kg',
+            self::TON   => 'dream.equipment.ton'
+        );
+    }
 
     /**
      * @var \DateTime

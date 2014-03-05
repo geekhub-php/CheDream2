@@ -33,17 +33,16 @@ class DreamType extends AbstractType
         $transformerVideo = new DreamVideoTransformer($dream, $mediaManager);
 
         $builder
-            ->add('title', 'text', array('label' => 'назва '))
-            ->add('description', 'textarea', array('label' => 'опис '))
-            ->add('phone', 'text', array('label' => 'телефон' ))
+            ->add('title', 'text', array('label' => 'dream.title'))
+            ->add('description', 'textarea', array('label' => 'dream.description'))
+            ->add('phone', 'text', array('label' => 'dream.phone'))
             ->add($builder->create('tags', 'text', array(
                 'required'  => false,
-                'label' => 'Ключові слова'
             ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
-                'label' => 'Кінцева дата: ',
+                'label' => 'dream.expired_date',
             ))
             ->add('dreamFinancialResources', 'collection', array(
                 'type' => new FinancialType(),
