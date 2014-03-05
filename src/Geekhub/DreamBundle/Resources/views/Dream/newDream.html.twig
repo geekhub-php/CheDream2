@@ -1,0 +1,142 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <h1>Dream <small>create or edit your dream</small></h1>
+    </div>
+    {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'id': 'create-dream-form' }}) }}
+    {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
+    <div class="row">
+        <div class="col-md-5">
+
+            <span class="fileinput-button" id="dream-poster-image">
+                <div id="dream-poster-container">
+                    <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+                    <input id="fileupload-poster" type="file" name="dream-poster">
+                </div>
+            </span>
+
+            <br>
+            <div id="dream-gallery"></div>
+            <br/>
+            <div id="dream-files"></div>
+            <div id="dream-videos"></div>
+
+            <div class="row">
+                <div class="col-md-11">
+
+                    <div id="dream-add-video">
+                        <div class="row">
+                            <div class="col-md-9 col-md-offset-1">
+                                <div>
+                                    <div id="dream-add-video-error"></div>
+                                    <input type="text" class="form-control" id="dream-add-video-text-input">
+                                </div>
+                                <br/>
+                                <div class="text-center">
+                                    <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="{{ 'dream.add'|trans }}">
+                                    <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="{{ 'dream.cancel'|trans }}">
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="btn btn-success fileinput-button btn-xs pull-left" id="load-input" onclick="loadFile()">
+                       <span>{{ 'dream.files_add'|trans }}</span>
+                        <input id="fileuploadz" type="file" name="files" multiple>
+                    </span>
+
+                    <span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()">{{ 'dream.videos_add'|trans }}</span>
+                </div>
+            </div>
+
+            <br/>
+
+            <div id="errors" class="files"></div>
+
+        </div>
+        <div class="col-md-7">
+            {{ form_row(form.title, { 'label': 'dream.title'|trans }) }}
+            {{ form_row(form.description, { 'label': 'dream.description'|trans }) }}
+            {{ form_row(form.phone, { 'label': 'dream.phone'|trans }) }}
+            {{ form_row(form.expiredDate, { 'label': 'dream.expiredate'|trans }) }}
+            {{ form_row(form.tags, { 'label': 'dream.tags'|trans }) }}
+            {{ form_widget(form.dreamPictures) }}
+            {{ form_widget(form.dreamFiles) }}
+            {{ form_widget(form.dreamVideos) }}
+            {{ form_widget(form.dreamPoster) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
+                <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                    {% for finance in form.dreamFinancialResources %}
+                        <li>
+                            {{ form_widget(finance) }}
+                            {{ form_errors(finance) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h4><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;EQUIPMENT</h4>
+                <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                    {% for equipment in form.dreamEquipmentResources %}
+                        <li>
+                            {{ form_widget(equipment) }}
+                            {{ form_errors(equipment) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
+                <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                    {% for work in form.dreamWorkResources %}
+                        <li>
+                            {{ form_widget(work) }}
+                            {{ form_errors(work) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+
+    <br>
+    <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">{{ 'dream.create'|trans }}</button>
+    {{ form_row(form._token) }}
+    {{ form_end(form) }}
+    {% include 'GeekhubDreamBundle:includes:dreamConfirmModal.html.twig' %}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+    <script src="{{ asset('js/dream.min.js') }}"></script>
+    <script>
+        $('#btnDreamSubmit').click(function(){
+            $('#create-dream-form').get(0).submit();
+        });
+        $(document).ready(function() {
+            $('ul.help-block li a').hide();
+            $('#newDreamForm_dreamPictures').get(0).value = '';
+            $('#newDreamForm_dreamFiles').get(0).value = '';
+            $('#newDreamForm_dreamVideos').get(0).value = '';
+            $('#newDreamForm_dreamPoster').get(0).value = '';
+        });
+    </script>
+{% endblock %}

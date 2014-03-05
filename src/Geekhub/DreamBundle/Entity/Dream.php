@@ -29,8 +29,8 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dream.title.not_blank")
-     * @Assert\Length(min = "5", minMessage = "dream.title.length_error_short")
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Length(min = "5", minMessage = "dream.min_length")
      * @ORM\Column(name="title", type="string", length=200)
      */
     protected $title;
@@ -38,7 +38,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dream.description.not_blank")
+     * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="description", type="text")
      */
     protected $description;
@@ -46,6 +46,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
+     * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="dream.only_numbers")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
     protected $phone;

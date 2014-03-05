@@ -6,6 +6,10 @@ geekhub_dream:
     resource: "@GeekhubDreamBundle/Resources/config/routing.yml"
     prefix:   /
 
+geekhub_tag:
+    resource: "@TagBundle/Resources/config/routing.yml"
+    prefix:   /tags
+
 geekhub_user:
     resource: "@GeekhubUserBundle/Resources/config/routing.yml"
     prefix:   /
@@ -45,3 +49,17 @@ gallery:
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
+
+media_internal_api:
+    resource: '@ApplicationSonataMediaBundle/Resources/config/api.yml'
+    prefix: /internal-api/media
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"

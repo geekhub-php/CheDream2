@@ -25,7 +25,7 @@ security:
                     facebook: "/login-social/check-facebook"
                     vkontakte: "/login-social/check-vkontakte"
                     odnoklassniki: "/login-social/check-odnoklassniki"
-                login_path:   /login-social
+                login_path:   /
                 failure_path: /login3
 
                 oauth_user_provider:
@@ -36,3 +36,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/dream/new, role: ROLE_USER }
