@@ -3,23 +3,26 @@ dream:
     cancel: Відміна
     files_add: Додати файли
     videos_add: Додати відео
-    title: Назва
+    title: Назва мрії
     description: Описання
     phone: Телефон
-    expiredate: Кінцева дата
-    tags: Ключові слова
+    expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
     resource:
         title: Назва статті
     financial:
+        title: Стаття витрат
         quantity: Сумма
     equipment:
+        title: Ресурс
         quantity: Кількість
+        type: Одиниці вимірювання
         piece: штук
         kg: кг.
         ton: тон
     work:
+        title: Назва робіт
         quantity: Людей
         days: Днів
     js:
@@ -27,3 +30,5 @@ dream:
         add_equipment: Додати абладнання та інструменти
         add_work: Додати робочі ресурси
         delete_resource: Видалити ресурс
+
+tags: Ключові слова
