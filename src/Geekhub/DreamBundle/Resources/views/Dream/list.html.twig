@@ -1,0 +1,97 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="container" id="wrap">
+        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+
+        <div style="margin-top: 50px;">
+
+            {% for dream in dreams %}
+                <div>
+
+                    <p>title = {{ dream.title }} <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a> </p>
+                    {% if dream.author != null %}
+                        <p>author name = {{ dream.author.firstName }}</p>
+                        <p>author surname = {{ dream.author.lastName }}</p>
+                        {% thumbnail dream.author.avatar, 'avatar_small' with {'class': 'img-thumbnail'} %}
+                    {% endif %}
+
+                    <p>descr = {{ dream.description }}</p>
+                    <p>phone = {{ dream.phone }}</p>
+                    <p>exp data = {{ dream.expiredDate|date('d.m.Y') }}</p>
+                    <p>status = {{ dream.currentStatus.title }}</p>
+                    <p>Tags =
+                        {% for tag in dream.tags %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </p>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Poster #}
+                        {% thumbnail dream.mediaPoster, 'poster_big' %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Pictures #}
+                    {% for picture in dream.mediaPictures %}
+                        {% thumbnail picture, 'pictures_prew' %}
+                        {#{% path picture, 'pictures_big' %}#}
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Files #}
+                    {% for file in dream.mediaFiles %}
+                        {#{{ loop.index }}#}
+                        {#{{ dump(file) }}#}
+                        {#{% path file, 'reference' %}#}
+                        <a href="{% path file, 'reference' %}" > {{ file }} </a>
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+                    <div>    {# Videos #}
+                    {% for video in dream.mediaVideos %}
+                        {% thumbnail video, 'video_prew' %}
+                        {% media video, 'reference' %}
+                        <br/>
+                    {% endfor %}
+                    </div>
+                    {# ------------------------------------------------------------------- #}
+
+                    <div class=" well well-sm">
+                        <p> Financial </p>
+                        {% for resources in dream.dreamFinancialResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <hr/>
+                        <p> Equipment </p>
+                        {% for resources in dream.dreamEquipmentResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                            {% if resources.quantityType is not null %}
+                                <p>quantityType = {{ resources.quantityType }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <hr/>
+                        <p> Work </p>
+                        {% for resources in dream.dreamWorkResources %}
+                            <p>title = {{ resources.title }}</p>
+                            {% if resources.quantity is not null %}
+                                <p>quantity = {{ resources.quantity }}</p>
+                            {% endif %}
+                            {% if resources.quantityDays is not null %}
+                                <p>quantityDays = {{ resources.quantityDays }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+    {#{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}#}
+{% endblock %}

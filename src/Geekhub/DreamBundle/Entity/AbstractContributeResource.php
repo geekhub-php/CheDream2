@@ -30,7 +30,7 @@ abstract class AbstractContributeResource
     /**
      * @var string
      *
-     * @Assert\NotBlank(message = "dreamResource.title.not_blank")
+     * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
     protected $title;
@@ -38,7 +38,9 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
-     * @ORM\Column(name="quantity", type="float", nullable=true)
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
+     * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;
 

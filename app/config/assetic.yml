@@ -12,6 +12,8 @@ assetic:
             node: /usr/local/bin/node
             node_paths: [/usr/local/lib/node_modules]
             apply_to: "\.less$"
+        yui_js:
+            jar: %kernel.root_dir%/../vendor/nervo/yuicompressor/yuicompressor.jar
     assets:
         css_style:
             inputs:
@@ -22,10 +24,37 @@ assetic:
                 - cssrewrite
                 - yui_css
             output: css/style.min.css
-        javascript:
+        scripts:
             inputs:
                 - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
+            filters: [yui_js]
             output: js/scripts.min.js
+        dream_css:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/jquery.tagit.css
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/tagit.ui-zendesk.css
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/dream-style.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output: css/dream_css.min.css
+        dream_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/bmatzner/jquery-ui-bundle/Bmatzner/JQueryUIBundle/Resources/public/js/jquery-ui.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tag-it.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
+                - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/vendor/jquery.ui.widget.js
+                - %kernel.root_dir%/../vendor/blueimp/jQuery-File-Upload/js/jquery.fileupload.js
+            filters: [yui_js]
+            output: js/dream.min.js
+        dream_js_remove_media:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
+            filters: [yui_js]
+            output: js/dream_remove_media.min.js
+
