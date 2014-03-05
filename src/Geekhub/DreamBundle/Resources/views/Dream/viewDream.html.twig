@@ -1,0 +1,58 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+            <div class="row">
+                <div class="col-md-7" style="border: solid 1px #000000; max-width: 500px;">
+                    {#Poster#}
+                        <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}" class="img-thumbnail"/>
+                </div>  {# end poster block#}
+                <div class="col-md-5" style="border: solid 1px #000000;">
+                    <div class="row" id="video">
+                            {% for video in dream.mediaVideos %}
+                                {% media video, 'reference' %}
+                            {% endfor %}
+                    </div> {# end video block#}
+                    <div class="row">
+
+                        {#Images#}
+                        {% if dream.mediaPictures|length > 0 %}
+                            {% for picture in dream.mediaPictures %}
+                                {% if loop.index <= 2 %}
+                                    <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                    </div> {# end pictures block#}
+
+                </div>  {# end video + pictures block#}
+            </div> {# end medi block#}
+
+
+
+            {{ dream.title }}
+
+            <p>Tags:
+            {% for tag in dream.tags %}
+                <span class="label label-primary">{{ tag.name }}</span>
+            {% endfor %}
+            </p>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $('#video object').get(0).width='100%';
+            $('#video object').get(0).height=200;
+            $('#video object embed').get(0).width='100%';
+            $('#video object embed').get(0).height=200;
+
+        });
+    </script>
+{% endblock %}

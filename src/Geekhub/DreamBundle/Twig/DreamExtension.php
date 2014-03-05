@@ -31,7 +31,8 @@ class DreamExtension extends \Twig_Extension
     {
         $provider = $this->mediaPool->getProvider($media->getProviderName());
         $format = $provider->getFormatName($media, 'reference');
-        return $provider->generatePublicUrl($media, $format);
+
+        return substr($provider->generatePublicUrl($media, $format), 3);
     }
 
     public function getName()

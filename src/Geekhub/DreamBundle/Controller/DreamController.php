@@ -100,18 +100,12 @@ class DreamController extends Controller
         return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
     }
 
-    public function viewAction($slug)
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @View()
+     */
+    public function viewDreamAction(Dream $dream)
     {
-        /** @var \GeekHub\DreamBundle\Entity\Dream $dream */
-        $em = $this->getDoctrine()->getManager();
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
-
-        $tagManager = $this->get('fpn_tag.tag_manager');
-        $tagManager->loadTagging($dream);
-
-        return  $this->render('GeekhubDreamBundle:Dream:showDream.html.twig', array(
-            'dream' => $dream,
-        ));
-
+        return  array('dream' => $dream);
     }
 }

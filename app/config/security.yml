@@ -37,3 +37,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/dream/new, role: ROLE_USER }
+        - { path: ^/dream/edit, role: ROLE_USER }

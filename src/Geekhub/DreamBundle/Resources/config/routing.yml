@@ -38,6 +38,5 @@ dream_ajax_remove_media:
         expose: true
 
 show_dream:
-    pattern:  /dream/{slug}
-    defaults: { _controller: GeekhubDreamBundle:Dream:view }
-
+    pattern:  /dream/view/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }

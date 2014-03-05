@@ -87,6 +87,17 @@ liip_imagine:
             filters:
 #                thumbnail: { size: [440, 260], mode: inset }
                 thumbnail: { size: [440, 260], mode: outbound }
+        dream_poster_view_form:
+            quality: 90
+            filters:
+                relative_resize: { widen: 680 }
+        dream_pictures_view_form:
+            quality: 90
+            filters:
+                thumbnail: { size: [220, 150], mode: outbound }
+#                upscale: { max: [220, 150] }
+#                relative_resize: { widen: 680 }
+
 
 stof_doctrine_extensions:
     default_locale: en_US
