@@ -77,34 +77,16 @@ liip_imagine:
             filters:
                 thumbnail: { size: [30, 30], mode: outbound }
         dream_thumb:
+            quality: 90
             filters:
 #                thumbnail: { size: [80, 50], mode: inset }
                 thumbnail: { size: [80, 50], mode: outbound }
 #                relative_resize: { heighten: 80 }
         dream_poster:
+            quality: 90
             filters:
 #                thumbnail: { size: [440, 260], mode: inset }
                 thumbnail: { size: [440, 260], mode: outbound }
-        poster_bigliip:
-            quality: 90
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            filters:
-                thumbnail: { size: [440, 260], mode: outbound }
-        pictures_prewliip:
-            quality: 90
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            filters:
-                thumbnail: { size: [80, 80], mode: outbound }
-        video_prewliip:
-            quality: 90
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            filters:
-                thumbnail: { size: [120, 90], mode: outbound }
-        avatar_smallliip:
-            quality: 90
-            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
-            filters:
-                thumbnail: { size: [100, 100], mode: outbound }
 
 stof_doctrine_extensions:
     default_locale: en_US

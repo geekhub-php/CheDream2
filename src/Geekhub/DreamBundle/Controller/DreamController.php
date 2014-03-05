@@ -106,20 +106,11 @@ class DreamController extends Controller
         $em = $this->getDoctrine()->getManager();
         $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneBySlug($slug);
 
-        $dreamPosterMedia = $dream->getMediaPoster();
-
-        $mediaPool = $this->get('sonata.media.pool');
-
-        $provider = $mediaPool->getProvider($dreamPosterMedia->getProviderName());
-
-        $format = $provider->getFormatName($dreamPosterMedia, 'reference');
-        $posterSrc = $provider->generatePublicUrl($dreamPosterMedia, $format);
         $tagManager = $this->get('fpn_tag.tag_manager');
         $tagManager->loadTagging($dream);
 
         return  $this->render('GeekhubDreamBundle:Dream:showDream.html.twig', array(
             'dream' => $dream,
-            'poster'    => $posterSrc
         ));
 
     }

@@ -8,9 +8,9 @@
 
             <div>
                 {#<img src="{{ '/relative/path/to/image.jpg' | imagine_filter('my_thumb') }}" />#}
-                {#{{ dump(dream.mediaPoster.getCopyright()) }}#}
-                {{ poster }}
-                {#<img src="{% path dream.mediaPoster, 'reference' %}" alt="dream poster" />#}
+
+                {#{{ dream.mediaPoster|mediaPath }}#}
+                <img src="{{ '../upload/media/poster/0001/01/b064687dbdfed7cd0acb1ea41b8ab44dfd4b147d.png' | imagine_filter('dream_poster')|raw }}" />
             </div>
             {{ dream.title }}
 
