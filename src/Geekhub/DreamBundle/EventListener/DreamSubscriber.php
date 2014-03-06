@@ -35,7 +35,7 @@ class DreamSubscriber implements EventSubscriber
 
             if(null != $token) {
                 $object->setAuthor($token->getUser());
-            } else {
+            } elseif (!$object->getAuthor()) {
                 throw new \Exception("Ooops! Something went wrong. We can't create dream without user. Please contact with administrator.");
             }
         }
