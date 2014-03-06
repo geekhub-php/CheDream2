@@ -23,9 +23,7 @@
             {% endif %}
         {% endif %}
         <div>   {# dream description start #}
-            <p>
-                {{ dream.description }}
-            </p>
+            {{ dream.description|raw }}
         </div>  {# dream description end #}
     </div>
 

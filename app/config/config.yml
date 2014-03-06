@@ -166,3 +166,12 @@ hwi_oauth:
 geekhub_user:
     image:
         upload_directory:  /upload/users/avatars/
+
+stfalcon_tinymce:
+    include_jquery: true
+    tinymce_jquery: true
+    selector: ".tinymce"
+    language: "uk"
+    theme:
+        simple:
+            theme: "modern"
