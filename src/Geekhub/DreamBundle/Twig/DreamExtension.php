@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Twig;
 
+use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Provider\Pool;
 
 class DreamExtension extends \Twig_Extension
@@ -29,10 +30,14 @@ class DreamExtension extends \Twig_Extension
 
     public function mediaPath($media)
     {
+        if ($media instanceof Media) {
         $provider = $this->mediaPool->getProvider($media->getProviderName());
         $format = $provider->getFormatName($media, 'reference');
 
         return substr($provider->generatePublicUrl($media, $format), 3);
+        }
+
+        return $media;
     }
 
     public function getName()

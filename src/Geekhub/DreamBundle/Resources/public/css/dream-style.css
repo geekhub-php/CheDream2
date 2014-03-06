@@ -22,3 +22,38 @@
         height: 100%;
     }
 }
+
+.show-hr
+{
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.showDream-wrapper
+{
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.bolder115
+{
+    font-weight: bolder;
+    font-size: 115%;
+}
+.showDreamAvatar-wrapper {
+    position: absolute;
+    bottom: -25px;
+    left: 0px;
+    width: 100%;
+}
+.showDreamAvatar-wrapper img {
+    border-radius: 7px;
+}
+.showDreamAvatar-fio {
+    position: absolute;
+    bottom: -8px;
+    left: 100px;
+    font-weight: bolder;
+}

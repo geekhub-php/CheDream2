@@ -38,6 +38,7 @@ class DreamType extends AbstractType
             ->add('phone', 'text', array('label' => 'dream.phone'))
             ->add($builder->create('tags', 'text', array(
                 'required'  => false,
+                'label' => 'tags',
             ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
                 'widget' => 'single_text',

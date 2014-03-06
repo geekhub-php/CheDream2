@@ -1,0 +1,32 @@
+<div class="row">     {# Content start #}
+
+    <div class="col-md-4">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+            <p class="bolder115">Підтримати:</p>
+            <hr class="show-hr">
+            <ul class="list-unstyled">
+                <li>Фінансово</li>
+                <li>Обладнанням / Технікою</li>
+                <li>Провести роботи</li>
+                <li>Інша допомога</li>
+            </ul>
+        {% else %}
+            <p>Щоб підтримати мрію, Вам потрібно авторизуватися.</p>
+        {% endif %}
+    </div>
+
+    <div class="col-md-8">
+        <span style="font-weight: bold; font-size: 160%;">{{ dream.title }}</span>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+            {% if app.user.id == dream.author.id %}
+                <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+            {% endif %}
+        {% endif %}
+        <div>   {# dream description start #}
+            <p>
+                {{ dream.description }}
+            </p>
+        </div>  {# dream description end #}
+    </div>
+
+</div>  {# Content end #}

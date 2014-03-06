@@ -5,42 +5,41 @@
 {% endblock %}
 {% block content %}
 
-            <div class="row">
-                <div class="col-md-7" style="border: solid 1px #000000; max-width: 500px;">
-                    {#Poster#}
-                        <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}" class="img-thumbnail"/>
-                </div>  {# end poster block#}
-                <div class="col-md-5" style="border: solid 1px #000000;">
-                    <div class="row" id="video">
-                            {% for video in dream.mediaVideos %}
-                                {% media video, 'reference' %}
-                            {% endfor %}
-                    </div> {# end video block#}
-                    <div class="row">
-
-                        {#Images#}
-                        {% if dream.mediaPictures|length > 0 %}
-                            {% for picture in dream.mediaPictures %}
-                                {% if loop.index <= 2 %}
-                                    <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-
-                    </div> {# end pictures block#}
-
-                </div>  {# end video + pictures block#}
-            </div> {# end medi block#}
-
-
-
-            {{ dream.title }}
-
-            <p>Tags:
+    {# Media content start #}
+        {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+    {# Media content end #}
+<div class="showDream-wrapper">
+        <p><span class="bolder115">{{ 'tags'|trans }}:</span>
             {% for tag in dream.tags %}
                 <span class="label label-primary">{{ tag.name }}</span>
             {% endfor %}
-            </p>
+        </p>
+
+    {# contributions and dream descriptions start #}
+        {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
+    {# contributions and dream descriptions end #}
+
+    <div class="row">
+        <div class="col-md-4">
+            {# Resources start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
+            {# Resources end #}
+        </div>
+
+        <div class="col-md-8">
+
+            {# participants start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
+            {# participants end #}
+            <br/>
+            {# comments start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
+            {# comments end #}
+
+        </div>
+
+    </div>
+</div>
 
 {% endblock %}
 {% block javascript %}
@@ -49,9 +48,9 @@
     <script>
         $(document).ready(function(){
             $('#video object').get(0).width='100%';
-            $('#video object').get(0).height=200;
+            $('#video object').get(0).height=250;
             $('#video object embed').get(0).width='100%';
-            $('#video object embed').get(0).height=200;
+            $('#video object embed').get(0).height=250;
 
         });
     </script>
