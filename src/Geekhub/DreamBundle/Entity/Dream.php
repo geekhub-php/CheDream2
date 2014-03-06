@@ -130,7 +130,7 @@ class Dream implements Taggable
 
     /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
     protected $author;
 
