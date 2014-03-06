@@ -36,3 +36,7 @@ dream_ajax_remove_media:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPictureRemove }
     options:
         expose: true
+
+faq_view:
+    pattern:  /faq
+    defaults: { _controller: GeekhubDreamBundle:FAQ:index }
