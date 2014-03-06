@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FaqController extends Controller
 {
-    public function indexAction()
+    public function indexAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -14,6 +14,7 @@ class FaqController extends Controller
 
         return $this->render('GeekhubDreamBundle:Faq:index.html.twig', array(
             'faqs' => $faqs,
+                'id' => $id,
         ));
     }
 

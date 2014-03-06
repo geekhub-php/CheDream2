@@ -1,35 +1,28 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
-    <h1>Faq list</h1>
-
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for faq in faqs %}
-            <tr>
-                <td><a href="{{ path('faq_show', { 'id': faq.id }) }}">{{ faq.id }}</a></td>
-                <td>{{ faq.title }}</td>
-                <td>{{ faq.question }}</td>
-                <td>{{ faq.answer }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('faq_show', { 'id': faq.id }) }}">show</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    {% endblock %}
+    <div class="row wrapper">
+        <div class="row">
+            <div class='span12'>
+                <h1 class="text-center">Регламент та поради</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <ul class="nav nav-pills nav-stacked">
+                        {% for faq in faqs %}
+                            <li><a href="{{ path('faq', { 'id': faq.id }) }}">{{ faq.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                    <div class="row">
+                        {% render path('faq_show', {'id': id}) %}
+                    </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+{% endblock %}

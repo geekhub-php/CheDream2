@@ -38,8 +38,8 @@ dream_ajax_remove_media:
         expose: true
 
 faq:
-    pattern:  /faq
-    defaults: { _controller: "GeekhubDreamBundle:Faq:index" }
+    pattern:  /faq/{id}
+    defaults: { _controller: "GeekhubDreamBundle:Faq:index", id: 1 }
 
 faq_show:
     pattern:  /faq/{id}/show
