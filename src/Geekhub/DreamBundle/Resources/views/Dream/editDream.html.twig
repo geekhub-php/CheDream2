@@ -72,11 +72,11 @@
 
         </div>
         <div class="col-md-7">
-            {{ form_row(form.title, { 'label': 'dream.title'|trans }) }}
-            {{ form_row(form.description, { 'label': 'dream.description'|trans }) }}
-            {{ form_row(form.phone, { 'label': 'dream.phone'|trans }) }}
-            {{ form_row(form.expiredDate, { 'label': 'dream.expiredate'|trans }) }}
-            {{ form_row(form.tags, { 'label': 'dream.tags'|trans }) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.phone) }}
+            {{ form_row(form.expiredDate) }}
+            {{ form_row(form.tags) }}
             {{ form_widget(form.dreamPictures) }}
             {{ form_widget(form.dreamFiles) }}
             {{ form_widget(form.dreamVideos) }}
