@@ -1,3 +1,38 @@
 geekhub_dream_homepage:
     pattern:  /
     defaults: { _controller: GeekhubDreamBundle:Default:index }
+
+new_dream:
+    pattern:  /dream/new
+    defaults: { _controller: GeekhubDreamBundle:Dream:newDream }
+    options:
+        expose: true
+
+edit_dream:
+    pattern:  /dream/edit/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:editDream }
+
+
+dream_list:
+    pattern:  /dream/list
+    defaults: { _controller: GeekhubDreamBundle:Dream:list }
+    options:
+        expose: true
+
+dream_ajax_load_image:
+    pattern:  /dream/ajaxLoadImage
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamImageLoader }
+    options:
+        expose: true
+
+dream_ajax_load_poster:
+    pattern:  /dream/ajaxLoadPoster
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPosterLoader }
+    options:
+        expose: true
+
+dream_ajax_remove_media:
+    pattern:  /dream/ajaxRemovePicture
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPictureRemove }
+    options:
+        expose: true

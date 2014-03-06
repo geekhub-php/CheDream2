@@ -1,0 +1,6 @@
+Application\Sonata\MediaBundle\Model\UploadFileResponse:
+    properties:
+        errors:
+            type: array
+        src:
+            type: array

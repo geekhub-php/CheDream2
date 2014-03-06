@@ -1,0 +1,6 @@
+tag_get_tags:
+    pattern:  /
+    defaults: { _controller: TagBundle:Tag:getTags }
+    methods:  [GET]
+    options:
+        expose: true

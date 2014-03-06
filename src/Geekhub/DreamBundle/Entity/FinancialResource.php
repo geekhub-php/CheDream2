@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Yuriy Tarnavskiy
+ * Date: 02.03.14
+ * Time: 14:55
+ */
 
 namespace Geekhub\DreamBundle\Entity;
 
@@ -7,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DreamResource
  *
- * @ORM\Table(name="dream_resources")
+ * @ORM\Table(name="financial_resource")
  * @ORM\Entity
  */
-class DreamResource extends AbstractContributeResource
+class FinancialResource extends AbstractContributeResource
 {
     /**
      * @var integer
@@ -21,8 +27,8 @@ class DreamResource extends AbstractContributeResource
      */
     private $id;
 
-     /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamResources")
+    /**
+     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamFinancialResources")
      */
     private $dream;
 
@@ -39,10 +45,10 @@ class DreamResource extends AbstractContributeResource
     /**
      * Set dream
      *
-     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  Dream         $dream
      * @return DreamResource
      */
-    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
+    public function setDream(Dream $dream = null)
     {
         $this->dream = $dream;
 
@@ -52,7 +58,7 @@ class DreamResource extends AbstractContributeResource
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream
+     * @return Dream
      */
     public function getDream()
     {

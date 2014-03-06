@@ -23,16 +23,46 @@ sonata_media:
                 small: { width: 100 , quality: 70}
                 avatar_small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+
+        pictures:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                big:   { width: 150 , quality: 90}
+                prew: { width: 80 , quality: 90}
+
+        poster:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                big:   { width: 440 , quality: 90}
+
         avatar:
             providers:
                 - sonata.media.provider.image
             formats:
                 big:   { width: 200 , quality: 90}
                 small:   { width: 100 , quality: 90}
+                normal:   { width: 200 , quality: 90}
+
+        video:
+            providers:
+                - sonata.media.provider.youtube
+            formats:
+                prew:   { width: 100 , quality: 90}
+
     cdn:
         server:
-            path: /upload/media
+            path: ../upload/media
+
     filesystem:
         local:
             directory:  %kernel.root_dir%/../web/upload/media
             create:     false
+
+#   for liipimagine integration --------------------------------
+#    providers:
+#        image:
+#            thumbnail:  sonata.media.thumbnail.liip_imagine
+#        youtube:
+#            thumbnail:  sonata.media.thumbnail.liip_imagine

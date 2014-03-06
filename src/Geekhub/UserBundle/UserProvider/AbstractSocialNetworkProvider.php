@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\Container,
     Symfony\Component\Filesystem\Filesystem;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Geekhub\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 abstract class AbstractSocialNetworkProvider
 {
@@ -46,6 +47,11 @@ abstract class AbstractSocialNetworkProvider
 
         $mediaManager = $this->container->get('sonata.media.manager.media');
         $mediaManager->save($media);
+
+        try {
+            $filesystem->remove($localImg);
+        } catch (IOExceptionInterface $e) {
+        }
 
         return $media;
     }

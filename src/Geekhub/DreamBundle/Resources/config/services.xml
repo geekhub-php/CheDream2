@@ -3,5 +3,19 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="dream_file_uploader.class">Geekhub\DreamBundle\Service\DreamImageHandler</parameter>
+        <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
+    </parameters>
+
+    <services>
+        <service id="dream_file_uploader" class="%dream_file_uploader.class%">
+            <argument type="service" id="liip_imagine.cache.manager"/>
+        </service>
+        <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+    </services>
 
 </container>

@@ -19,10 +19,12 @@
              {{ form_widget(form.facebookId) }}
              {{ form_label(form.vkontakteId) }}
              {{ form_widget(form.vkontakteId) }}
+             {{ form_label(form.odnoklassnikiId) }}
+             {{ form_widget(form.odnoklassnikiId) }}
             </div>
             <div class="col-md-7">
-             <input type="submit" value ="Зберегти">            
-              <p>Імя та прізвище</p>
+             <input type="submit" value ="{{ 'user.save'|trans }}"> 
+              <p>{{ 'user.first_and_lastname'|trans }}</p>
                <div class="row">
                 <div class="col-md-6">
                   {{ form_widget(form.firstName) }}

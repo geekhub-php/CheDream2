@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ path('geekhub_dream_homepage') }}">
             <img data-src="holder.js/80x20" alt="logo">
         </a>
     </div>
@@ -63,7 +63,7 @@
             </li>
 
             <li>
-                <a>Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{{ path('new_dream') }}">Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
             </li>
 
             {% if app.user is null %}
@@ -91,6 +91,9 @@
             {% else %}
                 <li>
                     <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                </li>
+                <li>
+                     <a href="{{ path('profile_edit') }}"> Редагувати </a>
                 </li>
                 <li>
                     <a href="{{ path('_logout') }}">

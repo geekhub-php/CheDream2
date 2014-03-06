@@ -374,6 +374,7 @@ class User extends BaseUser //implements DreamUserInterface
     public function addFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
         $this->favoriteDreams[] = $favoriteDreams;
+        $favoriteDreams->addUsersWhoFavorite($this);
 
         return $this;
     }

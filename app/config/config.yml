@@ -3,10 +3,12 @@ imports:
     - { resource: security.yml }
     - { resource: assetic.yml }
     - { resource: sonata.yml }
+    - { resource: jms_serializer.yml }
+    - { resource: twig.yml }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -26,10 +28,9 @@ framework:
     fragments:       ~
     http_method_override: true
 
-# Twig Configuration
-twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+sensio_framework_extra:
+    view:
+        annotations: false
 
 # Doctrine Configuration
 doctrine:
@@ -80,6 +81,35 @@ liip_imagine:
             filters:
                 thumbnail: { size: [100, 100], mode: outbound }
 
+        dream_thumb:
+            filters:
+#                thumbnail: { size: [80, 50], mode: inset }
+                thumbnail: { size: [80, 50], mode: outbound }
+#                relative_resize: { heighten: 80 }
+        dream_poster:
+            filters:
+#                thumbnail: { size: [440, 260], mode: inset }
+                thumbnail: { size: [440, 260], mode: outbound }
+        poster_bigliip:
+            quality: 90
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [440, 260], mode: outbound }
+        pictures_prewliip:
+            quality: 90
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [80, 80], mode: outbound }
+        video_prewliip:
+            quality: 90
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+        avatar_smallliip:
+            quality: 90
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
 
 stof_doctrine_extensions:
     default_locale: en_US
@@ -98,6 +128,20 @@ fpn_tag:
     model:
         tag_class:     Geekhub\TagBundle\Entity\Tag
         tagging_class: Geekhub\TagBundle\Entity\Tagging
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    body_converter:
+        enabled: true
+        validate: true
+    routing_loader:
+        default_format: json
+    view:
+        view_response_listener: force
+
+nelmio_api_doc: ~
 
 hwi_oauth:
     connect:
@@ -132,4 +176,4 @@ hwi_oauth:
 
 geekhub_user:
     image:
-        upload_directory: /upload/
+        upload_directory:  /upload/users/avatars/

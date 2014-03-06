@@ -1,0 +1,6 @@
+media_upload_images:
+    pattern:  /upload/files
+    defaults: { _controller: ApplicationSonataMediaBundle:Api:uploadFiles }
+    methods: [POST]
+    options:
+        expose: true

@@ -1,0 +1,6 @@
+Geekhub\TagBundle\Entity\Tag:
+    exclusion_policy: ALL
+    properties:
+        name:
+            type: string
+            expose: true
