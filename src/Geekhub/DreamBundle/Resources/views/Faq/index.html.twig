@@ -1,0 +1,35 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Faq list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for faq in faqs %}
+            <tr>
+                <td><a href="{{ path('faq_show', { 'id': faq.id }) }}">{{ faq.id }}</a></td>
+                <td>{{ faq.title }}</td>
+                <td>{{ faq.question }}</td>
+                <td>{{ faq.answer }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('faq_show', { 'id': faq.id }) }}">show</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

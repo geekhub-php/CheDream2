@@ -2,7 +2,6 @@
 
 namespace Geekhub\DreamBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Geekhub\DreamBundle\Entity\Dream,
@@ -33,7 +32,7 @@ class DreamSubscriber implements EventSubscriber
             $object->addStatus(new Status(Status::SUBMITTED));
             $token = $this->container->get('security.context')->getToken();
 
-            if(null != $token) {
+            if (null != $token) {
                 $object->setAuthor($token->getUser());
             } elseif (!$object->getAuthor()) {
                 throw new \Exception("Ooops! Something went wrong. We can't create dream without user. Please contact with administrator.");

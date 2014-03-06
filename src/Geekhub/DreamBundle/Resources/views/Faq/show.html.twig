@@ -1,0 +1,34 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Faq</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ faq.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ faq.title }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>{{ faq.question }}</td>
+            </tr>
+            <tr>
+                <th>Answer</th>
+                <td>{{ faq.answer }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('faq') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
