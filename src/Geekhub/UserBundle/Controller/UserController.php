@@ -47,4 +47,10 @@ class UserController extends Controller
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
     }
+
+    public function loginAction()
+    {
+        return $this->render('GeekhubUserBundle:User:login.html.twig');
+    }
+
 }

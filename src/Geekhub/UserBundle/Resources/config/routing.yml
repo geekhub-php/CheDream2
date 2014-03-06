@@ -53,3 +53,7 @@ _logout:
 profile_edit:
     pattern: /profileEdit
     defaults: { _controller: GeekhubUserBundle:User:userEdit }
+
+_login:
+    pattern: /loginSome
+    defaults: { _controller: GeekhubUserBundle:User:login }
