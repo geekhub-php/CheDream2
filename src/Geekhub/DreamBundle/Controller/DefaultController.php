@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('GeekhubDreamBundle:Default:index.html.twig');
     }
+
+    public function contactAction()
+    {
+        return $this->render('GeekhubDreamBundle:Default:contact.html.twig');
+    }
 }

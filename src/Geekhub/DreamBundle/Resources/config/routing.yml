@@ -36,3 +36,7 @@ dream_ajax_remove_media:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPictureRemove }
     options:
         expose: true
+
+contact:
+    pattern:  /contact
+    defaults: { _controller: GeekhubDreamBundle:Default:contact }
