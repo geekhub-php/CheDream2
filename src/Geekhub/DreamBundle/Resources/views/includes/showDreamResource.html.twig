@@ -21,8 +21,17 @@
         <p class="text-center bolder115"><span class="glyphicon glyphicon-wrench"> </span> Інструменти/обладнання</p>
         <ul class="list-group">
             {% for equipment in dream.dreamEquipmentResources %}
+
+                {% if equipment.quantityType == 'piece' %}
+                    {% set eType = 'шт.' %}
+                {% elseif equipment.quantityType == 'kg' %}
+                    {% set eType = 'кг.' %}
+                {% else %}
+                    {% set eType = 'тон.' %}
+                {% endif %}
+
                 <li class="list-group-item">
-                    <span class="badge">{{ equipment.quantity }} {{ equipment.quantityType }}</span>
+                    <span class="badge">{{ equipment.quantity }} {{ eType }}</span>
                     {{ equipment.title }}
                 </li>
             {% endfor %}
