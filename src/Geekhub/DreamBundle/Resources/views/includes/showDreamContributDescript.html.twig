@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-4">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+            <h3>Підтримати:</h3>
+            <hr class="show-hr">
+            <div class="btn-group-vertical" style="width: 100%">
+                <a type="button" class="btn btn-default btn-lg btn-block">Фінансово</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Інша допомога</a>
+            </div>
+        {% else %}
+            <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-8">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id%}
+        <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+        {% endif %}
+        <h2>{{ dream.title }}</h2>
+
+        <div>
+            {{ dream.description|raw }}
+        </div>
+    </div>
+
+</div>
