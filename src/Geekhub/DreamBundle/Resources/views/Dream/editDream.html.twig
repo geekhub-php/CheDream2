@@ -22,7 +22,7 @@
             <br>
             <div id="dream-gallery">
                 {% for picture in dreamPictures %}
-                    <img src="../{% path picture, 'pictures_prew' %}" class="img-thumbnail" data-idmedia="{{ picture.id }}">
+                    <img src="{{ picture|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ picture.id }}"/>
                 {% endfor %}
             </div>
             <br/>
@@ -74,6 +74,7 @@
         <div class="col-md-7">
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
+            {{ tinymce_init() }}
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}

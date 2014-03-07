@@ -14,7 +14,7 @@ edit_dream:
 
 
 dream_list:
-    pattern:  /dream/list
+    pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }
     options:
         expose: true
@@ -36,6 +36,10 @@ dream_ajax_remove_media:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:DreamPictureRemove }
     options:
         expose: true
+
+view_dream:
+    pattern:  /dreams/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
 
 faq:
     pattern:  /faq/{id}

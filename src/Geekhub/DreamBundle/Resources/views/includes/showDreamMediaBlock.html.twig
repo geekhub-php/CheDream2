@@ -1,0 +1,44 @@
+<div class="row">
+
+    <div class="col-md-7">
+        {#Poster#}
+        <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}"/>
+
+        <div class="showDreamAvatar-wrapper"> {# Avatar #}
+            <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}">
+            <p class="showDreamAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
+
+        </div>
+    </div>  {# end poster block#}
+
+    <div class="col-md-5">
+
+        {% if dream.mediaVideos|length %}
+            <div class="row" id="video">
+                {% media dream.mediaVideos.0, 'reference' %}
+            </div> {# end video block#}
+
+            <div class="row"> {#Images#}
+
+                {% if dream.mediaPictures|length > 0 %}
+                    <img src="{{ dream.mediaPictures.0|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                {% endif %}
+                {% if dream.mediaPictures|length > 2 %}
+                    <img src="{{ dream.mediaPictures.1|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                    <img src="{{ dream.mediaPictures.2|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                {% endif %}
+
+            </div> {# end pictures block#}
+        {% else %}
+            <div class="row">  {#Images#}
+                {% for picture in dream.mediaPictures %}
+                    {% if loop.index <= 9 %}
+                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                    {% endif %}
+                {% endfor %}
+            </div> {# end pictures block#}
+        {% endif %}
+
+    </div>  {# end video + pictures block#}
+
+</div> {# end medi block#}
