@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
