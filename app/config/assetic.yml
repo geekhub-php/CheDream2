@@ -19,7 +19,6 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.less
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
-                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/faq.css
                 - %kernel.root_dir%/../vendor/ahonymous/fontello/css/fontello.css
             filters:
                 - cssrewrite
