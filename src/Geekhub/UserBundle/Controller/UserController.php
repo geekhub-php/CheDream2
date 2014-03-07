@@ -24,7 +24,10 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
 
-        $form = $this->CreateForm(new UserType(), $user);
+        $form = $this->CreateForm(new UserType(), $user, array(
+                     'user' => $user,
+                     'media-manager' => $this->container->get('sonata.media.manager.media'),
+                     ));
 
         $form->handleRequest($request);
 
@@ -35,10 +38,6 @@ class UserController extends Controller
             $contacts->setPhone($user->getContacts()->getPhone());
             $contacts->setSkype($user->getContacts()->getSkype());
             $user->setContacts($contacts);
-            if ($user->getAvatar()) {
-                $mediaManager = $this->container->get('sonata.media.manager.media');
-                $mediaManager->save($user->getAvatar());
-            }
 
         	$em->flush();
 
