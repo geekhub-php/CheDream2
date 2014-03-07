@@ -25,20 +25,34 @@ abstract class AbstractContributeResource
     }
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
-
-    /**
      * @var string
      *
      * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
      */
     protected $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="hiddenContributor", type="boolean")
+     */
+    private $hiddenContributor;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
 
     /**
      * @var float
@@ -48,29 +62,6 @@ abstract class AbstractContributeResource
      * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;
-
-    /**
-     * Set createdAt
-     *
-     * @param  \DateTime     $createdAt
-     * @return DreamResource
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
 
     /**
      * Set title
@@ -93,6 +84,75 @@ abstract class AbstractContributeResource
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param  string          $description
+     * @return DreamContribute
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set hiddenContributor
+     *
+     * @param  boolean         $hiddenContributor
+     * @return DreamContribute
+     */
+    public function setHiddenContributor($hiddenContributor)
+    {
+        $this->hiddenContributor = $hiddenContributor;
+
+        return $this;
+    }
+
+    /**
+     * Get hiddenContributor
+     *
+     * @return boolean
+     */
+    public function getHiddenContributor()
+    {
+        return $this->hiddenContributor;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  \DateTime     $createdAt
+     * @return DreamResource
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**
