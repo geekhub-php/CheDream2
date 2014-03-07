@@ -30,6 +30,7 @@ class PageController extends Controller
                 );
             }
         }
+
         return $form->createView();
     }
 }
