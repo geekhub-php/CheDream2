@@ -2,7 +2,6 @@
 
 namespace Geekhub\DreamBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Geekhub\DreamBundle\Entity\Dream,

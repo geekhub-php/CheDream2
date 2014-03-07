@@ -11,7 +11,7 @@
 
                     <p>title = {{ dream.title }}
                         &nbsp;&nbsp;&nbsp;
-                        <a href="{{ path('show_dream', {'slug': dream.slug}) }}"> Show </a>
+                        <a href="{{ path('view_dream', {'slug': dream.slug}) }}"> Show </a>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             &nbsp;&nbsp;&nbsp;
                             <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a>

@@ -102,10 +102,10 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
-     * @View()
+     * @View(templateVar="dream")
      */
     public function viewDreamAction(Dream $dream)
     {
-        return  array('dream' => $dream);
+        return $dream;
     }
 }
