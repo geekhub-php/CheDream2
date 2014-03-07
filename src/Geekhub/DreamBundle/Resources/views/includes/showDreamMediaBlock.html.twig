@@ -13,23 +13,31 @@
 
     <div class="col-md-5">
 
-        <div class="row" id="video">
-            {% if dream.mediaVideos|length %}
+        {% if dream.mediaVideos|length %}
+            <div class="row" id="video">
                 {% media dream.mediaVideos.0, 'reference' %}
-            {% endif %}
-        </div> {# end video block#}
+            </div> {# end video block#}
 
-        <div class="row">
+            <div class="row"> {#Images#}
 
-            {#Images#}
-            {% if dream.mediaPictures|length > 0 %}
-                <img src="{{ dream.mediaPictures.0|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-            {% endif %}
-            {% if dream.mediaPictures|length > 1 %}
-                <img src="{{ dream.mediaPictures.1|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-            {% endif %}
+                {% if dream.mediaPictures|length > 0 %}
+                    <img src="{{ dream.mediaPictures.0|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                {% endif %}
+                {% if dream.mediaPictures|length > 2 %}
+                    <img src="{{ dream.mediaPictures.1|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                    <img src="{{ dream.mediaPictures.2|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                {% endif %}
 
-        </div> {# end pictures block#}
+            </div> {# end pictures block#}
+        {% else %}
+            <div class="row">  {#Images#}
+                {% for picture in dream.mediaPictures %}
+                    {% if loop.index <= 9 %}
+                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                    {% endif %}
+                {% endfor %}
+            </div> {# end pictures block#}
+        {% endif %}
 
     </div>  {# end video + pictures block#}
 
