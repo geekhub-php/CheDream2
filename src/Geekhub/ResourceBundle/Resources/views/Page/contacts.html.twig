@@ -10,6 +10,11 @@
 {% endblock %}
 
 {% block content %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <div class="wrapper row">
         <div class="row">
             <div class="col-md-6">
