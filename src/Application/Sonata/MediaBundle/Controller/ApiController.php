@@ -43,7 +43,6 @@ class ApiController extends Controller
 //        }
 //
 //        $response = $this->container->get('file_uploader')->loadFile();
-
         return array('errors' => array('bad size'), 'previews' => array('http://myhost.com/uploads/someimg.jpg'));
     }
 }
