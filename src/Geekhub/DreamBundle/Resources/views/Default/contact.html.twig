@@ -99,7 +99,49 @@
                 <br>
 
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.to) }}
+                                {{ form_errors(form.to) }}
+                                {{ form_widget(form.to) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.title) }}
+                                {{ form_errors(form.title) }}
+                                {{ form_widget(form.title) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_label(form.body) }}
+                                {{ form_errors(form.body) }}
+                                {{ form_widget(form.body) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_label(form.captcha) }}
+                                {{ form_errors(form.captcha) }}
+                                {{ form_widget(form.captcha) }}
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br/>
+                            <div class="col-md-12">
+                                {{ form_rest(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
