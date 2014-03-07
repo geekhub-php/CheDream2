@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekhub\DreamBundle\Controller;
+namespace Geekhub\ResourceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -10,9 +10,9 @@ class FaqController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $faqs = $em->getRepository('GeekhubDreamBundle:Faq')->findAll();
+        $faqs = $em->getRepository('GeekhubResourceBundle:Faq')->findAll();
 
-        return $this->render('GeekhubDreamBundle:Faq:index.html.twig', array(
+        return $this->render('GeekhubResourceBundle:Faq:index.html.twig', array(
             'faqs' => $faqs,
                 'id' => $id,
         ));
@@ -22,12 +22,12 @@ class FaqController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $faq = $em->getRepository('GeekhubDreamBundle:Faq')->find($id);
+        $faq = $em->getRepository('GeekhubResourceBundle:Faq')->find($id);
 
         if (!$faq) {
             throw $this->createNotFoundException('Unable to find Faq entity.');
         }
 
-        return $this->render('GeekhubDreamBundle:Faq:show.html.twig', array('faq' => $faq));
+        return $this->render('GeekhubResourceBundle:Faq:show.html.twig', array('faq' => $faq));
     }
 }

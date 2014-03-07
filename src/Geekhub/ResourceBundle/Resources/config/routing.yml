@@ -1,3 +1,11 @@
 page_contacts:
     pattern:  /contacts
     defaults: { _controller: GeekhubResourceBundle:Page:contacts }
+
+faq:
+    pattern:  /faq/{id}
+    defaults: { _controller: "GeekhubResourceBundle:Faq:index", id: 1 }
+
+faq_show:
+    pattern:  /faq/{id}/show
+    defaults: { _controller: "GeekhubResourceBundle:Faq:show" }
