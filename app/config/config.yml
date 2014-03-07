@@ -171,7 +171,7 @@ stfalcon_tinymce:
     include_jquery: true
     tinymce_jquery: true
     selector: ".tinymce"
-    language: "uk"
+    language: "%locale%"
     theme:
         simple:
             theme: "modern"
