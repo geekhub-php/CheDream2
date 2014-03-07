@@ -25,7 +25,7 @@ class FinancialType extends AbstractType
     {
         $builder
             ->add('title', 'text', array('label' => 'dream.financial.title'))
-            ->add('quantity', 'money', array('label' => 'dream.financial.quantity', 'currency' => 'UAH'));
+            ->add('quantity', 'money', array('label' => 'dream.financial.quantity', 'currency' => 'UAH', 'grouping' => true));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

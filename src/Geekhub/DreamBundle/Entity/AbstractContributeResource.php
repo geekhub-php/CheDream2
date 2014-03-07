@@ -15,7 +15,7 @@ abstract class AbstractContributeResource
     const KG    = 'kg';
     const PIECE = 'piece';
 
-    static public function getReadableQuantityTypes()
+    public static function getReadableQuantityTypes()
     {
         return array(
             self::PIECE => 'dream.equipment.piece',
