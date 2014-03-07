@@ -99,4 +99,13 @@ class DreamController extends Controller
     {
         return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
     }
+
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @View(templateVar="dream")
+     */
+    public function viewDreamAction(Dream $dream)
+    {
+        return $dream;
+    }
 }

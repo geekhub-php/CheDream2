@@ -1,0 +1,46 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+    {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+    <hr class="show-hr">
+    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
+
+    <div class="row">
+        <div class="col-md-4">
+            {# Resources start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
+            {# Resources end #}
+        </div>
+
+        <div class="col-md-8">
+
+            {# participants start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
+            {# participants end #}
+            <br/>
+            {# comments start #}
+                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
+            {# comments end #}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function(){
+            $('#video object').get(0).width='100%';
+            $('#video object').get(0).height=250;
+            $('#video object embed').get(0).width='100%';
+            $('#video object embed').get(0).height=250;
+
+        });
+    </script>
+{% endblock %}
