@@ -14,22 +14,19 @@
     <div class="col-md-5">
 
         <div class="row" id="video">
-            {% for video in dream.mediaVideos %}
-                {% if loop.index <= 1 %}
-                    {% media video, 'reference' %}
-                {% endif %}
-            {% endfor %}
+            {% if dream.mediaVideos|length %}
+                {% media dream.mediaVideos.0, 'reference' %}
+            {% endif %}
         </div> {# end video block#}
 
         <div class="row">
 
             {#Images#}
             {% if dream.mediaPictures|length > 0 %}
-                {% for picture in dream.mediaPictures %}
-                    {% if loop.index <= 2 %}
-                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-                    {% endif %}
-                {% endfor %}
+                <img src="{{ dream.mediaPictures.0|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+            {% endif %}
+            {% if dream.mediaPictures|length > 1 %}
+                <img src="{{ dream.mediaPictures.1|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
             {% endif %}
 
         </div> {# end pictures block#}

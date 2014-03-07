@@ -1,30 +1,28 @@
-<div class="row">     {# Content start #}
-
+<div class="row">
     <div class="col-md-4">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            <p class="bolder115">Підтримати:</p>
+            <h3>Підтримати:</h3>
             <hr class="show-hr">
-            <ul class="list-unstyled">
-                <li>Фінансово</li>
-                <li>Обладнанням / Технікою</li>
-                <li>Провести роботи</li>
-                <li>Інша допомога</li>
-            </ul>
+            <div class="btn-group-vertical" style="width: 100%">
+                <a type="button" class="btn btn-default btn-lg btn-block">Фінансово</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
+                <a type="button" class="btn btn-default btn-lg btn-block">Інша допомога</a>
+            </div>
         {% else %}
-            <p>Щоб підтримати мрію, Вам потрібно авторизуватися.</p>
+            <div class="alert alert-warning">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
         {% endif %}
     </div>
 
     <div class="col-md-8">
-        <span style="font-weight: bold; font-size: 160%;">{{ dream.title }}</span>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            {% if app.user.id == dream.author.id %}
-                <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
-            {% endif %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id%}
+        <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
         {% endif %}
-        <div>   {# dream description start #}
+        <h2>{{ dream.title }}</h2>
+
+        <div>
             {{ dream.description|raw }}
-        </div>  {# dream description end #}
+        </div>
     </div>
 
-</div>  {# Content end #}
+</div>

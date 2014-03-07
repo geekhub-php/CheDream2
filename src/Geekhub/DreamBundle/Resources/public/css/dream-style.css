@@ -28,20 +28,6 @@
     margin-top: 8px;
     margin-bottom: 8px;
 }
-.showDream-wrapper
-{
-    background-color: #ffffff;
-    padding-top: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-.bolder115
-{
-    font-weight: bolder;
-    font-size: 115%;
-}
 .showDreamAvatar-wrapper {
     position: absolute;
     bottom: -25px;

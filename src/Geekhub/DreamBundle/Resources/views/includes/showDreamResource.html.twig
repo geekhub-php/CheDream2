@@ -1,10 +1,9 @@
 <div>
-    <p class="bolder115">Кошторис проекту:</p>
+    <h3>Кошторис проекту:</h3>
     <hr class="show-hr">
 
     <div> {# financial #}
-
-        <p class="text-center bolder115"><span class="glyphicon glyphicon-usd"> </span> Фінансові витрати</p>
+        <h4 class="text-center"><span class="glyphicon glyphicon-usd"> </span> Фінансові витрати</h4>
         <ul class="list-group">
             {% for finance in dream.dreamFinancialResources %}
                 <li class="list-group-item">
@@ -18,7 +17,7 @@
 
     <div> {# equipment #}
 
-        <p class="text-center bolder115"><span class="glyphicon glyphicon-wrench"> </span> Інструменти/обладнання</p>
+        <h4 class="text-center"><span class="glyphicon glyphicon-wrench"> </span> Інструменти/обладнання</h4>
         <ul class="list-group">
             {% for equipment in dream.dreamEquipmentResources %}
 
@@ -41,7 +40,7 @@
 
     <div>  {# work #}
 
-        <p class="text-center bolder115"><span class="glyphicon glyphicon-user"> </span> Роботи та ресурси</p>
+        <h4 class="text-center"><span class="glyphicon glyphicon-user"> </span> Роботи та ресурси</h4>
         <ul class="list-group">
             {% for work in dream.dreamWorkResources %}
                 <li class="list-group-item">
@@ -53,4 +52,8 @@
 
     </div>
 
+    <h3>{{ 'tags'|trans }}:</h3>
+    {% for tag in dream.tags %}
+        <p class="pull-left" style="padding-right: 10px"><span class="glyphicon glyphicon-tag"></span>&nbsp{{ tag.name }}</p>
+    {% endfor %}
 </div>

@@ -5,19 +5,9 @@
 {% endblock %}
 {% block content %}
 
-    {# Media content start #}
-        {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
-    {# Media content end #}
-<div class="showDream-wrapper">
-        <p><span class="bolder115">{{ 'tags'|trans }}:</span>
-            {% for tag in dream.tags %}
-                <span class="label label-primary">{{ tag.name }}</span>
-            {% endfor %}
-        </p>
-
-    {# contributions and dream descriptions start #}
-        {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
-    {# contributions and dream descriptions end #}
+    {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+    <hr class="show-hr">
+    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
     <div class="row">
         <div class="col-md-4">
@@ -39,7 +29,6 @@
         </div>
 
     </div>
-</div>
 
 {% endblock %}
 {% block javascript %}
