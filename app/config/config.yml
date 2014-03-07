@@ -90,8 +90,7 @@ liip_imagine:
         dream_poster_view_form:
             quality: 90
             filters:
-                thumbnail: { size: [650, 500], mode: outbound }
-#                relative_resize: { widen: 680 }
+                thumbnail: { size: [650, 360], mode: outbound }
         dream_pictures_view_form:
             quality: 90
             filters:
