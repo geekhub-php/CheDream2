@@ -40,7 +40,3 @@ dream_ajax_remove_media:
 view_dream:
     pattern:  /dreams/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
-
-contact:
-    pattern:  /contact
-    defaults: { _controller: GeekhubDreamBundle:Default:contact }

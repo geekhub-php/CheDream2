@@ -14,6 +14,10 @@ geekhub_user:
     resource: "@GeekhubUserBundle/Resources/config/routing.yml"
     prefix:   /
 
+geekhub_resource:
+    resource: "@GeekhubResourceBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
