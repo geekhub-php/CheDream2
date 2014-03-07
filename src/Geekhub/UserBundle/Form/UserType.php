@@ -4,8 +4,6 @@ namespace Geekhub\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Geekhub\UserBundle\Form\ContactsType;
-use Geekhub\UserBundle\Form\FileMediaTransformer;
 
 class UserType extends AbstractType
 {
@@ -30,7 +28,7 @@ class UserType extends AbstractType
             ->add('vkontakteId', 'text', array('label' => 'user.vkontakte', 'required' => false ))
             ->add('odnoklassnikiId', 'text', array('label' => 'user.odnoklassniki', 'required' => false ))
             ->add( $builder->create('avatar', 'file', array(
-                      'label' => 'user.avatar', 
+                      'label' => 'user.avatar',
                       'required' => false))
               ->addModelTransformer($transformer)
              );

@@ -14,6 +14,7 @@ class FileMediaTransformer implements DataTransformerInterface
     public function transform($media)
     {
         $this->media = $media;
+
         return ;
     }
 
@@ -24,9 +25,9 @@ class FileMediaTransformer implements DataTransformerInterface
             $media->setBinaryContent($file);//'/var/www/CheDream2/web/upload/dream/image/cache/dream_poster/upload/tmp/poster/'.$fileName);
             $media->setProviderName('sonata.media.provider.image');
             $media->setContext('avatar');
+
             return $media;
-        }
-        else {
+        } else {
             return $this->media;
         }
 
