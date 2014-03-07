@@ -57,4 +57,16 @@ assetic:
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
             filters: [yui_js]
             output: js/dream_remove_media.min.js
+        gallery_css:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/gallery/blueimp-gallery.css
+            filters:
+                - cssrewrite
+                - yui_css
+            output: css/dream_gallery.min.css
+        gallery_js:
+            inputs:
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/gallery/blueimp-gallery.js
+            filters: [yui_js]
+            output: js/dream_gallery.min.js
 
