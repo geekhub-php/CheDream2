@@ -25,6 +25,7 @@ class FileMediaTransformer implements DataTransformerInterface
     public function transform($media)
     {
         $this->media = $media;
+
         return ;
     }
 
@@ -42,8 +43,7 @@ class FileMediaTransformer implements DataTransformerInterface
             $this->mediaManager->delete($oldMedia);
 
             return $media;
-        }
-        else {
+        } else {
             return $this->media;
         }
     }

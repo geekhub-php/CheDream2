@@ -11,7 +11,7 @@
            <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
             <div class="col-md-5">
              {% media avatar, 'big' %}
-             {{ form_widget(form.avatar) }}             
+             {{ form_widget(form.avatar) }}
              {{ form_widget(form.contacts) }}
              {{ form_label(form.email) }}
              {{ form_widget(form.email) }}
@@ -23,7 +23,7 @@
              {{ form_widget(form.odnoklassnikiId) }}
             </div>
             <div class="col-md-7">
-             <input type="submit" value ="{{ 'user.save'|trans }}"> 
+             <input type="submit" value ="{{ 'user.save'|trans }}">
               <p>{{ 'user.first_and_lastname'|trans }}</p>
                <div class="row">
                 <div class="col-md-6">
@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                   {{ form_widget(form.lastName) }}
                 </div>
-              </div>  
+              </div>
               {{ form_label(form.birthday) }}
                <div class="row">
                 <div class="col-md-3">
@@ -50,7 +50,7 @@
               {{ form_widget(form.about) }}
               {{ form_rest(form) }}
             </div>
-            </form> 
+            </form>
           </div>
         </div>
     </div>

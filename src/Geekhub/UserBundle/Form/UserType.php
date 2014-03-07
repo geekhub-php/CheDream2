@@ -33,7 +33,7 @@ class UserType extends AbstractType
             ->add('vkontakteId', 'text', array('label' => 'user.vkontakte', 'required' => false ))
             ->add('odnoklassnikiId', 'text', array('label' => 'user.odnoklassniki', 'required' => false ))
             ->add( $builder->create('avatar', 'file', array(
-                      'label' => 'user.avatar', 
+                      'label' => 'user.avatar',
                       'required' => false))
               ->addModelTransformer($transformer)
              );
