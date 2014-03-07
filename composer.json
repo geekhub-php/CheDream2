@@ -67,7 +67,8 @@
         "friendsofsymfony/rest-bundle": "1.3.*@dev",
         "nelmio/api-doc-bundle": "2.5.*",
         "willdurand/js-translation-bundle": "2.0.*@dev",
-        "stfalcon/tinymce-bundle": "0.3.*@dev"
+        "stfalcon/tinymce-bundle": "0.3.*@dev",
+        "gregwar/captcha-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
