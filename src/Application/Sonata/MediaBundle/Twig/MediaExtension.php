@@ -7,12 +7,12 @@
  * Time: 16:24
  */
 
-namespace Geekhub\DreamBundle\Twig;
+namespace Application\Sonata\MediaBundle\Twig;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\MediaBundle\Provider\Pool;
 
-class DreamExtension extends \Twig_Extension
+class MediaExtension extends \Twig_Extension
 {
     protected $mediaPool;
 
@@ -31,17 +31,17 @@ class DreamExtension extends \Twig_Extension
     public function mediaPath($media)
     {
         if ($media instanceof Media) {
-        $provider = $this->mediaPool->getProvider($media->getProviderName());
-        $format = $provider->getFormatName($media, 'reference');
+            $provider = $this->mediaPool->getProvider($media->getProviderName());
+            $format = $provider->getFormatName($media, 'reference');
 
-        return substr($provider->generatePublicUrl($media, $format), 3);
-        }
+            return substr($provider->generatePublicUrl($media, $format), 3);
+        } 
 
         return $media;
     }
 
     public function getName()
     {
-        return 'dream_extension';
+        return 'media_extension';
     }
 }

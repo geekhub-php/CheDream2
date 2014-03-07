@@ -6,7 +6,6 @@
     <parameters>
         <parameter key="dream_file_uploader.class">Geekhub\DreamBundle\Service\DreamImageHandler</parameter>
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
-        <parameter key="dream.twig.dream_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
     </parameters>
 
     <services>
@@ -16,10 +15,6 @@
         <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">
             <argument type="service" id="service_container"/>
             <tag name="doctrine.event_subscriber" connection="default" />
-        </service>
-        <service id="dream.twig.dream_extension" class="%dream.twig.dream_extension.class%">
-            <argument type="service" id="sonata.media.pool"/>
-            <tag name="twig.extension" />
         </service>
     </services>
 
