@@ -42,6 +42,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Geekhub\AdminBundle\GeekhubAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
