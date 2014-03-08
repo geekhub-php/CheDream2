@@ -57,3 +57,7 @@ profile_edit:
 _login:
     pattern: /loginSome
     defaults: { _controller: GeekhubUserBundle:User:login }
+
+profile_view:
+    pattern: /profile/{id}
+    defaults: { _controller: GeekhubUserBundle:Default:userView}

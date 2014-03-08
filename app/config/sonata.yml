@@ -36,6 +36,7 @@ sonata_media:
                 - sonata.media.provider.image
             formats:
                 big:   { width: 440 , quality: 90}
+                small:   { width: 80 , quality: 90}
 
         avatar:
             providers:
