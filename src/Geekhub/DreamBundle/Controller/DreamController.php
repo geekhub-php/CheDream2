@@ -10,8 +10,14 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\EquipmentContribute;
+use Geekhub\DreamBundle\Entity\FinancialContribute;
+use Geekhub\DreamBundle\Entity\WorkContribute;
 use Geekhub\DreamBundle\Form\DreamType;
 use FOS\RestBundle\Controller\Annotations\View;
+use Geekhub\DreamBundle\Form\EquipmentContributeType;
+use Geekhub\DreamBundle\Form\FinancialContributeType;
+use Geekhub\DreamBundle\Form\WorkContributeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -102,10 +108,40 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
-     * @View(templateVar="dream")
      */
-    public function viewDreamAction(Dream $dream)
+    public function viewDreamAction(Dream $dream, Request $request)
     {
-        return $dream;
+        $user = $this->getUser();
+        $financialContribute = new FinancialContribute();
+        $finForm = $this->createForm(new FinancialContributeType(), $financialContribute);
+        $equipForm = $this->createForm(new EquipmentContributeType(), new EquipmentContribute());
+        $workForm = $this->createForm(new WorkContributeType(), new WorkContribute());
+
+        if ($request->isMethod('POST')) {
+
+            if($request->get('financialContributeForm')) {
+                $finForm->handleRequest($request);
+
+                if ($finForm->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+
+                    $financialContribute->setDream($dream);
+                    $financialContribute->setUser($user);
+                    $em->persist($financialContribute);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('view_dream', array(
+                        'slug' => $dream->getSlug()
+                    )));
+                }
+            }
+        }
+
+        return $this->render('GeekhubDreamBundle:Dream:viewDream.html.twig', array(
+            'dream' => $dream,
+            'finForm'=>$finForm->createView(),
+            'equipForm'=>$equipForm->createView(),
+            'workForm'=>$workForm->createView(),
+        ));
     }
 }

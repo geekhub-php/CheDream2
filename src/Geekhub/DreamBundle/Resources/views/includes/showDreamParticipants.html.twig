@@ -2,6 +2,13 @@
     <h3>Участники проекту:</h3>
     <hr class="show-hr">
 
-    No users contribute this dream, <a href="#">be the first...</a>
+    {#No users contribute this dream, <a href="#">be the first...</a>#}
+
+    {% for userFinancialContributor in dream.dreamFinancialContributions %}
+        {% if not userFinancialContributor.hiddenContributor %}
+            {{ userFinancialContributor.user.firstName }} * {{ userFinancialContributor.user.lastName }}
+            {{ userFinancialContributor.financialArticle.title }} {{ userFinancialContributor.quantity }}<br/>
+        {% endif %}
+    {% endfor %}
 
 </div>

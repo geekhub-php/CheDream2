@@ -1,18 +1,36 @@
 <div class="row">
     <div class="col-md-4">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            {% if app.user.id == dream.author.id%}
-                <a href="#" class="btn btn-warning btn-sm" style="margin-top: 60px;">Розпочати збір коштів</a>
-            {% else %}
+            {#{% if app.user.id == dream.author.id%}#}
+                {#<a href="#" class="btn btn-warning btn-sm" style="margin-top: 60px;">Розпочати збір коштів</a>#}
+            {#{% else %}#}
                 <h3>Підтримати:</h3>
                 <hr class="show-hr">
                 <div class="btn-group-vertical" style="width: 100%">
                     <a type="button" class="btn btn-default btn-lg btn-block">Фінансово</a>
+                    <div>     {# financial contribute form start #}
+
+                        {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        {#{{ form_start(finForm) }}#}
+
+                        {{ form_row(finForm.financialArticle) }}
+                        {{ form_row(finForm.quantity) }}
+                        {{ form_row(finForm.hiddenContributor) }}
+                        {{ form_row(finForm.financialSubmit) }}
+
+                        {#<input type="submit" value=" Ok " class="text-center btn btn-primary">#}
+
+                        {{ form_errors(finForm) }}
+                        {{ form_rest(finForm) }}
+                        {{ form_end(finForm) }}
+                        <br/>
+                        <br/>
+                    </div>    {# financial contribute form end #}
                     <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
                     <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
                     <a type="button" class="btn btn-default btn-lg btn-block">Інша допомога</a>
                 </div>
-            {% endif %}
+            {#{% endif %}#}
         {% else %}
             <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
         {% endif %}
