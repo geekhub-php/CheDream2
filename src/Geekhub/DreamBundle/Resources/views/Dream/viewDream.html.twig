@@ -38,18 +38,35 @@
     {{ parent() }}
     <script src="{{ asset('js/dream_gallery.min.js') }}"></script>
     <script>
+        var finFormHide = function(){
+            $('#finFormContributor').hide();
+        };
+        var equipFormHide = function(){
+            $('#equipFormContributor').hide();
+        };
+        var workFormHide = function(){
+            $('#workFormContributor').hide();
+        };
+
+        var finFormShow = function() {
+            $('#finFormContributor').fadeIn(500).show();
+        };
+        var equipFormShow = function() {
+            $('#equipFormContributor').fadeIn(500).show();
+        };
+        var workFormShow = function() {
+            $('#workFormContributor').fadeIn(500).show();
+        };
+
         $(document).ready(function(){
             $('#video object').get(0).width='100%';
             $('#video object').get(0).height=250;
             $('#video object embed').get(0).width='100%';
             $('#video object embed').get(0).height=250;
-            $('#video object embed').attr({wmode:"opaque"});
-//            var param = $('<param>');
-//            param.attr({name:'wmode'});
-//            param.attr({value:'opaque'});
-//            $('#video object').eq(0).append(param);
-
-//            $('#video object embed').css({"z-index":"-10"});
+//            $('#video object embed').attr({wmode:"opaque"});
+            finFormHide();
+            equipFormHide();
+            workFormHide();
         });
 
         document.getElementById('links').onclick = function (event) {
@@ -60,5 +77,31 @@
                     links = this.getElementsByTagName('a');
             blueimp.Gallery(links, options);
         };
+
+        $('#finFormContributorShow').click(function(){
+            finFormShow();
+            equipFormHide();
+            workFormHide();
+        });
+        $('#equipFormContributorShow').click(function(){
+            finFormHide();
+            equipFormShow();
+            workFormHide();
+        });
+
+        $('#workFormContributorShow').click(function(){
+            finFormHide();
+            equipFormHide();
+            workFormShow();
+        });
+        $('#finButCancel').click(function(){
+            finFormHide();
+        });
+        $('#equipButCancel').click(function(){
+            equipFormHide();
+        });
+        $('#workButCancel').click(function(){
+            workFormHide();
+        });
     </script>
 {% endblock %}

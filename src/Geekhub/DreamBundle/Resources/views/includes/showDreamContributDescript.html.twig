@@ -7,16 +7,17 @@
                 <h3>Підтримати:</h3>
                 <hr class="show-hr">
                 <div class="btn-group-vertical" style="width: 100%">
-                    <a type="button" class="btn btn-default btn-lg btn-block">Фінансово</a>
-                    <div>     {# financial contribute form start #}
+                    <a type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow">Фінансово</a>
+                    <div id="finFormContributor">     {# financial contribute form start #}
 
-                        {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        {{ form_start(finForm, {'attr': {'role': 'form' } } ) }}
 
                         {{ form_row(finForm.financialArticle) }}
                         {{ form_row(finForm.quantity) }}
                         {{ form_row(finForm.hiddenContributor) }}
 
                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel">
 
                         {{ form_errors(finForm) }}
                         {{ form_rest(finForm) }}
@@ -24,17 +25,18 @@
                         <br/>
                         <br/>
                     </div>    {# financial contribute form end #}
-                    <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
+                    <a type="button" class="btn btn-default btn-lg btn-block" id="equipFormContributorShow">Обладнанням / Технікою</a>
 
-                    <div>     {# equipment contribute form start #}
+                    <div id="equipFormContributor">     {# equipment contribute form start #}
 
-                        {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        {{ form_start(equipForm, {'attr': {'role': 'form' } } ) }}
 
                         {{ form_row(equipForm.equipmentArticle) }}
                         {{ form_row(equipForm.quantity) }}
                         {{ form_row(equipForm.hiddenContributor) }}
 
                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel">
 
                         {{ form_errors(equipForm) }}
                         {{ form_rest(equipForm) }}
@@ -43,11 +45,11 @@
                         <br/>
                     </div>    {# equipment contribute form end #}
 
-                    <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
+                    <a type="button" class="btn btn-default btn-lg btn-block"  id="workFormContributorShow">Провести роботи</a>
 
-                    <div>     {# work contribute form start #}
+                    <div id="workFormContributor">     {# work contribute form start #}
 
-                        {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        {{ form_start(workForm, {'attr': {'role': 'form' } } ) }}
 
                         {{ form_row(workForm.workArticle) }}
                         {{ form_row(workForm.quantity) }}
@@ -55,6 +57,7 @@
                         {{ form_row(workForm.hiddenContributor) }}
 
                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel">
 
                         {{ form_errors(workForm) }}
                         {{ form_rest(workForm) }}
