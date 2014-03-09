@@ -108,6 +108,7 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @View(templateVar="dream, finForm, equipForm, workForm")
      */
     public function viewDreamAction(Dream $dream, Request $request)
     {
@@ -165,11 +166,11 @@ class DreamController extends Controller
             }
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:viewDream.html.twig', array(
+        return array(
             'dream' => $dream,
             'finForm'=>$finForm->createView(),
             'equipForm'=>$equipForm->createView(),
             'workForm'=>$workForm->createView(),
-        ));
+        );
     }
 }
