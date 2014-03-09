@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
@@ -42,7 +43,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new Geekhub\AdminBundle\GeekhubAdminBundle(),
+//            new Geekhub\AdminBundle\GeekhubAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
