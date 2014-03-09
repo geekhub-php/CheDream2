@@ -11,14 +11,12 @@
                     <div>     {# financial contribute form start #}
 
                         {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-                        {#{{ form_start(finForm) }}#}
 
                         {{ form_row(finForm.financialArticle) }}
                         {{ form_row(finForm.quantity) }}
                         {{ form_row(finForm.hiddenContributor) }}
-                        {{ form_row(finForm.financialSubmit) }}
 
-                        {#<input type="submit" value=" Ok " class="text-center btn btn-primary">#}
+                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
 
                         {{ form_errors(finForm) }}
                         {{ form_rest(finForm) }}
@@ -27,7 +25,45 @@
                         <br/>
                     </div>    {# financial contribute form end #}
                     <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
+
+                    <div>     {# equipment contribute form start #}
+
+                        {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                        {{ form_row(equipForm.equipmentArticle) }}
+                        {{ form_row(equipForm.quantity) }}
+                        {{ form_row(equipForm.hiddenContributor) }}
+
+                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+
+                        {{ form_errors(equipForm) }}
+                        {{ form_rest(equipForm) }}
+                        {{ form_end(equipForm) }}
+                        <br/>
+                        <br/>
+                    </div>    {# equipment contribute form end #}
+
                     <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
+
+                    <div>     {# work contribute form start #}
+
+                        {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                        {{ form_row(workForm.workArticle) }}
+                        {{ form_row(workForm.quantity) }}
+                        {{ form_row(workForm.quantityDays) }}
+                        {{ form_row(workForm.hiddenContributor) }}
+
+                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+
+                        {{ form_errors(workForm) }}
+                        {{ form_rest(workForm) }}
+                        {{ form_end(workForm) }}
+                        <br/>
+                        <br/>
+                    </div>    {# work contribute form end #}
+
+
                     <a type="button" class="btn btn-default btn-lg btn-block">Інша допомога</a>
                 </div>
             {#{% endif %}#}

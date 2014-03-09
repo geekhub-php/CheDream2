@@ -113,21 +113,49 @@ class DreamController extends Controller
     {
         $user = $this->getUser();
         $financialContribute = new FinancialContribute();
+        $equipmentContribute = new EquipmentContribute();
+        $workContribute = new WorkContribute();
         $finForm = $this->createForm(new FinancialContributeType(), $financialContribute);
-        $equipForm = $this->createForm(new EquipmentContributeType(), new EquipmentContribute());
-        $workForm = $this->createForm(new WorkContributeType(), new WorkContribute());
+        $equipForm = $this->createForm(new EquipmentContributeType(), $equipmentContribute);
+        $workForm = $this->createForm(new WorkContributeType(), $workContribute);
 
         if ($request->isMethod('POST')) {
 
             if($request->get('financialContributeForm')) {
                 $finForm->handleRequest($request);
-
                 if ($finForm->isValid()) {
                     $em = $this->getDoctrine()->getManager();
-
                     $financialContribute->setDream($dream);
                     $financialContribute->setUser($user);
                     $em->persist($financialContribute);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('view_dream', array(
+                        'slug' => $dream->getSlug()
+                    )));
+                }
+            }
+            if($request->get('equipmentContributeForm')) {
+                $equipForm->handleRequest($request);
+                if ($equipForm->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $equipmentContribute->setDream($dream);
+                    $equipmentContribute->setUser($user);
+                    $em->persist($equipmentContribute);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('view_dream', array(
+                        'slug' => $dream->getSlug()
+                    )));
+                }
+            }
+            if($request->get('workContributeForm')) {
+                $workForm->handleRequest($request);
+                if ($workForm->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $workContribute->setDream($dream);
+                    $workContribute->setUser($user);
+                    $em->persist($workContribute);
                     $em->flush();
 
                     return $this->redirect($this->generateUrl('view_dream', array(

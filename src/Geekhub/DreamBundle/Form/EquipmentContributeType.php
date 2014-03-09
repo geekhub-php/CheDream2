@@ -24,10 +24,11 @@ class EquipmentContributeType extends AbstractType
         $builder
             ->add('equipmentArticle', 'entity', array(
                 'class' => 'GeekhubDreamBundle:EquipmentResource',
-                'property' => 'title',))
+                'property' => 'title',
+                'label' => 'dream.equipment.title'))
             ->add('quantity', 'integer', array('label' => 'dream.equipment.quantity'))
             ->add('hiddenContributor', 'checkbox', array(
-                'label'     => 'Hide contribute?',
+                'label'     => 'hide.contribute',
                 'required'  => false, ));
     }
 

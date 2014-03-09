@@ -24,12 +24,12 @@ class FinancialContributeType extends AbstractType
         $builder
             ->add('financialArticle', 'entity', array(
                 'class' => 'GeekhubDreamBundle:FinancialResource',
-                'property' => 'title',))
+                'property' => 'title',
+                'label' => 'dream.financial.title'))
             ->add('quantity', 'money', array('label' => 'dream.financial.quantity', 'currency' => 'UAH', 'grouping' => true))
             ->add('hiddenContributor', 'checkbox', array(
-                'label'     => 'Hide contribute?',
-                'required'  => false, ))
-            ->add('financialSubmit', 'submit', array('label' => 'fin Ok'));
+                'label'     => 'hide.contribute',
+                'required'  => false, ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

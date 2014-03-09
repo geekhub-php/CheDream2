@@ -9,6 +9,7 @@ dream:
     expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
+    support: Підтримати
     resource:
         title: Назва статті
     financial:
@@ -31,3 +32,4 @@ dream:
         add_work: Додати робочі ресурси
         delete_resource: Видалити ресурс
 tags: Ключові слова
+hide.contribute: Приховати допомогу?

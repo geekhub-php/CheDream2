@@ -4,11 +4,30 @@
 
     {#No users contribute this dream, <a href="#">be the first...</a>#}
 
-    {% for userFinancialContributor in dream.dreamFinancialContributions %}
-        {% if not userFinancialContributor.hiddenContributor %}
-            {{ userFinancialContributor.user.firstName }} * {{ userFinancialContributor.user.lastName }}
-            {{ userFinancialContributor.financialArticle.title }} {{ userFinancialContributor.quantity }}<br/>
+    {% for financialContributors in dream.dreamFinancialContributions %}
+        {% if not financialContributors.hiddenContributor %}
+            {{ financialContributors.user.firstName }} * {{ financialContributors.user.lastName }}
+            {{ financialContributors.financialArticle.title }} {{ financialContributors.quantity }}<br/>
         {% endif %}
     {% endfor %}
+
+    ---------------------------------------------------------------------------------------<br/>
+
+    {% for equipmentContributor in dream.dreamEquipmentContributions %}
+        {% if not equipmentContributor.hiddenContributor %}
+            {{ equipmentContributor.user.firstName }} * {{ equipmentContributor.user.lastName }}
+            {{ equipmentContributor.equipmentArticle.title }} {{ equipmentContributor.quantity }}<br/>
+        {% endif %}
+    {% endfor %}
+
+    ---------------------------------------------------------------------------------------<br/>
+
+    {% for workContributor in dream.dreamWorkContributions %}
+        {% if not workContributor.hiddenContributor %}
+            {{ workContributor.user.firstName }} * {{ workContributor.user.lastName }}
+            {{ workContributor.workArticle.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>
+        {% endif %}
+    {% endfor %}
+
 
 </div>

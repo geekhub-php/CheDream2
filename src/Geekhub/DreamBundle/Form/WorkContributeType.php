@@ -24,11 +24,12 @@ class WorkContributeType extends AbstractType
         $builder
             ->add('workArticle', 'entity', array(
                 'class' => 'GeekhubDreamBundle:WorkResource',
-                'property' => 'title',))
-            ->add('quantity', 'integer', array('label' => 'dream.equipment.quantity'))
-            ->add('quantityDays', 'integer', array('label' => 'dream.equipment.quantityDays'))
+                'property' => 'title',
+                'label' => 'dream.work.title'))
+            ->add('quantity', 'integer', array('label' => 'dream.work.quantity'))
+            ->add('quantityDays', 'integer', array('label' => 'dream.work.days'))
             ->add('hiddenContributor', 'checkbox', array(
-                'label'     => 'Hide contribute?',
+                'label'     => 'hide.contribute',
                 'required'  => false, ));
     }
 
