@@ -66,7 +66,7 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
      */
     protected function replaceValue($current, $value)
     {
-        return preg_replace("/<current()>/", $value, $current);
+        return str_replace("<current()>", $value, $current);
     }
 
     /**
