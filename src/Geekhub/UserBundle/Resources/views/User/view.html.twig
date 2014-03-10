@@ -8,14 +8,26 @@
           <div style="padding: 5% 0;">
            <div class="row">
  
-             <div class="col-md-5">
-              {% media user.avatar, 'big' %}
-               <p>{{ user.contacts.phone }}</p>
-               <p>{{ user.contacts.skype }}</p>
-               <p>{{ user.email }}</p>
-               <p>{{ user.facebookId }}</p>
-               <p>{{ user.vkontakteId }}</p>
-               <p>{{ user.odnoklassnikiId }}</p>
+             <div class="col-md-3">
+              {% media user.avatar, 'normal' %}
+               {% if user.contacts.phone is not null %}
+                <a href="mailto:{{ user.contacts.phone }}"><div class="icon-phone-circled"></div></a>
+               {% endif %}
+               {% if user.contacts.skype is not null %}
+               <a href="skype:{{ user.contacts.skype }}"><div class="icon-skype"></div></a>
+               {% endif %}
+               {% if user.email is not null %}
+               <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
+               {% endif %}
+               {% if user.facebookId is not null %}
+               <a href="http://facebook.com/{{ user.facebookId }}"><div class="icon-facebook-circled"></div></a>
+               {% endif %}
+               {% if user.vkontakteId is not null %}
+               <a href="http://vk.com/id{{ user.vkontakteId }}"><div class="icon-vkontakte-rect"></div></a>
+               {% endif %}
+               {% if user.odnoklassnikiId is not null %}
+               <a href="http://odnoklassniki.ru/{{ user.odnoklassnikiId }}"><div class="icon-odnoklassniki-rect"></div></a>
+               {% endif %}
                <p>messages...</p>
              </div>
              <div class="col-md-7">
