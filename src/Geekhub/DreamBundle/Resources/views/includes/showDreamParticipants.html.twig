@@ -29,5 +29,17 @@
         {% endif %}
     {% endfor %}
 
+    **************************************************************************************<br/>
+
+    {% for user in contributors %}
+        <div>
+            <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}">
+            {{ user.firstName }}
+            {{ user.lastName }}
+            <ul>
+                {{ finContribute(user, dream)|raw }}
+            </ul>
+        </div>
+    {% endfor %}
 
 </div>

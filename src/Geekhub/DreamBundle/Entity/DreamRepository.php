@@ -12,4 +12,53 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
+    public function getFinContributionUsers($dream)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT u, c from GeekhubDreamBundle:FinancialContribute c
+                           join c.user u
+                           where c.dream = ?1
+                           group by u
+                           ')
+            ->setParameter(1, $dream)
+            ->getResult();
+    }
+
+    public function getEquipContributionUsers($dream)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT u, c from GeekhubDreamBundle:EquipmentContribute c
+                           join c.user u
+                           where c.dream = ?1
+                           group by u
+                           ')
+            ->setParameter(1, $dream)
+            ->getResult();
+    }
+
+    public function getWorkContributionUsers($dream)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT u, c from GeekhubDreamBundle:WorkContribute c
+                           join c.user u
+                           where c.dream = ?1
+                           group by u
+                           ')
+            ->setParameter(1, $dream)
+            ->getResult();
+    }
+
+    public function showFinancialContributors($user, $dream)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT f.title as article, sum(c.quantity) as zz
+                           FROM GeekhubDreamBundle:FinancialContribute c
+                           join c.financialArticle f
+                           where c.hiddenContributor = 0 and c.user = ?1 and c.dream = ?2
+                           group by f.title
+                           ')
+            ->setParameter(1, $user)
+            ->setParameter(2, $dream)
+            ->getResult();
+    }
 }

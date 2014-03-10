@@ -59,10 +59,12 @@
         };
 
         $(document).ready(function(){
-            $('#video object').get(0).width='100%';
-            $('#video object').get(0).height=250;
-            $('#video object embed').get(0).width='100%';
-            $('#video object embed').get(0).height=250;
+            if ($('#video object').get(0)) {
+                $('#video object').get(0).width='100%';
+                $('#video object').get(0).height=250;
+                $('#video object embed').get(0).width='100%';
+                $('#video object embed').get(0).height=250;
+            }
 //            $('#video object embed').attr({wmode:"opaque"});
             finFormHide();
             equipFormHide();

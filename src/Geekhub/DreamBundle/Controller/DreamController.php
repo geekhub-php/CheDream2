@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
@@ -116,9 +117,19 @@ class DreamController extends Controller
         $financialContribute = new FinancialContribute();
         $equipmentContribute = new EquipmentContribute();
         $workContribute = new WorkContribute();
-        $finForm = $this->createForm(new FinancialContributeType(), $financialContribute);
-        $equipForm = $this->createForm(new EquipmentContributeType(), $equipmentContribute);
-        $workForm = $this->createForm(new WorkContributeType(), $workContribute);
+        $finForm = $this->createForm(new FinancialContributeType(), $financialContribute, array('dream' => $dream));
+        $equipForm = $this->createForm(new EquipmentContributeType(), $equipmentContribute, array('dream' => $dream));
+        $workForm = $this->createForm(new WorkContributeType(), $workContribute, array('dream' => $dream));
+
+//      **********************************************************************************************************************************
+
+        /** @var EntityManager $em */
+
+        $userContributorSrv = $this->get('dream.get_user.contributor');
+        $userContributorSrv->setDream($dream);
+        $contributors = $userContributorSrv->getUsersContribute();
+
+//      **********************************************************************************************************************************
 
         if ($request->isMethod('POST')) {
 
@@ -171,6 +182,7 @@ class DreamController extends Controller
             'finForm'=>$finForm->createView(),
             'equipForm'=>$equipForm->createView(),
             'workForm'=>$workForm->createView(),
+            'contributors' => $contributors
         );
     }
 }
