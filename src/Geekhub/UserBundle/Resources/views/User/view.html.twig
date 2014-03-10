@@ -42,25 +42,19 @@
              <div class="row">
                Автор проектів: 
                {% for dream in user.dreams %}
-               <p>{% media dream.mediaPoster, 'small' %}</p>
-               <p>{{ dream.title }}</p>
-               <p>{{ dream.description }}</p>
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
                {% endfor %}
              </div>
              <div class="row">
                Учасник проектів: 
                {% for dream in user.contributions %}
-               <p>{% media dream.mediaPoster, 'small' %}</p>
-               <p>{{ dream.title }}</p>
-               <p>{{ dream.description }}</p>
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
                {% endfor %}
              </div>
              <div class="row">
                Favs: 
                {% for contribute in user.favoriteDreams %}
-               <p>{% media dream.mediaPoster, 'small' %}</p>
-               <p>{{ contribute.dream.title }}</p>
-               <p>{{ contribute.dream.description }}</p>
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribute.dream}) }}
                <p>{{ contribute.description }} (сколько??? единиц???)</p>
                {% endfor %}
              </div>
