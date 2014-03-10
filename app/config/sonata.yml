@@ -42,7 +42,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                big:   { width: 200 , quality: 90}
+                big:   { width: 440 , quality: 90}
                 small:   { width: 100 , quality: 90}
                 normal:   { width: 200 , quality: 90}
 
