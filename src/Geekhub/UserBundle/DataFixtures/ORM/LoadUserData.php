@@ -12,9 +12,12 @@ use Application\Sonata\MediaBundle\DataFixtures\ORM\AbstractMediaLoader;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\UserBundle\Entity\User;
+use Symfony\Component\Yaml\Yaml;
 
 class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterface
 {
+    protected $data;
+
     /**
      * Load data fixtures with the passed EntityManager
      *
@@ -22,27 +25,69 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getUserArray() as $item) {
-            $reference = 'avatar-'.$item;
+        $usersYaml = Yaml::parse($this->getYmlFile());
+
+        foreach ($this->getUserArray($usersYaml) as $key => $item) {
+            $reference = 'avatar-'.$key;
             $this->setMediaContent(
-                __DIR__.'/images/'.$item.'.jpg',
+                __DIR__.'/images/'.$key.'.jpg',
                 'sonata.media.provider.image',
                 $reference
             );
 
             $user = new User();
-            $user->setUsername($item);
-            $user->setEmail($item.'@example.com');
+            $user->setUsername($key);
+            $user->setEmail($key.'@example.com');
             $user->setEnabled(true);
-            $user->setPassword($item);
-            $user->setFirstName($item);
+            $user->setPlainPassword(
+                $item['password'] == '<current()>' ? $this->replaceValue($item['password'], $key) : $item['password']
+            );
+            $user->setFirstName(
+                $item['firstName'] == '<current()>' ? $this->replaceValue($item['firstName'], $key) : $item['firstName']
+            );
+            $user->setLastName(
+                !isset($item['lastName']) ? '' : $item['lastName']
+            );
             $user->setAvatar($this->getReference($reference));
+            $user->setRoles($item['roles']);
             $manager->persist($user);
 
-            $this->addReference('user-'.$item, $user);
+            $this->addReference('user-'.$key, $user);
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @param $current
+     * @param $value
+     *
+     * @return mixed
+     */
+    protected function replaceValue($current, $value)
+    {
+        return preg_replace("/<current()>/", $value, $current);
+    }
+
+    /**
+     * @param $ymlData
+     *
+     * @return mixed
+     */
+    protected function getUserArray($ymlData)
+    {
+        foreach ($ymlData as $key => $value) {
+            if (preg_match("/,/",$key)) {
+                $keys = array_unique(explode(',', $key));
+                foreach ($keys as $subKey) {
+                    $this->data[trim($subKey)] = $value;
+                }
+            } else {
+                $this->data[$key] = $value;
+            }
+        }
+
+        return $this->data;
     }
 
     /**
@@ -56,15 +101,10 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
     }
 
     /**
-     * @return string[]
+     * @return string
      */
-    protected function getUserArray()
+    protected function getYmlFile()
     {
-        return array(
-            'yoda',
-            'dartvaider',
-            'chewbacca',
-            'c3pio',
-        );
+        return __DIR__ . '/Data/User.yml';
     }
 }

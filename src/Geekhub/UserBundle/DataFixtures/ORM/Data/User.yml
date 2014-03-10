@@ -1,0 +1,11 @@
+root:
+    password:   P@$$w0rd
+    email:      <current()>@example.com
+    firstName:  SUPER
+    lastName:   ADMIN
+    roles:      [ADMIN]
+yoda, dartvaider, chewbacca, c3pio:
+    password:   <current()>
+    email:      <current()>@example.com
+    firstName:  <current()>
+    roles:      [USER]
