@@ -4,7 +4,7 @@ root:
     firstName:  SUPER
     lastName:   ADMIN
     roles:      [ADMIN]
-yoda, dartvaider, chewbacca, c3pio:
+yoda, dartwaider, chewbacca, c3pio:
     password:   <current()>
     email:      <current()>@example.com
     firstName:  <current()>

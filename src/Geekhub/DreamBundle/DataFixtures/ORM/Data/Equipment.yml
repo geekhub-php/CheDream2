@@ -1,5 +1,15 @@
 equipment1:
     dream:        dream1
     title:        зореліт
-    quantityType: шт
+    quantityType: piece
     quantity:     1
+equipment2:
+    dream:        dream3
+    title:        завод по переобці металу
+    quantityType: piece
+    quantity:     150
+equipment3:
+    dream:        dream3
+    title:        метал
+    quantityType: ton
+    quantity:     15000000
