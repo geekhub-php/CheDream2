@@ -14,3 +14,11 @@ dream2:
     expiredDate:  25.01.2015
     mediaPoster:  starship
     tags:         [транспорт, starship]
+dream3:
+    author:       dartwaider
+    title:        Зірка смерті
+    description:  Створити наймогутнішу зброю, яку навіть уявити собі не можна.
+    phone:        30666666666
+    expiredDate:  01.01.2015
+    mediaPoster:  star
+    tags:         [транспорт, starship, зброя]

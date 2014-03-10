@@ -10,3 +10,7 @@ finance3:
     dream:    dream2
     title:    фінанс1
     quantity: 50
+finance4:
+    dream:    dream3
+    title:    прозапас
+    quantity: 1000000000
