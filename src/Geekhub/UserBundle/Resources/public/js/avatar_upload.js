@@ -5,6 +5,7 @@ $('#user-avatar-image').click(function() {
         url: url,
         dataType: 'json',
         done: function (e, data) {
+            alert(data);
             var responseArr = JSON.parse(data.jqXHR.responseText);
             $.each(responseArr, function (index, file) {
                 if(file.error){
@@ -25,6 +26,7 @@ $('#user-avatar-image').click(function() {
 
         },
         error: function(msg) {
+            alert(msg);
             console.log('error = ' + msg);
             console.dir(msg);
         }
