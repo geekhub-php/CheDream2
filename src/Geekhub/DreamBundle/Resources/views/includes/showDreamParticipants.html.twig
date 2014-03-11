@@ -2,52 +2,62 @@
     <h3>Участники проекту:</h3>
     <hr class="show-hr">
 
-    {#{% for financialContributors in dream.dreamFinancialContributions %}#}
-        {#{% if not financialContributors.hiddenContributor %}#}
-            {#{{ financialContributors.user.firstName }} * {{ financialContributors.user.lastName }}#}
-            {#{{ financialContributors.financialArticle.title }} {{ financialContributors.quantity }}<br/>#}
-        {#{% endif %}#}
-    {#{% endfor %}#}
+    {#*********************** для контроля потом удалить ***********************************<br/>#}
 
-    {#---------------------------------------------------------------------------------------<br/>#}
+        {#{% for financialContributors in dream.dreamFinancialContributions %}#}
+            {#&#123;&#35;{% if not financialContributors.hiddenContributor %}&#35;&#125;#}
+                {#{{ financialContributors.user.firstName }} * {{ financialContributors.user.lastName }}#}
+                {#{{ financialContributors.financialArticle.title }} {{ financialContributors.quantity }}<br/>#}
+            {#&#123;&#35;{% endif %}&#35;&#125;#}
+        {#{% endfor %}#}
 
-    {#{% for equipmentContributor in dream.dreamEquipmentContributions %}#}
-        {#{% if not equipmentContributor.hiddenContributor %}#}
-            {#{{ equipmentContributor.user.firstName }} * {{ equipmentContributor.user.lastName }}#}
-            {#{{ equipmentContributor.equipmentArticle.title }} {{ equipmentContributor.quantity }}<br/>#}
-        {#{% endif %}#}
-    {#{% endfor %}#}
+        {#---------------------------------------------------------------------------------------<br/>#}
 
-    {#---------------------------------------------------------------------------------------<br/>#}
+        {#{% for equipmentContributor in dream.dreamEquipmentContributions %}#}
+            {#&#123;&#35;{% if not equipmentContributor.hiddenContributor %}&#35;&#125;#}
+                {#{{ equipmentContributor.user.firstName }} * {{ equipmentContributor.user.lastName }}#}
+                {#{{ equipmentContributor.equipmentArticle.title }} {{ equipmentContributor.quantity }}<br/>#}
+            {#&#123;&#35;{% endif %}&#35;&#125;#}
+        {#{% endfor %}#}
 
-    {#{% for workContributor in dream.dreamWorkContributions %}#}
-        {#{% if not workContributor.hiddenContributor %}#}
-            {#{{ workContributor.user.firstName }} * {{ workContributor.user.lastName }}#}
-            {#{{ workContributor.workArticle.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>#}
-        {#{% endif %}#}
-    {#{% endfor %}#}
+        {#---------------------------------------------------------------------------------------<br/>#}
+
+        {#{% for workContributor in dream.dreamWorkContributions %}#}
+            {#&#123;&#35;{% if not workContributor.hiddenContributor %}&#35;&#125;#}
+                {#{{ workContributor.user.firstName }} * {{ workContributor.user.lastName }}#}
+                {#{{ workContributor.workArticle.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>#}
+            {#&#123;&#35;{% endif %}&#35;&#125;#}
+        {#{% endfor %}#}
 
     {#**************************************************************************************<br/>#}
-    <div>
 
-    {% if contributors|length == 0 %}
-        <div class="alert alert-info">
-            Ще ніхто не підтримав цю мрію - будьте першим.
-        </div>
-    {% endif %}
-    {% for user in contributors %}
-        <div style="float: left; margin: 10px;">
-            <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
-            <span class="contributors-fio">
-                {{ user.firstName }}
-                {{ user.lastName }}
-            </span>
-            <ul class="list-unstyled">
-                {{ finContribute(user, dream)|raw }}
-                {{ equipContribute(user, dream)|raw }}
-                {{ workContribute(user, dream)|raw }}
-            </ul>
-        </div>
-    {% endfor %}
+    <div>
+        {% if contributors|length == 0 %}
+            <div class="alert alert-info">
+                Ще ніхто не підтримав цю мрію - будьте першим.
+            </div>
+        {% endif %}
+        {% for user in contributors %}
+            <div style="float: left; margin: 10px; max-width: 240px;">
+                <div style="float: left;">
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
+                </div>
+                <div>
+                    <p class="contributors-fio"  style="padding: 0 0 0 97px; margin: 0;">
+                        {{ user.firstName }}
+                    </p>
+                    <p class="contributors-fio"  style="padding: 0 0 0 97px; margin: 0;">
+                        {{ user.lastName }}
+                    </p>
+                </div>
+                <div style="clear: both;">
+                    <ul class="list-unstyled">
+                        {{ finContribute(user, dream)|raw }}
+                        {{ equipContribute(user, dream)|raw }}
+                        {{ workContribute(user, dream)|raw }}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>

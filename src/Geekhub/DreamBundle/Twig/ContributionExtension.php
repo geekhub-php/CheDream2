@@ -31,9 +31,11 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('finContribute', array($this, 'finContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipContribute', array($this, 'equipContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workContribute', array($this, 'workContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('finResource', array($this, 'finResource'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('equipResource', array($this, 'equipResource'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
         );
     }
-
 
     public function finContribute($user, $dream)
     {
@@ -42,7 +44,7 @@ class ContributionExtension extends \Twig_Extension
         $str = '';
         foreach ($finContr as $fin)
         {
-            $str .= '<li>'.$fin['article'].' '.$fin['totalSum'].'</li>';
+            $str .= '<li>'.$fin['article'].' '.$fin['totalSum'].' грн.</li>';
         }
         return $str;
     }
@@ -80,6 +82,44 @@ class ContributionExtension extends \Twig_Extension
         foreach ($workContr as $work)
         {
             $str .= '<li>'.$work['article'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
+        }
+        return $str;
+    }
+
+    public function finResource($financial, $dream)
+    {
+        $finResSumTotal = 0;
+        $finResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumFinancialResource($financial, $dream);
+
+        foreach ($finResSum as $fin)
+        {
+            $finResSumTotal = $fin['totalSum'];
+        }
+
+        return $finResSumTotal.' грн.';
+    }
+
+    public function equipResource($equipment, $dream)
+    {
+        $equipResSumTotal = 0;
+        $equipResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumEquipmentResource($equipment, $dream);
+
+        foreach ($equipResSum as $equip)
+        {
+            $equipResSumTotal = $equip['totalSum'];
+        }
+
+        return $equipResSumTotal;
+    }
+
+    public function workResource($work, $dream)
+    {
+        $str = 0;
+        $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);
+
+        foreach ($workResSum as $work)
+        {
+            $str = $work['totalSum'].' чол./ '.$work['totalDays'].' дн.';
         }
         return $str;
     }
