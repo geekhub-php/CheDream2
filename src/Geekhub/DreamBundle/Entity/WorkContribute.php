@@ -9,6 +9,8 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
@@ -25,6 +27,14 @@ class WorkContribute
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected  $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamWorkContributions")
@@ -51,6 +61,8 @@ class WorkContribute
     /**
      * @var float
      *
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Regex(pattern="/^[0-9]+$/", message="dream.only_numbers")
      * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;
@@ -58,6 +70,8 @@ class WorkContribute
     /**
      * @var integer
      *
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Regex(pattern="/^[0-9]+$/", message="dream.only_numbers")
      * @ORM\Column(name="quantityDays", type="integer")
      */
     protected $quantityDays;
@@ -71,6 +85,29 @@ class WorkContribute
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  \DateTime     $createdAt
+     * @return $this
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**

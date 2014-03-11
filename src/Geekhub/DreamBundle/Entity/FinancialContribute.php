@@ -9,6 +9,8 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
@@ -25,6 +27,14 @@ class FinancialContribute
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected  $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamFinancialContributions")
@@ -51,6 +61,8 @@ class FinancialContribute
     /**
      * @var float
      *
+     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
      * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;
@@ -63,6 +75,29 @@ class FinancialContribute
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  \DateTime     $createdAt
+     * @return $this
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**

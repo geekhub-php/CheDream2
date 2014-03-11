@@ -10,7 +10,7 @@
                     <a type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow">Фінансово</a>
                     <div id="finFormContributor">     {# financial contribute form start #}
 
-                        {{ form_start(finForm, {'attr': {'role': 'form' } } ) }}
+                        {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
                         {{ form_row(finForm.financialArticle) }}
                         {{ form_row(finForm.quantity) }}
@@ -29,7 +29,7 @@
 
                     <div id="equipFormContributor">     {# equipment contribute form start #}
 
-                        {{ form_start(equipForm, {'attr': {'role': 'form' } } ) }}
+                        {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
                         {{ form_row(equipForm.equipmentArticle) }}
                         {{ form_row(equipForm.quantity) }}
@@ -49,7 +49,7 @@
 
                     <div id="workFormContributor">     {# work contribute form start #}
 
-                        {{ form_start(workForm, {'attr': {'role': 'form' } } ) }}
+                        {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
                         {{ form_row(workForm.workArticle) }}
                         {{ form_row(workForm.quantity) }}
