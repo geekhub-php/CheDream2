@@ -1,5 +1,6 @@
 sonata_admin:
     title:      Cherkassy Dream Admin Panel !
+    title_logo: /apple-touch-icon.png
     templates:
         user_block: ApplicationSonataAdminBundle:Core:user_block.html.twig
 

@@ -4,9 +4,8 @@ security:
 
     role_hierarchy:
         ROLE_MODERATOR: ROLE_USER
-#        ROLE_ADMIN: ROLE_MODERATOR
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN: ROLE_MODERATOR
+        ROLE_SUPER_ADMIN: [ROLE_ALLOWED_TO_SWITCH, ROLE_SUPER_ADMIN]
 
     acl:
         connection: default
@@ -43,6 +42,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: [ROLE_MODERATOR, ROLE_SUPER_ADMIN]}
         - { path: ^/dream/new, role: ROLE_USER }
         - { path: ^/dream/edit, role: ROLE_USER }
