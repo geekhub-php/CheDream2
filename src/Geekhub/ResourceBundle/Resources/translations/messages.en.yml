@@ -1,0 +1,16 @@
+contacts:
+    feedback:     Зворотній зв'язок
+    write_us:
+        title:    Пишіть нам
+        email:    АДРЕСА ДЛЯ ЗВОРОТНЬОГО ЗВ'ЯЗКУ
+        theme:    ТЕМА ЛИСТА
+        body:     ТЕКСТ ПОВІДОМЛЕННЯ
+        captcha:  КАПЧА
+        submit:   Надіслати
+    landline:     Міський телефон
+    mobile_life:  Life
+    mobile_mts:   МТС
+    mobile_ks:    Київстар
+    skype:        Skype
+    icq:          ICQ
+    address:      З будь-яких питань звертайтеся за адресою
