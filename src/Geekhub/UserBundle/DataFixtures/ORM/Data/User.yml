@@ -3,9 +3,9 @@ root:
     email:      <current()>@example.com
     firstName:  SUPER
     lastName:   ADMIN
-    roles:      [ADMIN]
+    roles:      [ROLE_SUPER_ADMIN]
 yoda, dartwaider, chewbacca, c3pio:
     password:   <current()>
     email:      <current()>@example.com
     firstName:  <current()>
-    roles:      [USER]
+    roles:      [ROLE_USER]

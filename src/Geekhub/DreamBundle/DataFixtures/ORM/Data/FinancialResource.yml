@@ -1,16 +1,16 @@
-finance1:
+rfinance1:
     dream:    dream1
     title:    фінанс1
     quantity: 100
-finance2:
+rfinance2:
     dream:    dream1
     title:    фінанс2
     quantity: 200
-finance3:
+rfinance3:
     dream:    dream2
     title:    фінанс1
     quantity: 50
-finance4:
+rfinance4:
     dream:    dream3
     title:    прозапас
     quantity: 1000000000
