@@ -31,9 +31,11 @@
                         {% endblock %}
                     {% endembed %}
                 {% endblock %}
-                <div class="wrapper">
-                    {% block content %}{% endblock content %}
-                </div>
+                {% block main %}
+                    <div class="wrapper">
+                        {% block content %}{% endblock content %}
+                    </div>
+                {% endblock main %}
             </div>
             {% block footer %}{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}{% endblock %}
         {% endblock %}
