@@ -34,12 +34,16 @@
     left: 0px;
     width: 100%;
 }
-.showDreamAvatar-wrapper img {
+.showAvatar {
     border-radius: 7px;
 }
 .showDreamAvatar-fio {
     position: absolute;
     bottom: -8px;
     left: 100px;
+    font-weight: bolder;
+}
+.contributors-fio
+{
     font-weight: bolder;
 }
