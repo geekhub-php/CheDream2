@@ -47,6 +47,9 @@
         var workFormHide = function(){
             $('#workFormContributor').hide();
         };
+        var otherFormHide = function(){
+            $('#otherFormContributor').hide();
+        };
 
         var finFormShow = function() {
             $('#finFormContributor').fadeIn(500).show();
@@ -56,6 +59,9 @@
         };
         var workFormShow = function() {
             $('#workFormContributor').fadeIn(500).show();
+        };
+        var otherFormShow = function() {
+            $('#otherFormContributor').fadeIn(500).show();
         };
 
         $(document).ready(function(){
@@ -69,6 +75,7 @@
             finFormHide();
             equipFormHide();
             workFormHide();
+            otherFormHide();
         });
 
         document.getElementById('links').onclick = function (event) {
@@ -84,18 +91,27 @@
             finFormShow();
             equipFormHide();
             workFormHide();
+            otherFormHide();
         });
         $('#equipFormContributorShow').click(function(){
             finFormHide();
             equipFormShow();
             workFormHide();
+            otherFormHide();
         });
-
         $('#workFormContributorShow').click(function(){
             finFormHide();
             equipFormHide();
             workFormShow();
+            otherFormHide();
         });
+        $('#otherFormContributorShow').click(function(){
+            finFormHide();
+            equipFormHide();
+            workFormHide();
+            otherFormShow();
+        });
+
         $('#finButCancel').click(function(){
             finFormHide();
         });
@@ -104,6 +120,9 @@
         });
         $('#workButCancel').click(function(){
             workFormHide();
+        });
+        $('#otherButCancel').click(function(){
+            otherFormHide();
         });
     </script>
 {% endblock %}

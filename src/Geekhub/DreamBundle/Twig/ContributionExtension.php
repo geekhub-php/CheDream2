@@ -10,6 +10,8 @@ namespace Geekhub\DreamBundle\Twig;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Geekhub\DreamBundle\Entity\AbstractContributeResource;
+use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\UserBundle\Entity\User;
 
 class ContributionExtension extends \Twig_Extension
 {
@@ -31,6 +33,7 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('finContribute', array($this, 'finContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipContribute', array($this, 'equipContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workContribute', array($this, 'workContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('otherContribute', array($this, 'otherContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('finResource', array($this, 'finResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipResource', array($this, 'equipResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
@@ -83,6 +86,19 @@ class ContributionExtension extends \Twig_Extension
         {
             $str .= '<li>'.$work['article'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
         }
+        return $str;
+    }
+
+    public function otherContribute($user, $dream)
+    {
+        $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
+
+        $str = '';
+        foreach ($otherContribute as $other)
+        {
+            $str .= '<li>'.$other['title'].'</li>';
+        }
+
         return $str;
     }
 

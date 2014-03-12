@@ -193,6 +193,11 @@ class Dream implements Taggable
     protected $dreamWorkContributions;
 
     /**
+     * @ORM\OneToMany(targetEntity="OtherContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamOtherContributions;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -208,6 +213,7 @@ class Dream implements Taggable
         $this->dreamFinancialContributions = new ArrayCollection();
         $this->dreamEquipmentContributions = new ArrayCollection();
         $this->dreamWorkContributions = new ArrayCollection();
+        $this->dreamOtherContributions = new ArrayCollection();
     }
 
     /**
@@ -1009,5 +1015,38 @@ class Dream implements Taggable
     public function getDreamWorkContributions()
     {
         return $this->dreamWorkContributions;
+    }
+
+    /**
+     * Add dreamOtherContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
+     * @return Dream
+     */
+    public function addDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
+    {
+        $this->dreamOtherContributions[] = $dreamOtherContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamOtherContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
+     */
+    public function removeDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
+    {
+        $this->dreamOtherContributions->removeElement($dreamOtherContributions);
+    }
+
+    /**
+     * Get dreamOtherContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreamOtherContributions()
+    {
+        return $this->dreamOtherContributions;
     }
 }

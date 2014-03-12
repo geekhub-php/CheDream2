@@ -13,11 +13,13 @@ use Doctrine\ORM\EntityManager;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
+use Geekhub\DreamBundle\Entity\OtherContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
 use Geekhub\DreamBundle\Form\DreamType;
 use FOS\RestBundle\Controller\Annotations\View;
 use Geekhub\DreamBundle\Form\EquipmentContributeType;
 use Geekhub\DreamBundle\Form\FinancialContributeType;
+use Geekhub\DreamBundle\Form\OtherContributeType;
 use Geekhub\DreamBundle\Form\WorkContributeType;
 use Geekhub\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -119,9 +121,11 @@ class DreamController extends Controller
         $financialContribute = new FinancialContribute();
         $equipmentContribute = new EquipmentContribute();
         $workContribute = new WorkContribute();
+        $otherContribute = new OtherContribute();
         $finForm = $this->createForm(new FinancialContributeType(), $financialContribute, array('dream' => $dream));
         $equipForm = $this->createForm(new EquipmentContributeType(), $equipmentContribute, array('dream' => $dream));
         $workForm = $this->createForm(new WorkContributeType(), $workContribute, array('dream' => $dream));
+        $otherForm = $this->createForm(new OtherContributeType(), $otherContribute);
 
         $contributors = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getArrayContributorsByDream($dream);
 
@@ -134,9 +138,11 @@ class DreamController extends Controller
                 $finForm,
                 $equipForm,
                 $workForm,
+                $otherForm,
                 $financialContribute,
                 $equipmentContribute,
-                $workContribute
+                $workContribute,
+                $otherContribute
             );
 
             return $this->redirect($this->generateUrl('view_dream', array(
@@ -146,18 +152,20 @@ class DreamController extends Controller
 
         return array(
             'dream' => $dream,
-            'finForm'=>$finForm->createView(),
-            'equipForm'=>$equipForm->createView(),
-            'workForm'=>$workForm->createView(),
+            'finForm' => $finForm->createView(),
+            'equipForm' => $equipForm->createView(),
+            'workForm' => $workForm->createView(),
+            'otherForm' => $otherForm->createView(),
             'contributors' => $contributors
         );
     }
 
     private function handleContributionForms(Request $request, Dream $dream, User $user, Form $finForm,
-                                             Form $equipForm, Form $workForm,
+                                             Form $equipForm, Form $workForm, Form $otherForm,
                                              FinancialContribute $financialContribute,
                                              EquipmentContribute $equipmentContribute,
-                                             WorkContribute $workContribute)
+                                             WorkContribute $workContribute,
+                                             OtherContribute $otherContribute)
     {
         if($request->get('financialContributeForm')) {
             $finForm->handleRequest($request);
@@ -189,7 +197,15 @@ class DreamController extends Controller
                 $em->flush();
             }
         }
-
+        if($request->get('otherContributeForm')) {
+            $otherForm->handleRequest($request);
+            if ($otherForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $otherContribute->setDream($dream);
+                $otherContribute->setUser($user);
+                $em->persist($otherContribute);
+                $em->flush();
+            }
+        }
     }
-
 }

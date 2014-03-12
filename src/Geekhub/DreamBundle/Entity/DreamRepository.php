@@ -17,7 +17,8 @@ class DreamRepository extends EntityRepository
         return array_unique(array_merge(
             $this->getEquipmentContributors($dream)->toArray(),
             $this->getFinancialContributors($dream)->toArray(),
-            $this->getWorkContributors($dream)->toArray()
+            $this->getWorkContributors($dream)->toArray(),
+            $this->getOtherContributors($dream)->toArray()
         ));
     }
 
@@ -34,6 +35,11 @@ class DreamRepository extends EntityRepository
     public function getWorkContributors(Dream $dream)
     {
         return $dream->getDreamWorkContributions()->map($this->getUser());
+    }
+
+    public function getOtherContributors(Dream $dream)
+    {
+        return $dream->getDreamOtherContributions()->map($this->getUser());
     }
 
     public function showFinancialContributors($user, $dream)
@@ -75,6 +81,19 @@ class DreamRepository extends EntityRepository
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
+                           ')
+            ->setParameter('user', $user)
+            ->setParameter('dream', $dream)
+            ->getResult();
+    }
+
+    public function showOtherContributors($user, $dream)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT c.title as title
+                           FROM GeekhubDreamBundle:OtherContribute c
+                           where c.user = :user and c.dream = :dream
+                           order by c.id
                            ')
             ->setParameter('user', $user)
             ->setParameter('dream', $dream)

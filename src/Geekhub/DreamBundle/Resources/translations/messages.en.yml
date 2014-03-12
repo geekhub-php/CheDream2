@@ -26,6 +26,8 @@ dream:
         title: Назва робіт
         quantity: Людей
         days: Днів
+    other:
+        title: Інша допомога
     js:
         add_financial: Додати фінансові витрати
         add_equipment: Додати абладнання та інструменти
