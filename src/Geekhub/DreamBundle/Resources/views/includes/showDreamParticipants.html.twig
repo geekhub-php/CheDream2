@@ -37,7 +37,7 @@
             </div>
         {% endif %}
         {% for user in contributors %}
-            <div style="float: left; margin: 10px; max-width: 240px;">
+            <div style="margin: 10px; max-width: 240px; display: inline-block;">
                 <div style="float: left;">
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
                 </div>
