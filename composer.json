@@ -60,6 +60,7 @@
         "sonata-project/media-bundle": "2.2.*",
         "ahonymous/fontello": "dev-master",
         "guzzle/guzzle": "dev-guzzle4",
+        "guzzlehttp/streams": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "jms/serializer-bundle": "0.13.*",
