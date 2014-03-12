@@ -26,7 +26,7 @@ class WorkContributeType extends AbstractType
         $builder
             ->add('workArticle', 'entity', array(
                 'class' => 'GeekhubDreamBundle:WorkResource',
-                'query_builder' => function(EntityRepository $er ) use ( $dream ) {
+                'query_builder' => function (EntityRepository $er) use ($dream) {
                         return $er->createQueryBuilder('w')
                             ->where('w.dream = ?1')
                             ->setParameter(1, $dream);

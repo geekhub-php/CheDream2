@@ -45,10 +45,10 @@ class ContributionExtension extends \Twig_Extension
         $finContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showFinancialContributors($user, $dream);
 
         $str = '';
-        foreach ($finContr as $fin)
-        {
+        foreach ($finContr as $fin) {
             $str .= '<li>'.$fin['article'].' '.$fin['totalSum'].' грн.</li>';
         }
+
         return $str;
     }
 
@@ -57,8 +57,7 @@ class ContributionExtension extends \Twig_Extension
         $equipContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showEquipmentContributors($user, $dream);
 
         $str = '';
-        foreach ($equipContr as $equip)
-        {
+        foreach ($equipContr as $equip) {
             switch ($equip['qType']) {
                 case AbstractContributeResource::KG:
                     $qType = 'кг.';
@@ -74,6 +73,7 @@ class ContributionExtension extends \Twig_Extension
             }
             $str .= '<li>'.$equip['article'].' '.$equip['totalSum'].' '.$qType.'</li>';
         }
+
         return $str;
     }
 
@@ -82,10 +82,10 @@ class ContributionExtension extends \Twig_Extension
         $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
 
         $str = '';
-        foreach ($workContr as $work)
-        {
+        foreach ($workContr as $work) {
             $str .= '<li>'.$work['article'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
         }
+
         return $str;
     }
 
@@ -94,8 +94,7 @@ class ContributionExtension extends \Twig_Extension
         $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
 
         $str = '';
-        foreach ($otherContribute as $other)
-        {
+        foreach ($otherContribute as $other) {
             $str .= '<li>'.$other['title'].'</li>';
         }
 
@@ -107,8 +106,7 @@ class ContributionExtension extends \Twig_Extension
         $finResSumTotal = 0;
         $finResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumFinancialResource($financial, $dream);
 
-        foreach ($finResSum as $fin)
-        {
+        foreach ($finResSum as $fin) {
             $finResSumTotal = $fin['totalSum'];
         }
 
@@ -120,8 +118,7 @@ class ContributionExtension extends \Twig_Extension
         $equipResSumTotal = 0;
         $equipResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumEquipmentResource($equipment, $dream);
 
-        foreach ($equipResSum as $equip)
-        {
+        foreach ($equipResSum as $equip) {
             $equipResSumTotal = $equip['totalSum'];
         }
 
@@ -133,10 +130,10 @@ class ContributionExtension extends \Twig_Extension
         $str = 0;
         $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);
 
-        foreach ($workResSum as $work)
-        {
+        foreach ($workResSum as $work) {
             $str = $work['totalSum'].' чол./ '.$work['totalDays'].' дн.';
         }
+
         return $str;
     }
 }

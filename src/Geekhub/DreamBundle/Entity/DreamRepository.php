@@ -3,7 +3,6 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Geekhub\DreamBundle\Entity\Dream;
 
 /**
  * DreamsRepository
@@ -13,7 +12,8 @@ use Geekhub\DreamBundle\Entity\Dream;
  */
 class DreamRepository extends EntityRepository
 {
-    public function getArrayContributorsByDream(Dream $dream) {
+    public function getArrayContributorsByDream(Dream $dream)
+    {
         return array_unique(array_merge(
             $this->getEquipmentContributors($dream)->toArray(),
             $this->getFinancialContributors($dream)->toArray(),

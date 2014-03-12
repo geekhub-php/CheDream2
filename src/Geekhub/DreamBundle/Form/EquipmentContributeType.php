@@ -26,7 +26,7 @@ class EquipmentContributeType extends AbstractType
         $builder
             ->add('equipmentArticle', 'entity', array(
                 'class' => 'GeekhubDreamBundle:EquipmentResource',
-                'query_builder' => function(EntityRepository $er ) use ( $dream ) {
+                'query_builder' => function (EntityRepository $er) use ($dream) {
                         return $er->createQueryBuilder('w')
                             ->where('w.dream = ?1')
                             ->setParameter(1, $dream);

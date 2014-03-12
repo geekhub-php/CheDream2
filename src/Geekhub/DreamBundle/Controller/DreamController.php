@@ -9,7 +9,6 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
@@ -167,7 +166,7 @@ class DreamController extends Controller
                                              WorkContribute $workContribute,
                                              OtherContribute $otherContribute)
     {
-        if($request->get('financialContributeForm')) {
+        if ($request->get('financialContributeForm')) {
             $finForm->handleRequest($request);
             if ($finForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
@@ -177,7 +176,7 @@ class DreamController extends Controller
                 $em->flush();
             }
         }
-        if($request->get('equipmentContributeForm')) {
+        if ($request->get('equipmentContributeForm')) {
             $equipForm->handleRequest($request);
             if ($equipForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
@@ -187,7 +186,7 @@ class DreamController extends Controller
                 $em->flush();
             }
         }
-        if($request->get('workContributeForm')) {
+        if ($request->get('workContributeForm')) {
             $workForm->handleRequest($request);
             if ($workForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
@@ -197,7 +196,7 @@ class DreamController extends Controller
                 $em->flush();
             }
         }
-        if($request->get('otherContributeForm')) {
+        if ($request->get('otherContributeForm')) {
             $otherForm->handleRequest($request);
             if ($otherForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();

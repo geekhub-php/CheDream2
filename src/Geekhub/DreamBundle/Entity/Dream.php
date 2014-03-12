@@ -1020,7 +1020,7 @@ class Dream implements Taggable
     /**
      * Add dreamOtherContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
+     * @param  \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
      * @return Dream
      */
     public function addDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
@@ -1043,7 +1043,7 @@ class Dream implements Taggable
     /**
      * Get dreamOtherContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamOtherContributions()
     {

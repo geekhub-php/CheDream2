@@ -8,7 +8,6 @@
 
 namespace Geekhub\DreamBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -65,7 +64,7 @@ class OtherContribute
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,7 +74,7 @@ class OtherContribute
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime       $createdAt
      * @return OtherContribute
      */
     public function setCreatedAt($createdAt)
@@ -88,7 +87,7 @@ class OtherContribute
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -98,7 +97,7 @@ class OtherContribute
     /**
      * Set hiddenContributor
      *
-     * @param boolean $hiddenContributor
+     * @param  boolean         $hiddenContributor
      * @return OtherContribute
      */
     public function setHiddenContributor($hiddenContributor)
@@ -111,7 +110,7 @@ class OtherContribute
     /**
      * Get hiddenContributor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenContributor()
     {
@@ -121,7 +120,7 @@ class OtherContribute
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string          $title
      * @return OtherContribute
      */
     public function setTitle($title)
@@ -134,7 +133,7 @@ class OtherContribute
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -144,7 +143,7 @@ class OtherContribute
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return OtherContribute
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -157,7 +156,7 @@ class OtherContribute
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -167,7 +166,7 @@ class OtherContribute
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return OtherContribute
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -180,7 +179,7 @@ class OtherContribute
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
