@@ -36,7 +36,7 @@
                 {% if app.user is same as(user) %}
                 <p> <a href="{{path('profile_edit')}}">Редагувати</a></p>
                 {% endif %}
-                <p> {# user.birthday #} </p>
+                <p> {{ user.birthday|date("d M Y", "Europe/Kiev")|trans }} </p>
                 <p> {{ user.about }} </p>
              </div>
              <div class="row">
