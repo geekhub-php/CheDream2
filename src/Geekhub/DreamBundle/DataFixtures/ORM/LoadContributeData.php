@@ -43,12 +43,14 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $dream = $this->getReference($financeData['dream']);
             $resource = $this->getReference($financeData['resource']);
             $user = $this->getReference('user-'.$financeData['user']);
+
             $finance = new FinancialContribute();
             $finance->setDream($dream);
             $finance->setUser($user);
             $finance->setHiddenContributor($financeData['hidden']);
             $finance->setQuantity($financeData['quantity']);
             $finance->setFinancialArticle($resource);
+
             $manager->persist($finance);
         }
     }
@@ -64,12 +66,14 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $dream = $this->getReference($equipmentData['dream']);
             $resource = $this->getReference($equipmentData['resource']);
             $user = $this->getReference('user-'.$equipmentData['user']);
+
             $equipment = new EquipmentContribute();
             $equipment->setDream($dream);
             $equipment->setUser($user);
             $equipment->setHiddenContributor($equipmentData['hidden']);
             $equipment->setQuantity($equipmentData['quantity']);
             $equipment->setEquipmentArticle($resource);
+
             $manager->persist($equipment);
         }
     }
@@ -85,6 +89,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $dream = $this->getReference($workData['dream']);
             $resource = $this->getReference($workData['resource']);
             $user = $this->getReference('user-'.$workData['user']);
+
             $work = new WorkContribute();
             $work->setDream($dream);
             $work->setUser($user);
@@ -92,6 +97,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $work->setQuantity($workData['quantity']);
             $work->setQuantityDays($workData['quantityDays']);
             $work->setWorkArticle($resource);
+
             $manager->persist($work);
         }
     }
