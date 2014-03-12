@@ -125,9 +125,7 @@ class DreamController extends Controller
 
         /** @var EntityManager $em */
 
-        $userContributorSrv = $this->get('dream.get_user.contributor');
-        $userContributorSrv->setDream($dream);
-        $contributors = $userContributorSrv->getUsersContribute();
+        $contributors = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getArrayContributorsByDream($dream);
 
 //      **********************************************************************************************************************************
 

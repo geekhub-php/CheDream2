@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Geekhub\DreamBundle\Entity\Dream;
 
 /**
  * DreamsRepository
@@ -12,40 +13,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
-    public function getFinContributionUsers($dream)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT u, c from GeekhubDreamBundle:FinancialContribute c
-                           join c.user u
-                           where c.dream = ?1
-                           group by u
-                           ')
-            ->setParameter(1, $dream)
-            ->getResult();
+    public function getArrayContributorsByDream(Dream $dream) {
+        return array_unique(array_merge(
+            $this->getEquipmentContributors($dream)->toArray(),
+            $this->getFinancialContributors($dream)->toArray(),
+            $this->getWorkContributors($dream)->toArray()
+        ));
     }
 
-    public function getEquipContributionUsers($dream)
+    public function getFinancialContributors(Dream $dream)
     {
-        return $this->getEntityManager()
-            ->createQuery('SELECT u, c from GeekhubDreamBundle:EquipmentContribute c
-                           join c.user u
-                           where c.dream = ?1
-                           group by u
-                           ')
-            ->setParameter(1, $dream)
-            ->getResult();
+        return $dream->getDreamFinancialContributions()->map($this->getUser());
     }
 
-    public function getWorkContributionUsers($dream)
+    public function getEquipmentContributors(Dream $dream)
     {
-        return $this->getEntityManager()
-            ->createQuery('SELECT u, c from GeekhubDreamBundle:WorkContribute c
-                           join c.user u
-                           where c.dream = ?1
-                           group by u
-                           ')
-            ->setParameter(1, $dream)
-            ->getResult();
+        return $dream->getDreamEquipmentContributions()->map($this->getUser());
+    }
+
+    public function getWorkContributors(Dream $dream)
+    {
+        return $dream->getDreamWorkContributions()->map($this->getUser());
     }
 
     public function showFinancialContributors($user, $dream)
@@ -133,5 +121,10 @@ class DreamRepository extends EntityRepository
             ->setParameter(1, $work)
             ->setParameter(2, $dream)
             ->getResult();
+    }
+
+    protected function getUser()
+    {
+        return function ($contribute) {return $contribute->getUser(); };
     }
 }
