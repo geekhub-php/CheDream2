@@ -440,7 +440,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add financialContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions
+     * @param  \Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions
      * @return User
      */
     public function addFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions)
@@ -463,7 +463,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get financialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFinancialContributions()
     {
@@ -473,7 +473,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add equipmentContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions
      * @return User
      */
     public function addEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions)
@@ -496,7 +496,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get equipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEquipmentContributions()
     {
@@ -506,7 +506,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add workContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\WorkContribute $workContributions
+     * @param  \Geekhub\DreamBundle\Entity\WorkContribute $workContributions
      * @return User
      */
     public function addWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $workContributions)
@@ -529,7 +529,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get workContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getWorkContributions()
     {

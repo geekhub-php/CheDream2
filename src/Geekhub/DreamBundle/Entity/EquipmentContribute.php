@@ -26,7 +26,7 @@ class EquipmentContribute
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected  $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -39,24 +39,24 @@ class EquipmentContribute
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamEquipmentContributions")
      */
-    protected  $dream;
+    protected $dream;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hiddenContributor", type="boolean")
      */
-    protected  $hiddenContributor;
+    protected $hiddenContributor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="equipmentContributions")
      */
-    protected  $user;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="EquipmentResource")
      */
-    protected  $equipmentArticle;
+    protected $equipmentArticle;
 
     /**
      * @var float
@@ -70,7 +70,7 @@ class EquipmentContribute
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class EquipmentContribute
     /**
      * Set createdAt
      *
-     * @param  \DateTime     $createdAt
+     * @param  \DateTime $createdAt
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -103,7 +103,7 @@ class EquipmentContribute
     /**
      * Set hiddenContributor
      *
-     * @param boolean $hiddenContributor
+     * @param  boolean             $hiddenContributor
      * @return EquipmentContribute
      */
     public function setHiddenContributor($hiddenContributor)
@@ -116,7 +116,7 @@ class EquipmentContribute
     /**
      * Get hiddenContributor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenContributor()
     {
@@ -126,7 +126,7 @@ class EquipmentContribute
     /**
      * Set quantity
      *
-     * @param float $quantity
+     * @param  float               $quantity
      * @return EquipmentContribute
      */
     public function setQuantity($quantity)
@@ -139,7 +139,7 @@ class EquipmentContribute
     /**
      * Get quantity
      *
-     * @return float 
+     * @return float
      */
     public function getQuantity()
     {
@@ -149,7 +149,7 @@ class EquipmentContribute
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return EquipmentContribute
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -162,7 +162,7 @@ class EquipmentContribute
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -172,7 +172,7 @@ class EquipmentContribute
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return EquipmentContribute
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -185,7 +185,7 @@ class EquipmentContribute
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -195,7 +195,7 @@ class EquipmentContribute
     /**
      * Set equipmentArticle
      *
-     * @param \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentArticle
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentArticle
      * @return EquipmentContribute
      */
     public function setEquipmentArticle(\Geekhub\DreamBundle\Entity\EquipmentResource $equipmentArticle = null)
@@ -208,7 +208,7 @@ class EquipmentContribute
     /**
      * Get equipmentArticle
      *
-     * @return \Geekhub\DreamBundle\Entity\EquipmentResource 
+     * @return \Geekhub\DreamBundle\Entity\EquipmentResource
      */
     public function getEquipmentArticle()
     {

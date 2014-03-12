@@ -25,7 +25,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     public function load(ObjectManager $manager)
     {
         $dreams = Yaml::parse($this->getYmlFile());
-        $tagManager = $this->container->get('fpn_tag.tag_manager');
+        $tagManager = $this->container->get('geekhub.tag.tag_manager');
 
         foreach ($dreams as $key => $dreamData) {
             $dream = new Dream();
@@ -41,9 +41,10 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
-            $tagsObjArray = $tagManager->loadOrCreateTags($dreamData['tags']);
-            $dream->setTags(null);
-            $tagManager->addTags($tagsObjArray, $dream);
+
+            $dream->setTags($dreamData['tags']);
+            $tagManager->addTagsToEntity($dream);
+
             $manager->persist($dream);
 
             $this->addReference($key, $dream);
