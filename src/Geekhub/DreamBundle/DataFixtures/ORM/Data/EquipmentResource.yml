@@ -1,0 +1,15 @@
+requipment1:
+    dream:        dream1
+    title:        зореліт
+    quantityType: piece
+    quantity:     1
+requipment2:
+    dream:        dream3
+    title:        завод по переобці металу
+    quantityType: piece
+    quantity:     150
+requipment3:
+    dream:        dream3
+    title:        метал
+    quantityType: ton
+    quantity:     15000000

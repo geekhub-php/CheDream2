@@ -1,0 +1,28 @@
+cwork1:
+    dream:        dream1
+    user:         chewbacca
+    hidden:       0
+    quantity:     1
+    quantityDays: 1
+    resource:     rwork2
+cwork2:
+    dream:        dream1
+    user:         dartwaider
+    hidden:       0
+    quantity:     1
+    quantityDays: 1
+    resource:     rwork1
+cwork3:
+    dream:        dream3
+    user:         chewbacca
+    hidden:       0
+    quantity:     1
+    quantityDays: 5
+    resource:     rwork3
+cwork4:
+    dream:        dream3
+    user:         c3pio
+    hidden:       0
+    quantity:     1
+    quantityDays: 50
+    resource:     rwork3
