@@ -26,7 +26,7 @@ class WorkContribute
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected  $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -39,24 +39,24 @@ class WorkContribute
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamWorkContributions")
      */
-    protected  $dream;
+    protected $dream;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hiddenContributor", type="boolean")
      */
-    protected  $hiddenContributor;
+    protected $hiddenContributor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="workContributions")
      */
-    protected  $user;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="WorkResource")
      */
-    protected  $workArticle;
+    protected $workArticle;
 
     /**
      * @var float
@@ -76,11 +76,10 @@ class WorkContribute
      */
     protected $quantityDays;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +89,7 @@ class WorkContribute
     /**
      * Set createdAt
      *
-     * @param  \DateTime     $createdAt
+     * @param  \DateTime $createdAt
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -113,7 +112,7 @@ class WorkContribute
     /**
      * Set hiddenContributor
      *
-     * @param boolean $hiddenContributor
+     * @param  boolean        $hiddenContributor
      * @return WorkContribute
      */
     public function setHiddenContributor($hiddenContributor)
@@ -126,7 +125,7 @@ class WorkContribute
     /**
      * Get hiddenContributor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenContributor()
     {
@@ -136,7 +135,7 @@ class WorkContribute
     /**
      * Set quantity
      *
-     * @param float $quantity
+     * @param  float          $quantity
      * @return WorkContribute
      */
     public function setQuantity($quantity)
@@ -149,7 +148,7 @@ class WorkContribute
     /**
      * Get quantity
      *
-     * @return float 
+     * @return float
      */
     public function getQuantity()
     {
@@ -159,7 +158,7 @@ class WorkContribute
     /**
      * Set quantityDays
      *
-     * @param integer $quantityDays
+     * @param  integer        $quantityDays
      * @return WorkContribute
      */
     public function setQuantityDays($quantityDays)
@@ -172,7 +171,7 @@ class WorkContribute
     /**
      * Get quantityDays
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantityDays()
     {
@@ -182,7 +181,7 @@ class WorkContribute
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return WorkContribute
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -195,7 +194,7 @@ class WorkContribute
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -205,7 +204,7 @@ class WorkContribute
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return WorkContribute
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -218,7 +217,7 @@ class WorkContribute
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -228,7 +227,7 @@ class WorkContribute
     /**
      * Set workArticle
      *
-     * @param \Geekhub\DreamBundle\Entity\WorkResource $workArticle
+     * @param  \Geekhub\DreamBundle\Entity\WorkResource $workArticle
      * @return WorkContribute
      */
     public function setWorkArticle(\Geekhub\DreamBundle\Entity\WorkResource $workArticle = null)
@@ -241,7 +240,7 @@ class WorkContribute
     /**
      * Get workArticle
      *
-     * @return \Geekhub\DreamBundle\Entity\WorkResource 
+     * @return \Geekhub\DreamBundle\Entity\WorkResource
      */
     public function getWorkArticle()
     {

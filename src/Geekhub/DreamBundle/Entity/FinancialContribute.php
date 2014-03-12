@@ -26,7 +26,7 @@ class FinancialContribute
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected  $id;
+    protected $id;
 
     /**
      * @var \DateTime
@@ -39,24 +39,24 @@ class FinancialContribute
     /**
      * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamFinancialContributions")
      */
-    protected  $dream;
+    protected $dream;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="hiddenContributor", type="boolean")
      */
-    protected  $hiddenContributor;
+    protected $hiddenContributor;
 
     /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="financialContributions")
      */
-    protected  $user;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="FinancialResource")
      */
-    protected  $financialArticle;
+    protected $financialArticle;
 
     /**
      * @var float
@@ -70,7 +70,7 @@ class FinancialContribute
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +80,7 @@ class FinancialContribute
     /**
      * Set createdAt
      *
-     * @param  \DateTime     $createdAt
+     * @param  \DateTime $createdAt
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -103,7 +103,7 @@ class FinancialContribute
     /**
      * Set hiddenContributor
      *
-     * @param boolean $hiddenContributor
+     * @param  boolean             $hiddenContributor
      * @return FinancialContribute
      */
     public function setHiddenContributor($hiddenContributor)
@@ -116,7 +116,7 @@ class FinancialContribute
     /**
      * Get hiddenContributor
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHiddenContributor()
     {
@@ -126,7 +126,7 @@ class FinancialContribute
     /**
      * Set quantity
      *
-     * @param float $quantity
+     * @param  float               $quantity
      * @return FinancialContribute
      */
     public function setQuantity($quantity)
@@ -139,7 +139,7 @@ class FinancialContribute
     /**
      * Get quantity
      *
-     * @return float 
+     * @return float
      */
     public function getQuantity()
     {
@@ -149,7 +149,7 @@ class FinancialContribute
     /**
      * Set dream
      *
-     * @param \Geekhub\DreamBundle\Entity\Dream $dream
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
      * @return FinancialContribute
      */
     public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
@@ -163,7 +163,7 @@ class FinancialContribute
     /**
      * Get dream
      *
-     * @return \Geekhub\DreamBundle\Entity\Dream 
+     * @return \Geekhub\DreamBundle\Entity\Dream
      */
     public function getDream()
     {
@@ -173,7 +173,7 @@ class FinancialContribute
     /**
      * Set user
      *
-     * @param \Geekhub\UserBundle\Entity\User $user
+     * @param  \Geekhub\UserBundle\Entity\User $user
      * @return FinancialContribute
      */
     public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
@@ -187,7 +187,7 @@ class FinancialContribute
     /**
      * Get user
      *
-     * @return \Geekhub\UserBundle\Entity\User 
+     * @return \Geekhub\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -197,7 +197,7 @@ class FinancialContribute
     /**
      * Set financialArticle
      *
-     * @param \Geekhub\DreamBundle\Entity\FinancialResource $financialArticle
+     * @param  \Geekhub\DreamBundle\Entity\FinancialResource $financialArticle
      * @return FinancialContribute
      */
     public function setFinancialArticle(\Geekhub\DreamBundle\Entity\FinancialResource $financialArticle = null)
@@ -210,7 +210,7 @@ class FinancialContribute
     /**
      * Get financialArticle
      *
-     * @return \Geekhub\DreamBundle\Entity\FinancialResource 
+     * @return \Geekhub\DreamBundle\Entity\FinancialResource
      */
     public function getFinancialArticle()
     {
