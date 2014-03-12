@@ -11,12 +11,12 @@ namespace Geekhub\DreamBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Geekhub\DreamBundle\Entity\EquipmentResource;
-use Geekhub\DreamBundle\Entity\FinancialResource;
-use Geekhub\DreamBundle\Entity\WorkResource;
+use Geekhub\DreamBundle\Entity\EquipmentContribute;
+use Geekhub\DreamBundle\Entity\FinancialContribute;
+use Geekhub\DreamBundle\Entity\WorkContribute;
 use Symfony\Component\Yaml\Yaml;
 
-class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterface
+class LoadContributeData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager
@@ -37,16 +37,19 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getFinance(ObjectManager $manager)
     {
-        $financeArray = $this->getFile(__DIR__.'/Data/FinancialResource.yml');
+        $financeArray = $this->getFile(__DIR__.'/Data/FinancialContribute.yml');
 
-        foreach ($financeArray as $key => $financeData) {
+        foreach ($financeArray as $financeData) {
             $dream = $this->getReference($financeData['dream']);
-            $finance = new FinancialResource();
+            $resource = $this->getReference($financeData['resource']);
+            $user = $this->getReference('user-'.$financeData['user']);
+            $finance = new FinancialContribute();
             $finance->setDream($dream);
-            $finance->setTitle($financeData['title']);
+            $finance->setUser($user);
+            $finance->setHiddenContributor($financeData['hidden']);
             $finance->setQuantity($financeData['quantity']);
+            $finance->setFinancialArticle($resource);
             $manager->persist($finance);
-            $this->addReference($key, $finance);
         }
     }
 
@@ -55,17 +58,19 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getEquipment(ObjectManager $manager)
     {
-        $equipmentArray = $this->getFile(__DIR__.'/Data/EquipmentResource.yml');
+        $equipmentArray = $this->getFile(__DIR__.'/Data/EquipmentContribute.yml');
 
-        foreach ($equipmentArray as $key => $equipmentData) {
+        foreach ($equipmentArray as $equipmentData) {
             $dream = $this->getReference($equipmentData['dream']);
-            $equipment = new EquipmentResource();
+            $resource = $this->getReference($equipmentData['resource']);
+            $user = $this->getReference('user-'.$equipmentData['user']);
+            $equipment = new EquipmentContribute();
             $equipment->setDream($dream);
-            $equipment->setTitle($equipmentData['title']);
+            $equipment->setUser($user);
+            $equipment->setHiddenContributor($equipmentData['hidden']);
             $equipment->setQuantity($equipmentData['quantity']);
-            $equipment->setQuantityType($equipmentData['quantityType']);
+            $equipment->setEquipmentArticle($resource);
             $manager->persist($equipment);
-            $this->addReference($key, $equipment);
         }
     }
 
@@ -74,17 +79,20 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getWork(ObjectManager $manager)
     {
-        $workArray = $this->getFile(__DIR__.'/Data/WorkResource.yml');
+        $workArray = $this->getFile(__DIR__.'/Data/WorkContribute.yml');
 
-        foreach ($workArray as $key => $workData) {
+        foreach ($workArray as $workData) {
             $dream = $this->getReference($workData['dream']);
-            $work = new WorkResource();
+            $resource = $this->getReference($workData['resource']);
+            $user = $this->getReference('user-'.$workData['user']);
+            $work = new WorkContribute();
             $work->setDream($dream);
-            $work->setTitle($workData['title']);
+            $work->setUser($user);
+            $work->setHiddenContributor($workData['hidden']);
             $work->setQuantity($workData['quantity']);
             $work->setQuantityDays($workData['quantityDays']);
+            $work->setWorkArticle($resource);
             $manager->persist($work);
-            $this->addReference($key, $work);
         }
     }
 
@@ -105,6 +113,6 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 }
