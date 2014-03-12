@@ -1,0 +1,12 @@
+Favorite1:
+    user: yoda
+    dreams: [dream1]
+Favorite2:
+    user: chewbacca
+    dreams: [dream2]
+Favorite3:
+    user: c3pio
+    dreams: [dream1, dream2]
+Favorite4:
+    user: dartwaider
+    dreams:  [dream3]

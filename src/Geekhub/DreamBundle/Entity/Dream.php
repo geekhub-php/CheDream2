@@ -915,7 +915,7 @@ class Dream implements Taggable
     /**
      * Add dreamFinancialContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions
+     * @param  \Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions
      * @return Dream
      */
     public function addDreamFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions)
@@ -938,7 +938,7 @@ class Dream implements Taggable
     /**
      * Get dreamFinancialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamFinancialContributions()
     {
@@ -948,7 +948,7 @@ class Dream implements Taggable
     /**
      * Add dreamEquipmentContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions
      * @return Dream
      */
     public function addDreamEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions)
@@ -971,7 +971,7 @@ class Dream implements Taggable
     /**
      * Get dreamEquipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamEquipmentContributions()
     {
@@ -981,7 +981,7 @@ class Dream implements Taggable
     /**
      * Add dreamWorkContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions
+     * @param  \Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions
      * @return Dream
      */
     public function addDreamWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions)
@@ -1004,7 +1004,7 @@ class Dream implements Taggable
     /**
      * Get dreamWorkContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDreamWorkContributions()
     {
