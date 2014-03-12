@@ -32,7 +32,7 @@ class DreamSubscriber implements EventSubscriber
             $object->addStatus(new Status(Status::SUBMITTED));
             $token = $this->container->get('security.context')->getToken();
 
-            if(null != $token) {
+            if (null != $token) {
                 $object->setAuthor($token->getUser());
             } elseif (!$object->getAuthor()) {
                 throw new \Exception("Ooops! Something went wrong. We can't create dream without user. Please contact with administrator.");
