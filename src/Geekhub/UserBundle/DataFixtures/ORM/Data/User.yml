@@ -1,5 +1,5 @@
 root:
-    password:   P@$$w0rd
+    password:   <current()>
     email:      <current()>@example.com
     firstName:  SUPER
     lastName:   ADMIN
