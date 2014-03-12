@@ -42,12 +42,12 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:FinancialContribute c
                            join c.financialArticle f
-                           where c.hiddenContributor = 0 and c.user = ?1 and c.dream = ?2
+                           where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
                            ')
-            ->setParameter(1, $user)
-            ->setParameter(2, $dream)
+            ->setParameter('user', $user)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
@@ -57,12 +57,12 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum, f.quantityType as qType
                            FROM GeekhubDreamBundle:EquipmentContribute c
                            join c.equipmentArticle f
-                           where c.hiddenContributor = 0 and c.user = ?1 and c.dream = ?2
+                           where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
                            ')
-            ->setParameter(1, $user)
-            ->setParameter(2, $dream)
+            ->setParameter('user', $user)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
@@ -72,12 +72,12 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
                            FROM GeekhubDreamBundle:WorkContribute c
                            join c.workArticle f
-                           where c.hiddenContributor = 0 and c.user = ?1 and c.dream = ?2
+                           where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
                            ')
-            ->setParameter(1, $user)
-            ->setParameter(2, $dream)
+            ->setParameter('user', $user)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
@@ -87,11 +87,11 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:FinancialContribute c
                            join c.financialArticle f
-                           where c.financialArticle = ?1 and c.dream = ?2
+                           where c.financialArticle = :financial and c.dream = :dream
                            group by f.title
                            ')
-            ->setParameter(1, $financial)
-            ->setParameter(2, $dream)
+            ->setParameter('financial', $financial)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
@@ -101,11 +101,11 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:EquipmentContribute c
                            join c.equipmentArticle f
-                           where c.equipmentArticle = ?1 and c.dream = ?2
+                           where c.equipmentArticle = :equipment and c.dream = :dream
                            group by f.title
                            ')
-            ->setParameter(1, $equipment)
-            ->setParameter(2, $dream)
+            ->setParameter('equipment', $equipment)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
@@ -115,11 +115,11 @@ class DreamRepository extends EntityRepository
             ->createQuery('SELECT sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
                            FROM GeekhubDreamBundle:WorkContribute c
                            join c.workArticle f
-                           where c.workArticle = ?1 and c.dream = ?2
+                           where c.workArticle = :work and c.dream = :dream
                            group by f.title
                            ')
-            ->setParameter(1, $work)
-            ->setParameter(2, $dream)
+            ->setParameter('work', $work)
+            ->setParameter('dream', $dream)
             ->getResult();
     }
 
