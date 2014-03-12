@@ -36,14 +36,16 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             );
 
             $user = new User();
+
             $user->setUsername($key);
             $user->setEmail($key.'@example.com');
             $user->setEnabled(true);
-            $user->setPlainPassword($item['password'] == '<current()>' ? $key : $item['password']);
-            $user->setFirstName($item['firstName'] == '<current()>' ? $key : $item['firstName']);
-            $user->setLastName(!isset($item['lastName']) ? null : $item['lastName']);
+            $user->setPlainPassword($key);
+            $user->setFirstName(array_key_exists('firstName', $item) ? $item['firstName'] : null);
+            $user->setLastName(array_key_exists('lastName', $item) ? $item['lastName'] : null);
             $user->setAvatar($this->getReference($reference));
             $user->setRoles(!isset($item['roles']) ? array('ROLE_USER') : $item['roles']);
+
             $manager->persist($user);
 
             $this->addReference('user-'.$key, $user);
