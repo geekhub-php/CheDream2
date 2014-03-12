@@ -27,7 +27,7 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
     {
         $usersYaml = Yaml::parse($this->getYmlFile());
 
-        foreach ($this->getUserArray($usersYaml) as $key => $item) {
+        foreach ($usersYaml as $key => $item) {
             $reference = 'avatar-'.$key;
             $this->setMediaContent(
                 __DIR__.'/images/'.$key.'.jpg',
@@ -39,55 +39,17 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             $user->setUsername($key);
             $user->setEmail($key.'@example.com');
             $user->setEnabled(true);
-            $user->setPlainPassword(
-                $item['password'] == '<current()>' ? $this->replaceValue($item['password'], $key) : $item['password']
-            );
-            $user->setFirstName(
-                $item['firstName'] == '<current()>' ? $this->replaceValue($item['firstName'], $key) : $item['firstName']
-            );
-            $user->setLastName(
-                !isset($item['lastName']) ? '' : $item['lastName']
-            );
+            $user->setPlainPassword($item['password'] == '<current()>' ? $key : $item['password']);
+            $user->setFirstName($item['firstName'] == '<current()>' ? $key : $item['firstName']);
+            $user->setLastName(!isset($item['lastName']) ? null : $item['lastName']);
             $user->setAvatar($this->getReference($reference));
-            $user->setRoles($item['roles']);
+            $user->setRoles(!isset($item['roles']) ? array('ROLE_USER') : $item['roles']);
             $manager->persist($user);
 
             $this->addReference('user-'.$key, $user);
         }
 
         $manager->flush();
-    }
-
-    /**
-     * @param $current
-     * @param $value
-     *
-     * @return mixed
-     */
-    protected function replaceValue($current, $value)
-    {
-        return str_replace("<current()>", $value, $current);
-    }
-
-    /**
-     * @param $ymlData
-     *
-     * @return mixed
-     */
-    protected function getUserArray($ymlData)
-    {
-        foreach ($ymlData as $key => $value) {
-            if (preg_match("/,/",$key)) {
-                $keys = array_unique(explode(',', $key));
-                foreach ($keys as $subKey) {
-                    $this->data[trim($subKey)] = $value;
-                }
-            } else {
-                $this->data[$key] = $value;
-            }
-        }
-
-        return $this->data;
     }
 
     /**

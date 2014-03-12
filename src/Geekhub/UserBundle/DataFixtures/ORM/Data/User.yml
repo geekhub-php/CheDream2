@@ -1,11 +1,22 @@
 root:
     password:   <current()>
-    email:      <current()>@example.com
+    email:      <current()>
     firstName:  SUPER
     lastName:   ADMIN
     roles:      [ROLE_SUPER_ADMIN]
-yoda, dartwaider, chewbacca, c3pio:
+yoda:
     password:   <current()>
-    email:      <current()>@example.com
+    email:      <current()>
     firstName:  <current()>
-    roles:      [ROLE_USER]
+dartwaider:
+    password:   <current()>
+    email:      <current()>
+    firstName:  <current()>
+chewbacca:
+    password:   <current()>
+    email:      <current()>
+    firstName:  <current()>
+c3pio:
+    password:   <current()>
+    email:      <current()>
+    firstName:  <current()>
