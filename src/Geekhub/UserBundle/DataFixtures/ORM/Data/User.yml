@@ -1,0 +1,12 @@
+admin:
+    firstName:  SUPER
+    lastName:   ADMIN
+    roles:      [ROLE_SUPER_ADMIN]
+yoda:
+    firstName:  Yoda
+dartwaider:
+    firstName:  Dart Waider
+chewbacca:
+    firstName:  Chewbacca
+c3pio:
+    firstName:  c3pio

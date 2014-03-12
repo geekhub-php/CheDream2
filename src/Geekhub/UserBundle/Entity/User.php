@@ -97,14 +97,19 @@ class User extends BaseUser //implements DreamUserInterface
     protected $favoriteDreams;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\DreamContribute", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\FinancialContribute", mappedBy="user", cascade={"persist", "remove"})
      */
-    protected $contributions;
+    protected $financialContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Comment", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\EquipmentContribute", mappedBy="user", cascade={"persist", "remove"})
      */
-    protected $userComments;
+    protected $equipmentContributions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\WorkContribute", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $workContributions;
 
     /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
@@ -118,10 +123,10 @@ class User extends BaseUser //implements DreamUserInterface
     {
         $this->contacts       = new Contacts();
         $this->favoriteDreams = new ArrayCollection();
-        $this->contributions  = new ArrayCollection();
-        $this->userComments   = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
-
+        $this->financialContributions = new ArrayCollection();
+        $this->equipmentContributions = new ArrayCollection();
+        $this->workContributions = new ArrayCollection();
         parent::__construct();
     }
 
@@ -400,72 +405,6 @@ class User extends BaseUser //implements DreamUserInterface
     }
 
     /**
-     * Add contributions
-     *
-     * @param  \Geekhub\DreamBundle\Entity\DreamContribute $contributions
-     * @return User
-     */
-    public function addContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
-    {
-        $this->contributions[] = $contributions;
-
-        return $this;
-    }
-
-    /**
-     * Remove contributions
-     *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $contributions
-     */
-    public function removeContribution(\Geekhub\DreamBundle\Entity\DreamContribute $contributions)
-    {
-        $this->contributions->removeElement($contributions);
-    }
-
-    /**
-     * Get contributions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContributions()
-    {
-        return $this->contributions;
-    }
-
-    /**
-     * Add userComments
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Comment $userComments
-     * @return User
-     */
-    public function addUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
-    {
-        $this->userComments[] = $userComments;
-
-        return $this;
-    }
-
-    /**
-     * Remove userComments
-     *
-     * @param \Geekhub\DreamBundle\Entity\Comment $userComments
-     */
-    public function removeUserComment(\Geekhub\DreamBundle\Entity\Comment $userComments)
-    {
-        $this->userComments->removeElement($userComments);
-    }
-
-    /**
-     * Get userComments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserComments()
-    {
-        return $this->userComments;
-    }
-
-    /**
      * Add dreams
      *
      * @param  \Geekhub\DreamBundle\Entity\Dream $dreams
@@ -496,5 +435,104 @@ class User extends BaseUser //implements DreamUserInterface
     public function getDreams()
     {
         return $this->dreams;
+    }
+
+    /**
+     * Add financialContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions
+     * @return User
+     */
+    public function addFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions)
+    {
+        $this->financialContributions[] = $financialContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove financialContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions
+     */
+    public function removeFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions)
+    {
+        $this->financialContributions->removeElement($financialContributions);
+    }
+
+    /**
+     * Get financialContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFinancialContributions()
+    {
+        return $this->financialContributions;
+    }
+
+    /**
+     * Add equipmentContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions
+     * @return User
+     */
+    public function addEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions)
+    {
+        $this->equipmentContributions[] = $equipmentContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipmentContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions
+     */
+    public function removeEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions)
+    {
+        $this->equipmentContributions->removeElement($equipmentContributions);
+    }
+
+    /**
+     * Get equipmentContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEquipmentContributions()
+    {
+        return $this->equipmentContributions;
+    }
+
+    /**
+     * Add workContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\WorkContribute $workContributions
+     * @return User
+     */
+    public function addWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $workContributions)
+    {
+        $this->workContributions[] = $workContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove workContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\WorkContribute $workContributions
+     */
+    public function removeWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $workContributions)
+    {
+        $this->workContributions->removeElement($workContributions);
+    }
+
+    /**
+     * Get workContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWorkContributions()
+    {
+        return $this->workContributions;
     }
 }

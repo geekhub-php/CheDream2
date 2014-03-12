@@ -14,11 +14,11 @@ class PageController extends Controller
     public function contactsAction(Request $request)
     {
         $form = $this->createFormBuilder()
-            ->add('to', 'email', array('label' => 'АДРЕСА ДЛЯ ЗВОРОТНЬОГО ЗВ\'ЯЗКУ'))
-            ->add('title', 'text', array('label' => 'ТЕМА ЛИСТА'))
-            ->add('body', 'textarea', array('label' => 'ТЕКСТ ПОВІДОМЛЕННЯ', 'attr' => array('rows' => '15')))
-            ->add('captcha', 'captcha', array('label' => 'КАПЧА'))
-            ->add('Надіслати', 'submit')
+            ->add('to', 'email', array('label' => 'contacts.write_us.email'))
+            ->add('title', 'text', array('label' => 'contacts.write_us.theme'))
+            ->add('body', 'textarea', array('label' => 'contacts.write_us.body', 'attr' => array('rows' => '15')))
+            ->add('captcha', 'captcha', array('label' => 'contacts.write_us.captcha'))
+            ->add('submit', 'submit', array('label' => 'contacts.write_us.submit'))
             ->getForm();
 
         if ($request->isMethod("POST")) {

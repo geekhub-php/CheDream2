@@ -25,7 +25,11 @@
         {% block body %}
             <div class="container" id="wrap">
                 {% block menu %}{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}{% endblock %}
-                {% block content %}{% endblock content %}
+                {% block main %}
+                    <div class="wrapper">
+                        {% block content %}{% endblock content %}
+                    </div>
+                {% endblock main %}
             </div>
             {% block footer %}{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}{% endblock %}
         {% endblock %}
