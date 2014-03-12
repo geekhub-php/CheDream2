@@ -42,7 +42,9 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
 
+            $dream->setTags($dreamData['tags']);
             $tagManager->addTagsToEntity($dream);
+
             $manager->persist($dream);
 
             $this->addReference($key, $dream);
