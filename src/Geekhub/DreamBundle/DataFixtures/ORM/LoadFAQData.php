@@ -28,9 +28,11 @@ class LoadFAQData extends AbstractFixture implements OrderedFixtureInterface
 
         foreach ($FAQ as $item) {
             $faq = new Faq();
+
             $faq->setTitle($item['title']);
             $faq->setQuestion($item['question']);
             $faq->setAnswer($item['answer']);
+
             $manager->persist($faq);
         }
 

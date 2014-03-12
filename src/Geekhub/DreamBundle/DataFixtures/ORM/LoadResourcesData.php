@@ -42,9 +42,11 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
         foreach ($financeArray as $key => $financeData) {
             $dream = $this->getReference($financeData['dream']);
             $finance = new FinancialResource();
+
             $finance->setDream($dream);
             $finance->setTitle($financeData['title']);
             $finance->setQuantity($financeData['quantity']);
+
             $manager->persist($finance);
             $this->addReference($key, $finance);
         }
@@ -60,10 +62,12 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
         foreach ($equipmentArray as $key => $equipmentData) {
             $dream = $this->getReference($equipmentData['dream']);
             $equipment = new EquipmentResource();
+
             $equipment->setDream($dream);
             $equipment->setTitle($equipmentData['title']);
             $equipment->setQuantity($equipmentData['quantity']);
             $equipment->setQuantityType($equipmentData['quantityType']);
+
             $manager->persist($equipment);
             $this->addReference($key, $equipment);
         }
@@ -79,10 +83,12 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
         foreach ($workArray as $key => $workData) {
             $dream = $this->getReference($workData['dream']);
             $work = new WorkResource();
+
             $work->setDream($dream);
             $work->setTitle($workData['title']);
             $work->setQuantity($workData['quantity']);
             $work->setQuantityDays($workData['quantityDays']);
+
             $manager->persist($work);
             $this->addReference($key, $work);
         }
