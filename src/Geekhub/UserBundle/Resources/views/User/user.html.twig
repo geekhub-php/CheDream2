@@ -1,0 +1,78 @@
+{% extends "GeekhubResourceBundle::layout.html.twig" %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="container" id="wrap">
+        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+
+        <div style="padding: 5% 0;">
+        <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
+          <div class="row">
+            <div class="col-md-5">
+            <div class="fileinput-button" id="user-avatar-image">
+                <div id="user-avatar-container">
+                    <img src="../{% path avatar, 'avatar_big' %}" class="img-thumbnail">
+                    <input id="dream_poster" type="file" name="dream-poster">
+                </div>
+            </div>
+             {# media avatar, 'big' #}
+             {{ form_widget(form.avatar) }}
+             {{ form_widget(form.contacts) }}
+             {{ form_label(form.email) }}
+             {{ form_widget(form.email) }}
+             {{ form_label(form.facebookId) }}
+             {{ form_widget(form.facebookId) }}
+             {{ form_label(form.vkontakteId) }}
+             {{ form_widget(form.vkontakteId) }}
+             {{ form_label(form.odnoklassnikiId) }}
+             {{ form_widget(form.odnoklassnikiId) }}
+            </div>
+            <div class="col-md-7">
+              <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
+               <div class="row">
+                <div class="col-md-6">
+                  {{ form_widget(form.firstName) }}
+                </div>
+                <div class="col-md-6">
+                  {{ form_widget(form.lastName) }}
+                </div>
+              </div>
+              {{ form_label(form.birthday) }}
+               <div class="row">
+                <div class="col-md-3">
+                    {{ form_widget(form.birthday.day) }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form_widget(form.birthday.month) }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ form_widget(form.birthday.year) }}
+                  </div>
+                </div>
+
+              {{ form_label(form.about) }}
+              {{ form_widget(form.about, {'attr': {'rows': 25}}) }}
+              {{ form_rest(form) }}
+            </div>
+          </div>
+          <div class="row center">
+           <input type="submit" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary" value="{{ 'user.save'|trans }}">
+          </form>
+          </div>
+        </div>
+    </div>
+
+    {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
+{% endblock body %}
+
+{% block javascript %}
+            <script src="{{ asset('js/scripts.min.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script src="{{ asset('js/user.min.js') }}"></script>
+{% endblock %}

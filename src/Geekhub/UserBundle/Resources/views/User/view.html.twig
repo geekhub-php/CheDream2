@@ -1,0 +1,60 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="container" id="wrap">
+        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+
+        <div style="margin-top: 50px;">
+          <div style="padding: 5% 0;">
+           <div class="row">
+ 
+             <div class="col-md-5">
+              {% media user.avatar, 'big' %}
+               <p>{{ user.contacts.phone }}</p>
+               <p>{{ user.contacts.skype }}</p>
+               <p>{{ user.email }}</p>
+               <p>{{ user.facebookId }}</p>
+               <p>{{ user.vkontakteId }}</p>
+               <p>{{ user.odnoklassnikiId }}</p>
+               <p>messages...</p>
+             </div>
+             <div class="col-md-7">
+              <div class="row">
+                <p> {{user.firstName}} {{user.lastName}}</p>
+                {% if app.user is same as(user) %}
+                <p> <a href="{{path('profile_edit')}}">Редагувати</a></p>
+                {% endif %}
+                <p> {# user.birthday #} </p>
+                <p> {{ user.about }} </p>
+             </div>
+             <div class="row">
+               Автор проектів: 
+               {% for dream in user.dreams %}
+               <p>{% media dream.mediaPoster, 'small' %}</p>
+               <p>{{ dream.title }}</p>
+               <p>{{ dream.description }}</p>
+               {% endfor %}
+             </div>
+             <div class="row">
+               Учасник проектів: 
+               {% for dream in user.contributions %}
+               <p>{% media dream.mediaPoster, 'small' %}</p>
+               <p>{{ dream.title }}</p>
+               <p>{{ dream.description }}</p>
+               {% endfor %}
+             </div>
+             <div class="row">
+               Favs: 
+               {% for contribute in user.favoriteDreams %}
+               <p>{% media dream.mediaPoster, 'small' %}</p>
+               <p>{{ contribute.dream.title }}</p>
+               <p>{{ contribute.dream.description }}</p>
+               <p>{{ contribute.description }} (сколько??? единиц???)</p>
+               {% endfor %}
+             </div>
+           </div>
+          </div>
+        </div>
+    </div>
+    
+{% endblock body %}

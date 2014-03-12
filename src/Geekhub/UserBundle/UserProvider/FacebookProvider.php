@@ -3,7 +3,7 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use GuzzleHttp\Client;
+use Guzzle\Http\Client;
 use Geekhub\UserBundle\Entity\User;
 
 class FacebookProvider extends AbstractSocialNetworkProvider
@@ -34,7 +34,8 @@ class FacebookProvider extends AbstractSocialNetworkProvider
     {
         $client = new Client();
 
-        $response = $client->get('https://graph.facebook.com/me?access_token='.$token);
+        $request = $client->get('https://graph.facebook.com/me?access_token='.$token);
+        $response = $request->send();
         $responseBody = $response->getBody();
 
         return $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\FacebookUserInfoResponse', 'json');

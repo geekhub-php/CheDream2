@@ -3,7 +3,7 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use GuzzleHttp\Client;
+use Guzzle\Http\Client;
 use Geekhub\UserBundle\Entity\User;
 
 class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
@@ -58,7 +58,8 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         $url .= '&' . http_build_query($arrayParameters);
 
         $client = new Client();
-        $response = $client->get($url);
+        $request = $client->get($url);
+        $response = $request->send();
         $responseBody = $response->getBody();
 
         $resultObj = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse', 'json');
