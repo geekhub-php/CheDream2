@@ -9,7 +9,7 @@
            <div class="row">
  
              <div class="col-md-3">
-              {% media user.avatar, 'normal' %}
+              <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
                {% if user.contacts.phone is not null %}
                 <a href="mailto:{{ user.contacts.phone }}"><div class="icon-phone-circled"></div></a>
                {% endif %}
@@ -47,15 +47,23 @@
              </div>
              <div class="row">
                Учасник проектів: 
-               {% for dream in user.contributions %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
+               {% for contribution in user.financialContributions %}
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribution.dream}) }}
+               {{ contribution.financialArticle.title }} ({{ contribution.quantity }} грн)
+               {% endfor %}
+               {% for contribution in user.equipmentContributions %}
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribution.dream}) }}
+               {{ contribution.equipmentArticle.title }} ({{ contribution.quantity }} шт.???)
+               {% endfor %}
+               {% for contribution in user.workContributions %}
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribution.dream}) }}
+               {{ contribution.workArticle.title }} ({{contribution.quantity}} чол. ??, {{contribution.quantityDays}} днів)
                {% endfor %}
              </div>
              <div class="row">
                Favs: 
-               {% for contribute in user.favoriteDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribute.dream}) }}
-               <p>{{ contribute.description }} (сколько??? единиц???)</p>
+               {% for dream in user.favoriteDreams %}
+               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
                {% endfor %}
              </div>
            </div>
