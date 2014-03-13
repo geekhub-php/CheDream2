@@ -18,7 +18,7 @@ $('#user-avatar-image').click(function() {
                 }
                 if(file.type == 'image' && file.error == null) {
                     $('#user-avatar-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
-                        '<input id="dream-poster" type="file" name="dream-poster">');
+                        '<input id="dream_poster" type="file" name="dream-poster">');
                     $('#newUserForm_avatar').get(0).value = file.src;
                 }
             });
