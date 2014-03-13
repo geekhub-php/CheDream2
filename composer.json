@@ -60,6 +60,7 @@
         "sonata-project/media-bundle": "2.2.*",
         "ahonymous/fontello": "dev-master",
         "guzzle/guzzle": "dev-guzzle4",
+        "guzzlehttp/streams": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "jms/serializer-bundle": "0.13.*",
@@ -67,10 +68,12 @@
         "friendsofsymfony/rest-bundle": "1.3.*@dev",
         "nelmio/api-doc-bundle": "2.5.*",
         "willdurand/js-translation-bundle": "2.0.*@dev",
-        "stfalcon/tinymce-bundle": "0.3.*@dev"
+        "stfalcon/tinymce-bundle": "0.3.*@dev",
+        "gregwar/captcha-bundle": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

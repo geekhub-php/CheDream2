@@ -1,0 +1,3 @@
+page_contacts:
+    pattern:  /contacts
+    defaults: { _controller: GeekhubResourceBundle:Page:contacts }

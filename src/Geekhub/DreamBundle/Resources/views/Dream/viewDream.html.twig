@@ -2,11 +2,14 @@
 
 {% block stylesheets %}
     <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dream_gallery.min.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 
     {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+
     <hr class="show-hr">
+
     {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
     <div class="row">
@@ -33,14 +36,29 @@
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
-
+    <script src="{{ asset('js/dream_gallery.min.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('#video object').get(0).width='100%';
             $('#video object').get(0).height=250;
             $('#video object embed').get(0).width='100%';
             $('#video object embed').get(0).height=250;
+            $('#video object embed').attr({wmode:"opaque"});
+//            var param = $('<param>');
+//            param.attr({name:'wmode'});
+//            param.attr({value:'opaque'});
+//            $('#video object').eq(0).append(param);
 
+//            $('#video object embed').css({"z-index":"-10"});
         });
+
+        document.getElementById('links').onclick = function (event) {
+            event = event || window.event;
+            var target = event.target || event.srcElement,
+                    link = target.src ? target.parentNode : target,
+                    options = {index: link, event: event},
+                    links = this.getElementsByTagName('a');
+            blueimp.Gallery(links, options);
+        };
     </script>
 {% endblock %}

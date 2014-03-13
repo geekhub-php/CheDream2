@@ -1,0 +1,15 @@
+rwork1:
+    dream:        dream1
+    title:        провідник по Місяцю
+    quantity:     1
+    quantityDays: 1
+rwork2:
+    dream:        dream1
+    title:        пілот зорельоту
+    quantity:     1
+    quantityDays: 1
+rwork3:
+    dream:        dream3
+    title:        робітники на заводи
+    quantity:     1000000
+    quantityDays: 365
