@@ -1,46 +1,40 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
-    <div style="padding: 5% 0;">
-        <div  style="padding: 10% 0;">
-            <h1 class="text-center">development process</h1>
 
-            Dreams: {{ dreams|length }}
-            <br/>
-            Completed: {{ completedDreams|length }}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; height: 300px; text-align: right;">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            {% for completedDream in completedDreams %}
+                {% if loop.index == 1 %}
+                       <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+                    {% else %}
+                       <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+
+            {% for completedDream in completedDreams %}
+                {% if loop.index == 1 %}
+                <div class="item active">
+                {% else %}
+                <div class="item">
+                {% endif %}
+                    <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h3>{{ completedDream.author.firstName }} {{ completedDream.author.lastName }}</h3>
+                            <p>{{ completedDream.title }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
 
         </div>
+
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
 {% endblock %}
-
-
-
-
-{#<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">#}
-    {#<!-- Indicators -->#}
-    {#<ol class="carousel-indicators">#}
-        {#<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>#}
-        {#<li data-target="#carousel-example-generic" data-slide-to="1"></li>#}
-        {#<li data-target="#carousel-example-generic" data-slide-to="2"></li>#}
-    {#</ol>#}
-
-    {#<!-- Wrapper for slides -->#}
-    {#<div class="carousel-inner">#}
-        {#<div class="item active">#}
-            {#<img src="..." alt="...">#}
-            {#<div class="carousel-caption">#}
-                {#<h3>...</h3>#}
-                {#<p>...</p>#}
-            {#</div>#}
-        {#</div>#}
-        {#...#}
-    {#</div>#}
-
-    {#<!-- Controls -->#}
-    {#<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">#}
-        {#<span class="glyphicon glyphicon-chevron-left"></span>#}
-    {#</a>#}
-    {#<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">#}
-        {#<span class="glyphicon glyphicon-chevron-right"></span>#}
-    {#</a>#}
-{#</div>#}

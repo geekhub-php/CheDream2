@@ -91,6 +91,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [650, 360], mode: outbound }
+        dream_poster_homePage:
+            quality: 90
+            filters:
+                thumbnail: { size: [500, 300], mode: outbound }
         dream_gallery_view:
             quality: 90
             filters:
