@@ -1,6 +1,6 @@
 geekhub_dream_homepage:
     pattern:  /
-    defaults: { _controller: GeekhubDreamBundle:Default:index }
+    defaults: { _controller: GeekhubDreamBundle:HomePage:home }
 
 new_dream:
     pattern:  /dream/new
