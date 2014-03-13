@@ -10,6 +10,7 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\View;
+use Geekhub\DreamBundle\Entity\Status;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HomePageController extends Controller
@@ -19,6 +20,11 @@ class HomePageController extends Controller
      */
     public function homeAction()
     {
+        $completedDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')
+            ->getArrayDreamsByStatus(Status::SUCCESS);
+
+//        var_dump($completedDreams); exit;
+
         return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
     }
 }
