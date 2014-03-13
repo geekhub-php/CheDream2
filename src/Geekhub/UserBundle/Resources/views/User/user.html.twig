@@ -16,9 +16,11 @@
             <div class="col-md-5">
             <div class="fileinput-button" id="user-avatar-image">
                 <div id="user-avatar-container">
-                    <img src="../{% path avatar, 'avatar_big' %}" class="img-thumbnail">
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
                     <input id="dream_poster" type="file" name="dream-poster">
                 </div>
+            </div>
+            <div id="errors" class="files">
             </div>
              {# media avatar, 'big' #}
              {{ form_widget(form.avatar) }}
@@ -61,7 +63,7 @@
             </div>
           </div>
           <div class="row center">
-           <input type="submit" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary" value="{{ 'user.save'|trans }}">
+           <input type="submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
           </form>
           </div>
         </div>
