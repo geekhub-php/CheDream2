@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class HomePageController extends Controller
 {
     /**
-     * @View(templateVar="dreams")
+     * @View()
      */
     public function homeAction()
     {
@@ -25,6 +25,11 @@ class HomePageController extends Controller
 
 //        var_dump($completedDreams); exit;
 
-        return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+        return array(
+            'dreams' => $dreams,
+            'completedDreams' => $completedDreams
+        );
     }
 }
