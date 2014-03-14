@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
-    public function  getArrayDreamsByStatus($status)
+    public function  getDreamsByStatus($status)
     {
 
         return $this->getEntityManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array(
