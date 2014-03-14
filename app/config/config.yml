@@ -79,7 +79,7 @@ liip_imagine:
         userAvatarBig:
             quality: 90
             filters:
-                thumbnail: { size: [440, 440], mode: outbound }
+                thumbnail: { size: [440, 260], mode: outbound }
 
         dream_thumb:
             quality: 90

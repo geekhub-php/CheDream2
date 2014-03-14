@@ -32,12 +32,6 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form -> isValid()) {
-            // !!!Object type are compared by reference, not by value.
-            // Doctrine updates this values if the reference changes
-            $contacts =  new Contacts();
-            $contacts->setPhone($user->getContacts()->getPhone());
-            $contacts->setSkype($user->getContacts()->getSkype());
-            $user->setContacts($contacts);
 
             $em->flush();
 
