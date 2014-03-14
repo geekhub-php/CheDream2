@@ -130,7 +130,7 @@ class Dream implements Taggable
     protected $statuses;
 
     /**
-     * @ORM\Column(name="currentStatus", type="object", nullable = true)
+     * @ORM\Column(name="currentStatus", type="string", length=100, nullable = true)
      */
     protected $currentStatus;
 
@@ -574,8 +574,8 @@ class Dream implements Taggable
     public function addStatus(Status $status)
     {
         $this->statuses[] = $status;
-//        $status->setDream($this);
-        $this->currentStatus = $status;
+        $status->setDream($this);
+        $this->currentStatus = $status->getTitle();
 
         return $this;
     }

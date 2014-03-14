@@ -13,6 +13,7 @@ use DateTime;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\Status;
 use Symfony\Component\Yaml\Yaml;
 
 class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterface
@@ -41,6 +42,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
+            $dream->addStatus(new Status(Status::SUBMITTED));
 
             $dream->setTags($dreamData['tags']);
             $tagManager->addTagsToEntity($dream);
