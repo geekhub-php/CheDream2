@@ -44,18 +44,17 @@
 
     <div>
         {% for dream in dreams %}
-            <div style="width: 200px;  display: inline-block; vertical-align: top; margin-top: 15px;">
-                <div style="height: 100px;">
-                    <h3>
+            <div style="width: 200px;  display: inline-block; margin-top: 15px;">
+                <div style="height: 50px; overflow: hidden; margin-bottom: 5px;">
+                    <h4 title="{{ dream.title }}">
                         {{ dream.title }}
-                    </h3>
+                    </h4>
                 </div>
                 <div style="position: relative;">
-                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}">
+                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
                     <div class="showHomePageAvatar-wrapper"> {# Avatar #}
                         <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
                         <p class="showHomePageAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
-
                     </div>
                 </div>
                 <div style="text-align: center; padding-top: 50px;">
