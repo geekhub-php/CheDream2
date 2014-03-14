@@ -5,6 +5,7 @@ imports:
     - { resource: sonata.yml }
     - { resource: jms_serializer.yml }
     - { resource: twig.yml }
+    - { resource: liip_imagine.yml }
 
 framework:
     #esi:             ~
@@ -68,44 +69,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-liip_imagine:
-    cache_prefix:          /upload/dream/image/cache
-    filter_sets:
-        userAvatar:
-            quality: 90
-            filters:
-                thumbnail: { size: [90, 90], mode: outbound }
-        dream_thumb:
-            quality: 90
-            filters:
-#                thumbnail: { size: [80, 50], mode: inset }
-                thumbnail: { size: [80, 50], mode: outbound }
-#                relative_resize: { heighten: 80 }
-        dream_poster:
-            quality: 90
-            filters:
-#                thumbnail: { size: [440, 260], mode: inset }
-                thumbnail: { size: [440, 260], mode: outbound }
-        dream_poster_view_form:
-            quality: 90
-            filters:
-                thumbnail: { size: [650, 360], mode: outbound }
-        dream_poster_homePage:
-            quality: 90
-            filters:
-                thumbnail: { size: [500, 300], mode: outbound }
-        dream_gallery_view:
-            quality: 90
-            filters:
-                thumbnail: { size: [700, 500], mode: outbound }
-        dream_pictures_view_form:
-            quality: 90
-            filters:
-                thumbnail: { size: [145, 100], mode: outbound }
-#                upscale: { max: [220, 150] }
-#                relative_resize: { widen: 680 }
-
 
 stof_doctrine_extensions:
     default_locale: en_US

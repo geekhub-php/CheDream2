@@ -1,27 +1,32 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dream_gallery.min.css') }}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; height: 300px; text-align: right;">
+    <div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; height: 300px; margin: 0 auto;">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             {% for completedDream in completedDreams %}
                 {% if loop.index == 1 %}
-                       <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+                       <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
                     {% else %}
-                       <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
+                       <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
                 {% endif %}
             {% endfor %}
         </ol>
-        <div class="carousel-inner">
 
+        <div class="carousel-inner">
             {% for completedDream in completedDreams %}
                 {% if loop.index == 1 %}
-                <div class="item active">
+                    {% set classStyle = 'item active' %}
                 {% else %}
-                <div class="item">
+                    {% set classStyle = 'item' %}
                 {% endif %}
-                    <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
+                <div class="{{ classStyle }}">
+                    <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
                     <div class="container">
                         <div class="carousel-caption">
                             <h3>{{ completedDream.author.firstName }} {{ completedDream.author.lastName }}</h3>
@@ -29,12 +34,36 @@
                         </div>
                     </div>
                 </div>
-
             {% endfor %}
-
         </div>
 
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a class="left carousel-control" href="#dreamCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#dreamCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+    </div> {#  end slider #}
+
+    <div>
+        {% for dream in dreams %}
+            <div style="width: 200px;  display: inline-block; vertical-align: top; margin-top: 15px;">
+                <div style="height: 100px;">
+                    <h3>
+                        {{ dream.title }}
+                    </h3>
+                </div>
+                <div style="position: relative;">
+                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}">
+                    <div class="showHomePageAvatar-wrapper"> {# Avatar #}
+                        <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
+                        <p class="showHomePageAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
+
+                    </div>
+                </div>
+                <div style="text-align: center; padding-top: 50px;">
+                        <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" class="btn btn-sm btn-default">Детальніше</a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+
+
 {% endblock %}
