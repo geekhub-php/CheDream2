@@ -43,7 +43,7 @@
 .showHomePageAvatar-wrapper img {
     border-radius: 7px;
 }
-.showDreamAvatar-wrapper img {
+.showAvatar {
     border-radius: 7px;
 }
 .showHomePageAvatar-fio {
@@ -83,4 +83,8 @@
 .dream-homepage-preview-footer{
     text-align: center;
     padding-top: 50px;
+}
+.contributors-fio
+{
+    font-weight: bolder;
 }

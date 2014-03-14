@@ -10,10 +10,20 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\EquipmentContribute;
+use Geekhub\DreamBundle\Entity\FinancialContribute;
+use Geekhub\DreamBundle\Entity\OtherContribute;
+use Geekhub\DreamBundle\Entity\WorkContribute;
 use Geekhub\DreamBundle\Form\DreamType;
 use FOS\RestBundle\Controller\Annotations\View;
+use Geekhub\DreamBundle\Form\EquipmentContributeType;
+use Geekhub\DreamBundle\Form\FinancialContributeType;
+use Geekhub\DreamBundle\Form\OtherContributeType;
+use Geekhub\DreamBundle\Form\WorkContributeType;
+use Geekhub\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -102,10 +112,99 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
-     * @View(templateVar="dream")
+     * @View(templateVar="dream, finForm, equipForm, workForm")
      */
-    public function viewDreamAction(Dream $dream)
+    public function viewDreamAction(Dream $dream, Request $request)
     {
-        return $dream;
+        $user = $this->getUser();
+        $financialContribute = new FinancialContribute();
+        $equipmentContribute = new EquipmentContribute();
+        $workContribute = new WorkContribute();
+        $otherContribute = new OtherContribute();
+        $finForm = $this->createForm(new FinancialContributeType(), $financialContribute, array('dream' => $dream));
+        $equipForm = $this->createForm(new EquipmentContributeType(), $equipmentContribute, array('dream' => $dream));
+        $workForm = $this->createForm(new WorkContributeType(), $workContribute, array('dream' => $dream));
+        $otherForm = $this->createForm(new OtherContributeType(), $otherContribute);
+
+        $contributors = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getArrayContributorsByDream($dream);
+
+        if ($request->isMethod('POST')) {
+
+            $this->handleContributionForms(
+                $request,
+                $dream,
+                $user,
+                $finForm,
+                $equipForm,
+                $workForm,
+                $otherForm,
+                $financialContribute,
+                $equipmentContribute,
+                $workContribute,
+                $otherContribute
+            );
+
+            return $this->redirect($this->generateUrl('view_dream', array(
+                'slug' => $dream->getSlug()
+            )));
+        }
+
+        return array(
+            'dream' => $dream,
+            'finForm' => $finForm->createView(),
+            'equipForm' => $equipForm->createView(),
+            'workForm' => $workForm->createView(),
+            'otherForm' => $otherForm->createView(),
+            'contributors' => $contributors
+        );
+    }
+
+    private function handleContributionForms(Request $request, Dream $dream, User $user, Form $finForm,
+                                             Form $equipForm, Form $workForm, Form $otherForm,
+                                             FinancialContribute $financialContribute,
+                                             EquipmentContribute $equipmentContribute,
+                                             WorkContribute $workContribute,
+                                             OtherContribute $otherContribute)
+    {
+        if ($request->get('financialContributeForm')) {
+            $finForm->handleRequest($request);
+            if ($finForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $financialContribute->setDream($dream);
+                $financialContribute->setUser($user);
+                $em->persist($financialContribute);
+                $em->flush();
+            }
+        }
+        if ($request->get('equipmentContributeForm')) {
+            $equipForm->handleRequest($request);
+            if ($equipForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $equipmentContribute->setDream($dream);
+                $equipmentContribute->setUser($user);
+                $em->persist($equipmentContribute);
+                $em->flush();
+            }
+        }
+        if ($request->get('workContributeForm')) {
+            $workForm->handleRequest($request);
+            if ($workForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $workContribute->setDream($dream);
+                $workContribute->setUser($user);
+                $em->persist($workContribute);
+                $em->flush();
+            }
+        }
+        if ($request->get('otherContributeForm')) {
+            $otherForm->handleRequest($request);
+            if ($otherForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $otherContribute->setDream($dream);
+                $otherContribute->setUser($user);
+                $em->persist($otherContribute);
+                $em->flush();
+            }
+        }
     }
 }
