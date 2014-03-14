@@ -30,7 +30,7 @@
                     <div style="position: relative">
                         <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
                         <span style="position: absolute; top: 6px; left: 8px; color: #ffffff; font-weight: bolder;">
-                            Підтримали 0
+                            Підтримали {{ getCountContributors(dream) }}
                         </span>
                         <span style="position: absolute; top: 6px; right: 8px; color: #ffffff; font-weight: bolder;">
                             Рейтинг 0

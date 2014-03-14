@@ -11,6 +11,9 @@ namespace Geekhub\DreamBundle\Twig;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\EquipmentResource;
+use Geekhub\DreamBundle\Entity\FinancialResource;
+use Geekhub\DreamBundle\Entity\WorkResource;
 use Geekhub\UserBundle\Entity\User;
 
 class ContributionExtension extends \Twig_Extension
@@ -37,10 +40,16 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('finResource', array($this, 'finResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipResource', array($this, 'equipResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('getCountContributors', array($this, 'getCountContributors'), array('is_safe' => array('html'))),
         );
     }
 
-    public function finContribute($user, $dream)
+    public function getCountContributors(Dream $dream)
+    {
+        return $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->getCountContributorsByDream($dream);
+    }
+
+    public function finContribute(User $user, Dream $dream)
     {
         $finContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showFinancialContributors($user, $dream);
 
@@ -52,7 +61,7 @@ class ContributionExtension extends \Twig_Extension
         return $str;
     }
 
-    public function equipContribute($user, $dream)
+    public function equipContribute(User $user, Dream $dream)
     {
         $equipContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showEquipmentContributors($user, $dream);
 
@@ -89,7 +98,7 @@ class ContributionExtension extends \Twig_Extension
         return $str;
     }
 
-    public function otherContribute($user, $dream)
+    public function otherContribute(User $user, Dream $dream)
     {
         $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
 
@@ -101,7 +110,7 @@ class ContributionExtension extends \Twig_Extension
         return $str;
     }
 
-    public function finResource($financial, $dream)
+    public function finResource(FinancialResource $financial,Dream $dream)
     {
         $finResSumTotal = 0;
         $finResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumFinancialResource($financial, $dream);
@@ -113,7 +122,7 @@ class ContributionExtension extends \Twig_Extension
         return $finResSumTotal.' грн.';
     }
 
-    public function equipResource($equipment, $dream)
+    public function equipResource(EquipmentResource $equipment, Dream $dream)
     {
         $equipResSumTotal = 0;
         $equipResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumEquipmentResource($equipment, $dream);
@@ -125,7 +134,7 @@ class ContributionExtension extends \Twig_Extension
         return $equipResSumTotal;
     }
 
-    public function workResource($work, $dream)
+    public function workResource(WorkResource $work, Dream $dream)
     {
         $str = 0;
         $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);

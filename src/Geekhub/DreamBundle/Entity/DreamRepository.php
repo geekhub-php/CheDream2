@@ -20,6 +20,11 @@ class DreamRepository extends EntityRepository
         ));
     }
 
+    public function getCountContributorsByDream(Dream $dream)
+    {
+        return count($this->getArrayContributorsByDream($dream));
+    }
+
     public function getArrayContributorsByDream(Dream $dream)
     {
         return array_unique(array_merge(
