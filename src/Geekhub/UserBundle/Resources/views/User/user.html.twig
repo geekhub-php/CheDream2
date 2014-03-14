@@ -24,15 +24,18 @@
             </div>
              {# media avatar, 'big' #}
              {{ form_widget(form.avatar) }}
-             {{ form_widget(form.contacts) }}
+             {{ form_label(form.phone) }}
+             {{ form_widget(form.phone) }}
+             {{ form_label(form.skype) }}
+             {{ form_widget(form.skype) }}
              {{ form_label(form.email) }}
              {{ form_widget(form.email) }}
-             {{ form_label(form.facebookId) }}
-             {{ form_widget(form.facebookId) }}
-             {{ form_label(form.vkontakteId) }}
-             {{ form_widget(form.vkontakteId) }}
-             {{ form_label(form.odnoklassnikiId) }}
-             {{ form_widget(form.odnoklassnikiId) }}
+             {{ form_label(form.facebookUrl) }}
+             {{ form_widget(form.facebookUrl) }}
+             {{ form_label(form.vkontakteUrl) }}
+             {{ form_widget(form.vkontakteUrl) }}
+             {{ form_label(form.odnoklassnikiUrl) }}
+             {{ form_widget(form.odnoklassnikiUrl) }}
             </div>
             <div class="col-md-7">
               <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
