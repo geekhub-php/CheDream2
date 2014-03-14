@@ -129,7 +129,7 @@ class Dream implements Taggable
      */
     protected $statuses;
 
-       /**
+    /**
      * @ORM\Column(name="currentStatus", type="object", nullable = true)
      */
     protected $currentStatus;
