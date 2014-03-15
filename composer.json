@@ -48,24 +48,25 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "bower install",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "mkdir -p web/fonts && cp -u vendor/bower-components/bootstrap/dist/fonts/* web/fonts/",
-            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/",
-            "bower install"
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ],
         "post-update-cmd": [
+            "bower install",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "mkdir -p web/fonts && cp -u vendor/bower-components/bootstrap/dist/fonts/* web/fonts/",
-            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/",
-            "bower install"
+            "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
+
         ]
     },
     "config": {
