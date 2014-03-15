@@ -86,7 +86,7 @@ class ContributionExtension extends \Twig_Extension
         return $str;
     }
 
-    public function workContribute($user, $dream)
+    public function workContribute(User $user, Dream $dream)
     {
         $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
 
