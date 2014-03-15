@@ -51,6 +51,25 @@
                         {% endfor %}
                     </table>
                 </div>
+
+            {#<h4 class="text-center"><span class="glyphicon glyphicon-cog"> </span> Інструменти/обладнання</h4>#}
+            {#<ul class="list-group">#}
+                {#{% for equipment in dream.dreamEquipmentResources %}#}
+
+                    {#{% if equipment.quantityType == 'piece' %}#}
+                        {#{% set eType = 'шт.' %}#}
+                    {#{% elseif equipment.quantityType == 'kg' %}#}
+                        {#{% set eType = 'кг.' %}#}
+                    {#{% else %}#}
+                        {#{% set eType = 'тон.' %}#}
+                    {#{% endif %}#}
+
+                    {#<li class="list-group-item">#}
+                        {#<span class="badge">{{ equipment.quantity }} {{ eType }}</span>#}
+                        {#{{ equipment.title }}#}
+                    {#</li>#}
+                {#{% endfor %}#}
+            {#</ul>#}
         {% endif %}
     </div>
 
