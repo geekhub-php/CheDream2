@@ -1,9 +1,5 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dream_gallery.min.css') }}" rel="stylesheet">
-{% endblock %}
 {% block content %}
 
     {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
@@ -36,7 +32,6 @@
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
-    <script src="{{ asset('js/dream_gallery.min.js') }}"></script>
     <script>
         var finFormHide = function(){
             $('#finFormContributor').hide();
