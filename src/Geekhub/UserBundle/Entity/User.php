@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class User extends BaseUser //implements DreamUserInterface
 {
+    use ContactsInfo;
     /**
      * @var integer
      *
@@ -45,7 +46,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $lastName;
 
     /**
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade="all")
      */
     protected $avatar;
 
@@ -55,13 +56,6 @@ class User extends BaseUser //implements DreamUserInterface
      * @ORM\Column(name="birthday", type="date", nullable=true)
      */
     protected $birthday;
-
-    /**
-     * @var Contacts
-     *
-     * @ORM\Column(name="contacts", type="object")
-     */
-    protected $contacts;
 
     /**
      * @var string
@@ -126,7 +120,6 @@ class User extends BaseUser //implements DreamUserInterface
      */
     public function __construct()
     {
-        $this->contacts       = new Contacts();
         $this->favoriteDreams = new ArrayCollection();
         $this->dreams         = new ArrayCollection();
         $this->financialContributions = new ArrayCollection();
@@ -259,29 +252,6 @@ class User extends BaseUser //implements DreamUserInterface
     public function getBirthday()
     {
         return $this->birthday;
-    }
-
-    /**
-     * Set contacts
-     *
-     * @param  Contacts $contacts
-     * @return User
-     */
-    public function setContacts($contacts)
-    {
-        $this->contacts = $contacts;
-
-        return $this;
-    }
-
-    /**
-     * Get contacts
-     *
-     * @return Contacts
-     */
-    public function getContacts()
-    {
-        return $this->contacts;
     }
 
     /**

@@ -10,7 +10,6 @@
 /bin/*
 !bin/reload.sh
 /.idea/
-composer.lock
 /web/upload/*
 /web/css/
 /web/js/

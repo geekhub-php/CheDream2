@@ -1,8 +1,5 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('css/dream_css.min.css') }}" rel="stylesheet">
-{% endblock %}
 {% block content %}
     <div class="page-header">
         <h1>Dream <small>create or edit your dream</small></h1>
@@ -127,7 +124,6 @@
     {{ parent() }}
     <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
     <script src="{{ url('bazinga_jstranslation_js') }}"></script>
-    <script src="{{ asset('js/dream.min.js') }}"></script>
     <script>
         $('#btnDreamSubmit').click(function(){
             $('#create-dream-form').get(0).submit();
