@@ -20,31 +20,22 @@ assetic:
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.less
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
                 - %kernel.root_dir%/../vendor/ahonymous/fontello/css/fontello.css
+                - %kernel.root_dir%/../vendor/bower-components/tag-it/css/jquery.tagit.css
+                - %kernel.root_dir%/../vendor/bower-components/tag-it/css/tagit.ui-zendesk.css
+                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/dream-style.css
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/css/blueimp-gallery.css
             filters:
                 - cssrewrite
                 - yui_css
             output: css/style.min.css
         scripts:
             inputs:
-                - %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.10.2.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
+                - %kernel.root_dir%/../vendor/bower-components/jquery/jquery.js
+                - %kernel.root_dir%/../vendor/bower-components/bootstrap/dist/js/bootstrap.js
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/assets/js/holder.js
-            filters: [yui_js]
-            output: js/scripts.min.js
-        dream_css:
-            inputs:
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/jquery.tagit.css
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/tagit.ui-zendesk.css
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/dream-style.css
-            filters:
-                - cssrewrite
-                - yui_css
-            output: css/dream_css.min.css
-        dream_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/bmatzner/jquery-ui-bundle/Bmatzner/JQueryUIBundle/Resources/public/js/jquery-ui.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tag-it.js
+                - %kernel.root_dir%/../vendor/bower-components/holderjs/holder.js
+                - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery-ui.js
+                - %kernel.root_dir%/../vendor/bower-components/tag-it/js/tag-it.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
@@ -62,19 +53,9 @@ assetic:
             output: js/user.min.js
         dream_js_remove_media:
             inputs:
+                - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js
             filters: [yui_js]
-            output: js/dream_remove_media.min.js
-        gallery_css:
-            inputs:
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/css/gallery/blueimp-gallery.css
-            filters:
-                - cssrewrite
-                - yui_css
-            output: css/dream_gallery.min.css
-        gallery_js:
-            inputs:
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/gallery/blueimp-gallery.js
-            filters: [yui_js]
-            output: js/dream_gallery.min.js
-
+            output: js/scripts.min.js
