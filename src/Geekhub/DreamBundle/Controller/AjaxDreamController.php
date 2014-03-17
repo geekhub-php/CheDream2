@@ -9,6 +9,7 @@
 namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\Status;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +48,6 @@ class AjaxDreamController extends Controller
         return new Response('ok');
     }
 
-
     public function addDreamToFavoriteAction(Request $request)
     {
         $dreamId = $request->get('id');
@@ -61,5 +61,17 @@ class AjaxDreamController extends Controller
         $em->flush();
 
         return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
+    }
+
+    public function loadMoreDreamsAction(Request $request)
+    {
+        $offset = $request->get('offset');
+        $limit = 2;
+        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
+            ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
+
+        return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
+            'dreams' => $dreams,
+        ));
     }
 }

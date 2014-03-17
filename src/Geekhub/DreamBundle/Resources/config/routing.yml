@@ -43,6 +43,12 @@ dream_ajax_dream_toFavorite:
     options:
         expose: true
 
+dream_ajax_loadMore_dreams:
+    pattern:  /dream/ajaxLoadMoreDreams
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadMoreDreams }
+    options:
+        expose: true
+
 view_dream:
     pattern:  /dreams/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }

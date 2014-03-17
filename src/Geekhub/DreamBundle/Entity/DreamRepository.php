@@ -20,6 +20,21 @@ class DreamRepository extends EntityRepository
         ));
     }
 
+    public function getSliceDreamsByStatus($status, $limit, $offset)
+    {
+
+        return $this->getEntityManager()
+            ->createQuery('SELECT d
+                           FROM GeekhubDreamBundle:Dream d
+                           where d.currentStatus = :status
+                           order by d.id
+                           ')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->setParameter('status', $status)
+            ->getResult();
+    }
+
     public function getCountContributorsByDream(Dream $dream)
     {
         return count($this->getArrayContributorsByDream($dream));

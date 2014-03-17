@@ -6,73 +6,68 @@
     
     <div>
         <div id="added_success"></div>
-        {% for dream in dreams %}
-            <div class="dream-homepage-preview">
-                <div class="dream-homepage-preview-header">
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                        <div class="dream-homepage-preview-header-favorite">
-                            {% if app.user in dream.usersWhoFavorites %}
-                                <span class="glyphicon glyphicon-star" style="color: green; font-size: 150%;" data-idmedia="{{ dream.id }}" data-sended="yes" title="уже в улюблених."></span>
-                            {% else %}
-                                <span class="glyphicon glyphicon-star" style="color: yellow; font-size: 150%;" data-idmedia="{{ dream.id }}" data-sended="no" title="додати до списку улюблених."></span>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                    <h4 title="{{ dream.title }}">
-                        {{ dream.title }}
-                    </h4>
-                </div>
-                <div class="dream-homepage-preview-body">
-                    <div style="position: relative">
-                        <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
-                        <span style="position: absolute; top: 6px; left: 8px; color: #ffffff; font-weight: bolder;">
-                            Підтримали {{ getCountContributors(dream) }}
-                        </span>
-                        <span style="position: absolute; top: 6px; right: 8px; color: #ffffff; font-weight: bolder;">
-                            Рейтинг 0
-                        </span>
-                    </div>
-                    <div class="showHomePageAvatar-wrapper"> {# Avatar #}
-                        <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
-                        <p class="showHomePageAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
-                    </div>
-                </div>
-                <div class="dream-homepage-preview-footer">
-                        <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" class="btn btn-sm btn-default">Детальніше</a>
-                </div>
-            </div>
-        {% endfor %}
+
+        <div id="dreams">
+
+        </div>
     </div>
 
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
     <script>
-            $('.dream-homepage-preview-header-favorite').click(function(event) {
-                if (event.target.tagName.toLowerCase() === 'span') {
-                    var itemObj = $(event.target);
-                    if (itemObj.data('sended') == 'yes') {
-                        console.log('already in favorite');
-                        return;
-                    }
-                    var path = Routing.generate('dream_ajax_dream_toFavorite');
-                    $.post(path, {id : $(event.target).data('idmedia')})
-                        .done(function(msgDone) {
-                            console.log(msgDone);
-                            itemObj.css({color:'green'});
-                            itemObj.data('sended', 'yes');
-                            itemObj.attr('title', 'уже в улюблених.');
-                            $('#added_success').append(
-                                '<div class="alert alert-info" style="margin-top: 20px;"> <strong>Мрію успішно додано до списку улюблених.</strong>' +
-                                        '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
-                                '</div>'
-                            );
+        var loadDreams = function(startIndex) {
+            var path = Routing.generate('dream_ajax_loadMore_dreams');
+            console.log(startIndex);
+                $.post(path, {offset : startIndex })
+                        .done(function(response) {
+                            $(response).appendTo($('#dreams')).hide().fadeIn(300);
                         })
                         .error(function(msg) {
                             console.log(msg);
                         }
-                    );
+                );
+        };
+
+        $(document).ready(function() {
+            var startIndex = 0;
+            loadDreams(startIndex);
+            var load = false;
+            $(window).scroll(function() {
+                if($(window).height() + $(window).scrollTop() >= $(document).height() && !load) {
+                    load = true;
+                    startIndex = $('.dream-homepage-preview').length;
+                    loadDreams(startIndex);
+                    console.log('end document scrolled');
+                    load = false;
                 }
             });
+        });
+
+        $('#dreams').on('click', 'span', function(event) {
+            var itemObj = $(event.target);
+            if (itemObj.data('sended') == 'yes') {
+                console.log('already in favorite');
+                return;
+            }
+            var path = Routing.generate('dream_ajax_dream_toFavorite');
+            $.post(path, {id : $(event.target).data('idmedia')})
+                .done(function(msgDone) {
+                    console.log(msgDone);
+                    itemObj.css({color:'green'});
+                    itemObj.data('sended', 'yes');
+                    itemObj.attr('title', 'уже в улюблених.');
+                    $('#added_success').append(
+                            '<div class="alert alert-info" style="margin-top: 20px;"> <strong>Мрію успішно додано до списку улюблених.</strong>' +
+                                    '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
+                                    '</div>'
+                    );
+                })
+                .error(function(msg) {
+                    console.log(msg);
+                }
+            );
+        });
+
     </script>
 {% endblock %}
