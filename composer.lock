@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f496bd2d333cb295bb2e4b268e08bc39",
+    "hash": "2ec1cd15f6310d630d02512b4a20570f",
     "packages": [
         {
             "name": "ahonymous/fontello",
@@ -39,109 +39,6 @@
                 "icons"
             ],
             "time": "2014-03-07 21:02:35"
-        },
-        {
-            "name": "blueimp/jQuery-File-Upload",
-            "version": "9.5.6",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/blueimp/jQuery-File-Upload/archive/9.5.6.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
-        },
-        {
-            "name": "bmatzner/jquery-bundle",
-            "version": "2.1.0",
-            "target-dir": "Bmatzner/JQueryBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bmatzner/BmatznerJQueryBundle.git",
-                "reference": "cb1890ae9724bf2814f127f6d44ebb2efe382001"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/cb1890ae9724bf2814f127f6d44ebb2efe382001",
-                "reference": "cb1890ae9724bf2814f127f6d44ebb2efe382001",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Bmatzner\\JQueryBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT",
-                "GPLv2"
-            ],
-            "authors": [
-                {
-                    "name": "Bernd Matzner",
-                    "email": "bernd@matznermatzner.de",
-                    "homepage": "http://berndmatzner.de"
-                }
-            ],
-            "description": "jQuery Bundle for Symfony2",
-            "homepage": "http://jquery.com/",
-            "keywords": [
-                "javascript",
-                "jquery",
-                "symfony"
-            ],
-            "time": "2014-02-28 15:35:16"
-        },
-        {
-            "name": "bmatzner/jquery-ui-bundle",
-            "version": "1.10.0",
-            "target-dir": "Bmatzner/JQueryUIBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bmatzner/BmatznerJQueryUIBundle.git",
-                "reference": "250d836c9cf2a2b286b7d472f5124fa886d1a63c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryUIBundle/zipball/250d836c9cf2a2b286b7d472f5124fa886d1a63c",
-                "reference": "250d836c9cf2a2b286b7d472f5124fa886d1a63c",
-                "shasum": ""
-            },
-            "require": {
-                "bmatzner/jquery-bundle": "*",
-                "symfony/framework-bundle": ">=2.1"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Bmatzner\\JQueryUIBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT",
-                "GPLv2"
-            ],
-            "authors": [
-                {
-                    "name": "Bernd Matzner",
-                    "email": "bernd@matznermatzner.de",
-                    "homepage": "http://berndmatzner.de"
-                }
-            ],
-            "description": "jQuery UI Bundle for Symfony2",
-            "homepage": "http://jqueryui.com/",
-            "keywords": [
-                "javascript",
-                "jquery",
-                "symfony",
-                "ui"
-            ],
-            "time": "2013-01-26 13:18:08"
         },
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -542,7 +439,7 @@
                     "role": "Creator"
                 }
             ],
-            "description": "images Fixtures for all Doctrine Object Managers",
+            "description": "Data Fixtures for all Doctrine Object Managers",
             "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "database"
@@ -1022,29 +919,6 @@
             "time": "2012-09-20 19:59:26"
         },
         {
-            "name": "frameworks/jquery",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/frameworks/jquery.git",
-                "reference": "50938c691a9b45bd84103f2686a69eeae2a41ed8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/frameworks/jquery/zipball/50938c691a9b45bd84103f2686a69eeae2a41ed8",
-                "reference": "50938c691a9b45bd84103f2686a69eeae2a41ed8",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "jQuery JavaScript Library",
-            "homepage": "http://jquery.com",
-            "time": "2014-01-24 18:22:45"
-        },
-        {
             "name": "friendsofsymfony/jsrouting-bundle",
             "version": "dev-master",
             "target-dir": "FOS/JsRoutingBundle",
@@ -1186,12 +1060,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "7867dfc7aa67969a24fec7f8aa1051eda23098e9"
+                "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/7867dfc7aa67969a24fec7f8aa1051eda23098e9",
-                "reference": "7867dfc7aa67969a24fec7f8aa1051eda23098e9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
+                "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
                 "shasum": ""
             },
             "require": {
@@ -1246,7 +1120,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-04 23:23:39"
+            "time": "2014-03-16 19:14:47"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1436,12 +1310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "098078c1cc7fcedbd5f22f376edfe67b7129f237"
+                "reference": "08b714b6f21d921f567bad60fbf0df2e5213ceb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/098078c1cc7fcedbd5f22f376edfe67b7129f237",
-                "reference": "098078c1cc7fcedbd5f22f376edfe67b7129f237",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/08b714b6f21d921f567bad60fbf0df2e5213ceb7",
+                "reference": "08b714b6f21d921f567bad60fbf0df2e5213ceb7",
                 "shasum": ""
             },
             "require": {
@@ -1489,7 +1363,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-03-12 03:43:30"
+            "time": "2014-03-15 17:20:34"
         },
         {
             "name": "guzzlehttp/streams",
@@ -1497,12 +1371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/streams.git",
-                "reference": "8d1c9e2e53882d5bad5d962db5134094a1a8196d"
+                "reference": "4d55c3333889ecdc0fd1dbf24107834d0e092d3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/8d1c9e2e53882d5bad5d962db5134094a1a8196d",
-                "reference": "8d1c9e2e53882d5bad5d962db5134094a1a8196d",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/4d55c3333889ecdc0fd1dbf24107834d0e092d3d",
+                "reference": "4d55c3333889ecdc0fd1dbf24107834d0e092d3d",
                 "shasum": ""
             },
             "require": {
@@ -1515,7 +1389,10 @@
             "autoload": {
                 "psr-4": {
                     "GuzzleHttp\\Stream\\": "src/"
-                }
+                },
+                "files": [
+                    "src/functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1534,7 +1411,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-03-12 02:31:20"
+            "time": "2014-03-17 02:38:57"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -1594,7 +1471,7 @@
                     "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
                 },
                 {
-                    "name": "Alexander",
+                    "name": "Alexander Mols",
                     "email": "iam.asm89@gmail.com",
                     "homepage": "http://asm89.github.io/"
                 },
@@ -2015,7 +1892,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2029,17 +1906,6 @@
                 "xml"
             ],
             "time": "2013-12-05 14:36:11"
-        },
-        {
-            "name": "jquery/jquery",
-            "version": "1.10.2",
-            "dist": {
-                "type": "file",
-                "url": "http://code.jquery.com/jquery-1.10.2.js",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
         },
         {
             "name": "knplabs/gaufrette",
@@ -2358,17 +2224,17 @@
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "dev-master",
+            "version": "0.x-dev",
             "target-dir": "Liip/ImagineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "7ca852cf51bacc436485d110b92294722ef99710"
+                "reference": "0490ecfd7184e71b24108ba0c2a85261c14b9fc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/7ca852cf51bacc436485d110b92294722ef99710",
-                "reference": "7ca852cf51bacc436485d110b92294722ef99710",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/0490ecfd7184e71b24108ba0c2a85261c14b9fc4",
+                "reference": "0490ecfd7184e71b24108ba0c2a85261c14b9fc4",
                 "shasum": ""
             },
             "require": {
@@ -2409,7 +2275,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-03-07 20:21:32"
+            "time": "2014-03-14 17:57:09"
         },
         {
             "name": "michelf/php-markdown",
@@ -2861,7 +2727,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 }
             ],
             "description": "This bundle provides a way to configure your controllers with annotations",
@@ -3622,12 +3490,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "94e8dc741321c34f5ed3612bbc88d12bdd9fdba0"
+                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/94e8dc741321c34f5ed3612bbc88d12bdd9fdba0",
-                "reference": "94e8dc741321c34f5ed3612bbc88d12bdd9fdba0",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
+                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
                 "shasum": ""
             },
             "require": {
@@ -3671,7 +3539,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2014-03-05 08:00:52"
+            "time": "2014-03-14 08:38:24"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4126,43 +3994,6 @@
                 "framework"
             ],
             "time": "2014-02-12 19:27:03"
-        },
-        {
-            "name": "twbs/bootstrap",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "e8a1df5f060bf7e6631554648e0abde150aedbe4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/e8a1df5f060bf7e6631554648e0abde150aedbe4",
-                "reference": "e8a1df5f060bf7e6631554648e0abde150aedbe4",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "sugeng tigefa",
-                    "email": "tigefa@gmail.com"
-                },
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                }
-            ],
-            "description": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.",
-            "homepage": "http://getbootstrap.com",
-            "keywords": [
-                "bootstrap",
-                "css"
-            ],
-            "time": "2013-08-19 21:18:20"
         },
         {
             "name": "twig/extensions",
@@ -4798,7 +4629,6 @@
         "doctrine/doctrine-fixtures-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
         "hwi/oauth-bundle": 20,
-        "frameworks/jquery": 20,
         "nervo/yuicompressor": 20,
         "fpn/doctrine-extensions-taggable": 20,
         "fpn/tag-bundle": 20,
