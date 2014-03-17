@@ -7,9 +7,7 @@
     <div>
         <div id="added_success"></div>
 
-        <div id="dreams">
-
-        </div>
+        <div id="dreams"></div>
     </div>
 
 {% endblock %}
@@ -58,9 +56,9 @@
                     itemObj.data('sended', 'yes');
                     itemObj.attr('title', 'уже в улюблених.');
                     $('#added_success').append(
-                            '<div class="alert alert-info" style="margin-top: 20px;"> <strong>Мрію успішно додано до списку улюблених.</strong>' +
-                                    '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
-                                    '</div>'
+                        '<div class="alert alert-info" style="margin-top: 20px;"> <strong>Мрію успішно додано до списку улюблених.</strong>' +
+                                '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
+                        '</div>'
                     );
                 })
                 .error(function(msg) {
@@ -68,6 +66,5 @@
                 }
             );
         });
-
     </script>
 {% endblock %}
