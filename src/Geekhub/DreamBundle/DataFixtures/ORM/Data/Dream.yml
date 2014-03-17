@@ -15,10 +15,18 @@ dream2:
     mediaPoster:  starship
     tags:         [транспорт, starship]
 dream3:
-    author:       dartwaider
+    author:       darthvaider
     title:        Зірка смерті
     description:  Створити наймогутнішу зброю, яку навіть уявити собі не можна.
     phone:        30666666666
     expiredDate:  01.01.2015
     mediaPoster:  star
     tags:         [транспорт, starship, зброя]
+dream4:
+    author:       c3pio
+    title:        Лівий протез
+    description:  Під час одного битви на Набу, відірвало ліву ногу. Потрібно поставити протез для кращого пересування.
+    phone:        30666666666
+    expiredDate:  01.01.2015
+    mediaPoster:  protez
+    tags:         [рух, зброя]
