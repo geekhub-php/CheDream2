@@ -14,6 +14,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
 class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterface
@@ -27,6 +28,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     {
         $dreams = Yaml::parse($this->getYmlFile());
         $tagManager = $this->container->get('geekhub.tag.tag_manager');
+        $counter = $this->addPictures();
 
         foreach ($dreams as $key => $dreamData) {
             $dream = new Dream();
@@ -42,10 +44,28 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
-            $dream->addStatus(new Status(Status::SUBMITTED));
+
+            if ($dreamData['status'] == 'submitted') {
+                $dream->addStatus(new Status(Status::SUBMITTED));
+            } elseif ($dreamData['status'] == 'rejected') {
+                $dream->addStatus(new Status(Status::REJECTED));
+            } elseif ($dreamData['status'] == 'collecting-resources') {
+                $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
+            } elseif ($dreamData['status'] == 'implementing') {
+                $dream->addStatus(new Status(Status::IMPLEMENTING));
+            } elseif ($dreamData['status'] == 'completed') {
+                $dream->addStatus(new Status(Status::COMPLETED));
+            } elseif ($dreamData['status'] == 'success') {
+                $dream->addStatus(new Status(Status::SUCCESS));
+            } elseif ($dreamData['status'] == 'fail') {
+                $dream->addStatus(new Status(Status::FAIL));
+            }
 
             $dream->setTags($dreamData['tags']);
             $tagManager->addTagsToEntity($dream);
+            for ($i = 0; $i < $counter; $i++) {
+                $dream->addMediaPicture($this->getReference('media'.$i));
+            }
 
             $manager->persist($dream);
 
@@ -76,5 +96,27 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     protected function getYmlFile()
     {
         return __DIR__.'/Data/Dream.yml';
+    }
+
+    /**
+     * @return int
+     */
+    private function addPictures()
+    {
+        $finder = new Finder();
+        $finder->files()->in(__DIR__.'/images');
+        $counter = 0;
+
+        foreach ($finder as $file) {
+            $this->setMediaContent(
+                __DIR__.'/images/'.$file->getRelativePathname(),
+                'sonata.media.provider.image',
+                'media'.$counter
+            );
+
+            $counter++;
+        }
+
+        return $counter;
     }
 }
