@@ -3,9 +3,5 @@ page_contacts:
     defaults: { _controller: GeekhubResourceBundle:Page:contacts }
 
 faq:
-    pattern:  /faq
-    defaults: { _controller: "GeekhubResourceBundle:Faq:index" }
-#
-#faq_show:
-#    pattern:  /faq/{slug}/show
-#    defaults: { _controller: "GeekhubResourceBundle:Faq:show" }
+    pattern:  /faq/{slug}
+    defaults: { _controller: "GeekhubResourceBundle:Faq:index", slug: null }

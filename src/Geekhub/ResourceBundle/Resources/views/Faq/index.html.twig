@@ -25,15 +25,18 @@
             <div class="tabbable tabs-left">
                 <ul class="nav nav-tabs">
                     {% for faq in faqs %}
-                        <li {{ faq.id == 1 ? 'class="active"' }}>
+                        <li {{ faq.slug == slug ? 'class="active"' }}>
                             <a data-toggle="tab" href="{{ path('faq') }}#{{ faq.slug }}">{{ faq.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="tab-content">
                     {% for faq in faqs %}
-                        <div class="tab-pane {{ faq.id == 1 ? 'active' }}" id="{{ faq.slug }}">
-                            {{ faq.question }}
+                        <div class="tab-pane {{ faq.slug == slug ? 'active' }}" id="{{ faq.slug }}">
+                            <h1>{{ faq.question }}</h1>
+                            <p>
+                                {{ faq.answer }}
+                            </p>
                         </div>
                     {% endfor %}
                 </div>
