@@ -2,6 +2,8 @@
 
 namespace Geekhub\ResourceBundle\Controller;
 
+use Geekhub\ResourceBundle\Entity\Faq;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,10 +14,8 @@ class FaqController extends Controller
      */
     public function indexAction($slug)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $faqs = $em->getRepository('GeekhubResourceBundle:Faq')->findAll();
-//        var_dump($faqs[0]->getSlug()); exit;
+        $faqs = $this->getDoctrine()->getManager()->getRepository('GeekhubResourceBundle:Faq')
+            ->findAll();
         if (is_null($slug)) {
             $slug = $faqs[0]->getSlug();
         }
@@ -27,18 +27,11 @@ class FaqController extends Controller
     }
 
     /**
+     * @ParamConverter("faq", class="GeekhubResourceBundle:Faq")
      * @Template
      */
-    public function showAction($slug)
+    public function showAction(Faq $faq)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $faq = $em->getRepository('GeekhubResourceBundle:Faq')->findOneBy(array('slug' => $slug));;
-
-        if (!$faq) {
-            throw $this->createNotFoundException('Unable to find Faq entity.');
-        }
-
         return array('faq' => $faq);
     }
 }
