@@ -6,7 +6,7 @@
         {#{% for financialContributors in dream.dreamFinancialContributions %}#}
             {#&#123;&#35;{% if not financialContributors.hiddenContributor %}&#35;&#125;#}
                 {#{{ financialContributors.user.firstName }} * {{ financialContributors.user.lastName }}#}
-                {#{{ financialContributors.financialArticle.title }} {{ financialContributors.quantity }}<br/>#}
+                {#{{ financialContributors.financialResource.title }} {{ financialContributors.quantity }}<br/>#}
             {#&#123;&#35;{% endif %}&#35;&#125;#}
         {#{% endfor %}#}
 
@@ -15,7 +15,7 @@
         {#{% for equipmentContributor in dream.dreamEquipmentContributions %}#}
             {#&#123;&#35;{% if not equipmentContributor.hiddenContributor %}&#35;&#125;#}
                 {#{{ equipmentContributor.user.firstName }} * {{ equipmentContributor.user.lastName }}#}
-                {#{{ equipmentContributor.equipmentArticle.title }} {{ equipmentContributor.quantity }}<br/>#}
+                {#{{ equipmentContributor.equipmentResource.title }} {{ equipmentContributor.quantity }}<br/>#}
             {#&#123;&#35;{% endif %}&#35;&#125;#}
         {#{% endfor %}#}
 
@@ -24,7 +24,7 @@
         {#{% for workContributor in dream.dreamWorkContributions %}#}
             {#&#123;&#35;{% if not workContributor.hiddenContributor %}&#35;&#125;#}
                 {#{{ workContributor.user.firstName }} * {{ workContributor.user.lastName }}#}
-                {#{{ workContributor.workArticle.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>#}
+                {#{{ workContributor.workResource.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>#}
             {#&#123;&#35;{% endif %}&#35;&#125;#}
         {#{% endfor %}#}
 

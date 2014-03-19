@@ -55,7 +55,7 @@ class ContributionExtension extends \Twig_Extension
 
         $str = '';
         foreach ($finContr as $fin) {
-            $str .= '<li>'.$fin['article'].' '.$fin['totalSum'].' грн.</li>';
+            $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
         }
 
         return $str;
@@ -80,7 +80,7 @@ class ContributionExtension extends \Twig_Extension
                 default:
                     $qType = '';
             }
-            $str .= '<li>'.$equip['article'].' '.$equip['totalSum'].' '.$qType.'</li>';
+            $str .= '<li>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'</li>';
         }
 
         return $str;
@@ -92,7 +92,7 @@ class ContributionExtension extends \Twig_Extension
 
         $str = '';
         foreach ($workContr as $work) {
-            $str .= '<li>'.$work['article'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
+            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
         }
 
         return $str;

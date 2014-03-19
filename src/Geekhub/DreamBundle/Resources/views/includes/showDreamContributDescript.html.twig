@@ -11,7 +11,7 @@
 
                         {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                        {{ form_row(finForm.financialArticle) }}
+                        {{ form_row(finForm.financialResource) }}
                         {{ form_row(finForm.quantity) }}
                         {{ form_row(finForm.hiddenContributor) }}
 
@@ -30,7 +30,7 @@
 
                         {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                        {{ form_row(equipForm.equipmentArticle) }}
+                        {{ form_row(equipForm.equipmentResource) }}
                         {{ form_row(equipForm.quantity) }}
                         {{ form_row(equipForm.hiddenContributor) }}
 
@@ -50,7 +50,7 @@
 
                         {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                        {{ form_row(workForm.workArticle) }}
+                        {{ form_row(workForm.workResource) }}
                         {{ form_row(workForm.quantity) }}
                         {{ form_row(workForm.quantityDays) }}
                         {{ form_row(workForm.hiddenContributor) }}
