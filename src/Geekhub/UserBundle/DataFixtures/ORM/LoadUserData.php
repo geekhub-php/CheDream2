@@ -31,6 +31,7 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             $reference = 'avatar-'.$key;
             $this->setMediaContent(
                 __DIR__.'/images/'.$key.'.jpg',
+                'avatar',
                 'sonata.media.provider.image',
                 $reference
             );
