@@ -56,7 +56,7 @@ class WorkContribute
     /**
      * @ORM\ManyToOne(targetEntity="WorkResource")
      */
-    protected $workArticle;
+    protected $workResource;
 
     /**
      * @var float
@@ -225,25 +225,25 @@ class WorkContribute
     }
 
     /**
-     * Set workArticle
+     * Set workResource
      *
-     * @param  \Geekhub\DreamBundle\Entity\WorkResource $workArticle
+     * @param  \Geekhub\DreamBundle\Entity\WorkResource $workResource
      * @return WorkContribute
      */
-    public function setWorkArticle(\Geekhub\DreamBundle\Entity\WorkResource $workArticle = null)
+    public function setWorkResource(\Geekhub\DreamBundle\Entity\WorkResource $workResource = null)
     {
-        $this->workArticle = $workArticle;
+        $this->workResource = $workResource;
 
         return $this;
     }
 
     /**
-     * Get workArticle
+     * Get workResource
      *
      * @return \Geekhub\DreamBundle\Entity\WorkResource
      */
-    public function getWorkArticle()
+    public function getWorkResource()
     {
-        return $this->workArticle;
+        return $this->workResource;
     }
 }

@@ -56,7 +56,7 @@ class EquipmentContribute
     /**
      * @ORM\ManyToOne(targetEntity="EquipmentResource")
      */
-    protected $equipmentArticle;
+    protected $equipmentResource;
 
     /**
      * @var float
@@ -193,25 +193,25 @@ class EquipmentContribute
     }
 
     /**
-     * Set equipmentArticle
+     * Set equipmentResource
      *
-     * @param  \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentArticle
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource
      * @return EquipmentContribute
      */
-    public function setEquipmentArticle(\Geekhub\DreamBundle\Entity\EquipmentResource $equipmentArticle = null)
+    public function setEquipmentResource(\Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource = null)
     {
-        $this->equipmentArticle = $equipmentArticle;
+        $this->equipmentResource = $equipmentResource;
 
         return $this;
     }
 
     /**
-     * Get equipmentArticle
+     * Get equipmentResource
      *
      * @return \Geekhub\DreamBundle\Entity\EquipmentResource
      */
-    public function getEquipmentArticle()
+    public function getEquipmentResource()
     {
-        return $this->equipmentArticle;
+        return $this->equipmentResource;
     }
 }

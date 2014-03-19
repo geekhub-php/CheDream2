@@ -73,9 +73,9 @@ class DreamRepository extends EntityRepository
     public function showFinancialContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:FinancialContribute c
-                           join c.financialArticle f
+                           join c.financialResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
@@ -88,9 +88,9 @@ class DreamRepository extends EntityRepository
     public function showEquipmentContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum, f.quantityType as qType
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, f.quantityType as qType
                            FROM GeekhubDreamBundle:EquipmentContribute c
-                           join c.equipmentArticle f
+                           join c.equipmentResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
@@ -103,9 +103,9 @@ class DreamRepository extends EntityRepository
     public function showWorkContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as article, sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
                            FROM GeekhubDreamBundle:WorkContribute c
-                           join c.workArticle f
+                           join c.workResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
                            group by f.title
                            order by f.title
@@ -133,8 +133,8 @@ class DreamRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:FinancialContribute c
-                           join c.financialArticle f
-                           where c.financialArticle = :financial and c.dream = :dream
+                           join c.financialResource f
+                           where c.financialResource = :financial and c.dream = :dream
                            group by f.title
                            ')
             ->setParameter('financial', $financial)
@@ -147,8 +147,8 @@ class DreamRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:EquipmentContribute c
-                           join c.equipmentArticle f
-                           where c.equipmentArticle = :equipment and c.dream = :dream
+                           join c.equipmentResource f
+                           where c.equipmentResource = :equipment and c.dream = :dream
                            group by f.title
                            ')
             ->setParameter('equipment', $equipment)
@@ -161,8 +161,8 @@ class DreamRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
                            FROM GeekhubDreamBundle:WorkContribute c
-                           join c.workArticle f
-                           where c.workArticle = :work and c.dream = :dream
+                           join c.workResource f
+                           where c.workResource = :work and c.dream = :dream
                            group by f.title
                            ')
             ->setParameter('work', $work)

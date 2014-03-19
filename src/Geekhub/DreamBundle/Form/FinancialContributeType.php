@@ -24,7 +24,7 @@ class FinancialContributeType extends AbstractType
     {
         $dream = $options['dream'];
         $builder
-            ->add('financialArticle', 'entity', array(
+            ->add('financialResource', 'entity', array(
                 'class' => 'GeekhubDreamBundle:FinancialResource',
                 'query_builder' => function (EntityRepository $er) use ($dream) {
                         return $er->createQueryBuilder('w')

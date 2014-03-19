@@ -56,7 +56,7 @@ class FinancialContribute
     /**
      * @ORM\ManyToOne(targetEntity="FinancialResource")
      */
-    protected $financialArticle;
+    protected $financialResource;
 
     /**
      * @var float
@@ -195,25 +195,25 @@ class FinancialContribute
     }
 
     /**
-     * Set financialArticle
+     * Set financialResource
      *
-     * @param  \Geekhub\DreamBundle\Entity\FinancialResource $financialArticle
+     * @param  \Geekhub\DreamBundle\Entity\FinancialResource $financialResource
      * @return FinancialContribute
      */
-    public function setFinancialArticle(\Geekhub\DreamBundle\Entity\FinancialResource $financialArticle = null)
+    public function setFinancialResource(\Geekhub\DreamBundle\Entity\FinancialResource $financialResource = null)
     {
-        $this->financialArticle = $financialArticle;
+        $this->financialResource = $financialResource;
 
         return $this;
     }
 
     /**
-     * Get financialArticle
+     * Get financialResource
      *
      * @return \Geekhub\DreamBundle\Entity\FinancialResource
      */
-    public function getFinancialArticle()
+    public function getFinancialResource()
     {
-        return $this->financialArticle;
+        return $this->financialResource;
     }
 }
