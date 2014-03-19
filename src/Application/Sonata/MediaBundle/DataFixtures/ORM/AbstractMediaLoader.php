@@ -31,15 +31,17 @@ abstract class AbstractMediaLoader extends AbstractFixture implements ContainerA
 
     /**
      * @param string $src
+     * @param string $context
      * @param string $provider
      * @param string $nameReference
      */
-    protected function setMediaContent($src, $provider, $nameReference)
+    protected function setMediaContent($src, $context, $provider, $nameReference)
     {
         $mediaManager = $this->container->get('sonata.media.manager.media');
 
         $media = new Media();
         $media->setBinaryContent($src);
+        $media->setContext($context);
         $media->setProviderName($provider);
         $mediaManager->save($media);
 
