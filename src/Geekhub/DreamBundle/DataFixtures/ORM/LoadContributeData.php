@@ -49,7 +49,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $finance->setUser($user);
             $finance->setHiddenContributor($financeData['hidden']);
             $finance->setQuantity($financeData['quantity']);
-            $finance->setFinancialArticle($resource);
+            $finance->setFinancialResource($resource);
 
             $manager->persist($finance);
         }
@@ -72,7 +72,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $equipment->setUser($user);
             $equipment->setHiddenContributor($equipmentData['hidden']);
             $equipment->setQuantity($equipmentData['quantity']);
-            $equipment->setEquipmentArticle($resource);
+            $equipment->setEquipmentResource($resource);
 
             $manager->persist($equipment);
         }
@@ -96,7 +96,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $work->setHiddenContributor($workData['hidden']);
             $work->setQuantity($workData['quantity']);
             $work->setQuantityDays($workData['quantityDays']);
-            $work->setWorkArticle($resource);
+            $work->setWorkResource($resource);
 
             $manager->persist($work);
         }
