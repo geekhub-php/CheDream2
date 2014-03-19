@@ -1,0 +1,29 @@
+{
+  "name": "btest",
+  "version": "0.0.0",
+  "authors": [
+    "Sergey Polischuk <spolischook@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tag-it": "*",
+    "jquery": "~1.10.*",
+    "jquery-ui": "~1.10.4",
+    "bootstrap": "3.1.*",
+    "holderjs": "*",
+    "blueimp-file-upload": "9.5.7",
+    "blueimp-gallery": "2.14.0",
+    "fontello": "5.0.0"
+  },
+  "resolutions": {
+    "jquery": "~1.10.1",
+    "bootstrap": "3.1.*"
+  }
+}
