@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="financial_resource")
  * @ORM\Entity
  */
-class FinancialResource extends AbstractContributeResource
+class FinancialResource extends AbstractResource
 {
     /**
      * @var integer
@@ -28,11 +28,6 @@ class FinancialResource extends AbstractContributeResource
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamFinancialResources")
-     */
-    private $dream;
-
-    /**
      * Get id
      *
      * @return integer
@@ -40,28 +35,5 @@ class FinancialResource extends AbstractContributeResource
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set dream
-     *
-     * @param  Dream         $dream
-     * @return DreamResource
-     */
-    public function setDream(Dream $dream = null)
-    {
-        $this->dream = $dream;
-
-        return $this;
-    }
-
-    /**
-     * Get dream
-     *
-     * @return Dream
-     */
-    public function getDream()
-    {
-        return $this->dream;
     }
 }
