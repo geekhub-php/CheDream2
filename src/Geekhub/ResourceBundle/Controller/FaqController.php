@@ -12,7 +12,7 @@ class FaqController extends Controller
     /**
      * @Template
      */
-    public function indexAction($slug)
+    public function faqListAction($slug)
     {
         $faqs = $this->getDoctrine()->getManager()->getRepository('GeekhubResourceBundle:Faq')
             ->findAll();
