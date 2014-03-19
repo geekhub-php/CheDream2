@@ -14,6 +14,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
 class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterface
@@ -27,11 +28,13 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     {
         $dreams = Yaml::parse($this->getYmlFile());
         $tagManager = $this->container->get('geekhub.tag.tag_manager');
+        $counter = $this->addPictures();
 
         foreach ($dreams as $key => $dreamData) {
             $dream = new Dream();
             $this->setMediaContent(
                 __DIR__.'/images/'.$dreamData['mediaPoster'].'.jpg',
+                'poster',
                 'sonata.media.provider.image',
                 'dream' . $key
             );
@@ -42,14 +45,20 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setDescription($dreamData['description']);
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
-            $dream->addStatus(new Status(Status::SUBMITTED));
 
             $dream->setTags($dreamData['tags']);
             $tagManager->addTagsToEntity($dream);
+            for ($i = 0; $i < $counter; $i++) {
+                $dream->addMediaPicture($this->getReference('media'.$i));
+            }
 
             $manager->persist($dream);
 
             $this->addReference($key, $dream);
+            if ($dream->getCurrentStatus() != $dreamData['status']) {
+                $dream-> addStatus(new Status(Status::SUCCESS));
+                $manager->persist($dream);
+            }
         }
 
         $manager->flush();
@@ -76,5 +85,28 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
     protected function getYmlFile()
     {
         return __DIR__.'/Data/Dream.yml';
+    }
+
+    /**
+     * @return int
+     */
+    private function addPictures()
+    {
+        $finder = new Finder();
+        $finder->files()->in(__DIR__.'/images');
+        $counter = 0;
+
+        foreach ($finder as $file) {
+            $this->setMediaContent(
+                __DIR__.'/images/'.$file->getRelativePathname(),
+                'pictures',
+                'sonata.media.provider.image',
+                'media'.$counter
+            );
+
+            $counter++;
+        }
+
+        return $counter;
     }
 }
