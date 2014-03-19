@@ -69,7 +69,7 @@ class AjaxDreamController extends Controller
         $limit = 4;
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
             ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
-
+ 
         return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
             'dreams' => $dreams,
         ));
