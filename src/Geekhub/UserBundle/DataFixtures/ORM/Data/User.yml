@@ -4,9 +4,24 @@ admin:
     roles:      [ROLE_SUPER_ADMIN]
 yoda:
     firstName:  Yoda
-dartwaider:
-    firstName:  Dart Waider
+darthvaider:
+    firstName:  Darth
+    lastName:   Vaider
 chewbacca:
     firstName:  Chewbacca
 c3pio:
     firstName:  c3pio
+r2d2:
+    firstName:  r2d2
+obi-van:
+    firstName:  Obi-Wan
+    lastName:   Kenobi
+boba:
+    firstName:  Boba
+    lastName:   Fett
+pamde:
+    firstName:  Padmé
+    lastName:   Amidala
+darthmaul:
+    firstName:  Darth
+    lastName:   Maul

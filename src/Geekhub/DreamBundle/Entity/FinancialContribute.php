@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="financial_contributes")
  * @ORM\Entity()
  */
-class FinancialContribute
+class FinancialContribute extends AbstractContribute
 {
     /**
      * @var integer
@@ -29,43 +29,9 @@ class FinancialContribute
     protected $id;
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    protected $createdAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamFinancialContributions")
-     */
-    protected $dream;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="hiddenContributor", type="boolean")
-     */
-    protected $hiddenContributor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="financialContributions")
-     */
-    protected $user;
-
-    /**
      * @ORM\ManyToOne(targetEntity="FinancialResource")
      */
-    protected $financialArticle;
-
-    /**
-     * @var float
-     *
-     * @Assert\NotBlank(message = "dream.not_blank")
-     * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
-     * @ORM\Column(name="quantity", type="float")
-     */
-    protected $quantity;
+    protected $financialResource;
 
     /**
      * Get id
@@ -78,142 +44,25 @@ class FinancialContribute
     }
 
     /**
-     * Set createdAt
+     * Set financialResource
      *
-     * @param  \DateTime $createdAt
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set hiddenContributor
-     *
-     * @param  boolean             $hiddenContributor
+     * @param  \Geekhub\DreamBundle\Entity\FinancialResource $financialResource
      * @return FinancialContribute
      */
-    public function setHiddenContributor($hiddenContributor)
+    public function setFinancialResource(\Geekhub\DreamBundle\Entity\FinancialResource $financialResource = null)
     {
-        $this->hiddenContributor = $hiddenContributor;
+        $this->financialResource = $financialResource;
 
         return $this;
     }
 
     /**
-     * Get hiddenContributor
-     *
-     * @return boolean
-     */
-    public function getHiddenContributor()
-    {
-        return $this->hiddenContributor;
-    }
-
-    /**
-     * Set quantity
-     *
-     * @param  float               $quantity
-     * @return FinancialContribute
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Get quantity
-     *
-     * @return float
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * Set dream
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
-     * @return FinancialContribute
-     */
-    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
-    {
-        $this->dream = $dream;
-        $dream->addDreamFinancialContribution($this);
-
-        return $this;
-    }
-
-    /**
-     * Get dream
-     *
-     * @return \Geekhub\DreamBundle\Entity\Dream
-     */
-    public function getDream()
-    {
-        return $this->dream;
-    }
-
-    /**
-     * Set user
-     *
-     * @param  \Geekhub\UserBundle\Entity\User $user
-     * @return FinancialContribute
-     */
-    public function setUser(\Geekhub\UserBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-        $user->addFinancialContribution($this);
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Geekhub\UserBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set financialArticle
-     *
-     * @param  \Geekhub\DreamBundle\Entity\FinancialResource $financialArticle
-     * @return FinancialContribute
-     */
-    public function setFinancialArticle(\Geekhub\DreamBundle\Entity\FinancialResource $financialArticle = null)
-    {
-        $this->financialArticle = $financialArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get financialArticle
+     * Get financialResource
      *
      * @return \Geekhub\DreamBundle\Entity\FinancialResource
      */
-    public function getFinancialArticle()
+    public function getFinancialResource()
     {
-        return $this->financialArticle;
+        return $this->financialResource;
     }
 }

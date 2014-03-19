@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="work_resource")
  * @ORM\Entity
  */
-class WorkResource extends AbstractContributeResource
+class WorkResource extends AbstractResource
 {
     /**
      * @var integer
@@ -38,11 +38,6 @@ class WorkResource extends AbstractContributeResource
     protected $quantityDays;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamWorkResources")
-     */
-    private $dream;
-
-    /**
      * Get id
      *
      * @return integer
@@ -53,33 +48,10 @@ class WorkResource extends AbstractContributeResource
     }
 
     /**
-     * Set dream
-     *
-     * @param  Dream         $dream
-     * @return DreamResource
-     */
-    public function setDream(Dream $dream = null)
-    {
-        $this->dream = $dream;
-
-        return $this;
-    }
-
-    /**
-     * Get dream
-     *
-     * @return Dream
-     */
-    public function getDream()
-    {
-        return $this->dream;
-    }
-
-    /**
      * Set quantityDays
      *
      * @param  integer       $quantityDays
-     * @return DreamResource
+     * @return WorkResource
      */
     public function setQuantityDays($quantityDays)
     {
