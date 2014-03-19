@@ -25,14 +25,14 @@
                 <div class="row">
                     <ul class="nav nav-pills nav-stacked">
                         {% for faq in faqs %}
-                            <li><a href="{{ path('faq', { 'id': faq.id }) }}">{{ faq.title }}</a></li>
+                            <li><a href="{{ path('faq', { 'slug': faq.slug }) }}">{{ faq.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
             <div class="col-md-9">
                     <div class="row">
-                        {% render path('faq_show', {'id': id}) %}
+                        {% render path('faq_show', {'slug': slug}) %}
                     </div>
             </div>
         </div>
