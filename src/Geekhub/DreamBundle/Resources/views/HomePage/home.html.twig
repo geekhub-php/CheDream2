@@ -16,7 +16,6 @@
     <script>
         var loadDreams = function(startIndex) {
             var path = Routing.generate('dream_ajax_loadMore_dreams');
-            console.log(startIndex);
                 $.post(path, {offset : startIndex })
                         .done(function(response) {
                             $(response).appendTo($('#dreams')).hide().fadeIn(300);
@@ -35,6 +34,7 @@
                 if($(window).height() + $(window).scrollTop() >= $(document).height() && !load) {
                     load = true;
                     startIndex = $('.dream-homepage-preview').length;
+                    console.log(startIndex);
                     loadDreams(startIndex);
                     console.log('end document scrolled');
                     load = false;
