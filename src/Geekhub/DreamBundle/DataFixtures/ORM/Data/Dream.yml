@@ -15,7 +15,7 @@ dream2:
     expiredDate:  25.01.2015
     mediaPoster:  starship
     tags:         [транспорт, starship]
-    status:       rejected
+    status:       success
 dream3:
     author:       darthvaider
     title:        Зірка смерті
@@ -81,6 +81,24 @@ dream9:
     status:       submitted
 dream10:
     author:       yoda
+    title:        Lorem ipsum
+    description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
+    phone:        380999856321
+    expiredDate:  01.03.2015
+    mediaPoster:  lorem
+    tags:         [мандрівка, знахідка]
+    status:       success
+dream11:
+    author:       pamde
+    title:        Lorem ipsum
+    description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
+    phone:        380999856321
+    expiredDate:  01.03.2015
+    mediaPoster:  lorem
+    tags:         [мандрівка, знахідка]
+    status:       submitted
+dream12:
+    author:       r2d2
     title:        Lorem ipsum
     description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
     phone:        380999856321

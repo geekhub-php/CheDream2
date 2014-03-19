@@ -34,6 +34,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream = new Dream();
             $this->setMediaContent(
                 __DIR__.'/images/'.$dreamData['mediaPoster'].'.jpg',
+                'poster',
                 'sonata.media.provider.image',
                 'dream' . $key
             );
@@ -45,22 +46,6 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $dream->setPhone($dreamData['phone']);
             $dream->setExpiredDate(new DateTime ($dreamData['expiredDate']));
 
-            if ($dreamData['status'] == 'submitted') {
-                $dream->addStatus(new Status(Status::SUBMITTED));
-            } elseif ($dreamData['status'] == 'rejected') {
-                $dream->addStatus(new Status(Status::REJECTED));
-            } elseif ($dreamData['status'] == 'collecting-resources') {
-                $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
-            } elseif ($dreamData['status'] == 'implementing') {
-                $dream->addStatus(new Status(Status::IMPLEMENTING));
-            } elseif ($dreamData['status'] == 'completed') {
-                $dream->addStatus(new Status(Status::COMPLETED));
-            } elseif ($dreamData['status'] == 'success') {
-                $dream->addStatus(new Status(Status::SUCCESS));
-            } elseif ($dreamData['status'] == 'fail') {
-                $dream->addStatus(new Status(Status::FAIL));
-            }
-
             $dream->setTags($dreamData['tags']);
             $tagManager->addTagsToEntity($dream);
             for ($i = 0; $i < $counter; $i++) {
@@ -70,6 +55,10 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             $manager->persist($dream);
 
             $this->addReference($key, $dream);
+            if ($dream->getCurrentStatus() != $dreamData['status']) {
+                $dream-> addStatus(new Status(Status::SUCCESS));
+                $manager->persist($dream);
+            }
         }
 
         $manager->flush();
@@ -110,6 +99,7 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
         foreach ($finder as $file) {
             $this->setMediaContent(
                 __DIR__.'/images/'.$file->getRelativePathname(),
+                'pictures',
                 'sonata.media.provider.image',
                 'media'.$counter
             );

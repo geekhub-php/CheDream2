@@ -8,35 +8,35 @@ rfinance2:
     quantity: 200
 rfinance3:
     dream:    dream3
-    title:    фінанс1
+    title:    фінанс3
     quantity: 50
 rfinance4:
     dream:    dream4
-    title:    прозапас
+    title:    фінанс4
     quantity: 1000
 rfinance5:
     dream:    dream5
-    title:    фінанс1
+    title:    фінанс5
     quantity: 100
 rfinance6:
     dream:    dream6
-    title:    фінанс2
+    title:    фінанс6
     quantity: 200
 rfinance7:
     dream:    dream7
-    title:    фінанс1
+    title:    фінанс7
     quantity: 50
 rfinance8:
     dream:    dream8
-    title:    прозапас
+    title:    фінанс8
     quantity: 1000
 rfinance9:
     dream:    dream9
-    title:    фінанс1
+    title:    фінанс9
     quantity: 100
 rfinance10:
     dream:    dream10
-    title:    фінанс2
+    title:    фінанс10
     quantity: 200
 rfinanc1:
     dream:    dream1
@@ -44,31 +44,31 @@ rfinanc1:
     quantity: 50
 rfinance12:
     dream:    dream2
-    title:    прозапас
+    title:    фінанс11
     quantity: 1000
 rfinance13:
     dream:    dream3
-    title:    фінанс1
+    title:    фінанс12
     quantity: 100
 rfinance14:
     dream:    dream4
-    title:    фінанс2
+    title:    фінанс13
     quantity: 200
 rfinance15:
     dream:    dream5
-    title:    фінанс1
+    title:    фінанс14
     quantity: 50
 rfinance16:
     dream:    dream6
-    title:    прозапас
+    title:    фінанс15
     quantity: 1000
 rfinance17:
     dream:    dream7
-    title:    фінанс1
+    title:    фінанс16
     quantity: 100
 rfinance18:
     dream:    dream8
-    title:    фінанс2
+    title:    фінанс17
     quantity: 200
 rfinance19:
     dream:    dream9
@@ -76,53 +76,53 @@ rfinance19:
     quantity: 50
 rfinance20:
     dream:    dream1
-    title:    прозапас
+    title:    фінанс18
     quantity: 1000
 rfinance21:
     dream:    dream2
-    title:    фінанс1
+    title:    фінанс19
     quantity: 100
 rfinance22:
     dream:    dream2
-    title:    фінанс2
+    title:    фінанс20
     quantity: 200
 rfinance23:
-    dream:    dream3
-    title:    фінанс1
+    dream:    dream12
+    title:    фінанс21
     quantity: 50
 rfinance24:
     dream:    dream4
-    title:    прозапас
+    title:    фінанс22
     quantity: 1000
 rfinance25:
     dream:    dream5
-    title:    фінанс1
+    title:    фінанс23
     quantity: 100
 rfinance26:
-    dream:    dream6
-    title:    фінанс2
+    dream:    dream11
+    title:    фінанс24
     quantity: 200
 rfinanc27:
     dream:    dream7
-    title:    фінанс1
+    title:    фінанс25
     quantity: 50
 rfinance28:
     dream:    dream8
-    title:    прозапас
+    title:    фінанс26
     quantity: 1000
 rfinance29:
     dream:    dream9
-    title:    фінанс1
+    title:    фінанс27
     quantity: 100
 rfinance30:
     dream:    dream3
-    title:    фінанс2
+    title:    фінанс28
     quantity: 200
 rfinance31:
-    dream:    dream1
-    title:    фінанс1
+    dream:    dream11
+    title:    фінанс29
     quantity: 50
 rfinance32:
-    dream:    dream2
-    title:    прозапас
+    dream:    dream12
+    title:    фінанс30
     quantity: 1000
