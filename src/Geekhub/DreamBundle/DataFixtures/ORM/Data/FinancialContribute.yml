@@ -18,25 +18,25 @@ cfinance3:
     resource:  rfinance2
 cfinance4:
     dream:    dream1
-    user:     dartwaider
+    user:     darthvaider
     quantity: 100
     hidden:   1
     resource:  rfinance2
 cfinance5:
     dream:    dream2
-    user:     chewbacca
+    user:     darthvaider
     quantity: 10
     hidden:   1
     resource:  rfinance3
 cfinance6:
     dream:    dream2
-    user:     dartwaider
+    user:     darthvaider
     quantity: 50
     hidden:   1
     resource:  rfinance3
 cfinance7:
     dream:    dream2
-    user:     dartwaider
+    user:     darthvaider
     quantity: 50
     hidden:   1
     resource:  rfinance3
