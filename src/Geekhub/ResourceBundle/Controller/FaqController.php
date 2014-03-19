@@ -12,26 +12,20 @@ class FaqController extends Controller
     /**
      * @Template
      */
-    public function indexAction($slug)
+    public function indexAction()
     {
         $faqs = $this->getDoctrine()->getManager()->getRepository('GeekhubResourceBundle:Faq')
             ->findAll();
-        if (is_null($slug)) {
-            $slug = $faqs[0]->getSlug();
-        }
 
-        return array(
-            'faqs' => $faqs,
-            'slug' => $slug,
-        );
+        return array('faqs' => $faqs);
     }
-
-    /**
-     * @ParamConverter("faq", class="GeekhubResourceBundle:Faq")
-     * @Template
-     */
-    public function showAction(Faq $faq)
-    {
-        return array('faq' => $faq);
-    }
+//
+//    /**
+//     * @ParamConverter("faq", class="GeekhubResourceBundle:Faq")
+//     * @Template
+//     */
+//    public function showAction(Faq $faq)
+//    {
+//        return array('faq' => $faq);
+//    }
 }
