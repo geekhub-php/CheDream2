@@ -11,19 +11,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractContributeResource
 {
-    const TON   = 'ton';
-    const KG    = 'kg';
-    const PIECE = 'piece';
-
-    public static function getReadableQuantityTypes()
-    {
-        return array(
-            self::PIECE => 'dream.equipment.piece',
-            self::KG    => 'dream.equipment.kg',
-            self::TON   => 'dream.equipment.ton'
-        );
-    }
-
     /**
      * @var \DateTime
      *
@@ -31,14 +18,6 @@ abstract class AbstractContributeResource
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank(message = "dream.not_blank")
-     * @ORM\Column(name="title", type="string", length=100)
-     */
-    protected $title;
 
     /**
      * @var float
@@ -50,10 +29,15 @@ abstract class AbstractContributeResource
     protected $quantity;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamEquipmentContributions")
+     */
+    protected $dream;
+
+    /**
      * Set createdAt
      *
      * @param  \DateTime     $createdAt
-     * @return DreamResource
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -73,33 +57,10 @@ abstract class AbstractContributeResource
     }
 
     /**
-     * Set title
-     *
-     * @param  string        $title
-     * @return DreamResource
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
      * Set quantity
      *
      * @param  float         $quantity
-     * @return DreamResource
+     * @return $this
      */
     public function setQuantity($quantity)
     {
@@ -116,5 +77,28 @@ abstract class AbstractContributeResource
     public function getQuantity()
     {
         return $this->quantity;
+    }
+
+    /**
+     * Set dream
+     *
+     * @param  \Geekhub\DreamBundle\Entity\Dream $dream
+     * @return $this
+     */
+    public function setDream(\Geekhub\DreamBundle\Entity\Dream $dream = null)
+    {
+        $this->dream = $dream;
+
+        return $this;
+    }
+
+    /**
+     * Get dream
+     *
+     * @return \Geekhub\DreamBundle\Entity\Dream
+     */
+    public function getDream()
+    {
+        return $this->dream;
     }
 }
