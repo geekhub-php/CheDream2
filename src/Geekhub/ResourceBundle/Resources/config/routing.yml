@@ -5,3 +5,7 @@ page_contacts:
 faq:
     pattern:  /faq/{slug}
     defaults: { _controller: "GeekhubResourceBundle:Faq:faqList", slug: null }
+
+faqs:
+    type: rest
+    resource: Geekhub\ResourceBundle\Controller\FaqController

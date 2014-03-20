@@ -3,6 +3,7 @@
 namespace Geekhub\ResourceBundle\Controller;
 
 use Geekhub\ResourceBundle\Entity\Faq;
+use FOS\RestBundle\Controller\Annotations\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,8 +15,7 @@ class FaqController extends Controller
      */
     public function faqListAction($slug)
     {
-        $faqs = $this->getDoctrine()->getManager()->getRepository('GeekhubResourceBundle:Faq')
-            ->findAll();
+        $faqs = $this->getFaqsAction();
         if (is_null($slug)) {
             $slug = $faqs[0]->getSlug();
         }
@@ -24,5 +24,16 @@ class FaqController extends Controller
             'faqs' => $faqs,
             'slug' => $slug,
         );
+    }
+
+    /**
+     * @return array
+     * @View(templateVar="faqs")
+     */
+    public function getFaqsAction()
+    {
+        return $this->getDoctrine()->getManager()
+            ->getRepository('GeekhubResourceBundle:Faq')
+            ->findAll();
     }
 }
