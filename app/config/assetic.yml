@@ -39,6 +39,20 @@ assetic:
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/vendor/jquery.ui.widget.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
+            filters: [yui_js]
+            output: js/dream.min.js
+        user_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery-ui.js
+                - %kernel.root_dir%/../src/Geekhub/UserBundle/Resources/public/js/avatar_upload.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/vendor/jquery.ui.widget.js
+                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
+            filters: [yui_js]
+            output: js/user.min.js
+        dream_js_remove_media:
+            inputs:
                 - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
