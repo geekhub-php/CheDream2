@@ -25,7 +25,6 @@ before_script:
     - chmod -R 777 app/cache app/logs
     - app/console --env=test cache:warmup
     - chmod -R 777 app/cache app/logs
-    - php app/console doctrine:database:create
     - php app/console doctrine:schema:update --force
     - php app/console doctrine:fixtures:load --no-interaction
     - php app/console assets:install --symlink
