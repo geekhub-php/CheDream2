@@ -1,0 +1,12 @@
+default:
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+      kernel:
+        env: test
+        debug: true
+    Behat\MinkExtension\Extension:
+      selenium2: ~
+      base_url: 'http://chedream.local/app_test.php/'
+      default_session: symfony2
+      javascript_session: selenium2
