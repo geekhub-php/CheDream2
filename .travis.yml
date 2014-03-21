@@ -17,6 +17,7 @@ before_script:
     - echo "127.0.0.1 chedream.local" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
     - npm install -g bower
+    - npm install less
     - composer self-update
     - composer install -n
     - chmod -R 777 ./
@@ -26,6 +27,7 @@ before_script:
     - app/console --env=test cache:warmup
     - chmod -R 777 app/cache app/logs
     - mkdir -p web/upload/media
+    - ln -s /usr/bin/nodejs /usr/local/bin/node
     - php app/console doctrine:schema:update --force
     - php app/console doctrine:fixtures:load --no-interaction
     - php app/console assets:install --symlink
