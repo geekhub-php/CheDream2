@@ -52,12 +52,12 @@ _logout:
 
 profile_edit:
     pattern: /user/edit
-    defaults: { _controller: GeekhubUserBundle:User:userEdit }
+    defaults: { _controller: GeekhubUserBundle:User:editUser }
 
 _login:
     pattern: /nologin
     defaults: { _controller: GeekhubUserBundle:User:login }
 
 profile_view:
-    pattern: /user/{id}
-    defaults: { _controller: GeekhubUserBundle:Default:userView}
+    pattern: /users/{id}
+    defaults: { _controller: GeekhubUserBundle:Default:viewUser }
