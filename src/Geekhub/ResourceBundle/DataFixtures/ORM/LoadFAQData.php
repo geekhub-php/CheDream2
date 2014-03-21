@@ -6,13 +6,13 @@
  * Time: 16:08
  */
 
-namespace Geekhub\DreamBundle\DataFixtures\ORM;
+namespace Geekhub\ResourceBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Yaml\Yaml;
-use Geekhub\DreamBundle\Entity\Faq;
+use Geekhub\ResourceBundle\Entity\Faq;
 
 class LoadFAQData extends AbstractFixture implements OrderedFixtureInterface
 {
