@@ -41,6 +41,16 @@ class UserController extends Controller
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
     }
 
+    public function userViewAction($id)
+    {
+        $user = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($id);
+        //$contributedDreams1 = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findByContributedUser($id);
+        
+        $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user);
+
+        return $this->render('GeekhubUserBundle:User:view.html.twig', array('user' => $user, 'contributedDreams' => $contributedDreams));
+    }
+
     public function loginAction()
     {
         return $this->render('GeekhubUserBundle:User:login.html.twig');

@@ -10,11 +10,4 @@ class DefaultController extends Controller
     {
         return $this->render('GeekhubUserBundle:Default:index.html.twig', array('name' => $name));
     }
-
-    public function userViewAction($id)
-    {
-        $user = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($id);
-        return $this->render('GeekhubUserBundle:User:view.html.twig', array('user' => $user));
-    }
-
 }

@@ -60,4 +60,4 @@ _login:
 
 profile_view:
     pattern: /user/{id}
-    defaults: { _controller: GeekhubUserBundle:Default:userView}
+    defaults: { _controller: GeekhubUserBundle:User:userView}

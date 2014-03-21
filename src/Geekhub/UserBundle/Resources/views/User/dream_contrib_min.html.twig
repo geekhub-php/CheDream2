@@ -1,0 +1,6 @@
+{{ include ('GeekhubUserBundle:User:dream_contrib_min.html.twig', {'dream': dream}) }}
+<div class="col-md-1">
+{% for contribution in dream.dreamFinancialContributions %}
+  {{ contribution.equipmentArticle.title }} ({{ contribution.quantity }} шт.???)
+{% endfor %}
+</div>
