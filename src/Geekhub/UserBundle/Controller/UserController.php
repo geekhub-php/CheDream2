@@ -16,7 +16,7 @@ class UserController extends Controller
         return $this->render('GeekhubUserBundle:Default:index.html.twig', array('name' => $name));
     }
 
-    public function userEditAction(Request $request)
+    public function editUserAction(Request $request)
     {
         $userAuth=$this->getUser();
         if (!$userAuth) {
