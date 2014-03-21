@@ -1,6 +1,22 @@
-{{ include ('GeekhubUserBundle:User:dream_contrib_min.html.twig', {'dream': dream}) }}
+{{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
 <div class="col-md-1">
 {% for contribution in dream.dreamFinancialContributions %}
-  {{ contribution.equipmentArticle.title }} ({{ contribution.quantity }} шт.???)
+  {% if not contribution.hiddenContributor %}
+    {{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})
+  {% endif %}
 {% endfor %}
+
+{% for contribution in dream.dreamEquipmentContributions %}
+  {% if not contribution.hiddenContributor %}
+    {{ contribution.equipmentResource.title }} ({{ contribution.quantity }} {{contribution.equipmentResource.getReadableQuantityTypes()[contribution.equipmentResource.quantityType]|trans }})
+  {% endif %}
+{% endfor %}
+
+{% for contribution in dream.dreamWorkContributions %}
+  {% if not contribution.hiddenContributor %}
+    {{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})
+  {% endif %}
+{% endfor %}
+
+
 </div>

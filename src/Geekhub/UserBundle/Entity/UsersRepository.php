@@ -17,11 +17,11 @@ class UsersRepository extends EntityRepository
             WHERE c.user = :user and c.hiddenContributor = false'
         )->setParameter('user', $user);
 
-        $contributedDreamsFin = $query->getResult();
+        $newContributedDreams = $query->getResult();
 
-        foreach ($contributedDreams as $dream) {
+        foreach ($newContributedDreams as $dream) {
             if ($dream['count_c'] > 0) {
-                $contributedDreams->add($dream);
+                $contributedDreams->add($dream[0]);
             }
         }
         return $contributedDreams;
@@ -36,7 +36,6 @@ class UsersRepository extends EntityRepository
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamFinancialContributions', $contributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamEquipmentContributions', $contributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamWorkContributions', $contributedDreams);
-
         return $contributedDreams;
     }
 }
