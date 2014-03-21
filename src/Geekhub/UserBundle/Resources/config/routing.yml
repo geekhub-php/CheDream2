@@ -57,7 +57,3 @@ profile_edit:
 _login:
     pattern: /nologin
     defaults: { _controller: GeekhubUserBundle:User:login }
-
-profile_view:
-    pattern: /users/{id}
-    defaults: { _controller: GeekhubUserBundle:Default:viewUser }
