@@ -17,7 +17,7 @@ before_script:
     - echo "127.0.0.1 chedream.local" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
     - npm install -g bower
-    - npm install less
+    - npm install -g less
     - composer self-update
     - composer install -n
     - chmod -R 777 ./
