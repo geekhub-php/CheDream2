@@ -51,14 +51,6 @@
                {% for dream in contributedDreams %}
                {{ include ('GeekhubUserBundle:User:dream_contrib_min.html.twig', {'dream': dream}) }}
                {% endfor %}
-               {% for contribution in user.equipmentContributions %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribution.dream}) }}
-               {{ contribution.equipmentArticle.title }} ({{ contribution.quantity }} шт.???)
-               {% endfor %}
-               {% for contribution in user.workContributions %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': contribution.dream}) }}
-               {{ contribution.workArticle.title }} ({{contribution.quantity}} чол. ??, {{contribution.quantityDays}} днів)
-               {% endfor %}
              </div>
              <div class="row">
                Favs: 
