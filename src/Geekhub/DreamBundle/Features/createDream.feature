@@ -9,10 +9,13 @@ Feature: Create dream feature
     And I fill in "password" with "admin"
     When I press "_submit"
     Then should be on "/"
+    And should see "SUPER ADMIN"
 
   @javascript
   Scenario: Try to create dream
-    Given I am login as "admin" with password "admin"
+    Given I am on "/login"
+    And print last response
+    And I am login as "admin" with password "admin"
     And I am on "/dream/new"
     And I should see "create or edit your dream"
     And I press "Створити"
@@ -28,6 +31,7 @@ Feature: Create dream feature
     And I should see "create or edit your dream"
     And I fill in "newDreamForm_title" with "Hello! This is my first dream!"
     And I fill in tinymce "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    And I fill in hidden "newDreamForm_tags" with "Hello, world"
     And I press "Створити"
     And I wait 1 seconds
     And I press "btnDreamSubmit"
