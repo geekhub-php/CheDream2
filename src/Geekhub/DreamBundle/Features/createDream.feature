@@ -13,7 +13,7 @@ Feature: Create dream feature
 
   @javascript
   Scenario: Try to create dream
-    Given I am on "/login"
+    Given I am on homepage
     And print last response
     And I am login as "admin" with password "admin"
     And I am on "/dream/new"
