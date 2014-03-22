@@ -8,34 +8,43 @@ env:
   - SYMFONY_VERSION=2.4.*
 
 before_script:
+    # Copy skeleton parameters file
     - cp app/config/parameters.yml.dist app/config/parameters.yml
+
+    # Install packages
     - sudo apt-get update > /dev/null
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
     - npm install -g bower
     - npm install -g less
     - sudo ln -s /home/travis/.nvm/v0.10.25/bin/node /usr/local/bin/node
     - sudo ln -s /home/travis/.nvm/v0.10.25/lib/node_modules /usr/local/lib/node_modules
+
+    # Create VirtualHost
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
-    - sudo /etc/init.d/apache2 restart
     - sudo sed -i -e "/DocumentRoot/i\ServerName chedream.local" /etc/apache2/sites-available/default
     - echo "127.0.0.1 chedream.local" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
+
+    # Update composer
     - composer self-update
-    - composer install --dev --prefer-source
+    - composer install --dev --prefer-dist
+
+    # Make symfony2 preparation steps
     - mkdir -p web/upload/media
     - app/console do:da:cr -e=test > /dev/null
     - app/console do:sc:cr -e=test > /dev/null
     - php app/console doctrine:fixtures:load --no-interaction
     - php app/console assets:install --symlink
     - php app/console assetic:dump
-    - chmod -R 777 ./
     - chmod -R 777 app/cache app/logs
     - app/console --env=test cache:warmup
     - chmod -R 777 app/cache app/logs
+
+    # Setup selenium
     - "sh -e /etc/init.d/xvfb start"
     - "export DISPLAY=:99.0"
-    - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar"
-    - "java -jar selenium-server-standalone-2.39.0.jar > /dev/null &"
+    - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
+    - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
     - sleep 5
 
 script:
