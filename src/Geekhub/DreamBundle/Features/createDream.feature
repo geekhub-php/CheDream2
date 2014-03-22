@@ -11,6 +11,15 @@ Feature: Create dream feature
     Then should be on "/"
     And should see "SUPER ADMIN"
 
+  Scenario: Test google.com
+    Given I am on "http://google.com"
+    Then print last response
+
+  @javascript
+  Scenario: Test google.com
+    Given I am on "http://google.com"
+    Then print last response
+
   @javascript
   Scenario: Try to create dream
     Given I am on homepage
