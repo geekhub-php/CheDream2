@@ -7,4 +7,4 @@ default:
       base_url: 'http://chedream.local/app_test.php/'
       default_session: symfony2
       javascript_session: selenium2
-      browser_name: firefox00
+      browser_name: firefox
