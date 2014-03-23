@@ -45,7 +45,7 @@
                   <h4>Автор проектів: </h4>
                 </div>
                 <div class="btn btn-primary" id="submitted"> На стадії проекту </div>
-                <div class="btn btn-primary" id="completed"> Втілені </div>
+                <div class="btn btn-primary" id="success"> Втілені </div>
              </div>   
              <div class="row">
               <div id="user-dreams">
@@ -88,23 +88,23 @@
             cache: false,
             success: function(html){
                 $("#user-dreams").html(html);
-            }
+            },
             error: function (html) {
-                $("#user-dreams").html('');
+                $("#user-dreams").html('No dreams yet');
             }
         });
    });
-   $('#completed').on("click",function() {
+   $('#success').on("click",function() {
          $.ajax({
             type: "POST",
-            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'completed'})}}",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'success'})}}",
             data: "data=0",
             cache: false,
             success: function(html){
                 $("#user-dreams").html(html);
-            }
+            },
             error: function (html) {
-                $("#user-dreams").html('');
+                $("#user-dreams").html('No dreams yet');
             }
         });
    });
