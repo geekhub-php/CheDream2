@@ -1060,12 +1060,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42"
+                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
-                "reference": "9b8bbbcf50620f7c8af9c7588d9fe29247c2fa42",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f8e9255eedc91bc53195de288c9fe640719b2817",
+                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1120,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-16 19:14:47"
+            "time": "2014-03-18 08:55:34"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1204,17 +1204,17 @@
         },
         {
             "name": "gregwar/captcha",
-            "version": "v1.0.10",
+            "version": "v1.0.11",
             "target-dir": "Gregwar/Captcha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "0a4555768cf0a5f277e2419d4e3483625fbbfdae"
+                "reference": "68c27a070922cf306984dc04a92a27525e534e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/0a4555768cf0a5f277e2419d4e3483625fbbfdae",
-                "reference": "0a4555768cf0a5f277e2419d4e3483625fbbfdae",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/68c27a070922cf306984dc04a92a27525e534e83",
+                "reference": "68c27a070922cf306984dc04a92a27525e534e83",
                 "shasum": ""
             },
             "require": {
@@ -1249,7 +1249,7 @@
                 "captcha",
                 "spam"
             ],
-            "time": "2013-11-27 09:12:31"
+            "time": "2014-03-19 15:13:34"
         },
         {
             "name": "gregwar/captcha-bundle",
@@ -1258,16 +1258,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/CaptchaBundle.git",
-                "reference": "f206bb66cce2ab0af9dedec05ce3d6e1f3b55b9e"
+                "reference": "f2e07fe6f297da5720b16f5784ca5bc4c241ee41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/f206bb66cce2ab0af9dedec05ce3d6e1f3b55b9e",
-                "reference": "f206bb66cce2ab0af9dedec05ce3d6e1f3b55b9e",
+                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/f2e07fe6f297da5720b16f5784ca5bc4c241ee41",
+                "reference": "f2e07fe6f297da5720b16f5784ca5bc4c241ee41",
                 "shasum": ""
             },
             "require": {
-                "gregwar/captcha": "v1.0.10",
+                "gregwar/captcha": "v1.0.11",
                 "php": ">=5.3.0"
             },
             "type": "captcha-bundle",
@@ -1302,7 +1302,7 @@
                 "spam",
                 "visual"
             ],
-            "time": "2014-03-06 16:23:06"
+            "time": "2014-03-19 15:15:10"
         },
         {
             "name": "guzzle/guzzle",
@@ -1371,12 +1371,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/streams.git",
-                "reference": "4d55c3333889ecdc0fd1dbf24107834d0e092d3d"
+                "reference": "e8b59027efbb17cc11258cdbd757c5c5b64a5260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/4d55c3333889ecdc0fd1dbf24107834d0e092d3d",
-                "reference": "4d55c3333889ecdc0fd1dbf24107834d0e092d3d",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/e8b59027efbb17cc11258cdbd757c5c5b64a5260",
+                "reference": "e8b59027efbb17cc11258cdbd757c5c5b64a5260",
                 "shasum": ""
             },
             "require": {
@@ -1411,7 +1411,7 @@
                 "Guzzle",
                 "stream"
             ],
-            "time": "2014-03-17 02:38:57"
+            "time": "2014-03-18 03:15:38"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -2229,12 +2229,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "0490ecfd7184e71b24108ba0c2a85261c14b9fc4"
+                "reference": "e39b7c1d5a969605690ef5f9ab1f837bf4083b5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/0490ecfd7184e71b24108ba0c2a85261c14b9fc4",
-                "reference": "0490ecfd7184e71b24108ba0c2a85261c14b9fc4",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/e39b7c1d5a969605690ef5f9ab1f837bf4083b5f",
+                "reference": "e39b7c1d5a969605690ef5f9ab1f837bf4083b5f",
                 "shasum": ""
             },
             "require": {
@@ -2275,7 +2275,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-03-14 17:57:09"
+            "time": "2014-03-23 14:00:21"
         },
         {
             "name": "michelf/php-markdown",
@@ -2330,16 +2330,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57"
+                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6225b22de9dcf36546be3a0b2fa8e3d986153f57",
-                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/392ef35fd470638e08d0160d6b1cbab63cb23174",
+                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174",
                 "shasum": ""
             },
             "require": {
@@ -2347,11 +2347,11 @@
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "~2.4.8",
-                "doctrine/couchdb": "dev-master",
-                "mlehner/gelf-php": "1.0.*",
+                "aws/aws-sdk-php": "~2.4, >2.4.8",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
                 "phpunit/phpunit": "~3.7.0",
-                "raven/raven": "0.5.*",
+                "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*"
             },
             "suggest": {
@@ -2359,19 +2359,20 @@
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "raven/raven": "Allow sending log messages to a Sentry server",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Monolog": "src/"
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2393,7 +2394,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-11-14 19:48:31"
+            "time": "2014-03-23 19:50:26"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -3717,17 +3718,17 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72"
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
-                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/98e197da54df1f966dd5e8a4992135703569c987",
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987",
                 "shasum": ""
             },
             "require": {
@@ -3761,7 +3762,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:58"
+            "time": "2013-10-04 10:06:38"
         },
         {
             "name": "symfony/monolog-bundle",
