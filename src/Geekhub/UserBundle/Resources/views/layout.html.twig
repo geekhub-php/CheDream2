@@ -1,0 +1,16 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block menu %}
+    {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
+        {% block items %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+{% block main %}
+    <div class="layout">
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{% endblock main %}
+
