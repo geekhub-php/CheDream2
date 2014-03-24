@@ -46,7 +46,6 @@
                      {{ form_widget(form.birthday.year) }}
                    </div>
                 </div>
-                {{ tinymce_init() }}
                 {{ form_row(form.about) }}
                 {{ form_rest(form) }}
             </div>
@@ -58,3 +57,9 @@
 </div>
 
 {% endblock content %}
+
+{% block javascript %}
+  {{ parent() }}
+  {{ tinymce_init() }}
+
+{% block javascript %}
