@@ -2,12 +2,9 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-var_dump(file_exists(__DIR__.'/../app/bootstrap.php.cache'));
-var_dump($loader = require_once __DIR__.'/../app/bootstrap.php.cache');
-exit;
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/AppKernel.php';
-
+$loader = require __DIR__.'/../app/bootstrap.php.cache';
+require __DIR__.'/../app/AppKernel.php';
+var_dump('app_dev.php_require_works');
 $kernel = new AppKernel('test', true);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
