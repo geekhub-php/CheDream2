@@ -38,7 +38,7 @@
                 {% if app.user is same as(user) %}
                  <a href="{{path('profile_edit')}}"><div class="btn btn-primary">Редагувати</div></a>
                 {% endif %}
-                <p> {{ user.about }} </p>
+                <p> {{ user.about|raw }} </p>
              </div>
              <div class="row">
                 <div class="col-md-7">
