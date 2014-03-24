@@ -1,6 +1,6 @@
 geekhub_user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: GeekhubUserBundle:Default:index }
+    pattern:  /hello
+    defaults: { _controller: GeekhubUserBundle:User:index }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

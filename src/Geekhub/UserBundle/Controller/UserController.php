@@ -8,12 +8,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Geekhub\UserBundle\Entity\Contacts;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
+use Hip\MandrillBundle\Message;
+use Hip\MandrillBundle\Dispatcher;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('GeekhubUserBundle:Default:index.html.twig', array('name' => $name));
+        $dispatcher = $this->get('hip_mandrill.dispatcher');
+
+        $message = new Message();
+
+        $message
+//            ->setFromEmail('test@gmail.com')
+            ->setFromName('Customer Care')
+            ->addTo('j_mos@ukr.net')
+            ->setSubject('TESTING')
+            ->setHtml('<html><body><h1>Some Content</h1></body></html>')
+            ;
+
+        $result = $dispatcher->send($message);
+
+        return new Response('<pre>' . print_r($result, true) . '</pre>');
     }
 
     public function editUserAction(Request $request)
