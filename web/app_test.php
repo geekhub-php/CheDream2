@@ -8,8 +8,13 @@ $appKernerl = realpath(__DIR__.'/../app/AppKernel.php');
 var_dump($bootstrapPath);
 var_dump($appKernerl);
 
-$loader = require $bootstrapPath;
-require $appKernerl;
+try {
+    $loader = require $bootstrapPath;
+    require $appKernerl;
+} catch (\Exeption $e) {
+    echo $e->getMessage();
+}
+
 var_dump('app_dev.php_require_works');
 $kernel = new AppKernel('test', true);
 $kernel->loadClassCache();
