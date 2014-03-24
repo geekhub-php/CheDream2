@@ -42,5 +42,5 @@ view_dream:
     defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
 
 view_all_dreams:
-    pattern:  /alldreams/{status}/view/{lastDreamId}
+    pattern:  /alldreams/{status}/view/{offset}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewAllDreams }

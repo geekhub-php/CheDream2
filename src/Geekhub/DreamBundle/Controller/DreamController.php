@@ -112,17 +112,17 @@ class DreamController extends Controller
     /**
      * @View(templateVar="dreams")
      */
-    public function viewAllDreamsAction($status, $lastDreamId)
+    public function viewAllDreamsAction($status, $offset)
     {
         $dreamRepository = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream');
         if ($status =="new") {
-            return $dreamRepository->findNewDreams(8, $lastDreamId);
+            return $dreamRepository->findNewDreams(8, $offset);
         }
         else if ($status =="popular") {
-            return $dreamRepository->findPopularDreams(8, $lastDreamId);
+            return $dreamRepository->findPopularDreams(8, $offset);
         }
         else { 
-            return $dreamRepository->findLimitedDreamsByStatus($status, 8, $lastDreamId);
+            return $dreamRepository->findLimitedDreamsByStatus($status, 8, $offset);
         }
     }
 }
