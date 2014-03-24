@@ -11,10 +11,10 @@
              <div class="col-md-3">
               <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
                {% if user.phone is not null %}
-                <a href="mailto:{{ user.contacts.phone }}"><div class="icon-phone-circled"></div></a>
+                <a href="mailto:{{ user.phone }}"><div class="icon-phone-circled"></div></a>
                {% endif %}
                {% if user.skype is not null %}
-               <a href="skype:{{ user.contacts.skype }}"><div class="icon-skype"></div></a>
+               <a href="skype:{{ user.skype }}"><div class="icon-skype"></div></a>
                {% endif %}
                {% if user.email is not null %}
                <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
