@@ -46,7 +46,8 @@
                      {{ form_widget(form.birthday.year) }}
                    </div>
                 </div>
-                {{ form_row(form.about, {'attr': {'rows': 25}}) }}
+                {{ tinymce_init() }}
+                {{ form_row(form.about) }}
                 {{ form_rest(form) }}
             </div>
             <div class="row center">

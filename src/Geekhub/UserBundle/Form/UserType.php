@@ -24,7 +24,11 @@ class UserType extends AbstractType
             ->add('firstName', 'text', array('label' => 'Ім\'я '))
             ->add('lastName', 'text', array('label' => 'Прізвище '))
             ->add('birthday', 'birthday', array('label' => 'user.birthday', 'required' => false))
-            ->add('about', 'textarea', array('label' => 'user.about_myself', 'required' => false))
+            ->add('about', 'textarea', array('label' => 'user.about_myself', 'required' => false, 
+                   'attr' => array(
+                       'class'=>'tinymce',
+                       'rows' => 12,
+                    )))
             ->add('email', 'email', array('label' => 'user.email'))
             ->add('phone', 'text', array('label' => 'user.phone', 'required' => false))
             ->add('skype', 'text', array('label' => 'user.skype', 'required' => false))
