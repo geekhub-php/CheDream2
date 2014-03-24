@@ -1,0 +1,35 @@
+<div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; height: 300px; margin: 0 auto;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for completedDream in completedDreams %}
+            {% if loop.index == 1 %}
+                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+            {% else %}
+                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+
+    <div class="carousel-inner">
+        {% for completedDream in completedDreams %}
+            {% if loop.index == 1 %}
+                {% set classStyle = 'item active' %}
+            {% else %}
+                {% set classStyle = 'item' %}
+            {% endif %}
+            <div class="{{ classStyle }}">
+                <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>{{ completedDream.author.firstName }} {{ completedDream.author.lastName }}</h3>
+                        <p>{{ completedDream.title }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a class="left carousel-control" href="#dreamCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#dreamCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+</div> {#  end slider #}
