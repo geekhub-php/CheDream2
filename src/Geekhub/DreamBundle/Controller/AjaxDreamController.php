@@ -8,13 +8,15 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
+use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\Status;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AjaxDreamController extends Controller
 {
-    public function DreamImageLoaderAction(Request $request)
+    public function dreamImageLoaderAction(Request $request)
     {
         $file = $request->files->get('files');
 
@@ -25,7 +27,7 @@ class AjaxDreamController extends Controller
         return new Response(json_encode($result));
     }
 
-    public function DreamPosterLoaderAction(Request $request)
+    public function dreamPosterLoaderAction(Request $request)
     {
         $file = $request->files->get('dream-poster');
 
@@ -36,13 +38,40 @@ class AjaxDreamController extends Controller
         return new Response(json_encode($result));
     }
 
-    public function DreamPictureRemoveAction(Request$request)
+    public function dreamPictureRemoveAction(Request$request)
     {
-        $idMedia = $request->get('id');
+        $mediaId = $request->get('id');
         $mediaManager = $this->get('sonata.media.manager.media');
-        $media = $mediaManager->findOneBy(array('id' => $idMedia));
+        $media = $mediaManager->findOneBy(array('id' => $mediaId));
         $mediaManager->delete($media);
 
         return new Response('ok');
+    }
+
+    public function addDreamToFavoriteAction(Request $request)
+    {
+        $dreamId = $request->get('id');
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        /** @var Dream $dream */
+        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById($dreamId);
+        $dream->addUsersWhoFavorite($user);
+        $em->persist($dream);
+        $em->flush();
+
+        return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
+    }
+
+    public function loadMoreDreamsAction(Request $request)
+    {
+        $offset = $request->get('offset');
+        $limit = 4;
+        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
+            ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
+ 
+        return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
+            'dreams' => $dreams,
+        ));
     }
 }

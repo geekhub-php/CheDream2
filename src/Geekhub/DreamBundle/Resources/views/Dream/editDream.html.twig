@@ -88,7 +88,7 @@
                 <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
                 <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
                     {% for finance in form.dreamFinancialResources %}
-                        <li>
+                        <li class="collection-form">
                             {{ form_widget(finance) }}
                             {{ form_errors(finance) }}
                         </li>
@@ -102,7 +102,7 @@
                 <h4><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;EQUIPMENT</h4>
                 <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                     {% for equipment in form.dreamEquipmentResources %}
-                        <li>
+                        <li class="collection-form">
                             {{ form_widget(equipment) }}
                             {{ form_errors(equipment) }}
                         </li>
@@ -114,7 +114,7 @@
                 <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
                 <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
                     {% for work in form.dreamWorkResources %}
-                        <li>
+                        <li class="collection-form">
                             {{ form_widget(work) }}
                             {{ form_errors(work) }}
                         </li>
@@ -135,8 +135,7 @@
 
 {% block javascript %}
     {{ parent() }}
-    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
-    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+
     <script>
         $(document).ready(function() {
             $('ul.help-block li a').hide();

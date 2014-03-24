@@ -13,3 +13,108 @@ requipment3:
     title:        метал
     quantityType: ton
     quantity:     15000000
+requipment4:
+    dream:        dream4
+    title:        протез
+    quantityType: piece
+    quantity:     1
+requipment5:
+    dream:        dream12
+    title:        Диск
+    quantityType: piece
+    quantity:     1
+requipment6:
+    dream:        dream5
+    title:        DVD-RW
+    quantityType: piece
+    quantity:     1
+requipment7:
+    dream:        dream6
+    title:        ресурс6
+    quantityType: piece
+    quantity:     1
+requipment8:
+    dream:        dream7
+    title:        ресурс7
+    quantityType: piece
+    quantity:     150
+requipment9:
+    dream:        dream8
+    title:        ресурс8
+    quantityType: ton
+    quantity:     150
+requipment10:
+    dream:        dream11
+    title:        ресурс9
+    quantityType: piece
+    quantity:     1
+requipment11:
+    dream:        dream10
+    title:        ресурс10
+    quantityType: piece
+    quantity:     150
+requipment12:
+    dream:        dream2
+    title:        ресурс11
+    quantityType: ton
+    quantity:     150
+requipment13:
+    dream:        dream10
+    title:        ресурс12
+    quantityType: piece
+    quantity:     1
+requipment14:
+    dream:        dream12
+    title:        ресурс13
+    quantityType: piece
+    quantity:     150
+requipment15:
+    dream:        dream7
+    title:        ресурс14
+    quantityType: ton
+    quantity:     15
+requipment16:
+    dream:        dream5
+    title:        ресурс15
+    quantityType: piece
+    quantity:     1
+requipment17:
+    dream:        dream10
+    title:        ресурс16
+    quantityType: piece
+    quantity:     150
+requipment18:
+    dream:        dream11
+    title:        ресурс17
+    quantityType: ton
+    quantity:     15
+requipment19:
+    dream:        dream5
+    title:        ресурс18
+    quantityType: piece
+    quantity:     1
+requipment20:
+    dream:        dream9
+    title:        ресурс19
+    quantityType: piece
+    quantity:     150
+requipment21:
+    dream:        dream4
+    title:        ресурс20
+    quantityType: ton
+    quantity:     15
+requipment22:
+    dream:        dream4
+    title:        ресурс21
+    quantityType: piece
+    quantity:     1
+requipment23:
+    dream:        dream10
+    title:        ресурс22
+    quantityType: piece
+    quantity:     150
+requipment24:
+    dream:        dream9
+    title:        ресурс23
+    quantityType: ton
+    quantity:     15

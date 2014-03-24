@@ -40,8 +40,8 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
         $financeArray = $this->getFile(__DIR__.'/Data/FinancialContribute.yml');
 
         foreach ($financeArray as $financeData) {
-            $dream = $this->getReference($financeData['dream']);
             $resource = $this->getReference($financeData['resource']);
+            $dream = $resource->getDream();
             $user = $this->getReference('user-'.$financeData['user']);
 
             $finance = new FinancialContribute();
@@ -49,7 +49,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $finance->setUser($user);
             $finance->setHiddenContributor($financeData['hidden']);
             $finance->setQuantity($financeData['quantity']);
-            $finance->setFinancialArticle($resource);
+            $finance->setFinancialResource($resource);
 
             $manager->persist($finance);
         }
@@ -63,8 +63,8 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
         $equipmentArray = $this->getFile(__DIR__.'/Data/EquipmentContribute.yml');
 
         foreach ($equipmentArray as $equipmentData) {
-            $dream = $this->getReference($equipmentData['dream']);
             $resource = $this->getReference($equipmentData['resource']);
+            $dream = $resource->getDream();
             $user = $this->getReference('user-'.$equipmentData['user']);
 
             $equipment = new EquipmentContribute();
@@ -72,7 +72,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $equipment->setUser($user);
             $equipment->setHiddenContributor($equipmentData['hidden']);
             $equipment->setQuantity($equipmentData['quantity']);
-            $equipment->setEquipmentArticle($resource);
+            $equipment->setEquipmentResource($resource);
 
             $manager->persist($equipment);
         }
@@ -86,8 +86,8 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
         $workArray = $this->getFile(__DIR__.'/Data/WorkContribute.yml');
 
         foreach ($workArray as $workData) {
-            $dream = $this->getReference($workData['dream']);
             $resource = $this->getReference($workData['resource']);
+            $dream = $resource->getDream();
             $user = $this->getReference('user-'.$workData['user']);
 
             $work = new WorkContribute();
@@ -96,7 +96,7 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $work->setHiddenContributor($workData['hidden']);
             $work->setQuantity($workData['quantity']);
             $work->setQuantityDays($workData['quantityDays']);
-            $work->setWorkArticle($resource);
+            $work->setWorkResource($resource);
 
             $manager->persist($work);
         }

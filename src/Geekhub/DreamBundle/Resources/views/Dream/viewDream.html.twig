@@ -4,7 +4,7 @@
 
     {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
 
-    <hr class="show-hr">
+    {#<hr class="show-hr">#}
 
     {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
@@ -33,18 +33,44 @@
 {% block javascript %}
     {{ parent() }}
     <script>
-        $(document).ready(function(){
-            $('#video object').get(0).width='100%';
-            $('#video object').get(0).height=250;
-            $('#video object embed').get(0).width='100%';
-            $('#video object embed').get(0).height=250;
-            $('#video object embed').attr({wmode:"opaque"});
-//            var param = $('<param>');
-//            param.attr({name:'wmode'});
-//            param.attr({value:'opaque'});
-//            $('#video object').eq(0).append(param);
+        var finFormHide = function(){
+            $('#finFormContributor').hide();
+        };
+        var equipFormHide = function(){
+            $('#equipFormContributor').hide();
+        };
+        var workFormHide = function(){
+            $('#workFormContributor').hide();
+        };
+        var otherFormHide = function(){
+            $('#otherFormContributor').hide();
+        };
 
-//            $('#video object embed').css({"z-index":"-10"});
+        var finFormShow = function() {
+            $('#finFormContributor').fadeIn(500).show();
+        };
+        var equipFormShow = function() {
+            $('#equipFormContributor').fadeIn(500).show();
+        };
+        var workFormShow = function() {
+            $('#workFormContributor').fadeIn(500).show();
+        };
+        var otherFormShow = function() {
+            $('#otherFormContributor').fadeIn(500).show();
+        };
+
+        $(document).ready(function(){
+            if ($('#video object').get(0)) {
+                $('#video object').get(0).width='100%';
+                $('#video object').get(0).height=250;
+                $('#video object embed').get(0).width='100%';
+                $('#video object embed').get(0).height=250;
+            }
+//            $('#video object embed').attr({wmode:"opaque"});
+            finFormHide();
+            equipFormHide();
+            workFormHide();
+            otherFormHide();
         });
 
         document.getElementById('links').onclick = function (event) {
@@ -55,5 +81,43 @@
                     links = this.getElementsByTagName('a');
             blueimp.Gallery(links, options);
         };
+
+        $('#finFormContributorShow').click(function(){
+            finFormShow();
+            equipFormHide();
+            workFormHide();
+            otherFormHide();
+        });
+        $('#equipFormContributorShow').click(function(){
+            finFormHide();
+            equipFormShow();
+            workFormHide();
+            otherFormHide();
+        });
+        $('#workFormContributorShow').click(function(){
+            finFormHide();
+            equipFormHide();
+            workFormShow();
+            otherFormHide();
+        });
+        $('#otherFormContributorShow').click(function(){
+            finFormHide();
+            equipFormHide();
+            workFormHide();
+            otherFormShow();
+        });
+
+        $('#finButCancel').click(function(){
+            finFormHide();
+        });
+        $('#equipButCancel').click(function(){
+            equipFormHide();
+        });
+        $('#workButCancel').click(function(){
+            workFormHide();
+        });
+        $('#otherButCancel').click(function(){
+            otherFormHide();
+        });
     </script>
 {% endblock %}

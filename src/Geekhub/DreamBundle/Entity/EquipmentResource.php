@@ -16,8 +16,21 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="equipment_resource")
  * @ORM\Entity
  */
-class EquipmentResource extends AbstractContributeResource
+class EquipmentResource extends AbstractResource
 {
+    const TON   = 'ton';
+    const KG    = 'kg';
+    const PIECE = 'piece';
+
+    public static function getReadableQuantityTypes()
+    {
+        return array(
+            self::PIECE => 'dream.equipment.piece',
+            self::KG    => 'dream.equipment.kg',
+            self::TON   => 'dream.equipment.ton'
+        );
+    }
+
     /**
      * @var integer
      *
@@ -35,11 +48,6 @@ class EquipmentResource extends AbstractContributeResource
     protected $quantityType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Dream", inversedBy="dreamEquipmentResources")
-     */
-    private $dream;
-
-    /**
      * Get id
      *
      * @return integer
@@ -50,33 +58,10 @@ class EquipmentResource extends AbstractContributeResource
     }
 
     /**
-     * Set dream
-     *
-     * @param  Dream         $dream
-     * @return DreamResource
-     */
-    public function setDream(Dream $dream = null)
-    {
-        $this->dream = $dream;
-
-        return $this;
-    }
-
-    /**
-     * Get dream
-     *
-     * @return Dream
-     */
-    public function getDream()
-    {
-        return $this->dream;
-    }
-
-    /**
      * Set quantityType
      *
      * @param  string        $quantityType
-     * @return DreamResource
+     * @return $this
      */
     public function setQuantityType($quantityType)
     {
