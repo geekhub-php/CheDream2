@@ -50,5 +50,8 @@
                 </argument>
             </call>
     </service>
+     <service id="geekhub.user.twig_dotdotdot_extension" class="Geekhub\UserBundle\Services\DotDotDotExtension">
+        <tag name="twig.extension" />
+    </service>
 </services>
 </container>

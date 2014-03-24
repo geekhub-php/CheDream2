@@ -90,7 +90,10 @@
                 </li>
             {% else %}
                 <li>
-                    <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                    <a href="{{ path('profile_view', {'id': app.user.id}) }}">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                </li>
+                <li>
+                     <a href="{{ path('profile_edit') }}"> Редагувати </a>
                 </li>
                 <li>
                     <a href="{{ path('_logout') }}">

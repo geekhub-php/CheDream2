@@ -15,6 +15,7 @@ dream:
     financial:
         title: Стаття витрат
         quantity: Сумма
+        valute: грн.
     equipment:
         title: Ресурс
         quantity: Кількість
@@ -24,8 +25,8 @@ dream:
         ton: тон
     work:
         title: Назва робіт
-        quantity: Людей
-        days: Днів
+        quantity: чол.
+        days: днів
     other:
         title: Інша допомога
     js:

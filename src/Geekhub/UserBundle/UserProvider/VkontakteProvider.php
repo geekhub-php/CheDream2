@@ -3,7 +3,7 @@
 namespace Geekhub\UserBundle\UserProvider;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use GuzzleHttp\Client;
+use Guzzle\Http\Client;
 use Geekhub\UserBundle\Entity\User;
 
 class VkontakteProvider extends AbstractSocialNetworkProvider
@@ -41,7 +41,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
     {
         $client = new Client();
         $response = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $responceBody = $response->getBody();
+        $responceBody = $response->getResponse();
 
         $result = $this->serializer->deserialize($responceBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 
