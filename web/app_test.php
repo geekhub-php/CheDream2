@@ -5,14 +5,14 @@ use Symfony\Component\HttpFoundation\Request;
 $bootstrapPath = realpath(__DIR__.'/../app/bootstrap.php.cache');
 $appKernerl = realpath(__DIR__.'/../app/AppKernel.php');
 
-var_dump($bootstrapPath);
-var_dump($appKernerl);
-
 try {
     $a = 1 / 0;
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
+
+var_dump($bootstrapPath);
+var_dump($appKernerl);
 
 $loader = require $bootstrapPath;
 require $appKernerl;
