@@ -16,7 +16,8 @@
         </a>
     </div>
 
-    <div class="navbar-collapse collapse">
+    {% block items %}
+        <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li>
                 <a href="{{ path('dream_list') }}">Мрії</a>
@@ -116,4 +117,5 @@
             </div>
         </form>
     </div>
+    {% endblock items %}
 </nav>
