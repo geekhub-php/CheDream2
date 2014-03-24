@@ -2,8 +2,14 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-$loader = require __DIR__.'/../app/bootstrap.php.cache';
-require __DIR__.'/../app/AppKernel.php';
+$bootstrapPath = realpath(__DIR__.'/../app/bootstrap.php.cache');
+$appKernerl = realpath(__DIR__.'/../app/AppKernel.php');
+
+var_dump($bootstrapPath);
+var_dump($appKernerl);
+
+$loader = require $bootstrapPath;
+require $appKernerl;
 var_dump('app_dev.php_require_works');
 $kernel = new AppKernel('test', true);
 $kernel->loadClassCache();
