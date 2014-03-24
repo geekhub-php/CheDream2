@@ -5,7 +5,7 @@
         <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}"/>
 
         <div class="showDreamAvatar-wrapper"> {# Avatar #}
-            <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}">
+            <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
             <p class="showDreamAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
 
         </div>
