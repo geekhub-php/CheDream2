@@ -9,6 +9,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
+        userAvatarBig:
+            quality: 90
+            filters:
+                thumbnail: { size: [440, 260], mode: outbound }
         dream_thumb:
             quality: 90
             filters:

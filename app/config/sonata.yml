@@ -21,6 +21,7 @@ sonata_media:
                 - sonata.media.provider.file
             formats:
                 small: { width: 100 , quality: 70}
+                avatar_small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
 
         pictures:
@@ -35,19 +36,22 @@ sonata_media:
                 - sonata.media.provider.image
             formats:
                 big:   { width: 440 , quality: 90}
+                small:   { width: 80 , quality: 90}
 
         avatar:
             providers:
                 - sonata.media.provider.image
             formats:
-                normal:   { width: 200 , quality: 90}
+                big:   { width: 440 , quality: 90}
                 small:   { width: 100 , quality: 90}
+                normal:   { width: 200 , quality: 90}
 
         video:
             providers:
                 - sonata.media.provider.youtube
             formats:
                 prew:   { width: 100 , quality: 90}
+
     cdn:
         server:
             path: ../upload/media

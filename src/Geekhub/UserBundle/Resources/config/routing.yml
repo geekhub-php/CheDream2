@@ -49,3 +49,11 @@ odnoklassniki_login:
 
 _logout:
     pattern: /logout
+
+profile_edit:
+    pattern: /user/edit
+    defaults: { _controller: GeekhubUserBundle:User:editUser }
+
+_login:
+    pattern: /nologin
+    defaults: { _controller: GeekhubUserBundle:User:login }

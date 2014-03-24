@@ -22,21 +22,21 @@ trait ContactsInfo
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="facebookUrl", type="string", length=150, nullable=true)
      */
     protected $facebookUrl;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakteUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="vkontakteUrl", type="string", length=150, nullable=true)
      */
     protected $vkontakteUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassnikiUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="odnoklassnikiUrl", type="string", length=150, nullable=true)
      */
     protected $odnoklassnikiUrl;
 
