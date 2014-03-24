@@ -20,9 +20,9 @@ Feature: Create dream feature
 #    Given I am on "http://google.com"
 #    Then print last response
 
-  @javascript
+  @mink:zombie
   Scenario: Try to create dream
-    Given I am on homepage
+    Given I am on "/login"
     And print last response
     And I am login as "admin" with password "admin"
     And I am on "/dream/new"
@@ -33,7 +33,7 @@ Feature: Create dream feature
     Then I should be on "/dream/new"
     And I should see "Поле не повинно бути порожнім"
 
-  @javascript
+  @mink:zombie
   Scenario: Try to create dream
     Given I am login as "admin" with password "admin"
     And I am on "/dream/new"
