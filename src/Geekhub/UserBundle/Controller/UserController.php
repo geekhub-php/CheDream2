@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Geekhub\UserBundle\Entity\Contacts;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends Controller
 {
@@ -39,6 +41,30 @@ class UserController extends Controller
         }
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+    }
+
+    /**
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
+     */
+    public function userViewAction($user)
+    {
+        $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user);
+
+        return $this->render('GeekhubUserBundle:User:view.html.twig', array('user' => $user, 'contributedDreams' => $contributedDreams));
+    }
+
+    /**
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
+     * @View(TemplateVar="dreams")
+     */
+    public function userOwnedDreamsViewAction($user, $status = "any")
+    {
+        if ($status != "any") {
+            return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author'=>$user, 'currentStatus'=>$status));
+        }
+        else {
+            return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author'=>$user));
+        }
     }
 
     public function loginAction()

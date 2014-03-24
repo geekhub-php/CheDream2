@@ -8,14 +8,14 @@ trait ContactsInfo
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=60, nullable=true)
      */
     protected $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="skype", type="string", length=15, nullable=true)
+     * @ORM\Column(name="skype", type="string", length=60, nullable=true)
      */
     protected $skype;
 
