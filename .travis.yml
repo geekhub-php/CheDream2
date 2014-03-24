@@ -25,6 +25,11 @@ before_script:
     - echo "127.0.0.1 chedream.local" | sudo tee -a /etc/hosts
     - sudo /etc/init.d/apache2 restart
 
+    # Update php.ini
+    - echo 'display_errors = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'short_open_tag = Off' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'date.timezone = "Europe/Kiev"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
     # Update composer
     - composer self-update
     - composer install --dev --prefer-dist
