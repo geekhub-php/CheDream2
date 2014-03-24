@@ -8,35 +8,35 @@ trait ContactsInfo
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=60, nullable=true)
      */
     protected $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="skype", type="string", length=15, nullable=true)
+     * @ORM\Column(name="skype", type="string", length=60, nullable=true)
      */
     protected $skype;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="facebookUrl", type="string", length=150, nullable=true)
      */
     protected $facebookUrl;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakteUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="vkontakteUrl", type="string", length=150, nullable=true)
      */
     protected $vkontakteUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassnikiUrl", type="string", length=40, nullable=true)
+     * @ORM\Column(name="odnoklassnikiUrl", type="string", length=150, nullable=true)
      */
     protected $odnoklassnikiUrl;
 
