@@ -68,13 +68,13 @@ class ContributionExtension extends \Twig_Extension
         $str = '';
         foreach ($equipContr as $equip) {
             switch ($equip['qType']) {
-                case AbstractContributeResource::KG:
+                case EquipmentResource::KG:
                     $qType = 'кг.';
                     break;
-                case AbstractContributeResource::PIECE:
+                case EquipmentResource::PIECE:
                     $qType = 'шт.';
                     break;
-                case AbstractContributeResource::TON:
+                case EquipmentResource::TON:
                     $qType = 'тон';
                     break;
                 default:
