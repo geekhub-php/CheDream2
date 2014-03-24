@@ -1,105 +1,70 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
-{% block body %}
-    <div class="container" id="wrap">
-        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
+{% block content %}
 
-        <div style="margin-top: 50px;">
-
-            {% for dream in dreams %}
-                <div>
-
-                    <p>title = {{ dream.title }}
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="{{ path('view_dream', {'slug': dream.slug}) }}"> Show </a>
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            &nbsp;&nbsp;&nbsp;
-                            <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a>
-                        {% endif %}
-                    </p>
-
-                    {#{% if dream.author != null %}#}
-                        {#<p>author name = {{ dream.author.firstName }}</p>#}
-                        {#<p>author surname = {{ dream.author.lastName }}</p>#}
-                        {#{% thumbnail dream.author.avatar, 'avatar_small' with {'class': 'img-thumbnail'} %}#}
-                    {#{% endif %}#}
-
-                    {#<p>descr = {{ dream.description }}</p>#}
-                    {#<p>phone = {{ dream.phone }}</p>#}
-                    {#<p>exp data = {{ dream.expiredDate|date('d.m.Y') }}</p>#}
-                    {#<p>status = {{ dream.currentStatus.title }}</p>#}
-                    {#<p>Tags =#}
-                        {#{% for tag in dream.tags %}#}
-                            {#{{ tag.name }}#}
-                        {#{% endfor %}#}
-                    {#</p>#}
-                    {#&#123;&#35; ------------------------------------------------------------------- &#35;&#125;#}
-                    {#<div>    &#123;&#35; Poster &#35;&#125;#}
-                        {#{% thumbnail dream.mediaPoster, 'poster_big' %}#}
-                    {#</div>#}
-                    {#&#123;&#35; ------------------------------------------------------------------- &#35;&#125;#}
-                    {#<div>    &#123;&#35; Pictures &#35;&#125;#}
-                    {#{% for picture in dream.mediaPictures %}#}
-                        {#{% thumbnail picture, 'pictures_prew' %}#}
-                        {#&#123;&#35;{% path picture, 'pictures_big' %}&#35;&#125;#}
-                    {#{% endfor %}#}
-                    {#</div>#}
-                    {#&#123;&#35; ------------------------------------------------------------------- &#35;&#125;#}
-                    {#<div>    &#123;&#35; Files &#35;&#125;#}
-                    {#{% for file in dream.mediaFiles %}#}
-                        {#&#123;&#35;{{ loop.index }}&#35;&#125;#}
-                        {#&#123;&#35;{{ dump(file) }}&#35;&#125;#}
-                        {#&#123;&#35;{% path file, 'reference' %}&#35;&#125;#}
-                        {#<a href="{% path file, 'reference' %}" > {{ file }} </a>#}
-                    {#{% endfor %}#}
-                    {#</div>#}
-                    {#&#123;&#35; ------------------------------------------------------------------- &#35;&#125;#}
-                    {#<div>    &#123;&#35; Videos &#35;&#125;#}
-                    {#{% for video in dream.mediaVideos %}#}
-                        {#{% thumbnail video, 'video_prew' %}#}
-                        {#{% media video, 'reference' %}#}
-                        {#<br/>#}
-                    {#{% endfor %}#}
-                    {#</div>#}
-                    {#&#123;&#35; ------------------------------------------------------------------- &#35;&#125;#}
-
-                    {#<div class=" well well-sm">#}
-                        {#<p> Financial </p>#}
-                        {#{% for resources in dream.dreamFinancialResources %}#}
-                            {#<p>title = {{ resources.title }}</p>#}
-                            {#{% if resources.quantity is not null %}#}
-                                {#<p>quantity = {{ resources.quantity }}</p>#}
-                            {#{% endif %}#}
-                        {#{% endfor %}#}
-                        {#<hr/>#}
-                        {#<p> Equipment </p>#}
-                        {#{% for resources in dream.dreamEquipmentResources %}#}
-                            {#<p>title = {{ resources.title }}</p>#}
-                            {#{% if resources.quantity is not null %}#}
-                                {#<p>quantity = {{ resources.quantity }}</p>#}
-                            {#{% endif %}#}
-                            {#{% if resources.quantityType is not null %}#}
-                                {#<p>quantityType = {{ resources.quantityType }}</p>#}
-                            {#{% endif %}#}
-                        {#{% endfor %}#}
-                        {#<hr/>#}
-                        {#<p> Work </p>#}
-                        {#{% for resources in dream.dreamWorkResources %}#}
-                            {#<p>title = {{ resources.title }}</p>#}
-                            {#{% if resources.quantity is not null %}#}
-                                {#<p>quantity = {{ resources.quantity }}</p>#}
-                            {#{% endif %}#}
-                            {#{% if resources.quantityDays is not null %}#}
-                                {#<p>quantityDays = {{ resources.quantityDays }}</p>#}
-                            {#{% endif %}#}
-                        {#{% endfor %}#}
-                    {#</div>#}
-
-                </div>
-            {% endfor %}
-
-        </div>
-
+    <div class="btn-group">
+       <button type="button" class="btn btn-default" id="new">Нові</button>
+       <button type="button" class="btn btn-default" id="popular">Популярні</button>
+       <button type="button" class="btn btn-default" id="submitted">На стадії втілення</button>
+       <button type="button" class="btn btn-default" id="success">Втілені</button>
+    </div>   
+    <div class="row">
+      <div id="dreams">
+     {{ render(controller('GeekhubDreamBundle:Dream:viewAllDreams', {'dreams': dreams, 'status': 'new', 'lastDreamId': 0})) }}
+      </div>
     </div>
-    {#{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}#}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+    $('#new').on('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "{{path('view_all_dreams', {'status': 'new', 'lastDreamId': 1}) }}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#dreams").html(html);
+            }
+        });
+    });
+
+    $('#popular').on('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "{{path('view_all_dreams', {'status': 'popular', 'lastDreamId': 1}) }}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#dreams").html(html);
+            }
+        });
+    });
+
+    $('#submitted').on('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "{{path('view_all_dreams', {'status': 'submitted', 'lastDreamId': 1}) }}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#dreams").html(html);
+            }
+        });
+    });
+
+    $('#success').on('click', function() {
+        $.ajax({
+            type: "POST",
+            url: "{{path('view_all_dreams', {'status': 'success', 'lastDreamId': 1} )}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#dreams").html(html);
+            }
+        });
+    });
+
+    </script>
 {% endblock %}

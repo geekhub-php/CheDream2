@@ -40,3 +40,7 @@ dream_ajax_remove_media:
 view_dream:
     pattern:  /dreams/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
+
+view_all_dreams:
+    pattern:  /alldreams/{status}/view/{lastDreamId}
+    defaults: { _controller: GeekhubDreamBundle:Dream:viewAllDreams }

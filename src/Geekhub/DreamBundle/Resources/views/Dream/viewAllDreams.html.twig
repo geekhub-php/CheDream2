@@ -1,0 +1,17 @@
+       {% for dream in dreams %}
+        <div class="col-md-3">
+         <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>{{ dream.title }}</h3>
+            <h4> <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_thumb') }}"> {{ dream.author.firstName }} {{ dream.author.lastName }}</h4>
+          </div>
+          <div class="panel-body">
+            <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_middle') }}">
+            <p>Підтримали (сума контрибютів) </p>
+            <p>Рейтинг??? </p>
+            <p>{{ dream.financialCompleted }} {{ dream.equipmentCompleted }} {{ dream.workCompleted }}</p>
+            <button type="button" class="btn btn-default">Підтримати</button>
+          </div>
+         </div>
+        </div>
+       {% endfor %} 
