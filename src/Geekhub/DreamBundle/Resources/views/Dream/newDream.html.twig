@@ -121,8 +121,6 @@
 
 {% block javascript %}
     {{ parent() }}
-    <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
-    <script src="{{ url('bazinga_jstranslation_js') }}"></script>
     <script>
         $('#btnDreamSubmit').click(function(){
             $('#create-dream-form').get(0).submit();

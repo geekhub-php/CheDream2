@@ -106,6 +106,11 @@ class User extends BaseUser //implements DreamUserInterface
     protected $workContributions;
 
     /**
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\OtherContribute", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $otherContributions;
+
+    /**
      * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
      */
     protected $dreams;
@@ -120,6 +125,7 @@ class User extends BaseUser //implements DreamUserInterface
         $this->financialContributions = new ArrayCollection();
         $this->equipmentContributions = new ArrayCollection();
         $this->workContributions = new ArrayCollection();
+        $this->otherContributions = new ArrayCollection();
         parent::__construct();
     }
 
@@ -433,7 +439,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get financialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getFinancialContributions()
     {
@@ -466,7 +472,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get equipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getEquipmentContributions()
     {
@@ -504,5 +510,38 @@ class User extends BaseUser //implements DreamUserInterface
     public function getWorkContributions()
     {
         return $this->workContributions;
+    }
+
+    /**
+     * Add otherContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
+     * @return User
+     */
+    public function addOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
+    {
+        $this->otherContributions[] = $otherContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove otherContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
+     */
+    public function removeOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
+    {
+        $this->otherContributions->removeElement($otherContributions);
+    }
+
+    /**
+     * Get otherContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOtherContributions()
+    {
+        return $this->otherContributions;
     }
 }
