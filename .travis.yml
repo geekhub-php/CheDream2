@@ -47,6 +47,9 @@ before_script:
     - app/console --env=test cache:warmup
     - sudo chmod -R 777 app/cache app/logs
 
+    # Check
+    - php app/check.php
+
     # Setup selenium
     - "sh -e /etc/init.d/xvfb start"
     - "export DISPLAY=:99.0"
