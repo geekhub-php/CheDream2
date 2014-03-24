@@ -27,6 +27,7 @@ before_script:
 
     # Update php.ini
     - echo 'display_errors = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'html_errors = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo 'short_open_tag = Off' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - echo 'date.timezone = "Europe/Kiev"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
@@ -41,9 +42,9 @@ before_script:
     - php app/console doctrine:fixtures:load --no-interaction
     - php app/console assets:install --symlink
     - php app/console assetic:dump
-    - chmod -R 777 app/cache app/logs
+    - sudo chmod -R 777 app/cache app/logs
     - app/console --env=test cache:warmup
-    - chmod -R 777 app/cache app/logs
+    - sudo chmod -R 777 app/cache app/logs
 
     # Setup selenium
     - "sh -e /etc/init.d/xvfb start"
