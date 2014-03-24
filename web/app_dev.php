@@ -16,15 +16,19 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
-var_dump('app_dev.php'); exit;
+var_dump('app_dev.php_start');
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 Debug::enable();
-
+var_dump('app_dev.php_2');
 require_once __DIR__.'/../app/AppKernel.php';
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
+var_dump('app_dev.php_load_cahce');
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
+var_dump('app_dev.php_handle_request');
 $response->send();
+var_dump('app_dev.php_send_response');
 $kernel->terminate($request, $response);
+var_dump('app_dev.php_end');
