@@ -10,7 +10,10 @@
 
         <title>{% block title %}Welcome{% endblock %}</title>
 
+        <link href="{{ asset('css/theme_fonts.css') }}" rel="stylesheet">
+        
         <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
 
         {% block stylesheets %}{% endblock %}
 
@@ -23,10 +26,10 @@
 
     <body>
         {% block body %}
-            <div class="container" id="wrap">
+            <div class="wrapper container" id="wrap">
                 {% block menu %}{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}{% endblock %}
                 {% block main %}
-                    <div class="wrapper">
+                    <div class="wrap">
                         {% block content %}{% endblock content %}
                     </div>
                 {% endblock main %}

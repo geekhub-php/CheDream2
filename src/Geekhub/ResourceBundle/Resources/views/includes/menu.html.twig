@@ -1,116 +1,121 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button"
-                class="navbar-toggle"
-                data-toggle="collapse"
-                data-target=".navbar-collapse"
-        >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-
-        <a class="navbar-brand" href="{{ path('geekhub_dream_homepage') }}">
-            <img data-src="holder.js/80x20" alt="logo">
-        </a>
-    </div>
-
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="{{ path('dream_list') }}">Мрії</a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span class="glyphicon glyphicon-question-sign"></span>
-                    FAQ
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ path('page_contacts') }}">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    Контакти
-                </a>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    Підписатися
-                    <b class="caret"></b>
-                </a>
-
-                <ul class="dropdown-menu" style="width: 300px">
-                    <li class="dropdown-header">Ваш e-mail</li>
-                    <li class="divider"></li>
+<!--<nav class="header navbar navbar-default" role="navigation">-->
+<nav class="header">
+    <div class="wrap">
+        <!--<div class="navbar-header">-->
+        
+        <span class="header-bg"></span>
+        
+        <!--<div>-->
+            <!--<button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+            >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>-->
+            
+            <a class="logo" href="{{ path('geekhub_dream_homepage') }}">
+                <img src="images/logo.png" alt="Logo">
+            </a>
+        <!--</div>-->
+        
+        <!--<div class="navbar-collapse collapse">-->
+        <!--<div>-->
+            <!--<ul class="nav navbar-nav">-->
+            <ul class="main-menu">
+                <li>
+                    <a href="{{ path('dream_list') }}">Мрії</a>
+                </li>
+                
+                <li>
+                    <a href="#">FAQ</a>
+                </li>
+                
+                <li>
+                    <a href="{{ path('page_contacts') }}">Контакти</a>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Підписатися
+                        <b class="caret"></b>
+                    </a>
+                    
+                    <ul class="dropdown-menu" style="width: 300px">
+                        <li class="dropdown-header">Ваш e-mail</li>
+                        <li class="divider"></li>
+                        <li>
+                            <form class="navbar-form">
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="mail@example.com"
+                                    >
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Submit</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <form>
+                <div class="search-block">
+                    <button class="icon-search" type="button"></button>
+                    <input type="text" class="field-search" placeholder="Geekstarte">
+                    
+                    <a href="#" class="search-link">
+                        <span class="icon-search"></span>
+                        <span class="search-title">Пошук</span>
+                    </a>
+                </div>
+            </form>
+            
+            <ul class="media-block">
+                {% if app.user is null %}
                     <li>
-                        <form class="navbar-form">
-                            <div class="input-group">
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder="mail@example.com"
-                                >
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Submit</button>
-                                </span>
-                            </div>
-                        </form>
+                        <span class="media-title">Увійти через</span>
                     </li>
-                </ul>
-            </li>
-
-            <li>
-                <a href="{{ path('new_dream') }}">Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
-            </li>
-
-            {% if app.user is null %}
-                <li>
-                    <a class="disable">Увійти через</a>
-                </li>
-
-                <li class="facebook">
-                    <a href="{{ path('facebook_login') }}">
-                        <i class="icon icon-facebook"></i>
-                    </a>
-                </li>
-
-                <li class="odnoklassniki">
-                    <a href="{{ path('odnoklassniki_login') }}">
-                        <i class="icon icon-odnoklassniki"></i>
-                    </a>
-                </li>
-
-                <li class="vkontakte">
-                    <a href="{{ path('vkontakte_login') }}">
-                        <i class="icon icon-vkontakte"></i>
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
-                </li>
-                <li>
-                    <a href="{{ path('_logout') }}">
-                        <span class="glyphicon glyphicon-log-out"></span>
-                        Вийти
-                    </a>
-                </li>
-            {% endif %}
-
-        </ul>
-
-        <form class="navbar-form " role="search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Пошук ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form>
-    </div>
-</nav>
+                    
+                    <li>
+                        <a href="{{ path('facebook_login') }}" class="fb">
+                            <i class="icon icon-facebook"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{ path('vkontakte_login') }}" class="vk">
+                            <i class="icon icon-vkontakte"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="{{ path('odnoklassniki_login') }}" class="ok">
+                            <i class="icon icon-odnoklassniki"></i>
+                        </a>
+                    </li>
+                    
+                {% else %}
+                    <li>
+                        <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('_logout') }}">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            Вийти
+                        </a>
+                    </li>
+                {% endif %}
+                
+            </ul>
+            
+            <a href="{{ path('new_dream') }}" class="add-dream"><span class="icon-bg"></span>Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
+            
+        <!--</div>-->
+    </div> <!--/Wrap-->
+</nav> <!--/Header-->
