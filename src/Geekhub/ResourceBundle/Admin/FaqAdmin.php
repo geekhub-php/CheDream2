@@ -26,7 +26,11 @@ class FaqAdmin extends Admin
         $formMapper
             ->add('title', 'text', array('label' => 'Заголовок'))
             ->add('question', 'text', array('label' => 'Питання'))
-            ->add('answer', 'textarea', array('label' => 'Відповідь', 'attr' => array('rows' => 10)))
+            ->add('answer', 'textarea', array('label' => 'Відповідь',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                    )
+            ))
         ;
     }
 
