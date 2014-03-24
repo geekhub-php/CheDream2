@@ -9,11 +9,13 @@ dream:
     expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
+    support: Підтримати
     resource:
         title: Назва статті
     financial:
         title: Стаття витрат
         quantity: Сумма
+        valute: грн.
     equipment:
         title: Ресурс
         quantity: Кількість
@@ -23,11 +25,14 @@ dream:
         ton: тон
     work:
         title: Назва робіт
-        quantity: Людей
-        days: Днів
+        quantity: чол.
+        days: днів
+    other:
+        title: Інша допомога
     js:
         add_financial: Додати фінансові витрати
         add_equipment: Додати абладнання та інструменти
         add_work: Додати робочі ресурси
         delete_resource: Видалити ресурс
 tags: Ключові слова
+hide.contribute: Приховати допомогу?
