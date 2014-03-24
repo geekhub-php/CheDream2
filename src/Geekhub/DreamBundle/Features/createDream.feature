@@ -20,10 +20,8 @@ Feature: Create dream feature
 #    Given I am on "http://google.com"
 #    Then print last response
 
-  @mink:zombie
+  @javascript
   Scenario: Try to create dream
-    Given I am on "/login"
-    And print last response
     And I am login as "admin" with password "admin"
     And I am on "/dream/new"
     And I should see "create or edit your dream"
@@ -33,7 +31,7 @@ Feature: Create dream feature
     Then I should be on "/dream/new"
     And I should see "Поле не повинно бути порожнім"
 
-  @mink:zombie
+  @javascript
   Scenario: Try to create dream
     Given I am login as "admin" with password "admin"
     And I am on "/dream/new"
@@ -45,4 +43,4 @@ Feature: Create dream feature
     And I wait 1 seconds
     And I press "btnDreamSubmit"
     Then I should not see "Поле не повинно бути порожнім"
-    And I wait 5 seconds
+    And I wait 3 seconds
