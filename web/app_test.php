@@ -9,7 +9,9 @@ try {
     $a = 1 / 0;
 } catch (\Exception $e) {
     echo $e->getMessage();
+    var_dump('Catch error');
 }
+$a = 1 / 0;
 
 var_dump($bootstrapPath);
 var_dump($appKernerl);
