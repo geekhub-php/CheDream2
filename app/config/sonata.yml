@@ -3,6 +3,7 @@ sonata_admin:
     title_logo: /apple-touch-icon.png
     templates:
         user_block: ApplicationSonataAdminBundle:Core:user_block.html.twig
+        edit:       ApplicationSonataAdminBundle:CRUD:edit.html.twig
     dashboard:
         blocks:
             -
