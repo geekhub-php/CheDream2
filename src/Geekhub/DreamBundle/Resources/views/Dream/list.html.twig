@@ -7,10 +7,11 @@
         <div style="margin-top: 50px;">
 
             {% for dream in dreams %}
-                <div>
-
-                    <p>title = {{ dream.title }}
-                        &nbsp;&nbsp;&nbsp;
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ dream.title }} ({{ dream.author.firstName }} {{ dream.author.lastName }})
+                    </div>
+                    <div class="col-md-2">
                         <a href="{{ path('view_dream', {'slug': dream.slug}) }}"> Show </a>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             &nbsp;&nbsp;&nbsp;
@@ -18,7 +19,9 @@
                                 <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a>
                             {% endif %}
                         {% endif %}
-                    </p>
+
+                    </div>
+
 
                     {#{% if dream.author != null %}#}
                         {#<p>author name = {{ dream.author.firstName }}</p>#}
