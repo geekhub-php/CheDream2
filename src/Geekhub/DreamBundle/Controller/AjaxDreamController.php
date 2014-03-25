@@ -66,7 +66,7 @@ class AjaxDreamController extends Controller
     public function loadMoreDreamsAction(Request $request)
     {
         $offset = $request->get('offset');
-        $limit = 4;
+        $limit = $this->get('service_container')->getParameter('count_dreams_on_home_page');
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
             ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
  
