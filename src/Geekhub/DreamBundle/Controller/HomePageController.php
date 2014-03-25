@@ -21,6 +21,12 @@ class HomePageController extends Controller
     public function homeAction()
     {
         $completedDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUCCESS);
+        if ($user = $this->getUser()) {
+            if (strpos($user->getEmail(),'@',0)==false) {
+                return $this->redirect($this->generateUrl('profile_edit'));
+            }
+
+        }
 //        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUBMITTED);
 
         return array(
