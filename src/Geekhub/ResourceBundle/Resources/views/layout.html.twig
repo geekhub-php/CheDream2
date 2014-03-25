@@ -26,8 +26,14 @@
 
     <body>
         {% block body %}
-            <div class="wrapper container" id="wrap">
-                {% block menu %}{% include 'GeekhubResourceBundle:includes:menu.html.twig' %}{% endblock %}
+            <div class="main-wrap container">
+                {% block menu %}
+                    {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
+                        {% block items %}
+                            {{ parent() }}
+                        {% endblock %}
+                    {% endembed %}
+                {% endblock %}
                 {% block main %}
                     <div class="wrap">
                         {% block content %}{% endblock content %}
@@ -41,6 +47,8 @@
             <script src="{{ asset('js/scripts.min.js') }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js') }}"></script>
         {% endblock %}
     </body>
 </html>

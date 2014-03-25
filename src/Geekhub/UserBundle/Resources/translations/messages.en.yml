@@ -1,0 +1,12 @@
+user:
+    first_and_lastname: Name
+    birthday: Birthday
+    about_myself: About myself
+    phone: Phone
+    skype: Skype
+    email: Email
+    facebook: Facebook
+    vkontakte: Vk
+    odnoklassniki: Odnoklassniki
+    save: Save changes
+not_login: Ви не залогінені в системі. Оберіть одну з соціальних мереж:

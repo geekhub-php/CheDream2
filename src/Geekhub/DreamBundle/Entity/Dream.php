@@ -119,16 +119,6 @@ class Dream implements Taggable
     protected $usersWhoFavorites;
 
     /**
-     * @ORM\OneToMany(targetEntity="DreamContribute", mappedBy="dream", cascade={"persist", "remove"})
-     */
-    protected $dreamContributes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="dream", cascade={"persist", "remove"})
-     */
-    protected $dreamComments;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
@@ -139,8 +129,8 @@ class Dream implements Taggable
      */
     protected $statuses;
 
-       /**
-     * @ORM\Column(name="currentStatus", type="object", nullable = true)
+    /**
+     * @ORM\Column(name="currentStatus", type="string", length=100, nullable = true)
      */
     protected $currentStatus;
 
@@ -188,13 +178,31 @@ class Dream implements Taggable
     protected $dreamWorkResources;
 
     /**
+     * @ORM\OneToMany(targetEntity="FinancialContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamFinancialContributions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EquipmentContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamEquipmentContributions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamWorkContributions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OtherContribute", mappedBy="dream", cascade={"persist", "remove"})
+     */
+    protected $dreamOtherContributions;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->usersWhoFavorites = new ArrayCollection();
-        $this->dreamContributes = new ArrayCollection();
-        $this->dreamComments = new ArrayCollection();
         $this->statuses = new ArrayCollection();
         $this->mediaPictures = new ArrayCollection();
         $this->mediaFiles = new ArrayCollection();
@@ -202,6 +210,10 @@ class Dream implements Taggable
         $this->dreamFinancialResources = new ArrayCollection();
         $this->dreamEquipmentResources = new ArrayCollection();
         $this->dreamWorkResources = new ArrayCollection();
+        $this->dreamFinancialContributions = new ArrayCollection();
+        $this->dreamEquipmentContributions = new ArrayCollection();
+        $this->dreamWorkContributions = new ArrayCollection();
+        $this->dreamOtherContributions = new ArrayCollection();
     }
 
     /**
@@ -531,72 +543,6 @@ class Dream implements Taggable
     }
 
     /**
-     * Add dreamContributes
-     *
-     * @param  \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
-     * @return Dream
-     */
-    public function addDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
-    {
-        $this->dreamContributes[] = $dreamContributes;
-
-        return $this;
-    }
-
-    /**
-     * Remove dreamContributes
-     *
-     * @param \Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes
-     */
-    public function removeDreamContribute(\Geekhub\DreamBundle\Entity\DreamContribute $dreamContributes)
-    {
-        $this->dreamContributes->removeElement($dreamContributes);
-    }
-
-    /**
-     * Get dreamContributes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDreamContributes()
-    {
-        return $this->dreamContributes;
-    }
-
-    /**
-     * Add dreamComments
-     *
-     * @param  \Geekhub\DreamBundle\Entity\Comment $dreamComments
-     * @return Dream
-     */
-    public function addDreamComment(\Geekhub\DreamBundle\Entity\Comment $dreamComments)
-    {
-        $this->dreamComments[] = $dreamComments;
-
-        return $this;
-    }
-
-    /**
-     * Remove dreamComments
-     *
-     * @param \Geekhub\DreamBundle\Entity\Comment $dreamComments
-     */
-    public function removeDreamComment(\Geekhub\DreamBundle\Entity\Comment $dreamComments)
-    {
-        $this->dreamComments->removeElement($dreamComments);
-    }
-
-    /**
-     * Get dreamComments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getDreamComments()
-    {
-        return $this->dreamComments;
-    }
-
-    /**
      * Set author
      *
      * @param  \Geekhub\UserBundle\Entity\User $author
@@ -628,8 +574,8 @@ class Dream implements Taggable
     public function addStatus(Status $status)
     {
         $this->statuses[] = $status;
-//        $status->setDream($this);
-        $this->currentStatus = $status;
+        $status->setDream($this);
+        $this->currentStatus = $status->getTitle();
 
         return $this;
     }
@@ -970,5 +916,137 @@ class Dream implements Taggable
     public function getDreamWorkResources()
     {
         return $this->dreamWorkResources;
+    }
+
+    /**
+     * Add dreamFinancialContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions
+     * @return Dream
+     */
+    public function addDreamFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions)
+    {
+        $this->dreamFinancialContributions[] = $dreamFinancialContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamFinancialContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions
+     */
+    public function removeDreamFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $dreamFinancialContributions)
+    {
+        $this->dreamFinancialContributions->removeElement($dreamFinancialContributions);
+    }
+
+    /**
+     * Get dreamFinancialContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamFinancialContributions()
+    {
+        return $this->dreamFinancialContributions;
+    }
+
+    /**
+     * Add dreamEquipmentContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions
+     * @return Dream
+     */
+    public function addDreamEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions)
+    {
+        $this->dreamEquipmentContributions[] = $dreamEquipmentContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamEquipmentContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions
+     */
+    public function removeDreamEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $dreamEquipmentContributions)
+    {
+        $this->dreamEquipmentContributions->removeElement($dreamEquipmentContributions);
+    }
+
+    /**
+     * Get dreamEquipmentContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamEquipmentContributions()
+    {
+        return $this->dreamEquipmentContributions;
+    }
+
+    /**
+     * Add dreamWorkContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions
+     * @return Dream
+     */
+    public function addDreamWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions)
+    {
+        $this->dreamWorkContributions[] = $dreamWorkContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamWorkContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions
+     */
+    public function removeDreamWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $dreamWorkContributions)
+    {
+        $this->dreamWorkContributions->removeElement($dreamWorkContributions);
+    }
+
+    /**
+     * Get dreamWorkContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamWorkContributions()
+    {
+        return $this->dreamWorkContributions;
+    }
+
+    /**
+     * Add dreamOtherContributions
+     *
+     * @param  \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
+     * @return Dream
+     */
+    public function addDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
+    {
+        $this->dreamOtherContributions[] = $dreamOtherContributions;
+
+        return $this;
+    }
+
+    /**
+     * Remove dreamOtherContributions
+     *
+     * @param \Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions
+     */
+    public function removeDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
+    {
+        $this->dreamOtherContributions->removeElement($dreamOtherContributions);
+    }
+
+    /**
+     * Get dreamOtherContributions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDreamOtherContributions()
+    {
+        return $this->dreamOtherContributions;
     }
 }

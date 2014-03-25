@@ -12,7 +12,7 @@ namespace Geekhub\DreamBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Geekhub\DreamBundle\Entity\AbstractContributeResource;
+use Geekhub\DreamBundle\Entity\EquipmentResource;
 
 class EquipmentType extends AbstractType
 {
@@ -27,7 +27,7 @@ class EquipmentType extends AbstractType
             ->add('title', 'text', array('label' => 'dream.equipment.title'))
             ->add('quantity', 'integer', array('label' => 'dream.equipment.quantity'))
             ->add('quantityType', 'choice', array(
-                'choices' => array(AbstractContributeResource::getReadableQuantityTypes()),
+                'choices' => array(EquipmentResource::getReadableQuantityTypes()),
                 'label'   => 'dream.equipment.type',
             ));
     }

@@ -1,0 +1,108 @@
+dream1:
+    author:       yoda
+    title:        Політ на Місяць
+    description:  Показати малим джедаям Місяць.
+    phone:        380979999999
+    expiredDate:  01.01.2015
+    mediaPoster:  moon
+    tags:         [місяць, джедай, навчання]
+    status:       submitted
+dream2:
+    author:       chewbacca
+    title:        Новенький зореліт
+    description:  Придбати ще один зореліт для контрабанди різного товару в міжгалактисному суспільстві.
+    phone:        380939999999
+    expiredDate:  25.01.2015
+    mediaPoster:  starship
+    tags:         [транспорт, starship]
+    status:       success
+dream3:
+    author:       darthvaider
+    title:        Зірка смерті
+    description:  Створити наймогутнішу зброю, яку навіть уявити собі не можна.
+    phone:        380666666666
+    expiredDate:  01.01.2015
+    mediaPoster:  star
+    tags:         [транспорт, starship, зброя]
+    status:       submitted
+dream4:
+    author:       c3pio
+    title:        Лівий протез
+    description:  Під час одного битви на Набу, відірвало ліву ногу. Потрібно поставити протез для кращого пересування.
+    phone:        380672355698
+    expiredDate:  01.01.2015
+    mediaPoster:  protez
+    tags:         [рух, зброя]
+    status:       submitted
+dream5:
+    author:       pamde
+    title:        Відформатувати память C3pio
+    description:  Багато чого знає.
+    phone:        380976565655
+    expiredDate:  01.03.2015
+    mediaPoster:  molotok
+    tags:         [пам''ять, зброя]
+    status:       submitted
+dream6:
+    author:       boba
+    title:        Бластер Т-56
+    description:  Хочу зібрати бластер - енергетичну імпульсну пучкову зброю. За розмірами і формою він має бути іншим різновидом пістолета або рушниці.
+    phone:        380623335599
+    expiredDate:  01.03.2015
+    mediaPoster:  blaster
+    tags:         [зброя]
+    status:       submitted
+dream7:
+    author:       r2d2
+    title:        Побачити місяць
+    description:  Хочу побачити, заради чого джедаїв Йода тиди малих джедаїв возить.
+    phone:        380636547896
+    expiredDate:  01.03.2015
+    mediaPoster:  moon
+    tags:         [мандрівка, цікавість]
+    status:       submitted
+dream8:
+    author:       darthvaider
+    title:        Швидка розвідка
+    description:  Найкращу розвідку у всьому міжгалактичному просторі.
+    phone:        380656969854
+    expiredDate:  01.03.2015
+    mediaPoster:  bond
+    tags:         [зброя, цікавість]
+    status:       submitted
+dream9:
+    author:       pamde
+    title:        Знайти батька моїх дітей
+    description:  Знайти Енакіна Скайвокера на Мустафарі.
+    phone:        30633358745
+    expiredDate:  01.03.2015
+    mediaPoster:  enakin
+    tags:         [мандрівка, знахідка]
+    status:       submitted
+dream10:
+    author:       yoda
+    title:        Lorem ipsum
+    description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
+    phone:        380999856321
+    expiredDate:  01.03.2015
+    mediaPoster:  lorem
+    tags:         [мандрівка, знахідка]
+    status:       success
+dream11:
+    author:       pamde
+    title:        Lorem ipsum
+    description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
+    phone:        380999856321
+    expiredDate:  01.03.2015
+    mediaPoster:  lorem
+    tags:         [мандрівка, знахідка]
+    status:       submitted
+dream12:
+    author:       r2d2
+    title:        Lorem ipsum
+    description:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis adipiscing dui vitae blandit. Praesent dapibus, dolor nec molestie congue, risus nunc porta nibh, et aliquet nisi arcu sed leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis at est facilisis, tempor nulla ac, vestibulum orci. Praesent nec consequat massa. Curabitur consequat gravida libero, quis luctus urna tempor nec. Aenean tristique dictum diam, a mattis risus sodales sed. Integer semper eros et elit malesuada tristique. Quisque dictum ligula quis leo faucibus rutrum eu non tortor. Sed ultricies eget nisl id tempus. Fusce pretium sem ut porta commodo. Ut sagittis elit nec orci ornare porta.
+    phone:        380999856321
+    expiredDate:  01.03.2015
+    mediaPoster:  lorem
+    tags:         [мандрівка, знахідка]
+    status:       submitted

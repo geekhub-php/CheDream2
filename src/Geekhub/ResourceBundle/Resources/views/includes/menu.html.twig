@@ -3,8 +3,6 @@
     <div class="wrap">
         <!--<div class="navbar-header">-->
         
-        <span class="header-bg"></span>
-        
         <!--<div>-->
             <!--<button type="button"
                     class="navbar-toggle"
@@ -18,7 +16,7 @@
             </button>-->
             
             <a class="logo" href="{{ path('geekhub_dream_homepage') }}">
-                <img src="images/logo.png" alt="Logo">
+                <img src="/images/logo.png" alt="Logo">
             </a>
         <!--</div>-->
         
@@ -31,7 +29,7 @@
                 </li>
                 
                 <li>
-                    <a href="#">FAQ</a>
+                    <a href="{{ path('faq') }}">FAQ</a>
                 </li>
                 
                 <li>
@@ -102,18 +100,20 @@
                     
                 {% else %}
                     <li>
-                        <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                        <a href="#" class="user" title="{{ app.user.getFirstName() }} {{ app.user.getLastName() }}">
+                            <span class="icon icon-user"></span>
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ path('_logout') }}">
-                            <span class="glyphicon glyphicon-log-out"></span>
-                            Вийти
+                        <a href="{{ path('_logout') }}" class="logout">
+                            <span class="icon icon-logout"></span>
                         </a>
                     </li>
                 {% endif %}
                 
             </ul>
             
+            <span class="header-bg"></span>
             <a href="{{ path('new_dream') }}" class="add-dream"><span class="icon-bg"></span>Додати мрію <span class="glyphicon glyphicon-plus"></span></a>
             
         <!--</div>-->

@@ -1,0 +1,50 @@
+cequipment1:
+    user:         chewbacca
+    quantity:     1
+    hidden:       0
+    resource:      requipment1
+cequipment2:
+    user:         yoda
+    quantity:     1
+    hidden:       0
+    resource:      requipment2
+cequipment3:
+    user:         pamde
+    quantity:     1
+    hidden:       0
+    resource:      requipment3
+cequipment4:
+    user:         boba
+    quantity:     1
+    hidden:       0
+    resource:      requipment4
+cequipment5:
+    user:         darthvaider
+    quantity:     1
+    hidden:       0
+    resource:      requipment5
+cequipment6:
+    user:         r2d2
+    quantity:     1
+    hidden:       0
+    resource:      requipment6
+cequipment7:
+    user:         obi-van
+    quantity:     1
+    hidden:       0
+    resource:      requipment7
+cequipment8:
+    user:         darthmaul
+    quantity:     1
+    hidden:       0
+    resource:      requipment8
+cequipment9:
+    user:         c3pio
+    quantity:     1
+    hidden:       0
+    resource:      requipment9
+cequipment10:
+    user:         c3pio
+    quantity:     1
+    hidden:       0
+    resource:      requipment10
