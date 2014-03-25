@@ -34,8 +34,9 @@ class FacebookProvider extends AbstractSocialNetworkProvider
     {
         $client = new Client();
 
-        $response = $client->get('https://graph.facebook.com/me?access_token='.$token);
-        $responseBody = $response->getResponse();
+        $request = $client->get('https://graph.facebook.com/me?access_token='.$token);
+        $response = $request->send();
+        $responseBody = $response->getBody()->__toString();
 
         return $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\FacebookUserInfoResponse', 'json');
     }
