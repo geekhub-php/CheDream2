@@ -80,8 +80,15 @@ html, body {
     padding-bottom: 140px;
 }
 .wrapper {
-  background-color: #ffffff;
-  padding: 10px;
+//    background-color: #ffffff;
+    padding: 10px;
+}
+.layout {
+    background: transparent;
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 10px dashed #ffffff;
 }
 #footer {
     height: 120px;
@@ -95,4 +102,51 @@ html, body {
         padding-left: 7px;
         padding-right: 7px;
     }
+}
+
+.tabs-left > .nav-tabs {
+    border-bottom: 0;
+}
+
+.tab-content > .tab-pane {
+    display: none;
+}
+
+.tab-content > .active {
+    display: block;
+}
+
+.tabs-left > .nav-tabs > li {
+    float: none;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    min-width: 74px;
+    margin-right: 0;
+    margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+    float: left;
+    margin-right: 19px;
+    border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    margin-right: -1px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+    border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+    border-color: #ddd transparent #ddd #ddd;
+    *border-right-color: #ffffff;
 }
