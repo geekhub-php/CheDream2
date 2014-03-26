@@ -40,10 +40,11 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
     private function vkontakteGetProfileField($uid, $token, $field)
     {
         $client = new Client();
-        $response = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $responceBody = $response->getResponse();
+        $request = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
+        $response = $request->send();
+        $responseBody = $response->getBody()->__toString();
 
-        $result = $this->serializer->deserialize($responceBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
+        $result = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 
         if ($result) {
             return $result->getResponse($field);

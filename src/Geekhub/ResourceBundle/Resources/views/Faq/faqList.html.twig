@@ -26,16 +26,18 @@
                 <ul class="nav nav-tabs">
                     {% for faq in faqs %}
                         <li {{ faq.slug == slug ? 'class="active"' }}>
-                            <a data-toggle="tab" href="{{ path('faq') }}#{{ faq.slug }}">{{ faq.title }}</a>
+                            <a data-toggle="tab" href="{{ path('faq') }}#{{ faq.slug }}">
+                                {{ faq.title|striptags }}
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="tab-content">
                     {% for faq in faqs %}
                         <div class="tab-pane {{ faq.slug == slug ? 'active' }}" id="{{ faq.slug }}">
-                            <h1>{{ faq.question }}</h1>
+                            <h1>{{ faq.question|striptags }}</h1>
                             <p>
-                                {{ faq.answer }}
+                                {{ faq.answer|raw }}
                             </p>
                         </div>
                     {% endfor %}
