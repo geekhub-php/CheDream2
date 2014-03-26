@@ -1,0 +1,38 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div id="dreams-filter">
+        <a href="" data-status="1" class="btn btn-sm btn-success">Нові</a>
+        <a href="" data-status="2" class="btn btn-sm btn-warning">Повернуті на доопрацювання</a>
+        <a href="" data-status="3" class="btn btn-sm btn-info">В процесі збирання ресурсів</a>
+        <a href="" data-status="4" class="btn btn-sm btn-info">На виконанні</a>
+        <a href="" data-status="5" class="btn btn-sm btn-success">Втілені</a>
+        <a href="" data-status="6" class="btn btn-sm btn-danger">Провалені (fail)</a>
+        <a href="" data-status="7" class="btn btn-sm btn-default">Всі</a>
+    </div>
+    <br/>
+    <div id="dreams"></div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        var url = Routing.generate('dream_ajax_load_filtered_dreams_for_admin');
+        $('#dreams-filter a').click(function(){
+            var itemObj = $(this);
+            $.post(url, {status : $(this).data('status') })
+                    .done(function(response) {
+                        $('#dreams').html(response);
+                    })
+                    .error(function(msg) {
+                        console.log(msg);
+                    }
+            );
+            return false;
+        });
+    </script>
+{% endblock %}
+

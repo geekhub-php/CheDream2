@@ -74,4 +74,38 @@ class AjaxDreamController extends Controller
             'dreams' => $dreams,
         ));
     }
+
+    public function loadFilteredDreamsForAdminAction(Request $request)
+    {
+        $statusCode = $request->get('status');
+
+        switch ($statusCode) {
+            case 1:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUBMITTED);
+                break;
+            case 2:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::REJECTED);
+                break;
+            case 3:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::COLLECTING_RESOURCES);
+                break;
+            case 4:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::IMPLEMENTING);
+                break;
+            case 5:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUCCESS);
+                break;
+            case 6:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::FAIL);
+                break;
+            case 7:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+                break;
+            default:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+                break;
+        }
+
+        return $this->render("GeekhubDreamBundle:includes:showFilteredDreamByStatus.html.twig", array('dreams' => $dreams));
+    }
 }
