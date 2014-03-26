@@ -5801,11 +5801,14 @@ body {
   padding-bottom: 140px;
 }
 .wrapper {
-<<<<<<< HEAD
-  background-color: #ffffff;
-=======
->>>>>>> 680f9bb21fc415f0d9ba03a978db8c2359afaea8
   padding: 10px;
+}
+.layout {
+  background: transparent;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 10px dashed #ffffff;
 }
 #footer {
   height: 120px;
@@ -5820,7 +5823,6 @@ body {
     padding-right: 7px;
   }
 }
-<<<<<<< HEAD
 .tabs-left > .nav-tabs {
   border-bottom: 0;
 }
@@ -5859,5 +5861,3 @@ body {
   border-color: #ddd transparent #ddd #ddd;
   *border-right-color: #ffffff;
 }
-=======
->>>>>>> 680f9bb21fc415f0d9ba03a978db8c2359afaea8
