@@ -1,6 +1,12 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
+    {% if rejectDescription is not null %}
+        <h3 style="text-align: center;">Повідомлення від адміністрації</h3>
+        <div class="alert alert-warning">
+            {{ rejectDescription|raw }}
+        </div>
+    {% endif %}
     <div class="page-header">
         <h1>Dream <small>create or edit your dream</small></h1>
     </div>
@@ -128,21 +134,22 @@
     </div>
 
     <br>
-    <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-3">
             <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
             {{ form_row(form._token) }}
             {{ form_end(form) }}
         </div>
-        <div class="col-md-3">
-            <button type="button" data-toggle="modal" data-target="#dreamStatusConfirmModal" class="btn btn-success">{{ 'dream.status.confirm'|trans }}</button>
-        </div>
-        <div class="col-md-3">
-            <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger">{{ 'dream.status.reject'|trans }}</button>
-        </div>
-    </div>
-
+        {% if is_granted("ROLE_SUPER_ADMIN") %}
+            <div class="col-md-3">
+                <form action="{{ path('confirm_dream', {'slug': slug}) }}" method="post">
+                    <button type="submit" class="btn btn-success">{{ 'dream.status.confirm'|trans }}</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger" title="Повернути на доопрацювання.">{{ 'dream.status.reject'|trans }}</button>
+            </div>
+        {% endif %}
     {{ include ('GeekhubDreamBundle:includes:dreamStatusRejectModal.html.twig') }}
 {% endblock %}
 

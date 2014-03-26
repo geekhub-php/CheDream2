@@ -54,5 +54,9 @@ view_dream:
     defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
 
 reject_dream:
-    pattern:  /dreams/reject/{slug}
+    pattern:  /dream/reject/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:rejectDream }
+
+confirm_dream:
+    pattern:  /dream/confirm/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:confirmDream }
