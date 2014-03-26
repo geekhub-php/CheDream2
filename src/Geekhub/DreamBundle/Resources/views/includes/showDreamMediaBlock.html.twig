@@ -6,7 +6,11 @@
 
         <div class="showDreamAvatar-wrapper"> {# Avatar #}
             <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
-            <p class="showDreamAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
+            <p class="showDreamAvatar-fio">
+                <a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;">
+                    {{ dream.author.firstName }} {{ dream.author.lastName }}
+                </a>
+            </p>
 
         </div>
     </div>  {# end poster block#}
