@@ -13,7 +13,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Message;
 
-class EmailSubscriber implements EventSubscriber
+class RegistrationSubscriber implements EventSubscriber
 {
     protected $container;
 
