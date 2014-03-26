@@ -68,7 +68,8 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
-        if ($this->getUser()->getId() != $dream->getAuthor()->getId()) {
+        if (($this->getUser()->getId() != $dream->getAuthor()->getId())
+            and (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) ) {
             throw new AccessDeniedException();
         }
 

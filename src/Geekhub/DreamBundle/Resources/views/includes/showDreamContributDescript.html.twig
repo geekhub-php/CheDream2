@@ -95,7 +95,7 @@
     </div>
 
     <div class="col-md-8">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id%}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id or is_granted("ROLE_SUPER_ADMIN") %}
             <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
         {% endif %}
         <h2>{{ dream.title }}</h2>
