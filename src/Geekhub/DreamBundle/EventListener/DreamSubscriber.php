@@ -20,7 +20,7 @@ class DreamSubscriber implements EventSubscriber
     {
         return array(
             'prePersist',
-//            'postLoad'
+            'postPersist'
         );
     }
 
@@ -40,5 +40,12 @@ class DreamSubscriber implements EventSubscriber
         }
     }
 
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
 
+        if ($object instanceof Status) {
+            // TODO: will make sender emails
+        }
+    }
 }
