@@ -14,6 +14,7 @@ use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
+use Geekhub\DreamBundle\Form\DreamRejectType;
 use Geekhub\DreamBundle\Form\DreamType;
 use FOS\RestBundle\Controller\Annotations\View;
 use Geekhub\DreamBundle\Form\EquipmentContributeType;
@@ -78,6 +79,8 @@ class DreamController extends Controller
             'media-manager' => $this->get('sonata.media.manager.media')
         ));
 
+        $rejectForm = $this->createForm(new DreamRejectType(), $dream);
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
@@ -96,10 +99,12 @@ class DreamController extends Controller
 
         return array(
             'form'          => $form->createView(),
+            'slug'          =>$dream->getSlug(),
             'poster'        => $dream->getMediaPoster(),
             'dreamPictures' => $dream->getMediaPictures(),
             'dreamFiles'    => $dream->getMediaFiles(),
-            'dreamVideos'   => $dream->getMediaVideos()
+            'dreamVideos'   => $dream->getMediaVideos(),
+            'rejectForm'    =>$rejectForm->createView()
         );
     }
 

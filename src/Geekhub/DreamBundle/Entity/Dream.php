@@ -46,6 +46,27 @@ class Dream implements Taggable
     /**
      * @var string
      *
+     * @ORM\Column(name="rejectedDescription", type="text", nullable=true)
+     */
+    protected $rejectedDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="implementedDescription", type="text", nullable=true)
+     */
+    protected $implementedDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="donateDescription", type="text", nullable=true)
+     */
+    protected $donateDescription;
+
+    /**
+     * @var string
+     *
      * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="dream.only_numbers")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
@@ -1048,5 +1069,74 @@ class Dream implements Taggable
     public function getDreamOtherContributions()
     {
         return $this->dreamOtherContributions;
+    }
+
+    /**
+     * Set rejectedDescription
+     *
+     * @param string $rejectedDescription
+     * @return Dream
+     */
+    public function setRejectedDescription($rejectedDescription)
+    {
+        $this->rejectedDescription = $rejectedDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get rejectedDescription
+     *
+     * @return string 
+     */
+    public function getRejectedDescription()
+    {
+        return $this->rejectedDescription;
+    }
+
+    /**
+     * Set implementedDescription
+     *
+     * @param string $implementedDescription
+     * @return Dream
+     */
+    public function setImplementedDescription($implementedDescription)
+    {
+        $this->implementedDescription = $implementedDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get implementedDescription
+     *
+     * @return string 
+     */
+    public function getImplementedDescription()
+    {
+        return $this->implementedDescription;
+    }
+
+    /**
+     * Set donateDescription
+     *
+     * @param string $donateDescription
+     * @return Dream
+     */
+    public function setDonateDescription($donateDescription)
+    {
+        $this->donateDescription = $donateDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get donateDescription
+     *
+     * @return string 
+     */
+    public function getDonateDescription()
+    {
+        return $this->donateDescription;
     }
 }

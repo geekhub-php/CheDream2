@@ -128,9 +128,22 @@
     </div>
 
     <br>
-    <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
-    {{ form_row(form._token) }}
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
+            {{ form_row(form._token) }}
+            {{ form_end(form) }}
+        </div>
+        <div class="col-md-3">
+            <button type="button" data-toggle="modal" data-target="#dreamStatusConfirmModal" class="btn btn-success">{{ 'dream.status.confirm'|trans }}</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger">{{ 'dream.status.reject'|trans }}</button>
+        </div>
+    </div>
+
+    {{ include ('GeekhubDreamBundle:includes:dreamStatusRejectModal.html.twig') }}
 {% endblock %}
 
 {% block javascript %}
