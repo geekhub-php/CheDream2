@@ -10,7 +10,6 @@ namespace Geekhub\TagBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Geekhub\DreamBundle\Entity\Dream;
 
 class TagSubscriber implements EventSubscriber
 {
@@ -37,7 +36,7 @@ class TagSubscriber implements EventSubscriber
     {
         $object = $args->getObject();
 
-        if ($object instanceof Dream) {
+        if (in_array('Taggable', class_implements($object))) {
             $tagManager = $this->container->get('geekhub.tag.tag_manager');
             $tagManager->loadTagging($object);
         }
