@@ -86,6 +86,10 @@ class DreamController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
+                if (($this->getUser()->getId() == $dream->getAuthor()->getId()) and ($dream->getCurrentStatus() == Status::REJECTED)) {
+                    $dream->addStatus(new Status(Status::SUBMITTED));
+                }
+
                 $tagManager = $this->get('geekhub.tag.tag_manager');
                 $tagManager->addTagsToEntity($dream);
 
