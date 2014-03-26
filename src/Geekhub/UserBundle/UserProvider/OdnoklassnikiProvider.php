@@ -58,8 +58,9 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         $url .= '&' . http_build_query($arrayParameters);
 
         $client = new Client();
-        $response = $client->get($url);
-        $responseBody = $response->getResponse();
+        $request = $client->get($url);
+        $response = $request->send();
+        $responseBody = $response->getBody()->__toString();
 
         $resultObj = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse', 'json');
 
