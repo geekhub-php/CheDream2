@@ -60,9 +60,9 @@ class Dream implements Taggable
     /**
      * @var string
      *
-     * @ORM\Column(name="donateDescription", type="text", nullable=true)
+     * @ORM\Column(name="completedDescription", type="text", nullable=true)
      */
-    protected $donateDescription;
+    protected $completedDescription;
 
     /**
      * @var string
@@ -1118,25 +1118,25 @@ class Dream implements Taggable
     }
 
     /**
-     * Set donateDescription
+     * Set completedDescription
      *
-     * @param string $donateDescription
+     * @param string $completedDescription
      * @return Dream
      */
-    public function setDonateDescription($donateDescription)
+    public function setCompletedDescription($completedDescription)
     {
-        $this->donateDescription = $donateDescription;
+        $this->completedDescription = $completedDescription;
 
         return $this;
     }
 
     /**
-     * Get donateDescription
+     * Get completedDescription
      *
      * @return string 
      */
-    public function getDonateDescription()
+    public function getCompletedDescription()
     {
-        return $this->donateDescription;
+        return $this->completedDescription;
     }
 }

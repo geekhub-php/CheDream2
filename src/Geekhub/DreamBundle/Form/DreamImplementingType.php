@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
- * File: DreamRejectType.php
+ * File: DreamImplementingType.php
  * User: Yuriy Tarnavskiy
- * Date: 26.03.14
- * Time: 16:54
+ * Date: 27.03.14
+ * Time: 12:07
  */
 
 namespace Geekhub\DreamBundle\Form;
@@ -13,18 +13,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DreamRejectType extends AbstractType
+class DreamImplementingType extends AbstractType
 {
     public function getName()
     {
-        return 'rejectedDreamForm';
+        return 'implementingDreamForm';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rejectedDescription', 'textarea', array(
-                'label' => 'dream.reject.description',
+            ->add('implementedDescription', 'textarea', array(
+                'label' => 'dream.implementing.description',
                 'attr' => array(
                     'class' => 'tinymce',
                     'rows' => 15,

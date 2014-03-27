@@ -68,7 +68,7 @@ class AjaxDreamController extends Controller
         $offset = $request->get('offset');
         $limit = $this->get('service_container')->getParameter('count_dreams_on_home_page');
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
-            ->getSliceDreamsByStatus(Status::COLLECTING_RESOURCES, $limit, $offset);
+            ->getDreamsByTwoStatuses(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, $limit, $offset);
  
         return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
             'dreams' => $dreams,
@@ -93,12 +93,15 @@ class AjaxDreamController extends Controller
                 $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::IMPLEMENTING);
                 break;
             case 5:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUCCESS);
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::COMPLETED);
                 break;
             case 6:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::FAIL);
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUCCESS);
                 break;
             case 7:
+                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::FAIL);
+                break;
+            case 8:
                 $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
                 break;
             default:

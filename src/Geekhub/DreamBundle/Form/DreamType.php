@@ -41,6 +41,13 @@ class DreamType extends AbstractType
                     'rows' => 15,
                 )
             ))
+            ->add('implementedDescription', 'textarea', array(
+                'label' => 'dream.implementing.description',
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'rows' => 15,
+                )
+            ))
             ->add('phone', 'text', array('label' => 'dream.phone'))
             ->add($builder->create('tags', 'text', array(
                 'required'  => false,

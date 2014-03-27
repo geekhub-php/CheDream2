@@ -24,6 +24,10 @@ confirm_dream:
     pattern:  /dream/confirm/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:confirmDream }
 
+implementing_dream:
+    pattern:  /dream/implementing/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:implementingDream }
+
 dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }

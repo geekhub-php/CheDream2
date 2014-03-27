@@ -30,10 +30,14 @@ dream:
     other:
         title: Інша допомога
     reject:
-        description: Причина повернення
+        description: Причина повернення *
     status:
         confirm: Підтвердити
         reject: Повернути
+    implementing:
+        description: Інформація для внесків *
+        start: Розпочати реалізацію
+        stop: Закінчити реалізацію
     js:
         add_financial: Додати фінансові витрати
         add_equipment: Додати абладнання та інструменти

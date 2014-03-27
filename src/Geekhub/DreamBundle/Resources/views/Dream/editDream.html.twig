@@ -11,13 +11,12 @@
         <h1>Dream <small>create or edit your dream</small></h1>
     </div>
     {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-    {#{{ form_start(form) }}#}
     <div class="row">
         <div class="col-md-5">
 
             <span class="fileinput-button" id="dream-poster-image">
                 <div id="dream-poster-container">
-                    <img src="../{% path poster, 'poster_big' %}" class="img-thumbnail">
+                    <img src="{{ poster|mediaPath|imagine_filter('dream_poster_view_form') }}" class="img-thumbnail">
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
             </span>
@@ -78,6 +77,10 @@
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
             {{ tinymce_init() }}
+                {% if status == 'implementing' %}
+                    {{ form_row(form.implementedDescription) }}
+                    {{ tinymce_init() }}
+                {% endif %}
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
