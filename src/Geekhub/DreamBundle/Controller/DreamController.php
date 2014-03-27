@@ -263,12 +263,12 @@ class DreamController extends Controller
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
-                $em = $this->getDoctrine()->getManager();
-                $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
-                $dream->setRejectedDescription(null);
-                $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
+            $dream->setRejectedDescription(null);
+            $em->flush();
 
-                return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('dream_admin_list'));
         }
 
         return $this->redirect($this->generateUrl('dream_admin_list'));

@@ -29,15 +29,14 @@
         $(document).ready(function() {
             var startIndex = 0;
             loadDreams(startIndex);
-            var load = false;
+
             $(window).scroll(function() {
-                if($(window).height() + $(window).scrollTop() >= $(document).height() && !load) {
-                    load = true;
-                    startIndex = $('.dream-homepage-preview').length;
-                    console.log(startIndex);
+                if($(window).height() + $(window).scrollTop() >= $(document).height()) {
+//                    startIndex = $('.dream-homepage-preview').length;
+                    startIndex += 8;
+//                    console.log(startIndex);
                     loadDreams(startIndex);
                     console.log('end document scrolled');
-                    load = false;
                 }
             });
         });

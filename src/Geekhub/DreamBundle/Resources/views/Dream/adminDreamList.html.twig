@@ -33,6 +33,17 @@
             );
             return false;
         });
+
+        $(document).ready(function(){
+            $.post(url, {status : 1 })
+                    .done(function(response) {
+                        $('#dreams').html(response);
+                    })
+                    .error(function(msg) {
+                        console.log(msg);
+                    }
+            );
+        });
     </script>
 {% endblock %}
 
