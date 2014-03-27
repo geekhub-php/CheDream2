@@ -44,6 +44,7 @@ assetic:
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
                 - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js
+                - %kernel.root_dir%/../app/Resources/public/frontend.js
             filters: [yui_js]
             output: js/scripts.min.js
 
