@@ -80,7 +80,7 @@ class AjaxDreamController extends Controller
         $limit = $this->get('service_container')->getParameter('count_dreams_on_home_page');
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
             ->getDreamsByTwoStatuses(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, $limit, $offset);
- 
+
         return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
             'dreams' => $dreams,
         ));

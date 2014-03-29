@@ -72,8 +72,7 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
-        if(($this->checkingForAuthorDream($dream)) and ($this->checkingForSuperAdminDream()))
-        {
+        if (($this->checkingForAuthorDream($dream)) and ($this->checkingForSuperAdminDream())) {
             throw new AccessDeniedException();
         }
 
@@ -139,6 +138,7 @@ class DreamController extends Controller
         if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ) {
             throw new AccessDeniedException();
         }
+
         return;
     }
 
@@ -251,7 +251,7 @@ class DreamController extends Controller
      */
     public function rejectDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream())  {
+        if ($this->checkingForSuperAdminDream()) {
             throw new AccessDeniedException();
         }
         $form = $this->createForm(new DreamRejectType(), $dream);
@@ -274,7 +274,7 @@ class DreamController extends Controller
      */
     public function confirmDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream())  {
+        if ($this->checkingForSuperAdminDream()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
@@ -349,7 +349,7 @@ class DreamController extends Controller
      */
     public function successDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream())  {
+        if ($this->checkingForSuperAdminDream()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
@@ -368,7 +368,7 @@ class DreamController extends Controller
      */
     public function failDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream())  {
+        if ($this->checkingForSuperAdminDream()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {

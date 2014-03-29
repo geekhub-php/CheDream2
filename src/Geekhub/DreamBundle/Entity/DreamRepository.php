@@ -12,9 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
-    public function  getDreamsByStatus($status)
+    public function getDreamsByStatus($status)
     {
-
         return $this->getEntityManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array(
             'currentStatus' => $status
         ));
@@ -38,7 +37,6 @@ class DreamRepository extends EntityRepository
 
     public function getSliceDreamsByStatus($status, $limit, $offset)
     {
-
         return $this->getEntityManager()
             ->createQuery('SELECT d
                            FROM GeekhubDreamBundle:Dream d

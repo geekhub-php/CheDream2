@@ -60,7 +60,7 @@ class EquipmentResource extends AbstractResource
     /**
      * Set quantityType
      *
-     * @param  string        $quantityType
+     * @param  string $quantityType
      * @return $this
      */
     public function setQuantityType($quantityType)

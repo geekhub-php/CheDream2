@@ -1081,7 +1081,7 @@ class Dream implements Taggable
     /**
      * Set rejectedDescription
      *
-     * @param string $rejectedDescription
+     * @param  string $rejectedDescription
      * @return Dream
      */
     public function setRejectedDescription($rejectedDescription)
@@ -1094,7 +1094,7 @@ class Dream implements Taggable
     /**
      * Get rejectedDescription
      *
-     * @return string 
+     * @return string
      */
     public function getRejectedDescription()
     {
@@ -1104,7 +1104,7 @@ class Dream implements Taggable
     /**
      * Set implementedDescription
      *
-     * @param string $implementedDescription
+     * @param  string $implementedDescription
      * @return Dream
      */
     public function setImplementedDescription($implementedDescription)
@@ -1117,7 +1117,7 @@ class Dream implements Taggable
     /**
      * Get implementedDescription
      *
-     * @return string 
+     * @return string
      */
     public function getImplementedDescription()
     {
@@ -1127,7 +1127,7 @@ class Dream implements Taggable
     /**
      * Set completedDescription
      *
-     * @param string $completedDescription
+     * @param  string $completedDescription
      * @return Dream
      */
     public function setCompletedDescription($completedDescription)
@@ -1140,7 +1140,7 @@ class Dream implements Taggable
     /**
      * Get completedDescription
      *
-     * @return string 
+     * @return string
      */
     public function getCompletedDescription()
     {
@@ -1150,7 +1150,7 @@ class Dream implements Taggable
     /**
      * Add mediaCompletedPictures
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
      * @return Dream
      */
     public function addMediaCompletedPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures)
@@ -1173,7 +1173,7 @@ class Dream implements Taggable
     /**
      * Get mediaCompletedPictures
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMediaCompletedPictures()
     {
