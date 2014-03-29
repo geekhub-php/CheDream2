@@ -20,7 +20,7 @@ class DreamSubscriber implements EventSubscriber
     {
         return array(
             'prePersist',
-            'postLoad'
+            'postPersist'
         );
     }
 
@@ -40,13 +40,12 @@ class DreamSubscriber implements EventSubscriber
         }
     }
 
-    public function postLoad(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
 
-        if ($object instanceof Dream) {
-            $tagManager = $this->container->get('geekhub.tag.tag_manager');
-            $tagManager->loadTagging($object);
+        if ($object instanceof Status) {
+            // TODO: will make sender emails
         }
     }
 }
