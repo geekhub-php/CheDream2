@@ -149,3 +149,10 @@ stfalcon_tinymce:
 braincrafted_bootstrap:
     assets_dir: %kernel.root_dir%/../vendor/bower-components/bootstrap
     jquery_path: %kernel.root_dir%/../vendor/bower-components/jquery/jquery.js
+
+hip_mandrill:
+    api_key: BGjBjUYtREBY1fHMABnofg
+    default:
+        sender: ahonymous@gmail.com
+        sender_name: John Doe
+#        subaccount: chedream

@@ -23,3 +23,4 @@ parameters:
     odnoklassniki_app_key: 1
 
     count_dreams_on_home_page: 8
+    admin.mail: ahonymous@gmail.com
