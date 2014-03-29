@@ -15,6 +15,7 @@ use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\DreamBundle\Entity\WorkContribute;
+use Geekhub\DreamBundle\Form\DreamCompletedType;
 use Geekhub\DreamBundle\Form\DreamImplementingType;
 use Geekhub\DreamBundle\Form\DreamRejectType;
 use Geekhub\DreamBundle\Form\DreamType;
@@ -72,9 +73,11 @@ class DreamController extends Controller
     public function editDreamAction(Dream $dream, Request $request)
     {
         if(($this->checkingForAuthorDream($dream)) and ($this->checkingForSuperAdminDream()))
-//        if (($this->getUser()->getId() != $dream->getAuthor()->getId())
-//            and (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) )
         {
+            throw new AccessDeniedException();
+        }
+
+        if ((!$this->checkingForAuthorDream($dream)) and (($dream->getCurrentStatus() == Status::SUCCESS) or ($dream->getCurrentStatus() == Status::FAIL))) {
             throw new AccessDeniedException();
         }
 
@@ -113,6 +116,7 @@ class DreamController extends Controller
             'rejectDescription' =>$dream->getRejectedDescription(),
             'poster'        => $dream->getMediaPoster(),
             'dreamPictures' => $dream->getMediaPictures(),
+            'dreamCompletedPictures' => $dream->getMediaCompletedPictures(),
             'dreamFiles'    => $dream->getMediaFiles(),
             'dreamVideos'   => $dream->getMediaVideos(),
             'rejectForm'    =>$rejectForm->createView()
@@ -154,7 +158,10 @@ class DreamController extends Controller
         $workForm = $this->createForm(new WorkContributeType(), $workContribute, array('dream' => $dream));
         $otherForm = $this->createForm(new OtherContributeType(), $otherContribute);
         $implementingForm = $this->createForm(new DreamImplementingType(), $dream);
-
+        $completedDreamForm = $this->createForm(new DreamCompletedType(), $dream, array(
+            'dream' => $dream,
+            'media-manager' => $this->get('sonata.media.manager.media')
+        ));
         $contributors = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getArrayContributorsByDream($dream);
 
         if ($request->isMethod('POST')) {
@@ -185,6 +192,7 @@ class DreamController extends Controller
             'workForm' => $workForm->createView(),
             'otherForm' => $otherForm->createView(),
             'implementingForm' => $implementingForm->createView(),
+            'completedForm' => $completedDreamForm->createView(),
             'contributors' => $contributors
         );
     }
@@ -306,6 +314,74 @@ class DreamController extends Controller
         return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
     }
 
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     */
+    public function completingDreamAction(Dream $dream, Request $request)
+    {
+        if ($this->checkingForAuthorDream($dream)) {
+            throw new AccessDeniedException();
+        }
+
+        $form = $this->createForm(new DreamCompletedType(), $dream, array(
+            'dream' => $dream,
+            'media-manager' => $this->get('sonata.media.manager.media')
+        ));
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $dream->addStatus(new Status(Status::COMPLETED));
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('view_dream', array(
+                    'slug' => $dream->getSlug()
+                )));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+    }
+
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     */
+    public function successDreamAction(Dream $dream, Request $request)
+    {
+        if ($this->checkingForSuperAdminDream())  {
+            throw new AccessDeniedException();
+        }
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $dream->addStatus(new Status(Status::SUCCESS));
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('dream_admin_list'));
+        }
+
+        return $this->redirect($this->generateUrl('dream_admin_list'));
+    }
+
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     */
+    public function failDreamAction(Dream $dream, Request $request)
+    {
+        if ($this->checkingForSuperAdminDream())  {
+            throw new AccessDeniedException();
+        }
+        if ($request->isMethod('POST')) {
+            $em = $this->getDoctrine()->getManager();
+            $dream->addStatus(new Status(Status::FAIL));
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('dream_admin_list'));
+        }
+
+        return $this->redirect($this->generateUrl('dream_admin_list'));
+    }
+
     private function checkingForAuthorDream(Dream $dream)
     {
         return $this->getUser()->getId() != $dream->getAuthor()->getId() ? true : false;
@@ -315,5 +391,4 @@ class DreamController extends Controller
     {
         return false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ? true : false;
     }
-
 }

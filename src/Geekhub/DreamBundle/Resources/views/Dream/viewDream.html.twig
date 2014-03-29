@@ -29,6 +29,7 @@
 
     </div>
     {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
+    {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
@@ -71,6 +72,37 @@
             equipFormHide();
             workFormHide();
             otherFormHide();
+
+            $("#imgUploadCompleted").click(function(){
+                var url = Routing.generate('dream_ajax_load_completed_image');
+                $('#imgUploadCompleted').fileupload({
+                    url: url,
+                    dataType: 'json',
+                    done: function (e, data) {
+                        var responseArr = JSON.parse(data.jqXHR.responseText);
+                        $.each(responseArr, function (index, file) {
+                            if(file.error){
+                                console.log('file error ' + file.src + ' error: ' + file.error);
+
+                                return;
+                            }
+                            if(file.type == 'image' && file.error == null) {
+                                console.log('f src = ' + file.src);
+                                $('#completedPicturesContainer').append('<img src="' + file.srcPreview + '" class="img-thumbnail">');
+                                $('#completingDreamForm_dreamPictures').get(0).value += ',' + file.src;
+                            }
+                            if(file.type == 'file' && file.error == null) {
+                                console.log('tyt nas ne dolgno but :)');
+                            }
+                        });
+                    },
+                    error: function(msg) {
+                        console.log('error = ' + msg);
+                        console.dir(msg);
+                    }
+                });
+            });
+
         });
 
         document.getElementById('links').onclick = function (event) {

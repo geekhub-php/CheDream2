@@ -162,6 +162,12 @@ class Dream implements Taggable
     protected $mediaPictures;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="mediaCompletedPictures_media")
+     */
+    protected $mediaCompletedPictures;
+
+    /**
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     protected $mediaPoster;
@@ -226,6 +232,7 @@ class Dream implements Taggable
         $this->usersWhoFavorites = new ArrayCollection();
         $this->statuses = new ArrayCollection();
         $this->mediaPictures = new ArrayCollection();
+        $this->mediaCompletedPictures = new ArrayCollection();
         $this->mediaFiles = new ArrayCollection();
         $this->mediaVideos = new ArrayCollection();
         $this->dreamFinancialResources = new ArrayCollection();
@@ -1138,5 +1145,38 @@ class Dream implements Taggable
     public function getCompletedDescription()
     {
         return $this->completedDescription;
+    }
+
+    /**
+     * Add mediaCompletedPictures
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
+     * @return Dream
+     */
+    public function addMediaCompletedPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures)
+    {
+        $this->mediaCompletedPictures[] = $mediaCompletedPictures;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaCompletedPictures
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
+     */
+    public function removeMediaCompletedPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures)
+    {
+        $this->mediaCompletedPictures->removeElement($mediaCompletedPictures);
+    }
+
+    /**
+     * Get mediaCompletedPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMediaCompletedPictures()
+    {
+        return $this->mediaCompletedPictures;
     }
 }

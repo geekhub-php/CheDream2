@@ -28,6 +28,18 @@ implementing_dream:
     pattern:  /dream/implementing/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:implementingDream }
 
+completed_dream:
+    pattern:  /dream/completing/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:completingDream }
+
+successed_dream:
+    pattern:  /dream/successed/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:successDream }
+
+failed_dream:
+    pattern:  /dream/failed/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:failDream }
+
 dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }
@@ -39,6 +51,12 @@ dream_admin_list:
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }
+    options:
+        expose: true
+
+dream_ajax_load_completed_image:
+    pattern:  /dream/ajaxLoadCompletedImage
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamCompletedPicturesLoader }
     options:
         expose: true
 
