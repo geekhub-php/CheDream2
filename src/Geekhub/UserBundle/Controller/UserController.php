@@ -5,17 +5,11 @@ namespace Geekhub\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
-use Geekhub\UserBundle\Entity\Contacts;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
 
 class UserController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('GeekhubUserBundle:Default:index.html.twig', array('name' => $name));
-    }
-
     public function editUserAction(Request $request)
     {
         $userAuth=$this->getUser();
@@ -61,8 +55,7 @@ class UserController extends Controller
     {
         if ($status != "any") {
             return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author'=>$user, 'currentStatus'=>$status));
-        }
-        else {
+        } else {
             return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author'=>$user));
         }
     }
