@@ -53,13 +53,19 @@ class DreamSubscriber implements EventSubscriber
                 ->getRepository('GeekhubDreamBundle:Dream')
                 ->getArrayContributorsByDream($dream)
             ;
+            $url = $this->container->get('router')
+                ->generate('view_dream', array('slug' => $dream->getSlug()), true);
 
             switch ($object->getTitle()) {
                 case Status::SUBMITTED :
                     $this->sendEmail(
                         $dispatcher,
-                        $dream->getTitle(). ' - створено! Збір ресурсів почнеться після модерації мрії.',
-                        $author->getEmail(),
+                        "<html><body>
+                            <p>
+                                <a href='".$url."'>$dream->getTitle()</a> - створено!
+                            </p>
+                        </body></html>",
+                        $this->container->getParameter('admin.mail'),
                         'STATUS'
                     );
                     break;
@@ -74,7 +80,11 @@ class DreamSubscriber implements EventSubscriber
                 case Status::REJECTED :
                     $this->sendEmail(
                         $dispatcher,
-                        $dream->getTitle(). ' - повернуто на дооформлення.!',
+                        "<html><body>
+                            <p>
+                                <a href='".$url."'>$dream->getTitle()</a> - повернуто на дооформлення.
+                            </p>
+                        </body></html>",
                         $author->getEmail(),
                         'STATUS'
                     );
@@ -83,7 +93,11 @@ class DreamSubscriber implements EventSubscriber
                     foreach ($contributors as $contributor) {
                         $this->sendEmail(
                             $dispatcher,
-                            $dream->getTitle(). ' - розпочата реалізація',
+                            "<html><body>
+                                <p>
+                                    <a href='".$url."'>".$dream->getTitle()."</a> - розпочата реалізація.
+                                </p>
+                            </body></html>",
                             $contributor->getEmail(),
                             'STATUS'
                         );
@@ -92,7 +106,11 @@ class DreamSubscriber implements EventSubscriber
                 case Status::COMPLETED :
                     $this->sendEmail(
                         $dispatcher,
-                        $dream->getTitle(). ' - завершена реалізація',
+                        "<html><body>
+                            <p>
+                                <a href='".$url."'>".$dream->getTitle()."</a> - завершена реалізація.
+                            </p>
+                        </body></html>",
                         $this->container->getParameter('admin.mail'),
                         'STATUS'
                     );
@@ -100,7 +118,12 @@ class DreamSubscriber implements EventSubscriber
                 case Status::SUCCESS :
                     $this->sendEmail(
                         $dispatcher,
-                        'Вітаємо! Вашу мрію - '.$dream->getTitle().' - завершено!',
+                        "<html><body>
+                            <p>Вітаємо!</p>
+                            <p>
+                                Вашу мрію <a href='".$url."'>".$dream->getTitle()."</a> завершено.
+                            </p>
+                        </body></html>",
                         $author->getEmail(),
                         'STATUS'
                     );
@@ -108,7 +131,11 @@ class DreamSubscriber implements EventSubscriber
                 case Status::FAIL :
                     $this->sendEmail(
                         $dispatcher,
-                        'Мрію '.$dream->getTitle().' - потрібно завершити! ',
+                        "<html><body>
+                            <p>
+                                Мрію <a href='".$url."'>".$dream->getTitle()."</a> потрібно завершити.
+                            </p>
+                        </body></html>",
                         $author->getEmail(),
                         'STATUS'
                     );
