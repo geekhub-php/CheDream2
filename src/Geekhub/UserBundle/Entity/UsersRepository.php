@@ -36,6 +36,7 @@ class UsersRepository extends EntityRepository
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamFinancialContributions', $contributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamEquipmentContributions', $contributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamWorkContributions', $contributedDreams);
+        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamOtherContributions', $contributedDreams);
         return $contributedDreams;
     }
 }

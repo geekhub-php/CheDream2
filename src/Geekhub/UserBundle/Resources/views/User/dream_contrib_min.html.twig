@@ -3,25 +3,43 @@
 <div class="col-md-3">
 <ul>
 {% for contribution in dream.dreamFinancialContributions %}
+  {% if contribution.user.id is same as (userId) %}
   {% if not contribution.hiddenContributor %}
     <li>{{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})</li>
+  {% endif %}
   {% endif %}
 {% endfor %}
 
 {% for contribution in dream.dreamEquipmentContributions %}
+  {% if contribution.user.id is same as (userId) %}
   {% if not contribution.hiddenContributor %}
+
     <li>
       {{ contribution.equipmentResource.title }} ({{ contribution.quantity }} {{contribution.equipmentResource.getReadableQuantityTypes()[contribution.equipmentResource.quantityType]|trans }})
     </li>
   {% endif %}
+  {% endif %}
 {% endfor %}
 
 {% for contribution in dream.dreamWorkContributions %}
+  {% if contribution.user.id is same as (userId) %}
   {% if not contribution.hiddenContributor %}
     <li>
     {{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})
-  {% endif %}
     </li>
+  {% endif %}
+  {% endif %}
 {% endfor %}
+{% for contribution in dream.dreamOtherContributions %}
+  {% if contribution.user.id is same as (userId) %}
+  {% if not contribution.hiddenContributor %}
+    <li>
+    {{ contribution.title }} 
+    </li>
+  {% endif %}
+  {% endif %}
+
+{% endfor %}
+
 </div>
 </div>
