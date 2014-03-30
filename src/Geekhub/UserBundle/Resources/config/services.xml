@@ -11,6 +11,7 @@
     <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
     <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
+    <parameter key="geekhub.user.admin.class">Geekhub\UserBundle\Admin\UserAdmin</parameter>
 </parameters>
 
 
@@ -59,6 +60,13 @@
     <service id="geekhub.user.registration_subscriber" class="%geekhub.user.registration_subscriber.class%">
         <argument type="service" id="service_container"/>
         <tag name="doctrine.event_subscriber" connection="default" />
+    </service>
+
+    <service id="geekhub.user.admin.faq" class="%geekhub.user.admin.class%">
+        <argument />
+        <argument>Geekhub\UserBundle\Entity\User</argument>
+        <argument>SonataAdminBundle:CRUD</argument>
+        <tag name="sonata.admin" manager_type="orm" group="CheDream" label="user"/>
     </service>
 </services>
 </container>
