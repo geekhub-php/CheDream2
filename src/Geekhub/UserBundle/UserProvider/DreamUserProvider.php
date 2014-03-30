@@ -5,6 +5,7 @@ namespace Geekhub\UserBundle\UserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\User\UserProviderInterface;
 use Doctrine\DBAL\Types,
@@ -39,7 +40,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $setterId = $setter.'Id';
 
         //we "disconnect" previously connected users
-        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
+        if (null !== $previousUser = $this->loadUserByUsername($username)) {
             $previousUser->$setterId(null);
             $this->userManager->updateUser($previousUser);
         }
@@ -56,9 +57,9 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $user = $this->loadUserByUsername($username);
 
-        if (null === $user) {
+        if (null === $user || null === $username) {
             $service = $response->getResourceOwner()->getName();
             $setter = 'set'.ucfirst($service);
             $setterId = $setter.'Id';
@@ -85,8 +86,11 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         }
 
         $user = parent::loadUserByOAuthUserResponse($response);
-
-        return $user;
+        if ($user->isAccountNonLocked()) {
+            return $user;
+        } else {
+            throw new LockedException();
+        }
     }
 
     public function setFacebookProvider(FacebookProvider $facebookProvider)
