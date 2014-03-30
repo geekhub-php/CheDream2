@@ -213,5 +213,4 @@ class DreamRepository extends EntityRepository
     {
         return function ($contribute) {return $contribute->getUser(); };
     }
->>>>>>> develop
 }

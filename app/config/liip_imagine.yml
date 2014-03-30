@@ -5,6 +5,10 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [90, 90], mode: outbound }
+        userAvatar_thumb:
+            quality: 90
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
         userAvatar_small:
             quality: 90
             filters:
@@ -19,6 +23,10 @@ liip_imagine:
 #                thumbnail: { size: [80, 50], mode: inset }
                 thumbnail: { size: [80, 50], mode: outbound }
 #                relative_resize: { heighten: 80 }
+        dream_middle:
+            quality: 90
+            filters:
+                thumbnail: { size: [220, 130], mode: outbound }
         dream_poster:
             quality: 90
             filters:
