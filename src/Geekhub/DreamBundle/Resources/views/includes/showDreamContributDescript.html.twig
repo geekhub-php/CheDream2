@@ -1,18 +1,94 @@
-<div class="row">
+<div class="row" style="margin-top: 40px;">
     <div class="col-md-4">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            {% if app.user.id == dream.author.id%}
-                <a href="#" class="btn btn-warning btn-sm" style="margin-top: 60px;">Розпочати збір коштів</a>
-            {% else %}
+            {#{% if app.user.id == dream.author.id%}#}
+                {#<a href="#" class="btn btn-warning btn-sm" style="margin-top: 60px;">Розпочати збір коштів</a>#}
+            {#{% else %}#}
                 <h3>Підтримати:</h3>
-                <hr class="show-hr">
                 <div class="btn-group-vertical" style="width: 100%">
-                    <a type="button" class="btn btn-default btn-lg btn-block">Фінансово</a>
-                    <a type="button" class="btn btn-default btn-lg btn-block">Обладнанням / Технікою</a>
-                    <a type="button" class="btn btn-default btn-lg btn-block">Провести роботи</a>
-                    <a type="button" class="btn btn-default btn-lg btn-block">Інша допомога</a>
+                    {% if dream.dreamFinancialResources|length > 0 %}
+                        <a type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow">Фінансово</a>
+                        <div id="finFormContributor">     {# financial contribute form start #}
+
+                            {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                            {{ form_row(finForm.financialResource) }}
+                            {{ form_row(finForm.quantity) }}
+                            {{ form_row(finForm.hiddenContributor) }}
+
+                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel">
+
+                            {{ form_errors(finForm) }}
+                            {{ form_rest(finForm) }}
+                            {{ form_end(finForm) }}
+                            <br/>
+                            <br/>
+                        </div>    {# financial contribute form end #}
+                    {% endif %}
+                    {% if dream.dreamEquipmentResources|length > 0 %}
+                        <a type="button" class="btn btn-default btn-lg btn-block" id="equipFormContributorShow">Обладнанням / Технікою</a>
+                        <div id="equipFormContributor">     {# equipment contribute form start #}
+
+                            {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                            {{ form_row(equipForm.equipmentResource) }}
+                            {{ form_row(equipForm.quantity) }}
+                            {{ form_row(equipForm.hiddenContributor) }}
+
+                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel">
+
+                            {{ form_errors(equipForm) }}
+                            {{ form_rest(equipForm) }}
+                            {{ form_end(equipForm) }}
+                            <br/>
+                            <br/>
+                        </div>    {# equipment contribute form end #}
+                    {% endif %}
+                    {% if dream.dreamWorkResources|length > 0 %}
+                        <a type="button" class="btn btn-default btn-lg btn-block"  id="workFormContributorShow">Провести роботи</a>
+                        <div id="workFormContributor">     {# work contribute form start #}
+
+                            {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                            {{ form_row(workForm.workResource) }}
+                            {{ form_row(workForm.quantity) }}
+                            {{ form_row(workForm.quantityDays) }}
+                            {{ form_row(workForm.hiddenContributor) }}
+
+                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel">
+
+                            {{ form_errors(workForm) }}
+                            {{ form_rest(workForm) }}
+                            {{ form_end(workForm) }}
+                            <br/>
+                            <br/>
+                        </div>    {# work contribute form end #}
+                    {% endif %}
+
+                    <a type="button" class="btn btn-default btn-lg btn-block" id="otherFormContributorShow">Інша допомога</a>
+
+                    <div id="otherFormContributor">     {# other contribute form start #}
+
+                        {{ form_start(otherForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                        {{ form_row(otherForm.title) }}
+                        {{ form_row(otherForm.hiddenContributor) }}
+
+                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm">
+                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="otherButCancel">
+
+                        {{ form_errors(otherForm) }}
+                        {{ form_rest(otherForm) }}
+                        {{ form_end(otherForm) }}
+                        <br/>
+                        <br/>
+                    </div>    {# other contribute form end #}
+
                 </div>
-            {% endif %}
+            {#{% endif %}#}
         {% else %}
             <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
         {% endif %}
@@ -20,7 +96,7 @@
 
     <div class="col-md-8">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id%}
-        <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+            <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
         {% endif %}
         <h2>{{ dream.title }}</h2>
 

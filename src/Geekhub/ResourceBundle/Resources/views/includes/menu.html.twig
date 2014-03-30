@@ -16,7 +16,8 @@
         </a>
     </div>
 
-    <div class="navbar-collapse collapse">
+    {% block items %}
+        <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li>
                 <a href="{{ path('dream_list') }}">Мрії</a>
@@ -90,7 +91,10 @@
                 </li>
             {% else %}
                 <li>
-                    <a href="#">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                    <a href="{{ path('profile_view', {'id': app.user.id}) }}">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                </li>
+                <li>
+                     <a href="{{ path('profile_edit') }}"> Редагувати </a>
                 </li>
                 <li>
                     <a href="{{ path('_logout') }}">
@@ -113,4 +117,5 @@
             </div>
         </form>
     </div>
+    {% endblock items %}
 </nav>

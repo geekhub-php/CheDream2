@@ -6,10 +6,18 @@
 
     <parameters>
         <parameter key="geekhub.tag.tag_manager.class">Geekhub\TagBundle\TagManager</parameter>
+        <parameter key="geekhub.tag.tag_subscriber.class">Geekhub\TagBundle\EventListener\TagSubscriber</parameter>
     </parameters>
 
 
     <services>
         <service id="geekhub.tag.tag_manager" class="%geekhub.tag.tag_manager.class%" parent="fpn_tag.tag_manager" />
+
+        <service id="geekhub.tag.tag_subscriber" class="%geekhub.tag.tag_subscriber.class%">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
     </services>
+
+
 </container>

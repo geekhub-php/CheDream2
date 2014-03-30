@@ -31,7 +31,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
         "sonata-project/media-bundle": "2.2.*",
         "ahonymous/fontello": "dev-master",
-        "guzzle/guzzle": "dev-guzzle4",
+        "guzzle/guzzle": "*@dev",
         "guzzlehttp/streams": "dev-master",
         "braincrafted/bootstrap-bundle": "~2.0@alpha",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
@@ -40,7 +40,8 @@
         "nelmio/api-doc-bundle": "2.5.*",
         "willdurand/js-translation-bundle": "2.0.*@dev",
         "stfalcon/tinymce-bundle": "0.3.*@dev",
-        "gregwar/captcha-bundle": "dev-master"
+        "gregwar/captcha-bundle": "dev-master",
+        "hipaway-travel/mandrill-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
