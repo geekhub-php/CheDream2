@@ -62,7 +62,7 @@ class DreamSubscriber implements EventSubscriber
                         $dispatcher,
                         "<html><body>
                             <p>
-                                <a href='".$url."'>$dream->getTitle()</a> - створено!
+                                <a href='".$url."'>".$dream->getTitle()."</a> - створено!
                             </p>
                         </body></html>",
                         $this->container->getParameter('admin.mail'),
@@ -82,7 +82,7 @@ class DreamSubscriber implements EventSubscriber
                         $dispatcher,
                         "<html><body>
                             <p>
-                                <a href='".$url."'>$dream->getTitle()</a> - повернуто на дооформлення.
+                                <a href='".$url."'>".$dream->getTitle()."</a> - повернуто на дооформлення.
                             </p>
                         </body></html>",
                         $author->getEmail(),
