@@ -72,7 +72,11 @@ class DreamSubscriber implements EventSubscriber
                 case Status::COLLECTING_RESOURCES :
                     $this->sendEmail(
                         $dispatcher,
-                        $dream->getTitle(). ' - розпочато збір коштів!',
+                        "<html><body>
+                            <p>
+                                <a href='".$url."'>".$dream->getTitle()."</a> - розпочато збір коштів!!
+                            </p>
+                        </body></html>",
                         $author->getEmail(),
                         'STATUS'
                     );
