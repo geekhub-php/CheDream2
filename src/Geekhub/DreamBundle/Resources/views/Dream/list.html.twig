@@ -23,79 +23,66 @@
     document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
     document.offset=0;
     document.load=0;
-
-    $('#new').on('click', function() {
+    document.dreamStatus='new';
+    var dreamLoader = function(status, offset) {
+        var requestUrl=Routing.generate('view_all_dreams', {'status': status, 'offset': offset});
         $.ajax({
             type: "POST",
-            url: "{{path('view_all_dreams', {'status': 'new', 'offset': 1}) }}",
+            url: requestUrl,
             data: "data=0",
             cache: false,
             success: function(html){
                 $("#dreams").html(html);
-                document.requestUrl="{{path('view_all_dreams', {'status': 'new', 'offset': '1'}) }}";
-                document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
+                document.dreamStatus = status;
                 document.offset=0;
             }
         });
+    }
+    var dreamUpdater = function() {
+        var requestUrl=Routing.generate('view_all_dreams', {'status': document.dreamStatus, 'offset': document.offset+8});
+        $.ajax({
+            type: "POST",
+            url: requestUrl,
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#dreams").append(html);
+                document.dreamStatus = status;
+                document.offset=document.offset + 8;
+            }
+        });
+    }
+
+
+    $('#new').on('click', function() {
+        document.load = true;
+        dreamLoader('new', 0);
+        document.load = false;
     });
 
     $('#popular').on('click', function() {
-        $.ajax({
-            type: "POST",
-            url: "{{path('view_all_dreams', {'status': 'popular', 'offset': 1}) }}",
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").html(html);
-                document.requestUrl="{{path('view_all_dreams', {'status': 'popular', 'offset': '1'}) }}";
-                document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
-                offset=1;
-            }
-        });
+        document.load = true;
+        dreamLoader('popular', 0);
+        document.load = false;
     });
 
     $('#submitted').on('click', function() {
-        $.ajax({
-            type: "POST",
-            url: "{{path('view_all_dreams', {'status': 'submitted', 'offset': 1}) }}",
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").html(html);
-                document.requestUrl="{{path('view_all_dreams', {'status': 'submitted', 'offset': '1'}) }}";
-                document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
-                document.offset=0;
-            }
-        });
+        document.load = true;
+        dreamLoader('submitted', 0);
+        document.load = false;
     });
 
     $('#success').on('click', function() {
-        $.ajax({
-            type: "POST",
-            url: "{{path('view_all_dreams', {'status': 'success', 'offset': 1} )}}",
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").html(html);
-                document.document.requestUrl="{{path('view_all_dreams', {'status': 'success', 'offset': '1'}) }}";
-                document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
-                document.offset=0;
-            }
-        });
+        document.load = true;
+        dreamLoader('success', 0);
+        document.load = false;
     });
 
     $(window).scroll( function() {
         if($(window).height() + $(window).scrollTop() >= $(document).height() && !document.load) {
-            $.ajax({
-                type: "POST",
-                url: document.requestUrl + (document.offset + 8),
-                data: "data=0",
-                cache: false,
-                success: function(html){
-                    $("#dreams").append(html);
-                    document.offset = document.offset+8;
-                }
-            });
+            document.load = true;
+            dreamUpdater();
+            document.load = false;
         }
     });
 

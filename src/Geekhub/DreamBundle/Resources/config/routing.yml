@@ -56,3 +56,5 @@ view_dream:
 view_all_dreams:
     pattern:  /alldreams/{status}/view/{offset}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewAllDreams }
+    options:
+        expose: true
