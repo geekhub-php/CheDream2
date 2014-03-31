@@ -61,3 +61,7 @@ profile_view:
 profile_view_dreams:
     pattern: /users/{id}/dreams/{status}
     defaults: { _controller: GeekhubUserBundle:User:userOwnedDreamsView}
+
+_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
