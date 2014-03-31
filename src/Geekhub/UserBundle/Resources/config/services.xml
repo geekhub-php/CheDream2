@@ -52,10 +52,6 @@
             </call>
     </service>
 
-     <service id="geekhub.user.twig_dotdotdot_extension" class="Geekhub\UserBundle\Services\DotDotDotExtension">
-        <tag name="twig.extension" />
-    </service>
-
     <service id="geekhub.user.registration_subscriber" class="%geekhub.user.registration_subscriber.class%">
         <argument type="service" id="service_container"/>
         <tag name="doctrine.event_subscriber" connection="default" />
