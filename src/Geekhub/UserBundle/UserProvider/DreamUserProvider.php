@@ -86,11 +86,11 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         }
 
         $user = parent::loadUserByOAuthUserResponse($response);
-        if ($user->isAccountNonLocked()) {
-            return $user;
-        } else {
+        if (!$user->isAccountNonLocked()) {
             throw new LockedException();
         }
+
+        return $user;
     }
 
     public function setFacebookProvider(FacebookProvider $facebookProvider)

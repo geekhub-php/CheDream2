@@ -29,7 +29,7 @@ class UserAdmin extends Admin
     {
         $datagridMapper
             ->add('email')
-//            ->add('enable')
+            ->add('username')
         ;
     }
 
