@@ -12,13 +12,6 @@ use Behat\Behat\Context\Step;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
-//
-// Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
-
 /**
  * Feature context.
  */
@@ -74,9 +67,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function iFillInHiddenFieldWithValue($field, $value)
     {
-//        $this->getSession()->getPage()->find('css',
-//            'input[name="'.$field.'"]')->setValue($value);
-
         $javascript = "document.getElementById('".$field."').value='".$value."'";
         $this->getSession()->executeScript($javascript);
     }
@@ -89,17 +79,4 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         $javascript = "tinymce.activeEditor.execCommand('mceInsertContent', false, \"$value\");";
         $this->getSession()->executeScript($javascript);
     }
-
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->kernel->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
 }
