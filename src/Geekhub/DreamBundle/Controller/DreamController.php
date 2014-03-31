@@ -72,11 +72,11 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
-        if (($this->checkingForAuthorDream($dream)) and ($this->checkingForSuperAdminDream())) {
+        if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
             throw new AccessDeniedException();
         }
 
-        if ((!$this->checkingForAuthorDream($dream)) and (($dream->getCurrentStatus() == Status::SUCCESS) or ($dream->getCurrentStatus() == Status::FAIL))) {
+        if ((!$this->isAuthor($dream)) and (($dream->getCurrentStatus() == Status::SUCCESS) or ($dream->getCurrentStatus() == Status::FAIL))) {
             throw new AccessDeniedException();
         }
 
@@ -91,7 +91,7 @@ class DreamController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                if (!$this->checkingForAuthorDream($dream) and $dream->getCurrentStatus() == Status::REJECTED) {
+                if (!$this->isAuthor($dream) and $dream->getCurrentStatus() == Status::REJECTED) {
                     $dream->addStatus(new Status(Status::SUBMITTED));
                     $dream->setRejectedDescription(null);
                 }
@@ -251,7 +251,7 @@ class DreamController extends Controller
      */
     public function rejectDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream()) {
+        if ($this->isSuperAdmin()) {
             throw new AccessDeniedException();
         }
         $form = $this->createForm(new DreamRejectType(), $dream);
@@ -274,7 +274,7 @@ class DreamController extends Controller
      */
     public function confirmDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream()) {
+        if ($this->isSuperAdmin()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
@@ -294,7 +294,7 @@ class DreamController extends Controller
      */
     public function implementingDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForAuthorDream($dream)) {
+        if ($this->isAuthor($dream)) {
             throw new AccessDeniedException();
         }
         $form = $this->createForm(new DreamImplementingType(), $dream);
@@ -319,7 +319,7 @@ class DreamController extends Controller
      */
     public function completingDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForAuthorDream($dream)) {
+        if ($this->isAuthor($dream)) {
             throw new AccessDeniedException();
         }
 
@@ -349,7 +349,7 @@ class DreamController extends Controller
      */
     public function successDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream()) {
+        if ($this->isSuperAdmin()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
@@ -368,7 +368,7 @@ class DreamController extends Controller
      */
     public function failDreamAction(Dream $dream, Request $request)
     {
-        if ($this->checkingForSuperAdminDream()) {
+        if ($this->isSuperAdmin()) {
             throw new AccessDeniedException();
         }
         if ($request->isMethod('POST')) {
@@ -382,12 +382,12 @@ class DreamController extends Controller
         return $this->redirect($this->generateUrl('dream_admin_list'));
     }
 
-    private function checkingForAuthorDream(Dream $dream)
+    private function isAuthor(Dream $dream)
     {
         return $this->getUser()->getId() != $dream->getAuthor()->getId() ? true : false;
     }
 
-    private function checkingForSuperAdminDream()
+    private function isSuperAdmin()
     {
         return false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ? true : false;
     }
