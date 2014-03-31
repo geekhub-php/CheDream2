@@ -28,7 +28,7 @@
                {% if user.odnoklassnikiUrl is not null %}
                <a href="{{ user.odnoklassnikiId }}"><div class="icon-odnoklassniki-rect"></div></a>
                {% endif %}
-             </div> {# class col-md-3#}
+             </div>
              <div class="col-md-8">
               <div class="row">
                 <div class="col-md-7"><h2> {{user.firstName}} {{user.lastName}}</h2> </div>
@@ -39,7 +39,7 @@
                  <a href="{{path('profile_edit')}}"><div class="btn btn-primary">Редагувати</div></a>
                 {% endif %}
                 <p> {{ user.about|raw }} </p>
-             </div> {# class col-md-8 #}
+             </div>
               {% if user.dreams is not empty %}
              <div class="row">
                 <div class="col-md-7">
@@ -47,14 +47,14 @@
                 </div>
                 <div class="btn btn-primary" id="submitted"> На стадії проекту </div>
                 <div class="btn btn-primary" id="success"> Втілені </div>
-                </div>  {#class=row #}
+                </div>  
                 <div class="row">
                  <div id="user-dreams">
                    {% for dream in user.dreams %}
-                   {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
+                   {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
                    {% endfor %}
                  </div>
-                </div> {#class=row #}
+                </div> 
              {% endif %} 
              {% if contributedDreams is not empty %}
              <div class="row">
@@ -62,7 +62,7 @@
              </div>
              <div class="row">
                {% for dream in contributedDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_contrib_min.html.twig', {'dream': dream, 'userId': user.id}) }}
+               {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
                {% endfor %}
              </div>
              {% endif %} 
@@ -72,9 +72,9 @@
              </div>
              <div class="row">
                {% for dream in user.favoriteDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
+               {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
                {% endfor %}
-             </div> {# class=row #}
+             </div> 
              {% endif %} 
            </div> {# class="col-md-8" right col #}
           </div> {# class=row (main row) #} 
