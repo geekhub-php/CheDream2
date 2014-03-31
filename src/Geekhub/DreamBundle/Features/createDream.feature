@@ -43,4 +43,3 @@ Feature: Create dream feature
     And I wait 1 seconds
     And I press "btnDreamSubmit"
     Then I should not see "Поле не повинно бути порожнім"
-    And I wait 3 seconds
