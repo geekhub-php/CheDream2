@@ -7,9 +7,6 @@ security:
         ROLE_ADMIN: ROLE_MODERATOR
         ROLE_SUPER_ADMIN: [ROLE_ALLOWED_TO_SWITCH, ROLE_SUPER_ADMIN]
 
-    acl:
-        connection: default
-
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
