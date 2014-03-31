@@ -13,9 +13,6 @@
         {{ render(controller('GeekhubDreamBundle:Dream:viewAllDreams', {'dreams': dreams, 'status': 'new', 'offset': 0})) }}
       </div>
     </div>
-    <div class="row center">
-      <button type="button" class="btn btn-default" id="showmore">Більше</button>
-    </div>
 {% endblock %}
 
 {% block javascript %}
@@ -25,6 +22,7 @@
     document.requestUrl="{{ path('view_all_dreams', {'status': 'new', 'offset': '1'}) }}";
     document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
     document.offset=0;
+    document.load=0;
 
     $('#new').on('click', function() {
         $.ajax({
@@ -86,17 +84,19 @@
         });
     });
 
-    $('#showmore').on('click', function() {
-        $.ajax({
-            type: "POST",
-            url: document.requestUrl + (document.offset + 8),
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").append(html);
-                document.offset = document.offset+8;
-            }
-        });
+    $(window).scroll( function() {
+        if($(window).height() + $(window).scrollTop() >= $(document).height() && !document.load) {
+            $.ajax({
+                type: "POST",
+                url: document.requestUrl + (document.offset + 8),
+                data: "data=0",
+                cache: false,
+                success: function(html){
+                    $("#dreams").append(html);
+                    document.offset = document.offset+8;
+                }
+            });
+        }
     });
 
     </script>
