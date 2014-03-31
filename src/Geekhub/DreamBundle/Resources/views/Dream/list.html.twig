@@ -8,6 +8,7 @@
        <button type="button" class="btn btn-default" id="submitted">На стадії втілення</button>
        <button type="button" class="btn btn-default" id="success">Втілені</button>
     </div>   
+    <div id="added_success"></div>
     <div class="row">
       <div id="dreams">
         {{ render(controller('GeekhubDreamBundle:Dream:viewAllDreams', {'dreams': dreams, 'status': 'new', 'offset': 0})) }}

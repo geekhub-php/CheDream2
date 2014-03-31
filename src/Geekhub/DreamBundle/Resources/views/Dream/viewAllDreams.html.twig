@@ -15,6 +15,6 @@
                  <span class="sr-only">Work Complete</span>
                  </div>
             </div>
-            <button type="button" class="btn btn-default">Підтримати</button>
+            <a href="{{ path('view_dream', {'slug': dream.slug}) }}"><button type="button" class="btn btn-default">Підтримати</button></a>
 
 {% endblock dream_bottom %}
