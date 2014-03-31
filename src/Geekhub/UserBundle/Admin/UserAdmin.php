@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class UserAdmin extends Admin
 {
-    // Поля, отображаемые в формах create/edit
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -26,7 +25,6 @@ class UserAdmin extends Admin
         ;
     }
 
-    // Поля, отображаемые в формах фильтров
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -35,7 +33,6 @@ class UserAdmin extends Admin
         ;
     }
 
-    // Поля, отображаемые в списках
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -46,4 +43,4 @@ class UserAdmin extends Admin
             ->add('enabled', null, array('required' => false))
         ;
     }
-} 
+}
