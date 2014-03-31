@@ -2,6 +2,7 @@
 
 namespace Geekhub\DreamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -29,13 +30,18 @@ class DreamRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
        $query = $em->createQuery(
-            'SELECT d
+            'SELECT d, size(d.usersWhoFavorites) as numberFavorites
             FROM GeekhubDreamBundle:Dream d
-            ORDER BY d.createdAt desc'
+            ORDER BY numberFavorites desc'
         )->setMaxResults($limit)
          ->setFirstResult($offset);
+         
+         $dreamsArray =  new ArrayCollection();
+         foreach ($query->getResult() as $dream) {
+             $dreamsArray->add($dream[0]);
+         }
 
-        return $query->getResult(); //??? doesnt work
+        return $dreamsArray; //??? doesnt work
     }
     public function findLimitedDreamsByStatus($status, $limit, $offset)
     {
