@@ -13,7 +13,6 @@
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
 </parameters>
 
-
 <services>
     <service id="geekhub_user.geekhub_abstract_user_data_service" class="%geekhub.user.abstract_social_network_provider.class%" abstract="true">
         <argument type="service" id="service_container" />
