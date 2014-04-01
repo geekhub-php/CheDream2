@@ -1,0 +1,11 @@
+default:
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+    Behat\MinkExtension\Extension:
+      selenium2: ~
+      zombie: ~
+      base_url: 'http://chedream.local/app_test.php/'
+      default_session: symfony2
+      javascript_session: selenium2
+      browser_name: firefox
