@@ -5,21 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 <parameters>
-<<<<<<< HEAD
-        <parameter key="geekhub.user.dream_user_provider.class">Geekhub\UserBundle\UserProvider\DreamUserProvider</parameter>
-        <parameter key="geekhub.user.abstract_social_network_provider.class">Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider</parameter>
-        <parameter key="geekhub.user.facebook_provider.class">Geekhub\UserBundle\UserProvider\FacebookProvider</parameter>
-        <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
-        <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
-        <parameter key="fos_user.model.user.class">Geekhub\UserBundle\Entity\User</parameter>
-=======
     <parameter key="geekhub.user.dream_user_provider.class">Geekhub\UserBundle\UserProvider\DreamUserProvider</parameter>
     <parameter key="geekhub.user.abstract_social_network_provider.class">Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider</parameter>
     <parameter key="geekhub.user.facebook_provider.class">Geekhub\UserBundle\UserProvider\FacebookProvider</parameter>
     <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
     <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
->>>>>>> develop
+    <parameter key="fos_user.model.user.class">Geekhub\UserBundle\Entity\User</parameter>
 </parameters>
 
 <services>
