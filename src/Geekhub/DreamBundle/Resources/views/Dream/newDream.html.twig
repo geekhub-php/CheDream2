@@ -1,121 +1,151 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>Dream <small>create or edit your dream</small></h1>
-    </div>
-    {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'id': 'create-dream-form' }}) }}
-    {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
-    <div class="row">
-        <div class="col-md-5">
-
-            <span class="fileinput-button" id="dream-poster-image">
-                <div id="dream-poster-container">
-                    <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+    <div class="content page-new-dream">
+        {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'id': 'create-dream-form' }}) }}
+        {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
+        <div class="row">
+            <div class="col-md-4">
+                
+                <!--<span class="fileinput-button no-display" id="dream-poster-image">
+                    <div id="dream-poster-container">-->
+                        <!--<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">-->
+                        <!--<input id="fileupload-poster" type="file" name="dream-poster">
+                    </div>
+                </span>-->
+                <span class="label">Додати</span>
+                <div id="dream-poster-image" class="main-photo">
+                    <div class="photo-holder">
+                        <span class="icon"></span>
+                        <span class="title required">Зображення</span>
+                    </div>
+                    <img src="" alt="Main Image">
+                    <!--<img data-src="holder.js/440x260/text:Main Image" class="">-->
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
-            </span>
-
-            <br>
-            <div id="dream-gallery"></div>
-            <br/>
-            <div id="dream-files"></div>
-            <div id="dream-videos"></div>
-
-            <div class="row">
-                <div class="col-md-11">
-
-                    <div id="dream-add-video">
-                        <div class="row">
-                            <div class="col-md-9 col-md-offset-1">
-                                <div>
-                                    <div id="dream-add-video-error"></div>
-                                    <input type="text" class="form-control" id="dream-add-video-text-input">
-                                </div>
-                                <br/>
-                                <div class="text-center">
-                                    <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="{{ 'dream.add'|trans }}">
-                                    <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="{{ 'dream.cancel'|trans }}">
-                                </div>
-                                <br/>
+                
+                <div id="dream-gallery" class="uploaded-images"></div>
+                <div id="dream-files"></div>
+                <div id="dream-videos"></div>
+                
+                <div id="dream-add-video">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <div id="dream-add-video-error"></div>
+                                <input type="text" class="form-control" id="dream-add-video-text-input">
+                            </div>
+                            <div class="text-center">
+                                <input type="button" id="add-video-button" class="btn btn-info btn-xs" value="{{ 'dream.add'|trans }}">
+                                <input type="button" id="add-video-button-cancel" class="btn btn-warning btn-xs" value="{{ 'dream.cancel'|trans }}">
                             </div>
                         </div>
                     </div>
-
-                    <span class="btn btn-success fileinput-button btn-xs pull-left" id="load-input" onclick="loadFile()">
-                       <span>{{ 'dream.files_add'|trans }}</span>
-                        <input id="fileuploadz" type="file" name="files" multiple>
-                    </span>
-
-                    <span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()">{{ 'dream.videos_add'|trans }}</span>
                 </div>
+                
+                <div class="upload-buttons">
+                    <span class="upload-resource upload-image" onclick="loadFile()"></span>
+                    <input id="fileuploadz" type="file" name="files" multiple>
+                    
+                    <span class="upload-resource upload-video" onclick="addDreamVideo()"></span>
+                    
+                    <span class="upload-resource upload-file" onclick="loadFile()"></span>
+                </div>
+                
+                <!--<span class="" onclick="loadFile()">
+                    <span>{{ 'dream.files_add'|trans }}</span>
+                    <input id="fileuploadz" type="file" name="files" multiple>
+                </span>-->
+                
+                <!--<span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()">{{ 'dream.videos_add'|trans }}</span>-->
+                
+                <div id="errors" class="files"></div>
             </div>
-
-            <br/>
-
-            <div id="errors" class="files"></div>
-
+            
+            <ul class="main-form-list col-md-8">
+                <li class="input-block name-block">
+                    <label class="label required">Назва</label>
+                    {{ form_widget(form.title, {'attr': {'placeholder': 'Без назви'}}) }}
+                </li>
+                <li class="input-block">
+                    <label class="label required">Опис</label>
+                    <div class="description-wrap">
+                        <div class="description">
+                            {{ form_widget(form.description) }}
+                            {{ tinymce_init() }}
+                        </div>
+                    </div>
+                </li>
+                <li class="input-block">
+                    <label class="label required">Кінцева дата</label>
+                    {{ form_widget(form.expiredDate) }}
+                </li>
+                <li class="input-block">
+                    <label class="label">Ключові слова</label>
+                    <span class="label-hint">Відокремлювати комою</span>
+                    {{ form_widget(form.tags) }}
+                </li>
+                <li class="input-block phone-block">
+                    <label class="label required">Телефон</label>
+                    {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
+                </li>
+                <li class="no-display">
+                    {{ form_widget(form.dreamPictures) }}
+                    {{ form_widget(form.dreamFiles) }}
+                    {{ form_widget(form.dreamVideos) }}
+                    {{ form_widget(form.dreamPoster) }}
+                </li>
+            </ul>
         </div>
-        <div class="col-md-7">
-            {{ form_row(form.title) }}
-            {{ form_row(form.description) }}
-            {{ tinymce_init() }}
-            {{ form_row(form.phone) }}
-            {{ form_row(form.expiredDate) }}
-            {{ form_row(form.tags) }}
-            {{ form_widget(form.dreamPictures) }}
-            {{ form_widget(form.dreamFiles) }}
-            {{ form_widget(form.dreamVideos) }}
-            {{ form_widget(form.dreamPoster) }}
+        
+        <div class="price-block">
+            <span class="label">Кошторис проекту</span>
+            <ul class="row form-list">
+                <li class="col-md-4">
+                    <span class="resource-caption"><span class="icon-resource icon-money"></span>Фінансові витрати</span>
+                    <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                        {% for finance in form.dreamFinancialResources %}
+                            <li class="collection-form">
+                                {{ form_widget(finance) }}
+                                {{ form_errors(finance) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                
+                <li class="col-md-4">
+                    <span class="resource-caption equipment-caption"><span class="icon-resource icon-equipment"></span>Інструменти / обладнання <br />техніка</span>
+                    <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                        {% for equipment in form.dreamEquipmentResources %}
+                            <li class="collection-form">
+                                {{ form_widget(equipment) }}
+                                {{ form_errors(equipment) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                
+                <li class="col-md-4">
+                    <span class="resource-caption"><span class="icon-resource icon-people"></span>Роботи та ресурси</span>
+                    <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                        {% for work in form.dreamWorkResources %}
+                            <li class="collection-form">
+                                {{ form_widget(work) }}
+                                {{ form_errors(work) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <h4><span class="glyphicon glyphicon-euro"></span>&nbsp;&nbsp;FINANCE</h4>
-                <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
-                    {% for finance in form.dreamFinancialResources %}
-                        <li class="collection-form">
-                            {{ form_widget(finance) }}
-                            {{ form_errors(finance) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="col-md-4">
-                <h4><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;EQUIPMENT</h4>
-                <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
-                    {% for equipment in form.dreamEquipmentResources %}
-                        <li class="collection-form">
-                            {{ form_widget(equipment) }}
-                            {{ form_errors(equipment) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="col-md-4">
-                <h4><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;WORK</h4>
-                <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
-                    {% for work in form.dreamWorkResources %}
-                        <li class="collection-form">
-                            {{ form_widget(work) }}
-                            {{ form_errors(work) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        
+        <div class="hidden">
+            {{ form_rest(form) }}
         </div>
-    </div>
-    <div class="hidden">
-        {{ form_rest(form) }}
-    </div>
-
-    <br>
-    <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">{{ 'dream.create'|trans }}</button>
-    {{ form_end(form) }}
+        
+        <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">{{ 'dream.create'|trans }}</button>
+        {{ form_end(form) }}
+    </div> <!--/Content-->
     {% include 'GeekhubDreamBundle:includes:dreamConfirmModal.html.twig' %}
 {% endblock %}
 

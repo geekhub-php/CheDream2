@@ -1,4 +1,4 @@
-.fileinput-button {
+/*.fileinput-button {
     position: relative;
     overflow: hidden;
 }
@@ -12,15 +12,15 @@
     font-size: 200px;
     direction: ltr;
     cursor: pointer;
-}
+}*/
 
 /* Fixes for IE < 8 */
 @media screen\9 {
-    .fileinput-button input {
+/*    .fileinput-button input {
         filter: alpha(opacity=0);
         font-size: 100%;
         height: 100%;
-    }
+    }*/
 }
 
 .show-hr
