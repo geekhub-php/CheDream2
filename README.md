@@ -14,7 +14,7 @@ Before run behavior tests you need to download Selenium server
 http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
 And run it:
 ```bash
-java -jar -Dselenium.LOGGER=/var/log/selenium /your/destination/dir/selenium-server-standalone-2.41.0.jar &
+java -jar -Dselenium.LOGGER=/tmp/selenium /your/destination/dir/selenium-server-standalone-2.41.0.jar &
 ```
 
 Use bin/behat @BundleName
