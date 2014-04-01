@@ -27,7 +27,9 @@
             <argument key="vkontakte">vkontakteId</argument>
             <argument key="odnoklassniki">odnoklassnikiId</argument>
         </argument>
-        <argument type="service" id="session" />
+            <call method="setSession">
+                <argument type="service" id="session" />
+            </call>
             <call method="setFacebookProvider">
                 <argument type="service" id="geekhub.user.facebook_provider" />
             </call>

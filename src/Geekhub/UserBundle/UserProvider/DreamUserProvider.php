@@ -2,7 +2,6 @@
 
 namespace Geekhub\UserBundle\UserProvider;
 
-use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
@@ -29,19 +28,11 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     /** @var OdnoklassnikiProvider $odnoklassnikiProvider */
     protected $odnoklassnikiProvider;
 
-    public function __construct(UserManagerInterface $userManager, array $properties, Session $session)
-    {
-        $this->userManager = $userManager;
-        $this->properties = $properties;
-        $this->session = $session;
-    }
-
     /**
      * {@inheritDoc}
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-        $property = $this->getProperty($response);
         $username = $response->getUsername();
 
         //on connect - get the access token and the user ID
@@ -100,12 +91,20 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         if (!$user->isAccountNonLocked()) {
             $this->session->getFlashBag()->add(
                 'locked',
-                'User is locked!'
+                'user.locked'
             );
             throw new LockedException();
         }
 
         return $user;
+    }
+
+    /**
+     * @param Session $session
+     */
+    public function setSession(Session $session)
+    {
+        $this->session = $session;
     }
 
     public function setFacebookProvider(FacebookProvider $facebookProvider)

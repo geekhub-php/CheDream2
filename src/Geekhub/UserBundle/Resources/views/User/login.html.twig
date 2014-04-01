@@ -5,7 +5,7 @@
 {% block fos_user_content %}
     {% for flashMessage in app.session.flashbag.get('locked') %}
         <div class="alert alert-success">
-            {{ flashMessage }}
+            {{ flashMessage|trans }}
         </div>
     {% endfor %}
     <div class="row" style="text-align: center;">
