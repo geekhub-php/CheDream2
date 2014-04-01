@@ -27,6 +27,17 @@ class AjaxDreamController extends Controller
         return new Response(json_encode($result));
     }
 
+    public function dreamCompletedPicturesLoaderAction(Request $request)
+    {
+        $file = $request->files->get('imgUpl');
+
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->init($file);
+        $result = $imageHandler->loadCompletedPictures();
+
+        return new Response(json_encode($result));
+    }
+
     public function dreamPosterLoaderAction(Request $request)
     {
         $file = $request->files->get('dream-poster');
@@ -66,12 +77,25 @@ class AjaxDreamController extends Controller
     public function loadMoreDreamsAction(Request $request)
     {
         $offset = $request->get('offset');
-        $limit = 4;
+        $limit = $this->container->getParameter('count_dreams_on_home_page');
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
-            ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
- 
+            ->getDreamsByTwoStatuses(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, $limit, $offset);
+
         return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
             'dreams' => $dreams,
         ));
+    }
+
+    public function loadFilteredDreamsForAdminAction(Request $request)
+    {
+        $statusCode = $request->get('status');
+
+        if ($statusCode == "ALL") {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        } else {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => $statusCode));
+        }
+
+        return $this->render("GeekhubDreamBundle:includes:showFilteredDreamByStatus.html.twig", array('dreams' => $dreams));
     }
 }

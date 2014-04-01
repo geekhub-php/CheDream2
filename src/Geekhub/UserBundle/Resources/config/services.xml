@@ -13,7 +13,6 @@
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
 </parameters>
 
-
 <services>
     <service id="geekhub_user.geekhub_abstract_user_data_service" class="%geekhub.user.abstract_social_network_provider.class%" abstract="true">
         <argument type="service" id="service_container" />
@@ -22,12 +21,15 @@
     </service>
 
     <service id="geekhub.user.dream_user_provider" class="%geekhub.user.dream_user_provider.class%">
-     	<argument type="service" id="fos_user.user_manager" />
+        <argument type="service" id="fos_user.user_manager" />
         <argument type="collection">
-         	<argument key="facebook">facebookId</argument>
-         	<argument key="vkontakte">vkontakteId</argument>
-         	<argument key="odnoklassniki">odnoklassnikiId</argument>
+            <argument key="facebook">facebookId</argument>
+            <argument key="vkontakte">vkontakteId</argument>
+            <argument key="odnoklassniki">odnoklassnikiId</argument>
         </argument>
+            <call method="setSession">
+                <argument type="service" id="session" />
+            </call>
             <call method="setFacebookProvider">
                 <argument type="service" id="geekhub.user.facebook_provider" />
             </call>

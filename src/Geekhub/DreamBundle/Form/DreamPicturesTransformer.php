@@ -20,11 +20,13 @@ class DreamPicturesTransformer implements DataTransformerInterface
 {
     protected $dream;
     protected $mediaManager;
+    protected $completed;
 
-    public function __construct(Dream $dream, MediaManager $mediaManager)
+    public function __construct(Dream $dream, MediaManager $mediaManager, $completed = false)
     {
         $this->dream = $dream;
         $this->mediaManager = $mediaManager;
+        $this->completed = $completed;
     }
 
     public function transform($t)
@@ -53,7 +55,9 @@ class DreamPicturesTransformer implements DataTransformerInterface
             $media->setProviderName('sonata.media.provider.image');
             $media->setContext('pictures');
             $this->mediaManager->save($media);
-            $this->dream->addMediaPicture($media);
+
+//            $this->dream->addMediaPicture($media);
+            $this->completed == true ? $this->dream->addMediaCompletedPicture($media) : $this->dream->addMediaPicture($media);
 
 //            try {
 //                $fs->remove($file);
