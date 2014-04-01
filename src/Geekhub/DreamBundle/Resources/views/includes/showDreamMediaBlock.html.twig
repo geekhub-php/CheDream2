@@ -6,7 +6,11 @@
 
         <div class="showDreamAvatar-wrapper"> {# Avatar #}
             <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
-            <p class="showDreamAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
+            <p class="showDreamAvatar-fio">
+                <a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;">
+                    {{ dream.author.firstName }} {{ dream.author.lastName }}
+                </a>
+            </p>
 
         </div>
     </div>  {# end poster block#}
@@ -20,37 +24,69 @@
 
             <div class="row"> {#Images#}
                 <div id="links">
-                    {% for picture in dream.mediaPictures %}
-                        {% if loop.index <= 3 %}
-                            <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
-                                <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-                            </a>
-                        {% else %}
-                            <div class="hidden">
+                    {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
+                        {% for picture in dream.mediaCompletedPictures %}
+                            {% if loop.index <= 3 %}
                                 <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                     <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
                                 </a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                            {% else %}
+                                <div class="hidden">
+                                    <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for picture in dream.mediaPictures %}
+                            {% if loop.index <= 3 %}
+                                <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                    <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                </a>
+                            {% else %}
+                                <div class="hidden">
+                                    <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div> {# end pictures block#}
         {% else %} {#  else media without video #}
             <div class="row">  {#Images#}
                 <div id="links">
-                    {% for picture in dream.mediaPictures %}
-                        {% if loop.index <= 9 %}
-                            <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
-                                <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
-                            </a>
-                        {% else %}
-                            <div class="hidden">
+                    {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
+                        {% for picture in dream.mediaCompletedPictures %}
+                            {% if loop.index <= 9 %}
                                 <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                     <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
                                 </a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                            {% else %}
+                                <div class="hidden">
+                                    <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for picture in dream.mediaPictures %}
+                            {% if loop.index <= 9 %}
+                                <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                    <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                </a>
+                            {% else %}
+                                <div class="hidden">
+                                    <a href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                                        <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" />
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div> {# end pictures block#}
         {% endif %}

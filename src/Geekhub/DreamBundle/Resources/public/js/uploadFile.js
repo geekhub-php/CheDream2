@@ -87,8 +87,7 @@ $('#add-video-button').click(function() {
 
         $('#dream-videos').append(
             '<div class="alert alert-warning">' +
-                '<i class="icon icon-youtube"></i>' + ' ' + '<a href="'+ videoSrc +'" target="_blank" >' + 'Youtube video' + '</a>' +
-                '</div>'
+                '<i class="icon icon-youtube"></i>' + 'Youtube video' + '</div>'
         );
         $('#dream-add-video-error').html('');
     } else {

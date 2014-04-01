@@ -1,9 +1,7 @@
 <div class="row" style="margin-top: 40px;">
     <div class="col-md-4">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            {#{% if app.user.id == dream.author.id%}#}
-                {#<a href="#" class="btn btn-warning btn-sm" style="margin-top: 60px;">Розпочати збір коштів</a>#}
-            {#{% else %}#}
+        {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
                 <h3>Підтримати:</h3>
                 <div class="btn-group-vertical" style="width: 100%">
                     {% if dream.dreamFinancialResources|length > 0 %}
@@ -88,16 +86,45 @@
                     </div>    {# other contribute form end #}
 
                 </div>
-            {#{% endif %}#}
-        {% else %}
-            <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
+            {% else %}
+                <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
+            {% endif %}
         {% endif %}
     </div>
 
     <div class="col-md-8">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id%}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (app.user.id == dream.author.id) %}
+            {% if ((dream.currentStatus == 'success') or (dream.currentStatus == 'completed')) %} {% else %}
+                <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+             {% endif %}
+        {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted("ROLE_SUPER_ADMIN") %}
             <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
         {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id %}
+            {% if dream.currentStatus == 'collecting-resources' %}
+                <button type="button" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</button>
+            {% elseif dream.currentStatus == 'implementing' %}
+                <button type="button" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</button>
+            {% endif %}
+        {% endif %}
+
+        {% if dream.currentStatus == 'implementing' and dream.implementedDescription is not null %}
+            <h4>Інформація:</h4>
+            <div class="alert alert-warning" >
+                {{ dream.implementedDescription|raw }}
+            </div>
+        {% endif %}
+
+        {% if ((dream.currentStatus == 'completed') or (dream.currentStatus == 'success')) and dream.completedDescription is not null %}
+            <h4>Мрія втілена:</h4>
+            <div class="alert alert-info" >
+                {{ dream.completedDescription|raw }}
+            </div>
+        {% endif %}
+
         <h2>{{ dream.title }}</h2>
 
         <div>

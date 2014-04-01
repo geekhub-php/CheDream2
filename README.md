@@ -4,6 +4,25 @@ CheDream [![Build Status](https://travis-ci.org/geekhub-php/CheDream2.png?branch
 Chedream - This is an open source project for the Cherkasy city administration.
 The project is developed through the efforts of the project [Geekhub][1]
 
+Tests
+-----
+Use this command for run unit tests:
+```bash
+bin/phpunit -c app
+```
+Before run behavior tests you need to download Selenium server
+http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
+And run it:
+```bash
+java -jar -Dselenium.LOGGER=/var/log/selenium /your/destination/dir/selenium-server-standalone-2.41.0.jar &
+```
+
+Use bin/behat @BundleName
+```bash
+bin/behat @GeekhubDreamBundle
+bin/behat @GeekhubResourceBundle
+```
+
 Api documentation
 -----------------
 

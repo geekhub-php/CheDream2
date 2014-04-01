@@ -1,0 +1,49 @@
+{% extends 'GeekhubResourceBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div id="dreams-filter">
+        <a href="" data-status="SUBMITTED" class="btn btn-sm btn-success">Нові мрії</a>
+        <a href="" data-status="REJECTED" class="btn btn-sm btn-warning">Повернуті на доопрацювання</a>
+        <a href="" data-status="COLLECTING_RESOURCES" class="btn btn-sm btn-info">В процесі збирання ресурсів</a>
+        <a href="" data-status="IMPLEMENTING" class="btn btn-sm btn-primary">На виконанні</a>
+        <a href="" data-status="COMPLETED" class="btn btn-sm btn-warning">Підтвердження виконання</a>
+        <a href="" data-status="SUCCESS" class="btn btn-sm btn-success">Втілені</a>
+        <a href="" data-status="FAIL" class="btn btn-sm btn-danger">Провалені (fail)</a>
+        <a href="" data-status="ALL" class="btn btn-sm btn-default">Всі мрії</a>
+    </div>
+    <br/>
+    <div id="dreams"></div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        var url = Routing.generate('dream_ajax_load_filtered_dreams_for_admin');
+        $('#dreams-filter a').click(function(){
+            var itemObj = $(this);
+            $.post(url, {status : $(this).data('status') })
+                    .done(function(response) {
+                        $('#dreams').html(response);
+                    })
+                    .error(function(msg) {
+                        console.log(msg);
+                    }
+            );
+            return false;
+        });
+
+        $(document).ready(function(){
+            $.post(url, {status : 'ALL' })
+                    .done(function(response) {
+                        $('#dreams').html(response);
+                    })
+                    .error(function(msg) {
+                        console.log(msg);
+                    }
+            );
+        });
+    </script>
+{% endblock %}

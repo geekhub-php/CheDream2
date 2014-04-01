@@ -26,7 +26,7 @@
             </div>
             <div class="showHomePageAvatar-wrapper"> {# Avatar #}
                 <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
-                <p class="showHomePageAvatar-fio">{{ dream.author.firstName }} {{ dream.author.lastName }}</p>
+                <p class="showHomePageAvatar-fio"><a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;"> {{ dream.author.firstName }} {{ dream.author.lastName }} </a></p>
             </div>
         </div>
         <div class="dream-homepage-preview-footer">

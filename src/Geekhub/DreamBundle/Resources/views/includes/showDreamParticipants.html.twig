@@ -43,10 +43,10 @@
                 </div>
                 <div>
                     <p class="contributors-fio"  style="padding: 0 0 0 97px; margin: 0;">
-                        {{ user.firstName }}
-                    </p>
-                    <p class="contributors-fio"  style="padding: 0 0 0 97px; margin: 0;">
-                        {{ user.lastName }}
+                        <a href="{{ path('profile_view', {'id': user.id}) }}" style="color: #33333F;">
+                            {{ user.firstName }}
+                            {{ user.lastName }}
+                        </a>
                     </p>
                 </div>
                 <div style="clear: both;">
