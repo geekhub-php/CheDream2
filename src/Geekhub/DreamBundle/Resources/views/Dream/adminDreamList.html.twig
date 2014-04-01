@@ -3,14 +3,14 @@
 {% block content %}
 
     <div id="dreams-filter">
-        <a href="" data-status="1" class="btn btn-sm btn-success">Нові мрії</a>
-        <a href="" data-status="2" class="btn btn-sm btn-warning">Повернуті на доопрацювання</a>
-        <a href="" data-status="3" class="btn btn-sm btn-info">В процесі збирання ресурсів</a>
-        <a href="" data-status="4" class="btn btn-sm btn-primary">На виконанні</a>
-        <a href="" data-status="5" class="btn btn-sm btn-warning">Підтвердження виконання</a>
-        <a href="" data-status="6" class="btn btn-sm btn-success">Втілені</a>
-        <a href="" data-status="7" class="btn btn-sm btn-danger">Провалені (fail)</a>
-        <a href="" data-status="8" class="btn btn-sm btn-default">Всі мрії</a>
+        <a href="" data-status="SUBMITTED" class="btn btn-sm btn-success">Нові мрії</a>
+        <a href="" data-status="REJECTED" class="btn btn-sm btn-warning">Повернуті на доопрацювання</a>
+        <a href="" data-status="COLLECTING_RESOURCES" class="btn btn-sm btn-info">В процесі збирання ресурсів</a>
+        <a href="" data-status="IMPLEMENTING" class="btn btn-sm btn-primary">На виконанні</a>
+        <a href="" data-status="COMPLETED" class="btn btn-sm btn-warning">Підтвердження виконання</a>
+        <a href="" data-status="SUCCESS" class="btn btn-sm btn-success">Втілені</a>
+        <a href="" data-status="FAIL" class="btn btn-sm btn-danger">Провалені (fail)</a>
+        <a href="" data-status="ALL" class="btn btn-sm btn-default">Всі мрії</a>
     </div>
     <br/>
     <div id="dreams"></div>
@@ -36,7 +36,7 @@
         });
 
         $(document).ready(function(){
-            $.post(url, {status : 1 })
+            $.post(url, {status : 'ALL' })
                     .done(function(response) {
                         $('#dreams').html(response);
                     })

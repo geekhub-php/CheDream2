@@ -90,34 +90,10 @@ class AjaxDreamController extends Controller
     {
         $statusCode = $request->get('status');
 
-        switch ($statusCode) {
-            case 1:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::SUBMITTED));
-                break;
-            case 2:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::REJECTED));
-                break;
-            case 3:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::COLLECTING_RESOURCES));
-                break;
-            case 4:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::IMPLEMENTING));
-                break;
-            case 5:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::COMPLETED));
-                break;
-            case 6:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::SUCCESS));
-                break;
-            case 7:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::FAIL));
-                break;
-            case 8:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
-                break;
-            default:
-                $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
-                break;
+        if ($statusCode == "ALL") {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        } else {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => $statusCode));
         }
 
         return $this->render("GeekhubDreamBundle:includes:showFilteredDreamByStatus.html.twig", array('dreams' => $dreams));
