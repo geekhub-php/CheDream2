@@ -20,7 +20,7 @@ class HomePageController extends Controller
      */
     public function homeAction()
     {
-        $completedDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->getDreamsByStatus(Status::SUCCESS);
+        $completedDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => Status::SUCCESS));
 
         return array(
             'completedDreams' => $completedDreams

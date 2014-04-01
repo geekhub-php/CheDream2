@@ -1060,12 +1060,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817"
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f8e9255eedc91bc53195de288c9fe640719b2817",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/98953461473facd3bcb486b88cdd87bc5120b218",
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1120,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-18 08:55:34"
+            "time": "2014-04-01 09:27:17"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1456,18 +1456,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Hipaway-Travel/HipMandrillBundle.git",
-                "reference": "594bc08cf43a2918b8232787c5f7460b829c365f"
+                "reference": "863ca20760646c92ab2fbc65e08cdc7634ce1773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Hipaway-Travel/HipMandrillBundle/zipball/594bc08cf43a2918b8232787c5f7460b829c365f",
-                "reference": "594bc08cf43a2918b8232787c5f7460b829c365f",
+                "url": "https://api.github.com/repos/Hipaway-Travel/HipMandrillBundle/zipball/863ca20760646c92ab2fbc65e08cdc7634ce1773",
+                "reference": "863ca20760646c92ab2fbc65e08cdc7634ce1773",
                 "shasum": ""
             },
             "require": {
                 "mandrill/mandrill": "1.*",
-                "symfony/config": ">=2.1,<2.5-dev",
-                "symfony/http-foundation": ">=2.1,<2.5-dev"
+                "symfony/config": ">=2.1,<2.6-dev",
+                "symfony/http-foundation": ">=2.1,<2.6-dev"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -1499,7 +1499,7 @@
                 "transaction mail",
                 "transactional"
             ],
-            "time": "2014-01-07 14:25:05"
+            "time": "2014-03-31 14:22:32"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -1559,7 +1559,7 @@
                     "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
                 },
                 {
-                    "name": "Alexander Mols",
+                    "name": "Alexander",
                     "email": "iam.asm89@gmail.com",
                     "homepage": "http://asm89.github.io/"
                 },

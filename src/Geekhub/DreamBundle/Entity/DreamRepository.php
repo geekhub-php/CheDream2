@@ -12,13 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
-    public function getDreamsByStatus($status)
-    {
-        return $this->getEntityManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array(
-            'currentStatus' => $status
-        ));
-    }
-
     public function getDreamsByTwoStatuses($status, $status2, $limit, $offset)
     {
         return $this->getEntityManager()
