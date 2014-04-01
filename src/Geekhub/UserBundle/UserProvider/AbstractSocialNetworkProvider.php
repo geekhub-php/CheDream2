@@ -56,5 +56,10 @@ abstract class AbstractSocialNetworkProvider
         return $media;
     }
 
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
     abstract public function setUserData(User $user, UserResponseInterface $response);
 }

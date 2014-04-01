@@ -11,10 +11,18 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RegistrationController extends FosUserBundleRegistrationController
 {
-    public function registerAction(Request $request)
+    protected $container;
+
+    public function setContainer(ContainerInterface $container = NULL)
+    {
+        $this->container = $container;
+    }
+
+    public function registerAction(Request $request, User $user = null)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
@@ -23,7 +31,11 @@ class RegistrationController extends FosUserBundleRegistrationController
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
-        $user = $userManager->createUser();
+        if (null === $user) {
+            //$this->redirect($this->generateUrl('_login')); // doesnt work
+            die("no user");
+        }
+        //$user = $userManager->createUser();
         $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
@@ -64,5 +76,4 @@ class RegistrationController extends FosUserBundleRegistrationController
             'form' => $form->createView(),
         ));
     }
-
 }

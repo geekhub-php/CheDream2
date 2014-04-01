@@ -7,7 +7,8 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserInterface,
-    Symfony\Component\Security\Core\User\UserProviderInterface;
+    Symfony\Component\Security\Core\User\UserProviderInterface,
+    Symfony\Component\HttpFoundation\Request;
 use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
@@ -76,13 +77,19 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
+            $userController = $this->facebookProvider->getContainer()->get('geekhub.user.user_controller');
+            $request =  new Request();
+            $response = $userController->registerAction($request, $user);
+            var_dump($response);
+            exit;
+            /*
             try {
                 $this->userManager->updateUser($user);
             } catch (DBALException $e) {
                 var_dump("dbal exception");
             }
 
-            return $user;
+            return $user;*/
         }
 
         $user = parent::loadUserByOAuthUserResponse($response);

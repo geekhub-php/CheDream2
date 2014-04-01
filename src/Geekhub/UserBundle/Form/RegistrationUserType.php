@@ -27,9 +27,9 @@ class RegistrationUserType extends AbstractType
             ->add('lastName', 'text', array('label' => 'Прізвище '))
             ->add('birthday', 'birthday', array('label' => 'user.birthday', 'required' => false))
             ->add('email', 'email', array('label' => 'user.email'))
-            ->add('phone', 'text', array('label' => 'user.phone'))
-            ->add( $builder->create('avatar', 'hidden')//->addModelTransformer($transformer)
-             );
+            ->add('phone', 'text', array('label' => 'user.phone'));
+            //->add( $builder->create('avatar', 'hidden')//->addModelTransformer($transformer)
+            // );
 
     }
 
