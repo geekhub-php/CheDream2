@@ -9,7 +9,6 @@
 namespace Geekhub\DreamBundle\Twig;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentResource;
 use Geekhub\DreamBundle\Entity\FinancialResource;

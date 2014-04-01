@@ -29,6 +29,20 @@ dream:
         days: днів
     other:
         title: Інша допомога
+    reject:
+        description: Причина повернення *
+    status:
+        confirm: Підтвердити
+        reject: Повернути
+        successed: Підтвердити виконання
+        failed: Мрія провалена
+    implementing:
+        description: Інформація для внесків *
+        start: Розпочати реалізацію
+        stop: Закінчити реалізацію
+    completed:
+        description: Деталі *
+        post: Опублікувати
     js:
         add_financial: Додати фінансові витрати
         add_equipment: Додати абладнання та інструменти
