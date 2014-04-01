@@ -1,30 +1,29 @@
-{% extends "GeekhubResourceBundle::layout.html.twig" %}
+{% extends "GeekhubUserBundle::layout.html.twig" %}
 
 {% block title %}Login{% endblock %}
 
-{% block body %}
-    <div class="container" id="wrap">
-        {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
-
-        <div style="padding: 5% 0;text-align: center;">
-          <div class="row">
-           {{ 'not_login'|trans }}
-          </div>
-          <div class="row" style="text-align: center;">
-                    <a href="{{ path('facebook_login') }}">
-                        <i class="icon icon-facebook"></i>
-                    </a>
-                    <a href="{{ path('odnoklassniki_login') }}">
-                        <i class="icon icon-odnoklassniki"></i>
-                    </a>
-                    <a href="{{ path('vkontakte_login') }}">
-                        <i class="icon icon-vkontakte"></i>
-                    </a>
-            </div>
-          </div>
-
+{% block fos_user_content %}
+    {% for flashMessage in app.session.flashbag.get('locked') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <div class="row" style="text-align: center;">
+        <p>
+            {{ 'not_login'|trans }}
+        </p>
+        <p>
+            <a href="{{ path('facebook_login') }}">
+                <i class="icon icon-facebook"></i>
+            </a>
+            <a href="{{ path('odnoklassniki_login') }}">
+                <i class="icon icon-odnoklassniki"></i>
+            </a>
+            <a href="{{ path('vkontakte_login') }}">
+                <i class="icon icon-vkontakte"></i>
+            </a>
+        </p>
         </div>
     </div>
 
-    {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}
-{% endblock body %}
+{% endblock fos_user_content %}

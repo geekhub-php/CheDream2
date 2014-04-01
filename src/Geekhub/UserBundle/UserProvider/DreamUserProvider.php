@@ -2,9 +2,11 @@
 
 namespace Geekhub\UserBundle\UserProvider;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface,
     HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserInterface,
     Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -16,6 +18,8 @@ use Geekhub\UserBundle\UserProvider\FacebookProvider,
 
 class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
+    protected $session;
+
     /** @var FacebookProvider $facebookProvider */
     protected $facebookProvider;
 
@@ -24,6 +28,13 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     /** @var OdnoklassnikiProvider $odnoklassnikiProvider */
     protected $odnoklassnikiProvider;
+
+    public function __construct(UserManagerInterface $userManager, array $properties, Session $session)
+    {
+        $this->userManager = $userManager;
+        $this->properties = $properties;
+        $this->session = $session;
+    }
 
     /**
      * {@inheritDoc}
@@ -87,6 +98,10 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
         $user = parent::loadUserByOAuthUserResponse($response);
         if (!$user->isAccountNonLocked()) {
+            $this->session->getFlashBag()->add(
+                'locked',
+                'User is locked!'
+            );
             throw new LockedException();
         }
 
