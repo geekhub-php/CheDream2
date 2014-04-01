@@ -21,7 +21,7 @@ class AbstractResource extends AbstractContributeResource
     /**
      * Set title
      *
-     * @param  string        $title
+     * @param  string $title
      * @return $this
      */
     public function setTitle($title)
