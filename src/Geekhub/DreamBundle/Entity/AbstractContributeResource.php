@@ -36,7 +36,7 @@ abstract class AbstractContributeResource
     /**
      * Set createdAt
      *
-     * @param  \DateTime     $createdAt
+     * @param  \DateTime $createdAt
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -59,7 +59,7 @@ abstract class AbstractContributeResource
     /**
      * Set quantity
      *
-     * @param  float         $quantity
+     * @param  float $quantity
      * @return $this
      */
     public function setQuantity($quantity)

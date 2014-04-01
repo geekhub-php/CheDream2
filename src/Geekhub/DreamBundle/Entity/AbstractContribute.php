@@ -24,7 +24,7 @@ class AbstractContribute extends AbstractContributeResource
     /**
      * Set hiddenContributor
      *
-     * @param  boolean             $hiddenContributor
+     * @param  boolean $hiddenContributor
      * @return $this
      */
     public function setHiddenContributor($hiddenContributor)
