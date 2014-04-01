@@ -80,7 +80,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             $userController = $this->facebookProvider->getContainer()->get('geekhub.user.user_controller');
             $request =  new Request();
             $response = $userController->registerAction($request, $user);
-            var_dump($response);
+            echo $response->getContent();
             exit;
             /*
             try {
