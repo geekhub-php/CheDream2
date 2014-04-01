@@ -11,6 +11,8 @@
     <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
     <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
+    <parameter key="fos_user.model.user.class">Geekhub\UserBundle\Entity\User</parameter>
+    <parameter key="geekhub.user.user_controller.class">Geekhub\UserBundle\Controller\RegistrationController</parameter>
 </parameters>
 
 <services>
@@ -58,9 +60,21 @@
         <tag name="twig.extension" />
     </service>
 
+     <service id="geekhub_user.registration.form.type" class="Geekhub\UserBundle\Form\RegistrationUserType">
+            <tag name="form.type" alias="geekhub_user_registration" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>
+
     <service id="geekhub.user.registration_subscriber" class="%geekhub.user.registration_subscriber.class%">
         <argument type="service" id="service_container"/>
         <tag name="doctrine.event_subscriber" connection="default" />
     </service>
+
+    <service id="geekhub.user.user_controller" class="%geekhub.user.user_controller.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+    </service>
+
 </services>
 </container>
