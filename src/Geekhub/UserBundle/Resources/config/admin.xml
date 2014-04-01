@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="geekhub.user.admin.class">Geekhub\UserBundle\Admin\UserAdmin</parameter>
+    </parameters>
+
+    <services>
+        <service id="geekhub.user.admin.faq" class="%geekhub.user.admin.class%">
+            <argument />
+            <argument>Geekhub\UserBundle\Entity\User</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            <tag name="sonata.admin" manager_type="orm" group="CheDream" label="user"/>
+        </service>
+    </services>
+</container>

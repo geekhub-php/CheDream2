@@ -36,7 +36,7 @@ class TagSubscriber implements EventSubscriber
     {
         $object = $args->getObject();
 
-        if (in_array('Taggable', class_implements($object))) {
+        if (in_array('DoctrineExtensions\Taggable\Taggable', class_implements($object))) {
             $tagManager = $this->container->get('geekhub.tag.tag_manager');
             $tagManager->loadTagging($object);
         }
