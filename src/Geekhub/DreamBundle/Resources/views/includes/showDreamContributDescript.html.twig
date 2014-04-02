@@ -96,15 +96,22 @@
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (app.user.id == dream.author.id) %}
             {% if ((dream.currentStatus == 'success') or (dream.currentStatus == 'completed')) %} {% else %}
                 {% if (dream.currentStatus == 'submitted') or (dream.currentStatus == 'rejected') %}
-                    <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+                    <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.editDream'|trans }}</a>
                 {% else %}
-                    <button type="button" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" title="{{ 'dream.edit'|trans }}">{{ 'dream.edit'|trans }}</button>
+                    <button type="button" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" title="{{ 'dream.editDream'|trans }}">{{ 'dream.editDream'|trans }}</button>
+                {% endif %}
+
+                {% if dream.currentStatus == 'implementing' %}
+                    <button type="button" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
                 {% endif %}
              {% endif %}
         {% endif %}
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted("ROLE_SUPER_ADMIN") %}
-            <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.edit'|trans }}</a>
+            <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.editDream'|trans }}</a>
+            {% if dream.currentStatus == 'implementing' %}
+                <button type="button" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
+            {% endif %}
         {% endif %}
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id %}

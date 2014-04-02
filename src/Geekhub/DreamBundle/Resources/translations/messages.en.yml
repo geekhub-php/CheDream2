@@ -10,6 +10,8 @@ dream:
     expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
+    editDream: Редагувати мрію
+    editYellowBlock: Редагувати інформацію
     support: Підтримати
     resource:
         title: Назва статті
