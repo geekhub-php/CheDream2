@@ -4,8 +4,6 @@
 
     {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
 
-    {#<hr class="show-hr">#}
-
     {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
     <div class="row">
@@ -30,6 +28,7 @@
     </div>
     {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
     {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
+    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}

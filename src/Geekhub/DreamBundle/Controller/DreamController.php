@@ -193,7 +193,8 @@ class DreamController extends Controller
             'otherForm' => $otherForm->createView(),
             'implementingForm' => $implementingForm->createView(),
             'completedForm' => $completedDreamForm->createView(),
-            'contributors' => $contributors
+            'contributors' => $contributors,
+            'admin_email' => $this->container->getParameter('admin.mail')
         );
     }
 
