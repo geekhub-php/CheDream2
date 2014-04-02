@@ -45,12 +45,18 @@ class RegistrationSubscriber implements EventSubscriber
             $dispatcher = $this->container->get('hip_mandrill.dispatcher');
 
             $message = new Message();
+            $body = $this->container->get('templating')->render(
+                'GeekhubResourceBundle:Email:registration.html.twig',
+                array(
+                    'user' => $object->getFirstName()." ".$object->getLastName()
+                )
+            );
 
             $message->setFromEmail('test@gmail.com')
                 ->setFromName('Черкаська мрія')
                 ->addTo($object->getEmail())
                 ->setSubject('REGISTRATION')
-                ->setHtml('<html><body><h1>DONE!!!</h1></body></html>')
+                ->setHtml($body)
             ;
 
             $dispatcher->send($message);
