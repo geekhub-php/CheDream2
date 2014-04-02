@@ -6,12 +6,8 @@
                 <h4 class="modal-title">Увага.</h4>
             </div>
             <div class="modal-body">
-
-                <div class="form-group">
-                    <p>Шановний(на) <strong>{{ dream.author.firstName }} {{ dream.author.lastName }}</strong>, на данному єтапі Вам заборонено редагувати Вашу мрію.</p>
-                    <p class="help-block">В разі необхідності редагування, Ви можете звернутися до <a href="mailto:{{ admin_email }}"> адміністрації. </a></p>
-                </div>
-
+                <p>Шановний(на) <strong>{{ dream.author.firstName }} {{ dream.author.lastName }}</strong>, на данному єтапі Вам заборонено редагувати Вашу мрію.</p>
+                <p class="help-block">В разі необхідності редагування, Ви можете звернутися до <a href="mailto:{{ admin_email }}"> адміністрації. </a></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'dream.close'|trans }}</button>
