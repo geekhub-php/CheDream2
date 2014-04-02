@@ -32,7 +32,7 @@ security:
                     vkontakte: "/login-social/check-vkontakte"
                     odnoklassniki: "/login-social/check-odnoklassniki"
                 login_path:   /
-                failure_path: /login3
+                failure_path: /nologin
 
                 oauth_user_provider:
                     service: geekhub.user.dream_user_provider

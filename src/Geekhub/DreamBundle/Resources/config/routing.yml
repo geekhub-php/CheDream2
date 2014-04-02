@@ -12,16 +12,51 @@ edit_dream:
     pattern:  /dream/edit/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:editDream }
 
+view_dream:
+    pattern:  /dreams/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
+
+reject_dream:
+    pattern:  /dream/reject/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:rejectDream }
+
+confirm_dream:
+    pattern:  /dream/confirm/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:confirmDream }
+
+implementing_dream:
+    pattern:  /dream/implementing/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:implementingDream }
+
+completed_dream:
+    pattern:  /dream/completing/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:completingDream }
+
+successed_dream:
+    pattern:  /dream/successed/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:successDream }
+
+failed_dream:
+    pattern:  /dream/failed/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:failDream }
 
 dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }
-    options:
-        expose: true
+
+dream_admin_list:
+    pattern:  /dream/list
+    defaults: { _controller: GeekhubDreamBundle:Dream:adminDreamList }
 
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }
+    options:
+        expose: true
+
+dream_ajax_load_completed_image:
+    pattern:  /dream/ajaxLoadCompletedImage
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamCompletedPicturesLoader }
     options:
         expose: true
 
@@ -56,5 +91,11 @@ view_dream:
 view_all_dreams:
     pattern:  /alldreams/{status}/view/{offset}
     defaults: { _controller: GeekhubDreamBundle:Dream:viewAllDreams }
+    options:
+        expose: true
+
+dream_ajax_load_filtered_dreams_for_admin:
+    pattern:  /dream/ajaxLoadFilteredDreamsByStatus
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadFilteredDreamsForAdmin }
     options:
         expose: true

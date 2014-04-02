@@ -24,6 +24,22 @@ class DreamImageHandler
         $this->file = $file;
     }
 
+    public function loadCompletedPictures()
+    {
+        $uploader = new SymfonyFileUploader($this->file, $this->liipimage);
+        $uploader->setLiipImagineFilter('dream_thumb');
+        $uploader->setUploadPathForPictures('upload/tmp/image/');
+        $uploader->setUploadPathForFiles('');
+        $uploader->setAllowedSizeForPictures(2*1024*1024);
+        $uploader->setAllowedSizeForFile(0);
+        $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png'));
+        $uploader->setAllowedFilesTypes(array(''));
+
+        $result = $uploader->load();
+
+        return $result;
+    }
+
     public function loadFiles()
     {
         $uploader = new SymfonyFileUploader($this->file, $this->liipimage);

@@ -41,8 +41,9 @@ class DreamRepository extends EntityRepository
              $dreamsArray->add($dream[0]);
          }
 
-        return $dreamsArray; //??? doesnt work
+        return $dreamsArray;
     }
+
     public function findLimitedDreamsByStatus($status, $limit, $offset)
     {
         $em = $this->getEntityManager();
@@ -57,26 +58,19 @@ class DreamRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function  getDreamsByStatus($status)
+    public function getDreamsByTwoStatuses($status, $status2, $limit, $offset)
     {
-
-        return $this->getEntityManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array(
-            'currentStatus' => $status
-        ));
-    }
-
-    public function getSliceDreamsByStatus($status, $limit, $offset)
-    {
-
         return $this->getEntityManager()
             ->createQuery('SELECT d
                            FROM GeekhubDreamBundle:Dream d
                            where d.currentStatus = :status
+                           or d.currentStatus = :status2
                            order by d.id
                            ')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->setParameter('status', $status)
+            ->setParameter('status2', $status2)
             ->getResult();
     }
 

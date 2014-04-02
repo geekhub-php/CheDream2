@@ -9,4 +9,5 @@ user:
     vkontakte: Vk
     odnoklassniki: Odnoklassniki
     save: Save changes
+    locked: Користувач заблокований!
 not_login: Ви не залогінені в системі. Оберіть одну з соціальних мереж:

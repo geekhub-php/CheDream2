@@ -1,4 +1,4 @@
-<div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 500px; height: 300px; margin: 0 auto;">
+<div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 900px; height: 500px; margin: 0 auto;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         {% for completedDream in completedDreams %}
@@ -21,8 +21,8 @@
                 <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>{{ completedDream.author.firstName }} {{ completedDream.author.lastName }}</h3>
-                        <p>{{ completedDream.title }}</p>
+                        <h3><a href="{{ path('profile_view', {'id': completedDream.author.id}) }}" style="color: #fff;"> {{ completedDream.author.firstName }} {{ completedDream.author.lastName }} </a></h3>
+                        <p><a href="{{ path('view_dream', {'slug': completedDream.slug} ) }}" style="color: #fff;" >{{ completedDream.title }}</a></p>
                     </div>
                 </div>
             </div>
