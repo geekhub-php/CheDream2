@@ -4,8 +4,8 @@ namespace Geekhub\DreamBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Geekhub\DreamBundle\Entity\Dream,
-    Geekhub\DreamBundle\Entity\Status;
+use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\Status;
 use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
 use Symfony\Component\DependencyInjection\Container;
