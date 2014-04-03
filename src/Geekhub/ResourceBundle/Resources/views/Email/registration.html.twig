@@ -1,10 +1,9 @@
-<html>
-    <body>
-        <h1>
-            Успішна реєстрація
-        </h1>
-        <p>
-            Ви зареєстровані на <a href="http://chedream.local">Черкаcькій мрії</a> як {{ user }}.
-        </p>
-    </body>
-</html>
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block title %}
+    Успішна реєстрація
+{% endblock title %}
+
+{% block body %}
+    Ви зареєстровані на <a href="{{ url('geekhub_dream_homepage') }}">Черкаcькій мрії</a> як {{ user }}.
+{% endblock body %}

@@ -6,15 +6,30 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Geekhub\DreamBundle\Entity\Dream,
     Geekhub\DreamBundle\Entity\Status;
+use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
+use Symfony\Component\DependencyInjection\Container;
 
 class DreamSubscriber implements EventSubscriber
 {
     protected $container;
 
-    public function __construct($container)
+    protected $dispatcher;
+
+    /**
+     * @param Container $container
+     */
+    public function setContainer(Container $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @param Dispatcher $dispatcher
+     */
+    public function setDispatcher(Dispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
     }
 
     public function getSubscribedEvents()
@@ -44,7 +59,6 @@ class DreamSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
-        $dispatcher = $this->container->get('hip_mandrill.dispatcher');
 
         if ($object instanceof Status) {
             $dream = $object->getDream();
@@ -53,102 +67,103 @@ class DreamSubscriber implements EventSubscriber
                 ->getRepository('GeekhubDreamBundle:Dream')
                 ->getArrayContributorsByDream($dream)
             ;
-            $url = $this->container->get('router')
-                ->generate('view_dream', array('slug' => $dream->getSlug()), true);
+            $template = $this->container->get('templating');
+            $admin = $this->container->getParameter('admin.mail');
 
             switch ($object->getTitle()) {
                 case Status::SUBMITTED :
                     $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>
-                                <a href='".$url."'>".$dream->getTitle()."</a> - створено!
-                            </p>
-                        </body></html>",
-                        $this->container->getParameter('admin.mail'),
-                        'STATUS'
+                        $template->render(
+                            'GeekhubResourceBundle:Email:dreamSubmitted.html.twig',
+                            array(
+                                'dream' => $dream
+                            )
+                        ),
+                        $admin,
+                        Status::SUBMITTED
                     );
                     break;
                 case Status::COLLECTING_RESOURCES :
                     $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>
-                                <a href='".$url."'>".$dream->getTitle()."</a> - розпочато збір коштів!!
-                            </p>
-                        </body></html>",
+                        $template->render(
+                            'GeekhubResourceBundle:Email:dreamCollecting.html.twig',
+                            array(
+                                'dream' => $dream
+                            )
+                        ),
                         $author->getEmail(),
-                        'STATUS'
+                        Status::COLLECTING_RESOURCES
                     );
                     break;
                 case Status::REJECTED :
                     $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>
-                                <a href='".$url."'>".$dream->getTitle()."</a> - повернуто на дооформлення.
-                            </p>
-                        </body></html>",
+                        $template->render(
+                            'GeekhubResourceBundle:Email:dreamRejected.html.twig',
+                            array(
+                                'dream' => $dream
+                            )
+                        ),
                         $author->getEmail(),
-                        'STATUS'
+                        Status::REJECTED
                     );
                     break;
                 case Status::IMPLEMENTING :
                     foreach ($contributors as $contributor) {
                         $this->sendEmail(
-                            $dispatcher,
-                            "<html><body>
-                                <p>
-                                    <a href='".$url."'>".$dream->getTitle()."</a> - розпочата реалізація.
-                                </p>
-                            </body></html>",
+                            $template->render(
+                                'GeekhubResourceBundle:Email:dreamImplementing.html.twig',
+                                array(
+                                    'dream' => $dream
+                                )
+                            ),
                             $contributor->getEmail(),
-                            'STATUS'
+                            Status::IMPLEMENTING
                         );
                     }
                     break;
                 case Status::COMPLETED :
                     $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>
-                                <a href='".$url."'>".$dream->getTitle()."</a> - завершена реалізація.
-                            </p>
-                        </body></html>",
-                        $this->container->getParameter('admin.mail'),
-                        'STATUS'
+                        $template->render(
+                            'GeekhubResourceBundle:Email:dreamCompleted.html.twig',
+                            array(
+                                'dream' => $dream
+                            )
+                        ),
+                        $admin,
+                        Status::COMPLETED
                     );
                     break;
                 case Status::SUCCESS :
-                    $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>Вітаємо!</p>
-                            <p>
-                                Вашу мрію <a href='".$url."'>".$dream->getTitle()."</a> завершено.
-                            </p>
-                        </body></html>",
-                        $author->getEmail(),
-                        'STATUS'
-                    );
+                    foreach ($contributors as $contributor) {
+                        $this->sendEmail(
+                            $template->render(
+                                'GeekhubResourceBundle:Email:dreamSuccess.html.twig',
+                                array(
+                                    'dream' => $dream
+                                )
+                            ),
+                            $contributor->getEmail(),
+                            Status::SUCCESS
+                        );
+                    }
                     break;
                 case Status::FAIL :
                     $this->sendEmail(
-                        $dispatcher,
-                        "<html><body>
-                            <p>
-                                Мрію <a href='".$url."'>".$dream->getTitle()."</a> потрібно завершити.
-                            </p>
-                        </body></html>",
+                        $template->render(
+                            'GeekhubResourceBundle:Email:dreamFail.html.twig',
+                            array(
+                                'dream' => $dream
+                            )
+                        ),
                         $author->getEmail(),
-                        'STATUS'
+                        Status::FAIL
                     );
                     break;
             }
         }
     }
 
-    protected function sendEmail($dispatcher, $body, $to, $subject)
+    protected function sendEmail($body, $to, $subject)
     {
         $message = new Message();
         $message->setFromEmail('test@gmail.com')
@@ -158,6 +173,6 @@ class DreamSubscriber implements EventSubscriber
             ->setHtml($body)
         ;
 
-        $dispatcher->send($message);
+        $this->dispatcher->send($message);
     }
 }
