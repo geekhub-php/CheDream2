@@ -12,12 +12,16 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Message;
+use Symfony\Component\DependencyInjection\Container;
 
 class RegistrationSubscriber implements EventSubscriber
 {
     protected $container;
 
-    public function __construct($container)
+    /**
+     * @param Container $container
+     */
+    public function setContainer(Container $container)
     {
         $this->container = $container;
     }
