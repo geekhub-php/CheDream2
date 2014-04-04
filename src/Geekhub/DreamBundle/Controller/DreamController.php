@@ -135,7 +135,7 @@ class DreamController extends Controller
      */
     public function adminDreamListAction()
     {
-        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ) {
+        if ($this->isSuperAdmin()) {
             throw new AccessDeniedException();
         }
 
@@ -193,7 +193,8 @@ class DreamController extends Controller
             'otherForm' => $otherForm->createView(),
             'implementingForm' => $implementingForm->createView(),
             'completedForm' => $completedDreamForm->createView(),
-            'contributors' => $contributors
+            'contributors' => $contributors,
+            'admin_email' => $this->container->getParameter('admin.mail')
         );
     }
 
@@ -303,6 +304,27 @@ class DreamController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $dream->addStatus(new Status(Status::IMPLEMENTING));
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('view_dream', array(
+                    'slug' => $dream->getSlug()
+                )));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+    }
+
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     */
+    public function editInformationDreamAction(Dream $dream, Request $request)
+    {
+        $form = $this->createForm(new DreamImplementingType(), $dream);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('view_dream', array(

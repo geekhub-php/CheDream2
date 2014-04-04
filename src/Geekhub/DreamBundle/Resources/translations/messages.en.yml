@@ -1,6 +1,7 @@
 dream:
     add: Додати
     cancel: Відміна
+    close: Закрити
     files_add: Додати файли
     videos_add: Додати відео
     title: Назва мрії
@@ -9,6 +10,8 @@ dream:
     expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
+    editDream: Редагувати мрію
+    editYellowBlock: Редагувати інформацію
     support: Підтримати
     resource:
         title: Назва статті

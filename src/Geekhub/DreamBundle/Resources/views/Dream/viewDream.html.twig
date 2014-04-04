@@ -4,8 +4,6 @@
 
     {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
 
-    {#<hr class="show-hr">#}
-
     {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
     <div class="row">
@@ -28,8 +26,14 @@
         </div>
 
     </div>
-    {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
+    {% if dream.currentStatus == 'collecting-resources' %}
+        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
+    {% endif %}
     {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
+    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
+    {% if dream.currentStatus == 'implementing' %}
+        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
+    {% endif %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
