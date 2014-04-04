@@ -253,14 +253,13 @@ class DreamController extends Controller
     {
         $limit = $this->container->getParameter('count_dreams_on_home_page');
         $dreamRepository = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream');
-        if ($status =="new") {
-            return $dreamRepository->findBy(array(), array('createdAt' => 'ASC') , $limit, $offset);
-        }
-        else if ($status =="popular") {
-            return $dreamRepository->findPopularDreams($limit, $offset);
-        }
-        else { 
-            return $dreamRepository->findBy(array('currentStatus' => $status), array('createdAt' => 'ASC') , $limit, $offset);
+        switch ($status) {
+            case "new":
+                return $dreamRepository->findBy(array(), array('createdAt' => 'ASC') , $limit, $offset);
+            case "popular":
+                return $dreamRepository->findPopularDreams($limit, $offset);
+            default:
+                return $dreamRepository->findBy(array('currentStatus' => $status), array('createdAt' => 'ASC') , $limit, $offset);
         }
     }
 
