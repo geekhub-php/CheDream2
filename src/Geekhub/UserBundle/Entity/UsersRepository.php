@@ -91,7 +91,7 @@ class UsersRepository extends EntityRepository
     }
 
 
-    public function findUserDreamProjects($user)
+    public function findUserImplementedDreams($user)
     {
         $em = $this->getEntityManager();
 
@@ -109,7 +109,7 @@ class UsersRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findUserImplementedDreams($user)
+    public function findUserDreamProjects($user)
     {
         $em = $this->getEntityManager();
 

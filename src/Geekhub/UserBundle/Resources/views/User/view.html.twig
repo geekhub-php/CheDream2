@@ -40,20 +40,19 @@
                 {% endif %}
                 <p> {{ user.about|raw }} </p>
              </div>
-              {% if user.dreams is not empty %}
+              {% if userDreams is not empty %}
              <div class="row">
                 <div class="col-md-7">
                   <h4>Автор проектів: </h4>
                 </div>
+                <div class="btn btn-primary" id="any"> Усі мрії </div>
                 <div class="btn btn-primary" id="projects"> На стадії проекту </div>
                 <div class="btn btn-primary" id="implemented"> Втілені </div>
                 </div>  
                 <div class="row">
                  <div id="user-dreams">
-                   {% for dream in user.dreams %}
-                      {% if (dream.currentStatus is same as ('submitted')) or (dream.currentStatus is same as ('success')) %}
+                   {% for dream in userDreams %}
                          {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                      {% endif %}
                    {% endfor %}
                  </div>
                 </div> 
@@ -89,6 +88,22 @@
 
    {{ parent() }}
    <script>
+   $('#any').on("click",function() {
+         $.ajax({
+            type: "POST",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'any'})}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#user-dreams").html(html);
+            },
+            error: function (html) {
+                $("#user-dreams").html('No dreams yet');
+            }
+        });
+   });
+
+
    $('#projects').on("click",function() {
          $.ajax({
             type: "POST",

@@ -45,23 +45,20 @@ class UserController extends Controller
     {
         if ($this->getUser() == $user) {
             $showHiddenContributedDreams = true;
-            $myDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
+            $userDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
         }
         else {
             $showHiddenContributedDreams = false;
-            $myDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array(
-                'author' => $user,
-                'currentStatus' => Status::SUCCESS,
-                'currentStatus' => Status::COLLECTING_RESOURCES,
-                'currentStatus' => Status::IMPLEMENTING,
-                'currentStatus' => Status::COMPLETED,
-                'currentStatus' => Status::SUCCESS,
-                ));
+            $userDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
         }
         $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user, $showHiddenContributedDreams);
 
-
-        return $this->render('GeekhubUserBundle:User:view.html.twig', array('user' => $user, 'contributedDreams' => $contributedDreams));
+        return $this->render('GeekhubUserBundle:User:view.html.twig', 
+            array(
+                'user' => $user, 
+                'contributedDreams' => $contributedDreams,
+                'userDreams' => $userDreams,
+            ));
     }
 
     /**
@@ -70,24 +67,25 @@ class UserController extends Controller
      */
     public function userOwnedDreamsViewAction($user, $status = "any")
     {
-        if ($status == "any") {
-            if ($this->getUser()==$user) {
-                return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-            }
-            else {
-                return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
-            }
-        }
-        else if ($status == "projects") {
-            if ($this->getUser()==$user) {
-                return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findMyDreamProjects($user);
-            }
-            else {
-                return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserDreamProjects($user);
-            }
-        }
-        else  {
-            return  $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserImplementedDreams($user);
+        switch ($status){
+            case "any":
+                if ($this->getUser()==$user) {
+                    return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
+                }
+                else {
+                    return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
+                }
+                break;
+            case "projects":
+                if ($this->getUser()==$user) {
+                    return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findMyDreamProjects($user);
+                }
+                else {
+                    return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserDreamProjects($user);
+                }
+                break;
+            default:
+                return  $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserImplementedDreams($user);
         }
     }
 
@@ -95,5 +93,4 @@ class UserController extends Controller
     {
         return $this->render('GeekhubUserBundle:User:login.html.twig');
     }
-
 }
