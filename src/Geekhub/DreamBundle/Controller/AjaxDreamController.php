@@ -90,7 +90,7 @@ class AjaxDreamController extends Controller
     {
         $statusCode = $request->get('status');
 
-        if ($statusCode == "ALL") {
+        if ($statusCode == "all") {
             $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
         } else {
             $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('currentStatus' => $statusCode));

@@ -82,10 +82,6 @@
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
             {{ tinymce_init() }}
-                {% if status == 'implementing' %}
-                    {{ form_row(form.implementedDescription) }}
-                    {{ tinymce_init() }}
-                {% endif %}
             {{ form_row(form.phone) }}
             {{ form_row(form.expiredDate) }}
             {{ form_row(form.tags) }}
