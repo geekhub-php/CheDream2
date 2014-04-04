@@ -45,13 +45,15 @@
                 <div class="col-md-7">
                   <h4>Автор проектів: </h4>
                 </div>
-                <div class="btn btn-primary" id="submitted"> На стадії проекту </div>
-                <div class="btn btn-primary" id="success"> Втілені </div>
+                <div class="btn btn-primary" id="projects"> На стадії проекту </div>
+                <div class="btn btn-primary" id="implemented"> Втілені </div>
                 </div>  
                 <div class="row">
                  <div id="user-dreams">
                    {% for dream in user.dreams %}
-                   {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                      {% if (dream.currentStatus is same as ('submitted')) or (dream.currentStatus is same as ('success')) %}
+                         {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                      {% endif %}
                    {% endfor %}
                  </div>
                 </div> 
@@ -87,10 +89,10 @@
 
    {{ parent() }}
    <script>
-   $('#submitted').on("click",function() {
+   $('#projects').on("click",function() {
          $.ajax({
             type: "POST",
-            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'submitted'})}}",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'projects'})}}",
             data: "data=0",
             cache: false,
             success: function(html){
@@ -101,10 +103,10 @@
             }
         });
    });
-   $('#success').on("click",function() {
+   $('#implemented').on("click",function() {
          $.ajax({
             type: "POST",
-            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'success'})}}",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'implemented'})}}",
             data: "data=0",
             cache: false,
             success: function(html){
