@@ -55,10 +55,10 @@ class UsersRepository extends EntityRepository
         $query = $em->createQuery(
            "SELECT d
             FROM GeekhubDreamBundle:Dream d 
-            WHERE d.author = :user and (d.currentStatus=:submitted
-                                   or d.currentStatus=:rejected
-                                   or d.currentStatus=:collectingResources
-                                   or d.currentStatus=:implementing)"
+            WHERE d.author = :user and (d.currentStatus = :submitted
+                                   or d.currentStatus = :rejected
+                                   or d.currentStatus = :collectingResources
+                                   or d.currentStatus = :implementing)"
         )->setParameter('user', $user)
          ->setParameter('submitted', Status::SUBMITTED)
          ->setParameter('rejected', Status::REJECTED)
@@ -121,7 +121,6 @@ class UsersRepository extends EntityRepository
         )->setParameter('user', $user)
          ->setParameter('collectingResources', Status::COLLECTING_RESOURCES)
          ->setParameter('implementing', Status::IMPLEMENTING);
-
 
         return $query->getResult();
     }
