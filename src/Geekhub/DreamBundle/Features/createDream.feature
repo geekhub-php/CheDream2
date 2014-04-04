@@ -22,7 +22,7 @@ Feature: Create dream feature
 
   @javascript
   Scenario: Try to create dream
-    And I am login as "admin" with password "admin"
+    And I am login as "darthVader" with password "darthVader"
     And I am on "/dream/new"
     And I should see "create or edit your dream"
     And I press "Створити"
@@ -33,13 +33,18 @@ Feature: Create dream feature
 
   @javascript
   Scenario: Try to create dream
-    Given I am login as "admin" with password "admin"
+    Given I am login as "darthVader" with password "darthVader"
     And I am on "/dream/new"
     And I should see "create or edit your dream"
     And I fill in "newDreamForm_title" with "Hello! This is my first dream!"
-    And I fill in tinymce "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     And I fill in hidden "newDreamForm_tags" with "Hello, world"
     And I press "Створити"
     And I wait 1 seconds
     And I press "btnDreamSubmit"
+    And I wait 1 seconds
     Then I should not see "Поле не повинно бути порожнім"
+
+  Scenario: GeekhubDreamBundle:DreamController:editDreamAction
+    Given I am login as "darthVader" with password "darthVader"
+#    And I am on ""

@@ -20,7 +20,7 @@ security:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
                 always_use_default_target_path: true
-                default_target_path:  /admin
+                default_target_path:  /
 #            logout:       true
             logout:
                 path:   /logout
