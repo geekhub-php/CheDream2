@@ -17,7 +17,7 @@ dream2:
     tags:         [транспорт, starship]
     status:       success
 dream3:
-    author:       darthvaider
+    author:       darthVader
     title:        Зірка смерті
     description:  Створити наймогутнішу зброю, яку навіть уявити собі не можна.
     phone:        380666666666
@@ -62,7 +62,7 @@ dream7:
     tags:         [мандрівка, цікавість]
     status:       submitted
 dream8:
-    author:       darthvaider
+    author:       darthVader
     title:        Швидка розвідка
     description:  Найкращу розвідку у всьому міжгалактичному просторі.
     phone:        380656969854
