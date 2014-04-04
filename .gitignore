@@ -9,6 +9,7 @@
 /vendor/
 /bin/*
 !bin/reload.sh
+!bin/tests.sh
 /.idea/
 /web/upload/*
 /web/css/
