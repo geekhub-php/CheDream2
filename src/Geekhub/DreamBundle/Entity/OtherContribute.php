@@ -63,7 +63,7 @@ class OtherContribute extends AbstractContribute
         return $this;
     }
 
-    /**quantity = $quantity
+    /**
      * Get title
      *
      * @return string
