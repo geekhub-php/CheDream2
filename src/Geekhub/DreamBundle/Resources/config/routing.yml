@@ -52,6 +52,14 @@ dream_admin_list:
     pattern:  /dream/list
     defaults: { _controller: GeekhubDreamBundle:Dream:adminDreamList }
 
+dream_search:
+    pattern:  /dream/searchForm
+    defaults: { _controller: GeekhubDreamBundle:Dream:search }
+
+dream_search_text:
+    pattern:  /dream/search/{text}
+    defaults: { _controller: GeekhubDreamBundle:Dream:searchDream }
+
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }

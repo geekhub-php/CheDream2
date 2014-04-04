@@ -115,11 +115,11 @@
 
         </ul>
 
-        <form class="navbar-form " role="search">
+        <form class="navbar-form " role="search" action="{{ path('dream_search') }}" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Пошук ...">
+                <input type="text" class="form-control" placeholder="Пошук ..." name="search_text">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </span>

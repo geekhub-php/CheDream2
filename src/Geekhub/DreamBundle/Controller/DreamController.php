@@ -404,6 +404,29 @@ class DreamController extends Controller
         return $this->redirect($this->generateUrl('dream_admin_list'));
     }
 
+    public function searchAction(Request $request)
+    {
+        $searchingText = strip_tags(trim($request->get('search_text')));
+
+        if ($searchingText == null or $searchingText == ' ')
+            return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+
+        return $this->redirect($this->generateUrl('dream_search_text', array('text' => $searchingText)));
+    }
+
+    /**
+     * @View()
+     */
+    public function searchDreamAction($text)
+    {
+        $dreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->searchDreams($text);
+
+        return array(
+            'dreams' => $dreams,
+            'search_text' => $text
+        );
+    }
+
     private function isAuthor(Dream $dream)
     {
         return $this->getUser()->getId() != $dream->getAuthor()->getId() ? true : false;
