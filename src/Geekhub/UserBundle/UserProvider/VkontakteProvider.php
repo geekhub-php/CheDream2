@@ -15,7 +15,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         $user->setFirstName($responseArray['response'][0]['first_name']);
         $user->setMiddleName($responseArray['response'][0]['nickname']);
         $user->setLastName($responseArray['response'][0]['last_name']);
-        $user->setEmail('id'.$user->GetVkontakteId().'@vk.com'); //is not real, but unique email is required for FosUserBundle
+        $user->setEmail('id'.$user->GetVkontakteId().'vk.com'); //is not real, but unique email is required for FosUserBundle
 
         if ($remoteImg = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {
             $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');

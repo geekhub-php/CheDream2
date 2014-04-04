@@ -1,0 +1,48 @@
+{% extends "GeekhubResourceBundle::layout.html.twig" %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block content %}
+<div style="padding: 5% 0;">
+    <form method="POST" enctype="multipart/form-data" action="{{ path('profile_update_contacts') }}">
+        <div class="row">
+            <div class="col-md-5">
+              <div class="fileinput-button" id="user-avatar-image">
+                <div id="user-avatar-container">
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
+                    <input id="dream_poster" type="file" name="dream-poster">
+                </div>
+              </div>
+              <div id="errors" class="files">
+              </div>
+                {# media avatar, 'big' #}
+                {# form_widget(form.avatar) #}
+            </div>
+            <div class="col-md-7">
+                <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
+                <div class="row">
+                    <div class="col-md-6">
+                      {{ form_widget(form.firstName) }}
+                    </div>
+                    <div class="col-md-6">
+                      {{ form_widget(form.lastName) }}
+                    </div>
+                </div>
+                {{ form_row(form.phone) }}
+                {{ form_row(form.email) }}
+                {{ form_rest(form) }}
+                {{ form_errors(form) }}
+            </div>
+            <div class="row center">
+             <input type="submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
+             </form>
+            </div>
+        </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+  {{ parent() }}
+
+{% endblock javascript %}

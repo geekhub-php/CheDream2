@@ -61,6 +61,7 @@
     <service id="geekhub.user.registration_subscriber" class="%geekhub.user.registration_subscriber.class%">
         <argument type="service" id="service_container"/>
         <tag name="doctrine.event_subscriber" connection="default" />
+        <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"  />
     </service>
 </services>
 </container>
