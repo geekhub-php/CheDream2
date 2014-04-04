@@ -34,7 +34,7 @@ class MediaExtension extends \Twig_Extension
             $provider = $this->mediaPool->getProvider($media->getProviderName());
             $format = $provider->getFormatName($media, 'reference');
 
-            return substr($provider->generatePublicUrl($media, $format), 0);
+            return $provider->generatePublicUrl($media, $format);
         } elseif (null == $media) {
             return 'bundles/applicationsonatamedia/img/default-no-image.png';
         }
