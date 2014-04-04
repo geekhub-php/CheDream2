@@ -14,18 +14,6 @@ use Doctrine\ORM\EntityRepository;
 class DreamRepository extends EntityRepository
 {
 
-	public function findNewDreams($limit, $offset)
-    {
-        $em = $this->getEntityManager();
-       $query = $em->createQuery(
-            'SELECT d FROM GeekhubDreamBundle:Dream d
-            ORDER BY d.createdAt'
-        )->setMaxResults($limit)
-         ->setFirstResult($offset);
-
-        return $query->getResult();
-    }
-
 	public function findPopularDreams($limit, $offset)
     {
         $em = $this->getEntityManager();
@@ -42,20 +30,6 @@ class DreamRepository extends EntityRepository
          }
 
         return $dreamsArray;
-    }
-
-    public function findLimitedDreamsByStatus($status, $limit, $offset)
-    {
-        $em = $this->getEntityManager();
-       $query = $em->createQuery(
-            'SELECT d FROM GeekhubDreamBundle:Dream d
-            WHERE d.currentStatus = :status
-            ORDER BY d.createdAt'
-        )->setMaxResults($limit)
-         ->setFirstResult($offset)
-         ->setParameter('status', $status);
-
-        return $query->getResult();
     }
 
     public function getDreamsByTwoStatuses($status, $status2, $limit, $offset)
