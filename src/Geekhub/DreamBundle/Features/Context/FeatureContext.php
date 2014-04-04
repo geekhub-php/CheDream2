@@ -72,11 +72,11 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
-     * @Given /^I fill in tinymce "([^"]*)"$/
+     * @Given /^I fill in tinymce "([^"]*)" with "([^"]*)"$/
      */
-    public function fillInTinyMce($value)
+    public function fillInTinyMce($tinyId, $value)
     {
-        $javascript = "tinymce.activeEditor.execCommand('mceInsertContent', false, \"$value\");";
+        $javascript = "tinymce.EditorManager.get('$tinyId').setContent('$value');";
         $this->getSession()->executeScript($javascript);
     }
 }

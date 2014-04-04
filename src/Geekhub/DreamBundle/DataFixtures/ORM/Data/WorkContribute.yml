@@ -5,7 +5,7 @@ cwork1:
     quantityDays: 1
     resource:     rwork2
 cwork2:
-    user:         darthvaider
+    user:         darthVader
     hidden:       0
     quantity:     1
     quantityDays: 1
@@ -29,7 +29,7 @@ cwork5:
     quantityDays: 1
     resource:     rwork25
 cwork6:
-    user:         darthvaider
+    user:         darthVader
     hidden:       0
     quantity:     1
     quantityDays: 1
