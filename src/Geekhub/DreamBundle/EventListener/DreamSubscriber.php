@@ -59,6 +59,8 @@ class DreamSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
+        $template = $this->container->get('templating');
+        $admin = $this->container->getParameter('admin.mail');
 
         if ($object instanceof Status) {
             $dream = $object->getDream();
@@ -67,8 +69,6 @@ class DreamSubscriber implements EventSubscriber
                 ->getRepository('GeekhubDreamBundle:Dream')
                 ->getArrayContributorsByDream($dream)
             ;
-            $template = $this->container->get('templating');
-            $admin = $this->container->getParameter('admin.mail');
 
             switch ($object->getTitle()) {
                 case Status::SUBMITTED :
@@ -160,6 +160,21 @@ class DreamSubscriber implements EventSubscriber
                     );
                     break;
             }
+        }
+
+        if ('Geekhub\DreamBundle\Entity\AbstractContribute' == get_parent_class($object)) {
+            $this->sendEmail(
+                $template->render(
+                    'GeekhubResourceBundle:Email:contribution.html.twig',
+                    array(
+                        'dream' => $object->getDream(),
+                        'contributor' => $object
+                    )
+                ),
+                $object->getUser()->getEmail(),
+                'Підтримка мрії'
+            );
+
         }
     }
 
