@@ -47,4 +47,6 @@ Feature: Create dream feature
 
   Scenario: GeekhubDreamBundle:DreamController:editDreamAction
     Given I am login as "darthVader" with password "darthVader"
-#    And I am on ""
+    And I am on "/dreams"
+    Then I should see "Hello! This is my first dream!"
+
