@@ -28,6 +28,10 @@ implementing_dream:
     pattern:  /dream/implementing/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:implementingDream }
 
+implementing_dream_edit_yellowBlock:
+    pattern:  /dream/editingyellowblock/{slug}
+    defaults: { _controller: GeekhubDreamBundle:Dream:editInformationDream }
+
 completed_dream:
     pattern:  /dream/completing/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:completingDream }
