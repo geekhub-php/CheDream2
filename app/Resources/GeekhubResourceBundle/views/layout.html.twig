@@ -10,7 +10,20 @@
 
         <title>{% block title %}Welcome{% endblock %}</title>
 
-        <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/geekhubresource/css/temp/fontello.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/geekhubresource/css/theme_fonts.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/geekhubresource/css/base.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/sonataadmin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/geekhubresource/css/temp/jquery.tagit.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/geekhubresource/css/temp/tagit.ui-zendesk.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/geekhubdream/css/dream-style.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/geekhubresource/css/temp/blueimp-gallery.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/geekhubresource/css/theme.css') }}" rel="stylesheet">
 
         {% block stylesheets %}{% endblock %}
 
@@ -23,7 +36,7 @@
 
     <body>
         {% block body %}
-            <div class="container" id="wrap">
+            <div class="main-wrap container">
                 {% block menu %}
                     {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
                         {% block items %}
@@ -32,7 +45,7 @@
                     {% endembed %}
                 {% endblock %}
                 {% block main %}
-                    <div class="wrapper">
+                    <div class="wrap">
                         {% block content %}{% endblock content %}
                     </div>
                 {% endblock main %}
@@ -41,7 +54,28 @@
         {% endblock %}
 
         {% block javascript %}
-            <script src="{{ asset('js/scripts.min.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/bootstrap.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/bc-bootstrap-collection.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/holder.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery-ui.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/tag-it.js') }}"></script>
+            
+            <script src="{{ asset('bundles/geekhubdream/js/createDream.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubdream/js/tags.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubdream/js/uploadFile.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubuser/js/avatar_upload.js') }}"></script>
+            
+            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.ui.widget.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.fileupload.js') }}"></script>
+            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.fileupload.js') }}"></script>
+            
+            <script src="{{ asset('bundles/geekhubdream/js/removeMediaObj.js') }}"></script>
+            
+            <script src="{{ asset('bundles/geekhubresource/js/temp/blueimp-gallery.js') }}"></script>
+            
+            <script src="{{ asset('bundles/geekhubresource/js/frontend.js') }}"></script>
+            
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
             <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>

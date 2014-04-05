@@ -2,8 +2,11 @@ $(document).ready(function() {
     $('#dream-add-video').hide();
 });
 
-$('#dream-poster-image').click(function() {
+$('#dream-poster-image').on('click', function() {
+    var $block = $(this);
     var url = Routing.generate('dream_ajax_load_poster');
+    
+    //$block.find('input').click();
     $('#fileupload-poster').fileupload({
         url: url,
         dataType: 'json',
@@ -16,16 +19,14 @@ $('#dream-poster-image').click(function() {
                             '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
                             '</div>'
                     );
-
+                    
                     return;
                 }
                 if(file.type == 'image' && file.error == null) {
-                    $('#dream-poster-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
-                        '<input id="fileupload-poster" type="file" name="dream-poster">');
+                    $block.addClass('active').find('img').attr('src', file.srcPreview);
                     $('#newDreamForm_dreamPoster').get(0).value = file.src;
                 }
             });
-
         },
         error: function(msg) {
             console.log('error = ' + msg);
@@ -54,7 +55,7 @@ loadFile = function () {
                     return;
                 }
                 if(file.type == 'image' && file.error == null) {
-                    $('#dream-gallery').append('<img src="' + file.srcPreview + '" class="img-thumbnail">');
+                    $('#dream-gallery').append('<img src="' + file.srcPreview + '" alt="Image">');
                     $('#newDreamForm_dreamPictures').get(0).value += ',' + file.src;
                 }
                 if(file.type == 'file' && file.error == null) {
