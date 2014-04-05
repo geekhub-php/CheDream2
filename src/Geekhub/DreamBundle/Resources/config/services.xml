@@ -17,7 +17,7 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
-            <call method="setDispatcher">
+            <call method="setMandrillDispatcher">
                 <argument type="service" id="hip_mandrill.dispatcher" />
             </call>
             <tag name="doctrine.event_subscriber" connection="default" />

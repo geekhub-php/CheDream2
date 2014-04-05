@@ -14,7 +14,7 @@ class DreamSubscriber implements EventSubscriber
 {
     protected $container;
 
-    protected $dispatcher;
+    protected $mandrillDispatcher;
 
     /**
      * @param Container $container
@@ -27,9 +27,9 @@ class DreamSubscriber implements EventSubscriber
     /**
      * @param Dispatcher $dispatcher
      */
-    public function setDispatcher(Dispatcher $dispatcher)
+    public function setMandrillDispatcher(Dispatcher $dispatcher)
     {
-        $this->dispatcher = $dispatcher;
+        $this->mandrillDispatcher = $dispatcher;
     }
 
     public function getSubscribedEvents()
@@ -192,6 +192,6 @@ class DreamSubscriber implements EventSubscriber
             ->setHtml($body)
         ;
 
-        $this->dispatcher->send($message);
+        $this->mandrillDispatcher->send($message);
     }
 }
