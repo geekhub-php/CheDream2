@@ -153,6 +153,5 @@ braincrafted_bootstrap:
 hip_mandrill:
     api_key: BGjBjUYtREBY1fHMABnofg
     default:
-        sender: ahonymous@gmail.com
-        sender_name: John Doe
-#        subaccount: chedream
+        sender: "%admin.mail%"
+        sender_name: Черкаська мрія
