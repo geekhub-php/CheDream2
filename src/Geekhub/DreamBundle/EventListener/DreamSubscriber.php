@@ -61,6 +61,9 @@ class DreamSubscriber implements EventSubscriber
         $object = $args->getObject();
         $template = $this->container->get('templating');
         $admin = $this->container->getParameter('admin.mail');
+        $scheme = $this->container->get('router')->getContext()->getScheme();
+        $host = $this->container->get('router')->getContext()->getHost();
+        $baseUrl = sprintf('%s://%s', $scheme, $host);
 
         if ($object instanceof Status) {
             $dream = $object->getDream();
@@ -168,7 +171,8 @@ class DreamSubscriber implements EventSubscriber
                     'GeekhubResourceBundle:Email:contribution.html.twig',
                     array(
                         'dream' => $object->getDream(),
-                        'contributor' => $object
+                        'contributor' => $object,
+                        'baseUrl' => $baseUrl
                     )
                 ),
                 $object->getUser()->getEmail(),
