@@ -1,0 +1,9 @@
+Geekhub\DreamBundle\Entity\Dream:
+    exclusion_policy: ALL
+    properties:
+        title:
+            expose: true
+            type: string
+        slug:
+            expose: true
+            type: string
