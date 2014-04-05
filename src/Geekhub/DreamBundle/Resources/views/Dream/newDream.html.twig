@@ -103,37 +103,82 @@
             <ul class="row form-list">
                 <li class="col-md-4">
                     <span class="resource-caption"><span class="icon-resource icon-money"></span>Фінансові витрати</span>
-                    <ul class="list-unstyled financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                    <ul class="resources-list financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
                         {% for finance in form.dreamFinancialResources %}
                             <li class="collection-form">
                                 {{ form_widget(finance) }}
                                 {{ form_errors(finance) }}
                             </li>
                         {% endfor %}
+                        
+                        <li class="labels-block block-type-1">
+                            <span class="resource-label width-1">Стаття витрати</span>
+                            <span class="resource-label width-2">Сума, грн</span>
+                        </li>
+                        <li class="input-block block-type-1">
+                            <div class="form-group">
+                                <input type="text" class="resource-field width-1" name="">
+                                <input type="text" class="resource-field width-2" name="">
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <a href="#add-financial-resource" class="btn-add"><span class="icon-add"></span></a>
+                        </li>
                     </ul>
                 </li>
                 
                 <li class="col-md-4">
                     <span class="resource-caption equipment-caption"><span class="icon-resource icon-equipment"></span>Інструменти / обладнання <br />техніка</span>
-                    <ul class="list-unstyled equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                    <ul class="resources-list equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                         {% for equipment in form.dreamEquipmentResources %}
                             <li class="collection-form">
                                 {{ form_widget(equipment) }}
                                 {{ form_errors(equipment) }}
                             </li>
                         {% endfor %}
+                        
+                        <li class="labels-block block-type-2">
+                            <span class="resource-label width-1">Назва</span>
+                            <span class="resource-label width-2">Одиниця виміру</span>
+                            <span class="resource-label width-3">Кільк.</span>
+                        </li>
+                        <li class="input-block block-type-2">
+                            <input type="text" class="resource-field width-1" name="">
+                            <input type="text" class="resource-field width-2" name="">
+                            <input type="text" class="resource-field width-3" name="">
+                        </li>
+                        
+                        <li>
+                            <a href="#add-equipment-resource" class="btn-add"><span class="icon-add"></span></a>
+                        </li>
                     </ul>
                 </li>
                 
                 <li class="col-md-4">
                     <span class="resource-caption"><span class="icon-resource icon-people"></span>Роботи та ресурси</span>
-                    <ul class="list-unstyled workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                    <ul class="resources-list workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
                         {% for work in form.dreamWorkResources %}
                             <li class="collection-form">
                                 {{ form_widget(work) }}
                                 {{ form_errors(work) }}
                             </li>
                         {% endfor %}
+                        
+                        <li class="labels-block block-type-3">
+                            <span class="resource-label width-1">Назва робіт</span>
+                            <span class="resource-label width-2">Чоловік</span>
+                            <span class="resource-label width-3">Днів</span>
+                        </li>
+                        <li class="input-block block-type-3">
+                            <input type="text" class="resource-field width-1" name="">
+                            <input type="text" class="resource-field width-2" name="">
+                            <input type="text" class="resource-field width-3" name="">
+                        </li>
+                        
+                        <li>
+                            <a href="#add-human-resource" class="btn-add"><span class="icon-add"></span></a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -142,8 +187,9 @@
         <div class="hidden">
             {{ form_rest(form) }}
         </div>
-        
-        <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="btn btn-primary">{{ 'dream.create'|trans }}</button>
+        <div class="buttons-block">
+            <button type="button" data-toggle="modal" data-target="#dreamConfirmModal" class="custom-btn btn-green">{{ 'dream.create'|trans }}</button>
+        </div>
         {{ form_end(form) }}
     </div> <!--/Content-->
     {% include 'GeekhubDreamBundle:includes:dreamConfirmModal.html.twig' %}
