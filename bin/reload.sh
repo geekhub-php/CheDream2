@@ -9,6 +9,9 @@ rm -rf app/logs/*
 APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1`
 
 mkdir -p web/upload/media
+rm -rf web/upload/media/*
+rm -rf web/upload/dream/*
+rm -rf web/upload/tmp/*
 
 setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
 setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload

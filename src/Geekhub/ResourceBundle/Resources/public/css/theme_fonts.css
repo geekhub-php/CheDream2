@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
     font-family: 'Daxpro';
     src: url('/fonts/daxpro-webfont.eot');
     src: url('/fonts/daxpro-webfont.eot?#iefix') format('embedded-opentype'),
@@ -17,9 +17,9 @@
          url('/fonts/daxpro-bold-webfont.svg#dax_probold') format('svg');
     font-weight: bold;
     font-style: normal;
-}
+}*/
 
-/*@font-face {
+@font-face {
     font-family: 'Daxpro';
     src: url('../fonts/daxpro-webfont.eot');
     src: url('../fonts/daxpro-webfont.eot?#iefix') format('embedded-opentype'),
@@ -38,4 +38,4 @@
          url('../fonts/daxpro-bold-webfont.svg#dax_probold') format('svg');
     font-weight: bold;
     font-style: normal;
-}*/
+}

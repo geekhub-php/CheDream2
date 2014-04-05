@@ -10,22 +10,11 @@
 
         <title>{% block title %}Welcome{% endblock %}</title>
 
-        <link href="{{ asset('bundles/geekhubresource/css/temp/fontello.css') }}" rel="stylesheet">
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% endblock %}
         <link href="{{ asset('bundles/geekhubresource/css/theme_fonts.css') }}" rel="stylesheet">
-        
-        <link href="{{ asset('bundles/geekhubresource/css/base.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/sonataadmin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-        
-        <link href="{{ asset('bundles/geekhubresource/css/temp/jquery.tagit.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/geekhubresource/css/temp/tagit.ui-zendesk.css') }}" rel="stylesheet">
-        
-        <link href="{{ asset('bundles/geekhubdream/css/dream-style.css') }}" rel="stylesheet">
-        
-        <link href="{{ asset('bundles/geekhubresource/css/temp/blueimp-gallery.css') }}" rel="stylesheet">
-        
         <link href="{{ asset('bundles/geekhubresource/css/theme.css') }}" rel="stylesheet">
-
-        {% block stylesheets %}{% endblock %}
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -54,31 +43,27 @@
         {% endblock %}
 
         {% block javascript %}
-            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/bootstrap.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/bc-bootstrap-collection.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/holder.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery-ui.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/tag-it.js') }}"></script>
-            
-            <script src="{{ asset('bundles/geekhubdream/js/createDream.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubdream/js/tags.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubdream/js/uploadFile.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubuser/js/avatar_upload.js') }}"></script>
-            
-            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.ui.widget.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.fileupload.js') }}"></script>
-            <script src="{{ asset('bundles/geekhubresource/js/temp/jquery.fileupload.js') }}"></script>
-            
-            <script src="{{ asset('bundles/geekhubdream/js/removeMediaObj.js') }}"></script>
-            
-            <script src="{{ asset('bundles/geekhubresource/js/temp/blueimp-gallery.js') }}"></script>
-            
-            <script src="{{ asset('bundles/geekhubresource/js/frontend.js') }}"></script>
-            
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            {% javascripts
+            '../vendor/bower-components/jquery/jquery.js'
+            '../vendor/bower-components/bootstrap/dist/js/bootstrap.js'
+            '../vendor/bower-components/holderjs/holder.js'
+            '../vendor/bower-components/jquery-ui/ui/jquery-ui.js'
+            '../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js'
+            '../vendor/bower-components/tag-it/js/tag-it.js'
+            '../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js'
+            '../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js'
+            '../vendor/bower-components/hinclude/hinclude.js'
+            '../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js'
+            'bundles/fosjsrouting/js/router.js'
+            'bundles/bazingajstranslation/js/translator.min.js'
+            'bundles/geekhubresource/js/frontend.js'
+            '@GeekhubDreamBundle/Resources/public/js/*'
+            '@GeekhubUserBundle/Resources/public/js/*'
+            output='js/scripts.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
             <script src="{{ url('bazinga_jstranslation_js') }}"></script>
         {% endblock %}
     </body>

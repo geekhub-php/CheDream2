@@ -10,12 +10,9 @@
 
         <title>{% block title %}Welcome{% endblock %}</title>
 
-        <link href="{{ asset('css/theme_fonts.css') }}" rel="stylesheet">
-        
-        <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/theme.css') }}" rel="stylesheet">
-
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% endblock %}
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -26,7 +23,7 @@
 
     <body>
         {% block body %}
-            <div class="main-wrap container">
+            <div class="container" id="wrap">
                 {% block menu %}
                     {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
                         {% block items %}
@@ -35,7 +32,7 @@
                     {% endembed %}
                 {% endblock %}
                 {% block main %}
-                    <div class="wrap">
+                    <div class="wrapper">
                         {% block content %}{% endblock content %}
                     </div>
                 {% endblock main %}
@@ -44,10 +41,26 @@
         {% endblock %}
 
         {% block javascript %}
-            <script src="{{ asset('js/scripts.min.js') }}"></script>
-            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            {% javascripts
+                '../vendor/bower-components/jquery/jquery.js'
+                '../vendor/bower-components/bootstrap/dist/js/bootstrap.js'
+                '../vendor/bower-components/holderjs/holder.js'
+                '../vendor/bower-components/jquery-ui/ui/jquery-ui.js'
+                '../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js'
+                '../vendor/bower-components/tag-it/js/tag-it.js'
+                '../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js'
+                '../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js'
+                '../vendor/bower-components/hinclude/hinclude.js'
+                '../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js'
+                'bundles/fosjsrouting/js/router.js'
+                'bundles/bazingajstranslation/js/translator.min.js'
+                '@GeekhubDreamBundle/Resources/public/js/*'
+                '@GeekhubUserBundle/Resources/public/js/*'
+                output='js/scripts.js'
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
             <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
             <script src="{{ url('bazinga_jstranslation_js') }}"></script>
         {% endblock %}
     </body>

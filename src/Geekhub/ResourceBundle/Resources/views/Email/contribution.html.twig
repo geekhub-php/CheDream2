@@ -1,0 +1,28 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block title %}
+    Ви долучилися до мрії!!!
+{% endblock title %}
+
+{% block body %}
+    <p>
+        Мрія {{ dream.author.firstName}} {{ dream.author.lastName }} <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> отримала Вашу підтримку.
+    </p>
+    <p>
+        Опис мрії:
+    </p>
+    <p>
+        <img src="{{ baseUrl }}{% path dream.mediaPoster, 'big' %}" />
+        <br/>
+        {{ dream.description|raw }}
+    </p>
+    <p>
+        Ви запропонували:
+    </p>
+    <ul class="list-unstyled">
+        {{ finContribute(contributor.user, dream)|raw }}
+        {{ equipContribute(contributor.user, dream)|raw }}
+        {{ workContribute(contributor.user, dream)|raw }}
+        {{ otherContribute(contributor.user, dream)|raw }}
+    </ul>
+{% endblock body %}

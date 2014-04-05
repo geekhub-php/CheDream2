@@ -1,0 +1,9 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block title %}
+    Успішна реєстрація
+{% endblock title %}
+
+{% block body %}
+    Ви зареєстровані на <a href="{{ url('geekhub_dream_homepage') }}">Черкаcькій мрії</a> як {{ user }}.
+{% endblock body %}

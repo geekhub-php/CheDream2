@@ -39,7 +39,9 @@ class LoadUserData extends AbstractMediaLoader implements OrderedFixtureInterfac
             $user = new User();
 
             $user->setUsername($key);
-            $user->setEmail($key.'@example.com');
+            $user->setEmail(
+                $key != 'admin' ? $key.'@example.com' : $this->container->getParameter('admin.mail')
+            );
             $user->setEnabled(true);
             $user->setPlainPassword($key);
             $user->setFirstName(array_key_exists('firstName', $item) ? $item['firstName'] : null);
