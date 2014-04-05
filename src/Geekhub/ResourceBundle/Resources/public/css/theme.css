@@ -49,18 +49,25 @@ img                            { vertical-align: middle; }
     padding: 0 0 0 2px;
 }
 
-.input-block input {
+.input-block input,
+.input-block select.input-view {
     height: 37px;
     padding-left: 10px;
     padding-right: 10px;
 }
 .input-block input,
 .input-block textarea,
+.input-block select.input-view,
 .input-block input:focus,
 .input-block textarea:focus {
     border: 1px solid #E1E1E1;
     border-radius: 0;
     box-shadow: none;
+    background: #FFF;
+}
+.input-block select.input-view {
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 .input-block textarea {
     resize: vertical;
@@ -792,7 +799,8 @@ img                            { vertical-align: middle; }
     display: inline-block;
     padding-bottom: 3px;
 }
-.resources-list .resource-field {
+.resources-list .resource-field,
+.resources-list select.resource-field {
     height: 100%;
 }
 .resources-list .resource-label,

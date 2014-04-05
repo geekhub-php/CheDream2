@@ -111,19 +111,27 @@
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-1">
+                        <li class="labels-block block-type-1" data-labels>
                             <span class="resource-label width-1">Стаття витрати</span>
                             <span class="resource-label width-2">Сума, грн</span>
                         </li>
-                        <li class="input-block block-type-1">
+                        <li class="input-block block-type-1" data-template>
                             <div class="form-group">
-                                <input type="text" class="resource-field width-1" name="">
-                                <input type="text" class="resource-field width-2" name="">
+                                <input
+                                       type="text"
+                                       class="resource-field width-1"
+                                       required="required"
+                                       data-name="newDreamForm[dreamFinancialResources][][title]">
+                                <input
+                                       type="number"
+                                       class="resource-field width-2"
+                                       required="required"
+                                       data-name="newDreamForm[dreamFinancialResources][][quantity]">
                             </div>
                         </li>
                         
                         <li>
-                            <a href="#add-financial-resource" class="btn-add"><span class="icon-add"></span></a>
+                            <a href="#add-financial-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
                     </ul>
                 </li>
@@ -138,19 +146,34 @@
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-2">
+                        <li class="labels-block block-type-2" data-labels>
                             <span class="resource-label width-1">Назва</span>
                             <span class="resource-label width-2">Одиниця виміру</span>
                             <span class="resource-label width-3">Кільк.</span>
                         </li>
-                        <li class="input-block block-type-2">
-                            <input type="text" class="resource-field width-1" name="">
-                            <input type="text" class="resource-field width-2" name="">
-                            <input type="text" class="resource-field width-3" name="">
+                        <li class="input-block block-type-2" data-template>
+                            <input
+                                   type="text"
+                                   class="resource-field width-1"
+                                   required="required"
+                                   data-name="newDreamForm[dreamEquipmentResources][][title]">
+                            <select
+                                    class="resource-field input-view width-2"
+                                    required="required"
+                                    data-name="newDreamForm[dreamEquipmentResources][][quantityType]">
+                                <option value="piece">штук</option>
+                                <option value="kg">кг.</option>
+                                <option value="ton">тон</option>
+                            </select>
+                            <input
+                                   type="number"
+                                   class="resource-field width-3"
+                                   required="required"
+                                   data-name="newDreamForm[dreamEquipmentResources][][quantity]">
                         </li>
                         
                         <li>
-                            <a href="#add-equipment-resource" class="btn-add"><span class="icon-add"></span></a>
+                            <a href="#add-equipment-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
                     </ul>
                 </li>
@@ -165,19 +188,31 @@
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-3">
+                        <li class="labels-block block-type-3" data-labels>
                             <span class="resource-label width-1">Назва робіт</span>
                             <span class="resource-label width-2">Чоловік</span>
                             <span class="resource-label width-3">Днів</span>
                         </li>
-                        <li class="input-block block-type-3">
-                            <input type="text" class="resource-field width-1" name="">
-                            <input type="text" class="resource-field width-2" name="">
-                            <input type="text" class="resource-field width-3" name="">
+                        <li class="input-block block-type-3" data-template>
+                            <input
+                                   type="text"
+                                   class="resource-field width-1"
+                                   required="required"
+                                   data-name="newDreamForm[dreamWorkResources][][title]">
+                            <input
+                                   type="number"
+                                   class="resource-field width-2"
+                                   required="required"
+                                   data-name="newDreamForm[dreamWorkResources][][quantity]">
+                            <input
+                                   type="number"
+                                   class="resource-field width-3"
+                                   required="required"
+                                   data-name="newDreamForm[dreamWorkResources][][quantityDays]">
                         </li>
                         
                         <li>
-                            <a href="#add-human-resource" class="btn-add"><span class="icon-add"></span></a>
+                            <a href="#add-human-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
                     </ul>
                 </li>
