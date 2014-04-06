@@ -248,23 +248,6 @@ class DreamController extends Controller
     }
 
     /**
-     * @View(templateVar="dreams")
-     */
-    public function viewAllDreamsAction($status, $offset)
-    {
-        $limit = $this->container->getParameter('count_dreams_on_home_page');
-        $dreamRepository = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream');
-        switch ($status) {
-            case "new":
-                return $dreamRepository->findBy(array(), array('createdAt' => 'ASC') , $limit, $offset);
-            case "popular":
-                return $dreamRepository->findPopularDreams($limit, $offset);
-            default:
-                return $dreamRepository->findBy(array('currentStatus' => $status), array('createdAt' => 'ASC') , $limit, $offset);
-        }
-    }
-
-    /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
      */
     public function rejectDreamAction(Dream $dream, Request $request)
