@@ -48,10 +48,6 @@ dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }
 
-dream_admin_list:
-    pattern:  /dream/list
-    defaults: { _controller: GeekhubDreamBundle:Dream:adminDreamList }
-
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }

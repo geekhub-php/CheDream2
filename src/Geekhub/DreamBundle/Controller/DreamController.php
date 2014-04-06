@@ -131,18 +131,6 @@ class DreamController extends Controller
     }
 
     /**
-     * @View()
-     */
-    public function adminDreamListAction()
-    {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
-        }
-
-        return;
-    }
-
-    /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
      * @View(templateVar="dream, finForm, equipForm, workForm")
      */
