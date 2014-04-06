@@ -61,4 +61,4 @@ before_script:
 
 script:
     - bin/phpunit -c app
-    - bin/behat @GeekhubDreamBundle
+    - bin/behat @GeekhubDreamBundle -p phantomjs
