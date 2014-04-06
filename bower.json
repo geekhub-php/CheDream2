@@ -20,7 +20,8 @@
     "holderjs": "*",
     "blueimp-file-upload": "9.5.7",
     "blueimp-gallery": "2.14.0",
-    "fontello": "5.0.0"
+    "fontello": "5.0.0",
+    "hinclude": "~0.9.5"
   },
   "resolutions": {
     "jquery": "~1.10.1",

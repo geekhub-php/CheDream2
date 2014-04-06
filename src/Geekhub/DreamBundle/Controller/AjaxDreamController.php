@@ -74,18 +74,6 @@ class AjaxDreamController extends Controller
         return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
     }
 
-    public function loadMoreDreamsAction(Request $request)
-    {
-        $offset = $request->get('offset');
-        $limit = $this->container->getParameter('count_dreams_on_home_page');
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
-            ->getDreamsByTwoStatuses(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, $limit, $offset);
-
-        return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
-            'dreams' => $dreams,
-        ));
-    }
-
     public function loadFilteredDreamsForAdminAction(Request $request)
     {
         $statusCode = $request->get('status');
