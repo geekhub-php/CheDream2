@@ -17,7 +17,7 @@ class DreamAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
+            ->add('title', null, array())
             ->add('currentStatus')
         ;
     }
@@ -27,16 +27,6 @@ class DreamAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('currentStatus')
-            ->add('_action', 'actions', array(
-                    'label' => 'Дії',
-                    'actions' => array(
-                        'edit' => array(
-                            'route' => array(
-                                'name' => 'edit_dream'
-                            )
-                        ),
-                    )
-                ))
         ;
     }
-} 
+}
