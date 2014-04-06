@@ -14,16 +14,16 @@
 {% block javascript %}
     {{ parent() }}
     <script>
-        var loadDreams = function(startIndex) {
-            var path = Routing.generate('dream_ajax_loadMore_dreams');
-                $.post(path, {offset : startIndex })
-                        .done(function(response) {
-                            $(response).appendTo($('#dreams')).hide().fadeIn(300);
-                        })
-                        .error(function(msg) {
-                            console.log(msg);
-                        }
-                );
+        var loadDreams = function (startIndex) {
+            var path = Routing.generate('api_v1_get_dreams');
+            $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing'] })
+                    .done(function (response) {
+                        $(response).appendTo($('#dreams')).hide().fadeIn(300);
+                    })
+                    .error(function (msg) {
+                        console.log(msg);
+                    }
+            );
         };
 
         $(document).ready(function() {
@@ -32,9 +32,7 @@
 
             $(window).scroll(function() {
                 if($(window).height() + $(window).scrollTop() >= $(document).height()) {
-//                    startIndex = $('.dream-homepage-preview').length;
                     startIndex += 8;
-//                    console.log(startIndex);
                     loadDreams(startIndex);
                     console.log('end document scrolled');
                 }

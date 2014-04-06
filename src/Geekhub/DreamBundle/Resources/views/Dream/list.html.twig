@@ -4,26 +4,7 @@
     <div class="container" id="wrap">
         {% include 'GeekhubResourceBundle:includes:menu.html.twig' %}
         <div style="margin-top: 50px;">
-            {% for dream in dreams %}
-                <div class="row">
-                    <div class="col-md-4">
-                        {{ dream.title }} ({{ dream.author.firstName }} {{ dream.author.lastName }})
-                    </div>
-                    <div class="col-md-2">
-                        <a href="{{ path('view_dream', {'slug': dream.slug}) }}"> Show </a>
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            &nbsp;&nbsp;&nbsp;
-                            {% if (app.user.id == dream.author.id) or is_granted("ROLE_SUPER_ADMIN") %}
-                                <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    <div class="col-md-2">
-                        {{ dream.currentStatus }}
-                    </div>
-                    <div class="col-md-offset-4"></div>
-                </div>
-            {% endfor %}
+            {{ render(url('api_v1_get_dreams')) }}
         </div>
     </div>
     {% include 'GeekhubResourceBundle:includes:footer.html.twig' %}

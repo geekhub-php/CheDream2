@@ -123,11 +123,11 @@ class DreamController extends Controller
     }
 
     /**
-     * @View(templateVar="dreams")
+     * @View()
      */
     public function listAction()
     {
-        return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        return;
     }
 
     /**
