@@ -27,7 +27,8 @@ class DreamController extends Controller
      * @QueryParam(name="limit", requirements="\d+", default="8", description="Count dreams")
      * @QueryParam(name="offset", requirements="\d+", default="0", description="From what offset")
      * @QueryParam(name="user", description="Find all dream by user with given username")
-     * @QueryParam(array=true, name="orderBy", description="Array of order field")
+     * @QueryParam(name="orderBy", description="Order field name")
+     * @QueryParam(name="orderDirection", description="Order direction: asc or desc (if not specified - desc used)")
      * @QueryParam(array=true, name="statuses", description="Array of dreams statuses")
      * @QueryParam(name="template", default=false, description="From what offset")
      *
@@ -40,12 +41,27 @@ class DreamController extends Controller
             'currentStatus' => $paramFetcher->get('statuses'),
         );
 
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
-            array_filter($criteria),
-            $paramFetcher->get('orderBy'),
-            $paramFetcher->get('limit'),
-            $paramFetcher->get('offset')
-        );
+        $orderArray=array();
+        if ($paramFetcher->get('orderBy')) {
+            if ($paramFetcher->get('orderDirection')) {
+                $orderArray[$paramFetcher->get('orderBy')] = $paramFetcher->get('orderDirection');
+            }
+            else {
+                $orderArray[$paramFetcher->get('orderBy')] = 'DESC';
+            }
+        }
+
+        if ($paramFetcher->get('orderBy') == 'favouritesCount') {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findPopularDreams($paramFetcher->get('limit'), $paramFetcher->get('offset'));
+        }
+        else {
+            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
+                array_filter($criteria),
+                $orderArray,
+                $paramFetcher->get('limit'),
+                $paramFetcher->get('offset')
+            );
+        }
 
         if (!$paramFetcher->get('template')) {
             return $dreams;

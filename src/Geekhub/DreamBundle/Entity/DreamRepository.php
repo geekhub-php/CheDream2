@@ -20,9 +20,13 @@ class DreamRepository extends EntityRepository
        $query = $em->createQuery(
             'SELECT d, size(d.usersWhoFavorites) as numberFavorites
             FROM GeekhubDreamBundle:Dream d
+            WHERE d.currentStatus = :collectingResources or d.currentStatus = :implementing or d.currentStatus = :success
             ORDER BY numberFavorites desc'
         )->setMaxResults($limit)
-         ->setFirstResult($offset);
+         ->setFirstResult($offset)
+         ->setParameter('collectingResources', Status::COLLECTING_RESOURCES)
+         ->setParameter('implementing', Status::IMPLEMENTING)
+         ->setParameter('success', Status::SUCCESS);
          
          $dreamsArray =  new ArrayCollection();
          foreach ($query->getResult() as $dream) {

@@ -5,14 +5,15 @@
     <div class="btn-group">
        <button type="button" class="btn btn-default" id="new">Нові</button>
        <button type="button" class="btn btn-default" id="popular">Популярні</button>
-       <button type="button" class="btn btn-default" id="submitted">На стадії втілення</button>
+       <button type="button" class="btn btn-default" id="implementing">На стадії втілення</button>
        <button type="button" class="btn btn-default" id="success">Втілені</button>
     </div>   
     <div id="added_success"></div>
     <div class="row">
       <div id="dreams">
-        {{ render(controller('GeekhubDreamBundle:Dream:viewAllDreams', {'dreams': dreams, 'status': 'new', 'offset': 0})) }}
+        {# render(controller('GeekhubDreamBundle:Dream:viewAllDreams', {'dreams': dreams, 'status': 'new', 'offset': 0})) #}
       </div>
+    </div>
 
 {% endblock %}
 
@@ -20,62 +21,66 @@
     {{ parent() }}
 
     <script>
-    document.requestUrl="{{ path('view_all_dreams', {'status': 'new', 'offset': '1'}) }}";
-    document.requestUrl=document.requestUrl.substr(0, document.requestUrl.length-1);
-    document.offset=0;
+    
     document.load=0;
-    document.dreamStatus='new';
-    var dreamLoader = function(status, offset) {
-        var requestUrl=Routing.generate('view_all_dreams', {'status': status, 'offset': offset});
-        $.ajax({
-            type: "POST",
-            url: requestUrl,
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").html(html);
-                document.dreamStatus = status;
-                document.offset=0;
-            }
-        });
-    }
+    document.offset=0;
+    document.dreamStatuses = ['collecting-resources', 'implementing'];
+    document.orderBy='createdAt';
+
     var dreamUpdater = function() {
-        var requestUrl=Routing.generate('view_all_dreams', {'status': document.dreamStatus, 'offset': document.offset+8});
-        $.ajax({
-            type: "POST",
-            url: requestUrl,
-            data: "data=0",
-            cache: false,
-            success: function(html){
-                $("#dreams").append(html);
-                document.dreamStatus = status;
+        var path = Routing.generate('api_v1_get_dreams');
+        $.get(path, {offset: document.offset, statuses: document.dreamStatuses, orderBy: document.orderBy, orderDirection: document.orderDirection})
+            .done(function (response) {
+                $(response).appendTo($('#dreams')).hide().fadeIn(300);
                 document.offset=document.offset + 8;
-            }
-        });
+                })
+            .error(function (msg) {
+                console.log(msg);
+                });
     }
 
 
     $('#new').on('click', function() {
         document.load = true;
-        dreamLoader('new', 0);
+        document.offset = 0;
+        document.dreamStatuses = ['collecting-resources'];
+        document.orderBy = 'createdAt';
+        document.orderDirection = 'desc';
+        $('#dreams').empty();
+        dreamUpdater();
         document.load = false;
     });
 
     $('#popular').on('click', function() {
         document.load = true;
-        dreamLoader('popular', 0);
+        document.offset = 0;
+        document.dreamStatuses = ['collecting-resources', 'implementing'];
+        document.orderBy = 'favouritesCount';
+        document.orderDirection = 'desc';
+        $('#dreams').empty();
+        dreamUpdater();
         document.load = false;
     });
 
-    $('#submitted').on('click', function() {
+    $('#implementing').on('click', function() {
         document.load = true;
-        dreamLoader('submitted', 0);
+        document.offset = 0;
+        document.dreamStatuses = ['implementing'];
+        document.orderBy = 'createdAt';
+        document.orderDirection = 'desc';
+        $('#dreams').empty();
+        dreamUpdater();
         document.load = false;
     });
 
     $('#success').on('click', function() {
         document.load = true;
-        dreamLoader('success', 0);
+        document.offset = 0;
+        document.dreamStatuses = ['completed', 'success'];
+        document.orderBy = 'createdAt';
+        document.orderDirection = 'desc';
+        $('#dreams').empty();
+        dreamUpdater();
         document.load = false;
     });
 
@@ -87,6 +92,7 @@
         }
     });
 
+    dreamUpdater();
 
     </script>
 {% endblock %}
