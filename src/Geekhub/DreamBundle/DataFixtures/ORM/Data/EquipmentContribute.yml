@@ -19,7 +19,7 @@ cequipment4:
     hidden:       0
     resource:      requipment4
 cequipment5:
-    user:         darthvaider
+    user:         darthVader
     quantity:     1
     hidden:       0
     resource:      requipment5

@@ -26,7 +26,7 @@ class OtherContributeType extends AbstractType
                 'label' => 'dream.other.title'))
             ->add('hiddenContributor', 'checkbox', array(
                 'label'     => 'hide.contribute',
-                'disabled' => true,
+                'disabled' => false,
                 'required'  => false, ));
     }
 

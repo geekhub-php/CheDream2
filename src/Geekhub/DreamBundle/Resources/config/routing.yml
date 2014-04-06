@@ -99,3 +99,12 @@ dream_ajax_load_filtered_dreams_for_admin:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadFilteredDreamsForAdmin }
     options:
         expose: true
+
+geekhub_dream_forntend:
+    resource: "@GeekhubDreamBundle/Resources/config/routing/frontend.yml"
+    prefix:   /
+
+geekhub_dream_api_v1:
+    resource: "@GeekhubDreamBundle/Resources/config/routing/api_v1.yml"
+    prefix:   /api
+    type:     rest

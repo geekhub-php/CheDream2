@@ -32,22 +32,6 @@ class DreamRepository extends EntityRepository
         return $dreamsArray;
     }
 
-    public function getDreamsByTwoStatuses($status, $status2, $limit, $offset)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT d
-                           FROM GeekhubDreamBundle:Dream d
-                           where d.currentStatus = :status
-                           or d.currentStatus = :status2
-                           order by d.id
-                           ')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
-            ->setParameter('status', $status)
-            ->setParameter('status2', $status2)
-            ->getResult();
-    }
-
     public function getCountContributorsByDream(Dream $dream)
     {
         return count($this->getArrayContributorsByDream($dream));

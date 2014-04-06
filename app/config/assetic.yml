@@ -1,9 +1,6 @@
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:
-        - GeekhubResourceBundle
     filters:
         cssrewrite: ~
         yui_css:
@@ -26,25 +23,4 @@ assetic:
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/css/blueimp-gallery.css
             filters:
                 - cssrewrite
-                - yui_css
-            output: css/style.min.css
-        scripts:
-            inputs:
-                - %kernel.root_dir%/../vendor/bower-components/jquery/jquery.js
-                - %kernel.root_dir%/../vendor/bower-components/bootstrap/dist/js/bootstrap.js
-                - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js
-                - %kernel.root_dir%/../vendor/bower-components/holderjs/holder.js
-                - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery-ui.js
-                - %kernel.root_dir%/../vendor/bower-components/tag-it/js/tag-it.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/createDream.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/tags.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/uploadFile.js
-                - %kernel.root_dir%/../src/Geekhub/UserBundle/Resources/public/js/avatar_upload.js
-                - %kernel.root_dir%/../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js
-                - %kernel.root_dir%/../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/removeMediaObj.js
-                - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js
-                - %kernel.root_dir%/../src/Geekhub/DreamBundle/Resources/public/js/favorite.js
-            filters: [yui_js]
-            output: js/scripts.min.js
-
+            output: css/style.css
