@@ -251,11 +251,11 @@ class DreamController extends Controller
                 $dream->addStatus(new Status(Status::REJECTED));
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('dream_admin_list'));
+                return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
             }
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -272,10 +272,10 @@ class DreamController extends Controller
             $dream->setRejectedDescription(null);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -367,10 +367,10 @@ class DreamController extends Controller
             $dream->addStatus(new Status(Status::SUCCESS));
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -386,10 +386,10 @@ class DreamController extends Controller
             $dream->addStatus(new Status(Status::FAIL));
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     private function isAuthor(Dream $dream)
