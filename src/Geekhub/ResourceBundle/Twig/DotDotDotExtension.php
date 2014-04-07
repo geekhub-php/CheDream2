@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekhub\UserBundle\Services;
+namespace Geekhub\ResourceBundle\Twig;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -16,12 +16,14 @@ class DotDotDotExtension extends \Twig_Extension
 
     public function dotdotdotFilter($text, $number = 20)
     {
-        if (mb_strlen($text)>$number) {
-            $newText=mb_substr($text,0,$number);
+        $decodedText=iconv( mb_detect_encoding($text, mb_detect_order(), true), 'windows-1251', $text);
+
+        if (mb_strlen($decodedText)>$number) {
+            $newText=mb_substr($decodedText,0,$number);
+            $newText=iconv("windows-1251", "UTF-8", $newText);
             $newText=$newText."...";
 
             return $newText;
-
         }
         else {
 
@@ -31,6 +33,7 @@ class DotDotDotExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'chabanenk0_twig_extension';
+        return 'geekhub_twig_extension';
     }
 }
+ 

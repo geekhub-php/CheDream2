@@ -23,15 +23,6 @@
                 <a href="{{ path('dream_list') }}">Мрії</a>
             </li>
 
-            {% if is_granted("ROLE_SUPER_ADMIN") %}
-                <li>
-                    <a href="{{ path('dream_admin_list') }}">
-                        <span class="glyphicon glyphicon-asterisk"></span>
-                        admin list
-                    </a>
-                </li>
-            {% endif %}
-
             <li>
                 <a href="{{ path('faq') }}">
                     <span class="glyphicon glyphicon-question-sign"></span>
