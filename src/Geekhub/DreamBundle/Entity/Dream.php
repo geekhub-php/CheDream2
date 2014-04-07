@@ -140,6 +140,13 @@ class Dream implements Taggable
     protected $usersWhoFavorites;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="favoritesCount", type="integer", nullable=false)
+     */
+    protected $favoritesCount;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
@@ -230,6 +237,7 @@ class Dream implements Taggable
     public function __construct()
     {
         $this->usersWhoFavorites = new ArrayCollection();
+        $this->favoritesCount = 0;
         $this->statuses = new ArrayCollection();
         $this->mediaPictures = new ArrayCollection();
         $this->mediaCompletedPictures = new ArrayCollection();
@@ -546,6 +554,7 @@ class Dream implements Taggable
     public function addUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
     {
         $this->usersWhoFavorites[] = $usersWhoFavorites;
+        $this->favoritesCount = $this->usersWhoFavorites->count();
 
         return $this;
     }
@@ -558,6 +567,7 @@ class Dream implements Taggable
     public function removeUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
     {
         $this->usersWhoFavorites->removeElement($usersWhoFavorites);
+        $this->favoritesCount = $this->usersWhoFavorites->count();
     }
 
     /**
@@ -568,6 +578,16 @@ class Dream implements Taggable
     public function getUsersWhoFavorites()
     {
         return $this->usersWhoFavorites;
+    }
+
+    /**
+     * Get favoritesCount
+     *
+     * @return integer
+     */
+    public function getFavoritesCount()
+    {
+        return $this->favoritesCount;
     }
 
     /**

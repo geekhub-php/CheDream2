@@ -123,22 +123,10 @@ class DreamController extends Controller
     }
 
     /**
-     * @View(templateVar="dreams")
+     * @View()
      */
     public function listAction()
     {
-        return $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findAll();
-    }
-
-    /**
-     * @View()
-     */
-    public function adminDreamListAction()
-    {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
-        }
-
         return;
     }
 
@@ -263,11 +251,11 @@ class DreamController extends Controller
                 $dream->addStatus(new Status(Status::REJECTED));
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('dream_admin_list'));
+                return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
             }
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -284,10 +272,10 @@ class DreamController extends Controller
             $dream->setRejectedDescription(null);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -379,10 +367,10 @@ class DreamController extends Controller
             $dream->addStatus(new Status(Status::SUCCESS));
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
     }
 
     /**
@@ -398,10 +386,33 @@ class DreamController extends Controller
             $dream->addStatus(new Status(Status::FAIL));
             $em->flush();
 
-            return $this->redirect($this->generateUrl('dream_admin_list'));
+            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('dream_admin_list'));
+        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
+    }
+
+    public function searchAction(Request $request)
+    {
+        $searchingText = strip_tags(trim($request->get('search_text')));
+
+        if ($searchingText == null or $searchingText == ' ')
+            return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+
+        return $this->redirect($this->generateUrl('dream_search_text', array('text' => $searchingText)));
+    }
+
+    /**
+     * @View()
+     */
+    public function searchDreamAction($text)
+    {
+        $dreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->searchDreams($text);
+
+        return array(
+            'dreams' => $dreams,
+            'search_text' => $text
+        );
     }
 
     private function isAuthor(Dream $dream)

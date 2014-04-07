@@ -2,6 +2,7 @@
 
 namespace Geekhub\DreamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,21 +13,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
-    public function getDreamsByTwoStatuses($status, $status2, $limit, $offset)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT d
-                           FROM GeekhubDreamBundle:Dream d
-                           where d.currentStatus = :status
-                           or d.currentStatus = :status2
-                           order by d.id
-                           ')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
-            ->setParameter('status', $status)
-            ->setParameter('status2', $status2)
-            ->getResult();
-    }
 
     public function getCountContributorsByDream(Dream $dream)
     {
@@ -160,6 +146,24 @@ class DreamRepository extends EntityRepository
                            ')
             ->setParameter('work', $work)
             ->setParameter('dream', $dream)
+            ->getResult();
+    }
+
+    public function searchDreams($text)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT d
+                           FROM GeekhubDreamBundle:Dream d
+                           where
+                           ( d.title like :search_text or d.description like :search_text )
+                           and
+                           ( d.currentStatus = :status1 or d.currentStatus = :status2 or d.currentStatus = :status3 )
+                           order by d.id
+                           ')
+            ->setParameter('search_text', '%'.$text.'%')
+            ->setParameter('status1', Status::COLLECTING_RESOURCES)
+            ->setParameter('status2', Status::IMPLEMENTING)
+            ->setParameter('status3', Status::SUCCESS)
             ->getResult();
     }
 

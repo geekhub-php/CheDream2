@@ -2,30 +2,34 @@
     <!-- Indicators -->
     <ol class="carousel-indicators">
         {% for completedDream in completedDreams %}
-            {% if loop.index == 1 %}
-                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
-            {% else %}
-                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
+            {% if completedDream.mediaPoster is not null %}
+                {% if loop.index == 1 %}
+                    <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+                {% else %}
+                    <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1 }}"></li>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ol>
 
     <div class="carousel-inner">
         {% for completedDream in completedDreams %}
-            {% if loop.index == 1 %}
-                {% set classStyle = 'item active' %}
-            {% else %}
-                {% set classStyle = 'item' %}
-            {% endif %}
-            <div class="{{ classStyle }}">
-                <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h3><a href="{{ path('profile_view', {'id': completedDream.author.id}) }}" style="color: #fff;"> {{ completedDream.author.firstName }} {{ completedDream.author.lastName }} </a></h3>
-                        <p><a href="{{ path('view_dream', {'slug': completedDream.slug} ) }}" style="color: #fff;" >{{ completedDream.title }}</a></p>
+            {% if completedDream.mediaPoster is not null %}
+                {% if loop.index == 1 %}
+                    {% set classStyle = 'item active' %}
+                {% else %}
+                    {% set classStyle = 'item' %}
+                {% endif %}
+                <div class="{{ classStyle }}">
+                    <img src="{{ completedDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ completedDream.mediaPoster.name }}">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h3><a href="{{ path('profile_view', {'id': completedDream.author.id}) }}" style="color: #fff;"> {{ completedDream.author.firstName }} {{ completedDream.author.lastName }} </a></h3>
+                            <p><a href="{{ path('view_dream', {'slug': completedDream.slug} ) }}" style="color: #fff;" >{{ completedDream.title }}</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 

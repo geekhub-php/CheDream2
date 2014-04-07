@@ -40,39 +40,47 @@
                 {% endif %}
                 <p> {{ user.about|raw }} </p>
              </div>
+              {% if userDreams is not empty %}
              <div class="row">
                 <div class="col-md-7">
                   <h4>Автор проектів: </h4>
                 </div>
-                <div class="btn btn-primary" id="submitted"> На стадії проекту </div>
-                <div class="btn btn-primary" id="success"> Втілені </div>
-             </div>   
-             <div class="row">
-              <div id="user-dreams">
-               {% for dream in user.dreams %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
-               {% endfor %}
-              </div>
-             </div>
+                <div class="btn btn-primary" id="any"> Усі мрії </div>
+                <div class="btn btn-primary" id="projects"> На стадії проекту </div>
+                <div class="btn btn-primary" id="implemented"> Втілені </div>
+                </div>  
+                <div class="row">
+                 <div id="user-dreams">
+                   {% for dream in userDreams %}
+                         {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                   {% endfor %}
+                 </div>
+                </div> 
+             {% endif %} 
+             {% if contributedDreams is not empty %}
              <div class="row">
                <h4>Учасник проектів: </h4>
              </div>
              <div class="row">
                {% for dream in contributedDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_contrib_min.html.twig', {'dream': dream}) }}
+               {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
                {% endfor %}
              </div>
+             {% endif %} 
+             {% if user.favoriteDreams is not empty %}
              <div class="row">
                <h4>Favs: </h4>
              </div>
              <div class="row">
                {% for dream in user.favoriteDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_min.html.twig', {'dream': dream}) }}
+               {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
                {% endfor %}
-             </div>
-           </div>
-          </div>
-        </div>
+             </div> 
+             {% endif %} 
+           </div> {# class="col-md-8" right col #}
+          </div> {# class=row (main row) #} 
+        </div> {# style=padding 5% #}
+      </div> {# margin-top 50px#}
     
 {% endblock content %}
 
@@ -80,10 +88,10 @@
 
    {{ parent() }}
    <script>
-   $('#submitted').on("click",function() {
+   $('#any').on("click",function() {
          $.ajax({
             type: "POST",
-            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'submitted'})}}",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'any'})}}",
             data: "data=0",
             cache: false,
             success: function(html){
@@ -94,10 +102,26 @@
             }
         });
    });
-   $('#success').on("click",function() {
+
+
+   $('#projects').on("click",function() {
          $.ajax({
             type: "POST",
-            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'success'})}}",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'projects'})}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#user-dreams").html(html);
+            },
+            error: function (html) {
+                $("#user-dreams").html('No dreams yet');
+            }
+        });
+   });
+   $('#implemented').on("click",function() {
+         $.ajax({
+            type: "POST",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'implemented'})}}",
             data: "data=0",
             cache: false,
             success: function(html){

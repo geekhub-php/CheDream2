@@ -35,12 +35,12 @@
             <br/>
             <div id="dream-files">
                 {% for file in dreamFiles %}
-                    <a href="{% path file, 'reference' %}"  data-idmedia="{{ file.id }}"> {{ file }} </a>
+                    <a href="{{ file|mediaPath }}"  data-idmedia="{{ file.id }}"> {{ file.name }} </a>
                 {% endfor %}
             </div>
             <div id="dream-videos">
                 {% for video in dreamVideos %}
-                    <img src="../{% path video, 'video_prew' %}" class="img-thumbnail"  data-idmedia="{{ video.id }}">
+                    <img src="{{ video|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ video.id }}"/>
                 {% endfor %}
             </div>
 

@@ -6,7 +6,7 @@ dream1:
     expiredDate:  01.01.2015
     mediaPoster:  moon
     tags:         [місяць, джедай, навчання]
-    status:       submitted
+    status:       implementing
 dream2:
     author:       chewbacca
     title:        Новенький зореліт
@@ -24,7 +24,7 @@ dream3:
     expiredDate:  01.01.2015
     mediaPoster:  star
     tags:         [транспорт, starship, зброя]
-    status:       submitted
+    status:       collecting-resources
 dream4:
     author:       c3pio
     title:        Лівий протез
