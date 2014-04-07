@@ -67,7 +67,7 @@ class RegistrationSubscriber implements EventSubscriber
 
         if($user instanceof User)
         {
-            if (!strstr($user->getEmail(),'@')) {
+            if (strstr($user->getEmail(),'@example.com')) {
                 $routeName = $this->container->get('request')->get('_route');
                 $uri =$this->container->get('request')->getUri();
                 if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {

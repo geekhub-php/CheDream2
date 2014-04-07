@@ -17,7 +17,7 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         $user->setFirstName($responseArray['first_name']);
         $user->setMiddleName('');
         $user->setLastName($responseArray['last_name']);
-        $user->setEmail($user->getOdnoklassnikiId().'odnoklassniki.ru');
+        $user->setEmail($user->getOdnoklassnikiId().'@example.com');
         $user->setBirthday(new \DateTime($responseArray['birthday']));
 
         $token = $response->getAccessToken();
