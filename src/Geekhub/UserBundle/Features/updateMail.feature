@@ -27,11 +27,10 @@ Feature: Update user's email feature
     And I fill in "password" with "darthVader"
     When I press "_submit"
     Then I should be on "/user/updateContacts"
-    And I fill in "newUserForm[lastName]" with "darthVader"
     And I fill in "newUserForm[phone]" with "+380671234567"
     And I fill in "newUserForm[email]" with "realDarthVadersEmail@mail.ru"
     When I press "_submit"
     Then should be on "/"
     And I am on "/users/3"
-    And I should see "darthVader"
+    And I should see "Darth Vader"
   

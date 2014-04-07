@@ -25,12 +25,16 @@ Feature: Create dream feature
     Given I am login as "darthVader" with password "darthVader"
     And I am on "/dreams"
     And I press "Нові"
+    And I wait 4 seconds
     And I should see "Зірка смерті"
     And I press "Популярні"
+    And I wait 4 seconds
     And I should see "Зірка смерті"
     And I should see "Політ на Місяць"
     And I press "На стадії втілення"
+    And I wait 4 seconds
     And I should see "Політ на Місяць"
     And I press "Втілені"
+    And I wait 4 seconds
     And I should see "Новенький зореліт"
     And I should see "Lorem ipsum"

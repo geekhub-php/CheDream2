@@ -37,6 +37,7 @@ Feature: Create dream feature
     And I am on "/dream/new"
     And I should see "create or edit your dream"
     And I fill in "newDreamForm_title" with "Hello! This is my first dream!"
+    And I wait 3 seconds
     And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     And I fill in hidden "newDreamForm_tags" with "Hello, world"
     And I press "Створити"
