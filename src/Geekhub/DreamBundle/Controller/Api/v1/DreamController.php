@@ -41,10 +41,7 @@ class DreamController extends Controller
             'currentStatus' => $paramFetcher->get('statuses'),
         );
 
-        $orderArray=array();
-        if ($paramFetcher->get('orderBy')) {
-            $orderArray[$paramFetcher->get('orderBy')] = $paramFetcher->get('orderDirection');
-        }
+        $orderArray = $paramFetcher->get('orderBy') ? [$paramFetcher->get('orderBy') => $paramFetcher->get('orderDirection')] : array();
 
         $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
             array_filter($criteria),
