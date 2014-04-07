@@ -68,6 +68,7 @@ class RegistrationSubscriber implements EventSubscriber
             $dispatcher->send($message);
         }
     }
+
     public function onKernelRequest(GetResponseEvent $event)
     {
         //$user = $event->getAuthenticationToken()->getUser();
