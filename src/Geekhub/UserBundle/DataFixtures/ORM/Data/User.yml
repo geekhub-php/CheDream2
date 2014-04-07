@@ -4,24 +4,33 @@ admin:
     roles:      [ROLE_SUPER_ADMIN]
 yoda:
     firstName:  Yoda
+    email:  dartYoda@mail.ru
 darthVader:
     firstName:  Darth
     lastName:   Vader
+    email:  darthVader@example.com
 chewbacca:
     firstName:  Chewbacca
+    email:  chewbacca@example.com
 c3pio:
     firstName:  c3pio
+    email:  c3pio@example.com
 r2d2:
     firstName:  r2d2
+    email:  r2d2@example.com
 obi-van:
     firstName:  Obi-Wan
     lastName:   Kenobi
+    email:  obi-van@example.com
 boba:
     firstName:  Boba
     lastName:   Fett
+    email:  boba@example.com
 pamde:
     firstName:  Padmé
     lastName:   Amidala
+    email:  pamde@example.com
 darthmaul:
     firstName:  Darth
     lastName:   Maul
+    email:  darthmaul@example.com
