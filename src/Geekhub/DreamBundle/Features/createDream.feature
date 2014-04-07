@@ -48,6 +48,9 @@ Feature: Create dream feature
   @javascript
   Scenario: GeekhubDreamBundle:DreamController:editDreamAction
     Given I am login as "darthVader" with password "darthVader"
-    And I am on "/dreams"
+    And I am on "/users/3"
     Then I should see "Hello! This is my first dream!"
+    And I am on "/logout"
+    And I am on "/users/3"
+    Then I should not see "Hello! This is my first dream!"
 
