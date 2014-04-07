@@ -23,15 +23,6 @@
                 <a href="{{ path('dream_list') }}">Мрії</a>
             </li>
 
-            {% if is_granted("ROLE_SUPER_ADMIN") %}
-                <li>
-                    <a href="{{ path('dream_admin_list') }}">
-                        <span class="glyphicon glyphicon-asterisk"></span>
-                        admin list
-                    </a>
-                </li>
-            {% endif %}
-
             <li>
                 <a href="{{ path('faq') }}">
                     <span class="glyphicon glyphicon-question-sign"></span>
@@ -115,11 +106,11 @@
 
         </ul>
 
-        <form class="navbar-form " role="search">
+        <form class="navbar-form " role="search" action="{{ path('dream_search') }}" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Пошук ...">
+                <input type="text" class="form-control" placeholder="Пошук ..." name="search_text">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </span>
