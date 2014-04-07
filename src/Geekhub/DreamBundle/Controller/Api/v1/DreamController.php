@@ -46,17 +46,12 @@ class DreamController extends Controller
             $orderArray[$paramFetcher->get('orderBy')] = $paramFetcher->get('orderDirection');
         }
 
-        if ($paramFetcher->get('orderBy') == 'favouritesCount') {
-            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findPopularDreams($paramFetcher->get('limit'), $paramFetcher->get('offset'));
-        }
-        else {
-            $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
-                array_filter($criteria),
-                $orderArray,
-                $paramFetcher->get('limit'),
-                $paramFetcher->get('offset')
-            );
-        }
+        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
+            array_filter($criteria),
+            $orderArray,
+            $paramFetcher->get('limit'),
+            $paramFetcher->get('offset')
+        );
 
         if (!$paramFetcher->get('template')) {
             return $dreams;

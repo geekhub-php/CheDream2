@@ -14,28 +14,6 @@ use Doctrine\ORM\EntityRepository;
 class DreamRepository extends EntityRepository
 {
 
-	public function findPopularDreams($limit, $offset)
-    {
-        $em = $this->getEntityManager();
-       $query = $em->createQuery(
-            'SELECT d, size(d.usersWhoFavorites) as numberFavorites
-            FROM GeekhubDreamBundle:Dream d
-            WHERE d.currentStatus = :collectingResources or d.currentStatus = :implementing or d.currentStatus = :success
-            ORDER BY numberFavorites desc'
-        )->setMaxResults($limit)
-         ->setFirstResult($offset)
-         ->setParameter('collectingResources', Status::COLLECTING_RESOURCES)
-         ->setParameter('implementing', Status::IMPLEMENTING)
-         ->setParameter('success', Status::SUCCESS);
-         
-         $dreamsArray =  new ArrayCollection();
-         foreach ($query->getResult() as $dream) {
-             $dreamsArray->add($dream[0]);
-         }
-
-        return $dreamsArray;
-    }
-
     public function getCountContributorsByDream(Dream $dream)
     {
         return count($this->getArrayContributorsByDream($dream));
