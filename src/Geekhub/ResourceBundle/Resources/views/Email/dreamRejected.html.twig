@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block body %}
-    <p>Адміністрація повернула мрію <a href="{{ url('edit_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> на дооформлення.</p>
+    <p>Адміністрація повернула мрію <a href="{{ url('edit_dream', {'id': dream.id }) }}">{{ dream.title }}</a> на дооформлення.</p>
     <p>Зауваження:</p>
     {{ dream.rejectedDescription|raw }}
 {% endblock body %}

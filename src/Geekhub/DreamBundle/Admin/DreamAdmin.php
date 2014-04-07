@@ -34,21 +34,12 @@ class DreamAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
+            ->add('title', 'url', array('route' => array(
+                    'name'=>'edit_dream',
+                    'identifier_parameter_name'=> 'id'
+                ))
+            )
             ->add('currentStatus')
-            ->add('slug')
         ;
-    }
-
-    public function getTemplate($name)
-    {
-        switch ($name) {
-            case 'edit':
-                return 'GeekhubDreamBundle:Dream:adminDreamList.html.twig';
-                break;
-            default:
-                return parent::getTemplate($name);
-                break;
-        }
     }
 }

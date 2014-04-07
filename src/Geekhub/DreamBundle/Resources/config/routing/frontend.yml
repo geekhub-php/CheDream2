@@ -9,7 +9,7 @@ new_dream:
         expose: true
 
 edit_dream:
-    pattern:  /dream/edit/{slug}
+    pattern:  /dream/edit/{id}
     defaults: { _controller: GeekhubDreamBundle:Dream:editDream }
 
 view_dream:
