@@ -37,6 +37,7 @@ Feature: Create dream feature
     And I am on "/dream/new"
     And I should see "create or edit your dream"
     And I fill in "newDreamForm_title" with "Hello! This is my first dream!"
+    And I wait 3 seconds
     And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     And I fill in hidden "newDreamForm_tags" with "Hello, world"
     And I press "Створити"
@@ -48,6 +49,9 @@ Feature: Create dream feature
   @javascript
   Scenario: GeekhubDreamBundle:DreamController:editDreamAction
     Given I am login as "darthVader" with password "darthVader"
-    And I am on "/dreams"
+    And I am on "/users/3"
     Then I should see "Hello! This is my first dream!"
+    And I am on "/logout"
+    And I am on "/users/3"
+    Then I should not see "Hello! This is my first dream!"
 

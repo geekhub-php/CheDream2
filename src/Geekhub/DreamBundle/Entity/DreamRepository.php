@@ -2,6 +2,7 @@
 
 namespace Geekhub\DreamBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,6 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class DreamRepository extends EntityRepository
 {
+
     public function getCountContributorsByDream(Dream $dream)
     {
         return count($this->getArrayContributorsByDream($dream));
