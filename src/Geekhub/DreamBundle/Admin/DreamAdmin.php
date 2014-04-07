@@ -11,18 +11,10 @@ namespace Geekhub\DreamBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class DreamAdmin extends Admin
 {
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('title')
-            ->add('slug')
-        ;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -41,5 +33,10 @@ class DreamAdmin extends Admin
                     )
                 ))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list', 'edit'));
     }
 }
