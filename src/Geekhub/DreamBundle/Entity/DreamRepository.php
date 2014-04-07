@@ -149,6 +149,19 @@ class DreamRepository extends EntityRepository
             ->getResult();
     }
 
+    public function searchDreams($text)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT d
+                           FROM GeekhubDreamBundle:Dream d
+                           where d.title like :search_text
+                           or d.description like :search_text
+                           order by d.id
+                           ')
+            ->setParameter('search_text', '%'.$text.'%')
+            ->getResult();
+    }
+
     protected function getUser()
     {
         return function ($contribute) {return $contribute->getUser(); };

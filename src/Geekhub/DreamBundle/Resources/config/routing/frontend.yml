@@ -48,9 +48,13 @@ dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }
 
-dream_admin_list:
-    pattern:  /dream/list
-    defaults: { _controller: GeekhubDreamBundle:Dream:adminDreamList }
+dream_search:
+    pattern:  /dream/searchForm
+    defaults: { _controller: GeekhubDreamBundle:Dream:search }
+
+dream_search_text:
+    pattern:  /dream/search/{text}
+    defaults: { _controller: GeekhubDreamBundle:Dream:searchDream }
 
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
@@ -79,11 +83,5 @@ dream_ajax_remove_media:
 dream_ajax_dream_toFavorite:
     pattern:  /dream/ajaxAddDreamToFavorite
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:addDreamToFavorite }
-    options:
-        expose: true
-
-dream_ajax_load_filtered_dreams_for_admin:
-    pattern:  /dream/ajaxLoadFilteredDreamsByStatus
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadFilteredDreamsForAdmin }
     options:
         expose: true
