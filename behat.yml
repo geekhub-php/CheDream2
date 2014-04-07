@@ -8,3 +8,17 @@ default:
       default_session: symfony2
       javascript_session: selenium2
       browser_name: firefox
+
+phantomjs:
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+    Behat\MinkExtension\Extension:
+      selenium2: ~
+      base_url: 'http://chedream.local/app_test.php/'
+      default_session: symfony2
+      javascript_session: selenium2
+      browser_name: 'phantomjs'
+      selenium2:
+        wd_host: "http://127.0.0.1:4444/wd/hub"
+        capabilities: { "browser": "phantomjs"}
