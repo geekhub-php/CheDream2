@@ -152,11 +152,16 @@ class DreamRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT d
                            FROM GeekhubDreamBundle:Dream d
-                           where d.title like :search_text
-                           or d.description like :search_text
+                           where
+                           ( d.title like :search_text or d.description like :search_text )
+                           and
+                           ( d.currentStatus = :status1 or d.currentStatus = :status2 or d.currentStatus = :status3 )
                            order by d.id
                            ')
             ->setParameter('search_text', '%'.$text.'%')
+            ->setParameter('status1', Status::COLLECTING_RESOURCES)
+            ->setParameter('status2', Status::IMPLEMENTING)
+            ->setParameter('status3', Status::SUCCESS)
             ->getResult();
     }
 
