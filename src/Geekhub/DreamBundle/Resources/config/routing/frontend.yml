@@ -77,9 +77,3 @@ dream_ajax_dream_toFavorite:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:addDreamToFavorite }
     options:
         expose: true
-
-dream_ajax_load_filtered_dreams_for_admin:
-    pattern:  /dream/ajaxLoadFilteredDreamsByStatus
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadFilteredDreamsForAdmin }
-    options:
-        expose: true
