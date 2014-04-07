@@ -26,7 +26,6 @@ class DreamAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
             ->add('currentStatus')
         ;
     }
@@ -34,12 +33,13 @@ class DreamAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title', 'url', array('route' => array(
-                    'name'=>'edit_dream',
-                    'identifier_parameter_name'=> 'id'
-                ))
-            )
+            ->add('title')
             ->add('currentStatus')
+            ->add('_action', 'actions', array(
+                    'actions' => array(
+                        array('template' => 'GeekhubDreamBundle:Admin:edit_button.html.twig')
+                    )
+                ))
         ;
     }
 }

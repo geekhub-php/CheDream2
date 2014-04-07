@@ -6,7 +6,7 @@
     <div class="col-md-2">
         <a href="{{ path('view_dream', {'slug': dream.slug}) }}"> Show </a>
         &nbsp;&nbsp;&nbsp;
-        <a href="{{ path('edit_dream', {'id': dream.id}) }}"> Edit </a>
+        <a href="{{ path('edit_dream', {'slug': dream.slug}) }}"> Edit </a>
     </div>
     <div class="col-md-2">
         {{ dream.currentStatus }}
