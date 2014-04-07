@@ -23,15 +23,15 @@ Feature: Update user's email feature
   @javascript
   Scenario: Try to log in with fake email
     Given I am on "/login"
-    And I fill in "username" with "yoda"
-    And I fill in "password" with "yoda"
+    And I fill in "username" with "darthVader"
+    And I fill in "password" with "darthVader"
     When I press "_submit"
     Then I should be on "/user/updateContacts"
-    And I fill in "newUserForm[lastName]" with "Yoda"
-    And I fill in "_phone" with "+380671234567"
-    And I fill in "_email" with "realemail@mail.ru"
+    And I fill in "newUserForm[lastName]" with "darthVader"
+    And I fill in "newUserForm[phone]" with "+380671234567"
+    And I fill in "newUserForm[email]" with "realDarthVadersEmail@mail.ru"
     When I press "_submit"
     Then should be on "/"
-    And I am on "/users/2"
-    And I should see "Yoda"
+    And I am on "/users/3"
+    And I should see "darthVader"
   
