@@ -1,0 +1,4 @@
+Geekhub\DreamBundle\Model\Dreams:
+    properties:
+        dreams:
+            type: ArrayCollection<Geekhub\DreamBundle\Entity\Dream>

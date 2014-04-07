@@ -15,5 +15,9 @@
             <argument>SonataAdminBundle:CRUD</argument>
             <tag name="sonata.admin" manager_type="orm" group="CheDream" label="faq"/>
         </service>
+
+        <service id="geekhub.user.twig_dotdotdot_extension" class="Geekhub\ResourceBundle\Twig\DotDotDotExtension">
+          <tag name="twig.extension" />
+        </service>
     </services>
 </container>
