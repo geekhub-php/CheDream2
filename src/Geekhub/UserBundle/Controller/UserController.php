@@ -4,6 +4,7 @@ namespace Geekhub\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
+use Geekhub\UserBundle\Form\UserForUpdateContactsType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
@@ -92,5 +93,33 @@ class UserController extends Controller
     public function loginAction()
     {
         return $this->render('GeekhubUserBundle:User:login.html.twig');
+    }
+
+    public function updateContactsAction(Request $request)
+    {
+        $userAuth=$this->getUser();
+        if (!$userAuth) {
+            return $this->redirect($this->generateUrl('_login'));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
+        $user->setEmail('');
+
+        $form = $this->CreateForm(new UserForUpdateContactsType(), $user, array(
+                     'user' => $user,
+                     'media-manager' => $this->container->get('sonata.media.manager.media'),
+                     ));
+
+        $form->handleRequest($request);
+
+        if ($form -> isValid()) {
+
+            $em->flush();
+
+            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+        }
+
+        return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
     }
 }
