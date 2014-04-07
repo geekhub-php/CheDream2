@@ -28,7 +28,7 @@ class DreamController extends Controller
      * @QueryParam(name="offset", requirements="\d+", default="0", description="From what offset")
      * @QueryParam(name="user", description="Find all dream by user with given username")
      * @QueryParam(name="orderBy", description="Order field name")
-     * @QueryParam(name="orderDirection", default="DESC", description="Order direction: asc or desc (if not specified - desc used)")
+     * @QueryParam(name="orderDirection", default="DESC", description="Order direction: asc or desc")
      * @QueryParam(array=true, name="statuses", description="Array of dreams statuses")
      * @QueryParam(name="template", default=false, description="From what offset")
      *
