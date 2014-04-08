@@ -10,7 +10,7 @@ Installation
 <li>
 Clone project to you local place
 
-```
+```bash
 git clone https://github.com/geekhub-php/CheDream2.git /path
 ```
 </li>
