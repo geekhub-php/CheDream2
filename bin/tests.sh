@@ -7,6 +7,8 @@ fi
 java -jar ./selenium-server-standalone-2.41.0.jar  > /dev/null &
 sleep 5
 
+cp -u src/Geekhub/DreamBundle/DataFixtures/ORM/images/starship.jpg web/upload/tmp/starship.jpg
+
 #bin/phpunit -c app
 #bin/behat @GeekhubUserBundle
 #bin/behat @GeekhubDreamBundle

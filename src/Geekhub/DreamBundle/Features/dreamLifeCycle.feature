@@ -11,7 +11,7 @@ Feature: Create dream life cycle  feature
     And I wait 2 seconds
     Given I am on "/dream/new"
     And I should see "create or edit your dream"
-#    And I attach the file "src/Geekhub/DreamBundle/DataFixtures/ORM/images/starship.jpg" to "fileupload-poster"
+    And I fill in hiddenImage "newDreamForm_dreamPoster" with "../web/upload/tmp/starship.jpg"
     And I fill in "newDreamForm_title" with "Dream for testing dream life cycle"
     And I wait 1 seconds
     And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
@@ -164,7 +164,7 @@ Feature: Create dream life cycle  feature
     And I press "dream-admin-confirm-completed"
 
 #    And I wait 2 seconds
-#    And should see "Dream for testing dream life cycle" in the "carousel-caption" element
+#    And should see "Dream for testing dream life cycle" in the "#dream-slider-container" element
 
     And I wait 5 seconds
     Given I am on "/logout"
