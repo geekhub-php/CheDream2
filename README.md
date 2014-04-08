@@ -6,41 +6,55 @@ The project is developed through the efforts of the project [Geekhub][1]
 
 Installation
 -----
-1.  Clone project to you local place
-    ```
-    git clone https://github.com/geekhub-php/CheDream2.git /path
-    ```
-2.  Install Node.js Download sources from official web [site][2]
-    2.1.    Extract node.js archive to you local directory
-    2.2.    Run terminal and go to extracted node.js directory
-    2.3.    Enter next commands:
+<ol>
+<li>
+Clone project to you local place
+
+```
+git clone https://github.com/geekhub-php/CheDream2.git /path
+```
+</li>
+<li>
+Install Node.js Download sources from official web [site][2]
+<ol>
+<li>Extract node.js archive to you local directory</li>
+<li>Run terminal and go to extracted node.js directory</li>
+<li>Enter next commands:
 
 ```bash
 ./configure
 make
 make install
 ```
-3. In terminal enter next command for create sym link
+</li>
+</ol>
+</li>
+<li>In terminal enter next command for create sym link
 
 ```bash
 ln -s /usr/bin/node /usr/local/bin/node
 ```
-4. Install global less module for node.js
+</li>
+<li>Install global less module for node.js
 
 ```bash
 npm -g install less
 ```
-5. Install global Bower (the browser package manager)
+</li>
+<li>Install global Bower (the browser package manager)
 
 ```bash
 npm -g install bower
 ```
-6. Expand you project, enter in web_root/path/to/you/project/web next command and answer configuration questions:
+</li>
+<li>Expand you project, enter in web_root/path/to/you/project/web next command and answer configuration questions:
 
 ```bash
 sh bin/reload.sh
 ```
-7. That all.
+</li>
+<li>That all.</li>
+</ol>
 
 Tests
 -----
