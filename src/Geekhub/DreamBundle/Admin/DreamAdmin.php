@@ -26,6 +26,8 @@ class DreamAdmin extends Admin
     {
         $listMapper
             ->add('title')
+            ->add('author.firstName')
+            ->add('author.lastName')
             ->add('currentStatus')
             ->add('_action', 'actions', array(
                     'actions' => array(
