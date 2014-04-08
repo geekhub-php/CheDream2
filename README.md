@@ -14,27 +14,32 @@ Installation
     2.1.    Extract node.js archive to you local directory
     2.2.    Run terminal and go to extracted node.js directory
     2.3.    Enter next commands:
-            ```bash
-            ./configure
-            make
-            make install
-            ```
+
+```bash
+./configure
+make
+make install
+```
 3. In terminal enter next command for create sym link
-    ```bash
-    ln -s /usr/bin/node /usr/local/bin/node
-    ```
+
+```bash
+ln -s /usr/bin/node /usr/local/bin/node
+```
 4. Install global less module for node.js
-    ```bash
-    npm -g install less
-    ```
+
+```bash
+npm -g install less
+```
 5. Install global Bower (the browser package manager)
-    ```bash
-    npm -g install bower
-    ```
+
+```bash
+npm -g install bower
+```
 6. Expand you project, enter in web_root/path/to/you/project/web next command and answer configuration questions:
-    ```bash
-    sh bin/reload.sh
-    ```
+
+```bash
+sh bin/reload.sh
+```
 7. That all.
 
 Tests
