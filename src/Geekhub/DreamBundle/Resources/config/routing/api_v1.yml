@@ -1,0 +1,7 @@
+dreams:
+    type:     rest
+    resource: Geekhub\DreamBundle\Controller\Api\v1\DreamController
+    name_prefix:  api_v1_
+    prefix:   /v1
+    options:
+        expose: true

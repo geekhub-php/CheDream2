@@ -12,7 +12,7 @@
         </button>
 
         <a class="navbar-brand" href="{{ path('geekhub_dream_homepage') }}">
-            <img data-src="holder.js/80x20" alt="logo">
+            <img data-src="holder.js/80x20" alt="logo" />
         </a>
     </div>
 
@@ -39,7 +39,7 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="glyphicon glyphicon-info-sign"></span>
                     Підписатися
                     <b class="caret"></b>
                 </a>
@@ -91,26 +91,30 @@
                 </li>
             {% else %}
                 <li>
-                    <a href="{{ path('profile_view', {'id': app.user.id}) }}">{{ app.user.getFirstName() }} {{ app.user.getLastName() }}</a>
+                    <a href="{{ path('profile_view', {'id': app.user.id}) }}">
+                        <span class="glyphicon glyphicon-user"></span>
+                        {{ app.user.getFirstName() }} {{ app.user.getLastName() }}
+                    </a>
                 </li>
                 <li>
-                     <a href="{{ path('profile_edit') }}"> Редагувати </a>
+                     <a href="{{ path('profile_edit') }}" title="Редагувати">
+                         <span class="glyphicon glyphicon-pencil"></span>
+                     </a>
                 </li>
                 <li>
-                    <a href="{{ path('_logout') }}">
+                    <a href="{{ path('_logout') }}" title="Вийти">
                         <span class="glyphicon glyphicon-log-out"></span>
-                        Вийти
                     </a>
                 </li>
             {% endif %}
 
         </ul>
 
-        <form class="navbar-form " role="search">
+        <form class="navbar-form " role="search" action="{{ path('dream_search') }}" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Пошук ...">
+                <input type="text" class="form-control" placeholder="Пошук ..." name="search_text">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </span>

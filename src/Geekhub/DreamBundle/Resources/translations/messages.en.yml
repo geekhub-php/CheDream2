@@ -1,6 +1,7 @@
 dream:
     add: Додати
     cancel: Відміна
+    close: Закрити
     files_add: Додати файли
     videos_add: Додати відео
     title: Назва мрії
@@ -9,6 +10,8 @@ dream:
     expired_date: Кінцева дата
     create: Створити
     edit: Редагувати
+    editDream: Редагувати мрію
+    editYellowBlock: Редагувати інформацію
     support: Підтримати
     resource:
         title: Назва статті
@@ -29,6 +32,20 @@ dream:
         days: днів
     other:
         title: Інша допомога
+    reject:
+        description: Причина повернення *
+    status:
+        confirm: Підтвердити
+        reject: Повернути
+        successed: Підтвердити виконання
+        failed: Мрія провалена
+    implementing:
+        description: Інформація для внесків *
+        start: Розпочати реалізацію
+        stop: Закінчити реалізацію
+    completed:
+        description: Деталі *
+        post: Опублікувати
     js:
         add_financial: Додати фінансові витрати
         add_equipment: Додати абладнання та інструменти

@@ -9,3 +9,7 @@ faq:
 faqs:
     type: rest
     resource: Geekhub\ResourceBundle\Controller\FaqController
+
+page_about:
+    pattern:  /about
+    defaults: { _controller: "GeekhubResourceBundle:Page:about" }

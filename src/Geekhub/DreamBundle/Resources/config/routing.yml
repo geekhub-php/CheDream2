@@ -1,54 +1,8 @@
-geekhub_dream_homepage:
-    pattern:  /
-    defaults: { _controller: GeekhubDreamBundle:HomePage:home }
+geekhub_dream_forntend:
+    resource: "@GeekhubDreamBundle/Resources/config/routing/frontend.yml"
+    prefix:   /
 
-new_dream:
-    pattern:  /dream/new
-    defaults: { _controller: GeekhubDreamBundle:Dream:newDream }
-    options:
-        expose: true
-
-edit_dream:
-    pattern:  /dream/edit/{slug}
-    defaults: { _controller: GeekhubDreamBundle:Dream:editDream }
-
-
-dream_list:
-    pattern:  /dreams
-    defaults: { _controller: GeekhubDreamBundle:Dream:list }
-    options:
-        expose: true
-
-dream_ajax_load_image:
-    pattern:  /dream/ajaxLoadImage
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }
-    options:
-        expose: true
-
-dream_ajax_load_poster:
-    pattern:  /dream/ajaxLoadPoster
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamPosterLoader }
-    options:
-        expose: true
-
-dream_ajax_remove_media:
-    pattern:  /dream/ajaxRemovePicture
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamPictureRemove }
-    options:
-        expose: true
-
-dream_ajax_dream_toFavorite:
-    pattern:  /dream/ajaxAddDreamToFavorite
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:addDreamToFavorite }
-    options:
-        expose: true
-
-dream_ajax_loadMore_dreams:
-    pattern:  /dream/ajaxLoadMoreDreams
-    defaults: { _controller: GeekhubDreamBundle:AjaxDream:loadMoreDreams }
-    options:
-        expose: true
-
-view_dream:
-    pattern:  /dreams/{slug}
-    defaults: { _controller: GeekhubDreamBundle:Dream:viewDream }
+geekhub_dream_api_v1:
+    resource: "@GeekhubDreamBundle/Resources/config/routing/api_v1.yml"
+    prefix:   /api
+    type:     rest

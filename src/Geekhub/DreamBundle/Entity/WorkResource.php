@@ -50,7 +50,7 @@ class WorkResource extends AbstractResource
     /**
      * Set quantityDays
      *
-     * @param  integer       $quantityDays
+     * @param  integer      $quantityDays
      * @return WorkResource
      */
     public function setQuantityDays($quantityDays)

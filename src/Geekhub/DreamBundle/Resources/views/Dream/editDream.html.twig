@@ -1,17 +1,22 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
+    {% if rejectDescription is not null %}
+        <h3 style="text-align: center;">Повідомлення від адміністрації</h3>
+        <div class="alert alert-warning">
+            {{ rejectDescription|raw }}
+        </div>
+    {% endif %}
     <div class="page-header">
         <h1>Dream <small>create or edit your dream</small></h1>
     </div>
     {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-    {#{{ form_start(form) }}#}
     <div class="row">
         <div class="col-md-5">
 
             <span class="fileinput-button" id="dream-poster-image">
                 <div id="dream-poster-container">
-                    <img src="../{% path poster, 'poster_big' %}" class="img-thumbnail">
+                    <img src="{{ poster|mediaPath|imagine_filter('dream_poster_view_form') }}" class="img-thumbnail">
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
             </span>
@@ -21,16 +26,21 @@
                 {% for picture in dreamPictures %}
                     <img src="{{ picture|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ picture.id }}"/>
                 {% endfor %}
+                {% if status == 'completed' or status == 'success' %}
+                    {% for picture in dreamCompletedPictures %}
+                        <img src="{{ picture|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ picture.id }}"/>
+                    {% endfor %}
+                {% endif %}
             </div>
             <br/>
             <div id="dream-files">
                 {% for file in dreamFiles %}
-                    <a href="{% path file, 'reference' %}"  data-idmedia="{{ file.id }}"> {{ file }} </a>
+                    <a href="{{ file|mediaPath }}"  data-idmedia="{{ file.id }}"> {{ file.name }} </a>
                 {% endfor %}
             </div>
             <div id="dream-videos">
                 {% for video in dreamVideos %}
-                    <img src="../{% path video, 'video_prew' %}" class="img-thumbnail"  data-idmedia="{{ video.id }}">
+                    <img src="{{ video|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ video.id }}"/>
                 {% endfor %}
             </div>
 
@@ -128,9 +138,38 @@
     </div>
 
     <br>
-    <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
-    {{ form_row(form._token) }}
-    {{ form_end(form) }}
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
+            {{ form_row(form._token) }}
+            {{ form_end(form) }}
+        </div>
+        {% if is_granted("ROLE_SUPER_ADMIN") %}
+            {% if (status == 'submitted') or (status == 'rejected') %}
+                <div class="col-md-3">
+                    <form action="{{ path('confirm_dream', {'slug': slug}) }}" method="post">
+                        <button type="submit" class="btn btn-success">{{ 'dream.status.confirm'|trans }}</button>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger" title="Повернути на доопрацювання.">{{ 'dream.status.reject'|trans }}</button>
+                </div>
+            {% endif %}
+
+            {% if status == 'completed' %}
+                <div class="col-md-3">
+                    <form action="{{ path('successed_dream', {'slug': slug}) }}" method="post">
+                        <button type="submit" class="btn btn-success">{{ 'dream.status.successed'|trans }}</button>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form action="{{ path('failed_dream', {'slug': slug}) }}" method="post">
+                        <button type="submit" class="btn btn-danger">{{ 'dream.status.failed'|trans }}</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endif %}
+    {{ include ('GeekhubDreamBundle:includes:dreamStatusRejectModal.html.twig') }}
 {% endblock %}
 
 {% block javascript %}

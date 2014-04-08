@@ -4,9 +4,9 @@ admin:
     roles:      [ROLE_SUPER_ADMIN]
 yoda:
     firstName:  Yoda
-darthvaider:
+darthVader:
     firstName:  Darth
-    lastName:   Vaider
+    lastName:   Vader
 chewbacca:
     firstName:  Chewbacca
 c3pio:

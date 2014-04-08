@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block description %}CheDream - Open source crowdfunding system{% endblock %}">
+        <meta name="author" content="{% block author %}Geekhub PHP Developers Team{% endblock %}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Welcome{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+        {% block body %}
+            <div class="container" id="wrap">
+                {% block menu %}
+                    {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
+                        {% block items %}
+                            {{ parent() }}
+                        {% endblock %}
+                    {% endembed %}
+                {% endblock %}
+                {% block main %}
+                    <div class="wrapper">
+                        {% block content %}{% endblock content %}
+                    </div>
+                {% endblock main %}
+            </div>
+            {% block footer %}{% include 'GeekhubResourceBundle:includes:footer.html.twig' %}{% endblock %}
+        {% endblock %}
+
+        {% block javascript %}
+            {% javascripts
+            '../vendor/bower-components/jquery/jquery.js'
+            '../vendor/bower-components/bootstrap/dist/js/bootstrap.js'
+            '../vendor/bower-components/holderjs/holder.js'
+            '../vendor/bower-components/jquery-ui/ui/jquery-ui.js'
+            '../vendor/bower-components/blueimp-file-upload/js/jquery.fileupload.js'
+            '../vendor/bower-components/tag-it/js/tag-it.js'
+            '../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js'
+            '../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js'
+            '../vendor/bower-components/hinclude/hinclude.js'
+            '../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js'
+            'bundles/fosjsrouting/js/router.js'
+            'bundles/bazingajstranslation/js/translator.min.js'
+            '@GeekhubDreamBundle/Resources/public/js/*'
+            '@GeekhubUserBundle/Resources/public/js/*'
+            output='js/scripts.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

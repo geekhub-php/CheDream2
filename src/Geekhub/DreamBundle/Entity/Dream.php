@@ -46,6 +46,27 @@ class Dream implements Taggable
     /**
      * @var string
      *
+     * @ORM\Column(name="rejectedDescription", type="text", nullable=true)
+     */
+    protected $rejectedDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="implementedDescription", type="text", nullable=true)
+     */
+    protected $implementedDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="completedDescription", type="text", nullable=true)
+     */
+    protected $completedDescription;
+
+    /**
+     * @var string
+     *
      * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="dream.only_numbers")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */
@@ -119,6 +140,13 @@ class Dream implements Taggable
     protected $usersWhoFavorites;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="favoritesCount", type="integer", nullable=false)
+     */
+    protected $favoritesCount;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
@@ -139,6 +167,12 @@ class Dream implements Taggable
      * @ORM\JoinTable(name="mediaPictures_media")
      */
     protected $mediaPictures;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinTable(name="mediaCompletedPictures_media")
+     */
+    protected $mediaCompletedPictures;
 
     /**
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
@@ -203,8 +237,10 @@ class Dream implements Taggable
     public function __construct()
     {
         $this->usersWhoFavorites = new ArrayCollection();
+        $this->favoritesCount = 0;
         $this->statuses = new ArrayCollection();
         $this->mediaPictures = new ArrayCollection();
+        $this->mediaCompletedPictures = new ArrayCollection();
         $this->mediaFiles = new ArrayCollection();
         $this->mediaVideos = new ArrayCollection();
         $this->dreamFinancialResources = new ArrayCollection();
@@ -518,6 +554,7 @@ class Dream implements Taggable
     public function addUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
     {
         $this->usersWhoFavorites[] = $usersWhoFavorites;
+        $this->favoritesCount = $this->usersWhoFavorites->count();
 
         return $this;
     }
@@ -530,6 +567,7 @@ class Dream implements Taggable
     public function removeUsersWhoFavorite(\Geekhub\UserBundle\Entity\User $usersWhoFavorites)
     {
         $this->usersWhoFavorites->removeElement($usersWhoFavorites);
+        $this->favoritesCount = $this->usersWhoFavorites->count();
     }
 
     /**
@@ -540,6 +578,16 @@ class Dream implements Taggable
     public function getUsersWhoFavorites()
     {
         return $this->usersWhoFavorites;
+    }
+
+    /**
+     * Get favoritesCount
+     *
+     * @return integer
+     */
+    public function getFavoritesCount()
+    {
+        return $this->favoritesCount;
     }
 
     /**
@@ -1048,5 +1096,107 @@ class Dream implements Taggable
     public function getDreamOtherContributions()
     {
         return $this->dreamOtherContributions;
+    }
+
+    /**
+     * Set rejectedDescription
+     *
+     * @param  string $rejectedDescription
+     * @return Dream
+     */
+    public function setRejectedDescription($rejectedDescription)
+    {
+        $this->rejectedDescription = $rejectedDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get rejectedDescription
+     *
+     * @return string
+     */
+    public function getRejectedDescription()
+    {
+        return $this->rejectedDescription;
+    }
+
+    /**
+     * Set implementedDescription
+     *
+     * @param  string $implementedDescription
+     * @return Dream
+     */
+    public function setImplementedDescription($implementedDescription)
+    {
+        $this->implementedDescription = $implementedDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get implementedDescription
+     *
+     * @return string
+     */
+    public function getImplementedDescription()
+    {
+        return $this->implementedDescription;
+    }
+
+    /**
+     * Set completedDescription
+     *
+     * @param  string $completedDescription
+     * @return Dream
+     */
+    public function setCompletedDescription($completedDescription)
+    {
+        $this->completedDescription = $completedDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get completedDescription
+     *
+     * @return string
+     */
+    public function getCompletedDescription()
+    {
+        return $this->completedDescription;
+    }
+
+    /**
+     * Add mediaCompletedPictures
+     *
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
+     * @return Dream
+     */
+    public function addMediaCompletedPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures)
+    {
+        $this->mediaCompletedPictures[] = $mediaCompletedPictures;
+
+        return $this;
+    }
+
+    /**
+     * Remove mediaCompletedPictures
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures
+     */
+    public function removeMediaCompletedPicture(\Application\Sonata\MediaBundle\Entity\Media $mediaCompletedPictures)
+    {
+        $this->mediaCompletedPictures->removeElement($mediaCompletedPictures);
+    }
+
+    /**
+     * Get mediaCompletedPictures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMediaCompletedPictures()
+    {
+        return $this->mediaCompletedPictures;
     }
 }

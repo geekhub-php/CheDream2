@@ -27,6 +27,17 @@ class AjaxDreamController extends Controller
         return new Response(json_encode($result));
     }
 
+    public function dreamCompletedPicturesLoaderAction(Request $request)
+    {
+        $file = $request->files->get('imgUpl');
+
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->init($file);
+        $result = $imageHandler->loadCompletedPictures();
+
+        return new Response(json_encode($result));
+    }
+
     public function dreamPosterLoaderAction(Request $request)
     {
         $file = $request->files->get('dream-poster');
@@ -61,17 +72,5 @@ class AjaxDreamController extends Controller
         $em->flush();
 
         return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
-    }
-
-    public function loadMoreDreamsAction(Request $request)
-    {
-        $offset = $request->get('offset');
-        $limit = 4;
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')
-            ->getSliceDreamsByStatus(Status::SUBMITTED, $limit, $offset);
- 
-        return $this->render('GeekhubDreamBundle:includes:homePageLoadDream.html.twig', array(
-            'dreams' => $dreams,
-        ));
     }
 }

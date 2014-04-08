@@ -9,7 +9,6 @@
 namespace Geekhub\DreamBundle\Twig;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Geekhub\DreamBundle\Entity\AbstractContributeResource;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentResource;
 use Geekhub\DreamBundle\Entity\FinancialResource;
@@ -41,6 +40,7 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('equipResource', array($this, 'equipResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('getCountContributors', array($this, 'getCountContributors'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('displayLimitWord', array($this, 'displayLimitWord'), array('is_safe' => array('html'))),
         );
     }
 
@@ -59,6 +59,25 @@ class ContributionExtension extends \Twig_Extension
         }
 
         return $str;
+    }
+
+    public function displayLimitWord($text, $limit = 20)
+    {
+        $words = explode(' ', strip_tags(trim($text)));
+        $countWords = count($words);
+
+        if ($countWords < $limit) {
+            $lim = $countWords;
+        } else {
+            $lim = $limit;
+        }
+
+        $strResult = '';
+        for ($i = 0; $i < $lim; $i++) {
+            $strResult .= $words[$i].' ';
+        }
+
+        return $strResult.'...';
     }
 
     public function equipContribute(User $user, Dream $dream)
