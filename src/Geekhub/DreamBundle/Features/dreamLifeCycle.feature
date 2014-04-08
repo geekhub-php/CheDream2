@@ -11,7 +11,8 @@ Feature: Create dream life cycle  feature
     And I wait 2 seconds
     Given I am on "/dream/new"
     And I should see "create or edit your dream"
-    And I fill in hiddenImage "newDreamForm_dreamPoster" with "../web/upload/tmp/starship.jpg"
+    And I fill in hiddenImage "newDreamForm_dreamPoster" with "../web/upload/tmp/enakin.jpg"
+    And I wait 2 seconds
     And I fill in "newDreamForm_title" with "Dream for testing dream life cycle"
     And I wait 1 seconds
     And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
