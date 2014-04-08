@@ -2,9 +2,6 @@
 
 namespace Geekhub\ResourceBundle\Twig;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\Event;
-
 class DotDotDotExtension extends \Twig_Extension
 {
     public function getFilters()
@@ -24,9 +21,7 @@ class DotDotDotExtension extends \Twig_Extension
             $newText=$newText."...";
 
             return $newText;
-        }
-        else {
-
+        } else {
             return $text;
         }
     }
@@ -36,4 +31,3 @@ class DotDotDotExtension extends \Twig_Extension
         return 'geekhub_twig_extension';
     }
 }
- 

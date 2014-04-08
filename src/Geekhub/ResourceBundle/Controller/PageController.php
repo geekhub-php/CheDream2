@@ -56,7 +56,5 @@ class PageController extends Controller
      * @View()
      */
     public function aboutAction()
-    {
-
-    }
+    {}
 }
