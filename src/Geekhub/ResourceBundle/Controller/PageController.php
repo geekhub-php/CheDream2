@@ -51,4 +51,12 @@ class PageController extends Controller
 
         return $form->createView();
     }
+
+    /**
+     * @View()
+     */
+    public function aboutAction()
+    {
+
+    }
 }
