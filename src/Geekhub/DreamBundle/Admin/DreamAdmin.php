@@ -8,6 +8,7 @@
 
 namespace Geekhub\DreamBundle\Admin;
 
+use Geekhub\DreamBundle\Entity\Status;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -17,8 +18,11 @@ class DreamAdmin extends Admin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $choiceOptions = Status::getStatusesArray();
         $datagridMapper
-            ->add('currentStatus')
+            ->add('currentStatus',null, array(), 'choice', array(
+                    'choices' => $choiceOptions
+                ))
         ;
     }
 
