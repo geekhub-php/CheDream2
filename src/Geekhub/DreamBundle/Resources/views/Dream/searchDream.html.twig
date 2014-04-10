@@ -1,7 +1,7 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
-    {#<h3 style="display: inline-block;">Ви шукали: <strong>{{ search_text }}</strong></h3> <span style="font-size: 110%; font-style: italic; margin-left: 10px;">( Знайдено: {{ dreams|length }} співпадань.)</span>#}
+    <h3 style="display: inline-block;">Ви шукали: <strong>{{ search_text }}</strong></h3> <span style="font-size: 110%; font-style: italic; margin-left: 10px;">( Знайдено: {{ dreams|length }} співпадань.)</span>
     <div class="row">
         {% for dream in dreams %}
             <div class="col-md-6" style="margin-bottom: 10px; height: 105px;">

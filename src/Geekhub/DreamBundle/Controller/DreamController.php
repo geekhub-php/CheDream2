@@ -416,12 +416,14 @@ class DreamController extends Controller
         );
     }
 
+    /**
+     * @View(template="GeekhubDreamBundle:Dream:searchDream.html.twig")
+     */
     public function dreamsByTagAction($tag)
     {
-        $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', $tag);
-
+        $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', strip_tags(trim($tag)));
+        $dreams = new ArrayCollection();
         if (count($ids) > 0 ) {
-            $dreams = new ArrayCollection();
             foreach ($ids as $id)
             {
                 $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneById($id);
@@ -429,7 +431,10 @@ class DreamController extends Controller
             }
         }
 
-        return $this->render('GeekhubDreamBundle:Dream:searchDream.html.twig', array('dreams' => $dreams));
+        return array(
+            'dreams' => $dreams,
+            'search_text' => $tag
+        );
     }
 
     private function isAuthor(Dream $dream)
