@@ -7,7 +7,7 @@ Feature: Create dream life cycle  feature
   Scenario: Login as Yoda and create Dream
     Given I am login as "yoda" with password "yoda"
     And I wait 3 seconds
-    Then I should see "FAQ"
+    Then I am on homepage
     And I wait 2 seconds
     Given I am on "/dream/new"
     And I should see "create or edit your dream"
@@ -42,7 +42,7 @@ Feature: Create dream life cycle  feature
   Scenario: Login as Admin and check Dream
     Given I am login as "admin" with password "admin"
     And I wait 3 seconds
-    Then I should see "FAQ"
+    Then I am on homepage
     Given I am on "/admin"
     And I should see "Cherkassy Dream Admin Panel"
     Given I am on "/admin/geekhub/dream/dream/list"
@@ -62,7 +62,7 @@ Feature: Create dream life cycle  feature
   Scenario: Login as Yoda and fixed rejected Dream
     Given I am login as "yoda" with password "yoda"
     And I wait 3 seconds
-    Then I should see "FAQ"
+    Then I am on homepage
     Given I am on "/dream/edit/dream-for-testing-dream-life-cycle"
     And I should see "bad description Dream. Rejected"
     And I fill in tinymce "newDreamForm_description" with "new Dream description"
@@ -74,7 +74,7 @@ Feature: Create dream life cycle  feature
   Scenario: Login as Admin and check Dream again
     Given I am login as "admin" with password "admin"
     And I wait 3 seconds
-    Then I should see "FAQ"
+    Then I am on homepage
     Given I am on "/admin"
     And I should see "Cherkassy Dream Admin Panel"
     Given I am on "/admin/geekhub/dream/dream/list"
@@ -151,7 +151,7 @@ Feature: Create dream life cycle  feature
   Scenario: Login as Admin and confirm completed Dream
     Given I am login as "admin" with password "admin"
     And I wait 3 seconds
-    Then I should see "FAQ"
+    Then I am on homepage
     And I should not see "Dream for testing dream life cycle"
 
     Given I am on "/admin"
