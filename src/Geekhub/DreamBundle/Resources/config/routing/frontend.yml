@@ -44,6 +44,10 @@ failed_dream:
     pattern:  /dream/failed/{slug}
     defaults: { _controller: GeekhubDreamBundle:Dream:failDream }
 
+dream_by_tag:
+    pattern:  /dream/tag/{tag}
+    defaults: { _controller: GeekhubDreamBundle:Dream:dreamsByTag }
+
 dream_list:
     pattern:  /dreams
     defaults: { _controller: GeekhubDreamBundle:Dream:list }

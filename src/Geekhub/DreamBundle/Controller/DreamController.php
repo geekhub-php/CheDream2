@@ -9,6 +9,7 @@
 
 namespace Geekhub\DreamBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
@@ -413,6 +414,22 @@ class DreamController extends Controller
             'dreams' => $dreams,
             'search_text' => $text
         );
+    }
+
+    public function dreamsByTagAction($tag)
+    {
+        $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', $tag);
+
+        if (count($ids) > 0 ) {
+            $dreams = new ArrayCollection();
+            foreach ($ids as $id)
+            {
+                $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneById($id);
+                $dreams->add($dream);
+            }
+        }
+
+        return $this->render('GeekhubDreamBundle:Dream:searchDream.html.twig', array('dreams' => $dreams));
     }
 
     private function isAuthor(Dream $dream)
