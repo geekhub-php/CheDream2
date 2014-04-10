@@ -27,7 +27,7 @@ class TagTransformer implements DataTransformerInterface
         $tagObjects = array();
 
         if (null === $tagsString) {
-            $tagObjects[] = 'мрія';
+            $tagObjects[] = null;
         } else {
             $tagsArray = explode (',', $tagsString);
             foreach ($tagsArray as $tagTitle) {

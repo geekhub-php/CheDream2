@@ -52,6 +52,14 @@ class DreamController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
+                $tags = $dream->getTags();
+                if (is_null($tags[0])) {
+                    $em->persist($dream);
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+                }
+
                 $tagManager = $this->get('geekhub.tag.tag_manager');
                 $tagManager->addTagsToEntity($dream);
 
