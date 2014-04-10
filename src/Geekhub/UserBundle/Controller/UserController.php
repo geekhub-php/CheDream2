@@ -136,7 +136,7 @@ class UserController extends Controller
         $body = $this->container->get('templating')->render(
             'GeekhubResourceBundle:Email:registration.html.twig',
             array(
-                'user' => $user->getFirstName()." ".$user->getLastName()
+                'user' => $user
             )
         );
 

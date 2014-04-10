@@ -1,9 +1,56 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
-    Успішна реєстрація
-{% endblock title %}
+{% block header %}
+    <h1 class="text-center">
+        <b>Щиро вітаємо на
+        <a href="{{ url('geekhub_dream_homepage') }}" class="brand">
+            <img data-src="holder.js/80x20" alt="logo" />
+        </a></b>
+    </h1>
+{% endblock header %}
 
-{% block body %}
-    Ви зареєстровані на <a href="{{ url('geekhub_dream_homepage') }}">Черкаcькій мрії</a> як {{ user }}.
-{% endblock body %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 class="text-center">
+                Деталі вашого облікового запису
+                {#Деталі вашого профілю на сайті#}
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
+            <h2>
+                <b>{{ user.firstName ~ " " ~ user.lastName  }}</b>
+            </h2>
+            <h3>
+                {{ user.email }}
+            </h3>
+            <h4>підключено через
+                {% if user.facebookId is not null  %}
+                    Facebook
+                {% elseif user.odnoklassnikiId %}
+                    Однокласники
+                {% elseif user.vkontakteId %}
+                    ВКонтакте
+                {% endif %}
+            </h4>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+         <h3 class="text-center">Що далі?</h3>
+        <div class="col-md-12">
+            <div class="col-md-6 text-right">
+                <a href="{{ url('dream_list') }}">
+                    <button class="btn btn-default">Подивитися мрії</button>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{{ url('new_dream') }}">
+                    <button class="btn btn-default">Створити мрію</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
