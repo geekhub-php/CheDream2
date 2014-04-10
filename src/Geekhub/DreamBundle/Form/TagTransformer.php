@@ -24,15 +24,15 @@ class TagTransformer implements DataTransformerInterface
 
     public function reverseTransform($tagsString)
     {
-        if (null === $tagsString) {
-            return;
-        }
-
-        $tagsArray = explode (',', $tagsString);
         $tagObjects = array();
 
-        foreach ($tagsArray as $tagTitle) {
-            $tagObjects[] = $tagTitle;
+        if (null === $tagsString) {
+            $tagObjects[] = 'dream';
+        } else {
+            $tagsArray = explode (',', $tagsString);
+            foreach ($tagsArray as $tagTitle) {
+                $tagObjects[] = $tagTitle;
+            }
         }
 
         return $tagObjects;
