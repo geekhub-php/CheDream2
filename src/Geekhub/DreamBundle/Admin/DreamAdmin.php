@@ -18,18 +18,10 @@ class DreamAdmin extends Admin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $choiceOptions = array(
-            Status::SUBMITTED => Status::SUBMITTED,
-            Status::COLLECTING_RESOURCES => Status::COLLECTING_RESOURCES,
-            Status::REJECTED => Status::REJECTED,
-            Status::IMPLEMENTING => Status::IMPLEMENTING,
-            Status::COMPLETED => Status::COMPLETED,
-            Status::SUCCESS => Status::SUCCESS,
-            Status::FAIL => Status::FAIL,
-        );
+        $choiceOptions = Status::getStatusesArray();
         $datagridMapper
             ->add('currentStatus',null, array(), 'choice', array(
-                'choices' => $choiceOptions
+                    'choices' => $choiceOptions
                 ))
         ;
     }

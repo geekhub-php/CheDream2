@@ -135,4 +135,17 @@ class Status
     {
         return $this->dream;
     }
+
+    public static function getStatusesArray()
+    {
+        return array(
+            self::SUBMITTED => self::SUBMITTED,
+            self::COLLECTING_RESOURCES => self::COLLECTING_RESOURCES,
+            self::REJECTED => self::REJECTED,
+            self::IMPLEMENTING => self::IMPLEMENTING,
+            self::COMPLETED => self::COMPLETED,
+            self::SUCCESS => self::SUCCESS,
+            self::FAIL => self::FAIL,
+        );
+    }
 }
