@@ -1,9 +1,46 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
-    Розпочато збір коштів
-{% endblock title %}
+{% block header %}
+    <h1 class="text-center">Вітаємо! Мрія, яку ви створили, була підтверджена адміністратором.</h1>
+{% endblock header %}
 
-{% block body %}
-    Адміністрація підтвердила мрію <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a>.
-{% endblock body %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 class="text-center">
+                Мрія вже доступна на сайті і готова до збору коштів.
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
+            <div class="col-xs-6 col-md-4">
+                <img src="{{ baseUrl }}{% path dream.mediaPoster, 'small' %}" />
+            </div>
+            <div class="col-md-8">
+                    <h2><b>{{ dream.title }}</b></h2>
+                    <p class="text-center"><i>створена {{ dream.createdAt }}</i></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h4 class="text-center">Саме час поділитися новиною з друзями та розпочати збір ресурсів.</h4>
+        <div class="col-md-12">
+            <div class="col-md-4 text-right">
+                <a href="http://www.facebook.com">
+                    <button class="btn btn-default">Facebook</button>
+                </a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="http://www.vk.com">
+                    <button class="btn btn-default">VK</button>
+                </a>
+            </div>
+            <div class="col-md-4 text-left">
+                <a href="http://http://www.odnoklassniki.ru/">
+                    <button class="btn btn-default">Однокласники</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
