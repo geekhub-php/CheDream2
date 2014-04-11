@@ -1,9 +1,35 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
-    Мрія <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> - втілена!!!
-{% endblock title %}
+{% block header %}
+    <h1 class="text-center">Наше місто стало краще, дякуючи вам</h1>
+{% endblock header %}
 
-{% block body %}
-    Детальний звіт про мрію <a href="{{ url('view_dream', {'slug': dream.slug }) }}">ТУТ</a>.
-{% endblock body %}
+{% block content %}
+    <div class="row">
+        <div class="alert-block">
+            Мрія успішно завершена!
+        </div>
+        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
+            <div class="col-xs-6 col-md-4">
+                <img src="{{ baseUrl }}{% path dream.mediaPoster, 'small' %}" />
+            </div>
+            <div class="col-md-8">
+                <h2><b>{{ dream.title }}</b></h2>
+                <p class="text-center"><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3 class="text-center">Щиро дякуємо за допомогу!</h3>
+    </div>
+
+    <div class="row">
+        <h4 class="text-center">Це чудовий початок, не варто зупинятися!</h4>
+        <h4 class="text-center">Перегляньте мрії, до яких ви ще не долучилися. Змінимо місто разом!</h4>
+    </div>
+
+    <div class="row text-center">
+        <h2><a href="{{ url('dream_list') }}">Дивиться усі мрії</a></h2>
+    </div>
+{% endblock content %}
