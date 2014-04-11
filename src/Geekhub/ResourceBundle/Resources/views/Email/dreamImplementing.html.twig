@@ -15,10 +15,10 @@
         <h4 class="text-center">Нагадуємо, ви обіцяли допомогти з реалізацією мрії ресурсами:</h4>
         <div class="col-md-8 col-md-offset-2 jumbotron">
             <ul class="list-unstyled">
-                {{ finContribute(contributor.user, dream)|raw }}
-                {{ equipContribute(contributor.user, dream)|raw }}
-                {{ workContribute(contributor.user, dream)|raw }}
-                {{ otherContribute(contributor.user, dream)|raw }}
+                {{ finContribute(contributor, dream)|raw }}
+                {{ equipContribute(contributor, dream)|raw }}
+                {{ workContribute(contributor, dream)|raw }}
+                {{ otherContribute(contributor, dream)|raw }}
             </ul>
         </div>
     </div>

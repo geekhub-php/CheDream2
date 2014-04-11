@@ -73,6 +73,7 @@ class DreamSubscriber implements EventSubscriber
                 ->getArrayContributorsByDream($dream)
             ;
 
+
             switch ($object->getTitle()) {
                 case Status::SUBMITTED :
                     $this->sendEmail(
@@ -91,7 +92,8 @@ class DreamSubscriber implements EventSubscriber
                         $template->render(
                             'GeekhubResourceBundle:Email:dreamCollecting.html.twig',
                             array(
-                                'dream' => $dream
+                                'dream' => $dream,
+                                'baseUrl' => $baseUrl
                             )
                         ),
                         $author->getEmail(),
@@ -116,7 +118,8 @@ class DreamSubscriber implements EventSubscriber
                             $template->render(
                                 'GeekhubResourceBundle:Email:dreamImplementing.html.twig',
                                 array(
-                                    'dream' => $dream
+                                    'dream' => $dream,
+                                    'contributor' => $contributor
                                 )
                             ),
                             $contributor->getEmail(),
