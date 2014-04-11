@@ -434,8 +434,11 @@ class DreamController extends Controller
         if (count($ids) > 0 ) {
             foreach ($ids as $id)
             {
-                $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneById($id);
-                $dreams->add($dream);
+                $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(array(
+                    'id' => $id,
+                    'currentStatus' => array(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, Status::SUCCESS)
+                ));
+                is_null($dream) ? : $dreams->add($dream);
             }
         }
 
