@@ -432,8 +432,7 @@ class DreamController extends Controller
         $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', strip_tags(trim($tag)));
         $dreams = new ArrayCollection();
         if (count($ids) > 0 ) {
-            foreach ($ids as $id)
-            {
+            foreach ($ids as $id) {
                 $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(array(
                     'id' => $id,
                     'currentStatus' => array(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, Status::SUCCESS)
