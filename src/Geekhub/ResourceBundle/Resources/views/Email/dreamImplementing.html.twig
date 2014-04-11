@@ -1,9 +1,32 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
-    Мрія отримала підтримку
-{% endblock title %}
+{% block header %}
+    <h1 class="text-center">До роботи!</h1>
+{% endblock header %}
 
-{% block body %}
-    Ви зголосилися підтримати мрію <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a>. Автор мрії розпочав збирати ресурси. Детальніте <a href="{{ url('view_dream', {'slug': dream.slug }) }}">ТУТ</a>.
-{% endblock body %}
+{% block content %}
+    <div class="row">
+        <p>
+            Мрія <a href="{{ url('view_dream', { 'slug' : dream.slug}) }}">{{ dream.title }}</a> перейшла в статус "Реалізація". Це означає, починається активна фаза реалізації мрії.
+        </p>
+    </div>
+
+    <div class="row">
+        <h4 class="text-center">Нагадуємо, ви обіцяли допомогти з реалізацією мрії ресурсами:</h4>
+        <div class="col-md-8 col-md-offset-2 jumbotron">
+            <ul class="list-unstyled">
+                {{ finContribute(contributor.user, dream)|raw }}
+                {{ equipContribute(contributor.user, dream)|raw }}
+                {{ workContribute(contributor.user, dream)|raw }}
+                {{ otherContribute(contributor.user, dream)|raw }}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <h4 class="text-center">Автор мрії розмістив настуне оголошення:</h4>
+        <div class="col-md-8 col-md-offset-2 jumbotron">
+            {{ dream.implementedDescription }}
+        </div>
+    </div>
+{% endblock content %}
