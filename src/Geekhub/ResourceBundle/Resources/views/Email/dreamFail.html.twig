@@ -1,9 +1,9 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
+{% block header %}
     Мрія <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> - не втілена!!!
-{% endblock title %}
+{% endblock header %}
 
-{% block body %}
+{% block content %}
     Адміністрація не підтверджує втулення мрії <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a>.
-{% endblock body %}
+{% endblock content %}
