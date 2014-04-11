@@ -1,28 +1,39 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
-{% block title %}
-    Ви долучилися до мрії!!!
-{% endblock title %}
+{% block header %}
+    <h1 class="text-center">Дякуємо за вашу підтримку!</h1>
+{% endblock header %}
 
-{% block body %}
-    <p>
-        Мрія {{ dream.author.firstName}} {{ dream.author.lastName }} <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> отримала Вашу підтримку.
-    </p>
-    <p>
-        Опис мрії:
-    </p>
-    <p>
-        <img src="{{ baseUrl }}{% path dream.mediaPoster, 'big' %}" />
-        <br/>
-        {{ dream.description|raw }}
-    </p>
-    <p>
-        Ви запропонували:
-    </p>
-    <ul class="list-unstyled">
-        {{ finContribute(contributor.user, dream)|raw }}
-        {{ equipContribute(contributor.user, dream)|raw }}
-        {{ workContribute(contributor.user, dream)|raw }}
-        {{ otherContribute(contributor.user, dream)|raw }}
-    </ul>
-{% endblock body %}
+{% block content %}
+    <div class="row">
+        <h3 class="text-center">
+            Ви підримали:
+        </h3>
+        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
+            <div class="col-xs-6 col-md-4">
+                <img src="{{ baseUrl }}{% path dream.mediaPoster, 'small' %}" />
+            </div>
+            <div class="col-md-8">
+                <h2><b>{{ dream.title }}</b></h2>
+                <p class="text-center"><i>створена {{ dream.createdAt }}</i></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h4 class="text-center">Ви обіцяли:</h4>
+        <div class="col-md-8 col-md-offset-2 jumbotron">
+            <ul class="list-unstyled">
+                {{ finContribute(contributor.user, dream)|raw }}
+                {{ equipContribute(contributor.user, dream)|raw }}
+                {{ workContribute(contributor.user, dream)|raw }}
+                {{ otherContribute(contributor.user, dream)|raw }}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <h4>Коли роботи будуть розпочинатися, ви обов'язково отримаєте листа, а також з вами звяжеться автор мрії.</h4>
+        <h4>Якщо ви хочете зв'язатися з автором зараз, <a href="#">напишіть йому листа</a>. </h4>
+    </div>
+{% endblock content %}
