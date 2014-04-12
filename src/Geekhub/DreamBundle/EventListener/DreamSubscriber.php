@@ -6,6 +6,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
+use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
 use Symfony\Component\DependencyInjection\Container;
@@ -59,118 +60,14 @@ class DreamSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
-        $template = $this->container->get('templating');
-        $admin = $this->container->getParameter('admin.mail');
-//        $scheme = $this->container->get('router')->getContext()->getScheme();
-//        $host = $this->container->get('router')->getContext()->getHost();
-//        $baseUrl = sprintf('%s://%s', $scheme, $host);
 
         if ($object instanceof Status) {
-            $dream = $object->getDream();
-            $author = $dream->getAuthor();
-            $contributors = $this->container->get('doctrine')
-                ->getRepository('GeekhubDreamBundle:Dream')
-                ->getArrayContributorsByDream($dream)
-            ;
-
-            switch ($object->getTitle()) {
-                case Status::SUBMITTED :
-                    $this->sendEmail(
-                        $template->render(
-                            'GeekhubResourceBundle:Email:dreamSubmitted.html.twig',
-                            array(
-                                'dream' => $dream
-                            )
-                        ),
-                        $admin,
-                        Status::SUBMITTED
-                    );
-                    break;
-                case Status::COLLECTING_RESOURCES :
-                    $this->sendEmail(
-                        $template->render(
-                            'GeekhubResourceBundle:Email:dreamCollecting.html.twig',
-                            array(
-                                'dream' => $dream
-//                                'baseUrl' => $baseUrl
-                            )
-                        ),
-                        $author->getEmail(),
-                        Status::COLLECTING_RESOURCES
-                    );
-                    break;
-                case Status::REJECTED :
-                    $this->sendEmail(
-                        $template->render(
-                            'GeekhubResourceBundle:Email:dreamRejected.html.twig',
-                            array(
-                                'dream' => $dream
-                            )
-                        ),
-                        $author->getEmail(),
-                        Status::REJECTED
-                    );
-                    break;
-                case Status::IMPLEMENTING :
-                    foreach ($contributors as $contributor) {
-                        $this->sendEmail(
-                            $template->render(
-                                'GeekhubResourceBundle:Email:dreamImplementing.html.twig',
-                                array(
-                                    'dream' => $dream,
-                                    'contributor' => $contributor
-                                )
-                            ),
-                            $contributor->getEmail(),
-                            Status::IMPLEMENTING
-                        );
-                    }
-                    break;
-                case Status::COMPLETED :
-                    $this->sendEmail(
-                        $template->render(
-                            'GeekhubResourceBundle:Email:dreamCompleted.html.twig',
-                            array(
-                                'dream' => $dream
-                            )
-                        ),
-                        $admin,
-                        Status::COMPLETED
-                    );
-                    break;
-                case Status::SUCCESS :
-                    foreach ($contributors as $contributor) {
-                        $this->sendEmail(
-                            $template->render(
-                                'GeekhubResourceBundle:Email:dreamSuccess.html.twig',
-                                array(
-                                    'dream' => $dream
-//                                    'baseUrl' => $baseUrl
-                                )
-                            ),
-                            $contributor->getEmail(),
-                            Status::SUCCESS
-                        );
-                    }
-                    break;
-                case Status::FAIL :
-                    $this->sendEmail(
-                        $template->render(
-                            'GeekhubResourceBundle:Email:dreamFail.html.twig',
-                            array(
-                                'dream' => $dream
-                            )
-                        ),
-                        $author->getEmail(),
-                        Status::FAIL
-                    );
-                    break;
-            }
+            $this->postStatusEmail($object->getTitle(), $object->getDream());
         }
 
         if ('Geekhub\DreamBundle\Entity\AbstractContribute' == get_parent_class($object)) {
             $this->sendEmail(
-                $template->render(
+                $this->getTemplate(
                     'GeekhubResourceBundle:Email:contribution.html.twig',
                     array(
                         'dream' => $object->getDream(),
@@ -195,5 +92,47 @@ class DreamSubscriber implements EventSubscriber
         ;
 
         $this->mandrillDispatcher->send($message);
+    }
+
+    protected function postStatusEmail($status, Dream $dream)
+    {
+        if (in_array($status, array('success', 'implementing'))) {
+            $users = $this->container->get('doctrine')
+                ->getRepository('GeekhubDreamBundle:Dream')
+                ->getArrayContributorsByDream($dream)
+            ;
+        }
+
+        if (in_array($status, array('submitted', 'completed'))) {
+            $user = new User();
+            $user->setEmail($this->container->getParameter('admin.mail'));
+            $users = array($user);
+        }
+
+        if (in_array($status, array('rejected', 'collecting-resources', 'fail'))) {
+            $users = array($dream->getAuthor());
+        }
+
+        foreach ($users as $user) {
+            $this->sendEmail(
+                $this->getTemplate(
+                    'GeekhubResourceBundle:Email:'.$status.'.html.twig',
+                    array(
+                        'dream' => $dream,
+                        'contributor' => $user
+                    )
+                ),
+                $user->getEmail(),
+                $status
+            );
+        }
+    }
+
+    protected function getTemplate($nameTwigTemplate, $options = array())
+    {
+        return $this->container->get('templating')->render(
+            $nameTwigTemplate,
+            $options
+        );
     }
 }
