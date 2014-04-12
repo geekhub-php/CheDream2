@@ -24,47 +24,6 @@ class RegistrationSubscriber
     {
         $this->container = $container;
     }
-//
-//    /**
-//     * Returns an array of events this subscriber wants to listen to.
-//     *
-//     * @return array
-//     */
-//    public function getSubscribedEvents()
-//    {
-//        return array(
-//            'postPersist',
-//        );
-//    }
-//
-//    /**
-//     * @param LifecycleEventArgs $args
-//     */
-//    public function postPersist(LifecycleEventArgs $args)
-//    {
-////        $object = $args->getObject();
-////
-////        if ($object instanceof User) {
-////            $dispatcher = $this->container->get('hip_mandrill.dispatcher');
-////
-////            $message = new Message();
-////            $body = $this->container->get('templating')->render(
-////                'GeekhubResourceBundle:Email:registration.html.twig',
-////                array(
-////                    'user' => $object->getFirstName()." ".$object->getLastName()
-////                )
-////            );
-////
-////            $message->setFromEmail('test@gmail.com')
-////                ->setFromName('Черкаська мрія')
-////                ->addTo($object->getEmail())
-////                ->setSubject('REGISTRATION')
-////                ->setHtml($body)
-////            ;
-////
-////            $dispatcher->send($message);
-////        }
-//    }
 
     public function onKernelRequest(GetResponseEvent $event)
     {
@@ -73,8 +32,7 @@ class RegistrationSubscriber
         $user = $sc->getToken()->getUser();
         $targetRoute = 'profile_update_contacts';
 
-        if($user instanceof User)
-        {
+        if ($user instanceof User) {
             if (strstr($user->getEmail(),'@example.com')) {
                 $routeName = $this->container->get('request')->get('_route');
                 $uri =$this->container->get('request')->getUri();
