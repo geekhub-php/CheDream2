@@ -59,8 +59,8 @@ class DreamSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
+        $template = $this->container->get('templating');
         $admin = $this->container->getParameter('admin.mail');
-//        $template = $this->container->get('templating');
 //        $scheme = $this->container->get('router')->getContext()->getScheme();
 //        $host = $this->container->get('router')->getContext()->getHost();
 //        $baseUrl = sprintf('%s://%s', $scheme, $host);
