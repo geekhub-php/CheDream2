@@ -59,11 +59,11 @@ class DreamSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
-        $template = $this->container->get('templating');
         $admin = $this->container->getParameter('admin.mail');
-        $scheme = $this->container->get('router')->getContext()->getScheme();
-        $host = $this->container->get('router')->getContext()->getHost();
-        $baseUrl = sprintf('%s://%s', $scheme, $host);
+//        $template = $this->container->get('templating');
+//        $scheme = $this->container->get('router')->getContext()->getScheme();
+//        $host = $this->container->get('router')->getContext()->getHost();
+//        $baseUrl = sprintf('%s://%s', $scheme, $host);
 
         if ($object instanceof Status) {
             $dream = $object->getDream();
@@ -91,8 +91,8 @@ class DreamSubscriber implements EventSubscriber
                         $template->render(
                             'GeekhubResourceBundle:Email:dreamCollecting.html.twig',
                             array(
-                                'dream' => $dream,
-                                'baseUrl' => $baseUrl
+                                'dream' => $dream
+//                                'baseUrl' => $baseUrl
                             )
                         ),
                         $author->getEmail(),
@@ -144,8 +144,8 @@ class DreamSubscriber implements EventSubscriber
                             $template->render(
                                 'GeekhubResourceBundle:Email:dreamSuccess.html.twig',
                                 array(
-                                    'dream' => $dream,
-                                    'baseUrl' => $baseUrl
+                                    'dream' => $dream
+//                                    'baseUrl' => $baseUrl
                                 )
                             ),
                             $contributor->getEmail(),
@@ -174,8 +174,7 @@ class DreamSubscriber implements EventSubscriber
                     'GeekhubResourceBundle:Email:contribution.html.twig',
                     array(
                         'dream' => $object->getDream(),
-                        'contributor' => $object,
-                        'baseUrl' => $baseUrl
+                        'contributor' => $object
                     )
                 ),
                 $object->getUser()->getEmail(),

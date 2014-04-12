@@ -11,7 +11,7 @@
         </h3>
         <div class="col-md-8 col-md-offset-2 jumbotron text-center">
             <div class="col-xs-6 col-md-4">
-                <img src="{{ baseUrl~dream.mediaPoster|mediaPath|imagine_filter('dream_thumb')  }}" />
+                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb', true) }}" />
             </div>
             <div class="col-md-8">
                 <h2><b>{{ dream.title }}</b></h2>
