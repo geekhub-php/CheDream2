@@ -1,32 +1,37 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
 {% block header %}
-    <h1 class="text-center">До роботи!</h1>
+    До роботи!
 {% endblock header %}
 
 {% block content %}
-    <div class="row">
-        <p>
-            Мрія <a href="{{ url('view_dream', { 'slug' : dream.slug}) }}">{{ dream.title }}</a> перейшла в статус "Реалізація". Це означає, починається активна фаза реалізації мрії.
-        </p>
-    </div>
+    <p>
+        Мрія "<a href="{{ url('view_dream', { 'slug' : dream.slug}) }}">{{ dream.title }}</a>" перейшла в статус "Реалізація". Це означає, починається активна фаза реалізації мрії.
+    </p>
 
-    <div class="row">
-        <h4 class="text-center">Нагадуємо, ви обіцяли допомогти з реалізацією мрії ресурсами:</h4>
-        <div class="col-md-8 col-md-offset-2 jumbotron">
-            <ul class="list-unstyled">
-                {{ finContribute(contributor, dream)|raw }}
-                {{ equipContribute(contributor, dream)|raw }}
-                {{ workContribute(contributor, dream)|raw }}
-                {{ otherContribute(contributor, dream)|raw }}
-            </ul>
-        </div>
-    </div>
+    <h4 class="centered">Нагадуємо, ви обіцяли допомогти з реалізацією мрії ресурсами:</h4>
 
-    <div class="row">
-        <h4 class="text-center">Автор мрії розмістив настуне оголошення:</h4>
-        <div class="col-md-8 col-md-offset-2 jumbotron">
-            {{ dream.implementedDescription|raw }}
-        </div>
-    </div>
+    <table class="layout">
+        <tr>
+            <td>
+                <b>
+                    <ul>
+                    {{ finContribute(contributor, dream)|raw }}
+                    {{ equipContribute(contributor, dream)|raw }}
+                    {{ workContribute(contributor, dream)|raw }}
+                    {{ otherContribute(contributor, dream)|raw }}
+                </ul></b>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <h4 class="centered">Автор мрії розмістив настуне оголошення:</h4>
+    <table class="layout">
+        <tr>
+            <td>
+                {{ dream.implementedDescription|raw }}
+            </td>
+        </tr>
+    </table>
 {% endblock content %}

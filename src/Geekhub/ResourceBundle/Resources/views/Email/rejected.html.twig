@@ -1,11 +1,17 @@
-{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+{% extends 'GeekhubResourceBundle:Email:collecting-resources.html.twig' %}
 
-{% block heade %}
-    Повернуто на дооформлення
+{% block header %}
+    Повернуто на дооформлення!!!
 {% endblock header %}
 
-{% block content %}
-    <p>Адміністрація повернула мрію <a href="{{ url('edit_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> на дооформлення.</p>
-    <p>Зауваження:</p>
+{% block description %}
+    Адміністрація повернула мрію на дооформлення.
+{% endblock description %}
+
+{% block alert_title %}
+    Зауваження:
+{% endblock alert_title %}
+
+{% block alert %}
     {{ dream.rejectedDescription|raw }}
-{% endblock content %}
+{% endblock alert %}

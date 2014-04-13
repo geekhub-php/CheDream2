@@ -1,56 +1,55 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
 {% block header %}
-    <h1 class="text-center">
-        <b>Щиро вітаємо на
+    <b>
+        Щиро вітаємо у
         <a href="{{ url('geekhub_dream_homepage') }}" class="brand">
-            <img data-src="holder.js/80x20" alt="logo" />
-        </a></b>
-    </h1>
+            <img data-src="holder.js/80x20" alt="Черкаській мрії" />
+        </a>
+    </b>
 {% endblock header %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h3 class="text-center">
-                Деталі вашого облікового запису
-                {#Деталі вашого профілю на сайті#}
-            </h3>
-        </div>
+    <h3 class="centered">
+        Деталі вашого облікового запису
+        {#Деталі вашого профілю на сайті#}
+    </h3>
+
+    <div class="layout centered">
+        <h2>
+            <b>{{ user.firstName ~ " " ~ user.lastName  }}</b>
+        </h2>
+        <h3>
+            {{ user.email }}
+        </h3>
+        <h4>підключено через
+            {% if user.facebookId is not null  %}
+                Facebook
+            {% elseif user.odnoklassnikiId %}
+                Однокласники
+            {% elseif user.vkontakteId %}
+                ВКонтакте
+            {% endif %}
+        </h4>
     </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
-            <h2>
-                <b>{{ user.firstName ~ " " ~ user.lastName  }}</b>
-            </h2>
-            <h3>
-                {{ user.email }}
-            </h3>
-            <h4>підключено через
-                {% if user.facebookId is not null  %}
-                    Facebook
-                {% elseif user.odnoklassnikiId %}
-                    Однокласники
-                {% elseif user.vkontakteId %}
-                    ВКонтакте
-                {% endif %}
-            </h4>
-        </div>
-    </div>
+    <br/>
     <hr/>
-    <div class="row">
-         <h3 class="text-center">Що далі?</h3>
-        <div class="col-md-12">
-            <div class="col-md-6 text-right">
-                <a href="{{ url('dream_list') }}">
-                    <button class="btn btn-default">Подивитися мрії</button>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="{{ url('new_dream') }}">
-                    <button class="btn btn-default">Створити мрію</button>
-                </a>
-            </div>
-        </div>
+
+    <div  class="centered">
+        <h3>Що далі?</h3>
+        <table style="width: 100%">
+            <tr>
+                <td style="text-align: right">
+                    <a href="{{ url('dream_list') }}">
+                        <button class="btn btn-default">Подивитися мрії</button>
+                    </a>
+                </td>
+                <td style="text-align: left">
+                    <a href="{{ url('new_dream') }}">
+                        <button class="btn btn-default">Створити мрію</button>
+                    </a>
+                </td>
+            </tr>
+        </table>
     </div>
 {% endblock content %}

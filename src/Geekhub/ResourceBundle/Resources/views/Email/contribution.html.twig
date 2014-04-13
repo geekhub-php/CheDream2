@@ -1,39 +1,49 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
 {% block header %}
-    <h1 class="text-center">Дякуємо за вашу підтримку!</h1>
+    Дякуємо за вашу підтримку!
 {% endblock header %}
 
 {% block content %}
-    <div class="row">
-        <h3 class="text-center">
+    <div class="centered">
+        <h3>
             Ви підримали:
         </h3>
-        <div class="col-md-8 col-md-offset-2 jumbotron text-center">
-            <div class="col-xs-6 col-md-4">
-                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb', true) }}" />
-            </div>
-            <div class="col-md-8">
-                <h2><b>{{ dream.title }}</b></h2>
-                <p class="text-center"><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <h4 class="text-center">Ви обіцяли:</h4>
-        <div class="col-md-8 col-md-offset-2 jumbotron">
-            <ul class="list-unstyled">
-                {{ finContribute(contributor.user, dream)|raw }}
-                {{ equipContribute(contributor.user, dream)|raw }}
-                {{ workContribute(contributor.user, dream)|raw }}
-                {{ otherContribute(contributor.user, dream)|raw }}
-            </ul>
-        </div>
+        <table class="layout">
+            <tr>
+                <td>
+                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form', true) }}" />
+                </td>
+                <td>
+                    <h2><b>{{ dream.title }}</b></h2>
+                    <p><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
+                </td>
+            </tr>
+        </table>
     </div>
+    <br/>
 
-    <div class="row text-center">
+    <h4 class="centered">Ви обіцяли:</h4>
+
+    <table class="layout">
+        <tr>
+            <td>
+                <b><ul>
+                    {{ finContribute(contributor.user, dream)|raw }}
+                    {{ equipContribute(contributor.user, dream)|raw }}
+                    {{ workContribute(contributor.user, dream)|raw }}
+                    {{ otherContribute(contributor.user, dream)|raw }}
+                </ul></b>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <div class="centered">
         <h4>Коли роботи будуть розпочинатися, ви обов'язково отримаєте листа, а також з вами звяжеться автор мрії.</h4>
-        <h4>Якщо ви хочете зв'язатися з автором зараз, <a href="#">напишіть йому листа</a>. </h4>
+        <br/>
+
+        <h4>Якщо ви хочете зв'язатися з автором зараз, <a href="mailto:{{ dream.author.email }}">напишіть йому листа</a>. </h4>
     </div>
 {% endblock content %}

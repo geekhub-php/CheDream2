@@ -113,18 +113,20 @@ class DreamSubscriber implements EventSubscriber
             $users = array($dream->getAuthor());
         }
 
-        foreach ($users as $user) {
-            $this->sendEmail(
-                $this->getTemplate(
-                    'GeekhubResourceBundle:Email:'.$status.'.html.twig',
-                    array(
-                        'dream' => $dream,
-                        'contributor' => $user
-                    )
-                ),
-                $user->getEmail(),
-                $status
-            );
+        if (isset($users)) {
+            foreach ($users as $user) {
+                $this->sendEmail(
+                    $this->getTemplate(
+                        'GeekhubResourceBundle:Email:'.$status.'.html.twig',
+                        array(
+                            'dream' => $dream,
+                            'contributor' => $user
+                        )
+                    ),
+                    $user->getEmail(),
+                    $status
+                );
+            }
         }
     }
 
