@@ -416,12 +416,16 @@ class DreamController extends Controller
      */
     public function searchDreamAction($text)
     {
-        $dreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->searchDreams($text);
+        if ($text != 'default-search-text') {
+            $dreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->searchDreams($text);
 
-        return array(
-            'dreams' => $dreams,
-            'search_text' => $text
-        );
+            return array(
+                'dreams' => $dreams,
+                'search_text' => $text
+            );
+        } else {
+            return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        }
     }
 
     /**
@@ -429,22 +433,26 @@ class DreamController extends Controller
      */
     public function dreamsByTagAction($tag)
     {
-        $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', strip_tags(trim($tag)));
-        $dreams = new ArrayCollection();
-        if (count($ids) > 0 ) {
-            foreach ($ids as $id) {
-                $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(array(
-                    'id' => $id,
-                    'currentStatus' => array(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, Status::SUCCESS)
-                ));
-                is_null($dream) ? : $dreams->add($dream);
+        if ($tag != 'default-tag') {
+            $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', strip_tags(trim($tag)));
+            $dreams = new ArrayCollection();
+            if (count($ids) > 0 ) {
+                foreach ($ids as $id) {
+                    $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(array(
+                        'id' => $id,
+                        'currentStatus' => array(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, Status::SUCCESS)
+                    ));
+                    is_null($dream) ? : $dreams->add($dream);
+                }
             }
-        }
 
-        return array(
-            'dreams' => $dreams,
-            'search_text' => $tag
-        );
+            return array(
+                'dreams' => $dreams,
+                'search_text' => $tag
+            );
+        } else {
+            return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        }
     }
 
     private function isAuthor(Dream $dream)

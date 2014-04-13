@@ -46,7 +46,7 @@ failed_dream:
 
 dream_by_tag:
     pattern:  /dream/tag/{tag}
-    defaults: { _controller: GeekhubDreamBundle:Dream:dreamsByTag }
+    defaults: { _controller: GeekhubDreamBundle:Dream:dreamsByTag, tag: 'default-tag' }
 
 dream_list:
     pattern:  /dreams
@@ -58,7 +58,7 @@ dream_search:
 
 dream_search_text:
     pattern:  /dream/search/{text}
-    defaults: { _controller: GeekhubDreamBundle:Dream:searchDream }
+    defaults: { _controller: GeekhubDreamBundle:Dream:searchDream, text: 'default-search-text' }
 
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
