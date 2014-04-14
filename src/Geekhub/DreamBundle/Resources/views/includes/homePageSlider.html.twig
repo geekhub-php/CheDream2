@@ -12,7 +12,7 @@
         {% endfor %}
     </ol>
 
-    <div class="carousel-inner">
+    <div class="carousel-inner" id="dream-slider-container">
         {% for completedDream in completedDreams %}
             {% if completedDream.mediaPoster is not null %}
                 {% if loop.index == 1 %}

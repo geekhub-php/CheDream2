@@ -5,7 +5,7 @@
                 <h3>Підтримати:</h3>
                 <div class="btn-group-vertical" style="width: 100%">
                     {% if dream.dreamFinancialResources|length > 0 %}
-                        <a type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow">Фінансово</a>
+                        <input type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow" value="Фінансово" />
                         <div id="finFormContributor">     {# financial contribute form start #}
 
                             {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
@@ -25,7 +25,7 @@
                         </div>    {# financial contribute form end #}
                     {% endif %}
                     {% if dream.dreamEquipmentResources|length > 0 %}
-                        <a type="button" class="btn btn-default btn-lg btn-block" id="equipFormContributorShow">Обладнанням / Технікою</a>
+                        <input type="button" class="btn btn-default btn-lg btn-block" id="equipFormContributorShow" value="Обладнанням / Технікою" />
                         <div id="equipFormContributor">     {# equipment contribute form start #}
 
                             {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
@@ -45,7 +45,7 @@
                         </div>    {# equipment contribute form end #}
                     {% endif %}
                     {% if dream.dreamWorkResources|length > 0 %}
-                        <a type="button" class="btn btn-default btn-lg btn-block"  id="workFormContributorShow">Провести роботи</a>
+                        <input type="button" class="btn btn-default btn-lg btn-block"  id="workFormContributorShow" value="Провести роботи" />
                         <div id="workFormContributor">     {# work contribute form start #}
 
                             {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
@@ -66,7 +66,7 @@
                         </div>    {# work contribute form end #}
                     {% endif %}
 
-                    <a type="button" class="btn btn-default btn-lg btn-block" id="otherFormContributorShow">Інша допомога</a>
+                    <input type="button" class="btn btn-default btn-lg btn-block" id="otherFormContributorShow" value="Інша допомога" />
 
                     <div id="otherFormContributor">     {# other contribute form start #}
 
@@ -96,13 +96,13 @@
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (app.user.id == dream.author.id) %}
             {% if ((dream.currentStatus == 'success') or (dream.currentStatus == 'completed')) %} {% else %}
                 {% if (dream.currentStatus == 'submitted') or (dream.currentStatus == 'rejected') %}
-                    <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.editDream'|trans }}</a>
+                    <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs" id="dream-edit-link">{{ 'dream.editDream'|trans }}</a>
                 {% else %}
-                    <button type="button" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" title="{{ 'dream.editDream'|trans }}">{{ 'dream.editDream'|trans }}</button>
+                    <button type="button" id="dream-edit-dream-modal" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" title="{{ 'dream.editDream'|trans }}">{{ 'dream.editDream'|trans }}</button>
                 {% endif %}
 
                 {% if dream.currentStatus == 'implementing' %}
-                    <button type="button" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
+                    <button type="button" id="dream-edit-yellowBlock-modal" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
                 {% endif %}
              {% endif %}
         {% endif %}
@@ -116,9 +116,9 @@
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id %}
             {% if dream.currentStatus == 'collecting-resources' %}
-                <button type="button" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</button>
+                <button type="button" id="dream-start-collect-res-modal" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</button>
             {% elseif dream.currentStatus == 'implementing' %}
-                <button type="button" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</button>
+                <button type="button" id="dream-finish-collect-res-modal" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</button>
             {% endif %}
         {% endif %}
 

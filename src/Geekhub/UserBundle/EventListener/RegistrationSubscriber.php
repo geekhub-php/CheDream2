@@ -8,12 +8,15 @@
 
 namespace Geekhub\UserBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Geekhub\UserBundle\Entity\User;
+use Hip\MandrillBundle\Message;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\Container;
 
-class RegistrationSubscriber
+class RegistrationSubscriber implements EventSubscriber
 {
     protected $container;
 
@@ -29,16 +32,19 @@ class RegistrationSubscriber
     {
         //$user = $event->getAuthenticationToken()->getUser();
         $sc = $this->container->get('security.context');
-        $user = $sc->getToken()->getUser();
-        $targetRoute = 'profile_update_contacts';
+        if ($sc->getToken()) {
+            $user = $sc->getToken()->getUser();
+            $targetRoute = 'profile_update_contacts';
 
-        if ($user instanceof User) {
-            if (strstr($user->getEmail(),'@example.com')) {
-                $routeName = $this->container->get('request')->get('_route');
-                $uri =$this->container->get('request')->getUri();
-                if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
-                    $url = $this->container->get('router')->generate($targetRoute);
-                    $event->setResponse(new RedirectResponse($url));
+            if($user instanceof User)
+            {
+                if (strstr($user->getEmail(),'@example.com')) {
+                    $routeName = $this->container->get('request')->get('_route');
+                    $uri =$this->container->get('request')->getUri();
+                    if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
+                        $url = $this->container->get('router')->generate($targetRoute);
+                        $event->setResponse(new RedirectResponse($url));
+                    }
                 }
             }
         }
