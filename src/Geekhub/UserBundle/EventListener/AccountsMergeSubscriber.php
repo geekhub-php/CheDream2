@@ -65,6 +65,7 @@ class AccountsMergeSubscriber implements EventSubscriber
                 $em->persist($mergeRequest);
                 $object->setEmail($args->getOldValue('email'));
                 $object->setEmailCanonical($args->getOldValue('email'));
+                $object->setRegistrationStatus(-2);//User::WANTS_MERGE);
                 $this->sendMergeNotificationEmail($userWithTheSameEmail, $object, $hash);
                 $em->flush();
             }
@@ -92,8 +93,7 @@ class AccountsMergeSubscriber implements EventSubscriber
             ->setSubject('Accounts merge request')
             ->setHtml($body);
 
-        //$dispatcher->send($message);
-        echo $message->getHtml();
+        $dispatcher->send($message);
     }
 
     private function getUniqueHash()

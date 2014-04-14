@@ -105,7 +105,9 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
-        $user->setEmail('');
+        if (strstr($user->getEmail(),'@example.com')) {
+            $user->setEmail('');
+        }
 
         $form = $this->CreateForm(new UserForUpdateContactsType(), $user, array(
                      'user' => $user,
@@ -116,6 +118,7 @@ class UserController extends Controller
 
         if ($form -> isValid()) {
 
+            $user->setRegistrationStatus(0);
             $em->flush();
 
             return $this->redirect($this->generateUrl("geekhub_dream_homepage"));

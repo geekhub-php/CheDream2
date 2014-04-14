@@ -41,6 +41,13 @@ trait ContactsInfo
     protected $odnoklassnikiUrl;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="registrationStatus", type="integer")
+     */
+    protected $registrationStatus;
+
+    /**
      * Set phone
      *
      * @param  string   $phone
@@ -148,5 +155,27 @@ trait ContactsInfo
     public function getOdnoklassnikiUrl()
     {
         return $this->odnoklassnikiUrl;
+    }
+
+    /**
+     * Set registrationStatus
+     *
+     * @param  integer   $registrationStatus
+     */
+    public function setRegistrationStatus($registrationStatus)
+    {
+        $this->registrationStatus = $registrationStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get RegistrationStatus
+     *
+     * @return integer
+     */
+    public function getRegistrationStatus()
+    {
+        return $this->registrationStatus;
     }
 }

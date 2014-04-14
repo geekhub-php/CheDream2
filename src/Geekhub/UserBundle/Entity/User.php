@@ -15,6 +15,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const NORMAL            =  0;
+    const EMAIL_UNAVAILABLE = -1;
+    const WANTS_MERGE       = -2;
+
     /**
      * @var integer
      *
