@@ -140,7 +140,7 @@
     <br>
         <div class="col-md-2"></div>
         <div class="col-md-3">
-            <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary">
+            <input type="submit" value="{{ 'dream.edit'|trans }}" class="text-center btn btn-primary" id="dream-edit-all">
             {{ form_row(form._token) }}
             {{ form_end(form) }}
         </div>
@@ -148,18 +148,18 @@
             {% if (status == 'submitted') or (status == 'rejected') %}
                 <div class="col-md-3">
                     <form action="{{ path('confirm_dream', {'slug': slug}) }}" method="post">
-                        <button type="submit" class="btn btn-success">{{ 'dream.status.confirm'|trans }}</button>
+                        <button type="submit" class="btn btn-success" id="dream-admin-confirm">{{ 'dream.status.confirm'|trans }}</button>
                     </form>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger" title="Повернути на доопрацювання.">{{ 'dream.status.reject'|trans }}</button>
+                    <button type="button" data-toggle="modal" data-target="#dreamStatusRejectModal" class="btn btn-danger" title="Повернути на доопрацювання." id="dream-admin-reject-modal">{{ 'dream.status.reject'|trans }}</button>
                 </div>
             {% endif %}
 
             {% if status == 'completed' %}
                 <div class="col-md-3">
                     <form action="{{ path('successed_dream', {'slug': slug}) }}" method="post">
-                        <button type="submit" class="btn btn-success">{{ 'dream.status.successed'|trans }}</button>
+                        <button type="submit" class="btn btn-success" id="dream-admin-confirm-completed">{{ 'dream.status.successed'|trans }}</button>
                     </form>
                 </div>
                 <div class="col-md-3">
