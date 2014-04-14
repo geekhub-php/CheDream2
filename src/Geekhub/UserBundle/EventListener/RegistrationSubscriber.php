@@ -73,19 +73,22 @@ class RegistrationSubscriber implements EventSubscriber
     {
         //$user = $event->getAuthenticationToken()->getUser();
         $sc = $this->container->get('security.context');
-        $user = $sc->getToken()->getUser();
-        $targetRoute = 'profile_update_contacts';
+        if ($sc->getToken()) {
+            $user = $sc->getToken()->getUser();
+            $targetRoute = 'profile_update_contacts';
 
-        if($user instanceof User)
-        {
-            if (strstr($user->getEmail(),'@example.com')) {
-                $routeName = $this->container->get('request')->get('_route');
-                $uri =$this->container->get('request')->getUri();
-                if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
-                    $url = $this->container->get('router')->generate($targetRoute);
-                    $event->setResponse(new RedirectResponse($url));
+            if($user instanceof User)
+            {
+                if (strstr($user->getEmail(),'@example.com')) {
+                    $routeName = $this->container->get('request')->get('_route');
+                    $uri =$this->container->get('request')->getUri();
+                    if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
+                        $url = $this->container->get('router')->generate($targetRoute);
+                        $event->setResponse(new RedirectResponse($url));
+                    }
                 }
             }
+
         }
     }
 }
