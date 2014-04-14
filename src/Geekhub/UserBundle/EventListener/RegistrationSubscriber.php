@@ -8,15 +8,12 @@
 
 namespace Geekhub\UserBundle\EventListener;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Geekhub\UserBundle\Entity\User;
-use Hip\MandrillBundle\Message;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\Container;
 
-class RegistrationSubscriber implements EventSubscriber
+class RegistrationSubscriber
 {
     protected $container;
 
