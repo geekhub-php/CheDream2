@@ -14,7 +14,7 @@ class FacebookProvider extends AbstractSocialNetworkProvider
 
         $user->setFirstName($responseArray['first_name']);
         $user->setLastName($responseArray['last_name']);
-        $user->setEmail($user->getFacebookId())."@example.com");
+        $user->setEmail($user->getFacebookId()."@example.com");
 
         $remoteImg = 'http://graph.facebook.com/'.$user->getFacebookId().'/picture?width=200&height=200';
         $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->getFacebookId()).'.jpg');

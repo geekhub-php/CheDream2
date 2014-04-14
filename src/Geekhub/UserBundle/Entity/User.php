@@ -111,7 +111,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $otherContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author", cascade="all")
      */
     protected $dreams;
 

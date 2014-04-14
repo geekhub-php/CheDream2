@@ -2,6 +2,7 @@
 
 namespace Geekhub\UserBundle\Controller;
 
+use Geekhub\UserBundle\Entity\MergeRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Geekhub\UserBundle\Form\UserForUpdateContactsType;
@@ -121,5 +122,17 @@ class UserController extends Controller
         }
 
         return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+    }
+
+
+    /**
+     * @ParamConverter("mergeRequest", class="GeekhubUserBundle:MergeRequest", options={"hash" = "hash"})
+     */
+    public function mergeAccountsAction(MergeRequest $mergeRequest)
+    {
+        $proposer = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getProposersId());
+        $mergingUser = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getMergingUserId());
+        $this->get('geekhub.user.accounts_merge_subscriber')->mergeUsers($proposer, $mergingUser);
+        return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
     }
 }
