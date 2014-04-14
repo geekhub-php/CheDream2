@@ -8,25 +8,21 @@
 
 namespace Geekhub\DreamBundle\Admin;
 
+use Geekhub\DreamBundle\Entity\Status;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class DreamAdmin extends Admin
 {
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('title')
-            ->add('slug')
-        ;
-    }
-
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
+        $choiceOptions = Status::getStatusesArray();
         $datagridMapper
-            ->add('currentStatus')
+            ->add('currentStatus',null, array(), 'choice', array(
+                    'choices' => $choiceOptions
+                ))
         ;
     }
 
@@ -34,6 +30,8 @@ class DreamAdmin extends Admin
     {
         $listMapper
             ->add('title')
+            ->add('author.firstName')
+            ->add('author.lastName')
             ->add('currentStatus')
             ->add('_action', 'actions', array(
                     'actions' => array(
@@ -41,5 +39,10 @@ class DreamAdmin extends Admin
                     )
                 ))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list', 'edit'));
     }
 }

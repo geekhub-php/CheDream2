@@ -2,9 +2,7 @@
 
 namespace Geekhub\ResourceBundle\Features\Context;
 
-use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Behat\MinkExtension\Context\MinkContext;
 
 use Behat\Behat\Context\BehatContext,
     Behat\Behat\Exception\PendingException;

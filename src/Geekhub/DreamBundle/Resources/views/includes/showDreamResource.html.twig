@@ -79,6 +79,8 @@
 
     <h3>{{ 'tags'|trans }}:</h3>
     {% for tag in dream.tags %}
-        <p class="pull-left" style="padding-right: 10px"><span class="glyphicon glyphicon-tag"></span>&nbsp;{{ tag.name }}</p>
+        <p class="pull-left" style="padding-right: 10px;"><span class="glyphicon glyphicon-tag"></span>&nbsp;
+            <a href="{{ path('dream_by_tag', {'tag': tag.name}) }}" style=" color: #000000;">{{ tag.name }}</a>
+        </p>
     {% endfor %}
 </div>

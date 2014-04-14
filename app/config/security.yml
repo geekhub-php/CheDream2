@@ -25,6 +25,7 @@ security:
             logout:
                 path:   /logout
                 target: /
+                invalidate_session: false
             anonymous:    true
             oauth:
                 resource_owners:
