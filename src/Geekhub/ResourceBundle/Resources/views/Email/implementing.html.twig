@@ -1,0 +1,37 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block header %}
+    До роботи!
+{% endblock header %}
+
+{% block content %}
+    <p>
+        Мрія "<a href="{{ url('view_dream', { 'slug' : dream.slug}) }}">{{ dream.title }}</a>" перейшла в статус "Реалізація". Це означає, починається активна фаза реалізації мрії.
+    </p>
+
+    <h4 class="centered">Нагадуємо, ви обіцяли допомогти з реалізацією мрії ресурсами:</h4>
+
+    <table class="layout">
+        <tr>
+            <td>
+                <b>
+                    <ul>
+                    {{ finContribute(contributor, dream)|raw }}
+                    {{ equipContribute(contributor, dream)|raw }}
+                    {{ workContribute(contributor, dream)|raw }}
+                    {{ otherContribute(contributor, dream)|raw }}
+                </ul></b>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <h4 class="centered">Автор мрії розмістив настуне оголошення:</h4>
+    <table class="layout">
+        <tr>
+            <td>
+                {{ dream.implementedDescription|raw }}
+            </td>
+        </tr>
+    </table>
+{% endblock content %}

@@ -2,13 +2,14 @@
 
 namespace Geekhub\UserBundle\Controller;
 
+use Geekhub\UserBundle\Entity\User;
+use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Geekhub\UserBundle\Form\UserForUpdateContactsType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
-use Geekhub\DreamBundle\Entity\Status;
 
 class UserController extends Controller
 {
@@ -116,10 +117,36 @@ class UserController extends Controller
         if ($form -> isValid()) {
 
             $em->flush();
+            $this->sendEmail($user);
 
             return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
         }
 
         return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+    }
+
+    /**
+     * @param User $user
+     */
+    protected function sendEmail(User $user)
+    {
+        $dispatcher = $this->container->get('hip_mandrill.dispatcher');
+
+        $message = new Message();
+        $body = $this->container->get('templating')->render(
+            'GeekhubResourceBundle:Email:registration.html.twig',
+            array(
+                'user' => $user
+            )
+        );
+
+        $message->setFromEmail('test@gmail.com')
+            ->setFromName('Черкаська мрія')
+            ->addTo($user->getEmail())
+            ->setSubject('REGISTRATION')
+            ->setHtml($body)
+        ;
+
+        $dispatcher->send($message);
     }
 }
