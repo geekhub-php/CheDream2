@@ -131,6 +131,7 @@ class User extends BaseUser //implements DreamUserInterface
         $this->equipmentContributions = new ArrayCollection();
         $this->workContributions = new ArrayCollection();
         $this->otherContributions = new ArrayCollection();
+        $this->registrationStatus = User::NORMAL;
         parent::__construct();
     }
 
