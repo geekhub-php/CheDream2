@@ -72,6 +72,15 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I fill in hiddenImage "([^"]*)" with "([^"]*)"$/
+     */
+    public function iFillInHiddenImageWithValue($field, $value)
+    {
+        $javascript = "document.getElementById('".$field."').value='".$value."'";
+        $this->getSession()->executeScript($javascript);
+    }
+
+    /**
      * @Given /^I fill in tinymce "([^"]*)" with "([^"]*)"$/
      */
     public function fillInTinyMce($tinyId, $value)

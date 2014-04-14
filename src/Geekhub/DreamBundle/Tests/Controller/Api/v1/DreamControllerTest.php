@@ -4,7 +4,7 @@ namespace Geekhub\DreamBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DreamController extends WebTestCase
+class DreamControllerTest extends WebTestCase
 {
     public function testGetDreams()
     {
