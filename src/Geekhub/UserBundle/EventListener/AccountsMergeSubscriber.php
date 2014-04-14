@@ -120,35 +120,50 @@ class AccountsMergeSubscriber implements EventSubscriber
             if (!$mergingUser->getFavoriteDreams()->contains($dream)) {
                 $mergingUser->addFavoriteDream($dream);
             }
-            //$proposer->removeFavoriteDream($dream);
         }
 
-        foreach ($proposer->getDreams() as $dream) {
-            $dream->setAuthor($mergingUser);
-        }
-
-        foreach ($proposer->getFinancialContributions() as $contribution) {
-            $contribution->setUser($mergingUser);
-            //$proposer->removeFinancialContribution($contribution);
-        }
-
-        foreach ($proposer->getEquipmentContributions() as $contribution) {
-            //$mergingUser->addEquipmentContribution($contribution);
-            $contribution->setUser($mergingUser);
-            //$proposer->removeEquipmentContribution($contribution);
-        }
-        foreach ($proposer->getWorkContributions() as $contribution) {
-            //$mergingUser->addWorkContribution($contribution);
-            $contribution->setUser($mergingUser);
-            //$proposer->removeWorkContribution($contribution);
-        }
-
-        foreach ($proposer->getOtherContributions() as $contribution) {
-            //$mergingUser->addOtherContribution($contribution);
-            $contribution->setUser($mergingUser);
-            //$proposer->removeOtherContribution($contribution);
-        }
         $em->flush();
+        $query = $em->createQuery(
+           "UPDATE GeekhubDreamBundle:Dream d SET d.author = :newAuthor 
+            WHERE d.author = :currentAuthor"
+        )->setParameter('currentAuthor', $proposer)
+         ->setParameter('newAuthor', $mergingUser);
+
+        $query->getResult();
+
+        
+        $query = $em->createQuery(
+           "UPDATE GeekhubDreamBundle:FinancialContribute c SET c.user = :newAuthor 
+            WHERE c.user = :currentAuthor"
+        )->setParameter('currentAuthor', $proposer)
+         ->setParameter('newAuthor', $mergingUser);
+        
+        $query->execute();
+
+        $query = $em->createQuery(
+           "UPDATE GeekhubDreamBundle:EquipmentContribute c SET c.user = :newAuthor 
+            WHERE c.user = :currentAuthor"
+        )->setParameter('currentAuthor', $proposer)
+         ->setParameter('newAuthor', $mergingUser);
+        
+        $query->execute();
+
+        $query = $em->createQuery(
+           "UPDATE GeekhubDreamBundle:WorkContribute c SET c.user = :newAuthor 
+            WHERE c.user = :currentAuthor"
+        )->setParameter('currentAuthor', $proposer)
+         ->setParameter('newAuthor', $mergingUser);
+        
+        $query->execute();
+
+        $query = $em->createQuery(
+           "UPDATE GeekhubDreamBundle:OtherContribute c SET c.user = :newAuthor 
+            WHERE c.user = :currentAuthor"
+        )->setParameter('currentAuthor', $proposer)
+         ->setParameter('newAuthor', $mergingUser);
+        
+        $query->execute();
+
         $em->remove($proposer);
         $em->flush();
     }

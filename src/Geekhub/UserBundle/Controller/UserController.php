@@ -133,6 +133,10 @@ class UserController extends Controller
         $proposer = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getProposersId());
         $mergingUser = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getMergingUserId());
         $this->get('geekhub.user.accounts_merge_subscriber')->mergeUsers($proposer, $mergingUser);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($mergeRequest);
+        $em->flush();
+
         return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
     }
 }
