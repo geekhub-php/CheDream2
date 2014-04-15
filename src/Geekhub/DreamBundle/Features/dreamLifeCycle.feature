@@ -27,10 +27,18 @@ Feature: Create dream life cycle  feature
     And I fill in "newDreamForm_dreamFinancialResources_0_title" with "fin1"
     And I fill in "newDreamForm_dreamFinancialResources_0_quantity" with "1500"
     And I wait 1 seconds
+    And I follow "Додати фінансові витрати"
+    And I fill in "newDreamForm_dreamFinancialResources_1_title" with "fin2"
+    And I fill in "newDreamForm_dreamFinancialResources_1_quantity" with "700"
+    And I wait 1 seconds
     And I follow "Додати абладнання та інструменти"
     And I fill in "newDreamForm_dreamEquipmentResources_0_title" with "equip1"
-    And I fill in "newDreamForm_dreamEquipmentResources_0_quantity" with "7"
+    And I fill in "newDreamForm_dreamEquipmentResources_0_quantity" with "9"
     And I select "kg" from "newDreamForm_dreamEquipmentResources_0_quantityType"
+    And I follow "Додати робочі ресурси"
+    And I fill in "newDreamForm_dreamWorkResources_0_title" with "work1"
+    And I fill in "newDreamForm_dreamWorkResources_0_quantity" with "7"
+    And I wait 1 seconds
     And I wait 1 seconds
     And I press "Створити"
     And I wait 1 seconds
@@ -98,19 +106,53 @@ Feature: Create dream life cycle  feature
     And I wait 2 seconds
     And I should see "Увага."
     And I press "Закрити"
+
     And I press "finFormContributorShow"
     And I should see "Стаття витрат"
     And I fill in "financialContributeForm_quantity" with "150"
-    And I press "Підтримати"
+    And I press "sbmt-btn-fin"
     And I wait 2 seconds
     And I should see "150 грн."
     And I press "finFormContributorShow"
     And I should see "Стаття витрат"
     And I fill in "financialContributeForm_quantity" with "200"
     And I check "financialContributeForm_hiddenContributor"
-    And I press "Підтримати"
+    And I press "sbmt-btn-fin"
     And I wait 2 seconds
     And I should see "350 грн."
+
+    And I wait 1 seconds
+    And I press "equipFormContributorShow"
+    And I should see "Ресурс"
+    And I fill in "equipmentContributeForm_quantity" with "3"
+    And I press "sbmt-btn-equip"
+    And I wait 2 seconds
+    And I should see "3 кг."
+    And I wait 1 seconds
+    And I press "equipFormContributorShow"
+    And I should see "Ресурс"
+    And I fill in "equipmentContributeForm_quantity" with "2"
+    And I check "equipmentContributeForm_hiddenContributor"
+    And I press "sbmt-btn-equip"
+    And I wait 2 seconds
+    And I should see "5 кг."
+
+    And I wait 1 seconds
+    And I press "workFormContributorShow"
+    And I should see "Назва робіт"
+    And I fill in "workContributeForm_quantity" with "2"
+    And I press "sbmt-btn-work"
+    And I wait 2 seconds
+    And I should see "2 дн."
+    And I wait 1 seconds
+    And I press "workFormContributorShow"
+    And I should see "Ресурс"
+    And I fill in "workContributeForm_quantity" with "4"
+    And I check "workContributeForm_hiddenContributor"
+    And I press "sbmt-btn-work"
+    And I wait 2 seconds
+    And I should see "6 дн."
+
     And I wait 2 seconds
     And I press "dream-start-collect-res-modal"
     And I wait 2 seconds
@@ -163,9 +205,6 @@ Feature: Create dream life cycle  feature
     Then the "newDreamForm_title" field should contain "Dream for testing dream life cycle"
     And the "newDreamForm_description" field should contain "<p>new Dream description</p>"
     And I press "dream-admin-confirm-completed"
-
-#    And I wait 2 seconds
-#    And should see "Dream for testing dream life cycle" in the "#dream-slider-container" element
 
     And I wait 5 seconds
     Given I am on "/logout"
