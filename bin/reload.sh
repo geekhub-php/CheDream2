@@ -1,26 +1,60 @@
 #!/bin/bash
 
-php composer.phar update
-php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
+echo ""
+echo "Выберите необходимое действие:"
+echo "1 - Стандартный reload."
+echo "2 - Только перезагрузка БД и запуск тестов."
+echo "3 - Выход. \n"
+read reload
 
-rm -rf app/cache/*
-rm -rf app/logs/*
+case $reload in
+1)
+    echo "Стандартный reload. \n"
+    php composer.phar update
+    php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
-APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1`
+    rm -rf app/cache/*
+    rm -rf app/logs/*
 
-mkdir -p web/upload/media
-rm -rf web/upload/media/*
-rm -rf web/upload/dream/*
-rm -rf web/upload/tmp/*
+    APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1`
 
-setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
-setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
+    mkdir -p web/upload/media
+    rm -rf web/upload/media/*
+    rm -rf web/upload/dream/*
+    rm -rf web/upload/tmp/*
 
-php app/console doctrine:database:drop --force
-php app/console doctrine:database:create
-php app/console doctrine:schema:update --force
-php app/console cache:clear
-php app/console doctrine:fixtures:load --no-interaction
-php app/console assets:install --symlink
-php app/console assetic:dump
-php app/console cache:clear
+    setfacl -R -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
+    setfacl -dR -m u:"$APACHEUSER":rwX -m u:`whoami`:rwX app/cache app/logs web/upload
+
+    php app/console doctrine:database:drop --force
+    php app/console doctrine:database:create
+    php app/console doctrine:schema:update --force
+    php app/console cache:clear
+    php app/console doctrine:fixtures:load --no-interaction
+    php app/console assets:install --symlink
+    php app/console assetic:dump
+    php app/console cache:clear
+
+;;
+2)
+    echo "перезагрузка БД и запуск тестов. \n"
+    php app/console doctrine:database:drop --force
+    php app/console doctrine:database:create
+    php app/console doctrine:schema:update --force
+    php app/console cache:clear
+    php app/console doctrine:fixtures:load --no-interaction
+    php app/console cache:clear
+
+    sh bin/tests.sh
+
+;;
+3)
+exit 0
+;;
+*)
+    echo "Введите правильное действие! \n"
+    sh bin/reload.sh
+
+esac
+
+
