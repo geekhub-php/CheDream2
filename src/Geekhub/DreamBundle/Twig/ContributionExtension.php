@@ -111,7 +111,7 @@ class ContributionExtension extends \Twig_Extension
 
         $str = '';
         foreach ($workContr as $work) {
-            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
+            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
         }
 
         return $str;
@@ -159,7 +159,7 @@ class ContributionExtension extends \Twig_Extension
         $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);
 
         foreach ($workResSum as $work) {
-            $str = $work['totalSum'].' чол./ '.$work['totalDays'].' дн.';
+            $str = $work['totalSum'].' дн.';
         }
 
         return $str;

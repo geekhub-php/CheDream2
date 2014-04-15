@@ -87,7 +87,6 @@ class LoadResourcesData extends AbstractFixture implements OrderedFixtureInterfa
             $work->setDream($dream);
             $work->setTitle($workData['title']);
             $work->setQuantity($workData['quantity']);
-            $work->setQuantityDays($workData['quantityDays']);
 
             $manager->persist($work);
             $this->addReference($key, $work);

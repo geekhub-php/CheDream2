@@ -34,7 +34,6 @@ class WorkContributeType extends AbstractType
                 'property' => 'title',
                 'label' => 'dream.work.title'))
             ->add('quantity', 'integer', array('label' => 'dream.work.quantity'))
-            ->add('quantityDays', 'integer', array('label' => 'dream.work.days'))
             ->add('hiddenContributor', 'checkbox', array(
                 'label'     => 'hide.contribute',
                 'required'  => false, ));
