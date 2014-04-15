@@ -13,6 +13,7 @@
         <service id="dream_file_uploader" class="%dream_file_uploader.class%">
             <argument type="service" id="liip_imagine.cache.manager"/>
         </service>
+
         <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
@@ -22,6 +23,7 @@
             </call>
             <tag name="doctrine.event_subscriber" connection="default" />
         </service>
+
         <service id="dream.twig.contribution_extension" class="%dream.twig.contribution_extension.class%">
             <argument type="service" id="doctrine" />
             <tag name="twig.extension" />

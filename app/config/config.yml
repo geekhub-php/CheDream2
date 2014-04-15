@@ -152,6 +152,9 @@ braincrafted_bootstrap:
     jquery_path: %kernel.root_dir%/../vendor/bower-components/jquery/jquery.js
 
 hip_mandrill:
+#prod mail API
+#    api_key: rwa2A9eFJM6J_T2NcBh3YA
+#dev mail API
     api_key: BGjBjUYtREBY1fHMABnofg
     default:
         sender: "%admin.mail%"

@@ -1,9 +1,0 @@
-{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
-
-{% block title %}
-    Мрія отримала підтримку
-{% endblock title %}
-
-{% block body %}
-    Ви зголосилися підтримати мрію <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a>. Автор мрії розпочав збирати ресурси. Детальніте <a href="{{ url('view_dream', {'slug': dream.slug }) }}">ТУТ</a>.
-{% endblock body %}

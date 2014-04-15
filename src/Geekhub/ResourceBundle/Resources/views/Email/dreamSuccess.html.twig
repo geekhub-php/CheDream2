@@ -1,9 +1,0 @@
-{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
-
-{% block title %}
-    Мрія <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> - втілена!!!
-{% endblock title %}
-
-{% block body %}
-    Детальний звіт про мрію <a href="{{ url('view_dream', {'slug': dream.slug }) }}">ТУТ</a>.
-{% endblock body %}
