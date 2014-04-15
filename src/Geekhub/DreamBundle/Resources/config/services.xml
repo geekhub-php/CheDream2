@@ -7,6 +7,8 @@
         <parameter key="dream_file_uploader.class">Geekhub\DreamBundle\Service\DreamImageHandler</parameter>
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
         <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\ContributionExtension</parameter>
+        <parameter key="geekhub.dream.email.listener">Geekhub\DreamBundle\EventListener\EmailNotificationListener</parameter>
+        <parameter key="geekhub.admin.email">admin.mail</parameter>
     </parameters>
 
     <services>
@@ -22,6 +24,13 @@
                 <argument type="service" id="hip_mandrill.dispatcher" />
             </call>
             <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+
+        <service id="dream.email.listener" class="%geekhub.dream.email.listener%">
+            <argument type="service" id="hip_mandrill.dispatcher" />
+            <argument>%geekhub.admin.email%</argument>
+            <argument type="service" id="twig" />
+            <tag name="doctrine.event_listener" event="postPersist" connection="default" />
         </service>
 
         <service id="dream.twig.contribution_extension" class="%dream.twig.contribution_extension.class%">
