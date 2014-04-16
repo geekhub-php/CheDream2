@@ -173,21 +173,15 @@ class DreamExtension extends \Twig_Extension
         $financialResources = $dream->getDreamFinancialResources();
 
         if (count($financialResources) > 0) {
-            /** @var \Geekhub\DreamBundle\Entity\FinancialResource $financialResource */
-            $financialResourcesSum = 0;
-            foreach ($financialResources as $financialResource) {
-                $financialResourcesSum += $financialResource->getQuantity();
-            }
+            $arrayResourcesQuantity = $financialResources->map($this->getQuantity())->toArray();
+            $financialResourcesSum = array_sum($arrayResourcesQuantity);
 
-            $financialContributions = $dream->getDreamFinancialContributions();
-            /** @var \Geekhub\DreamBundle\Entity\FinancialContribute $financialContribute */
-            $financialContributionsSum = 0;
-            foreach ($financialContributions as $financialContribute) {
-                $financialContributionsSum += $financialContribute->getQuantity();
-            }
+            $arrayContributionsQuantity = $dream->getDreamFinancialContributions()->map($this->getQuantity())->toArray();
+            $financialContributionsSum = array_sum($arrayContributionsQuantity);
 
             return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
         } else {
+            
             return null;
         }
     }
@@ -197,22 +191,16 @@ class DreamExtension extends \Twig_Extension
         $equipmentResources = $dream->getDreamEquipmentResources();
 
         if (count($equipmentResources) > 0) {
-            /** @var \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource */
-            $equipmentResourcesSum = 0;
-            foreach ($equipmentResources as $equipmentResource) {
-                $equipmentResourcesSum += $equipmentResource->getQuantity();
-            }
+            $arrayResourcesQuantity = $equipmentResources->map($this->getQuantity())->toArray();
+            $equipmentResourcesSum = array_sum($arrayResourcesQuantity);
 
-            $equipmentContributions = $dream->getDreamEquipmentContributions();
-            /** @var \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContribute */
-            $equipmentContributionsSum = 0;
-            foreach ($equipmentContributions as $equipmentContribute) {
-                $equipmentContributionsSum += $equipmentContribute->getQuantity();
-            }
+            $arrayContributionsQuantity = $dream->getDreamEquipmentContributions()->map($this->getQuantity())->toArray();
+            $equipmentContributionsSum = array_sum($arrayContributionsQuantity);
 
             return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
         } else {
-            null;
+
+            return null;
         }
     }
 
@@ -221,23 +209,22 @@ class DreamExtension extends \Twig_Extension
         $workResources = $dream->getDreamWorkResources();
 
         if (count($workResources) > 0) {
-            /** @var \Geekhub\DreamBundle\Entity\WorkResource $workResource */
-            $workResourcesSum = 0;
-            foreach ($workResources as $workResource) {
-                $workResourcesSum += $workResource->getQuantity();
-            }
+            $arrayResourcesQuantity = $workResources->map($this->getQuantity())->toArray();
+            $workResourcesSum = array_sum($arrayResourcesQuantity);
 
-            $workContributions = $dream->getDreamWorkContributions();
-            /** @var \Geekhub\DreamBundle\Entity\WorkContribute $workContribute */
-            $workContributionsSum = 0;
-            foreach ($workContributions as $workContribute) {
-                $workContributionsSum += $workContribute->getQuantity();
-            }
+            $arrayContributionsQuantity = $dream->getDreamWorkContributions()->map($this->getQuantity())->toArray();
+            $workContributionsSum = array_sum($arrayContributionsQuantity);
 
             return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
         } else {
+
             return null;
         }
+    }
+
+    private function getQuantity()
+    {
+        return function ($element) { return $element->getQuantity(); };
     }
 
     private function arithmeticMeanInPercent($resourceSum, $contributeSum)
