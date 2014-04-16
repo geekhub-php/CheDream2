@@ -15,7 +15,7 @@ use Geekhub\DreamBundle\Entity\FinancialResource;
 use Geekhub\DreamBundle\Entity\WorkResource;
 use Geekhub\UserBundle\Entity\User;
 
-class ContributionExtension extends \Twig_Extension
+class DreamExtension extends \Twig_Extension
 {
     protected $doctrine;
 
@@ -26,7 +26,7 @@ class ContributionExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'contribution_extension';
+        return 'dream_extension';
     }
 
     public function getFunctions()
@@ -41,6 +41,9 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('getCountContributors', array($this, 'getCountContributors'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('displayLimitWord', array($this, 'displayLimitWord'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionFinancial', array($this, 'showPercentOfCompletionFinancial'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionEquipment', array($this, 'showPercentOfCompletionEquipment'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionWork', array($this, 'showPercentOfCompletionWork'), array('is_safe' => array('html'))),
         );
     }
 
@@ -138,7 +141,7 @@ class ContributionExtension extends \Twig_Extension
             $finResSumTotal = $fin['totalSum'];
         }
 
-        return $finResSumTotal.' грн.';
+        return $finResSumTotal;
     }
 
     public function equipResource(EquipmentResource $equipment, Dream $dream)
@@ -159,9 +162,73 @@ class ContributionExtension extends \Twig_Extension
         $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);
 
         foreach ($workResSum as $work) {
-            $str = $work['totalSum'].' дн.';
+            $str = $work['totalSum'];
         }
 
         return $str;
+    }
+
+    public function showPercentOfCompletionFinancial(Dream $dream)
+    {
+        $financialResources = $dream->getDreamFinancialResources();
+        /** @var \Geekhub\DreamBundle\Entity\FinancialResource $financialResource */
+        $financialResourcesSum = 0;
+        foreach ($financialResources as $financialResource) {
+            $financialResourcesSum += $financialResource->getQuantity();
+        }
+
+        $financialContributions = $dream->getDreamFinancialContributions();
+        /** @var \Geekhub\DreamBundle\Entity\FinancialContribute $financialContribute */
+        $financialContributionsSum = 0;
+        foreach ($financialContributions as $financialContribute) {
+            $financialContributionsSum += $financialContribute->getQuantity();
+        }
+
+        return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
+    }
+
+    public function showPercentOfCompletionEquipment(Dream $dream)
+    {
+        $equipmentResources = $dream->getDreamEquipmentResources();
+        /** @var \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource */
+        $equipmentResourcesSum = 0;
+        foreach ($equipmentResources as $equipmentResource) {
+            $equipmentResourcesSum += $equipmentResource->getQuantity();
+        }
+
+        $equipmentContributions = $dream->getDreamEquipmentContributions();
+        /** @var \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContribute */
+        $equipmentContributionsSum = 0;
+        foreach ($equipmentContributions as $equipmentContribute) {
+            $equipmentContributionsSum += $equipmentContribute->getQuantity();
+        }
+
+        return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
+
+    }
+
+    public function showPercentOfCompletionWork(Dream $dream)
+    {
+        $workResources = $dream->getDreamWorkResources();
+        /** @var \Geekhub\DreamBundle\Entity\WorkResource $workResource */
+        $workResourcesSum = 0;
+        foreach ($workResources as $workResource) {
+            $workResourcesSum += $workResource->getQuantity();
+        }
+
+        $workContributions = $dream->getDreamWorkContributions();
+        /** @var \Geekhub\DreamBundle\Entity\WorkContribute $workContribute */
+        $workContributionsSum = 0;
+        foreach ($workContributions as $workContribute) {
+            $workContributionsSum += $workContribute->getQuantity();
+        }
+
+        return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
+
+    }
+
+    private function arithmeticMeanInPercent($resourceSum, $contributeSum)
+    {
+       return round($contributeSum * 100 / $resourceSum);
     }
 }

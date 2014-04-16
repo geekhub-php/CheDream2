@@ -6,7 +6,7 @@
     <parameters>
         <parameter key="dream_file_uploader.class">Geekhub\DreamBundle\Service\DreamImageHandler</parameter>
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
-        <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\ContributionExtension</parameter>
+        <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
     </parameters>
 
     <services>
