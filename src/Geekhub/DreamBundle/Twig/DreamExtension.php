@@ -204,7 +204,6 @@ class DreamExtension extends \Twig_Extension
         }
 
         return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
-
     }
 
     public function showPercentOfCompletionWork(Dream $dream)
@@ -224,7 +223,6 @@ class DreamExtension extends \Twig_Extension
         }
 
         return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
-
     }
 
     private function arithmeticMeanInPercent($resourceSum, $contributeSum)
