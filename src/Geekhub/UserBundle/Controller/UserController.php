@@ -3,13 +3,14 @@
 namespace Geekhub\UserBundle\Controller;
 
 use Geekhub\UserBundle\Entity\MergeRequest;
+use Geekhub\UserBundle\Entity\User;
+use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Geekhub\UserBundle\Form\UserForUpdateContactsType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
-use Geekhub\DreamBundle\Entity\Status;
 
 class UserController extends Controller
 {
@@ -120,13 +121,13 @@ class UserController extends Controller
 
             $user->setRegistrationStatus(0);
             $em->flush();
+            $this->sendEmail($user);
 
             return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
         }
 
         return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
     }
-
 
     /**
      * @ParamConverter("mergeRequest", class="GeekhubUserBundle:MergeRequest", options={"hash" = "hash"})
@@ -141,5 +142,31 @@ class UserController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+
+    /**
+     * @param User $user
+     */
+    protected function sendEmail(User $user)
+    {
+        $dispatcher = $this->container->get('hip_mandrill.dispatcher');
+
+        $message = new Message();
+        $body = $this->container->get('templating')->render(
+            'GeekhubResourceBundle:Email:registration.html.twig',
+            array(
+                'user' => $user
+            )
+        );
+
+        $senderName = $this->container->getParameter('sender_name');
+        $senderMail = $this->container->getParameter('sender_mail');
+        $message->setFromEmail($senderMail)
+            ->setFromName($senderName)
+            ->addTo($user->getEmail())
+            ->setSubject('REGISTRATION')
+            ->setHtml($body)
+        ;
+
+        $dispatcher->send($message);
     }
 }

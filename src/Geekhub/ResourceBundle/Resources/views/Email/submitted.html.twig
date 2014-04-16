@@ -1,0 +1,9 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block header %}
+    Створено мрію
+{% endblock header %}
+
+{% block content %}
+    Cтворена мрія <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a>.
+{% endblock content %}

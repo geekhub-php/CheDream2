@@ -1,0 +1,36 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block header %}
+    Наше місто стало краще, дякуючи вам!
+{% endblock header %}
+
+{% block content %}
+    <div style="position: absolute; color: red; border-style: double; border-color: red">
+        {% block warning %}
+            Мрія успішно завершена!
+        {% endblock warning %}
+    </div>
+
+    <div class="centered">
+        <table class="layout">
+            <tr>
+                <td>
+                    <div  style="background-image: url('{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form', true) }}'); width: 145px; height: 100px; margin-right: auto; margin-left: auto"></div>
+                </td>
+                <td>
+                    <h2><b>{{ dream.title }}</b></h2>
+                    <p><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="centered">
+        {% block alert %}
+            <h3>Щиро дякуємо за допомогу!</h3>
+            <h4 class="text-center">Це чудовий початок, не варто зупинятися!</h4>
+            <h4 class="text-center">Перегляньте мрії, до яких ви ще не долучилися. Змінимо місто разом!</h4>
+            <h2><a href="{{ url('dream_list') }}">Дивиться усі мрії</a></h2>
+        {% endblock alert %}
+    </div>
+{% endblock content %}
