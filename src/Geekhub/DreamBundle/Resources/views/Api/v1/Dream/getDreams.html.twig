@@ -32,9 +32,15 @@
         <div class="dream-homepage-preview-footer">
             <div>  {# percent of completion #}
                 <p>
-                    F={{ showPercentOfCompletionFinancial(dream) }}%
-                    E={{ showPercentOfCompletionEquipment(dream) }}%
-                    W={{ showPercentOfCompletionWork(dream) }}%
+                    {% if showPercentOfCompletionFinancial(dream) is not null %}
+                        F={{ showPercentOfCompletionFinancial(dream) }}%
+                    {% endif %}
+                    {% if showPercentOfCompletionEquipment(dream) is not null %}
+                        E={{ showPercentOfCompletionEquipment(dream) }}%
+                    {% endif %}
+                    {% if showPercentOfCompletionWork(dream) is not null %}
+                        W={{ showPercentOfCompletionWork(dream) }}%
+                    {% endif %}
                 </p>
             </div>
             {% block dream_bottom %}

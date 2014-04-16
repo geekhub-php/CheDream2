@@ -171,58 +171,73 @@ class DreamExtension extends \Twig_Extension
     public function showPercentOfCompletionFinancial(Dream $dream)
     {
         $financialResources = $dream->getDreamFinancialResources();
-        /** @var \Geekhub\DreamBundle\Entity\FinancialResource $financialResource */
-        $financialResourcesSum = 0;
-        foreach ($financialResources as $financialResource) {
-            $financialResourcesSum += $financialResource->getQuantity();
-        }
 
-        $financialContributions = $dream->getDreamFinancialContributions();
-        /** @var \Geekhub\DreamBundle\Entity\FinancialContribute $financialContribute */
-        $financialContributionsSum = 0;
-        foreach ($financialContributions as $financialContribute) {
-            $financialContributionsSum += $financialContribute->getQuantity();
-        }
+        if (count($financialResources) > 0) {
+            /** @var \Geekhub\DreamBundle\Entity\FinancialResource $financialResource */
+            $financialResourcesSum = 0;
+            foreach ($financialResources as $financialResource) {
+                $financialResourcesSum += $financialResource->getQuantity();
+            }
 
-        return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
+            $financialContributions = $dream->getDreamFinancialContributions();
+            /** @var \Geekhub\DreamBundle\Entity\FinancialContribute $financialContribute */
+            $financialContributionsSum = 0;
+            foreach ($financialContributions as $financialContribute) {
+                $financialContributionsSum += $financialContribute->getQuantity();
+            }
+
+            return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
+        } else {
+            return null;
+        }
     }
 
     public function showPercentOfCompletionEquipment(Dream $dream)
     {
         $equipmentResources = $dream->getDreamEquipmentResources();
-        /** @var \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource */
-        $equipmentResourcesSum = 0;
-        foreach ($equipmentResources as $equipmentResource) {
-            $equipmentResourcesSum += $equipmentResource->getQuantity();
-        }
 
-        $equipmentContributions = $dream->getDreamEquipmentContributions();
-        /** @var \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContribute */
-        $equipmentContributionsSum = 0;
-        foreach ($equipmentContributions as $equipmentContribute) {
-            $equipmentContributionsSum += $equipmentContribute->getQuantity();
-        }
+        if (count($equipmentResources) > 0) {
+            /** @var \Geekhub\DreamBundle\Entity\EquipmentResource $equipmentResource */
+            $equipmentResourcesSum = 0;
+            foreach ($equipmentResources as $equipmentResource) {
+                $equipmentResourcesSum += $equipmentResource->getQuantity();
+            }
 
-        return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
+            $equipmentContributions = $dream->getDreamEquipmentContributions();
+            /** @var \Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContribute */
+            $equipmentContributionsSum = 0;
+            foreach ($equipmentContributions as $equipmentContribute) {
+                $equipmentContributionsSum += $equipmentContribute->getQuantity();
+            }
+
+            return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
+        } else {
+            null;
+        }
     }
 
     public function showPercentOfCompletionWork(Dream $dream)
     {
         $workResources = $dream->getDreamWorkResources();
-        /** @var \Geekhub\DreamBundle\Entity\WorkResource $workResource */
-        $workResourcesSum = 0;
-        foreach ($workResources as $workResource) {
-            $workResourcesSum += $workResource->getQuantity();
-        }
 
-        $workContributions = $dream->getDreamWorkContributions();
-        /** @var \Geekhub\DreamBundle\Entity\WorkContribute $workContribute */
-        $workContributionsSum = 0;
-        foreach ($workContributions as $workContribute) {
-            $workContributionsSum += $workContribute->getQuantity();
-        }
+        if (count($workResources) > 0) {
+            /** @var \Geekhub\DreamBundle\Entity\WorkResource $workResource */
+            $workResourcesSum = 0;
+            foreach ($workResources as $workResource) {
+                $workResourcesSum += $workResource->getQuantity();
+            }
 
-        return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
+            $workContributions = $dream->getDreamWorkContributions();
+            /** @var \Geekhub\DreamBundle\Entity\WorkContribute $workContribute */
+            $workContributionsSum = 0;
+            foreach ($workContributions as $workContribute) {
+                $workContributionsSum += $workContribute->getQuantity();
+            }
+
+            return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
+        } else {
+            return null;
+        }
     }
 
     private function arithmeticMeanInPercent($resourceSum, $contributeSum)
