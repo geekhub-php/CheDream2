@@ -40,6 +40,7 @@ class AccountsMergeSubscriber implements EventSubscriber
     {
         return array(
             'preUpdate',
+            'prePersist',
         );
     }
 
@@ -72,6 +73,36 @@ class AccountsMergeSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function prePersist(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+
+        if ($object instanceof User) {
+
+            $email = $object->getEmail();
+            $em = $this->container->get('doctrine')->getManager();
+            $userWithTheSameEmail = $em->getRepository('GeekhubUserBundle:User')->findOneByEmail($email);
+
+            if ($userWithTheSameEmail && ($userWithTheSameEmail->getId() != $object->getId())) {
+                $mergeRequest =  new MergeRequest();
+                $mergeRequest->setProposersId($object->getId());
+                $mergeRequest->setMergingUserId($userWithTheSameEmail->getId());
+                $hash = $this->getUniqueHash();
+                $mergeRequest->setHash($hash);
+                $em->persist($mergeRequest);
+                $object->setEmail('fake_'.$object->getId().'@example.com');
+                $object->setEmailCanonical($object->getEmail());
+                $object->setRegistrationStatus(-2);//User::WANTS_MERGE);
+                $this->sendMergeNotificationEmail($userWithTheSameEmail, $object, $hash);
+                $em->flush();
+                exit;
+            }
+        }
+    }
+
     private function sendMergeNotificationEmail(User $userWithTheSameEmail, User $userWhoAsksMerge, $hash)
     {
         $dispatcher = $this->container->get('hip_mandrill.dispatcher');
@@ -87,8 +118,10 @@ class AccountsMergeSubscriber implements EventSubscriber
                 )
             );
 
-        $message->setFromEmail('test@gmail.com')
-            ->setFromName('Черкаська мрія')
+        $senderName = $this->container->getParameter('sender_name');
+        $senderMail = $this->container->getParameter('sender_mail');
+        $message->setFromEmail($senderMail)
+            ->setFromName($senderName)
             ->addTo($userWithTheSameEmail->getEmail())
             ->setSubject('Accounts merge request')
             ->setHtml($body);
@@ -98,8 +131,8 @@ class AccountsMergeSubscriber implements EventSubscriber
 
     private function getUniqueHash()
     {
-        $generator = new SecureRandom();
-        return  md5($generator->nextBytes(10));
+        //$generator = new SecureRandom();
+        return  uniqid();//md5($generator->nextBytes(10));
     }
 
     public function mergeUsers(User $proposer, User $mergingUser)
