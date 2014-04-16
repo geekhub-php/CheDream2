@@ -170,56 +170,50 @@ class DreamExtension extends \Twig_Extension
 
     public function showPercentOfCompletionFinancial(Dream $dream)
     {
-        $financialResources = $dream->getDreamFinancialResources();
+        if (count($dream->getDreamFinancialResources()) == 0) {
 
-        if (count($financialResources) > 0) {
-            $arrayResourcesQuantity = $financialResources->map($this->getQuantity())->toArray();
-            $financialResourcesSum = array_sum($arrayResourcesQuantity);
-
-            $arrayContributionsQuantity = $dream->getDreamFinancialContributions()->map($this->getQuantity())->toArray();
-            $financialContributionsSum = array_sum($arrayContributionsQuantity);
-
-            return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
-        } else {
-            
             return null;
         }
+
+        $arrayResourcesQuantity = $dream->getDreamFinancialResources()->map($this->getQuantity())->toArray();
+        $financialResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamFinancialContributions()->map($this->getQuantity())->toArray();
+        $financialContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
     }
 
     public function showPercentOfCompletionEquipment(Dream $dream)
     {
-        $equipmentResources = $dream->getDreamEquipmentResources();
-
-        if (count($equipmentResources) > 0) {
-            $arrayResourcesQuantity = $equipmentResources->map($this->getQuantity())->toArray();
-            $equipmentResourcesSum = array_sum($arrayResourcesQuantity);
-
-            $arrayContributionsQuantity = $dream->getDreamEquipmentContributions()->map($this->getQuantity())->toArray();
-            $equipmentContributionsSum = array_sum($arrayContributionsQuantity);
-
-            return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
-        } else {
+        if (count($dream->getDreamEquipmentResources()) == 0) {
 
             return null;
         }
+
+        $arrayResourcesQuantity = $dream->getDreamEquipmentResources()->map($this->getQuantity())->toArray();
+        $equipmentResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamEquipmentContributions()->map($this->getQuantity())->toArray();
+        $equipmentContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
     }
 
     public function showPercentOfCompletionWork(Dream $dream)
     {
-        $workResources = $dream->getDreamWorkResources();
-
-        if (count($workResources) > 0) {
-            $arrayResourcesQuantity = $workResources->map($this->getQuantity())->toArray();
-            $workResourcesSum = array_sum($arrayResourcesQuantity);
-
-            $arrayContributionsQuantity = $dream->getDreamWorkContributions()->map($this->getQuantity())->toArray();
-            $workContributionsSum = array_sum($arrayContributionsQuantity);
-
-            return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
-        } else {
+        if (count($dream->getDreamWorkResources()) == 0) {
 
             return null;
         }
+
+        $arrayResourcesQuantity = $dream->getDreamWorkResources()->map($this->getQuantity())->toArray();
+        $workResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamWorkContributions()->map($this->getQuantity())->toArray();
+        $workContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
     }
 
     private function getQuantity()
