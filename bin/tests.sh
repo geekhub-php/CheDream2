@@ -14,6 +14,7 @@ bin/phpunit -c app
 bin/behat src/Geekhub/DreamBundle/Features/dreamLifeCycle.feature
 #bin/behat @GeekhubDreamBundle
 bin/behat @GeekhubUserBundle
+#bin/behat src/Geekhub/UserBundle/Features/mergeAccounts.feature
 bin/behat @GeekhubResourceBundle
 
 pid=`ps aux | grep selenium | awk '{print $2}'`

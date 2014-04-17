@@ -142,6 +142,7 @@ class UserController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+    }
 
     /**
      * @param User $user
