@@ -15,7 +15,7 @@ use Geekhub\DreamBundle\Entity\FinancialResource;
 use Geekhub\DreamBundle\Entity\WorkResource;
 use Geekhub\UserBundle\Entity\User;
 
-class ContributionExtension extends \Twig_Extension
+class DreamExtension extends \Twig_Extension
 {
     protected $doctrine;
 
@@ -26,7 +26,7 @@ class ContributionExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'contribution_extension';
+        return 'dream_extension';
     }
 
     public function getFunctions()
@@ -41,6 +41,9 @@ class ContributionExtension extends \Twig_Extension
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('getCountContributors', array($this, 'getCountContributors'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('displayLimitWord', array($this, 'displayLimitWord'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionFinancial', array($this, 'showPercentOfCompletionFinancial'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionEquipment', array($this, 'showPercentOfCompletionEquipment'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('showPercentOfCompletionWork', array($this, 'showPercentOfCompletionWork'), array('is_safe' => array('html'))),
         );
     }
 
@@ -111,7 +114,7 @@ class ContributionExtension extends \Twig_Extension
 
         $str = '';
         foreach ($workContr as $work) {
-            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' чол./ '.$work['totalDays'].' дн.</li>';
+            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
         }
 
         return $str;
@@ -138,7 +141,7 @@ class ContributionExtension extends \Twig_Extension
             $finResSumTotal = $fin['totalSum'];
         }
 
-        return $finResSumTotal.' грн.';
+        return $finResSumTotal;
     }
 
     public function equipResource(EquipmentResource $equipment, Dream $dream)
@@ -159,9 +162,67 @@ class ContributionExtension extends \Twig_Extension
         $workResSum = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showSumWorkResource($work, $dream);
 
         foreach ($workResSum as $work) {
-            $str = $work['totalSum'].' чол./ '.$work['totalDays'].' дн.';
+            $str = $work['totalSum'];
         }
 
         return $str;
+    }
+
+    public function showPercentOfCompletionFinancial(Dream $dream)
+    {
+        if (count($dream->getDreamFinancialResources()) == 0) {
+
+            return null;
+        }
+
+        $arrayResourcesQuantity = $dream->getDreamFinancialResources()->map($this->getQuantity())->toArray();
+        $financialResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamFinancialContributions()->map($this->getQuantity())->toArray();
+        $financialContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
+    }
+
+    public function showPercentOfCompletionEquipment(Dream $dream)
+    {
+        if (count($dream->getDreamEquipmentResources()) == 0) {
+
+            return null;
+        }
+
+        $arrayResourcesQuantity = $dream->getDreamEquipmentResources()->map($this->getQuantity())->toArray();
+        $equipmentResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamEquipmentContributions()->map($this->getQuantity())->toArray();
+        $equipmentContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
+    }
+
+    public function showPercentOfCompletionWork(Dream $dream)
+    {
+        if (count($dream->getDreamWorkResources()) == 0) {
+
+            return null;
+        }
+
+        $arrayResourcesQuantity = $dream->getDreamWorkResources()->map($this->getQuantity())->toArray();
+        $workResourcesSum = array_sum($arrayResourcesQuantity);
+
+        $arrayContributionsQuantity = $dream->getDreamWorkContributions()->map($this->getQuantity())->toArray();
+        $workContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
+    }
+
+    private function getQuantity()
+    {
+        return function ($element) { return $element->getQuantity(); };
+    }
+
+    private function arithmeticMeanInPercent($resourceSum, $contributeSum)
+    {
+       return round($contributeSum * 100 / $resourceSum);
     }
 }

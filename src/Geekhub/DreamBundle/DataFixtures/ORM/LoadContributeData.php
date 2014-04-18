@@ -95,7 +95,6 @@ class LoadContributeData extends AbstractFixture implements OrderedFixtureInterf
             $work->setUser($user);
             $work->setHiddenContributor($workData['hidden']);
             $work->setQuantity($workData['quantity']);
-            $work->setQuantityDays($workData['quantityDays']);
             $work->setWorkResource($resource);
 
             $manager->persist($work);

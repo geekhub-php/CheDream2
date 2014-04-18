@@ -1,0 +1,56 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block header %}
+    Вітаємо! Мрія, яку ви створили, була підтверджена адміністратором.
+{% endblock header %}
+
+{% block content %}
+    <h3 class="centered">
+        {% block description %}
+            Мрія вже доступна на сайті і готова до збору коштів.
+        {% endblock description %}
+    </h3>
+
+    <table class="layout centered">
+        <tr>
+            <td>
+                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form', true) }}" />
+            </td>
+            <td>
+                <h2><b>{{ dream.title }}</b></h2>
+                <p><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <div class="centered">
+        <h4>
+            {% block alert_title %}
+                Саме час поділитися новиною з друзями та розпочати збір ресурсів.
+            {% endblock alert_title %}
+        </h4>
+        {% block alert %}
+        {% endblock alert %}
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#505050; border:1px solid #808080; border-radius:5px;">
+            <tr>
+                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                    <a href="{{ url('facebook_login') }}" target="_blank" style="color:#FFFFFF; text-decoration:none;">
+                        Facebook
+                    </a>
+                </td>
+                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                    <a href="{{ url('vkontakte_login') }}"  target="_blank" style="color:#FFFFFF; text-decoration:none;">
+                        VK
+                    </a>
+                </td>
+                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                    <a href="{{ url('odnoklassniki_login') }}"  target="_blank" style="color:#FFFFFF; text-decoration:none;">
+                        Однокласники
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock content %}
