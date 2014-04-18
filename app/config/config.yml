@@ -167,10 +167,10 @@ monolog:
     handlers:
         applog:
             type: stream
-            path: /var/log/symfony.log
+            path: %kernel.root_dir%/../app/logs/error.log
             level: error
         loggly:
             type: loggly
-            token:  4a2f0dae-c59f-4af6-b808-4a01f77c01fe
+            token: 4a2f0dae-c59f-4af6-b808-4a01f77c01fe
             level: error
             bubble: true

@@ -15,6 +15,7 @@ case $reload in
 
     rm -rf app/cache/*
     rm -rf app/logs/*
+    touch app/logs/error.log
 
     APACHEUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data' | grep -v root | head -1 | cut -d\  -f1`
 
