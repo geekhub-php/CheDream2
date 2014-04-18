@@ -11,6 +11,31 @@
             {# Resources start #}
                 {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
             {# Resources end #}
+
+            <div style="clear: both;">
+                <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,odnoklassniki"
+                     data-yashareTheme="counter">
+                    <span style="font-weight: bolder; font-size: 140%;">Поділитись через:</span>
+                    <a rel="nofollow"
+                       target="_blank"
+                       href="http://share.yandex.ru/go.xml?service=vkontakte&url={{ app.request.uri }}&title={{ dream.title }}"
+                       data-service="vkontakte">
+                    </a>
+
+                    <a rel="nofollow"
+                       target="_blank"
+                       href="http://share.yandex.ru/go.xml?service=facebook&url={{ app.request.uri }}&title={{ dream.title }}"
+                       data-service="facebook">
+                    </a>
+
+                    <a rel="nofollow"
+                       target="_blank"
+                       href="http://share.yandex.ru/go.xml?service=odnoklassniki&url={{ app.request.uri }}&title={{ dream.title }}"
+                       data-service="odnoklassniki">
+                    </a>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-8">
