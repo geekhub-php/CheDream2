@@ -1,0 +1,17 @@
+{% extends 'GeekhubResourceBundle:Email:collecting-resources.html.twig' %}
+
+{% block header %}
+    Повернуто на дооформлення!!!
+{% endblock header %}
+
+{% block description %}
+    Адміністрація повернула мрію на дооформлення.
+{% endblock description %}
+
+{% block alert_title %}
+    Зауваження:
+{% endblock alert_title %}
+
+{% block alert %}
+    {{ dream.rejectedDescription|raw }}
+{% endblock alert %}

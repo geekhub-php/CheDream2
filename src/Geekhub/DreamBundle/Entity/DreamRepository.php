@@ -81,7 +81,7 @@ class DreamRepository extends EntityRepository
     public function showWorkContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:WorkContribute c
                            join c.workResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
@@ -137,7 +137,7 @@ class DreamRepository extends EntityRepository
     public function showSumWorkResource($work, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT sum(c.quantity) as totalSum, sum(c.quantityDays) as totalDays
+            ->createQuery('SELECT sum(c.quantity) as totalSum
                            FROM GeekhubDreamBundle:WorkContribute c
                            join c.workResource f
                            where c.workResource = :work and c.dream = :dream

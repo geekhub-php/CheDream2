@@ -28,7 +28,7 @@ dream:
         ton: тон
     work:
         title: Назва робіт
-        quantity: чол.
+        quantity: к-ть робочих днів
         days: днів
     other:
         title: Інша допомога

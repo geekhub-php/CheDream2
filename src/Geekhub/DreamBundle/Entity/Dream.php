@@ -67,6 +67,7 @@ class Dream implements Taggable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message = "dream.not_blank")
      * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="dream.only_numbers")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
      */

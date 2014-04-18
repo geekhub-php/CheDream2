@@ -25,8 +25,7 @@ class WorkType extends AbstractType
     {
         $builder
             ->add('title', 'text', array('label' => 'dream.work.title'))
-            ->add('quantity', 'integer', array('label' => 'dream.work.quantity'))
-            ->add('quantityDays', 'integer', array('label' => 'dream.work.days'));
+            ->add('quantity', 'integer', array('label' => 'dream.work.quantity'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

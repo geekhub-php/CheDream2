@@ -1,0 +1,13 @@
+{% extends 'GeekhubResourceBundle:Email:success.html.twig' %}
+
+{% block header %}
+    Мрія <a href="{{ url('view_dream', {'slug': dream.slug }) }}">{{ dream.title }}</a> - не втілена!!!
+{% endblock header %}
+
+{% block warning %}
+    Мрія зазнала невдачі!
+{% endblock warning %}
+
+{% block alert %}
+    Нажаль адміністація ресурсу не може підтвердити реалізацію мрії.
+{% endblock alert %}
