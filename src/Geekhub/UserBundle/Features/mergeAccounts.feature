@@ -21,7 +21,7 @@ Feature: Merge user's accounts with the same email feature
 #    Then print last response
 
   @javascript
-  Scenario: Try to log in with fake email
+  Scenario: Try to merge two accounts
     Given I am on "/login"
     And I fill in "username" with "chewbacca"
     And I fill in "password" with "chewbacca"
@@ -44,13 +44,15 @@ Feature: Merge user's accounts with the same email feature
     And I am on "/login"
     And I fill in "username" with "c3pio"
     And I fill in "password" with "c3pio"
+    When I press "_submit"
     Then I should be on "/user/updateContacts"
     And I fill in "newUserForm[phone]" with "+380671234567"
     And I fill in "newUserForm[email]" with "chewbacca@mail.ru"
     And I fill in "newUserForm[lastName]" with " "
+    When I press "_submit"
     And I should see "Адреса електронної пошти, яку Ви вказали, співпадає з одним із зареєстрованих користувачів"
     And I am on "/logout"
-    And I am on "/user/mergeAccounts/534f02b7abde7"
+    And I am Executing last merging accounts query
     And I am on "/login"
     And I fill in "username" with "chewbacca"
     And I fill in "password" with "chewbacca"
@@ -64,5 +66,3 @@ Feature: Merge user's accounts with the same email feature
     And I should see "ресурс8 (1 тон)"
     And I should see "Зірка смерті"
     And I should see "робота23 (1 днів)"
-        
-  
