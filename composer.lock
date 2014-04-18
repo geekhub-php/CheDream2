@@ -1310,12 +1310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "fa0046309160ea52aeed51b5608adfd263dfa0a2"
+                "reference": "dc4a4af0ba585522863f75324bbfe2e0009f2893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/fa0046309160ea52aeed51b5608adfd263dfa0a2",
-                "reference": "fa0046309160ea52aeed51b5608adfd263dfa0a2",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/dc4a4af0ba585522863f75324bbfe2e0009f2893",
+                "reference": "dc4a4af0ba585522863f75324bbfe2e0009f2893",
                 "shasum": ""
             },
             "require": {
@@ -1394,7 +1394,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-04-14 23:10:44"
+            "time": "2014-04-16 17:46:30"
         },
         {
             "name": "guzzlehttp/streams",
@@ -3547,26 +3547,28 @@
         },
         {
             "name": "sonata-project/notification-bundle",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "1e22d2da2e64bc5ab0f383a569a5d73d4185c043"
+                "reference": "fb89ab9da1d542f341dccc3437637769fb068369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/1e22d2da2e64bc5ab0f383a569a5d73d4185c043",
-                "reference": "1e22d2da2e64bc5ab0f383a569a5d73d4185c043",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/fb89ab9da1d542f341dccc3437637769fb068369",
+                "reference": "fb89ab9da1d542f341dccc3437637769fb068369",
                 "shasum": ""
             },
             "require": {
+                "friendsofsymfony/rest-bundle": "~1.1",
+                "jms/serializer-bundle": "~0.11",
+                "nelmio/api-doc-bundle": "~2.4",
                 "sonata-project/core-bundle": "~2.2@dev,>2.2.4",
                 "sonata-project/doctrine-extensions": "1.*",
                 "sonata-project/easy-extends-bundle": "2.1.*",
                 "symfony/symfony": "~2.1"
             },
             "require-dev": {
-                "friendsofsymfony/rest-bundle": "~1.2",
                 "guzzle/guzzle": "3.*",
                 "liip/monitor": "~1.0",
                 "liip/monitor-bundle": "~1.0",
@@ -3613,7 +3615,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2014-02-14 14:28:15"
+            "time": "2014-04-17 12:52:34"
         },
         {
             "name": "stfalcon/tinymce-bundle",
@@ -3622,12 +3624,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df"
+                "reference": "2d78f28743e8c769d8cd8a164f34f16cc6595d7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
-                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/2d78f28743e8c769d8cd8a164f34f16cc6595d7c",
+                "reference": "2d78f28743e8c769d8cd8a164f34f16cc6595d7c",
                 "shasum": ""
             },
             "require": {
@@ -3671,7 +3673,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2014-03-14 08:38:24"
+            "time": "2014-04-17 12:40:40"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
