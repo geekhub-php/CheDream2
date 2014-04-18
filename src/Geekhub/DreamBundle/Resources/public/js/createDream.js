@@ -13,8 +13,8 @@ jQuery(document).ready(function() {
 });
 
 function processCollectionHolder($collectionHolder, addLinkText) {
-    var $addLink   = $('<a href="#" class="add_fin_link btn btn-xs btn-default text-left">' + addLinkText + '</a>');
-    var $newLinkLi = $('<li class="list-unstyled"></li>').append($addLink);
+    var $addLink   = $('<a href="#" class="btn-add"><span class="icon-add"></span></a>');
+    var $newLinkLi = $('<li class=""></li>').append($addLink);
 
     $collectionHolder.find('li.collection-form').each(function() {
         appendDeleteLink($(this));
@@ -33,12 +33,12 @@ function addFormToCollection($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
     var index = $collectionHolder.data('index');
     var newForm = prototype.replace(/__name__/g, index);
-    var $newFormLi = $('<li class="list-unstyled"></li>').append('<br>' + newForm);
+    var $newFormLi = $('<li class="input-block"></li>').append(newForm);
     $newFormLi.find('input').each(function(){
-        $(this).addClass('form-control');
+        //$(this).addClass('form-control');
     });
     $newFormLi.find('select').each(function(){
-        $(this).addClass('form-control');
+        //$(this).addClass('form-control');
     });
 
     $collectionHolder.data('index', index + 1);
