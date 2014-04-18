@@ -24,12 +24,13 @@ class EquipmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array('label' => 'dream.equipment.title'))
-            ->add('quantity', 'integer', array('label' => 'dream.equipment.quantity'))
-            ->add('quantityType', 'choice', array(
+            ->add('title', 'text', ['label' => false, 'attr' => ['class' => 'resource-field width-1']])
+            ->add('quantityType', 'choice', [
                 'choices' => array(EquipmentResource::getReadableQuantityTypes()),
-                'label'   => 'dream.equipment.type',
-            ));
+                'label'   => false,
+                'attr' => ['class' => 'resource-field width-2 input-view']
+            ])
+            ->add('quantity', 'integer', ['label' => false, 'attr' => ['class' => 'resource-field width-3']]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

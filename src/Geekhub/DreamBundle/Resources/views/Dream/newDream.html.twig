@@ -103,18 +103,19 @@
             <ul class="row form-list">
                 <li class="col-md-4">
                     <span class="resource-caption"><span class="icon-resource icon-money"></span>Фінансові витрати</span>
-                    <ul class="resources-list financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
+                    <ul class="resources-list block-type-1 financialResources" data-prototype="{{ form_widget(form.dreamFinancialResources.vars.prototype)|e }}">
                         {% for finance in form.dreamFinancialResources %}
-                            <li class="collection-form">
+                            <li class="input-block collection-form">
                                 {{ form_widget(finance) }}
                                 {{ form_errors(finance) }}
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-1" data-labels>
+                        <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Стаття витрати</span>
                             <span class="resource-label width-2">Сума, грн</span>
                         </li>
+                        <!--
                         <li class="input-block block-type-1" data-template>
                             <div class="form-group">
                                 <input
@@ -133,24 +134,26 @@
                         <li>
                             <a href="#add-financial-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
+                        -->
                     </ul>
                 </li>
                 
                 <li class="col-md-4">
                     <span class="resource-caption equipment-caption"><span class="icon-resource icon-equipment"></span>Інструменти / обладнання <br />техніка</span>
-                    <ul class="resources-list equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
+                    <ul class="resources-list block-type-2 equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
                         {% for equipment in form.dreamEquipmentResources %}
-                            <li class="collection-form">
+                            <li class="input-block collection-form">
                                 {{ form_widget(equipment) }}
                                 {{ form_errors(equipment) }}
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-2" data-labels>
+                        <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва</span>
                             <span class="resource-label width-2">Одиниця виміру</span>
                             <span class="resource-label width-3">Кільк.</span>
                         </li>
+                        <!--
                         <li class="input-block block-type-2" data-template>
                             <input
                                    type="text"
@@ -175,24 +178,26 @@
                         <li>
                             <a href="#add-equipment-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
+                        -->
                     </ul>
                 </li>
                 
                 <li class="col-md-4">
                     <span class="resource-caption"><span class="icon-resource icon-people"></span>Роботи та ресурси</span>
-                    <ul class="resources-list workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
+                    <ul class="resources-list block-type-3 workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
                         {% for work in form.dreamWorkResources %}
-                            <li class="collection-form">
+                            <li class="input-block collection-form">
                                 {{ form_widget(work) }}
                                 {{ form_errors(work) }}
                             </li>
                         {% endfor %}
                         
-                        <li class="labels-block block-type-3" data-labels>
+                        <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва робіт</span>
                             <span class="resource-label width-2">Чоловік</span>
                             <span class="resource-label width-3">Днів</span>
                         </li>
+                        <!--
                         <li class="input-block block-type-3" data-template>
                             <input
                                    type="text"
@@ -214,6 +219,7 @@
                         <li>
                             <a href="#add-human-resource" class="btn-add" data-add-resource><span class="icon-add"></span></a>
                         </li>
+                        -->
                     </ul>
                 </li>
             </ul>

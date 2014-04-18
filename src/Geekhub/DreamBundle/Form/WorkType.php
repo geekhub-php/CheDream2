@@ -24,9 +24,9 @@ class WorkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array('label' => 'dream.work.title'))
-            ->add('quantity', 'integer', array('label' => 'dream.work.quantity'))
-            ->add('quantityDays', 'integer', array('label' => 'dream.work.days'));
+            ->add('title', 'text', array('label' => false, 'attr' => ['class' => 'resource-field width-1']))
+            ->add('quantity', 'integer', array('label' => false, 'attr' => ['class' => 'resource-field width-2']))
+            ->add('quantityDays', 'integer', array('label' => false, 'attr' => ['class' => 'resource-field width-3']));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
