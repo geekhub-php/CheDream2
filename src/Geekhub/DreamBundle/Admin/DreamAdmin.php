@@ -30,6 +30,7 @@ class DreamAdmin extends Admin
     {
         $listMapper
             ->add('title')
+            ->add('author.phone')
             ->add('author.firstName')
             ->add('author.lastName')
             ->add('currentStatus')
