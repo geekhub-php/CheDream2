@@ -38,7 +38,7 @@ Feature: Merge user's accounts with the same email feature
     And I should see "робота2 (1 днів)"
     And I should not see "Швидка розвідка"
     And I should not see "ресурс8 (1 тон)"
-    And I should not see "Зірка смерті"
+    #And I should not see "Зірка смерті"
     And I should not see "робота23 (1 днів)"
     And I am on "/logout"
     And I am on "/login"

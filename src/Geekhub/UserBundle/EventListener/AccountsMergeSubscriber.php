@@ -98,7 +98,6 @@ class AccountsMergeSubscriber implements EventSubscriber
                 $object->setRegistrationStatus(-2);//User::WANTS_MERGE);
                 $this->sendMergeNotificationEmail($userWithTheSameEmail, $object, $hash);
                 $em->flush();
-                exit;
             }
         }
     }
@@ -131,8 +130,7 @@ class AccountsMergeSubscriber implements EventSubscriber
 
     private function getUniqueHash()
     {
-        //$generator = new SecureRandom();
-        return  uniqid();//md5($generator->nextBytes(10));
+        return  uniqid();
     }
 
     public function mergeUsers(User $proposer, User $mergingUser)
@@ -153,7 +151,7 @@ class AccountsMergeSubscriber implements EventSubscriber
             if (!$mergingUser->getFavoriteDreams()->contains($dream)) {
                 $mergingUser->addFavoriteDream($dream);
             }
-        }
+        }   
 
         $em->flush();
         $query = $em->createQuery(
