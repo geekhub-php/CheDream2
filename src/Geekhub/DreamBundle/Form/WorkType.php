@@ -26,6 +26,7 @@ class WorkType extends AbstractType
         $builder
             ->add('title', 'text', array('label' => false, 'attr' => ['class' => 'resource-field width-1']))
             ->add('quantity', 'integer', array('label' => false, 'attr' => ['class' => 'resource-field width-2']))
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
