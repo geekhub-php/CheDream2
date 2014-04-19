@@ -13,8 +13,9 @@
             {# Resources end #}
 
             <div style="clear: both;">
-                <span style="font-weight: bolder; font-size: 140%;">Поділитись через:</span>
-                <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareQuickServices="vkontakte,facebook,odnoklassniki"
+                <h3>Поділитись через:</h3>
+                <div class="yashare-auto-init" data-yashareL10n="uk"
+                     data-yashareQuickServices="vkontakte,facebook,odnoklassniki,twitter,gplus"
                      data-yashareTheme="counter">
                     <a rel="nofollow"
                        target="_blank"
@@ -32,6 +33,18 @@
                        target="_blank"
                        href="http://share.yandex.ru/go.xml?service=odnoklassniki&url={{ app.request.uri }}&title={{ dream.title }}"
                        data-service="odnoklassniki">
+                    </a>
+
+                    <a rel="nofollow"
+                       target="_blank"
+                       href="http://share.yandex.ru/go.xml?service=twitter&url={{ app.request.uri }}&title={{ dream.title }}"
+                       data-service="twitter">
+                    </a>
+
+                    <a rel="nofollow"
+                       target="_blank"
+                       href="http://share.yandex.ru/go.xml?service=gplus&url={{ app.request.uri }}&title={{ dream.title }}"
+                       data-service="gplus">
                     </a>
                 </div>
             </div>
