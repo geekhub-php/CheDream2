@@ -7,7 +7,9 @@
         <meta name="description" content="{% block description %}CheDream - Open source crowdfunding system{% endblock %}">
         <meta name="author" content="{% block author %}Geekhub PHP Developers Team{% endblock %}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-
+        {% if dream.mediaPoster is defined %}
+            <meta property="og:image" content="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage', true) }}">
+        {% endif %}
         <title>{% block title %}Welcome{% endblock %}</title>
 
         {% block stylesheets %}
