@@ -39,6 +39,10 @@ class DreamController extends Controller
      */
     public function newDreamAction(Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            return $this->redirect($this->generateUrl('_login'));
+        }
+
         $dream = new Dream();
 
         $form = $this->createForm(new DreamType(), $dream, array(
@@ -81,6 +85,10 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+            return $this->redirect($this->generateUrl('_login'));
+        }
+
         if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
             throw new AccessDeniedException();
         }
