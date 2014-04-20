@@ -85,10 +85,6 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
-        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-            return $this->redirect($this->generateUrl('_login'));
-        }
-
         if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
             throw new AccessDeniedException();
         }
