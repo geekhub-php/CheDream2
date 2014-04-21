@@ -67,21 +67,21 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $vkontakteId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $facebookId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $odnoklassnikiId;
 
