@@ -30,8 +30,21 @@
             </div>
         </div>
         <div class="dream-homepage-preview-footer">
+            <div>  {# percent of completion #}
+                <p>
+                    {% if showPercentOfCompletionFinancial(dream) is not null %}
+                        F={{ showPercentOfCompletionFinancial(dream) }}%
+                    {% endif %}
+                    {% if showPercentOfCompletionEquipment(dream) is not null %}
+                        E={{ showPercentOfCompletionEquipment(dream) }}%
+                    {% endif %}
+                    {% if showPercentOfCompletionWork(dream) is not null %}
+                        W={{ showPercentOfCompletionWork(dream) }}%
+                    {% endif %}
+                </p>
+            </div>
             {% block dream_bottom %}
-            <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" class="btn btn-sm btn-default" id="{{ dream.slug }}">Детальніше</a>
+                <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" class="btn btn-sm btn-default" id="{{ dream.slug }}">Детальніше</a>
             {% endblock dream_bottom %}
         </div>
     </div>

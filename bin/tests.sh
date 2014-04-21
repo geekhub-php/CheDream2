@@ -11,6 +11,8 @@ cp -u src/Geekhub/DreamBundle/DataFixtures/ORM/images/enakin.jpg web/upload/tmp/
 
 bin/phpunit -c app
 
+bin/behat @GeekhubUserBundle
+bin/behat src/Geekhub/DreamBundle/Features/newDreamRedirect.feature
 bin/behat src/Geekhub/DreamBundle/Features/dreamLifeCycle.feature
 #bin/behat @GeekhubDreamBundle
 bin/behat @GeekhubUserBundle

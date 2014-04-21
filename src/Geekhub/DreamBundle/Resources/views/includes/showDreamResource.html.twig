@@ -15,7 +15,7 @@
                                     <span class="label label-default">{{ finance.quantity }} грн.</span>
                                 </td>
                                 <td style="width: 10%;">
-                                    <span class="label label-info">{{ finResource(finance, dream) }}</span>
+                                    <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -65,10 +65,10 @@
                                     {{ work.title }}
                                 </td>
                                 <td style="width: 10%; text-align: right;">
-                                    <span class="label label-default">{{ work.quantity }} чол. / {{ work.quantityDays }} дн.</span>
+                                    <span class="label label-default">{{ work.quantity }} дн.</span>
                                 </td>
                                 <td style="width: 10%;">
-                                    <span class="label label-info">{{ workResource(work, dream) }}</span>
+                                    <span class="label label-info">{{ workResource(work, dream) }} дн.</span>
                                 </td>
                             </tr>
                         {% endfor %}
