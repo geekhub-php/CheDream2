@@ -8,9 +8,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            {# Resources start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
-            {# Resources end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
 
             <div style="clear: both;">
                 <h3>Поділитись через:</h3>
@@ -20,36 +18,7 @@
                     data-yashareTitle="{{ dream.title }}"
                     data-yashareLink="{{ app.request.uri }}"
                     data-yashareDescription="{{ displayLimitWord(dream.description, 30) }}"
-                    data-yashareImage="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage', true) }}">
-                    <a rel="nofollow"
-                       target="_blank"
-                       href="http://share.yandex.ru/go.xml"
-                       data-service="vkontakte">
-                    </a>
-
-                    <a rel="nofollow"
-                       target="_blank"
-                       href="http://share.yandex.ru/go.xml"
-                       data-service="facebook">
-                    </a>
-
-                    <a rel="nofollow"
-                       target="_blank"
-                       href="http://share.yandex.ru/go.xml"
-                       data-service="odnoklassniki">
-                    </a>
-
-                    <a rel="nofollow"
-                       target="_blank"
-                       href="http://share.yandex.ru/go.xml"
-                       data-service="twitter">
-                    </a>
-
-                    <a rel="nofollow"
-                       target="_blank"
-                       href="http://share.yandex.ru/go.xml"
-                       data-service="gplus">
-                    </a>
+                    data-yashareImage="{{ dream.mediaPoster|mediaPath|imagine_filter('social_share_image', true) }}">
                 </div>
             </div>
 
@@ -57,13 +26,9 @@
 
         <div class="col-md-8">
 
-            {# participants start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
-            {# participants end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
             <br/>
-            {# comments start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
-            {# comments end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
 
         </div>
 

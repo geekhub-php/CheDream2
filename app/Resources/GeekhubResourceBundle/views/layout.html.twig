@@ -2,14 +2,21 @@
 <html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
+        {% if dream.mediaPoster is defined %}
+            <meta property="og:title" content="{{ dream.title }}" />
+            <meta property="og:description" content="{{ displayLimitWord(dream.description, 30) }}" />
+            <meta property="og:url" content="{{ app.request.uri }}" />
+            <meta property="og:image" content="{{ dream.mediaPoster|mediaPath|imagine_filter('social_share_image', true) }}" />
+
+            <meta name="title" content="{{ dream.title }}" />
+            <meta name="description" content="{{ displayLimitWord(dream.description, 30) }}" />
+            <link rel="image_src" href="{{ dream.mediaPoster|mediaPath|imagine_filter('social_share_image', true) }}" />
+        {% endif %}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="{% block description %}CheDream - Open source crowdfunding system{% endblock %}">
         <meta name="author" content="{% block author %}Geekhub PHP Developers Team{% endblock %}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% if dream.mediaPoster is defined %}
-            <meta property="og:image" content="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage', true) }}">
-        {% endif %}
         <title>{% block title %}Welcome{% endblock %}</title>
 
         {% block stylesheets %}
