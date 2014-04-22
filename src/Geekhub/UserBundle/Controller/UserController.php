@@ -96,6 +96,12 @@ class UserController extends Controller
         return $this->render('GeekhubUserBundle:User:login.html.twig');
     }
 
+    /**
+     * @param Request $request
+     * @View(template="GeekhubUserBundle:User:userUpdateContacts.html.twig")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateContactsAction(Request $request)
     {
         $userAuth=$this->getUser();
@@ -114,15 +120,31 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form -> isValid()) {
+        if ($form->isValid()) {
+            $hasUser = $em->getRepository('GeekhubUserBundle:User')
+                ->findOneBy(array(
+                    'email' => trim($form->get('email')->getData())
+                ))
+            ;
 
-            $em->flush();
-            $this->sendEmail($user);
+            if ($hasUser == null) {
+                $em->flush();
+                $this->sendEmail($user);
 
-            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+                return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+            } else {
+                $this->container->get('session')->getFlashBag()->add(
+                    'emailIsBusy',
+                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (".$hasUser->getEmail().")."
+                );
+            }
         }
 
-        return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+        return array(
+            'form'=>$form->createView(),
+            'user'=>$user,
+            'avatar'=>$user->getAvatar()
+        );
     }
 
     /**
