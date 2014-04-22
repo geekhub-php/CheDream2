@@ -31,11 +31,24 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form -> isValid()) {
+        if ($form->isValid()) {
+            $hasUser = $em->getRepository('GeekhubUserBundle:User')
+                ->findOneBy(array(
+                    'email' => trim($form->get('email')->getData())
+                ))
+            ;
 
-            $em->flush();
+            if ($hasUser == null) {
+                $em->flush();
+                $this->sendEmail($user);
 
-            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+                return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+            } else {
+                $this->container->get('session')->getFlashBag()->add(
+                    'emailIsBusy',
+                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (".$hasUser->getEmail().")."
+                );
+            }
         }
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
