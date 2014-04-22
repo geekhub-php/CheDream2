@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Daxpro';
+    src: url('../fonts/daxpro-webfont.eot');
+    src: url('../fonts/daxpro-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/daxpro-webfont.woff') format('woff'),
+         url('../fonts/daxpro-webfont.ttf') format('truetype'),
+         url('../fonts/daxpro-webfont.svg#daxproregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Daxpro';
+    src: url('../fonts/daxpro-bold-webfont.eot');
+    src: url('../fonts/daxpro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/daxpro-bold-webfont.woff') format('woff'),
+         url('../fonts/daxpro-bold-webfont.ttf') format('truetype'),
+         url('../fonts/daxpro-bold-webfont.svg#dax_probold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body, select, input, textarea, input[type="password"], a:link, a:visited {
+    font: 14px/1.2em 'Daxpro', sans-serif;
+    color: #454545;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Daxpro', sans-serif;
+}
+
+div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
+    line-height: 1.2em;
+}
