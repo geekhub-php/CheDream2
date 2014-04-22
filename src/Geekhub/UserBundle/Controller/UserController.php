@@ -10,6 +10,7 @@ use Geekhub\UserBundle\Form\UserForUpdateContactsType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -104,7 +105,7 @@ class UserController extends Controller
      */
     public function updateContactsAction(Request $request)
     {
-        $userAuth=$this->getUser();
+        $userAuth = $this->getUser();
         if (!$userAuth) {
             return $this->redirect($this->generateUrl('_login'));
         }
@@ -135,8 +136,13 @@ class UserController extends Controller
             } else {
                 $this->container->get('session')->getFlashBag()->add(
                     'emailIsBusy',
-                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (".$hasUser->getEmail().")."
+                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (<a href='"
+                    .$this->container->get('router')->generate('profile_update_contacts',
+                        ['mergeUserWithEmail' => $hasUser->getEmail()])
+                    ."'>email</a>)."
                 );
+
+//                $this->get('hwi_oauth.resource_owner.facebook')
             }
         }
 
@@ -170,5 +176,10 @@ class UserController extends Controller
         ;
 
         $dispatcher->send($message);
+    }
+
+    public function mergeAccountsByEmailAction($email)
+    {
+        return new Response('mergeAccountsByEmailAction');
     }
 }

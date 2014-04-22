@@ -544,4 +544,14 @@ class User extends BaseUser //implements DreamUserInterface
     {
         return $this->otherContributions;
     }
+
+    public function getNotNullSocialIds()
+    {
+        return array_filter([
+                'facebook' => $this->facebookId,
+                'vkontakte' => $this->vkontakteId,
+                'odnoklassniki' => $this->odnoklassnikiId,
+            ], 'strlen')
+        ;
+    }
 }

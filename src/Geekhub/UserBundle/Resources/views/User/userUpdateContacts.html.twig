@@ -5,7 +5,7 @@
 {% block content %}
     {% for flashMessage in app.session.flashbag.get('emailIsBusy') %}
         <div class="alert alert-success">
-            {{ flashMessage|trans }}
+            {{ flashMessage|trans|raw }}
         </div>
     {% endfor %}
 

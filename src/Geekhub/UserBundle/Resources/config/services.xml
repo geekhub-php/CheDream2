@@ -60,5 +60,22 @@
         </call>
         <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"  />
     </service>
+
+    <service id="account_merger" class="Geekhub\UserBundle\AccountMerger">
+        <call method="setFacebookResourceOwner">
+            <argument type="service" id="geekhub.user.facebook_provider" />
+        </call>
+        <call method="setVkontakteResourceOwner">
+            <argument type="service" id="geekhub.user.vkontakte_provider" />
+        </call>
+        <call method="setOdnoklassnikiResourceOwner">
+            <argument type="service" id="geekhub.user.odnoklassniki_provider" />
+        </call>
+    </service>
+    <service id="hwi_oauth.connect_controller" class="HWI\Bundle\OAuthBundle\Controller\ConnectController">
+        <call method="setContainer">
+            <argument type="service" id="service_container" />
+        </call>
+    </service>
 </services>
 </container>

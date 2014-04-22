@@ -61,3 +61,7 @@ profile_view_dreams:
 profile_update_contacts:
     pattern: /user/updateContacts
     defaults: { _controller: GeekhubUserBundle:User:updateContacts }
+
+merge_accounts:
+    pattern: /user/merge/{email}
+    defaults: { _controller: GeekhubUserBundle:User:mergeAccountsByEmail }
