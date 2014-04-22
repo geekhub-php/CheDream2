@@ -34,7 +34,7 @@ class RegistrationSubscriber
             $targetRoute = 'profile_update_contacts';
 
             if ($user instanceof User) {
-                if (strstr($user->getEmail(),'@example.com')) {
+                if (!$user->getPhone() || !$user->getEmail()) {
                     $routeName = $this->container->get('request')->get('_route');
                     $uri =$this->container->get('request')->getUri();
                     if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
