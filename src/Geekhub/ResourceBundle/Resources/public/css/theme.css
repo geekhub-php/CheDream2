@@ -144,6 +144,21 @@ img                            { vertical-align: middle; }
     background: #FFF;
 }
 
+.page-green-shadow {
+    position: relative;
+}
+.page-green-shadow:after {
+    content: '';
+    display: block;
+    width: 645px;
+    height: 26px;
+    position: absolute;
+    left: 50%;
+    bottom: -26px;
+    margin: 0 0 0 -323px;
+    background: url(/images/page_green_shadow.png) no-repeat;
+}
+
 
 /*----------------------------------------------------------------------------------*/
 /*-------------------------------------> Header <-----------------------------------*/
