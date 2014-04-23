@@ -560,6 +560,6 @@ class User extends BaseUser //implements DreamUserInterface
 
     public function isFakeEmail()
     {
-        false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
     }
 }
