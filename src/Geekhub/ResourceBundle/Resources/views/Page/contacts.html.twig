@@ -115,8 +115,8 @@
                         {{ form_errors(form.captcha) }}
                         {{ form_widget(form.captcha) }}
                     </li>
-                    <li class="buttons-block row">
-                        {{ form_widget(form.submit, { 'attr': {'class': 'custom-btn btn-orange'} }) }}
+                    <li class="buttons-block">
+                        <input type="submit" value="{{ 'contacts.write_us.submit'|trans }}" class="custom-btn btn-orange">
                     </li>
                 </ul>
             {{ form_end(form) }}
