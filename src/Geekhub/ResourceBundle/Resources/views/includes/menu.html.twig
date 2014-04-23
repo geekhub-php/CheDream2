@@ -28,15 +28,6 @@
                     <a href="{{ path('dream_list') }}">Мрії</a>
                 </li>
                 
-                {% if is_granted("ROLE_SUPER_ADMIN") %}
-                    <li>
-                        <a href="{{ path('dream_admin_list') }}">
-                            <span class="glyphicon glyphicon-asterisk"></span>
-                            admin list
-                        </a>
-                    </li>
-                {% endif %}
-                
                 <li>
                     <a href="{{ path('faq') }}">FAQ</a>
                 </li>
@@ -112,6 +103,73 @@
                         <a href="#" class="user" title="{{ app.user.getFirstName() }} {{ app.user.getLastName() }}">
                             <span class="icon icon-user"></span>
                         </a>
+                    </li>
+                    <li class="user-dreams-block">
+                        <a href="#" class="show-dreams">
+                            <span class="icon icon-dream"></span>
+                        </a>
+                        <ul class="dreams-list">
+                            <li>
+                                <a href="#">
+                                    <span class="photo-block">
+                                        <img src="" alt="Image">
+                                        <span class="icon-status submitted"></span>
+                                    </span>
+                                    <span class="info-block">
+                                        <span class="name">Supernatural</span>
+                                        <span class="status">Finished</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo-block">
+                                        <img src="" alt="Image">
+                                        <span class="icon-status rejected"></span>
+                                    </span>
+                                    <span class="info-block">
+                                        <span class="name">Supernatural</span>
+                                        <span class="status">Finished</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo-block">
+                                        <img src="" alt="Image">
+                                        <span class="icon-status collecting-resources"></span>
+                                    </span>
+                                    <span class="info-block">
+                                        <span class="name">Supernatural</span>
+                                        <span class="status">Finished</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo-block">
+                                        <img src="" alt="Image">
+                                        <span class="icon-status implementing"></span>
+                                    </span>
+                                    <span class="info-block">
+                                        <span class="name">Supernatural</span>
+                                        <span class="status">Finished</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="photo-block">
+                                        <img src="" alt="Image">
+                                        <span class="icon-status completed"></span>
+                                    </span>
+                                    <span class="info-block">
+                                        <span class="name">Supernatural</span>
+                                        <span class="status">Finished</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ path('_logout') }}" class="logout">
