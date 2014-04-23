@@ -36,6 +36,11 @@ class RegistrationSubscriber
             return;
         }
 
+        $path = $this->container->get('router')->getContext()->getPathInfo();
+        if (strpos('/connect', $path) || strpos('/login-social', $path)) {
+            return;
+        }
+
         if (!$sc = $this->container->get('security.context')) {
             return;
         }
