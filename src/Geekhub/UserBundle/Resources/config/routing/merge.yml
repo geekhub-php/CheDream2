@@ -1,0 +1,10 @@
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+
+profile_update_contacts:
+    pattern: /user/updateContacts
+    defaults: { _controller: GeekhubUserBundle:User:updateContacts }
+
+merge_accounts:
+    pattern: /user/merge/{email}
+    defaults: { _controller: GeekhubUserBundle:User:mergeAccountsByEmail }

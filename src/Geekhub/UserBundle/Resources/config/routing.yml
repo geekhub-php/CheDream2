@@ -17,8 +17,8 @@ hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
 
-hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+merge_route:
+    resource: "@GeekhubUserBundle/Resources/config/routing/merge.yml"
     prefix:   /connect-account
 
 hwi_oauth_login:
@@ -61,11 +61,3 @@ profile_view:
 profile_view_dreams:
     pattern: /users/{id}/dreams/{status}
     defaults: { _controller: GeekhubUserBundle:User:userOwnedDreamsView}
-
-profile_update_contacts:
-    pattern: /user/updateContacts
-    defaults: { _controller: GeekhubUserBundle:User:updateContacts }
-
-merge_accounts:
-    pattern: /user/merge/{email}
-    defaults: { _controller: GeekhubUserBundle:User:mergeAccountsByEmail }
