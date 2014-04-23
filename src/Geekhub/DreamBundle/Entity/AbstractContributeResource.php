@@ -22,7 +22,7 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
-     * @Assert\NotBlank(message = "dream.not_blank")
+     * @Assert\NotBlank(message="dream.only_numbers")
      * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
      * @ORM\Column(name="quantity", type="float")
      */
