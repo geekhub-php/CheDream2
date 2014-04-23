@@ -116,7 +116,7 @@
                         {{ form_widget(form.captcha) }}
                     </li>
                     <li class="buttons-block row">
-                        {{ form_rest(form) }}
+                        {{ form_widget(form.submit, { 'attr': {'class': 'custom-btn btn-orange'} }) }}
                     </li>
                 </ul>
             {{ form_end(form) }}
