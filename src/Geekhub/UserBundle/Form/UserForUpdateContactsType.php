@@ -24,7 +24,6 @@ class UserForUpdateContactsType extends AbstractType
             ->add('firstName', 'text', array('label' => 'Ім\'я '))
             ->add('lastName', 'text', array('label' => 'Прізвище '))
             ->add('email', 'email', array('label' => 'user.email'))
-            ->add('phone', 'text', array('label' => 'user.phone'))
             ->add( $builder->create('avatar', 'hidden')->addModelTransformer($transformer)
              );
 
