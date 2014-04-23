@@ -115,7 +115,7 @@ class DreamController extends Controller
 
                     return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
                 }
-
+                
                 $tagManager = $this->get('geekhub.tag.tag_manager');
                 $tagManager->addTagsToEntity($dream);
 
