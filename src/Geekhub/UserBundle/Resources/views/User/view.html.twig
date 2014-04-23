@@ -11,42 +11,57 @@
                 <div class="col-md-3">
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
                     {% if user.phone is not null %}
-                    <a href="mailto:{{ user.phone }}"><div class="icon-phone-circled"></div></a>
+                        <a href="mailto:{{ user.phone }}"><div class="icon-phone-circled"></div></a>
                     {% endif %}
 
                     {% if user.skype is not null %}
-                    <a href="skype:{{ user.skype }}"><div class="icon-skype"></div></a>
+                        <a href="skype:{{ user.skype }}"><div class="icon-skype"></div></a>
                     {% endif %}
 
                     {% if user.email is not null %}
-                    <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
+                        <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
                     {% endif %}
 
-                    {% if user.facebookUrl is not null %}
-                    <a href="{{ user.facebookUrl }}"><div class="icon-facebook-circled"></div></a>
-                    {% elseif %}
-
+                    {% if user.facebookId is not null %}
+                        <a href="{{ user.facebookUrl }}"><div class="icon-facebook-circled"></div></a>
+                    {% else %}
+                        <a href="{{ path('facebook_login') }}">
+                            <i class="icon-facebook-circled" style="color: black"></i>
+                        </a>
                     {% endif %}
 
-                    {% if user.vkontakteUrl is not null %}
-                    <a href="{{ user.vkontakteUrl }}"><div class="icon-vkontakte-rect"></div></a>
+                    {% if user.vkontakteId is not null %}
+                        <a href="{{ user.vkontakteUrl }}"><div class="icon-vkontakte-rect"></div></a>
+                    {% else %}
+                        <a href="{{ path('vkontakte_login') }}">
+                            <i class="icon-vkontakte-rect" style="color: black"></i>
+                        </a>
                     {% endif %}
 
-                    {% if user.odnoklassnikiUrl is not null %}
-                    <a href="{{ user.odnoklassnikiId }}"><div class="icon-odnoklassniki-rect"></div></a>
+                    {% if user.odnoklassnikiId is not null %}
+                        <a href="{{ user.odnoklassnikiUrl }}"><div class="icon-odnoklassniki-rect"></div></a>
+                    {% else %}
+                        <a href="{{ path('odnoklassniki_login') }}">
+                            <i class="icon-odnoklassniki-rect" style="color: black"></i>
+                        </a>
                     {% endif %}
                 </div>
 
                 <div class="col-md-8">
 
                     <div class="row">
-                        <div class="col-md-7"><h2> {{user.firstName}} {{user.lastName}}</h2> </div>
+                        <div class="col-md-7">
+                            <h2> {{user.firstName}} {{user.lastName}}</h2>
+                        </div>
+
                         <div class="col-md-3">
                             <p> {{ user.birthday|date("d M Y", "Europe/Kiev")|trans }} </p>
                         </div>
+
                         {% if app.user is same as(user) %}
                             <a href="{{path('profile_edit')}}"><div class="btn btn-primary">Редагувати</div></a>
                         {% endif %}
+
                         <p> {{ user.about|raw }} </p>
                     </div>
 
@@ -55,16 +70,16 @@
                             <div class="col-md-7">
                               <h4>Автор проектів: </h4>
                             </div>
-                                <div class="btn btn-primary" id="any"> Усі мрії </div>
-                                <div class="btn btn-primary" id="projects"> На стадії проекту </div>
-                                <div class="btn btn-primary" id="implemented"> Втілені </div>
-                            </div>
-                            <div class="row">
-                                <div id="user-dreams">
-                                    {% for dream in userDreams %}
-                                        {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                                    {% endfor %}
-                                </div>
+
+                            <div class="btn btn-primary" id="any"> Усі мрії </div>
+                            <div class="btn btn-primary" id="projects"> На стадії проекту </div>
+                            <div class="btn btn-primary" id="implemented"> Втілені </div>
+                        </div>
+                        <div class="row">
+                            <div id="user-dreams">
+                                {% for dream in userDreams %}
+                                    {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                                {% endfor %}
                             </div>
                         </div>
                     {% endif %}
