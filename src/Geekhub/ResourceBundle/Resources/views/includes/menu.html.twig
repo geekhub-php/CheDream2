@@ -100,7 +100,7 @@
                     
                 {% else %}
                     <li>
-                        <a href="#" class="user" title="{{ app.user.getFirstName() }} {{ app.user.getLastName() }}">
+                        <a href="{{ path('profile_view', {'id': app.user.id}) }}" class="user" title="{{ app.user.getFirstName() }} {{ app.user.getLastName() }}">
                             <span class="icon icon-user"></span>
                         </a>
                     </li>
@@ -109,66 +109,33 @@
                             <span class="icon icon-dream"></span>
                         </a>
                         <ul class="dreams-list">
-                            <li>
-                                <a href="#">
-                                    <span class="photo-block">
-                                        <img src="" alt="Image">
-                                        <span class="icon-status submitted"></span>
-                                    </span>
-                                    <span class="info-block">
-                                        <span class="name">Supernatural</span>
-                                        <span class="status">Finished</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo-block">
-                                        <img src="" alt="Image">
-                                        <span class="icon-status rejected"></span>
-                                    </span>
-                                    <span class="info-block">
-                                        <span class="name">Supernatural</span>
-                                        <span class="status">Finished</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo-block">
-                                        <img src="" alt="Image">
-                                        <span class="icon-status collecting-resources"></span>
-                                    </span>
-                                    <span class="info-block">
-                                        <span class="name">Supernatural</span>
-                                        <span class="status">Finished</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo-block">
-                                        <img src="" alt="Image">
-                                        <span class="icon-status implementing"></span>
-                                    </span>
-                                    <span class="info-block">
-                                        <span class="name">Supernatural</span>
-                                        <span class="status">Finished</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo-block">
-                                        <img src="" alt="Image">
-                                        <span class="icon-status completed"></span>
-                                    </span>
-                                    <span class="info-block">
-                                        <span class="name">Supernatural</span>
-                                        <span class="status">Finished</span>
-                                    </span>
-                                </a>
-                            </li>
+                            {% for dream in app.user.dreams %}
+                                {% if (dream.currentStatus not in ['success', 'fail']) and (loop.index <= 5) %}
+                                    {% set dreamStatusM = dream.currentStatus %}
+                                    <li>
+                                        <a href="{{ path('view_dream', {'slug': dream.slug} ) }}">
+                                        <span class="photo-block">
+                                            <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_preview_in_menu') }}"  alt="Image" >
+                                            <span class="icon-status {{ dreamStatusM }}"></span>
+                                        </span>
+                                        <span class="info-block">
+                                            <span class="name">{{ dream.title }}</span>
+                                            {% if dream.currentStatus == 'submitted' %}
+                                                <span class="status">на перевірці</span>
+                                            {% elseif dream.currentStatus == 'rejected' %}
+                                                <span class="status">відхилені</span>
+                                            {% elseif dream.currentStatus == 'collecting-resources' %}
+                                                <span class="status">збір коштів</span>
+                                            {% elseif dream.currentStatus == 'implementing' %}
+                                                <span class="status">реалізація</span>
+                                            {% elseif dream.currentStatus == 'completed' %}
+                                                <span class="status">завершена</span>
+                                            {% endif %}
+                                        </span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                     </li>
                     <li>
