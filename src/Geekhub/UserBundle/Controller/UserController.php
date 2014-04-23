@@ -105,7 +105,10 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
-        $user->setEmail('');
+        
+        if (strstr($user->getEmail(),'@example.com')) {
+            $user->setEmail('');
+        }
 
         $form = $this->CreateForm(new UserForUpdateContactsType(), $user, array(
                      'user' => $user,
