@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const FAKE_EMAIL_PART = "@example.com";
+
     /**
      * @var integer
      *
@@ -553,5 +556,10 @@ class User extends BaseUser //implements DreamUserInterface
                 'odnoklassniki' => $this->odnoklassnikiId,
             ], 'strlen')
         ;
+    }
+
+    public function isFakeEmail()
+    {
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
     }
 }
