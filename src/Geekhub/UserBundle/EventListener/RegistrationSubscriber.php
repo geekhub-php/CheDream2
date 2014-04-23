@@ -46,9 +46,16 @@ class RegistrationSubscriber
         }
 
         $request = $this->container->get('request');
-        $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, [], Router::ABSOLUTE_URL);
+        $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, array(), Router::ABSOLUTE_URL);
 
-        if ((!$user->getEmail() || false !== strpos($user->getEmail(), '@example.com')) && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
+        if ($email = $user->getEmail()) {
+            $email = explode('@', trim($email));
+            $emailAccount = $email[0];
+        } else {
+            $emailAccount = null;
+        }
+
+        if ($user->getUsername() == $emailAccount && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
             $event->setResponse(new RedirectResponse($url));
         } elseif ($accessToken = $request->query->get('code')) {
             $service = $request->query->get('service');
