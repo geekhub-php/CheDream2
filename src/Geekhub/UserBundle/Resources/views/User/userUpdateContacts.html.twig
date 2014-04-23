@@ -15,8 +15,8 @@
                 <div class="col-md-5">
                   <div class="fileinput-button" id="user-avatar-image">
                     <div id="user-avatar-container">
-                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-                        <input id="dream_poster" type="file" name="dream-poster">
+                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail" />
+                        <input id="dream_poster" type="file" name="dream-poster" />
                     </div>
                   </div>
                   <div id="errors" class="files">
@@ -38,9 +38,9 @@
                     {{ form_row(form.email) }}
                     {{ form_rest(form) }}
                     {{ form_errors(form) }}
-                </div>
-                <div class="row center">
-                 <input type="submit" name= "_submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
+                    <div class="row center">
+                        <input type="submit" name= "_submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
+                    </div>
                 </div>
             </div>
         </form>

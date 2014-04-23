@@ -80,6 +80,11 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
+
+            if ($hasUser = $this->userManager->findUserByEmail($user->getEmail())) {
+                $user->setEmail($user->getUsername()."@example.com");
+            }
+
             try {
                 $this->userManager->updateUser($user);
             } catch (DBALException $e) {
