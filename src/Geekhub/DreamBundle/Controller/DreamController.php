@@ -108,11 +108,17 @@ class DreamController extends Controller
                     $dream->addStatus(new Status(Status::SUBMITTED));
                     $dream->setRejectedDescription(null);
                 }
+                $em = $this->getDoctrine()->getManager();
+                $tags = $dream->getTags();
+                if (is_null($tags[0])) {
+                    $em->flush();
+
+                    return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+                }
 
                 $tagManager = $this->get('geekhub.tag.tag_manager');
                 $tagManager->addTagsToEntity($dream);
 
-                $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
                 $tagManager->saveTagging($dream);
