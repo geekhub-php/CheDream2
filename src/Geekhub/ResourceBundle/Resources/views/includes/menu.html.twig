@@ -111,12 +111,11 @@
                         <ul class="dreams-list">
                             {% for dream in app.user.dreams %}
                                 {% if (dream.currentStatus not in ['success', 'fail']) and (loop.index <= 5) %}
-                                    {% set dreamStatusM = dream.currentStatus %}
                                     <li>
                                         <a href="{{ path('view_dream', {'slug': dream.slug} ) }}">
                                         <span class="photo-block">
                                             <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_preview_in_menu') }}"  alt="Image" >
-                                            <span class="icon-status {{ dreamStatusM }}"></span>
+                                            <span class="icon-status {{ dream.currentStatus }}"></span>
                                         </span>
                                         <span class="info-block">
                                             <span class="name">{{ dream.title }}</span>
