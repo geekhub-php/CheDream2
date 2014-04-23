@@ -1,5 +1,10 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+ {% block stylesheets %}
+     {{ parent() }}
+     <link href="{{ asset('bundles/geekhubresource/css/main.css') }}" rel="stylesheet">
+ {% endblock %}
+
 {% block content %}
 
     {{ include('GeekhubDreamBundle:includes:homePageSlider.html.twig', {completedDreams: completedDreams}) }}
