@@ -1,30 +1,74 @@
-<div>
-    <h3>Кошторис проекту:</h3>
+<div class="support">
 
-    <div> {# financial #}
-        {% if dream.dreamFinancialResources|length > 0 %}
-            <h4 class="text-center"><span class="glyphicon glyphicon-usd"> </span> Фінансові витрати</h4>
-                <div class="table-responsive">
-                    <table class="table-condensed table-hover" style="background-color: #ffffff; border-radius: 10px;">
-                        {% for finance in dream.dreamFinancialResources %}
-                            <tr>
-                                <td style="width: 80%;">
-                                    {{ finance.title }}
-                                </td>
-                                <td style="width: 10%; text-align: right;">
-                                    <span class="label label-default">{{ finance.quantity }} грн.</span>
-                                </td>
-                                <td style="width: 10%;">
-                                    <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+    <p class="summary">Підтримало <span>{{contributors|length}}</span></p>
+    <div class="work-progress">
+        {% if showPercentOfCompletionFinancial(dream) is not null %}
+            <div class="financial-radial-progress" data-progress="{{ showPercentOfCompletionFinancial(dream) }}">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
                 </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if showPercentOfCompletionEquipment(dream) is not null %}
+            <div class="equipmant-radial-progress" data-progress="{{ showPercentOfCompletionEquipment(dream) }}">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if showPercentOfCompletionWork(dream) is not null %}
+            <div class="work-radial-progress" data-progress="{{ showPercentOfCompletionWork(dream) }}">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
         {% endif %}
     </div>
 
-    <div> {# equipment #}
+    <h3>Кошторис проекту:</h3>
+    <div class="goals-successes">
+        {% if dream.dreamFinancialResources|length > 0 %}
+            <h4>Фінансові витрати</h4>
+                <ul>
+                    {% for finance in dream.dreamFinancialResources %}
+                        <li>
+                            {{ finance.title }}
+                            <span class="label label-default">{{ finance.quantity }} грн.</span>
+                            <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+        {% endif %}
         {% if dream.dreamEquipmentResources|length > 0 %}
             <h4 class="text-center"><span class="glyphicon glyphicon-cog"> </span> Інструменти/обладнання</h4>
             <div class="table-responsive">
@@ -52,9 +96,6 @@
                 </table>
             </div>
         {% endif %}
-    </div>
-
-    <div>  {# work #}
         {% if dream.dreamWorkResources|length > 0 %}
             <h4 class="text-center"><span class="glyphicon glyphicon-user"> </span> Роботи та ресурси</h4>
                 <div class="table-responsive">
