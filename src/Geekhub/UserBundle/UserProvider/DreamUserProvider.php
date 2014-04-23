@@ -13,7 +13,8 @@ use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
     Geekhub\UserBundle\UserProvider\VkontakteProvider,
-    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider;
+    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider,
+    Geekhub\UserBundle\Entity\User;
 
 class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
@@ -45,6 +46,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setterId(null);
+            $this->mergeUsersInfo($user, $previousUser);
             $this->userManager->updateUser($previousUser);
         }
 
@@ -128,5 +130,12 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function setOdnoklassnikiProvider(OdnoklassnikiProvider $odnoklassnikiProvider)
     {
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
+    }
+
+    protected function mergeUsersInfo(User $user, User $previousUser)
+    {
+        if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
+            $user->setEmail($previousUser->getEmail());
+        }
     }
 }
