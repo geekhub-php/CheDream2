@@ -146,6 +146,7 @@ stfalcon_tinymce:
     theme:
         simple:
             theme: "modern"
+            content_css: "/bundles/geekhubresource/css/theme_tinymce.css"
 
 braincrafted_bootstrap:
     assets_dir: %kernel.root_dir%/../vendor/bower-components/bootstrap
@@ -162,3 +163,15 @@ hip_mandrill:
 
 fos_js_routing:
     routes_to_expose: [ api_v1_get_dreams ]
+
+monolog:
+    handlers:
+        applog:
+            type: stream
+            path: %kernel.root_dir%/../app/logs/error.log
+            level: error
+        loggly:
+            type: loggly
+            token: 4a2f0dae-c59f-4af6-b808-4a01f77c01fe
+            level: error
+            bubble: true

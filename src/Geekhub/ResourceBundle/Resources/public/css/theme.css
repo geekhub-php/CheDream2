@@ -144,6 +144,21 @@ img                            { vertical-align: middle; }
     background: #FFF;
 }
 
+.page-green-shadow {
+    position: relative;
+}
+.page-green-shadow:after {
+    content: '';
+    display: block;
+    width: 645px;
+    height: 26px;
+    position: absolute;
+    left: 50%;
+    bottom: -26px;
+    margin: 0 0 0 -323px;
+    background: url(/images/page_green_shadow.png) no-repeat;
+}
+
 
 /*----------------------------------------------------------------------------------*/
 /*-------------------------------------> Header <-----------------------------------*/
@@ -158,7 +173,8 @@ img                            { vertical-align: middle; }
 .header.search-active .search-block .search-link,
 .header .search-block .field-search,
 .header.search-active .search-block .search-title,
-.header.search-active .media-block .media-title {
+.header.search-active .media-block .media-title,
+.header .dreams-list {
     display: none;
 }
 .header .search-block .icon-search,
@@ -170,7 +186,10 @@ img                            { vertical-align: middle; }
 .header .media-block .media-title,
 .header .media-block a,
 .header .icon-user,
-.header .icon-logout {
+.header .icon-logout,
+.header.dreams-active .dreams-list,
+.header .icon-dream,
+.header .dreams-list li * {
     display: block;
 }
 
@@ -279,7 +298,7 @@ img                            { vertical-align: middle; }
 .header .media-block {
     float: right;
 }
-.header .media-block li {
+.header .media-block > li {
     float: left;
 }
 .header .media-block .media-title {
@@ -354,11 +373,111 @@ img                            { vertical-align: middle; }
     background: #464646;
 }
 
+.header .media-block .show-dreams {
+    padding: 25px 6px 0 11px;
+}
+.header .icon-dream {
+    width: 27px;
+    height: 22px;
+    background: url(/images/sprite.png) -240px 0 no-repeat;
+}
+.header .show-dreams:hover .icon-dream {
+    background: url(/images/sprite.png) -240px -40px no-repeat;
+}
+.header .show-dreams:active .icon-dream {
+    background: url(/images/sprite.png) -240px -80px no-repeat;
+}
+.header .show-dreams:hover {
+    background: #FCB040;
+}
+
 .header .user:active,
-.header .logout:active {
+.header .logout:active,
+.header .show-dreams:active {
     background: transparent;
 }
 
+.header .user-dreams-block {
+    position: relative;
+}
+.header .dreams-list {
+    position: absolute;
+    left: -20px;
+    top: 63px;
+    width: 220px;
+    background: #FFF;
+    -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.11);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.11); 
+    text-align: left;
+    z-index: 5;
+}
+.header .dreams-list:before {
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    border-color: transparent transparent #FFF;
+}
+.header .dreams-list .photo-block {
+    float: left;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 0 10px 0 0;
+}
+.header .dreams-list .photo-block img {
+    max-height: 100%;
+    max-width: 100%;
+}
+.header .dreams-list .icon-status {
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    right: -11px;
+    top: 19px;
+}
+.header .dreams-list a {
+    overflow: hidden;
+    height: auto;
+    padding: 7px;
+    border-top: 1px solid #E7E7E7;
+}
+.header .dreams-list li:first-child a {
+    border-top: 0;
+}
+.header .dreams-list .info-block {
+    overflow: hidden;
+}
+.header .dreams-list .name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #464646;
+    padding: 2px 0 1px;
+}
+.header .dreams-list .status {
+    color: #9B9B9B;
+    padding: 0 0 0 4px;
+}
+
+.header .dreams-list .submitted {
+    background: url(/images/sprite.png) -180px -200px no-repeat;
+}
+.header .dreams-list .rejected {
+    background: url(/images/sprite.png) -100px -200px no-repeat;
+}
+.header .dreams-list .collecting-resources {
+    background: url(/images/sprite.png) -140px -200px no-repeat;
+}
+.header .dreams-list .implementing {
+    background: url(/images/sprite.png) -100px -240px no-repeat;
+}
+.header .dreams-list .completed {
+    background: url(/images/sprite.png) -140px -240px no-repeat;
+}
 
 /*----------------------------------------------------------------------------------*/
 /*------------------------------------> Footer <------------------------------------*/
@@ -574,7 +693,7 @@ img                            { vertical-align: middle; }
 }
 .page-new-dream .main-photo {
     position: relative;
-    padding-top: 126px;
+    padding-top: 130px;
     height: 195px;
     border: 1px dashed #B8B8B8;
     cursor: pointer;
@@ -582,10 +701,10 @@ img                            { vertical-align: middle; }
 }
 .page-new-dream .main-photo .icon {
     display: block;
-    width: 77px;
-    height: 56px;
+    width: 89px;
+    height: 68px;
     position: absolute;
-    top: 58px;
+    top: 55px;
     left: 50%;
     margin: 0 0 0 -39px;
     background: url(/images/sprite.png) 0 -200px no-repeat;
@@ -594,7 +713,13 @@ img                            { vertical-align: middle; }
     font-size: 16px;
     color: #9B9B9B;
 }
-
+.page-new-dream .main-photo.active img {
+    max-width: 100%;
+}
+.page-new-dream .main-photo.active {
+    padding: 0;
+    height: auto;
+}
 
 .page-new-dream .main-photo input,
 .page-new-dream .main-photo img,
@@ -617,6 +742,7 @@ img                            { vertical-align: middle; }
 }
 .page-new-dream .uploaded-images {
     margin: 0 0 0 -9px;
+    font-size: 0;
 }
 .page-new-dream .uploaded-images img {
     margin: 10px 0 0 9px;
@@ -647,6 +773,38 @@ img                            { vertical-align: middle; }
     width: 39px;
     height: 45px;
     background: url(/images/sprite.png) -120px -140px no-repeat;
+}
+
+.upload-results .alert {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 15px 0 0;
+}
+.upload-results .alert-danger {
+    padding-right: 45px;
+}
+.upload-results .alert-danger .close {
+    margin-right: -30px;
+}
+.upload-results .alert-danger strong {
+    display: block;
+}
+
+.page-new-dream .add-video-block {
+    padding: 25px 0 0;
+}
+.page-new-dream .add-video-block .custom-btn {
+    width: 40%;
+    height: 28px;
+    font-size: 15px;
+}
+.page-new-dream .add-video-block .buttons-block {
+    padding-top: 10px;
+    text-align: left;
+}
+.page-new-dream .add-video-block .btn-orange {
+    float: right;
 }
 
 .page-new-dream .input-block .label-hint {
@@ -785,8 +943,18 @@ img                            { vertical-align: middle; }
     background: url(/images/sprite.png) -100px -120px no-repeat;
 }
 
+.resources-list .btn-add:hover {
+    border: 1px solid #C4C4C4;
+    -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.11);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.11);    
+}
+.resources-list .btn-add:hover .icon-add {
+    background: url(/images/sprite.png) -120px -120px no-repeat;
+}
+
 .resources-list > li {
     margin-bottom: 7px;
+    position: relative;
 }
 .resources-list > li,
 .resources-list > li div {
@@ -825,13 +993,17 @@ img                            { vertical-align: middle; }
 .resources-list.block-type-2 .width-2 { width: 92px; }
 .resources-list.block-type-2 .width-3 { width: 40px; }
 
-.resources-list.block-type-3 .width-1 { width: 146px; }
-.resources-list.block-type-3 .width-2 { width: 74px; }
-.resources-list.block-type-3 .width-3 { width: 46px; }
+.resources-list.block-type-3 .width-1 { width: 193px; }
+.resources-list.block-type-3 .width-2 { width: 80px; }
 
 .resources-list .form-group {
     margin: 0;
     float: left;
+}
+.resources-list .close {
+    position: absolute;
+    right: -15px;
+    top: -4px;
 }
 .resources-list .input-group-addon {
     display: none;

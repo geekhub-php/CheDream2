@@ -37,7 +37,8 @@ class EquipmentType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Geekhub\DreamBundle\Entity\EquipmentResource'
+                'data_class' => 'Geekhub\DreamBundle\Entity\EquipmentResource',
+                'cascade_validation' => true
             )
         );
     }
