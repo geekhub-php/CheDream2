@@ -6,5 +6,5 @@ profile_update_contacts:
     defaults: { _controller: GeekhubUserBundle:User:updateContacts }
 
 merge_accounts:
-    pattern: /user/merge/{email}
+    pattern: /user/merge/{mergeUserWithEmail}
     defaults: { _controller: GeekhubUserBundle:User:mergeAccountsByEmail }

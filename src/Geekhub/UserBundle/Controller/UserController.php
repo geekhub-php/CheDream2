@@ -62,16 +62,15 @@ class UserController extends Controller
         if ($this->getUser() == $user) {
             $showHiddenContributedDreams = true;
             $userDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-        }
-        else {
+        } else {
             $showHiddenContributedDreams = false;
             $userDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
         }
         $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user, $showHiddenContributedDreams);
 
-        return $this->render('GeekhubUserBundle:User:view.html.twig', 
+        return $this->render('GeekhubUserBundle:User:view.html.twig',
             array(
-                'user' => $user, 
+                'user' => $user,
                 'contributedDreams' => $contributedDreams,
                 'userDreams' => $userDreams,
             ));
@@ -83,20 +82,18 @@ class UserController extends Controller
      */
     public function userOwnedDreamsViewAction($user, $status = "any")
     {
-        switch ($status){
+        switch ($status) {
             case "any":
                 if ($this->getUser()==$user) {
                     return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-                }
-                else {
+                } else {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
                 }
                 break;
             case "projects":
                 if ($this->getUser()==$user) {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findMyDreamProjects($user);
-                }
-                else {
+                } else {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserDreamProjects($user);
                 }
                 break;
@@ -150,12 +147,10 @@ class UserController extends Controller
                 $this->container->get('session')->getFlashBag()->add(
                     'emailIsBusy',
                     $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (<a href='"
-                    .$this->container->get('router')->generate('profile_update_contacts',
+                    .$this->container->get('router')->generate('merge_accounts',
                         ['mergeUserWithEmail' => $hasUser->getEmail()])
                     ."'>email</a>)."
                 );
-
-//                $this->get('hwi_oauth.resource_owner.facebook')
             }
         }
 
@@ -191,8 +186,44 @@ class UserController extends Controller
         $dispatcher->send($message);
     }
 
-    public function mergeAccountsByEmailAction($email)
+    public function mergeAccountsByEmailAction(Request $request)
     {
-        return new Response('mergeAccountsByEmailAction');
+
+//        if ($accessToken = $request->query->get('code')) {
+//            $service = $request->query->get('service');
+//            var_dump($service);exit;
+//            $this->container->get('session')->set('_hwi_oauth.connect_confirmation.key', $accessToken);
+//            $event->setResponse($this->container->get('hwi_oauth.connect_controller')->connectServiceAction($request, $service));
+//        } elseif ($email = $request->query->get('mergeUserWithEmail')) {
+//            $hasUser = $this->container->get('doctrine')->getRepository('GeekhubUserBundle:User')->findOneByEmail($email);
+//            $socialIds = $hasUser->getNotNullSocialIds();
+//            if (empty($socialIds)) {
+//                throw new \Exception(sprintf('Oops! Something went wrong - user with email "%s" not register by
+//                social networks', $hasUser->getEmail()));
+//            }
+//
+//            $socialNetworks = $hasUser->getNotNullSocialIds();
+//            $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
+////            var_dump($resourceOwner->getAuthorizationUrl($url)); exit;
+//
+////            $redirectUrl = $this->container->get('security.http_utils')->generateUri($request,
+////                self::UPDATE_CONTACTS_ROUTE);
+////            var_dump($redirectUrl);exit;
+//
+////            var_dump($resourceOwner->getAuthorizationUrl($url)); exit;
+//
+////            $this->container->get('hwi_oauth.connect_controller')->connectServiceAction($request, key($socialNetworks));
+//
+//            $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, ['service' => key($socialNetworks)], Router::ABSOLUTE_URL);
+//            $event->setResponse(new RedirectResponse($resourceOwner->getAuthorizationUrl($url)));
+
+
+
+//            echo $resourceOwner->getAuthorizationUrl($url)."<br/>".$url;
+
+//            $this->container->get('account_merger')->mergeAccountsByEmail($email, $user);
+//        }
+//        return new Response('mergeAccountsByEmailAction');
+        var_dump($request->get('mergeUserWithEmail'));exit;
     }
 }
