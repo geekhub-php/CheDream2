@@ -29,4 +29,6 @@ h1, h2, h3, h4, h5, h6 {
 
 div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
     line-height: 1.2em;
+    padding:0;
+    margin:0;
 }
