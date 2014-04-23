@@ -55,7 +55,7 @@ class RegistrationSubscriber
 
         $apendEmail = explode('@', trim($user->getEmail()));
 
-        if (in_array($apendEmail[0], $user->getNotNullSocialIds()) && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
+        if ($apendEmail[1] == 'example.com' && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
             $event->setResponse(new RedirectResponse($url));
         }
     }

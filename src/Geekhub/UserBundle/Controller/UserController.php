@@ -132,25 +132,29 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $hasUser = $em->getRepository('GeekhubUserBundle:User')
+            $mergedUser = $em->getRepository('GeekhubUserBundle:User')
                 ->findOneBy(array(
                     'email' => trim($form->get('email')->getData())
                 ))
             ;
 
-            if ($hasUser == null) {
+            if ($mergedUser == null) {
                 $em->flush();
                 $this->sendEmail($user);
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
             } else {
-                $this->container->get('session')->getFlashBag()->add(
-                    'emailIsBusy',
-                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (<a href='"
-                    .$this->container->get('router')->generate('merge_accounts',
-                        ['mergeUserWithEmail' => $hasUser->getEmail()])
-                    ."'>email</a>)."
-                );
+//                $this->container->get('session')->getFlashBag()->add(
+//                    'emailIsBusy',
+//                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (<a href='"
+//                    .$this->container->get('router')->generate('merge_accounts',
+//                        ['mergeUserWithEmail' => $hasUser->getEmail()])
+//                    ."'>email</a>)."
+//                );
+                return $this->render('GeekhubUserBundle:User:mergeAccounts.html.twig', array(
+                    'mergedUser' => $mergedUser,
+                    'currentUser' => $user,
+                ));
             }
         }
 
@@ -186,7 +190,12 @@ class UserController extends Controller
         $dispatcher->send($message);
     }
 
-    public function mergeAccountsByEmailAction(Request $request)
+    /**
+     * @param Request $request
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
+     * @return mixed
+     */
+    public function mergeAccountsAction(Request $request, User $user)
     {
 
 //        if ($accessToken = $request->query->get('code')) {
@@ -202,20 +211,20 @@ class UserController extends Controller
 //                social networks', $hasUser->getEmail()));
 //            }
 //
-//            $socialNetworks = $hasUser->getNotNullSocialIds();
-//            $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
+            $socialNetworks = $user->getNotNullSocialIds();
+            $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
 ////            var_dump($resourceOwner->getAuthorizationUrl($url)); exit;
 //
-////            $redirectUrl = $this->container->get('security.http_utils')->generateUri($request,
-////                self::UPDATE_CONTACTS_ROUTE);
-////            var_dump($redirectUrl);exit;
+//            $redirectUrl = $this->container->get('security.http_utils')->generateUri($request,
+//                self::UPDATE_CONTACTS_ROUTE);
+//            var_dump($redirectUrl);exit;
 //
 ////            var_dump($resourceOwner->getAuthorizationUrl($url)); exit;
 //
-////            $this->container->get('hwi_oauth.connect_controller')->connectServiceAction($request, key($socialNetworks));
+            return $this->container->get('hwi_oauth.connect_controller')->redirectToServiceAction($request, key($socialNetworks));
 //
 //            $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, ['service' => key($socialNetworks)], Router::ABSOLUTE_URL);
-//            $event->setResponse(new RedirectResponse($resourceOwner->getAuthorizationUrl($url)));
+//            new RedirectResponse($resourceOwner->getAuthorizationUrl($url));
 
 
 
@@ -224,6 +233,6 @@ class UserController extends Controller
 //            $this->container->get('account_merger')->mergeAccountsByEmail($email, $user);
 //        }
 //        return new Response('mergeAccountsByEmailAction');
-        var_dump($request->get('mergeUserWithEmail'));exit;
+//        var_dump($request->get('mergeUserWithEmail'));exit;
     }
 }
