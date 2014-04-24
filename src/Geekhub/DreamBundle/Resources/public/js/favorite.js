@@ -2,7 +2,7 @@ $('#dreams').on('click', 'span', function(event) {
     var itemObj = $(event.target);
     if (itemObj.data('sended') == 'yes') {
         console.log('del from fav');
-        var path1 = Routing.generate('dream_ajax_dream_fromFavorite');
+        var path1 = Routing.generate('dream_ajax_dream_removeFromFavorite');
         $.post(path1, {id : $(event.target).data('idmedia')})
             .done(function(msgDone) {
                 console.log(msgDone);
