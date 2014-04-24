@@ -19,6 +19,7 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         $user->setLastName($responseArray['last_name']);
         $user->setEmail($user->getOdnoklassnikiId().'@example.com');
         $user->setBirthday(new \DateTime($responseArray['birthday']));
+        $user->setRegistrationStatus(User::EMAIL_UNAVAILABLE);
 
         $token = $response->getAccessToken();
         $photoUrl = $this->doOdnoklassnikiApiRequest('photos.getUserPhotos', $token);

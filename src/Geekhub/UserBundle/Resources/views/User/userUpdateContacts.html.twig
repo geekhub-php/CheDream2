@@ -6,6 +6,13 @@
 <div style="padding: 5% 0;">
     <form method="POST" enctype="multipart/form-data" action="{{ path('profile_update_contacts') }}">
         <div class="row">
+            {% if user.registrationStatus is same as (-2) %}
+            <H2 align="center"> Вітаємо Вас на сайті "Черкаська мрія"! </H2>
+            <p>Адреса електронної пошти, яку Ви вказали, співпадає з одним із зареєстрованих користувачів. На вказану адресу надіслано листа з інструкціями, як обєднати ваші акаунти. Ви також можете вказати іншу адресу електронної пошти щоб негайно почати роботу.</p>
+            {% else %}
+            <H2 align="center"> Вітаємо Вас на сайті "Черкаська мрія"! </H2>
+            <p>Для завершення реєстрації необхідно вказати електронну пошту та телефон для звязку:</p>
+            {% endif %}
             <div class="col-md-5">
               <div class="fileinput-button" id="user-avatar-image">
                 <div id="user-avatar-container">

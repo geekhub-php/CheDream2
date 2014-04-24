@@ -2,6 +2,7 @@
 
 namespace Geekhub\UserBundle\Controller;
 
+use Geekhub\UserBundle\Entity\MergeRequest;
 use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -105,7 +106,9 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
-        $user->setEmail('');
+        if (strstr($user->getEmail(),'@example.com')) {
+            $user->setEmail('');
+        }
 
         $form = $this->CreateForm(new UserForUpdateContactsType(), $user, array(
                      'user' => $user,
@@ -116,6 +119,7 @@ class UserController extends Controller
 
         if ($form -> isValid()) {
 
+            $user->setRegistrationStatus(0);
             $em->flush();
             $this->sendEmail($user);
 
@@ -123,6 +127,21 @@ class UserController extends Controller
         }
 
         return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+    }
+
+    /**
+     * @ParamConverter("mergeRequest", class="GeekhubUserBundle:MergeRequest", options={"hash" = "hash"})
+     */
+    public function mergeAccountsAction(MergeRequest $mergeRequest)
+    {
+        $proposer = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getProposersId());
+        $mergingUser = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findOneById($mergeRequest->getMergingUserId());
+        $this->get('geekhub.user.accounts_merge_subscriber')->mergeUsers($proposer, $mergingUser);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($mergeRequest);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
     }
 
     /**
@@ -140,8 +159,10 @@ class UserController extends Controller
             )
         );
 
-        $message->setFromEmail('test@gmail.com')
-            ->setFromName('Черкаська мрія')
+        $senderName = $this->container->getParameter('sender_name');
+        $senderMail = $this->container->getParameter('sender_mail');
+        $message->setFromEmail($senderMail)
+            ->setFromName($senderName)
             ->addTo($user->getEmail())
             ->setSubject('REGISTRATION')
             ->setHtml($body)

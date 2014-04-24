@@ -11,6 +11,7 @@
     <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
     <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
+    <parameter key="geekhub.user.accounts_merge_subscriber.class">Geekhub\UserBundle\EventListener\AccountsMergeSubscriber</parameter>
 </parameters>
 
 <services>
@@ -60,5 +61,13 @@
         </call>
         <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"  />
     </service>
+
+    <service id="geekhub.user.accounts_merge_subscriber" class="%geekhub.user.accounts_merge_subscriber.class%">
+        <call method="setContainer">
+            <argument type="service" id="service_container"/>
+        </call>
+        <tag name="doctrine.event_subscriber" connection="default" />
+    </service>
+
 </services>
 </container>

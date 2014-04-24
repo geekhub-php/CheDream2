@@ -1,0 +1,12 @@
+{% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
+
+{% block title %}
+    Співпадання адрес електронної пошти
+{% endblock title %}
+
+{% block body %}
+    <p>Шановний(а) {{ user }}!</p>
+    <p>Користувач з іменем {{ userWhoAsksMerge }} вказав таку ж адресу електронної пошти, як і Ваша. Якщо це дійсно Ви і Ви погоджуєтесь поєднати ці аккаунти, будь-ласка перейдіть за <a href="{{ url('profile_merge_accounts', {'hash': hash}) }}">наступною веб-адресою</a>.</p>
+    <p>Якщо Ви не хочете поєднувати ці акаунти, просто проігноруйте цього листа.</p>
+
+{% endblock body %}

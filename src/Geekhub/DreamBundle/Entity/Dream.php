@@ -148,7 +148,7 @@ class Dream implements Taggable
     protected $favoritesCount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams")
+     * @ORM\ManyToOne(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="dreams", cascade="all")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
     protected $author;

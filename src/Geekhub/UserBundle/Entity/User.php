@@ -15,6 +15,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const NORMAL            =  0;
+    const EMAIL_UNAVAILABLE = -1;
+    const WANTS_MERGE       = -2;
+
     /**
      * @var integer
      *
@@ -111,7 +116,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $otherContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author", cascade="all")
      */
     protected $dreams;
 
@@ -126,6 +131,7 @@ class User extends BaseUser //implements DreamUserInterface
         $this->equipmentContributions = new ArrayCollection();
         $this->workContributions = new ArrayCollection();
         $this->otherContributions = new ArrayCollection();
+        $this->registrationStatus = User::NORMAL;
         parent::__construct();
     }
 
