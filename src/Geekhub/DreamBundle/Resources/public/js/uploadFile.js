@@ -23,9 +23,10 @@ $('#dream-poster-image').on('click', function(e) {
             $.each(responseArr, function (index, file) {
                 if(file.error){
                     $('#errors').append(
-                        '<div class="alert alert-danger">' + file.src + ' <strong>' +file.error + '</strong>' +
-                            '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
-                            '</div>'
+                        '<div class="alert alert-danger">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+                            file.src + ' <strong>' +file.error + '</strong>' +
+                        '</div>'                        
                     );
                     
                     return;

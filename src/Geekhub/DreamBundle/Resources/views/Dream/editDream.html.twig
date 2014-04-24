@@ -2,9 +2,8 @@
 
 {% block content %}
     {% if rejectDescription is not null %}
-        <h3 style="text-align: center;">Повідомлення від адміністрації</h3>
         <div class="alert alert-warning">
-            {{ rejectDescription|raw }}
+            <strong>Повідомлення від адміністрації: </strong>{{ rejectDescription|raw }}
         </div>
     {% endif %}
     
@@ -14,7 +13,7 @@
                 <div class="col-md-4">
                     
                     <span class="label">Додати</span>
-                    <div id="dream-poster-image" class="main-photo">
+                    <div id="dream-poster-image" class="main-photo active">
                         <div class="photo-holder">
                             <span class="icon"></span>
                             <span class="title required">Зображення</span>
