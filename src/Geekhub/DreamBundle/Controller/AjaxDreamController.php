@@ -61,15 +61,38 @@ class AjaxDreamController extends Controller
     public function addDreamToFavoriteAction(Request $request)
     {
         $dreamId = $request->get('id');
+        $action = $request->get('state');
+        if (null ==$action) {
+            $action = 'toggle';
+        }
         $user = $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         /** @var Dream $dream */
         $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById($dreamId);
-        $dream->addUsersWhoFavorite($user);
+        if ($action == 'add') {
+            $dream->addUsersWhoFavorite($user);
+            $action = "Added to favorite";
+        }
+
+        if ($action == 'remove') {
+            $dream->removeUsersWhoFavorite($user);
+            $action = "Removed from favorite";
+        }
+
+        if ($action == 'toggle') {
+            if ($dream->getUsersWhoFavorites()->contains($user)) {
+                $dream->removeUsersWhoFavorite($user);
+                $action = "Removed from favorite";
+            }
+            else {
+                $dream->addUsersWhoFavorite($user);
+                $action = "Added to favorite";
+            }
+        }
         $em->persist($dream);
         $em->flush();
 
-        return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
+        return new Response($action." with DreamId=$dreamId and UserId=".$user->getId());
     }
 }
