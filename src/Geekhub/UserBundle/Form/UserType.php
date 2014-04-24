@@ -32,9 +32,9 @@ class UserType extends AbstractType
             ->add('email', 'email', array('label' => 'user.email'))
             ->add('phone', 'text', array('label' => 'user.phone', 'required' => false))
             ->add('skype', 'text', array('label' => 'user.skype', 'required' => false))
-            ->add('facebookUrl', 'url', array('label' => 'user.facebook' , 'required' => false))
-            ->add('vkontakteUrl', 'url', array('label' => 'user.vkontakte', 'required' => false ))
-            ->add('odnoklassnikiUrl', 'url', array('label' => 'user.odnoklassniki', 'required' => false ))
+//            ->add('facebookUrl', 'url', array('label' => 'user.facebook' , 'required' => false))
+//            ->add('vkontakteUrl', 'url', array('label' => 'user.vkontakte', 'required' => false ))
+//            ->add('odnoklassnikiUrl', 'url', array('label' => 'user.odnoklassniki', 'required' => false ))
             ->add( $builder->create('avatar', 'hidden')->addModelTransformer($transformer)
              );
 

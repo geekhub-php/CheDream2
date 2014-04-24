@@ -12,11 +12,16 @@ use Geekhub\UserBundle\Entity\User;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpKernel\HttpKernel;
+use Symfony\Component\Routing\Router;
 
 class RegistrationSubscriber
 {
-    protected $container;
+    const UPDATE_CONTACTS_ROUTE = 'profile_update_contacts';
 
+    protected $ignoredRoutes = [];
+    protected $container;
+    
     /**
      * @param Container $container
      */
@@ -27,22 +32,31 @@ class RegistrationSubscriber
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        //$user = $event->getAuthenticationToken()->getUser();
-        $sc = $this->container->get('security.context');
-        if ($sc->getToken()) {
-            $user = $sc->getToken()->getUser();
-            $targetRoute = 'profile_update_contacts';
+        if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+            return;
+        }
 
-            if ($user instanceof User) {
-                if (!$user->getPhone() || strstr($user->getEmail(),'@example.com')) {
-                    $routeName = $this->container->get('request')->get('_route');
-                    $uri =$this->container->get('request')->getUri();
-                    if ($routeName && ($routeName != $targetRoute) && !strstr($uri,'/upload/')) {
-                        $url = $this->container->get('router')->generate($targetRoute);
-                        $event->setResponse(new RedirectResponse($url));
-                    }
-                }
-            }
+        $path = $this->container->get('router')->getContext()->getPathInfo();
+        if (strpos($path, '/connect') !== false || strpos($path, '/login-social') !== false) {
+            return;
+        }
+
+        if (!$sc = $this->container->get('security.context')) {
+            return;
+        }
+
+        $user = $sc->getToken()->getUser();
+        if (!($user instanceof User)) {
+            return;
+        }
+
+        $request = $this->container->get('request');
+        $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, array(), Router::ABSOLUTE_URL);
+
+        $apendEmail = explode('@', trim($user->getEmail()));
+
+        if ($apendEmail[1] == 'example.com' && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
+            $event->setResponse(new RedirectResponse($url));
         }
     }
 }

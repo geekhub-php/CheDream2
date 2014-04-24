@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const FAKE_EMAIL_PART = "@example.com";
+
     /**
      * @var integer
      *
@@ -67,21 +70,21 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $vkontakteId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $facebookId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $odnoklassnikiId;
 
@@ -543,5 +546,20 @@ class User extends BaseUser //implements DreamUserInterface
     public function getOtherContributions()
     {
         return $this->otherContributions;
+    }
+
+    public function getNotNullSocialIds()
+    {
+        return array_filter([
+                'facebook' => $this->facebookId,
+                'vkontakte' => $this->vkontakteId,
+                'odnoklassniki' => $this->odnoklassnikiId,
+            ], 'strlen')
+        ;
+    }
+
+    public function isFakeEmail()
+    {
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
     }
 }
