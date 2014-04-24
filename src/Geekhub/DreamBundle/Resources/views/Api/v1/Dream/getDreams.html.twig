@@ -4,9 +4,9 @@
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
                 <div class="dream-homepage-preview-header-favorite">
                     {% if app.user in dream.usersWhoFavorites %}
-                        <span class="glyphicon glyphicon-star" style="color: green; font-size: 150%;" data-idmedia="{{ dream.id }}" data-sended="yes" title="уже в улюблених."></span>
+                        <span class="glyphicon glyphicon-star"  data-idmedia="{{ dream.id }}" data-sended="yes" title="уже в улюблених."></span>
                     {% else %}
-                        <span class="glyphicon glyphicon-star" style="color: yellow; font-size: 150%;" data-idmedia="{{ dream.id }}" data-sended="no" title="додати до списку улюблених."></span>
+                        <span class="glyphicon glyphicon-star" data-idmedia="{{ dream.id }}" data-sended="no" title="додати до списку улюблених."></span>
                     {% endif %}
                 </div>
             {% endif %}
@@ -15,18 +15,19 @@
             </h4>
         </div>
         <div class="dream-homepage-preview-body">
-            <div style="position: relative">
-                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
-                        <span style="position: absolute; top: 6px; left: 8px; color: #ffffff; font-weight: bolder;">
-                            Підтримали {{ getCountContributors(dream) }}
-                        </span>
-                        <span style="position: absolute; top: 6px; right: 8px; color: #ffffff; font-weight: bolder;">
-                            Рейтинг 0
-                        </span>
-            </div>
             <div class="showHomePageAvatar-wrapper"> {# Avatar #}
                 <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
-                <p class="showHomePageAvatar-fio"><a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;"> {{ dream.author.firstName }} {{ dream.author.lastName }} </a></p>
+                <p class="showHomePageAvatar-fio"><a href="{{ path('profile_view', {'id': dream.author.id}) }}"> {{ dream.author.firstName }} {{ dream.author.lastName }} </a></p>
+            </div>
+            <div>
+                <span class="triangle"></span>
+                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
+                        <span class="supported">
+                            <span>{{ getCountContributors(dream) }}</span> Підтримало
+                        </span>
+                        <span class="rating">
+                            Рейтинг <span>0</span>
+                        </span>
             </div>
         </div>
         <div class="dream-homepage-preview-footer">
@@ -44,7 +45,7 @@
                 </p>
             </div>
             {% block dream_bottom %}
-                <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" class="btn btn-sm btn-default" id="{{ dream.slug }}">Детальніше</a>
+                <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" id="{{ dream.slug }}">Детальніше</a>
             {% endblock dream_bottom %}
         </div>
     </div>

@@ -94,3 +94,169 @@
   height: inherit;
   width: inherit;
 }
+.wrap #dreams .dream-homepage-preview {
+  position: relative;
+  width: 230px;
+  padding: 0;
+  margin: 0 12px 20px 0;
+  border-radius: 0;
+}
+.wrap #dreams .dream-homepage-preview:nth-child(4n) {
+  margin-right: 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header {
+  height: 111px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star:before {
+  content: "";
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star[data-sended="no"] {
+  background: #ffffff url("../images/star_off.png") right top no-repeat;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star[data-sended="no"]:hover {
+  background: #ffffff url("../images/star_off_hover.png") right top no-repeat;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star[data-sended="yes"] {
+  background: #ffffff url("../images/star_on.png") right top no-repeat;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header .dream-homepage-preview-header-favorite .glyphicon.glyphicon-star[data-sended="yes"]:hover {
+  background: #ffffff url("../images/star_on_hover.png") right top no-repeat;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header h4 {
+  margin: 21px 34px 19px 23px;
+  color: #464646;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-header h4:hover {
+  color: #f2602c;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .showHomePageAvatar-wrapper {
+  top: -24px;
+  height: 36px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .showHomePageAvatar-wrapper img {
+  height: 24px;
+  width: 24px;
+  margin-top: 12px;
+  border-radius: 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .showHomePageAvatar-wrapper p {
+  top: 0;
+  left: 24px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .showHomePageAvatar-wrapper p a {
+  font-size: 14px;
+  line-height: 14px;
+  color: #9b9b9b;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .showHomePageAvatar-wrapper p a:hover {
+  color: #f2602c;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.triangle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 19px 19px 0;
+  border-color: transparent #fff transparent transparent;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body .img-thumbnail {
+  height: 154px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.supported,
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.rating {
+  position: absolute;
+  bottom: 7px;
+  margin-left: 11px;
+  color: #fff;
+  font-size: 13px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.supported span,
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.rating span {
+  font-size: 18px;
+  font-weight: bold;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.rating {
+  right: 0;
+  margin-right: 15px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.rating span {
+  font-weight: normal;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer {
+  padding: 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer div {
+  height: 57px;
+  padding: 16px 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a {
+  display: block;
+  height: 45px;
+  margin: 0;
+  padding-top: 11px;
+  border: solid 2px #fff;
+  border-top: solid 1px #c3c3c3;
+  font-weight: bold;
+  font-size: 18px;
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(47%, #ffffff), color-stop(68%, #efefef), color-stop(79%, #f2f2f2), color-stop(91%, #fcfcfc), color-stop(100%, #ffffff));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0);
+  /* IE6-9 */
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a:before,
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  top: 50%;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a:hover {
+  color: #f2602c;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a:hover:before,
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a:hover:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-box-shadow: 0 0 20px rgba(242, 96, 44, 0.3);
+  -moz-box-shadow: 0 0 20px rgba(242, 96, 44, 0.3);
+  box-shadow: 0 0 20px rgba(242, 96, 44, 0.3);
+  top: 50%;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  -moz-border-radius: 75px;
+  border-radius: 75px;
+}
