@@ -36,6 +36,7 @@ case $reload in
     php app/console assets:install --symlink
     php app/console assetic:dump
     php app/console cache:clear
+
 ;;
 2)
     echo "перезагрузка БД. \n"
@@ -56,6 +57,7 @@ case $reload in
     php app/console cache:clear
 
     sh bin/tests.sh
+    
 ;;
 0)
 exit 0
