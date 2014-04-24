@@ -31,19 +31,9 @@
             </div>
         </div>
         <div class="dream-homepage-preview-footer">
-            <div>  {# percent of completion #}
-                <p>
-                    {% if showPercentOfCompletionFinancial(dream) is not null %}
-                        F={{ showPercentOfCompletionFinancial(dream) }}%
-                    {% endif %}
-                    {% if showPercentOfCompletionEquipment(dream) is not null %}
-                        E={{ showPercentOfCompletionEquipment(dream) }}%
-                    {% endif %}
-                    {% if showPercentOfCompletionWork(dream) is not null %}
-                        W={{ showPercentOfCompletionWork(dream) }}%
-                    {% endif %}
-                </p>
-            </div>
+
+            {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' %}
+
             {% block dream_bottom %}
                 <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" id="{{ dream.slug }}">Детальніше</a>
             {% endblock dream_bottom %}

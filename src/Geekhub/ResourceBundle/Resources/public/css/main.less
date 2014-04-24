@@ -1,3 +1,4 @@
+@images-folder: '/bundles/geekhubresource/images';
 .wrap{
   background: url("../images/banner-shadow-large.png") center 316px no-repeat;
   #dreamCarousel{
@@ -89,10 +90,12 @@
   #dreams{
     font-size: 0;
     .dream-homepage-preview{
+      display: inline-block;
       position: relative;
       width: 230px;
       padding: 0;
       margin: 0 12px 20px 0;
+      background: #fff;
       border-radius: 0;
 
       &:nth-child(4n){
@@ -105,7 +108,7 @@
             &:before{
               content: "";
             }
-            position: relative;
+            position: absolute;
             top: 0;
             right: 0;
             width: 30px;
@@ -125,7 +128,7 @@
           }
         }
         h4{
-          margin: 21px 34px 19px 23px;
+          padding: 21px 34px 19px 23px;
           color: #464646;
           &:hover{
             color: #f2602c;
@@ -133,9 +136,12 @@
         }
       }
       .dream-homepage-preview-body{
+        position: relative;
         .showHomePageAvatar-wrapper{
+          position: absolute;
           top: -24px;
           height: 36px;
+          width: 100%;
           img{
             height: 24px;
             width: 24px;
@@ -143,6 +149,7 @@
             border-radius: 0;
           }
           p{
+            position: absolute;
             top: 0;
             left: 24px;
             a{
@@ -196,12 +203,217 @@
       }
 
       .dream-homepage-preview-footer{
-        div{
-          height: 57px;
-          padding: 16px 0;
-          p{
-            font-size: 15px;
+        div.work-progress{
+          width: 200px;
+          height: 58px;
+          margin: 16px auto;
+          text-align: center;
+          .financial-radial-progress {
+            @circle-size: 58px;
+            @circle-background: #e0e0e0;
+            @circle-color: #5a5a5a;
+            @inset-size: 44px;
+            @inset-color: #fbfbfb;
+            @transition-length: 1s;
+            float: left;
+            width:  @circle-size;
+            height: @circle-size;
+            margin: 0 13px 0 0;;
+
+            background-color: @circle-background;
+            border-radius: 50%;
+            .circle {
+              .mask, .fill {
+                width:    @circle-size;
+                height:   @circle-size;
+                position: absolute;
+                border-radius: 50%;
+              }
+              .mask, .fill {
+                -webkit-backface-visibility: hidden;
+                transition: -webkit-transform @transition-length;
+                transition: -ms-transform @transition-length;
+                transition: transform @transition-length;
+                border-radius: 50%;
+              }
+              .mask {
+                clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+                .fill {
+                  clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                  background-color: @circle-color;
+                }
+              }
+            }
+            .inset {
+              width:       @inset-size;
+              height:      @inset-size;
+              position:    absolute;
+              margin-left: (@circle-size - @inset-size)/2;
+              margin-top:  (@circle-size - @inset-size)/2;
+
+              background: url("@{images-folder}/financial.png") no-repeat center @inset-color;
+              border-radius: 50%;
+            }
+
+            @i: 0;
+            @increment: 180deg / 100;
+            .loop (@i) when (@i <= 100) {
+        &[data-progress="@{i}"] {
+        .circle {
+        .mask.full, .fill {
+        -webkit-transform: rotate(@increment * @i);
+          -ms-transform: rotate(@increment * @i);
+          transform: rotate(@increment * @i);
+        }
+        .fill.fix {
+        -webkit-transform: rotate(@increment * @i * 2);
+          -ms-transform: rotate(@increment * @i * 2);
+          transform: rotate(@increment * @i * 2);
+        }
+        }
+        }
+        .loop(@i + 1);
+        }
+        .loop(@i);
+        }
+        .equipmant-radial-progress {
+        @circle-size: 58px;
+          @circle-background: #e0e0e0;
+          @circle-color: #5a5a5a;
+          @inset-size: 44px;
+          @inset-color: #fbfbfb;
+          @transition-length: 1s;
+          float: left;
+          width:  @circle-size;
+          height: @circle-size;
+          margin: 0 13px 0 0;
+
+          background-color: @circle-background;
+          border-radius: 50%;
+          .circle {
+            .mask, .fill {
+              width:    @circle-size;
+              height:   @circle-size;
+              position: absolute;
+              border-radius: 50%;
+            }
+            .mask, .fill {
+              -webkit-backface-visibility: hidden;
+              transition: -webkit-transform @transition-length;
+              transition: -ms-transform @transition-length;
+              transition: transform @transition-length;
+              border-radius: 50%;
+            }
+            .mask {
+              clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+              .fill {
+                clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                background-color: @circle-color;
+              }
+            }
           }
+          .inset {
+            width:       @inset-size;
+            height:      @inset-size;
+            position:    absolute;
+            margin-left: (@circle-size - @inset-size)/2;
+            margin-top:  (@circle-size - @inset-size)/2;
+
+            background: url("@{images-folder}/equipment.png") no-repeat center @inset-color;
+            border-radius: 50%;
+          }
+
+          @i: 0;
+          @increment: 180deg / 100;
+          .loop (@i) when (@i <= 100) {
+        &[data-progress="@{i}"] {
+        .circle {
+        .mask.full, .fill {
+        -webkit-transform: rotate(@increment * @i);
+          -ms-transform: rotate(@increment * @i);
+          transform: rotate(@increment * @i);
+        }
+        .fill.fix {
+        -webkit-transform: rotate(@increment * @i * 2);
+          -ms-transform: rotate(@increment * @i * 2);
+          transform: rotate(@increment * @i * 2);
+        }
+        }
+        }
+        .loop(@i + 1);
+        }
+        .loop(@i);
+        }
+        .work-radial-progress {
+        margin: 0;
+
+          @circle-size: 58px;
+          @circle-background: #e0e0e0;
+          @circle-color: #5a5a5a;
+          @inset-size: 44px;
+          @inset-color: #fbfbfb;
+          @transition-length: 1s;
+          float: left;
+          width:  @circle-size;
+          height: @circle-size;
+          margin: 0;
+
+          background-color: @circle-background;
+          border-radius: 50%;
+          .circle {
+            .mask, .fill {
+              width:    @circle-size;
+              height:   @circle-size;
+              position: absolute;
+              border-radius: 50%;
+            }
+            .mask, .fill {
+              -webkit-backface-visibility: hidden;
+              transition: -webkit-transform @transition-length;
+              transition: -ms-transform @transition-length;
+              transition: transform @transition-length;
+              border-radius: 50%;
+            }
+            .mask {
+              clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+              .fill {
+                clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                background-color: @circle-color;
+              }
+            }
+          }
+          .inset {
+            width:       @inset-size;
+            height:      @inset-size;
+            position:    absolute;
+            margin-left: (@circle-size - @inset-size)/2;
+            margin-top:  (@circle-size - @inset-size)/2;
+
+            background: url("@{images-folder}/work.png") no-repeat center @inset-color;
+            border-radius: 50%;
+          }
+
+          @i: 0;
+          @increment: 180deg / 100;
+          .loop (@i) when (@i <= 100) {
+        &[data-progress="@{i}"] {
+        .circle {
+        .mask.full, .fill {
+        -webkit-transform: rotate(@increment * @i);
+          -ms-transform: rotate(@increment * @i);
+          transform: rotate(@increment * @i);
+        }
+        .fill.fix {
+        -webkit-transform: rotate(@increment * @i * 2);
+          -ms-transform: rotate(@increment * @i * 2);
+          transform: rotate(@increment * @i * 2);
+        }
+        }
+        }
+        .loop(@i + 1);
+        }
+        .loop(@i);
+        }
         }
         padding: 0;
         a{
@@ -213,6 +425,7 @@
           border-top: solid 1px #c3c3c3;
           font-weight: bold;
           font-size: 18px;
+          text-align: center;
           background: #ffffff; /* Old browsers */
           background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 47%, #efefef 68%, #f2f2f2 79%, #fcfcfc 91%, #ffffff 100%); /* FF3.6+ */
           background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#ffffff), color-stop(68%,#efefef), color-stop(79%,#f2f2f2), color-stop(91%,#fcfcfc), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
