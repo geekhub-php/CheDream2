@@ -57,7 +57,7 @@ case $reload in
     php app/console cache:clear
 
     sh bin/tests.sh
-
+    
 ;;
 0)
 exit 0

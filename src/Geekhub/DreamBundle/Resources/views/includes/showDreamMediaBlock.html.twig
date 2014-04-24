@@ -101,6 +101,11 @@
             <ol class="indicator"></ol>
         </div>
 
+        <div class="pull-right">
+            {% for file in dream.mediaFiles %}
+                <a href="{{ file|mediaPath }}" >{{ file.name }}</a>
+            {% endfor %}
+        </div>
     </div>  {# end video + pictures block#}
 
 </div> {# end medi block#}
