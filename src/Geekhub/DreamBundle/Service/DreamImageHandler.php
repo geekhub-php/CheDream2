@@ -49,7 +49,7 @@ class DreamImageHandler
         $uploader->setAllowedSizeForPictures(2*1024*1024);
         $uploader->setAllowedSizeForFile(3*1024*1024);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
-        $uploader->setAllowedFilesTypes(array('doc', 'docx', 'pdf', 'xls', 'xlsx','pptx','ppt'));
+        $uploader->setAllowedFilesTypes(array('doc', 'pdf', 'xls','ppt'));
 
         $result = $uploader->load();
 

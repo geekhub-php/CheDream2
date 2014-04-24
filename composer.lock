@@ -1127,12 +1127,12 @@
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -1310,12 +1310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle3.git",
-                "reference": "fa0046309160ea52aeed51b5608adfd263dfa0a2"
+                "reference": "e4d12d7d6acccf75a5e504114e2df9195e494108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/fa0046309160ea52aeed51b5608adfd263dfa0a2",
-                "reference": "fa0046309160ea52aeed51b5608adfd263dfa0a2",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/e4d12d7d6acccf75a5e504114e2df9195e494108",
+                "reference": "e4d12d7d6acccf75a5e504114e2df9195e494108",
                 "shasum": ""
             },
             "require": {
@@ -1394,7 +1394,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2014-04-14 23:10:44"
+            "time": "2014-04-23 21:43:40"
         },
         {
             "name": "guzzlehttp/streams",
@@ -1910,7 +1910,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2461,16 +2461,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.8.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174"
+                "reference": "65026b610f8c19e61d7242f600530677b0466aac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/392ef35fd470638e08d0160d6b1cbab63cb23174",
-                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/65026b610f8c19e61d7242f600530677b0466aac",
+                "reference": "65026b610f8c19e61d7242f600530677b0466aac",
                 "shasum": ""
             },
             "require": {
@@ -2498,7 +2498,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8.x-dev"
+                    "dev-master": "1.9.x-dev"
                 }
             },
             "autoload": {
@@ -2525,7 +2525,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-03-23 19:50:26"
+            "time": "2014-04-24 13:29:03"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -3547,26 +3547,28 @@
         },
         {
             "name": "sonata-project/notification-bundle",
-            "version": "2.2.5",
+            "version": "2.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle.git",
-                "reference": "1e22d2da2e64bc5ab0f383a569a5d73d4185c043"
+                "reference": "fb89ab9da1d542f341dccc3437637769fb068369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/1e22d2da2e64bc5ab0f383a569a5d73d4185c043",
-                "reference": "1e22d2da2e64bc5ab0f383a569a5d73d4185c043",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/fb89ab9da1d542f341dccc3437637769fb068369",
+                "reference": "fb89ab9da1d542f341dccc3437637769fb068369",
                 "shasum": ""
             },
             "require": {
+                "friendsofsymfony/rest-bundle": "~1.1",
+                "jms/serializer-bundle": "~0.11",
+                "nelmio/api-doc-bundle": "~2.4",
                 "sonata-project/core-bundle": "~2.2@dev,>2.2.4",
                 "sonata-project/doctrine-extensions": "1.*",
                 "sonata-project/easy-extends-bundle": "2.1.*",
                 "symfony/symfony": "~2.1"
             },
             "require-dev": {
-                "friendsofsymfony/rest-bundle": "~1.2",
                 "guzzle/guzzle": "3.*",
                 "liip/monitor": "~1.0",
                 "liip/monitor-bundle": "~1.0",
@@ -3613,7 +3615,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2014-02-14 14:28:15"
+            "time": "2014-04-17 12:52:34"
         },
         {
             "name": "stfalcon/tinymce-bundle",
@@ -3622,12 +3624,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df"
+                "reference": "2d78f28743e8c769d8cd8a164f34f16cc6595d7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
-                "reference": "7d52006d55ab4ac086a163354ab3e4a49cbfa4df",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/2d78f28743e8c769d8cd8a164f34f16cc6595d7c",
+                "reference": "2d78f28743e8c769d8cd8a164f34f16cc6595d7c",
                 "shasum": ""
             },
             "require": {
@@ -3671,7 +3673,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2014-03-14 08:38:24"
+            "time": "2014-04-17 12:40:40"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5092,16 +5094,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.34",
+            "version": "3.7.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19"
+                "reference": "83f9537e46346f75ed6925441ac259453213c7cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
-                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/83f9537e46346f75ed6925441ac259453213c7cc",
+                "reference": "83f9537e46346f75ed6925441ac259453213c7cc",
                 "shasum": ""
             },
             "require": {
@@ -5162,7 +5164,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-03-28 11:04:36"
+            "time": "2014-04-21 06:25:54"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
