@@ -56,6 +56,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         //we connect current user
         $user->$setterId($username);
 
+        $this->userManager->deleteUser($previousUser);
         $this->userManager->updateUser($user);
     }
 
@@ -130,9 +131,6 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     protected function updateEmails(User $user, User $previousUser)
     {
-        $userIsFakeEmail = $user->isFakeEmail();
-        $previousUserIsFakeEmail = $previousUser->isFakeEmail();
-
         if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
             $realEmail = $previousUser->getEmail();
 
@@ -174,9 +172,6 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     protected function mergeDreams(User $user, User $previousUser)
     {
-
-//        $em = $this->facebookProvider->container->get('doctrine')->getManager();
-//
         foreach ($previousUser->getFavoriteDreams() as $dream) {
             if (!$user->getFavoriteDreams()->contains($dream)) {
                 $user->addFavoriteDream($dream);
@@ -185,62 +180,37 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
         foreach ($previousUser->getDreams() as $dream) {
             $previousUser->removeDream($dream);
+            $dream->setAuthor($user);
             $user->addDream($dream);
         }
 
         $this->userManager->updateUser($previousUser);
         $this->userManager->updateUser($user);
-
-
-
-
-//
-//        $em->flush();
-//        $query = $em->createQuery(
-//           "UPDATE GeekhubDreamBundle:Dream d SET d.author = :newAuthor
-//            WHERE d.author = :currentAuthor"
-//        )->setParameter('currentAuthor', $previousUser)
-//         ->setParameter('newAuthor', $user);
-//
-//        $query->getResult();
-//
-//        $em->flush();
     }
 
     protected function mergeContributions(User $user, User $previousUser)
     {
-//        $em = $this->facebookProvider->container->get('doctrine')->getManager();
-//        $query = $em->createQuery(
-//           "UPDATE GeekhubDreamBundle:FinancialContribute c SET c.user = :newAuthor
-//            WHERE c.user = :currentAuthor"
-//        )->setParameter('currentAuthor', $previousUser)
-//         ->setParameter('newAuthor', $user);
-//
-//        $query->execute();
-//
-//        $query = $em->createQuery(
-//           "UPDATE GeekhubDreamBundle:EquipmentContribute c SET c.user = :newAuthor
-//            WHERE c.user = :currentAuthor"
-//        )->setParameter('currentAuthor', $previousUser)
-//         ->setParameter('newAuthor', $user);
-//
-//        $query->execute();
-//
-//        $query = $em->createQuery(
-//           "UPDATE GeekhubDreamBundle:WorkContribute c SET c.user = :newAuthor
-//            WHERE c.user = :currentAuthor"
-//        )->setParameter('currentAuthor', $previousUser)
-//         ->setParameter('newAuthor', $user);
-//
-//        $query->execute();
-//
-//        $query = $em->createQuery(
-//           "UPDATE GeekhubDreamBundle:OtherContribute c SET c.user = :newAuthor
-//            WHERE c.user = :currentAuthor"
-//        )->setParameter('currentAuthor', $previousUser)
-//         ->setParameter('newAuthor', $user);
-//
-//        $query->execute();
-//        $em->flush();
+        foreach ($previousUser->getEquipmentContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getFinancialContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getWorkContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getOtherContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
     }
 }
