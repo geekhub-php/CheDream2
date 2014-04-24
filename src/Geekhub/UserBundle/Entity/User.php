@@ -86,7 +86,7 @@ class User extends BaseUser //implements DreamUserInterface
     protected $odnoklassnikiId;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
+     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites", cascade={"persist", "remove"})
      */
     protected $favoriteDreams;
 
@@ -368,6 +368,7 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
         $this->favoriteDreams->removeElement($favoriteDreams);
+        $favoriteDreams->removeUsersWhoFavorite($this);
     }
 
     /**
