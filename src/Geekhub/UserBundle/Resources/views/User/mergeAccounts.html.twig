@@ -1,2 +1,13 @@
-{{ mergedUser.avatar }} <==== {{ currentUser.avatar }}
-<a href="{{ path('merge_accounts', {'user': mergedUser.id}) }}">Merge accounts?</a>
+{% extends "GeekhubUserBundle::layout.html.twig" %}
+
+{% block title %}Merge{% endblock %}
+
+{% block fos_user_content %}
+    <div class="row" style="text-align: center;">
+        <img src="{{ mergedUser.avatar|mediaPath|imagine_filter('userAvatarBig') }}"/> <====
+        <img src="{{ currentUser.avatar|mediaPath|imagine_filter('userAvatarBig') }}" />
+        <br/>
+        <a href="{{ path('merge_accounts', {'user': mergedUser.id}) }}">Merge accounts?</a>
+    </div>
+
+{% endblock fos_user_content %}
