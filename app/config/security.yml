@@ -21,11 +21,9 @@ security:
                 csrf_provider: form.csrf_provider
                 always_use_default_target_path: true
                 default_target_path:  /
-#            logout:       true
             logout:
                 path:   /logout
                 target: /
-                invalidate_session: false
             anonymous:    true
             oauth:
                 resource_owners:
@@ -40,8 +38,6 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: [ROLE_MODERATOR, ROLE_SUPER_ADMIN]}
-        - { path: ^/dream/new, role: ROLE_USER }
         - { path: ^/dream/edit, role: ROLE_USER }
