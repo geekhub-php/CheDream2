@@ -89,3 +89,9 @@ dream_ajax_dream_toFavorite:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:addDreamToFavorite }
     options:
         expose: true
+
+dream_ajax_dream_fromFavorite:
+    pattern:  /dream/ajaxAddDreamFromFavorite
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:removeDreamFromFavorite }
+    options:
+        expose: true
