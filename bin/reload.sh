@@ -3,7 +3,7 @@
 echo ""
 echo "Выберите необходимое действие:"
 echo "1 - Стандартный reload."
-echo "2 - Перезагрузка БД."
+echo "2 - Только перезагрузка БД."
 echo "3 - Перезагрузка БД и запуск тестов."
 echo "0 - Выход. \n"
 read reload
@@ -36,9 +36,11 @@ case $reload in
     php app/console assets:install --symlink
     php app/console assetic:dump
     php app/console cache:clear
+
 ;;
 2)
-    echo "Перезагрузка БД. \n"
+    echo "перезагрузка БД. \n"
+    php app/console cache:clear
     php app/console doctrine:database:drop --force
     php app/console doctrine:database:create
     php app/console doctrine:schema:update --force
@@ -46,7 +48,7 @@ case $reload in
     php app/console cache:clear
 ;;
 3)
-    echo "Перезагрузка БД и запуск тестов. \n"
+    echo "перезагрузка БД и запуск тестов. \n"
     php app/console doctrine:database:drop --force
     php app/console doctrine:database:create
     php app/console doctrine:schema:update --force
@@ -55,6 +57,7 @@ case $reload in
     php app/console cache:clear
 
     sh bin/tests.sh
+    
 ;;
 0)
 exit 0

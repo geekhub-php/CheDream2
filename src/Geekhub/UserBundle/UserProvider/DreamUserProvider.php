@@ -13,7 +13,8 @@ use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
     Geekhub\UserBundle\UserProvider\VkontakteProvider,
-    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider;
+    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider,
+    Geekhub\UserBundle\Entity\User;
 
 class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
@@ -33,6 +34,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
+        $property = $this->getProperty($response);
         $username = $response->getUsername();
 
         //on connect - get the access token and the user ID
@@ -42,8 +44,9 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $setterId = $setter.'Id';
 
         //we "disconnect" previously connected users
-        if (null !== $previousUser = $this->loadUserByUsername($username)) {
+        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setterId(null);
+            $this->mergeUsersInfo($user, $previousUser);
             $this->userManager->updateUser($previousUser);
         }
 
@@ -59,7 +62,8 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-        $user = $this->loadUserByUsername($username);
+//        $user = $this->loadUserByUsername($username);
+        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
 
         if (null === $user || null === $username) {
             $service = $response->getResourceOwner()->getName();
@@ -74,10 +78,16 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             // for example setVkontakteUser(...),  setFacebookUser(...)
             // the actual name of setter is in the variable $setterUser.
             $user = $this->$userDataServiceName->setUserData($user, $response);
-            $user->setUsername($username);
+            $user->setUsername(uniqid());
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
+//            $user->setEmail($username."@example.com");
+
+//            if ($hasUser = $this->userManager->findUserByEmail($user->getEmail())) {
+//                $user->setEmail($username."@example.com");
+//            }
+
             try {
                 $this->userManager->updateUser($user);
             } catch (DBALException $e) {
@@ -120,5 +130,12 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function setOdnoklassnikiProvider(OdnoklassnikiProvider $odnoklassnikiProvider)
     {
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
+    }
+
+    protected function mergeUsersInfo(User $user, User $previousUser)
+    {
+        if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
+            $user->setEmail($previousUser->getEmail());
+        }
     }
 }
