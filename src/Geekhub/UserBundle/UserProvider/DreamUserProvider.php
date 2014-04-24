@@ -8,7 +8,8 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserInterface,
-    Symfony\Component\Security\Core\User\UserProviderInterface;
+    Symfony\Component\Security\Core\User\UserProviderInterface,
+    Symfony\Component\PropertyAccess\PropertyAccessor;
 use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
@@ -46,8 +47,10 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setterId(null);
-            $this->mergeUsersInfo($user, $previousUser);
-            $this->userManager->updateUser($previousUser);
+            $this->updateEmails($user, $previousUser);
+            $this->updateOtherSocialIds($user, $previousUser);
+            $this->mergeDreams($user, $previousUser);
+            $this->mergeContributions($user, $previousUser);
         }
 
         //we connect current user
@@ -82,16 +85,9 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
-//            $user->setEmail($username."@example.com");
 
-//            if ($hasUser = $this->userManager->findUserByEmail($user->getEmail())) {
-//                $user->setEmail($username."@example.com");
-//            }
-
-            try {
-                $this->userManager->updateUser($user);
-            } catch (DBALException $e) {
-                var_dump("dbal exception");
+            if ($hasUser = $this->userManager->findUserByEmail($user->getEmail())) {
+                $user->setEmail($username."@example.com");
             }
 
             return $user;
@@ -132,10 +128,57 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
     }
 
-    protected function mergeUsersInfo(User $user, User $previousUser)
+    protected function updateEmails(User $user, User $previousUser)
     {
+        $userIsFakeEmail = $user->isFakeEmail();
+        $previousUserIsFakeEmail = $previousUser->isFakeEmail();
+
         if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
-            $user->setEmail($previousUser->getEmail());
+            $realEmail = $previousUser->getEmail();
+
+            $previousUser->setEmail(uniqid() . $previousUser::FAKE_EMAIL_PART);
+            $previousUser->setEmailCanonical($previousUser->getEmail());
+
+            $this->userManager->updateUser($previousUser);
+
+            $user->setEmail($realEmail);
+            $user->setEmailCanonical($realEmail);
         }
+    }
+
+    protected function updateOtherSocialIds(User $user, User $previousUser)
+    {
+        $propertyAccessor = new PropertyAccessor();
+        $socialIds = $previousUser->getNotNullSocialIds();
+
+        foreach ($socialIds as $socialKey => $socialId) {
+            $socialKey = $socialKey . 'Id';
+            $propertyAccessor->setValue($previousUser, $socialKey, null);
+        }
+
+        $this->userManager->updateUser($previousUser);
+
+        foreach ($socialIds as $socialKey => $socialId) {
+            $socialKey = $socialKey . 'Id';
+            $currentSocialId = $propertyAccessor->getValue($user, $socialKey);
+
+            if ($currentSocialId) {
+                throw new \Exception(sprintf('You already have registred by "%s" social network, and account "%s %s" can\t be merged'), $socialKey, $previousUser->getFirstName(), $previousUser->getLastName());
+            }
+
+            $propertyAccessor->setValue($user, $socialKey, $socialId);
+        }
+
+        $this->userManager->updateUser($user);
+    }
+
+    protected function mergeDreams(User $user, User $previousUser)
+    {
+
+    }
+
+    protected function mergeContributions(User $user, User $previousUser)
+    {
+
     }
 }
