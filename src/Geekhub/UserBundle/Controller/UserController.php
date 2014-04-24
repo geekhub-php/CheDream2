@@ -39,7 +39,6 @@ class UserController extends Controller
 
             if ($hasUser == null) {
                 $em->flush();
-                $this->sendEmail($user);
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
             } else {
