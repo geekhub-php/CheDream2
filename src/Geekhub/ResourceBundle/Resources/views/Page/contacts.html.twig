@@ -95,28 +95,28 @@
             <h2>{{ 'contacts.write_us.title'|trans }}</h2>
             {{  form_start(form) }}
                 <ul class="form-block">
-                    <li class="input-block row">
-                        {{ form_label(form.to) }}
+                    <li class="input-block">
+                        {{ form_label(form.to, null, {'label_attr': {'class': 'label'}}) }}
                         {{ form_errors(form.to) }}
                         {{ form_widget(form.to) }}
                     </li>
-                    <li class="input-block row">
-                        {{ form_label(form.title) }}
+                    <li class="input-block">
+                        {{ form_label(form.title, null, {'label_attr': {'class': 'label'}}) }}
                         {{ form_errors(form.title) }}
                         {{ form_widget(form.title) }}
                     </li>
-                    <li class="input-block row">
-                        {{ form_label(form.body) }}
+                    <li class="input-block">
+                        {{ form_label(form.body, null, {'label_attr': {'class': 'label'}}) }}
                         {{ form_errors(form.body) }}
                         {{ form_widget(form.body) }}
                     </li>
-                    <li class="input-block captcha-block row">
-                        {{ form_label(form.captcha) }}
+                    <li class="input-block captcha-block">
+                        {{ form_label(form.captcha, null, {'label_attr': {'class': 'label'}}) }}
                         {{ form_errors(form.captcha) }}
                         {{ form_widget(form.captcha) }}
                     </li>
                     <li class="buttons-block">
-                        <input type="submit" value="{{ 'contacts.write_us.submit'|trans }}" class="custom-btn btn-orange">
+                        <button type="submit" class="custom-btn btn-orange">{{ 'contacts.write_us.submit'|trans }}</button>
                     </li>
                 </ul>
             {{ form_end(form) }}

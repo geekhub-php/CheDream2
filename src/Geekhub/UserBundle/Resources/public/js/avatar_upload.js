@@ -1,6 +1,14 @@
+$(document).ready(function() {
+    $('#user-avatar-image input').on('click', function(e) {
+        e.stopPropagation();
+    });
+});
 
 $('#user-avatar-image').click(function() {
+    var $block = $(this);
     var url = Routing.generate('dream_ajax_load_poster');
+    
+    $block.find('input').click();
     $('#dream_poster').fileupload({
         url: url,
         dataType: 'json',
@@ -9,20 +17,19 @@ $('#user-avatar-image').click(function() {
             $.each(responseArr, function (index, file) {
                 if(file.error){
                     $('#errors').append(
-                        '<div class="alert alert-danger">' + file.src + ' <strong>' +file.error + '</strong>' +
-                            '&nbsp; &nbsp; <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> &nbsp;&nbsp; ' +
-                            '</div>'
+                        '<div class="alert alert-danger">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+                            file.src + ' <strong>' +file.error + '</strong>' +
+                        '</div>'
                     );
-
+                    
                     return;
                 }
                 if(file.type == 'image' && file.error == null) {
-                    $('#user-avatar-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
-                        '<input id="dream_poster" type="file" name="dream-poster">');
+                    $block.addClass('active').find('img').attr('src', file.srcPreview);
                     $('#newUserForm_avatar').get(0).value = file.src;
                 }
             });
-
         },
         error: function(msg) {
             console.log('error = ' + msg);
