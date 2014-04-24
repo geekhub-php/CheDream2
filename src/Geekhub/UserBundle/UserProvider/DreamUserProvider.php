@@ -56,6 +56,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         //we connect current user
         $user->$setterId($username);
 
+        $this->userManager->deleteUser($previousUser);
         $this->userManager->updateUser($user);
     }
 
@@ -130,9 +131,6 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     protected function updateEmails(User $user, User $previousUser)
     {
-        $userIsFakeEmail = $user->isFakeEmail();
-        $previousUserIsFakeEmail = $previousUser->isFakeEmail();
-
         if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
             $realEmail = $previousUser->getEmail();
 
@@ -174,11 +172,45 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     protected function mergeDreams(User $user, User $previousUser)
     {
+        foreach ($previousUser->getFavoriteDreams() as $dream) {
+            if (!$user->getFavoriteDreams()->contains($dream)) {
+                $user->addFavoriteDream($dream);
+            }
+        }
 
+        foreach ($previousUser->getDreams() as $dream) {
+            $previousUser->removeDream($dream);
+            $dream->setAuthor($user);
+            $user->addDream($dream);
+        }
+
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
     }
 
     protected function mergeContributions(User $user, User $previousUser)
     {
+        foreach ($previousUser->getEquipmentContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
 
+        foreach ($previousUser->getFinancialContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getWorkContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getOtherContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
     }
 }
