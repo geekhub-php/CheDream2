@@ -94,6 +94,9 @@
   height: inherit;
   width: inherit;
 }
+.wrap #dreams {
+  font-size: 0;
+}
 .wrap #dreams .dream-homepage-preview {
   position: relative;
   width: 230px;
@@ -187,6 +190,9 @@
   font-size: 18px;
   font-weight: bold;
 }
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.supported {
+  left: 0;
+}
 .wrap #dreams .dream-homepage-preview .dream-homepage-preview-body span.rating {
   right: 0;
   margin-right: 15px;
@@ -200,6 +206,9 @@
 .wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer div {
   height: 57px;
   padding: 16px 0;
+}
+.wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer div p {
+  font-size: 15px;
 }
 .wrap #dreams .dream-homepage-preview .dream-homepage-preview-footer a {
   display: block;
