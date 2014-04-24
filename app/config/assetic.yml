@@ -21,7 +21,7 @@ assetic:
                 - %kernel.root_dir%/../vendor/bower-components/tag-it/css/jquery.tagit.css
                 - %kernel.root_dir%/../vendor/bower-components/tag-it/css/tagit.ui-zendesk.css
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/css/blueimp-gallery.css
-                - %kernel.root_dir%/../vendor/bower-components/fancybox/source/jquery.fancybox.css
+                #- %kernel.root_dir%/../vendor/bower-components/fancybox/source/jquery.fancybox.css
             filters:
                 - cssrewrite
             output: css/style.css
