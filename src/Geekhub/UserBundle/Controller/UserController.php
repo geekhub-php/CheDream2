@@ -3,7 +3,6 @@
 namespace Geekhub\UserBundle\Controller;
 
 use Geekhub\UserBundle\Entity\User;
-use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Geekhub\UserBundle\Form\UserForUpdateContactsType;
@@ -140,7 +139,6 @@ class UserController extends Controller
 
             if ($mergedUser == null) {
                 $em->flush();
-                $this->sendEmail($user);
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
             } else {
@@ -166,32 +164,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param User $user
-     */
-    protected function sendEmail(User $user)
-    {
-        $dispatcher = $this->container->get('hip_mandrill.dispatcher');
-
-        $message = new Message();
-        $body = $this->container->get('templating')->render(
-            'GeekhubResourceBundle:Email:registration.html.twig',
-            array(
-                'user' => $user
-            )
-        );
-
-        $message->setFromEmail('test@gmail.com')
-            ->setFromName('Черкаська мрія')
-            ->addTo($user->getEmail())
-            ->setSubject('REGISTRATION')
-            ->setHtml($body)
-        ;
-
-        $dispatcher->send($message);
-    }
-
-    /**
-     * @param Request $request
+     * @param  Request $request
      * @ParamConverter("user", class="GeekhubUserBundle:User")
      * @return mixed
      */
@@ -225,8 +198,6 @@ class UserController extends Controller
 //
 //            $url = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, ['service' => key($socialNetworks)], Router::ABSOLUTE_URL);
 //            new RedirectResponse($resourceOwner->getAuthorizationUrl($url));
-
-
 
 //            echo $resourceOwner->getAuthorizationUrl($url)."<br/>".$url;
 
