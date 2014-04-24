@@ -108,34 +108,41 @@
                         <a href="#" class="show-dreams">
                             <span class="icon icon-dream"></span>
                         </a>
+                        
                         <ul class="dreams-list">
-                            {% for dream in app.user.dreams %}
-                                {% if (dream.currentStatus not in ['success', 'fail']) and (loop.index <= 5) %}
-                                    <li>
-                                        <a href="{{ path('view_dream', {'slug': dream.slug} ) }}">
-                                        <span class="photo-block">
-                                            <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_preview_in_menu') }}"  alt="Image" >
-                                            <span class="icon-status {{ dream.currentStatus }}"></span>
-                                        </span>
-                                        <span class="info-block">
-                                            <span class="name">{{ dream.title }}</span>
-                                            {% if dream.currentStatus == 'submitted' %}
-                                                <span class="status">на перевірці</span>
-                                            {% elseif dream.currentStatus == 'rejected' %}
-                                                <span class="status">відхилені</span>
-                                            {% elseif dream.currentStatus == 'collecting-resources' %}
-                                                <span class="status">збір коштів</span>
-                                            {% elseif dream.currentStatus == 'implementing' %}
-                                                <span class="status">реалізація</span>
-                                            {% elseif dream.currentStatus == 'completed' %}
-                                                <span class="status">завершена</span>
-                                            {% endif %}
-                                        </span>
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
+                            {% if app.user.dreams|length > 0 %}
+                                {% for dream in app.user.dreams %}
+                                    {% if (dream.currentStatus not in ['success', 'fail']) and (loop.index <= 5) %}
+                                        <li>
+                                            <a href="{{ path('view_dream', {'slug': dream.slug} ) }}">
+                                            <span class="photo-block">
+                                                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_preview_in_menu') }}"  alt="Image" >
+                                                <span class="icon-status {{ dream.currentStatus }}"></span>
+                                            </span>
+                                            <span class="info-block">
+                                                <span class="name">{{ dream.title }}</span>
+                                                {% if dream.currentStatus == 'submitted' %}
+                                                    <span class="status">на перевірці</span>
+                                                {% elseif dream.currentStatus == 'rejected' %}
+                                                    <span class="status">відхилені</span>
+                                                {% elseif dream.currentStatus == 'collecting-resources' %}
+                                                    <span class="status">збір коштів</span>
+                                                {% elseif dream.currentStatus == 'implementing' %}
+                                                    <span class="status">реалізація</span>
+                                                {% elseif dream.currentStatus == 'completed' %}
+                                                    <span class="status">завершена</span>
+                                                {% endif %}
+                                            </span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <li class="no-my-dreams">Ви не додали <br />жодної мрії</li>
+                            {% endif %}
+                            
                         </ul>
+                        
                     </li>
                     <li>
                         <a href="{{ path('_logout') }}" class="logout">
