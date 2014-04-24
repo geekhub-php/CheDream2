@@ -174,60 +174,73 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
 
     protected function mergeDreams(User $user, User $previousUser)
     {
-        $em = $this->facebookProvider->container->get('doctrine')->getManager();
 
+//        $em = $this->facebookProvider->container->get('doctrine')->getManager();
+//
         foreach ($previousUser->getFavoriteDreams() as $dream) {
             if (!$user->getFavoriteDreams()->contains($dream)) {
                 $user->addFavoriteDream($dream);
             }
-        }   
+        }
 
-        $em->flush();
-        $query = $em->createQuery(
-           "UPDATE GeekhubDreamBundle:Dream d SET d.author = :newAuthor 
-            WHERE d.author = :currentAuthor"
-        )->setParameter('currentAuthor', $previousUser)
-         ->setParameter('newAuthor', $user);
+        foreach ($previousUser->getDreams() as $dream) {
+            $previousUser->removeDream($dream);
+            $user->addDream($dream);
+        }
 
-        $query->getResult();
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
 
-        $em->flush();
+
+
+
+//
+//        $em->flush();
+//        $query = $em->createQuery(
+//           "UPDATE GeekhubDreamBundle:Dream d SET d.author = :newAuthor
+//            WHERE d.author = :currentAuthor"
+//        )->setParameter('currentAuthor', $previousUser)
+//         ->setParameter('newAuthor', $user);
+//
+//        $query->getResult();
+//
+//        $em->flush();
     }
 
     protected function mergeContributions(User $user, User $previousUser)
     {
-        $em = $this->facebookProvider->container->get('doctrine')->getManager();
-        $query = $em->createQuery(
-           "UPDATE GeekhubDreamBundle:FinancialContribute c SET c.user = :newAuthor 
-            WHERE c.user = :currentAuthor"
-        )->setParameter('currentAuthor', $previousUser)
-         ->setParameter('newAuthor', $user);
-        
-        $query->execute();
-
-        $query = $em->createQuery(
-           "UPDATE GeekhubDreamBundle:EquipmentContribute c SET c.user = :newAuthor 
-            WHERE c.user = :currentAuthor"
-        )->setParameter('currentAuthor', $previousUser)
-         ->setParameter('newAuthor', $user);
-        
-        $query->execute();
-
-        $query = $em->createQuery(
-           "UPDATE GeekhubDreamBundle:WorkContribute c SET c.user = :newAuthor 
-            WHERE c.user = :currentAuthor"
-        )->setParameter('currentAuthor', $previousUser)
-         ->setParameter('newAuthor', $user);
-        
-        $query->execute();
-
-        $query = $em->createQuery(
-           "UPDATE GeekhubDreamBundle:OtherContribute c SET c.user = :newAuthor 
-            WHERE c.user = :currentAuthor"
-        )->setParameter('currentAuthor', $previousUser)
-         ->setParameter('newAuthor', $user);
-        
-        $query->execute();
-        $em->flush();
+//        $em = $this->facebookProvider->container->get('doctrine')->getManager();
+//        $query = $em->createQuery(
+//           "UPDATE GeekhubDreamBundle:FinancialContribute c SET c.user = :newAuthor
+//            WHERE c.user = :currentAuthor"
+//        )->setParameter('currentAuthor', $previousUser)
+//         ->setParameter('newAuthor', $user);
+//
+//        $query->execute();
+//
+//        $query = $em->createQuery(
+//           "UPDATE GeekhubDreamBundle:EquipmentContribute c SET c.user = :newAuthor
+//            WHERE c.user = :currentAuthor"
+//        )->setParameter('currentAuthor', $previousUser)
+//         ->setParameter('newAuthor', $user);
+//
+//        $query->execute();
+//
+//        $query = $em->createQuery(
+//           "UPDATE GeekhubDreamBundle:WorkContribute c SET c.user = :newAuthor
+//            WHERE c.user = :currentAuthor"
+//        )->setParameter('currentAuthor', $previousUser)
+//         ->setParameter('newAuthor', $user);
+//
+//        $query->execute();
+//
+//        $query = $em->createQuery(
+//           "UPDATE GeekhubDreamBundle:OtherContribute c SET c.user = :newAuthor
+//            WHERE c.user = :currentAuthor"
+//        )->setParameter('currentAuthor', $previousUser)
+//         ->setParameter('newAuthor', $user);
+//
+//        $query->execute();
+//        $em->flush();
     }
 }
