@@ -19,20 +19,12 @@
                     {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
                     {# Resources end #}
 
-                    {% if dream.currentStatus == 'collecting-resources' %}
-                        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
-                    {% endif %}
                     {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
                     {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
-                    {% if dream.currentStatus == 'implementing' %}
-                        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
-                    {% endif %}
                 </div>
                 <div class="details">
-                    <h2>{{ dream.title }}</h2>
-                    <div class="description">
-                        {{ dream.description|raw }}
-                    </div>
+
+                    {{ include('GeekhubDreamBundle:includes:viewDreamStatusDetailsAndControls.html.twig', {dream: dream}) }}
 
                     {# participants start #}
                         {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
