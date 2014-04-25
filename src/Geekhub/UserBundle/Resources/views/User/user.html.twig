@@ -7,53 +7,62 @@
     <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
         <div class="row">
             <div class="col-md-5">
-              <div class="fileinput-button" id="user-avatar-image">
-                <div id="user-avatar-container">
-                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-                    <input id="dream_poster" type="file" name="dream-poster">
+                <div class="fileinput-button" id="user-avatar-image">
+                    <div id="user-avatar-container">
+                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
+                        <input id="dream_poster" type="file" name="dream-poster">
+                    </div>
                 </div>
-              </div>
-              <div id="errors" class="files">
-              </div>
+
+                <div id="errors" class="files">
+                </div>
+
                 {# media avatar, 'big' #}
                 {{ form_widget(form.avatar) }}
                 {{ form_row(form.phone) }}
                 {{ form_row(form.skype) }}
                 {{ form_row(form.email) }}
-                {{ form_row(form.facebookUrl) }}
-                {{ form_row(form.vkontakteUrl) }}
-                {{ form_row(form.odnoklassnikiUrl) }}
+                {#{{ form_row(form.facebookUrl) }}#}
+                {#{{ form_row(form.vkontakteUrl) }}#}
+                {#{{ form_row(form.odnoklassnikiUrl) }}#}
             </div>
+
             <div class="col-md-7">
                 <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
                 <div class="row">
                     <div class="col-md-6">
-                      {{ form_widget(form.firstName) }}
+                        {{ form_widget(form.firstName) }}
                     </div>
                     <div class="col-md-6">
-                      {{ form_widget(form.lastName) }}
+                        {{ form_widget(form.lastName) }}
                     </div>
                 </div>
-                 {{ form_label(form.birthday) }}
+
+                {{ form_label(form.birthday) }}
+
                 <div class="row">
-                   <div class="col-md-3">
-                      {{ form_widget(form.birthday.day) }}
-                   </div>
-                   <div class="col-md-3">
-                     {{ form_widget(form.birthday.month) }}
-                   </div>
-                   <div class="col-md-3">
-                     {{ form_widget(form.birthday.year) }}
-                   </div>
+                    <div class="col-md-3">
+                        {{ form_widget(form.birthday.day) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form_widget(form.birthday.month) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        {{ form_widget(form.birthday.year) }}
+                    </div>
                 </div>
+
                 {{ form_row(form.about) }}
                 {{ form_rest(form) }}
             </div>
+
             <div class="row center">
-             <input type="submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
-             </form>
+                <input name="_submit" type="submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
             </div>
         </div>
+    </form>
 </div>
 
 {% endblock content %}
@@ -61,5 +70,4 @@
 {% block javascript %}
   {{ parent() }}
   {{ tinymce_init() }}
-
 {% endblock javascript %}

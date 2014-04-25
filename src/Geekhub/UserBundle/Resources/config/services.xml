@@ -11,6 +11,7 @@
     <parameter key="geekhub.user.vkontakte_provider.class">Geekhub\UserBundle\UserProvider\VkontakteProvider</parameter>
     <parameter key="geekhub.user.odnoklassniki_provider.class">Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider</parameter>
     <parameter key="geekhub.user.registration_subscriber.class">Geekhub\UserBundle\EventListener\RegistrationSubscriber</parameter>
+    <parameter key="geekhub.user.doctrine_subscriber.class">Geekhub\UserBundle\EventListener\UserDoctrineSubscriber</parameter>
 </parameters>
 
 <services>
@@ -59,6 +60,30 @@
             <argument type="service" id="service_container"/>
         </call>
         <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"  />
+    </service>
+
+    <service id="account_merger" class="Geekhub\UserBundle\AccountMerger">
+        <call method="setFacebookResourceOwner">
+            <argument type="service" id="geekhub.user.facebook_provider" />
+        </call>
+        <call method="setVkontakteResourceOwner">
+            <argument type="service" id="geekhub.user.vkontakte_provider" />
+        </call>
+        <call method="setOdnoklassnikiResourceOwner">
+            <argument type="service" id="geekhub.user.odnoklassniki_provider" />
+        </call>
+    </service>
+
+    <service id="hwi_oauth.connect_controller" class="HWI\Bundle\OAuthBundle\Controller\ConnectController">
+        <call method="setContainer">
+            <argument type="service" id="service_container" />
+        </call>
+    </service>
+
+    <service id="geekhub.user.doctrine_subscriber" class="%geekhub.user.doctrine_subscriber.class%">
+        <argument type="service" id="hip_mandrill.dispatcher" />
+        <argument type="service" id="service_container" />
+        <tag name="doctrine.event_subscriber" />
     </service>
 </services>
 </container>
