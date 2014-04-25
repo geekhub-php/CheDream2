@@ -31,7 +31,8 @@ class FinancialType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Geekhub\DreamBundle\Entity\FinancialResource'
+                'data_class' => 'Geekhub\DreamBundle\Entity\FinancialResource',
+                'cascade_validation' => true
             )
         );
     }
