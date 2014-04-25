@@ -169,9 +169,6 @@
         $.post(path1, {id : dreamId})
             .done(function(msgDone) {
                 console.log(msgDone);
-                itemObj.css({color:'yellow'});
-                itemObj.data('sended', 'no');
-                itemObj.attr('title', 'додати до списку улюблених.');
                 $('#dream'+dreamId).remove();
             })
             .error(function(msg) {
