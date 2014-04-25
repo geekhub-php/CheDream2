@@ -443,7 +443,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get financialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFinancialContributions()
     {
@@ -476,7 +476,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get equipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEquipmentContributions()
     {
@@ -519,7 +519,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add otherContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
+     * @param  \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
      * @return User
      */
     public function addOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
@@ -542,7 +542,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get otherContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOtherContributions()
     {

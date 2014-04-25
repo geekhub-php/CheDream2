@@ -21,7 +21,7 @@ class RegistrationSubscriber
 
     protected $ignoredRoutes = [];
     protected $container;
-    
+
     /**
      * @param Container $container
      */

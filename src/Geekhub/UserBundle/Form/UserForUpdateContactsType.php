@@ -4,8 +4,6 @@ namespace Geekhub\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Geekhub\UserBundle\Form\ContactsType;
-use Geekhub\UserBundle\Form\FileMediaTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Geekhub\UserBundle\Entity\User;

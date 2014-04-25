@@ -2,10 +2,10 @@
 
 echo ""
 echo "Выберите необходимое действие:"
-echo "1 - Стандартный reload."
-echo "2 - Перезагрузка БД."
-echo "3 - ТЕСТЫ."
-echo "0 - Выход. \n"
+echo "    1 - Стандартный reload."
+echo "    2 - Перезагрузка БД."
+echo "    3 - ТЕСТЫ."
+echo "    0 - Выход. \n"
 read reload
 
 case $reload in
@@ -47,9 +47,10 @@ case $reload in
 ;;
 3)
     echo ""
-    echo "Выберите необходимое действие:"
-    echo "1 - Запуск всех тестов. \n"
-    echo "2 - Запуск функциональных тестов. \n"
+    echo "ТЕСТЫ: Выберите необходимое действие:"
+    echo "    1 - Запуск всех тестов."
+    echo "    2 - Запуск юнит тестов."
+    echo "    0 - Выход. \n"
     read testing
 
     case $testing in
@@ -65,7 +66,7 @@ case $reload in
         sh bin/tests.sh
     ;;
     2)
-        echo "Запуск функциональных тестов. \n"
+        echo "Запуск юнит тестов. \n"
         php app/console doctrine:database:drop --force
         php app/console doctrine:database:create
         php app/console doctrine:schema:update --force
@@ -75,10 +76,17 @@ case $reload in
 
         bin/phpunit -c app
     ;;
+    0)
+        exit 0
+    ;;
+    *)
+        echo "Введите правильное действие! \n"
+        sh bin/reload.sh
+
     esac
 ;;
 0)
-exit 0
+    exit 0
 ;;
 *)
     echo "Введите правильное действие! \n"

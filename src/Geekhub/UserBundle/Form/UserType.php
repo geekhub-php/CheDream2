@@ -4,8 +4,6 @@ namespace Geekhub\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Geekhub\UserBundle\Form\ContactsType;
-use Geekhub\UserBundle\Form\FileMediaTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Geekhub\UserBundle\Entity\User;
@@ -24,7 +22,7 @@ class UserType extends AbstractType
             ->add('firstName', 'text', array('label' => 'Ім\'я '))
             ->add('lastName', 'text', array('label' => 'Прізвище '))
             ->add('birthday', 'birthday', array('label' => 'user.birthday', 'required' => false))
-            ->add('about', 'textarea', array('label' => 'user.about_myself', 'required' => false, 
+            ->add('about', 'textarea', array('label' => 'user.about_myself', 'required' => false,
                    'attr' => array(
                        'class'=>'tinymce',
                        'rows' => 12,

@@ -1,36 +1,38 @@
 <div class="row">
-{{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-<div class="col-md-3">
-<ul>
-{% for contribution in dream.dreamFinancialContributions %}
-  {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor %}
-    <li>{{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})</li>
-  {% endif %}
-{% endfor %}
+    {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+    <div class="col-md-3">
+        <ul>
+            {% for contribution in dream.dreamFinancialContributions %}
+                {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor %}
+                    <li>
+                        {{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})
+                    </li>
+                {% endif %}
+            {% endfor %}
 
-{% for contribution in dream.dreamEquipmentContributions %}
-  {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
-    <li>
-      {{ contribution.equipmentResource.title }} ({{ contribution.quantity }} {{contribution.equipmentResource.getReadableQuantityTypes()[contribution.equipmentResource.quantityType]|trans }})
-    </li>
-  {% endif %}
-{% endfor %}
+            {% for contribution in dream.dreamEquipmentContributions %}
+                {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
+                    <li>
+                        {{ contribution.equipmentResource.title }} ({{ contribution.quantity }} {{contribution.equipmentResource.getReadableQuantityTypes()[contribution.equipmentResource.quantityType]|trans }})
+                    </li>
+                {% endif %}
+            {% endfor %}
 
-{% for contribution in dream.dreamWorkContributions %}
-  {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
-    <li>
-    {{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})
-    </li>
-  {% endif %}
-{% endfor %}
-{% for contribution in dream.dreamOtherContributions %}
-  {% if contribution.user.id is same as (userId)  and not contribution.hiddenContributor %}
-    <li>
-    {{ contribution.title }} 
-    </li>
-  {% endif %}
+            {% for contribution in dream.dreamWorkContributions %}
+                {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
+                    <li>
+                        {{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})
+                    </li>
+                {% endif %}
+            {% endfor %}
 
-{% endfor %}
-
-</div>
+            {% for contribution in dream.dreamOtherContributions %}
+                {% if contribution.user.id is same as (userId)  and not contribution.hiddenContributor %}
+                    <li>
+                        {{ contribution.title }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 </div>

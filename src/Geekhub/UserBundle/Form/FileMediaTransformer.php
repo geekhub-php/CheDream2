@@ -21,7 +21,6 @@ class FileMediaTransformer implements DataTransformerInterface
         $this->user = $user;
     }
 
-
     public function transform($media)
     {
         $this->media = $media;
