@@ -47,7 +47,7 @@ class DreamType extends AbstractType
                 'label' => 'tags',
             ))->addModelTransformer($transformerTag))
             ->add('expiredDate', 'date', array(
-                'input'  => 'string',
+                'format' => 'dd.MM.yyyy',
                 'widget' => 'single_text',
                 'label' => 'dream.expired_date',
             ))

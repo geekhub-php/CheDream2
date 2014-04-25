@@ -62,7 +62,7 @@
                 </li>
                 <li class="input-block">
                     <label class="label required">Кінцева дата</label>
-                    {{ form_widget(form.expiredDate, {'attr': {'placeholder': 'дд-мм-рррр'} } ) }}
+                    {{ form_widget(form.expiredDate, {'attr': {'placeholder': 'дд.мм.рррр'} } ) }}
                     {{ form_errors(form.expiredDate)  }}
                 </li>
                 <li class="input-block">
@@ -160,7 +160,7 @@
         });
 
         $(function() {
-            $( "#newDreamForm_expiredDate" ).datepicker({"dateFormat": "yy-mm-dd", "regional": "uk"});
+            $( "#newDreamForm_expiredDate" ).datepicker({"dateFormat": "dd.mm.yy", "regional": "uk"});
         });
 
         $(document).ready(function() {

@@ -73,9 +73,7 @@
                     <li class="input-block name-block">
                         <label class="label required">Назва</label>
                         {{ form_widget(form.title, {'attr': {'placeholder': 'Без назви'}}) }}
-                        <span class="error-validation-dream">
-                            {{ form_errors(form.title) }}
-                        </span>
+                        {{ form_errors(form.title) }}
                     </li>
                     <li class="input-block">
                         <label class="label required">Опис</label>
@@ -83,18 +81,14 @@
                             <div class="description">
                                 {{ form_widget(form.description) }}
                                 {{ tinymce_init() }}
-                                <span class="error-validation-dream">
-                                    {{ form_errors(form.description) }}
-                                </span>
                             </div>
                         </div>
+                        {{ form_errors(form.description) }}
                     </li>
                     <li class="input-block">
                         <label class="label required">Кінцева дата</label>
-                        {{ form_widget(form.expiredDate) }}
-                        <span class="error-validation-dream">
-                            {{ form_errors(form.expiredDate)  }}
-                        </span>
+                        {{ form_widget(form.expiredDate, {'attr': {'placeholder': 'дд.мм.рррр'} } ) }}
+                        {{ form_errors(form.expiredDate)  }}
                     </li>
                     <li class="input-block">
                         <label class="label">Ключові слова</label>
@@ -104,9 +98,7 @@
                     <li class="input-block phone-block">
                         <label class="label required">Телефон</label>
                         {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
-                        <span class="error-validation-dream">
-                            {{ form_errors(form.phone)  }}
-                        </span>
+                        {{ form_errors(form.phone)  }}
                     </li>
                     <li class="display-none">
                         {{ form_widget(form.dreamPictures) }}
@@ -219,6 +211,9 @@
     {{ parent() }}
 
     <script>
+        $(function() {
+            $( "#newDreamForm_expiredDate" ).datepicker({"dateFormat": "dd.mm.yy", "regional": "uk"});
+        });
         $(document).ready(function() {
             $('ul.help-block li a').hide();
             $('#newDreamForm_dreamPictures').get(0).value = '';
