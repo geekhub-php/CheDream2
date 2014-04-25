@@ -14,10 +14,16 @@
                         </a>
                     </div>
                     {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
-
-                    {# Resources start #}
                     {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
-                    {# Resources end #}
+
+                    <div class="tags">
+                        <h3>{{ 'tags'|trans }}</h3>
+                        {% for tag in dream.tags %}
+                            <p class="pull-left" style="padding-right: 10px;"><span class="glyphicon glyphicon-tag"></span>&nbsp;
+                                <a href="{{ path('dream_by_tag', {'tag': tag.name}) }}" style=" color: #000000;">{{ tag.name }}</a>
+                            </p>
+                        {% endfor %}
+                    </div>
 
                     {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
                     {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}

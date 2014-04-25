@@ -4,7 +4,7 @@
 
     {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' %}
 
-    <h3>Кошторис проекту:</h3>
+    <h3>Кошторис проекту</h3>
     <div class="goals-successes">
         {% if dream.dreamFinancialResources|length > 0 %}
             <div class="finances">
@@ -72,11 +72,4 @@
             </div>
         {% endif %}
     </div>
-
-    <h3>{{ 'tags'|trans }}:</h3>
-    {% for tag in dream.tags %}
-        <p class="pull-left" style="padding-right: 10px;"><span class="glyphicon glyphicon-tag"></span>&nbsp;
-            <a href="{{ path('dream_by_tag', {'tag': tag.name}) }}" style=" color: #000000;">{{ tag.name }}</a>
-        </p>
-    {% endfor %}
 </div>
