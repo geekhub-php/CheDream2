@@ -11,7 +11,7 @@
                 </div>
             {% endif %}
             <h4 title="{{ dream.title }}">
-                {{ dream.title }}
+                <a href="{{ path('view_dream', {'slug': dream.slug}) }}">{{ dream.title }}</a>
             </h4>
         </div>
         <div class="dream-homepage-preview-body">
