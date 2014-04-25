@@ -78,4 +78,10 @@
             {% endif %}
         </ul>{#thumbnails#}
     {% endif %}
+
+    <div class="pull-right">
+        {% for file in dream.mediaFiles %}
+            <a href="{{ file|mediaPath }}" >{{ file.name }}</a>
+        {% endfor %}
+    </div>
 </div>
