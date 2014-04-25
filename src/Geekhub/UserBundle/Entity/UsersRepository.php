@@ -13,14 +13,13 @@ class UsersRepository extends EntityRepository
 
         if ($showHiddenContributedDreams) {
             $condition2 = '';
-        }
-        else {
+        } else {
             $condition2 = 'and c.hiddenContributor = false';
         }
 
         $query = $em->createQuery(
            'SELECT d, count(c) as count_c
-            FROM GeekhubDreamBundle:Dream d 
+            FROM GeekhubDreamBundle:Dream d
             JOIN d.'.$typeContributionEntityName.' c
             WHERE c.user = :user '.$condition2
         )->setParameter('user', $user);
@@ -32,6 +31,7 @@ class UsersRepository extends EntityRepository
                 $contributedDreams->add($dream[0]);
             }
         }
+
         return $contributedDreams;
 
     }
@@ -45,6 +45,7 @@ class UsersRepository extends EntityRepository
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamEquipmentContributions', $contributedDreams, $showHiddenContributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamWorkContributions', $contributedDreams, $showHiddenContributedDreams);
         $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamOtherContributions', $contributedDreams, $showHiddenContributedDreams);
+
         return $contributedDreams;
     }
 
@@ -54,7 +55,7 @@ class UsersRepository extends EntityRepository
 
         $query = $em->createQuery(
            "SELECT d
-            FROM GeekhubDreamBundle:Dream d 
+            FROM GeekhubDreamBundle:Dream d
             WHERE d.author = :user and (d.currentStatus = :submitted
                                    or d.currentStatus = :rejected
                                    or d.currentStatus = :collectingResources
@@ -74,7 +75,7 @@ class UsersRepository extends EntityRepository
 
         $query = $em->createQuery(
            "SELECT d
-            FROM GeekhubDreamBundle:Dream d 
+            FROM GeekhubDreamBundle:Dream d
             WHERE d.author = :user and (d.currentStatus = :collectingResources
                                    or d.currentStatus = :implementing
                                    or d.currentStatus = :completed
@@ -90,14 +91,13 @@ class UsersRepository extends EntityRepository
         return $query->getResult();
     }
 
-
     public function findUserImplementedDreams($user)
     {
         $em = $this->getEntityManager();
 
         $query = $em->createQuery(
            "SELECT d
-            FROM GeekhubDreamBundle:Dream d 
+            FROM GeekhubDreamBundle:Dream d
             WHERE d.author = :user and (d.currentStatus = :completed
                                    or d.currentStatus = :success
                                    or d.currentStatus = :fail)"
@@ -115,7 +115,7 @@ class UsersRepository extends EntityRepository
 
         $query = $em->createQuery(
            "SELECT d
-            FROM GeekhubDreamBundle:Dream d 
+            FROM GeekhubDreamBundle:Dream d
             WHERE d.author = :user and (d.currentStatus = :collectingResources
                                      or d.currentStatus = :implementing)"
         )->setParameter('user', $user)

@@ -25,7 +25,7 @@ trait ContactsInfo
      * @ORM\Column(name="facebookUrl", type="string", length=150, nullable=true)
      */
     protected $facebookUrl;
-    
+
     /**
      * @var string
      *
@@ -43,7 +43,7 @@ trait ContactsInfo
     /**
      * Set phone
      *
-     * @param  string   $phone
+     * @param string $phone
      */
     public function setPhone($phone)
     {
@@ -65,7 +65,7 @@ trait ContactsInfo
     /**
      * Set skype
      *
-     * @param  string   $skype
+     * @param string $skype
      */
     public function setSkype($skype)
     {
@@ -87,7 +87,7 @@ trait ContactsInfo
     /**
      * Set facebookUrl
      *
-     * @param  string   $facebookUrl
+     * @param string $facebookUrl
      */
     public function setFacebookUrl($facebookUrl)
     {
@@ -109,7 +109,7 @@ trait ContactsInfo
     /**
      * Set vkontakteUrl
      *
-     * @param  string   $vkontakteUrl
+     * @param string $vkontakteUrl
      */
     public function setVkontakteUrl($vkontakteUrl)
     {
@@ -131,7 +131,7 @@ trait ContactsInfo
     /**
      * Set odnoklassnikiUrl
      *
-     * @param  string   $odnoklassnikiUrl
+     * @param string $odnoklassnikiUrl
      */
     public function setOdnoklassnikiUrl($odnoklassnikiUrl)
     {
