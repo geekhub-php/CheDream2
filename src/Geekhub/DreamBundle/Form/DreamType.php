@@ -46,9 +46,7 @@ class DreamType extends AbstractType
                 'required'  => false,
                 'label' => 'tags',
             ))->addModelTransformer($transformerTag))
-            ->add('expiredDate', 'date', array(
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
+            ->add('expiredDate', 'text', array(
                 'label' => 'dream.expired_date',
             ))
             ->add('dreamFinancialResources', 'collection', array(

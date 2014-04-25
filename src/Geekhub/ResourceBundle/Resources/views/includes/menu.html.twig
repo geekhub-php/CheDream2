@@ -19,10 +19,10 @@
                 </li>
             </ul>
             
-            <form>
+            <form action="{{ path('dream_search') }}" method="post">
                 <div class="search-block">
-                    <button class="icon-search" type="button"></button>
-                    <input type="text" class="field-search" placeholder="Geekstarte">
+                    <button class="icon-search" type="submit"></button>
+                    <input type="text" class="field-search" placeholder="Що шукаємо?" name="search_text">
                     
                     <a href="#" class="search-link">
                         <span class="icon-search"></span>
