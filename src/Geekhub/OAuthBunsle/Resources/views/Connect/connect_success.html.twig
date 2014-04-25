@@ -1,0 +1,12 @@
+{% extends "GeekhubUserBundle::layout.html.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block fos_user_content %}
+    <div class="row" style="text-align: center;">
+        <p>
+            <h3>{{ 'header.success' | trans({'%name%': userInformation.realName}, 'HWIOAuthBundle') }}</h3>
+            <br/>
+        </p>
+    </div>
+{% endblock fos_user_content %}

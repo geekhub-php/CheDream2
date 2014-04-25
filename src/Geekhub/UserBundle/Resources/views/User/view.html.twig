@@ -4,84 +4,96 @@
 
 
 {% block content %}
-        <div style="margin-top: 50px;">
-          <div style="padding: 5% 0;">
-           <div class="row">
- 
-             <div class="col-md-3">
-              <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-               {% if user.phone is not null %}
-                <a href="mailto:{{ user.phone }}"><div class="icon-phone-circled"></div></a>
-               {% endif %}
-               {% if user.skype is not null %}
-               <a href="skype:{{ user.skype }}"><div class="icon-skype"></div></a>
-               {% endif %}
-               {% if user.email is not null %}
-               <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
-               {% endif %}
-               {% if user.facebookUrl is not null %}
-               <a href="{{ user.facebookUrl }}"><div class="icon-facebook-circled"></div></a>
-               {% endif %}
-               {% if user.vkontakteUrl is not null %}
-               <a href="{{ user.vkontakteUrl }}"><div class="icon-vkontakte-rect"></div></a>
-               {% endif %}
-               {% if user.odnoklassnikiUrl is not null %}
-               <a href="{{ user.odnoklassnikiId }}"><div class="icon-odnoklassniki-rect"></div></a>
-               {% endif %}
-             </div>
-             <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-7"><h2> {{user.firstName}} {{user.lastName}}</h2> </div>
-                <div class="col-md-3">
-                   <p> {{ user.birthday|date("d M Y", "Europe/Kiev")|trans }} </p>
-                </div>
-                {% if app.user is same as(user) %}
-                 <a href="{{path('profile_edit')}}"><div class="btn btn-primary">Редагувати</div></a>
+<div class="content page-view-profile">
+    <div class="row"> 
+        <div class="col-md-4">
+            <div class="photo-block">
+                <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
+            </div>
+            
+            <div class="media-block">
+                {% if user.phone is not null %}
+                    <a href="mailto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
                 {% endif %}
-                <p> {{ user.about|raw }} </p>
-             </div>
-              {% if userDreams is not empty %}
-             <div class="row">
-                <div class="col-md-7">
-                  <h4>Автор проектів: </h4>
+                {% if user.skype is not null %}
+                    <a href="skype:{{ user.skype }}" class="skype"><span class="icon icon-skype"></span></a>
+                {% endif %}
+                {% if user.email is not null %}
+                    <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span></a>
+                {% endif %}
+                {% if user.facebookUrl is not null %}
+                    <a href="{{ user.facebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
+                {% endif %}
+                {% if user.vkontakteUrl is not null %}
+                    <a href="{{ user.vkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
+                {% endif %}
+                {% if user.odnoklassnikiUrl is not null %}
+                    <a href="{{ user.odnoklassnikiId }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="user-info">
+                {% if app.user is same as(user) %}
+                    <a href="{{path('profile_edit')}}" class="btn-edit">Редагувати</a>
+                {% endif %}
+                
+                <h1 class="name">{{user.firstName}} {{user.lastName}}</h1>
+                <span class="date">{{ user.birthday|date("d M Y", "Europe/Kiev")|trans }}</span>
+                
+                {% if user.about is not empty %}
+                    <div class="description">{{ user.about|raw }}</div>
+                {% endif %}
+            </div>
+            
+            {% if userDreams is not empty %}
+                <div class="caption-block">
+                    <ul class="filters-list">
+                        <li><a href="#" id="implemented">Втілені</a></li>
+                        <li><a href="#" id="projects">На стадії проекту</a></li>
+                        <li><a href="#" id="any">Усі мрії</a></li>
+                    </ul>
+                    <h2 class="caption">Автор проектів</h2>
                 </div>
-                <div class="btn btn-primary" id="any"> Усі мрії </div>
-                <div class="btn btn-primary" id="projects"> На стадії проекту </div>
-                <div class="btn btn-primary" id="implemented"> Втілені </div>
-                </div>  
-                <div class="row">
-                 <div id="user-dreams">
-                   {% for dream in userDreams %}
-                         {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                   {% endfor %}
-                 </div>
-                </div> 
-             {% endif %} 
-             {% if contributedDreams is not empty %}
-             <div class="row">
-               <h4>Учасник проектів: </h4>
-             </div>
-             <div class="row">
-               {% for dream in contributedDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
-               {% endfor %}
-             </div>
-             {% endif %} 
-             {% if user.favoriteDreams is not empty %}
-             <div class="row">
-               <h4>Favs: </h4>
-             </div>
-             <div class="row">
-               {% for dream in user.favoriteDreams %}
-               {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-               {% endfor %}
-             </div> 
-             {% endif %} 
-           </div> {# class="col-md-8" right col #}
-          </div> {# class=row (main row) #} 
-        </div> {# style=padding 5% #}
-      </div> {# margin-top 50px#}
-    
+                
+                <ul id="user-dreams" class="dreams-list row">
+                    {% for dream in userDreams %}
+                        <li class="col-md-6">
+                            {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %} 
+            
+            {% if contributedDreams is not empty %}
+                <div class="caption-block">
+                    <h2 class="caption">Учасник проектів</h2>
+                </div>
+                
+                <ul class="dreams-list">
+                    {% for dream in contributedDreams %}
+                        {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            {% if user.favoriteDreams is not empty %}
+                <div class="caption-block">
+                    <h2 class="caption">Favs</h2>
+                </div>
+                
+                <ul class="dreams-list row">
+                    {% for dream in user.favoriteDreams %}
+                        <li class="col-md-6">
+                            {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div> <!--/Content-->
 {% endblock content %}
 
 {% block javascript %}
