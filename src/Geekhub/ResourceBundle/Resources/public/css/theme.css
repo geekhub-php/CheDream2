@@ -88,7 +88,7 @@ img                            { vertical-align: middle; }
     font-weight: bold;
     height: auto;
     padding: 0;
-    border-color: transparent;
+    /*border-color: transparent;*/
 }
 .input-block.name-block input::-webkit-input-placeholder { font-weight: normal; }
 .input-block.name-block input::-moz-placeholder { font-weight: normal; } /* firefox 19+ */
@@ -99,10 +99,8 @@ img                            { vertical-align: middle; }
     padding-bottom: 0;
 }
 .input-block.phone-block input {
-    border-color: transparent;
     padding: 0;
     font-size: 20px;
-    
 }
 
 .input-block .description-wrap {
