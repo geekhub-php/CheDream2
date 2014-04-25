@@ -158,13 +158,14 @@ class UserController extends Controller
     /**
      * @param  Request $request
      * @ParamConverter("user", class="GeekhubUserBundle:User")
+     * @param User $user
      * @return mixed
      */
     public function mergeAccountsAction(Request $request, User $user)
     {
-            $socialNetworks = $user->getNotNullSocialIds();
-            $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
+        $socialNetworks = $user->getNotNullSocialIds();
+        $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
 
-            return $this->container->get('hwi_oauth.connect_controller')->redirectToServiceAction($request, key($socialNetworks));
+        return $this->container->get('hwi_oauth.connect_controller')->redirectToServiceAction($request, key($socialNetworks));
     }
 }

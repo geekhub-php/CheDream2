@@ -19,7 +19,7 @@ class RegistrationSubscriber
 {
     const UPDATE_CONTACTS_ROUTE = 'profile_update_contacts';
 
-    protected $ignoredRoutes = [];
+    protected $ignoredPrefixRoutes = ['connect', 'login-social', 'connect-account'];
     protected $container;
 
     /**
@@ -36,8 +36,8 @@ class RegistrationSubscriber
             return;
         }
 
-        $path = $this->container->get('router')->getContext()->getPathInfo();
-        if (strpos($path, '/connect') !== false || strpos($path, '/login-social') !== false) {
+        $path = explode('/', $this->container->get('router')->getContext()->getPathInfo());
+        if (in_array($path[0], $this->ignoredPrefixRoutes)) {
             return;
         }
 
