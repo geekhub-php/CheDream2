@@ -9,11 +9,7 @@
             <div class="col-md-4">
                 
                 {# media avatar, 'big' #}
-                {% if user.avatar is not null %}
-                    <div id="user-avatar-image" class="main-photo active">
-                {% else %}
-                    <div id="user-avatar-image" class="main-photo">
-                {% endif %}
+                <div id="user-avatar-image" class="main-photo {{ user.avatar ? 'active' }}">
                     <div class="photo-holder">
                         <span class="icon"></span>
                         <span class="title required">Аватар</span>
