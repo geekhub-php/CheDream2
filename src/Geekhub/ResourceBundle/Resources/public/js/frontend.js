@@ -13,13 +13,15 @@ $(function() {
     });
     
     
-    $header.find('.show-dreams').on('click', function() {
+    $header.find('.show-dreams').on('click', function(e) {
+        if ($header.hasClass('dreams-active')) return;
+        e.stopPropagation();
         $header.addClass('dreams-active');
     });
     
     $(document).on('click', function(e) {
         var $target = $(e.target);
-        if ($target.closest('.header').length && $target.closest('.user-dreams-block').length) return;
+        if ($target.closest('.header').length && $target.closest('.dreams-list').length) return;
         $header.removeClass('dreams-active');
     });
     
