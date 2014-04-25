@@ -1029,6 +1029,10 @@ img                            { vertical-align: middle; }
     text-align: center;
 }
 
+.page-new-dream .help-block {
+    color: #F46824;
+}
+
 .resources-list li {
     height: 33px;
 }

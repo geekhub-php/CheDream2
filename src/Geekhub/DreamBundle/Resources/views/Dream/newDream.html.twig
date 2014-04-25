@@ -6,13 +6,6 @@
         {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
         <div class="row">
             <div class="col-md-4">
-                
-                <!--<span class="fileinput-button no-display" id="dream-poster-image">
-                    <div id="dream-poster-container">-->
-                        <!--<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">-->
-                        <!--<input id="fileupload-poster" type="file" name="dream-poster">
-                    </div>
-                </span>-->
                 <span class="label">Додати</span>
                 <div id="dream-poster-image" class="main-photo">
                     <div class="photo-holder">
@@ -49,24 +42,13 @@
                     
                     <span class="upload-resource upload-file" onclick="loadFile()"></span>
                 </div>
-                
-                <!--<span class="" onclick="loadFile()">
-                    <span>{{ 'dream.files_add'|trans }}</span>
-                    <input id="fileuploadz" type="file" name="files" multiple>
-                </span>-->
-                
-                <!--<span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()">{{ 'dream.videos_add'|trans }}</span>-->
-                
-                
             </div>
             
             <ul class="main-form-list col-md-8">
                 <li class="input-block name-block">
                     <label class="label required">Назва</label>
                     {{ form_widget(form.title, {'attr': {'placeholder': 'Без назви'}}) }}
-                    <span class="error-validation-dream">
-                        {{ form_errors(form.title) }}
-                    </span>
+                    {{ form_errors(form.title) }}
                 </li>
                 <li class="input-block">
                     <label class="label required">Опис</label>
@@ -74,18 +56,14 @@
                         <div class="description">
                             {{ form_widget(form.description) }}
                             {{ tinymce_init() }}
-                            <span class="error-validation-dream">
-                                {{ form_errors(form.description)  }}
-                            </span>
                         </div>
                     </div>
+                    {{ form_errors(form.description)  }}
                 </li>
                 <li class="input-block">
                     <label class="label required">Кінцева дата</label>
                     {{ form_widget(form.expiredDate) }}
-                    <span class="error-validation-dream">
-                        {{ form_errors(form.expiredDate)  }}
-                    </span>
+                    {{ form_errors(form.expiredDate)  }}
                 </li>
                 <li class="input-block">
                     <label class="label">Ключові слова</label>
@@ -95,9 +73,7 @@
                 <li class="input-block phone-block">
                     <label class="label required">Телефон</label>
                     {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
-                    <span class="error-validation-dream">
-                        {{ form_errors(form.phone)  }}
-                    </span>
+                    {{ form_errors(form.phone)  }}
                 </li>
                 <li class="no-display">
                     {{ form_widget(form.dreamPictures) }}
