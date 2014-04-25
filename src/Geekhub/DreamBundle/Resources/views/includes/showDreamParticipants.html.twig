@@ -1,63 +1,28 @@
-<div>
+<div class="participants">
     <h3>Участники проекту:</h3>
-
-    {#*********************** для контроля потом удалить ***********************************<br/>#}
-
-        {#{% for financialContributors in dream.dreamFinancialContributions %}#}
-            {#&#123;&#35;{% if not financialContributors.hiddenContributor %}&#35;&#125;#}
-                {#{{ financialContributors.user.firstName }} * {{ financialContributors.user.lastName }}#}
-                {#{{ financialContributors.financialResource.title }} {{ financialContributors.quantity }}<br/>#}
-            {#&#123;&#35;{% endif %}&#35;&#125;#}
-        {#{% endfor %}#}
-
-        {#---------------------------------------------------------------------------------------<br/>#}
-
-        {#{% for equipmentContributor in dream.dreamEquipmentContributions %}#}
-            {#&#123;&#35;{% if not equipmentContributor.hiddenContributor %}&#35;&#125;#}
-                {#{{ equipmentContributor.user.firstName }} * {{ equipmentContributor.user.lastName }}#}
-                {#{{ equipmentContributor.equipmentResource.title }} {{ equipmentContributor.quantity }}<br/>#}
-            {#&#123;&#35;{% endif %}&#35;&#125;#}
-        {#{% endfor %}#}
-
-        {#---------------------------------------------------------------------------------------<br/>#}
-
-        {#{% for workContributor in dream.dreamWorkContributions %}#}
-            {#&#123;&#35;{% if not workContributor.hiddenContributor %}&#35;&#125;#}
-                {#{{ workContributor.user.firstName }} * {{ workContributor.user.lastName }}#}
-                {#{{ workContributor.workResource.title }} {{ workContributor.quantity }} {{ workContributor.quantityDays }}<br/>#}
-            {#&#123;&#35;{% endif %}&#35;&#125;#}
-        {#{% endfor %}#}
-
-    {#**************************************************************************************<br/>#}
-
-    <div>
-        {% if contributors|length == 0 %}
-            <div class="alert alert-info">
-                Ще ніхто не підтримав цю мрію - будьте першим.
-            </div>
-        {% endif %}
-        {% for user in contributors %}
-            <div style="margin: 10px; width: 220px; display: inline-block; vertical-align: top; overflow: hidden;">
-                <div style="float: left;">
-                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
-                </div>
-                <div>
-                    <p class="contributors-fio"  style="padding: 0 0 0 97px; margin: 0;">
-                        <a href="{{ path('profile_view', {'id': user.id}) }}" style="color: #33333F;">
+    {% if contributors|length == 0 %}
+        <p class="warning">
+            Ще ніхто не підтримав цю мрію - будьте першим.
+        </p>
+    {% else %}
+        <ul>
+            {% for user in contributors %}
+                <li class="{{ cycle(['odd', 'even'], loop.index) }}">
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}">
+                    <div>
+                        <a href="{{ path('profile_view', {'id': user.id}) }}">
                             {{ user.firstName }}
                             {{ user.lastName }}
                         </a>
-                    </p>
-                </div>
-                <div style="clear: both;">
-                    <ul class="list-unstyled">
-                        {{ finContribute(user, dream)|raw }}
-                        {{ equipContribute(user, dream)|raw }}
-                        {{ workContribute(user, dream)|raw }}
-                        {{ otherContribute(user, dream)|raw }}
-                    </ul>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+                        <ul class="items">
+                            {{ finContribute(user, dream)|raw }}
+                            {{ equipContribute(user, dream)|raw }}
+                            {{ workContribute(user, dream)|raw }}
+                            {{ otherContribute(user, dream)|raw }}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>

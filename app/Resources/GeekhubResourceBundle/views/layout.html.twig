@@ -13,6 +13,8 @@
         {% block stylesheets %}
             <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         {% endblock %}
+        <link href="{{ asset('bundles/geekhubresource/css/theme_fonts.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/geekhubresource/css/theme.css') }}" rel="stylesheet">
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -23,7 +25,7 @@
 
     <body>
         {% block body %}
-            <div class="container" id="wrap">
+            <div class="main-wrap container">
                 {% block menu %}
                     {% embed 'GeekhubResourceBundle:includes:menu.html.twig' %}
                         {% block items %}
@@ -32,7 +34,7 @@
                     {% endembed %}
                 {% endblock %}
                 {% block main %}
-                    <div class="wrapper">
+                    <div class="wrap">
                         {% block content %}{% endblock content %}
                     </div>
                 {% endblock main %}
@@ -51,9 +53,11 @@
             '../vendor/bower-components/jquery-ui/ui/jquery.ui.widget.js'
             '../vendor/bower-components/blueimp-gallery/js/blueimp-gallery.js'
             '../vendor/bower-components/hinclude/hinclude.js'
+            '../vendor/bower-components/fancybox/source/jquery.fancybox.js'
             '../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/js/bc-bootstrap-collection.js'
             'bundles/fosjsrouting/js/router.js'
             'bundles/bazingajstranslation/js/translator.min.js'
+            'bundles/geekhubresource/js/frontend.js'
             '@GeekhubDreamBundle/Resources/public/js/*'
             '@GeekhubUserBundle/Resources/public/js/*'
             output='js/scripts.js'

@@ -3,71 +3,110 @@
 {% block title %}Edit profile{% endblock %}
 
 {% block content %}
-<div style="padding: 5% 0;">
+<div class="content page-edit-profile page-green-shadow">
     <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
         <div class="row">
-            <div class="col-md-5">
-                <div class="fileinput-button" id="user-avatar-image">
-                    <div id="user-avatar-container">
-                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-                        <input id="dream_poster" type="file" name="dream-poster">
-                    </div>
-                </div>
-
-                <div id="errors" class="files">
-                </div>
-
+            <div class="col-md-4">
+                
                 {# media avatar, 'big' #}
+                {% if user.avatar is not null %}
+                    <div id="user-avatar-image" class="main-photo active">
+                {% else %}
+                    <div id="user-avatar-image" class="main-photo">
+                {% endif %}
+                    <div class="photo-holder">
+                        <span class="icon"></span>
+                        <span class="title required">Аватар</span>
+                    </div>
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
+                    <input id="dream_poster" type="file" name="dream-poster">
+                </div>
+                
+                <div id="errors" class="files"></div>
+                
+                <ul class="contacts-list">
+                    <li class="input-block">
+                        <label class="label">Телефон</label>
+                        {{ form_widget(form.phone) }}
+                    </li>
+                    <li class="input-block">
+                        <label class="label">Skype</label>
+                        {{ form_widget(form.skype) }}
+                    </li>
+                    <li class="input-block">
+                        <label class="label">Email</label>
+                        {{ form_widget(form.email) }}
+                    </li>
+                    {#
+                    <li class="input-block">
+                        <label class="label">Facebook</label>
+                        {{ form_widget(form.facebookUrl) }}
+                    </li>
+                    <li class="input-block">
+                        <label class="label">Vkontakte</label>
+                        {{ form_widget(form.vkontakteUrl) }}
+                    </li>
+                    <li class="input-block">
+                        <label class="label">Odnoklassniki</label>
+                        {{ form_widget(form.odnoklassnikiUrl) }}
+                    </li>
+                    #}
+                </ul>
                 {{ form_widget(form.avatar) }}
-                {{ form_row(form.phone) }}
-                {{ form_row(form.skype) }}
-                {{ form_row(form.email) }}
-                {#{{ form_row(form.facebookUrl) }}#}
-                {#{{ form_row(form.vkontakteUrl) }}#}
-                {#{{ form_row(form.odnoklassnikiUrl) }}#}
             </div>
-
-            <div class="col-md-7">
-                <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{ form_widget(form.firstName) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_widget(form.lastName) }}
-                    </div>
-                </div>
-
-                {{ form_label(form.birthday) }}
-
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ form_widget(form.birthday.day) }}
-                    </div>
-
-                    <div class="col-md-3">
-                        {{ form_widget(form.birthday.month) }}
-                    </div>
-
-                    <div class="col-md-3">
-                        {{ form_widget(form.birthday.year) }}
-                    </div>
-                </div>
-
-                {{ form_row(form.about) }}
-                {{ form_rest(form) }}
+            
+            <div class="col-md-8">
+                <ul class="user-info-list">
+                    <li class="input-block name-block">
+                        <label class="label">Ім’я</label>
+                        {{ form_widget(form.firstName, {'attr': {'placeholder': "Ім’я"}}) }}
+                    </li>
+                    <li class="input-block name-block">
+                        <label class="label">Прізвище</label>
+                        {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
+                    </li>
+                    
+                    <li class="input-block">
+                        <label class="label">Дата народження</label>
+                        <div class="row">
+                            <div class="col-md-2">
+                                {{ form_widget(form.birthday.day, {'attr': {'class': 'input-view'}}) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form.birthday.month, {'attr': {'class': 'input-view'}}) }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form_widget(form.birthday.year, {'attr': {'class': 'input-view'}}) }}
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="input-block">
+                        <label class="label">Про себе</label>
+                        <div class="description-wrap">
+                            <div class="description">
+                                {{ form_widget(form.about) }}
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="buttons-block">
+                        <button type="submit" class="custom-btn btn-green">Зберегти</button>
+                    </li>
+                    <li class="no-display">
+                        {{ form_rest(form) }}
+                    </li>
+                </ul>
             </div>
-
-            <div class="row center">
-                <input name="_submit" type="submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
-            </div>
+            
         </div>
     </form>
-</div>
+</div> <!--/Content-->
 
 {% endblock content %}
 
 {% block javascript %}
   {{ parent() }}
   {{ tinymce_init() }}
+
 {% endblock javascript %}
