@@ -4,68 +4,72 @@
 
     {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' %}
 
-    <h3>Кошторис проекту:</h3>
+    <h3>Кошторис проекту</h3>
     <div class="goals-successes">
         {% if dream.dreamFinancialResources|length > 0 %}
-            <h4>Фінансові витрати</h4>
-            <table border="0" cellpadding="0" cellspacing="0">
-                {% for finance in dream.dreamFinancialResources %}
-                    <tr>
-                        <td>{{ finance.title }}</td>
-                        <td class="right"><strong>{{ finResource(finance, dream) }}</strong>/{{ finance.quantity }} грн.</td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <div class="finances">
+                <h4>Фінансові витрати</h4>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    {% for finance in dream.dreamFinancialResources %}
+                        <tr>
+                            <td>{{ finance.title }}</td>
+                            <td class="right">
+                                <strong>{{ finResource(finance, dream) }}</strong>/{{ finance.quantity }} грн.
+                            </td>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         {% endif %}
         {% if dream.dreamEquipmentResources|length > 0 %}
-            <h4>Інструменти/обладнання</h4>
-            <table border="0" cellpadding="0" cellspacing="0">
-                {% for equipment in dream.dreamEquipmentResources %}
-                    {% if equipment.quantityType == 'piece' %}
-                        {% set eType = 'шт.' %}
-                    {% elseif equipment.quantityType == 'kg' %}
-                        {% set eType = 'кг.' %}
-                    {% else %}
-                        {% set eType = 'тон.' %}
-                    {% endif %}
-                    <tr>
-                        <td style="width: 80%;">
-                            {{ equipment.title }}
-                        </td>
-                        <td style="width: 10%; text-align: right;">
-                            <span class="label label-default">{{ equipment.quantity }} {{ eType }}</span>
-                        </td>
-                        <td style="width: 10%;">
-                            <span class="label label-info">{{ equipResource(equipment, dream) }} {{ eType }}</span>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <div class="equipment">
+                <h4>Інструменти/обладнання</h4>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    {% for equipment in dream.dreamEquipmentResources %}
+                        {% if equipment.quantityType == 'piece' %}
+                            {% set eType = 'шт.' %}
+                        {% elseif equipment.quantityType == 'kg' %}
+                            {% set eType = 'кг.' %}
+                        {% else %}
+                            {% set eType = 'тон.' %}
+                        {% endif %}
+                        <tr>
+                            <td>
+                                {{ equipment.title }}
+                            </td>
+                            <td class="right">
+                                <strong>{{ equipResource(equipment, dream) }}</strong>/{{ equipment.quantity }}{{ eType }}
+                            </td>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         {% endif %}
         {% if dream.dreamWorkResources|length > 0 %}
-            <h4>Роботи та ресурси</h4>
+            <div class="resources">
+                <h4>Роботи та ресурси</h4>
                 <table border="0" cellpadding="0" cellspacing="0">
                     {% for work in dream.dreamWorkResources %}
                         <tr>
                             <td style="width: 80%;">
                                 {{ work.title }}
                             </td>
-                            <td style="width: 10%; text-align: right;">
-                                <span class="label label-default">{{ work.quantity }} дн.</span>
+                            <td class="right">
+                                <strong>{{ workResource(work, dream) }}</strong>/{{ work.quantity }} дн.
                             </td>
-                            <td style="width: 10%;">
-                                <span class="label label-info">{{ workResource(work, dream) }} дн.</span>
-                            </td>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
         {% endif %}
     </div>
-
-    <h3>{{ 'tags'|trans }}:</h3>
-    {% for tag in dream.tags %}
-        <p class="pull-left" style="padding-right: 10px;"><span class="glyphicon glyphicon-tag"></span>&nbsp;
-            <a href="{{ path('dream_by_tag', {'tag': tag.name}) }}" style=" color: #000000;">{{ tag.name }}</a>
-        </p>
-    {% endfor %}
 </div>
