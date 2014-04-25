@@ -52,4 +52,11 @@
     {% else  %}
         {{ dream.description|raw }}
     {% endif %}
+
+    <ul class="attachments">
+        {% for file in dream.mediaFiles %}
+            <li><a href="zccdcs" >file name 1</a></li>
+            <li><a href="zccdcs" >file name 1</a></li>
+        {% endfor %}
+    </ul>
 </div>
