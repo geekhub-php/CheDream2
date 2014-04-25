@@ -15,7 +15,6 @@
                         <span class="title required">Аватар</span>
                     </div>
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
-                    <input id="dream_poster" type="file" name="dream-poster">
                 </div>
               
                 <div id="errors" class="files"></div>
@@ -31,10 +30,12 @@
                         <label class="label required">Прізвище</label>
                         {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
                     </li>
+                    {#
                     <li class="input-block phone-block">
                         <label class="label required">Телефон</label>
                         {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
                     </li>
+                    #}
                     <li class="input-block">
                         <label class="label required">Email</label>
                         {# set form.vars.value.email = '' #}

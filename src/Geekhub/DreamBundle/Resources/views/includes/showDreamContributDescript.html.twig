@@ -5,75 +5,99 @@
             <ul>
                 {% if dream.dreamFinancialResources|length > 0 %}
                     <li class="financial">
-                        <span class="circle"><span></span></span><a href="#">Фінансово</a>
-                        <div class="financial-help-popup">
-                            {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".financial-help-popup">Фінансово</a>
+                        <div class="financial-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                            {{ form_row(finForm.financialResource) }}
-                            {{ form_row(finForm.quantity) }}
-                            {{ form_row(finForm.hiddenContributor) }}
+                                        {{ form_row(finForm.financialResource) }}
+                                        {{ form_row(finForm.quantity) }}
+                                        {{ form_row(finForm.hiddenContributor) }}
 
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-fin">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-fin">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel" data-dismiss="modal">
 
-                            {{ form_errors(finForm) }}
-                            {{ form_rest(finForm) }}
-                            {{ form_end(finForm) }}
+                                        {{ form_errors(finForm) }}
+                                        {{ form_rest(finForm) }}
+                                        {{ form_end(finForm) }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
                 {% if dream.dreamEquipmentResources|length > 0 %}
                     <li class="equipment">
-                        <span class="circle"><span></span></span><a href="#">Обладнанням / Технікою</a>
-                        <div class="equipment-help-popup">
-                            {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".equipment-help-popup">Обладнанням / Технікою</a>
+                        <div class="equipment-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                            {{ form_row(equipForm.equipmentResource) }}
-                            {{ form_row(equipForm.quantity) }}
-                            {{ form_row(equipForm.hiddenContributor) }}
+                                        {{ form_row(equipForm.equipmentResource) }}
+                                        {{ form_row(equipForm.quantity) }}
+                                        {{ form_row(equipForm.hiddenContributor) }}
 
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-equip">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-equip">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel" data-dismiss="modal">
 
-                            {{ form_errors(equipForm) }}
-                            {{ form_rest(equipForm) }}
-                            {{ form_end(equipForm) }}
+                                        {{ form_errors(equipForm) }}
+                                        {{ form_rest(equipForm) }}
+                                        {{ form_end(equipForm) }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
                 {% if dream.dreamWorkResources|length > 0 %}
                     <li class="physical">
-                        <span class="circle"><span></span></span><a href="#">Провести роботи</a>
-                        <div class="physical-help-popup">
-                            {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".physical-help-popup">Провести роботи</a>
+                        <div class="physical-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                            {{ form_row(workForm.workResource) }}
-                            {{ form_row(workForm.quantity) }}
-                            {{ form_row(workForm.hiddenContributor) }}
+                                        {{ form_row(workForm.workResource) }}
+                                        {{ form_row(workForm.quantity) }}
+                                        {{ form_row(workForm.hiddenContributor) }}
 
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-work">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-work">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel" data-dismiss="modal">
 
-                            {{ form_errors(workForm) }}
-                            {{ form_rest(workForm) }}
-                            {{ form_end(workForm) }}
+                                        {{ form_errors(workForm) }}
+                                        {{ form_rest(workForm) }}
+                                        {{ form_end(workForm) }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 {% endif %}
                 <li class="other">
-                    <span class="circle"><span></span></span><a href="#">Інша допомога</a>
-                    <div class="other-help-popup">
-                        {{ form_start(otherForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".other-help-popup">Інша допомога</a>
+                    <div class="other-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {{ form_start(otherForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                        {{ form_row(otherForm.title) }}
-                        {{ form_row(otherForm.hiddenContributor) }}
+                                    {{ form_row(otherForm.title) }}
+                                    {{ form_row(otherForm.hiddenContributor) }}
 
-                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-other">
-                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="otherButCancel">
+                                    <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-other">
+                                    <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="otherButCancel" data-dismiss="modal">
 
-                        {{ form_errors(otherForm) }}
-                        {{ form_rest(otherForm) }}
-                        {{ form_end(otherForm) }}
+                                    {{ form_errors(otherForm) }}
+                                    {{ form_rest(otherForm) }}
+                                    {{ form_end(otherForm) }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>

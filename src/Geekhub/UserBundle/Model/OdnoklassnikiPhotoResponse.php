@@ -18,6 +18,11 @@ class OdnoklassnikiPhotoResponse
 
     public function getPhoto()
     {
-        return $this->photos[0]['standard_url'];
+        if (($this->photos)&&(array_key_exists('standard_url', $this->photos[0]))) {
+            return $this->photos[0]['standard_url'];
+        }
+        else {
+            return null;
+        }
     }
 }

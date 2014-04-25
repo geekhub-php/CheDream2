@@ -10,30 +10,26 @@ class UsersRepository extends EntityRepository
 {
     private function dreamWithNotHiddenContributionMerge($em, $user, $typeContributionEntityName, ArrayCollection $contributedDreams, $showHiddenContributedDreams)
     {
-
         if ($showHiddenContributedDreams) {
-            $condition2 = '';
-        } else {
-            $condition2 = 'and c.hiddenContributor = false';
+            $conditions = array(
+                'user'=>$user,
+            );
+        }
+        else {
+            $conditions = array(
+                'user'=>$user,
+                'hiddenContributor'=>false,
+            );
         }
 
-        $query = $em->createQuery(
-           'SELECT d, count(c) as count_c
-            FROM GeekhubDreamBundle:Dream d
-            JOIN d.'.$typeContributionEntityName.' c
-            WHERE c.user = :user '.$condition2
-        )->setParameter('user', $user);
-
-        $newContributedDreams = $query->getResult();
-
-        foreach ($newContributedDreams as $dream) {
-            if ($dream['count_c'] > 0) {
-                $contributedDreams->add($dream[0]);
+        $contributions = $em->getRepository('GeekhubDreamBundle:'.$typeContributionEntityName)->findBy($conditions);
+        foreach ($contributions as $contribution) {
+            if (!$contributedDreams->contains($contribution->getDream())) {
+                $contributedDreams->add($contribution->getDream());
             }
         }
 
         return $contributedDreams;
-
     }
 
     public function findAllContributedDreams($user, $showHiddenContributedDreams)
@@ -41,11 +37,10 @@ class UsersRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         $contributedDreams = new ArrayCollection();
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamFinancialContributions', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamEquipmentContributions', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamWorkContributions', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'dreamOtherContributions', $contributedDreams, $showHiddenContributedDreams);
-
+        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'FinancialContribute', $contributedDreams, $showHiddenContributedDreams);
+        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'EquipmentContribute', $contributedDreams, $showHiddenContributedDreams);
+        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'WorkContribute', $contributedDreams, $showHiddenContributedDreams);
+        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'OtherContribute', $contributedDreams, $showHiddenContributedDreams);
         return $contributedDreams;
     }
 

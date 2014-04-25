@@ -17,7 +17,7 @@
                                 <strong>{{ finResource(finance, dream) }}</strong>/{{ finance.quantity }} грн.
                             </td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".financial-help-popup">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -44,7 +44,7 @@
                                 <strong>{{ equipResource(equipment, dream) }}</strong>/{{ equipment.quantity }}{{ eType }}
                             </td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".equipment-help-popup">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -64,7 +64,7 @@
                                 <strong>{{ workResource(work, dream) }}</strong>/{{ work.quantity }} дн.
                             </td>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <td class="add"><a href="javascript:void(0)">+</a></td>
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".physical-help-popup">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
