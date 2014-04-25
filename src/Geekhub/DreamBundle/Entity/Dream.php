@@ -135,7 +135,7 @@ class Dream implements Taggable
     protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="favoriteDreams")
+     * @ORM\ManyToMany(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="favoriteDreams", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="favorite_dreams")
      */
     protected $usersWhoFavorites;
