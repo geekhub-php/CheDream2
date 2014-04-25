@@ -370,33 +370,111 @@ img                            { vertical-align: middle; }
 .header .media-block a {
     padding-top: 26px;
 }
-.header .media-block a:hover {
+.footer .media-block a {
+    width: 39px;
+    height: 39px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 12px;
+}
+.page-view-profile .media-block {
+    text-align: center;
+    margin: 20px 0 0;
+}
+.page-view-profile .media-block a {
+    width: 41px;
+    height: 41px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 11px;
+    vertical-align: top;
+}
+.page-view-profile .media-block .icon {
+    font-size: 19px;
+}
+
+.header .media-block a:hover,
+.footer .media-block a:hover,
+.page-view-profile .media-block a:hover {
     color: #FFF;
 }
 .header .media-block .fb {
     width: 31px;
 }
 .header .media-block .fb:hover,
-.footer .media-block .fb:hover {
+.footer .media-block .fb:hover,
+.page-view-profile .media-block .fb:hover {
     background: #2D4B95;
+}
+.header .media-block .fb:active,
+.footer .media-block .fb:active,
+.page-view-profile .media-block .fb:active {
+    color: #2D4B95;
 }
 .header .media-block .vk {
     width: 40px;
     padding-right: 2px;
 }
 .header .media-block .vk:hover,
-.footer .media-block .vk:hover {
+.footer .media-block .vk:hover,
+.page-view-profile .media-block .vk:hover {
     background: #476A91;
+}
+.header .media-block .vk:active,
+.footer .media-block .vk:active,
+.page-view-profile .media-block .vk:active {
+    color: #476A91;
 }
 .header .media-block .ok {
     width: 30px;
 }
 .header .media-block .ok:hover,
-.footer .media-block .ok:hover {
+.footer .media-block .ok:hover,
+.page-view-profile .media-block .ok:hover {
     background: #F58921;
+}
+.header .media-block .ok:active,
+.footer .media-block .ok:active,
+.page-view-profile .media-block .ok:active {
+    color: #F58921;
 }
 .footer .media-block .tw:hover {
     background: #28AAE1;
+}
+.footer .media-block .tw:active {
+    color: #28AAE1;
+}
+.page-view-profile .media-block .phone:hover {
+    background: #454545;
+}
+.page-view-profile .media-block .phone:active {
+    color: #454545;
+}
+
+.page-view-profile .media-block .skype {
+    padding-top: 10px;
+}
+.page-view-profile .media-block .skype:hover {
+    background: #30A7DF;
+}
+.page-view-profile .media-block .skype:active {
+    color: #30A7DF;
+}
+
+.page-view-profile .media-block .mail:hover {
+    background: #EEC64D;
+}
+.page-view-profile .media-block .icon-mail:before {
+    content: '';
+    width: 22px;
+    height: 16px;
+    background: url(/images/sprite.png) -160px -120px no-repeat;
+}
+.page-view-profile .media-block .mail:hover .icon-mail:before {
+    background: url(/images/sprite.png) -200px -120px no-repeat;
+}
+.page-view-profile .media-block .mail:active .icon-mail:before {
+    background: url(/images/sprite.png) -240px -120px no-repeat;
 }
 
 .header .media-block .user {
@@ -451,6 +529,24 @@ img                            { vertical-align: middle; }
 .header .show-dreams:hover {
     background: #FCB040;
 }
+
+.page-view-profile .media-block .phone:active,
+.page-view-profile .media-block .skype:active,
+.page-view-profile .media-block .mail:active,
+
+.header .media-block .ok:active,
+.footer .media-block .ok:active,
+.page-view-profile .media-block .ok:active,
+
+.header .media-block .vk:active,
+.footer .media-block .vk:active,
+.page-view-profile .media-block .vk:active,
+
+.header .media-block .fb:active,
+.footer .media-block .fb:active,
+.page-view-profile .media-block .fb:active,
+
+.footer .media-block .tw:active,
 
 .header .user:active,
 .header .logout:active,
@@ -580,16 +676,6 @@ img                            { vertical-align: middle; }
 .footer .media-block .media-title {
     display: block;
     padding: 0 0 5px;
-}
-.footer .media-block a {
-    width: 39px;
-    height: 39px;
-    display: inline-block;
-    text-align: center;
-    padding-top: 12px;
-}
-.footer .media-block a:hover {
-    color: #FFF;
 }
 
 .footer .developers .title {
@@ -1045,6 +1131,124 @@ img                            { vertical-align: middle; }
     margin-top: 30px;
 }
 
+
+/*----------------------------------------------------------------------------------*/
+/*----------------------------> Page view user profile <----------------------------*/
+/*----------------------------------------------------------------------------------*/
+.page-view-profile {
+    padding: 30px 30px 60px;
+}
+
+.page-view-profile .photo-block img {
+    max-width: 100%;
+}
+.page-view-profile .user-info .name {
+    font-size: 30px;
+    font-weight: bold;
+    max-width: 370px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    float: left;
+}
+.page-view-profile .user-info .date {
+    font-size: 16px;
+    padding: 12px 0 0 20px;
+    overflow: hidden;
+    display: block;
+}
+.page-view-profile .user-info .btn-edit {
+    display: block;
+    float: right;
+    margin: 0 -30px 0 0;
+    width: 124px;
+    height: 29px;
+    font-weight: bold;
+    color: #FFF;
+    padding: 6px 0 0 32px;
+    background: url(/images/sprite.png) 0 -280px no-repeat;
+}
+.page-view-profile .user-info .description {
+    padding: 15px 0 0;
+    clear: both;
+}
+.page-view-profile .caption-block {
+    border-bottom: 1px solid #E1E1E1;
+    clear: both;
+    margin: 30px 0 0;
+}
+.page-view-profile .caption-block .caption {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0 0 5px;
+    text-transform: uppercase;
+    color: #F2602C;
+    overflow: hidden;
+}
+.page-view-profile .filters-list,
+.page-view-profile .filters-list li {
+    float: right;
+}
+.page-view-profile .filters-list li {
+    padding-left: 18px;
+}
+
+.page-view-profile .dreams-list a,
+.page-view-profile .dreams-list span {
+    display: block;
+}
+.page-view-profile .dreams-list > li {
+    margin-top: 15px;
+}
+.page-view-profile .dreams-list .photo-block {
+    width: 72px;
+    height: 72px;
+    background: #000;
+    margin: 0 15px 0 0;
+    float: left;
+}
+.page-view-profile .dreams-list .info-block,
+.page-view-profile .dreams-list .title {
+    overflow: hidden;
+}
+.page-view-profile .dreams-list .title {
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    margin: -3px 0 2px;
+    padding-right: 20px;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+.page-view-profile .dreams-list .close {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.page-view-profile .dreams-list .description {
+    height: 50px;
+    overflow: hidden;
+}
+
+.page-view-profile .attached-resources-list {
+    width: 190px;
+    margin: 0 0 0 30px;
+    float: right;
+}
+.page-view-profile .attached-resources-list .title-promise {
+    list-style: none;
+    margin-left: 0;
+    font-weight: bold;
+}
+.page-view-profile .attached-resources-list li {
+    list-style: disc;
+    margin-left: 15px;
+}
 
 /*----------------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------------*/
