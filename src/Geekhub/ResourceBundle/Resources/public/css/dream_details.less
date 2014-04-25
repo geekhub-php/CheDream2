@@ -16,6 +16,18 @@
       color: #f2602c;
     }
 
+    h4 {
+      margin: 0 0 10px;
+      font-family: @default-bold-font;
+      font-size: 14px;
+      line-height: 18px;
+      color: #464646;
+
+      span {
+        font-family: @default-font;
+      }
+    }
+
     /*================================= HEADER ===============================*/
     /*================================= HEADER ===============================*/
     /*================================= HEADER ===============================*/
@@ -461,6 +473,45 @@
               .loop(@i);
             }
           }//progress
+
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          .goals-successes {
+            table {
+              width: 100%;
+              margin: 0 0 14px;
+
+              tr {
+
+                td {
+                  padding: 5px 9px;
+                  border-bottom: 1px solid #fff;
+                  background: #f4f4f4;
+
+                  font-family: @default-font;
+                  font-size: 12px;
+                  line-height: 14px;
+                  color:#464646;
+
+                  strong {
+                    font-family: @default-bold-font;
+                  }
+                }
+
+                .right {
+                  text-align: right;
+                }
+
+                &:hover {
+                  td {
+                    background: #fde8e2;
+                  }
+                }
+              }
+            }
+          }
+
         }//support
       }//sidebar
 
@@ -475,6 +526,17 @@
         width: 590px;
         padding: 30px 0 0;
 
+        .admin-controls {
+          a,a:link {
+            margin: 0 10px 0 0;
+            font-size: 12px;
+            color:#fff;
+          }
+          a:first-child {
+            margin: 0 !important;
+          }
+        }
+
         h2 {
           overflow: hidden;
           margin: 0 0 14px;
@@ -483,12 +545,51 @@
           line-height: 31px;
           color:#464646;
         }
-
+        .info-details {
+          margin: 0 0 20px;
+          padding: 20px;
+          background:  url("@{images-folder}/dream-info-details-bg.png") #ffd843 no-repeat left 13px;
+          font-family: @default-font;
+          font-size: 14px;
+          line-height: 18px;
+          color: #010000;
+        }
         .description {
           margin: 0 0 30px;
           font-size: 14px;
           line-height: 18px;
           color:#464646;
+
+          > span.success {
+            display: block;
+            height: 56px;
+            padding: 20px 0 20px 20px;
+            margin: 0 0 22px;
+
+            background: #26e47e;
+            background: -moz-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, #26e47e), color-stop(100%, #00cbdd));
+            background: -webkit-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -o-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -ms-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: linear-gradient(to right, #26e47e 0%, #00cbdd 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26e47e', endColorstr='#00cbdd', GradientType=1 );
+
+            em {
+              display: inline-block;
+              height: 19px;
+              padding: 0 0 0 35px;
+
+              line-height: 20px;
+              background: url("@{images-folder}/dream-succeeded.png") no-repeat left center;
+
+              font-family: @default-bold-font;
+              font-style: normal;
+              font-size: 18px;
+              line-height: 20px;
+              color:#202020;
+            }
+          }
 
           p {
             margin: 0 0 21px;

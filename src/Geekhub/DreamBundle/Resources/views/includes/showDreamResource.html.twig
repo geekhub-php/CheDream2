@@ -8,62 +8,57 @@
     <div class="goals-successes">
         {% if dream.dreamFinancialResources|length > 0 %}
             <h4>Фінансові витрати</h4>
-                <ul>
-                    {% for finance in dream.dreamFinancialResources %}
-                        <li>
-                            {{ finance.title }}
-                            <span class="label label-default">{{ finance.quantity }} грн.</span>
-                            <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
-                        </li>
-                    {% endfor %}
-                </ul>
+            <table border="0" cellpadding="0" cellspacing="0">
+                {% for finance in dream.dreamFinancialResources %}
+                    <tr>
+                        <td>{{ finance.title }}</td>
+                        <td class="right"><strong>{{ finResource(finance, dream) }}</strong>/{{ finance.quantity }} грн.</td>
+                    </tr>
+                {% endfor %}
+            </table>
         {% endif %}
         {% if dream.dreamEquipmentResources|length > 0 %}
-            <h4 class="text-center"><span class="glyphicon glyphicon-cog"> </span> Інструменти/обладнання</h4>
-            <div class="table-responsive">
-                <table class="table-condensed table-hover" style="background-color: #ffffff; border-radius: 10px;">
-                    {% for equipment in dream.dreamEquipmentResources %}
-                        {% if equipment.quantityType == 'piece' %}
-                            {% set eType = 'шт.' %}
-                        {% elseif equipment.quantityType == 'kg' %}
-                            {% set eType = 'кг.' %}
-                        {% else %}
-                            {% set eType = 'тон.' %}
-                        {% endif %}
+            <h4>Інструменти/обладнання</h4>
+            <table border="0" cellpadding="0" cellspacing="0">
+                {% for equipment in dream.dreamEquipmentResources %}
+                    {% if equipment.quantityType == 'piece' %}
+                        {% set eType = 'шт.' %}
+                    {% elseif equipment.quantityType == 'kg' %}
+                        {% set eType = 'кг.' %}
+                    {% else %}
+                        {% set eType = 'тон.' %}
+                    {% endif %}
+                    <tr>
+                        <td style="width: 80%;">
+                            {{ equipment.title }}
+                        </td>
+                        <td style="width: 10%; text-align: right;">
+                            <span class="label label-default">{{ equipment.quantity }} {{ eType }}</span>
+                        </td>
+                        <td style="width: 10%;">
+                            <span class="label label-info">{{ equipResource(equipment, dream) }} {{ eType }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if dream.dreamWorkResources|length > 0 %}
+            <h4>Роботи та ресурси</h4>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    {% for work in dream.dreamWorkResources %}
                         <tr>
                             <td style="width: 80%;">
-                                {{ equipment.title }}
+                                {{ work.title }}
                             </td>
                             <td style="width: 10%; text-align: right;">
-                                <span class="label label-default">{{ equipment.quantity }} {{ eType }}</span>
+                                <span class="label label-default">{{ work.quantity }} дн.</span>
                             </td>
                             <td style="width: 10%;">
-                                <span class="label label-info">{{ equipResource(equipment, dream) }} {{ eType }}</span>
+                                <span class="label label-info">{{ workResource(work, dream) }} дн.</span>
                             </td>
                         </tr>
                     {% endfor %}
                 </table>
-            </div>
-        {% endif %}
-        {% if dream.dreamWorkResources|length > 0 %}
-            <h4 class="text-center"><span class="glyphicon glyphicon-user"> </span> Роботи та ресурси</h4>
-                <div class="table-responsive">
-                    <table class="table-condensed table-hover" style="background-color: #ffffff; border-radius: 10px;">
-                        {% for work in dream.dreamWorkResources %}
-                            <tr>
-                                <td style="width: 80%;">
-                                    {{ work.title }}
-                                </td>
-                                <td style="width: 10%; text-align: right;">
-                                    <span class="label label-default">{{ work.quantity }} дн.</span>
-                                </td>
-                                <td style="width: 10%;">
-                                    <span class="label label-info">{{ workResource(work, dream) }} дн.</span>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
         {% endif %}
     </div>
 
