@@ -37,7 +37,7 @@ class RegistrationSubscriber
         }
 
         $path = explode('/', $this->container->get('router')->getContext()->getPathInfo());
-        if (in_array($path[0], $this->ignoredPrefixRoutes)) {
+        if (in_array($path[1], $this->ignoredPrefixRoutes)) {
             return;
         }
 
