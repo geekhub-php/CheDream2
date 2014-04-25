@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "510aa85a01974aee302a1759b8d308ec",
+    "hash": "c995532efa8a4881898d58b3c4acbd59",
     "packages": [
         {
             "name": "ahonymous/fontello",
@@ -139,7 +139,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -925,12 +925,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "b240fe9dff876b1d6aaba15933789a1c2414c3ab"
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/b240fe9dff876b1d6aaba15933789a1c2414c3ab",
-                "reference": "b240fe9dff876b1d6aaba15933789a1c2414c3ab",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +973,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-04-25 16:44:03"
+            "time": "2014-04-25 17:27:17"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -1980,7 +1980,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],

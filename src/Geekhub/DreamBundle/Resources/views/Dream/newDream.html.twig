@@ -62,7 +62,7 @@
                 </li>
                 <li class="input-block">
                     <label class="label required">Кінцева дата</label>
-                    {{ form_widget(form.expiredDate) }}
+                    {{ form_widget(form.expiredDate, {'attr': {'placeholder': 'дд-мм-рррр'} } ) }}
                     {{ form_errors(form.expiredDate)  }}
                 </li>
                 <li class="input-block">
@@ -158,6 +158,11 @@
         $('#btnDreamSubmit').click(function(){
             $('#create-dream-form').get(0).submit();
         });
+
+        $(function() {
+            $( "#newDreamForm_expiredDate" ).datepicker({"dateFormat": "yy-mm-dd", "regional": "uk"});
+        });
+
         $(document).ready(function() {
             $('ul.help-block li a').hide();
             $('#newDreamForm_dreamPictures').get(0).value = '';
