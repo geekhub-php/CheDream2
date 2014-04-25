@@ -17,7 +17,7 @@
     }
 
     h4 {
-      margin: 0 0 10px;
+      padding: 0 0 10px;
       font-family: @default-bold-font;
       font-size: 14px;
       line-height: 18px;
@@ -257,6 +257,12 @@
             }
           }
 
+          h3 {
+            border: 0;
+            padding: 0;
+            margin: 0 0 12px;
+          }
+
           /*================================= SLIDERS ===============================*/
           /*================================= SLIDERS ===============================*/
           /*================================= SLIDERS ===============================*/
@@ -478,6 +484,30 @@
           /*================================= SLIDERS ===============================*/
           /*================================= SLIDERS ===============================*/
           .goals-successes {
+            > div {
+              border-top: 1px solid #e1e1e1;
+            }
+
+            h4 {
+              padding:  10px 0 10px 33px;
+            }
+
+            .finances {
+              h4 {
+                background: url("@{images-folder}/financial-results.png") no-repeat 3px center;
+              }
+            }
+            .equipment {
+              h4 {
+                background: url("@{images-folder}/equipment-results.png") no-repeat 3px center;
+              }
+            }
+            .resources {
+              h4 {
+                background: url("@{images-folder}/physical-results.png") no-repeat 3px center;
+              }
+            }
+
             table {
               width: 100%;
               margin: 0 0 14px;
@@ -499,7 +529,33 @@
                   }
                 }
 
+                .add {
+                  width: 20px;
+                  padding: 0 5px 0 0;
+                  a {
+                    display: block;
+                    width: 19px;
+                    height: 19px;
+                    background: #f2602c;
+
+                    text-align: center;
+                    font-size: 24px;
+                    line-height: 20px;
+                    color:#fff;
+
+                    border-radius: 20px;
+                    -moz-border-radius: 20px;
+                    -webkit-border-radius: 20px;
+                    background-clip: padding-box;
+
+                    &:hover {
+                      background:#ffb21c;
+                    }
+                  }
+                }
+
                 .right {
+                  width: 30%;
                   text-align: right;
                 }
 
