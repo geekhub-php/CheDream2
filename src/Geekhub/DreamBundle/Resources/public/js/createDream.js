@@ -48,7 +48,10 @@ function addFormToCollection($collectionHolder, $newLinkLi) {
 
 function appendDeleteLink($li) {
     var delete_resource = Translator.trans("dream.js.delete_resource");
-    var $deleteLink = $('<a href="#" class="btn btn-xs btn-danger pull-right">' + delete_resource + '</a>');
+    //var $deleteLink = $('<a href="#" class="btn btn-xs btn-danger pull-right">' + delete_resource + '</a>');
+    var $deleteLink = $('<a href="#" class="close">&times;</a>');
+    
+    
     $li.append($deleteLink);
 
     $deleteLink.on('click', function(e) {

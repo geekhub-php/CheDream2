@@ -13,6 +13,17 @@ $(function() {
     });
     
     
+    $header.find('.show-dreams').on('click', function() {
+        $header.addClass('dreams-active');
+    });
+    
+    $(document).on('click', function(e) {
+        var $target = $(e.target);
+        if ($target.closest('.header').length && $target.closest('.user-dreams-block').length) return;
+        $header.removeClass('dreams-active');
+    });
+    
+    
     if ($('.custom-radio').length) {
         executeCustomRadio();
     }

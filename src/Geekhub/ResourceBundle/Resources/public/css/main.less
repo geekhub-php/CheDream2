@@ -1,0 +1,91 @@
+.wrap{
+  background: url("../images/banner-shadow-large.png") center 316px no-repeat;
+  #dreamCarousel{
+    .carousel-indicators{
+      top: 0;
+      left: 0;
+      z-index: 0;
+      height: inherit;
+      width: inherit;
+      margin-left: 0;
+      li{
+        display: block;
+        overflow: hidden;
+        height: 158px;
+        width: 229px;
+        margin: 0;
+        background-color: #fff;
+        border: 0;
+        border-radius: 0;
+        border-bottom: solid 1px #e9e9e9;
+        text-indent: 0;
+        &:hover{
+          position: relative;
+          left: -12px;
+          width: 241px;
+        }
+        &.active{
+          position: relative;
+          left: -12px;
+          width: 241px;
+          background: #f1592a; /* Old browsers */
+          background: -moz-linear-gradient(left,  #f1592a 0%, #fcb040 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left, right, color-stop(0%,#f1592a), color-stop(100%,#fcb040)); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(left,  #f1592a 0%,#fcb040 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(left,  #f1592a 0%,#fcb040 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(left,  #f1592a 0%,#fcb040 100%); /* IE10+ */
+          background: linear-gradient(to right,  #f1592a 0%,#fcb040 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1592a', endColorstr='#fcb040',GradientType=0 ); /* IE6-9 */
+
+        }
+        &:hover p{
+          margin: 18px 31px;
+          color: #17d9a5;
+        }
+        &.active p{
+          margin: 18px 31px;
+          color: #fff;
+        }
+        p{
+          margin: 18px 18px;
+          font-family: 'Daxpro', sans-serif;
+          font-weight: bold;
+          font-size: 23px;
+          color: #464646;
+          text-align: left;
+        }
+        &:nth-child(odd){
+          position: absolute;
+          right: 0;
+          &.active, &:hover{
+            left: 729px;
+            p{
+              margin: 18px 18px;
+            }
+          }
+        }
+        &:last-child, &:nth-last-child(2){
+          border-bottom: 0;
+        }
+      }
+
+      .active{
+        height: 158px;
+        width: 229px;
+      }
+
+    }
+    .carousel-inner{
+      width: 498px;
+      height: 316px;
+      margin: 0 auto;
+
+      .item, & a, & img{
+        height: inherit;
+        width: inherit;
+      }
+    }
+  }
+
+
+}

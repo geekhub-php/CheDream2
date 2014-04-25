@@ -1,30 +1,23 @@
-<div>
+<div class="support">
+
+    <p class="summary">Підтримало <span>{{contributors|length}}</span></p>
+
+    {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' %}
+
     <h3>Кошторис проекту:</h3>
-
-    <div> {# financial #}
+    <div class="goals-successes">
         {% if dream.dreamFinancialResources|length > 0 %}
-            <h4 class="text-center"><span class="glyphicon glyphicon-usd"> </span> Фінансові витрати</h4>
-                <div class="table-responsive">
-                    <table class="table-condensed table-hover" style="background-color: #ffffff; border-radius: 10px;">
-                        {% for finance in dream.dreamFinancialResources %}
-                            <tr>
-                                <td style="width: 80%;">
-                                    {{ finance.title }}
-                                </td>
-                                <td style="width: 10%; text-align: right;">
-                                    <span class="label label-default">{{ finance.quantity }} грн.</span>
-                                </td>
-                                <td style="width: 10%;">
-                                    <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
+            <h4>Фінансові витрати</h4>
+                <ul>
+                    {% for finance in dream.dreamFinancialResources %}
+                        <li>
+                            {{ finance.title }}
+                            <span class="label label-default">{{ finance.quantity }} грн.</span>
+                            <span class="label label-info">{{ finResource(finance, dream) }} грн.</span>
+                        </li>
+                    {% endfor %}
+                </ul>
         {% endif %}
-    </div>
-
-    <div> {# equipment #}
         {% if dream.dreamEquipmentResources|length > 0 %}
             <h4 class="text-center"><span class="glyphicon glyphicon-cog"> </span> Інструменти/обладнання</h4>
             <div class="table-responsive">
@@ -52,9 +45,6 @@
                 </table>
             </div>
         {% endif %}
-    </div>
-
-    <div>  {# work #}
         {% if dream.dreamWorkResources|length > 0 %}
             <h4 class="text-center"><span class="glyphicon glyphicon-user"> </span> Роботи та ресурси</h4>
                 <div class="table-responsive">

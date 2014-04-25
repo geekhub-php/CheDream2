@@ -1,39 +1,51 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
 {% block content %}
+    <div id="dream">
+        <div id="dream-details">
+            {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
 
-    {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+            <div class="details-content">
+                <div class="sidebar">
+                    <div class="creator">
+                        <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
+                        <a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;">
+                            {{ dream.author.firstName }} {{ dream.author.lastName }}
+                        </a>
+                    </div>
+                    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
 
-    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
+                    {# Resources start #}
+                    {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
+                    {# Resources end #}
 
-    <div class="row">
-        <div class="col-md-4">
-            {# Resources start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
-            {# Resources end #}
+                    {% if dream.currentStatus == 'collecting-resources' %}
+                        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
+                    {% endif %}
+                    {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
+                    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
+                    {% if dream.currentStatus == 'implementing' %}
+                        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
+                    {% endif %}
+                </div>
+                <div class="details">
+                    <h2>{{ dream.title }}</h2>
+                    <div class="description">
+                        {{ dream.description|raw }}
+                    </div>
+
+                    {# participants start #}
+                        {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
+                    {# participants end #}
+                    <br/>
+                    {# comments start #}
+                        {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
+                    {# comments end #}
+                </div>
+                <div class="clear"></div>
+            </div>
         </div>
-
-        <div class="col-md-8">
-
-            {# participants start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
-            {# participants end #}
-            <br/>
-            {# comments start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
-            {# comments end #}
-
-        </div>
-
     </div>
-    {% if dream.currentStatus == 'collecting-resources' %}
-        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
-    {% endif %}
-    {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
-    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
-    {% if dream.currentStatus == 'implementing' %}
-        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
-    {% endif %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}

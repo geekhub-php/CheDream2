@@ -22,7 +22,6 @@ class PageController extends Controller
                     'attr' => array('rows' => '15')
                 ))
             ->add('captcha', 'captcha', array('label' => 'contacts.write_us.captcha'))
-            ->add('submit', 'submit', array('label' => 'contacts.write_us.submit'))
             ->setAction($this->generateUrl('page_contacts'))
             ->getForm();
 
