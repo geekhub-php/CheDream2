@@ -53,7 +53,6 @@ class DreamController extends Controller
 
         if ($request->isMethod('POST')) {
 
-            var_dump(new DateTime()); exit;
             $form->handleRequest($request);
 
             if ($form->isValid()) {
