@@ -13,10 +13,10 @@
             
             <div class="media-block">
                 {% if user.phone is not null %}
-                    <a href="mailto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
+                    <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
                 {% endif %}
                 {% if user.skype is not null %}
-                    <a href="skype:{{ user.skype }}" class="skype"><span class="icon icon-skype"></span></a>
+                    <a href="callto:{{ user.skype }}" class="skype"><span class="icon icon-skype"></span></a>
                 {% endif %}
                 {% if user.email is not null %}
                     <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span></a>
@@ -77,7 +77,7 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            
+            <div id="favorites-block">
             {% if user.favoriteDreams is not empty %}
                 <div class="caption-block">
                     <h2 class="caption">Favs</h2>
@@ -85,12 +85,13 @@
                 
                 <ul class="dreams-list row">
                     {% for dream in user.favoriteDreams %}
-                        <li class="col-md-6">
-                            {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                        <li id="dream{{ dream.id }}" class="col-md-6">
+                            {{ include ('GeekhubUserBundle:User:dream_favorite_miniature.html.twig', {'dream': dream}) }}
                         </li>
                     {% endfor %}
                 </ul>
             {% endif %}
+            </div>
         </div>
     </div>
 </div> <!--/Content-->
@@ -145,6 +146,24 @@
         });
    });
 
+    $('#unfavorite').on('click', function(event) {
+        console.log('remove from fav');
+        var dreamId = $(event.target).data('idmedia')
+        var $this = $(this);
+        var path1 = Routing.generate('dream_ajax_dream_removeFromFavorite');
+        $.post(path1, {id : dreamId})
+            .done(function(msgDone) {
+                console.log(msgDone);
+                if ($this.closest('ul').find('li').length == 1) {
+                    $('#favorites-block').remove();
+                } else 
+                $('#dream'+dreamId).remove();
+            })
+            .error(function(msg) {
+                console.log(msg);
+            }
+        );
+    });
 
 </script>
 {% endblock javascript %}

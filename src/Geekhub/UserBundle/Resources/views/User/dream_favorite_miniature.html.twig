@@ -4,7 +4,7 @@
 <span class="info-block">
     <span class="title">
         {{ dream.title }}
+        <a href="#" id="unfavorite" class="close" data-idmedia="{{ dream.id }}">&times;</a>
     </span>
     <span class="description">{{ dream.description|dotdotdot(150)|raw }}</span>
 </span>
-
