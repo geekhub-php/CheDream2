@@ -48,10 +48,7 @@
     {{ parent() }}
     <script>
         $(function(){
-            $(".dream-header .gallery-item").fancybox({
-                openEffect	: 'none',
-                closeEffect	: 'none'
-            });
+            $(".dream-header .gallery-item").fancybox();
             $(".dream-header .video").fancybox({
                 maxWidth	: 800,
                 maxHeight	: 600,
