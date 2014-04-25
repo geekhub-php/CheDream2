@@ -13,14 +13,9 @@
         <form method="POST" enctype="multipart/form-data" action="{{ path('profile_update_contacts') }}">
             <div class="row">
                 <div class="col-md-5">
-                  <div class="fileinput-button" id="user-avatar-image">
                     <div id="user-avatar-container">
                         <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail" />
-                        <input id="dream_poster" type="file" name="dream-poster" />
                     </div>
-                  </div>
-                  <div id="errors" class="files">
-                  </div>
                     {# media avatar, 'big' #}
                     {# form_widget(form.avatar) #}
                 </div>
@@ -46,7 +41,3 @@
         </form>
     </div>
 {% endblock content %}
-
-{% block javascript %}
-  {{ parent() }}
-{% endblock javascript %}
