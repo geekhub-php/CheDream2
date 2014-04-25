@@ -19,7 +19,7 @@ class RegistrationSubscriber
 {
     const UPDATE_CONTACTS_ROUTE = 'profile_update_contacts';
 
-    protected $ignoredPrefixRoutes = ['connect', 'login-social', 'connect-account'];
+    protected $ignoredPrefixRoutes = ['connect', 'login-social', 'connect-account', 'upload'];
     protected $container;
 
     /**

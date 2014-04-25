@@ -13,6 +13,11 @@ class VkontakteResponse
 
     public function getResponse($field)
     {
-        return $this->response[0][$field];
+        if (array_key_exists($field, $this->response[0])) { 
+             return $this->response[0][$field];
+        }
+        else {
+            return '';
+        }
     }
 }
