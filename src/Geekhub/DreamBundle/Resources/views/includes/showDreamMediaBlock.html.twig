@@ -65,7 +65,7 @@
                 {% for picture in dream.mediaPictures %}
                     {% if loop.index <= 9 %}
                         <li>
-                            <a class="gallery-item rel="gallery"" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
