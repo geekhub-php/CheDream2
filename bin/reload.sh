@@ -4,7 +4,7 @@ echo ""
 echo "Выберите необходимое действие:"
 echo "1 - Стандартный reload."
 echo "2 - Перезагрузка БД."
-echo "3 - Перезагрузка БД и запуск тестов."
+echo "3 - ТЕСТЫ."
 echo "0 - Выход. \n"
 read reload
 
@@ -46,15 +46,36 @@ case $reload in
     php app/console cache:clear
 ;;
 3)
-    echo "Перезагрузка БД и запуск тестов. \n"
-    php app/console doctrine:database:drop --force
-    php app/console doctrine:database:create
-    php app/console doctrine:schema:update --force
-    php app/console cache:clear
-    php app/console doctrine:fixtures:load --no-interaction
-    php app/console cache:clear
+    echo ""
+    echo "Выберите необходимое действие:"
+    echo "1 - Запуск всех тестов. \n"
+    echo "2 - Запуск функциональных тестов. \n"
+    read testing
 
-    sh bin/tests.sh
+    case $testing in
+    1)
+        echo "Запуск всех тестов. \n"
+        php app/console doctrine:database:drop --force
+        php app/console doctrine:database:create
+        php app/console doctrine:schema:update --force
+        php app/console cache:clear
+        php app/console doctrine:fixtures:load --no-interaction
+        php app/console cache:clear
+
+        sh bin/tests.sh
+    ;;
+    2)
+        echo "Запуск функциональных тестов. \n"
+        php app/console doctrine:database:drop --force
+        php app/console doctrine:database:create
+        php app/console doctrine:schema:update --force
+        php app/console cache:clear
+        php app/console doctrine:fixtures:load --no-interaction
+        php app/console cache:clear
+
+        bin/phpunit -c app
+    ;;
+    esac
 ;;
 0)
 exit 0

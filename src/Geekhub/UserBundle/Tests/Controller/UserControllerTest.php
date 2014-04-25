@@ -62,8 +62,7 @@ class UserControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/user/edit');
 
-        $avatarSrc = $crawler->filter('#user-avatar-container img')->attr('src');
-        $avatar = realpath($client->getKernel()->getRootDir() . '/../web' . $avatarSrc);
+        $avatar = realpath(__DIR__ . '/../../DataFixtures/ORM/images/darthVader.jpg');
 
         $form = $crawler->selectButton('_submit')->form();
         $form['newUserForm[email]'] = 'darthVader@yahoo.com';
@@ -81,7 +80,10 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/users/' . $dart->getId());
 
         $filesystem = new Filesystem;
-        $filesystem->dumpFile('/var/www/test.html', $client->getResponse()->getContent());
+        $filesystem->dumpFile(
+            $client->getKernel()->getRootDir() . '/cache/web/test.html',
+            $client->getResponse()->getContent()
+        );
 
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Darth Vader")')->count());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Who is your daddy?")')->count());
@@ -95,8 +97,7 @@ class UserControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/user/edit');
 
-        $avatarSrc = $crawler->filter('#user-avatar-container img')->attr('src');
-        $avatar = realpath($client->getKernel()->getRootDir() . '/../web' . $avatarSrc);
+        $avatar = realpath(__DIR__ . '/../../DataFixtures/ORM/images/darthVader.jpg');
 
         $form = $crawler->selectButton('_submit')->form();
         $form['newUserForm[email]'] = 'darthVader@example.com';
@@ -111,9 +112,9 @@ class UserControllerTest extends WebTestCase
     }
 
     /**
-     * @param Client $client
-     * @param string $username
-     * @param string $password
+     * @param  Client                                $client
+     * @param  string                                $username
+     * @param  string                                $password
      * @return \Symfony\Component\DomCrawler\Crawler
      */
     protected function loginAs(Client $client, $username, $password)
