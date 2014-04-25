@@ -31,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DreamController extends Controller
 {
@@ -51,6 +52,8 @@ class DreamController extends Controller
         ));
 
         if ($request->isMethod('POST')) {
+
+            var_dump(new DateTime()); exit;
             $form->handleRequest($request);
 
             if ($form->isValid()) {
