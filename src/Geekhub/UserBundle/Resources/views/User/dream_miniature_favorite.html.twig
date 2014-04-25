@@ -1,0 +1,19 @@
+<div id="dream{{ dream.id }}">
+<a href="{{ path('view_dream', {'slug': dream.slug}) }}">
+<div class="col-md-2"><img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail"></div>
+<div class="col-md-4">
+    <div class="row">
+     <h4>{{ dream.title }}</h4>
+    </div>
+    <div class="row">
+     <p>{{ dream.description|dotdotdot(150)|raw }}</p>
+    </div>
+</div>
+</a>
+    </div>
+    {% if app.user is same as(user) %}
+    <div id="unfavorite"  data-idmedia="{{ dream.id }}">
+    nnn
+    </div>
+    {% endif %}
+</div>
