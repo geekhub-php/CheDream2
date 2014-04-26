@@ -64,7 +64,7 @@ class DreamController extends Controller
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add(
-                        'dream',
+                        'dreamMessage',
                         'Мрія успішно створена.'
                     );
                     return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
@@ -79,7 +79,7 @@ class DreamController extends Controller
                 $tagManager->saveTagging($dream);
 
                 $this->get('session')->getFlashBag()->add(
-                    'dream',
+                    'dreamMessage',
                     'Мрія успішно створена.'
                 );
 
@@ -125,7 +125,7 @@ class DreamController extends Controller
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add(
-                        'dream',
+                        'dreamMessage',
                         'Мрія відредагована.'
                     );
                     return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
@@ -139,7 +139,7 @@ class DreamController extends Controller
                 $tagManager->saveTagging($dream);
 
                 $this->get('session')->getFlashBag()->add(
-                    'dream',
+                    'dreamMessage',
                     'Мрія відредагована.'
                 );
                 return $this->redirect($this->generateUrl('geekhub_dream_homepage'));

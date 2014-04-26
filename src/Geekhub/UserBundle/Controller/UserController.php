@@ -43,7 +43,7 @@ class UserController extends Controller
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add(
-                    'dream',
+                    'dreamMessage',
                     'Ваш профіль відредаговано.'
                 );
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));

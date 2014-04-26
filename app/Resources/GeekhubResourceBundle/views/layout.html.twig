@@ -46,7 +46,7 @@
                 {% endblock %}
                 {% block main %}
                     <div class="wrap">
-                        {% for flashMessage in app.session.flashbag.get('dream') %}
+                        {% for flashMessage in app.session.flashbag.get('dreamMessage') %}
                             <div class="alert alert-success">
                                 {{ flashMessage|trans }}
                             </div>
