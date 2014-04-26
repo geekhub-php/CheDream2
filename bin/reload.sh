@@ -43,6 +43,8 @@ case $reload in
     php app/console doctrine:database:create
     php app/console doctrine:schema:update --force
     php app/console doctrine:fixtures:load --no-interaction
+    php app/console assets:install --symlink
+    php app/console assetic:dump
     php app/console cache:clear
 ;;
 3)
@@ -93,5 +95,3 @@ case $reload in
     sh bin/reload.sh
 
 esac
-
-

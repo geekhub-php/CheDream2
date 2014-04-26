@@ -1,145 +1,108 @@
-<div class="row" style="margin-top: 40px;">
-    <div class="col-md-4">
-        {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                <h3>Підтримати:</h3>
-                <div class="btn-group-vertical" style="width: 100%">
-                    {% if dream.dreamFinancialResources|length > 0 %}
-                        <input type="button" class="btn btn-default btn-lg btn-block" id="finFormContributorShow" value="Фінансово" />
-                        <div id="finFormContributor">     {# financial contribute form start #}
+<div class="ways-to-support">
+    {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+            <h3>Підтримати:</h3>
+            <ul>
+                {% if dream.dreamFinancialResources|length > 0 %}
+                    <li class="financial">
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".financial-help-popup">Фінансово</a>
+                        <div class="financial-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                            {{ form_start(finForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+                                        {{ form_row(finForm.financialResource) }}
+                                        {{ form_row(finForm.quantity) }}
+                                        {{ form_row(finForm.hiddenContributor) }}
 
-                            {{ form_row(finForm.financialResource) }}
-                            {{ form_row(finForm.quantity) }}
-                            {{ form_row(finForm.hiddenContributor) }}
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-fin">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel" data-dismiss="modal">
 
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-fin">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="finButCancel">
-
-                            {{ form_errors(finForm) }}
-                            {{ form_rest(finForm) }}
-                            {{ form_end(finForm) }}
-                            <br/>
-                            <br/>
-                        </div>    {# financial contribute form end #}
-                    {% endif %}
-                    {% if dream.dreamEquipmentResources|length > 0 %}
-                        <input type="button" class="btn btn-default btn-lg btn-block" id="equipFormContributorShow" value="Обладнанням / Технікою" />
-                        <div id="equipFormContributor">     {# equipment contribute form start #}
-
-                            {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-
-                            {{ form_row(equipForm.equipmentResource) }}
-                            {{ form_row(equipForm.quantity) }}
-                            {{ form_row(equipForm.hiddenContributor) }}
-
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-equip">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel">
-
-                            {{ form_errors(equipForm) }}
-                            {{ form_rest(equipForm) }}
-                            {{ form_end(equipForm) }}
-                            <br/>
-                            <br/>
-                        </div>    {# equipment contribute form end #}
-                    {% endif %}
-                    {% if dream.dreamWorkResources|length > 0 %}
-                        <input type="button" class="btn btn-default btn-lg btn-block"  id="workFormContributorShow" value="Провести роботи" />
-                        <div id="workFormContributor">     {# work contribute form start #}
-
-                            {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-
-                            {{ form_row(workForm.workResource) }}
-                            {{ form_row(workForm.quantity) }}
-                            {{ form_row(workForm.hiddenContributor) }}
-
-                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-work">
-                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel">
-
-                            {{ form_errors(workForm) }}
-                            {{ form_rest(workForm) }}
-                            {{ form_end(workForm) }}
-                            <br/>
-                            <br/>
-                        </div>    {# work contribute form end #}
-                    {% endif %}
-
-                    <input type="button" class="btn btn-default btn-lg btn-block" id="otherFormContributorShow" value="Інша допомога" />
-
-                    <div id="otherFormContributor">     {# other contribute form start #}
-
-                        {{ form_start(otherForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
-
-                        {{ form_row(otherForm.title) }}
-                        {{ form_row(otherForm.hiddenContributor) }}
-
-                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-other">
-                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="otherButCancel">
-
-                        {{ form_errors(otherForm) }}
-                        {{ form_rest(otherForm) }}
-                        {{ form_end(otherForm) }}
-                        <br/>
-                        <br/>
-                    </div>    {# other contribute form end #}
-
-                </div>
-            {% else %}
-                <div class="alert alert-warning" style="margin-top: 65px;">Щоб підтримати мрію, Вам потрібно авторизуватися.</div>
-            {% endif %}
-        {% endif %}
-    </div>
-
-    <div class="col-md-8">
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (app.user.id == dream.author.id) %}
-            {% if ((dream.currentStatus == 'success') or (dream.currentStatus == 'completed')) %} {% else %}
-                {% if (dream.currentStatus == 'submitted') or (dream.currentStatus == 'rejected') %}
-                    <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs" id="dream-edit-link">{{ 'dream.editDream'|trans }}</a>
-                {% else %}
-                    <button type="button" id="dream-edit-dream-modal" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" title="{{ 'dream.editDream'|trans }}">{{ 'dream.editDream'|trans }}</button>
+                                        {{ form_errors(finForm) }}
+                                        {{ form_rest(finForm) }}
+                                        {{ form_end(finForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 {% endif %}
+                {% if dream.dreamEquipmentResources|length > 0 %}
+                    <li class="equipment">
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".equipment-help-popup">Обладнанням / Технікою</a>
+                        <div class="equipment-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(equipForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
 
-                {% if dream.currentStatus == 'implementing' %}
-                    <button type="button" id="dream-edit-yellowBlock-modal" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
+                                        {{ form_row(equipForm.equipmentResource) }}
+                                        {{ form_row(equipForm.quantity) }}
+                                        {{ form_row(equipForm.hiddenContributor) }}
+
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-equip">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="equipButCancel" data-dismiss="modal">
+
+                                        {{ form_errors(equipForm) }}
+                                        {{ form_rest(equipForm) }}
+                                        {{ form_end(equipForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 {% endif %}
-             {% endif %}
+                {% if dream.dreamWorkResources|length > 0 %}
+                    <li class="physical">
+                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".physical-help-popup">Провести роботи</a>
+                        <div class="physical-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ form_start(workForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                                        {{ form_row(workForm.workResource) }}
+                                        {{ form_row(workForm.quantity) }}
+                                        {{ form_row(workForm.hiddenContributor) }}
+
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-work">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="workButCancel" data-dismiss="modal">
+
+                                        {{ form_errors(workForm) }}
+                                        {{ form_rest(workForm) }}
+                                        {{ form_end(workForm) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+                <li class="other">
+                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".other-help-popup">Інша допомога</a>
+                    <div class="other-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {{ form_start(otherForm, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
+
+                                    {{ form_row(otherForm.title) }}
+                                    {{ form_row(otherForm.hiddenContributor) }}
+
+                                    <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-other">
+                                    <input type="button" value="{{ 'dream.cancel'|trans }}" class="text-center btn btn-warning btn-sm pull-right" id="otherButCancel" data-dismiss="modal">
+
+                                    {{ form_errors(otherForm) }}
+                                    {{ form_rest(otherForm) }}
+                                    {{ form_end(otherForm) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        {% else %}
+            <p class="warning">Щоб підтримати мрію, Вам потрібно авторизуватися.</p>
         {% endif %}
-
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted("ROLE_SUPER_ADMIN") %}
-            <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.editDream'|trans }}</a>
-            {% if dream.currentStatus == 'implementing' %}
-                <button type="button" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right" style="margin-right: 20px;" >{{ 'dream.editYellowBlock'|trans }}</button>
-            {% endif %}
-        {% endif %}
-
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id %}
-            {% if dream.currentStatus == 'collecting-resources' %}
-                <button type="button" id="dream-start-collect-res-modal" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</button>
-            {% elseif dream.currentStatus == 'implementing' %}
-                <button type="button" id="dream-finish-collect-res-modal" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs pull-right" style="margin-right: 20px;" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</button>
-            {% endif %}
-        {% endif %}
-
-        {% if dream.currentStatus == 'implementing' and dream.implementedDescription is not null %}
-            <h4>Інформація:</h4>
-            <div class="alert alert-warning" >
-                {{ dream.implementedDescription|raw }}
-            </div>
-        {% endif %}
-
-        {% if ((dream.currentStatus == 'completed') or (dream.currentStatus == 'success')) and dream.completedDescription is not null %}
-            <h4>Мрія втілена:</h4>
-            <div class="alert alert-info" >
-                {{ dream.completedDescription|raw }}
-            </div>
-        {% endif %}
-
-        <h2>{{ dream.title }}</h2>
-
-        <div>
-            {{ dream.description|raw }}
-        </div>
-    </div>
-
+    {% endif %}
 </div>

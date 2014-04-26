@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "510aa85a01974aee302a1759b8d308ec",
+    "hash": "c995532efa8a4881898d58b3c4acbd59",
     "packages": [
         {
             "name": "ahonymous/fontello",
@@ -925,12 +925,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "36629f5976f9f588093bf0bfb5230502fdb0eacf"
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/36629f5976f9f588093bf0bfb5230502fdb0eacf",
-                "reference": "36629f5976f9f588093bf0bfb5230502fdb0eacf",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +973,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-01-24 08:28:48"
+            "time": "2014-04-25 17:27:17"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -1127,12 +1127,12 @@
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -1559,7 +1559,7 @@
                     "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
                 },
                 {
-                    "name": "Alexander",
+                    "name": "Alexander Mols",
                     "email": "iam.asm89@gmail.com",
                     "homepage": "http://asm89.github.io/"
                 },
@@ -1910,7 +1910,7 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -4241,17 +4241,17 @@
         },
         {
             "name": "willdurand/js-translation-bundle",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "target-dir": "Bazinga/Bundle/JsTranslationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
-                "reference": "92d09cead24cef5e007dfbe1259dadbdeb3e1ab1"
+                "reference": "3d1e0b1fafadcbd10475f05c3db84633eb186c32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/92d09cead24cef5e007dfbe1259dadbdeb3e1ab1",
-                "reference": "92d09cead24cef5e007dfbe1259dadbdeb3e1ab1",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/3d1e0b1fafadcbd10475f05c3db84633eb186c32",
+                "reference": "3d1e0b1fafadcbd10475f05c3db84633eb186c32",
                 "shasum": ""
             },
             "require": {
@@ -4295,7 +4295,7 @@
                 "symfony",
                 "translation"
             ],
-            "time": "2014-03-06 11:43:10"
+            "time": "2014-01-20 16:17:52"
         },
         {
             "name": "willdurand/jsonp-callback-validator",

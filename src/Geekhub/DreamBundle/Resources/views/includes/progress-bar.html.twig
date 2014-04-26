@@ -1,0 +1,53 @@
+<div class="work-progress">
+    {% if showPercentOfCompletionFinancial(dream) is not null %}
+        <div class="financial-radial-progress" data-progress="{{ showPercentOfCompletionFinancial(dream) }}">
+            <div class="circle">
+                <div class="mask full">
+                    <div class="fill"></div>
+                </div>
+                <div class="mask half">
+                    <div class="fill"></div>
+                    <div class="fill fix"></div>
+                </div>
+            </div>
+            <div class="inset">
+                <div class="percentage">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if showPercentOfCompletionEquipment(dream) is not null %}
+        <div class="equipmant-radial-progress" data-progress="{{ showPercentOfCompletionEquipment(dream) }}">
+            <div class="circle">
+                <div class="mask full">
+                    <div class="fill"></div>
+                </div>
+                <div class="mask half">
+                    <div class="fill"></div>
+                    <div class="fill fix"></div>
+                </div>
+            </div>
+            <div class="inset">
+                <div class="percentage">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if showPercentOfCompletionWork(dream) is not null %}
+        <div class="work-radial-progress" data-progress="{{ showPercentOfCompletionWork(dream) }}">
+            <div class="circle">
+                <div class="mask full">
+                    <div class="fill"></div>
+                </div>
+                <div class="mask half">
+                    <div class="fill"></div>
+                    <div class="fill fix"></div>
+                </div>
+            </div>
+            <div class="inset">
+                <div class="percentage">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

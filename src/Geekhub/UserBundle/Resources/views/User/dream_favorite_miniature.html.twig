@@ -1,0 +1,10 @@
+<a href="{{ path('view_dream', {'slug': dream.slug}) }}" class="photo-block">
+    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}">
+</a>
+<span class="info-block">
+    <span class="title">
+        {{ dream.title }}
+        <a href="#" id="unfavorite" class="close" data-idmedia="{{ dream.id }}">&times;</a>
+    </span>
+    <span class="description">{{ dream.description|dotdotdot(150)|raw }}</span>
+</span>

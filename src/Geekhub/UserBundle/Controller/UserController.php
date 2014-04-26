@@ -30,22 +30,23 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isValid()) {
-            $hasUser = $em->getRepository('GeekhubUserBundle:User')
+            $mergedUser = $em->getRepository('GeekhubUserBundle:User')
                 ->findOneBy(array(
                     'email' => trim($form->get('email')->getData())
                 ))
             ;
 
-            if ($hasUser == null) {
+            if ($mergedUser == null || $mergedUser->getId() == $user->getId()) {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
             } else {
-                $this->container->get('session')->getFlashBag()->add(
-                    'emailIsBusy',
-                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (".$hasUser->getEmail().")."
-                );
+                return $this->render('GeekhubUserBundle:User:mergeAccounts.html.twig', array(
+                    'mergedUser' => $mergedUser,
+                    'currentUser' => $user,
+                ));
             }
         }
 

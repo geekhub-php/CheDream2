@@ -1,81 +1,72 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
+{% block title %}
+    {{ dream.title }}
+{% endblock %}
 
 {% block content %}
+    <div id="dream">
+        <div id="dream-details">
+            {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
 
-    {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
+            <div class="details-content">
+                <div class="sidebar">
+                    <div class="creator">
+                        <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar') }}" class="showAvatar">
+                        <a href="{{ path('profile_view', {'id': dream.author.id}) }}" style="color: #33333F;">
+                            {{ dream.author.firstName }} {{ dream.author.lastName }}
+                        </a>
+                    </div>
+                    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
+                    {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
 
-    {{ include('GeekhubDreamBundle:includes:showDreamContributDescript.html.twig', { dream: dream } ) }}
+                    <div class="tags">
+                        <h3>{{ 'tags'|trans }}</h3>
+                        {% for tag in dream.tags %}
+                            <p class="pull-left" style="padding-right: 10px;"><span class="glyphicon glyphicon-tag"></span>&nbsp;
+                                <a href="{{ path('dream_by_tag', {'tag': tag.name}) }}" style=" color: #000000;">{{ tag.name }}</a>
+                            </p>
+                        {% endfor %}
+                    </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            {# Resources start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
-            {# Resources end #}
+                    {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
+                    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
+                </div>
+                <div class="details">
+
+                    {{ include('GeekhubDreamBundle:includes:viewDreamStatusDetailsAndControls.html.twig', {dream: dream}) }}
+
+                    {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
+
+                    {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
+                </div>
+                <div class="clear"></div>
+            </div>
         </div>
-
-        <div class="col-md-8">
-
-            {# participants start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
-            {# participants end #}
-            <br/>
-            {# comments start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
-            {# comments end #}
-
-        </div>
-
     </div>
-    {% if dream.currentStatus == 'collecting-resources' %}
-        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
-    {% endif %}
-    {{ include ('GeekhubDreamBundle:includes:dreamStatusCompletedModal.html.twig') }}
-    {{ include ('GeekhubDreamBundle:includes:dreamAdminContactsForAuthor.html.twig') }}
-    {% if dream.currentStatus == 'implementing' %}
-        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
-    {% endif %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
     <script>
-        var finFormHide = function(){
-            $('#finFormContributor').hide();
-        };
-        var equipFormHide = function(){
-            $('#equipFormContributor').hide();
-        };
-        var workFormHide = function(){
-            $('#workFormContributor').hide();
-        };
-        var otherFormHide = function(){
-            $('#otherFormContributor').hide();
-        };
+        $(function(){
+            $(".dream-header .gallery-item").fancybox();
+            $(".dream-header .video").fancybox({
+                maxWidth	: 800,
+                maxHeight	: 600,
+                fitToView	: false,
+                width		: '70%',
+                height		: '70%',
+                autoSize	: false,
+                closeClick	: false,
+                openEffect	: 'none',
+                closeEffect	: 'none'
+            });
 
-        var finFormShow = function() {
-            $('#finFormContributor').fadeIn(500).show();
-        };
-        var equipFormShow = function() {
-            $('#equipFormContributor').fadeIn(500).show();
-        };
-        var workFormShow = function() {
-            $('#workFormContributor').fadeIn(500).show();
-        };
-        var otherFormShow = function() {
-            $('#otherFormContributor').fadeIn(500).show();
-        };
-
-        $(document).ready(function(){
             if ($('#video object').get(0)) {
                 $('#video object').get(0).width='100%';
                 $('#video object').get(0).height=250;
                 $('#video object embed').get(0).width='100%';
                 $('#video object embed').get(0).height=250;
             }
-//            $('#video object embed').attr({wmode:"opaque"});
-            finFormHide();
-            equipFormHide();
-            workFormHide();
-            otherFormHide();
 
             $("#imgUploadCompleted").click(function(){
                 var url = Routing.generate('dream_ajax_load_completed_image');
@@ -107,53 +98,6 @@
                 });
             });
 
-        });
-
-        document.getElementById('links').onclick = function (event) {
-            event = event || window.event;
-            var target = event.target || event.srcElement,
-                    link = target.src ? target.parentNode : target,
-                    options = {index: link, event: event},
-                    links = this.getElementsByTagName('a');
-            blueimp.Gallery(links, options);
-        };
-
-        $('#finFormContributorShow').click(function(){
-            finFormShow();
-            equipFormHide();
-            workFormHide();
-            otherFormHide();
-        });
-        $('#equipFormContributorShow').click(function(){
-            finFormHide();
-            equipFormShow();
-            workFormHide();
-            otherFormHide();
-        });
-        $('#workFormContributorShow').click(function(){
-            finFormHide();
-            equipFormHide();
-            workFormShow();
-            otherFormHide();
-        });
-        $('#otherFormContributorShow').click(function(){
-            finFormHide();
-            equipFormHide();
-            workFormHide();
-            otherFormShow();
-        });
-
-        $('#finButCancel').click(function(){
-            finFormHide();
-        });
-        $('#equipButCancel').click(function(){
-            equipFormHide();
-        });
-        $('#workButCancel').click(function(){
-            workFormHide();
-        });
-        $('#otherButCancel').click(function(){
-            otherFormHide();
         });
     </script>
 {% endblock %}
