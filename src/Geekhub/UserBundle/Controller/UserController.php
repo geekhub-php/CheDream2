@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\Form\FormError;
 
 class UserController extends Controller
 {
@@ -30,23 +31,20 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isValid()) {
-            $hasUser = $em->getRepository('GeekhubUserBundle:User')
+            $mergedUser = $em->getRepository('GeekhubUserBundle:User')
                 ->findOneBy(array(
                     'email' => trim($form->get('email')->getData())
                 ))
             ;
 
-            if ($hasUser == null) {
+            if ($mergedUser == null || $mergedUser->getId() == $user->getId()) {
                 $em->flush();
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
-            } else {
-                $this->container->get('session')->getFlashBag()->add(
-                    'emailIsBusy',
-                    $hasUser->getFirstName()." ".$hasUser->getLastName()." use this email (".$hasUser->getEmail().")."
-                );
-            }
+            } 
+            $form->get('email')->addError(new FormError('Така адреса вже використовується.'));
         }
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
