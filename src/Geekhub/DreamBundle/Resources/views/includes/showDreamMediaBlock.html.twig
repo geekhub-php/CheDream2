@@ -11,7 +11,7 @@
             </li>
             {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
                 {% for picture in dream.mediaCompletedPictures %}
-                    {% if loop.index <= 2%}
+                    {% if loop.index <= 4 %}
                         <li>
                             <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
@@ -27,7 +27,7 @@
                 {% endfor %}
             {% else %}
                 {% for picture in dream.mediaPictures %}
-                    {% if loop.index <= 2 %}
+                    {% if loop.index <= 4 %}
                         <li>
                             <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
@@ -47,7 +47,7 @@
         <ul class="thumbnails no-video">
             {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
                 {% for picture in dream.mediaCompletedPictures %}
-                    {% if loop.index <= 9 %}
+                    {% if loop.index <= 8 %}
                         <li>
                             <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
@@ -63,7 +63,7 @@
                 {% endfor %}
             {% else %}
                 {% for picture in dream.mediaPictures %}
-                    {% if loop.index <= 9 %}
+                    {% if loop.index <= 8 %}
                         <li>
                             <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
