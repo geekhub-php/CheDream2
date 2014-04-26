@@ -32,7 +32,8 @@ class WorkType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Geekhub\DreamBundle\Entity\WorkResource'
+                'data_class' => 'Geekhub\DreamBundle\Entity\WorkResource',
+                'cascade_validation' => true
             )
         );
     }
