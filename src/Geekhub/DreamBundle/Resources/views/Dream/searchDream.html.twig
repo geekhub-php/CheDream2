@@ -12,10 +12,10 @@
                 <div style="float: left;">
                     <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" width="145" height="100">
                 </div>
-                <p style="margin-left: 155px; margin-bottom: 0; font-weight: bold; font-size: 130%; padding: 0;">
-                    <a href="{{ path('view_dream', {'slug': dream.slug}) }}" style=" color: #000000;">{{ dream.title }}</a>
+                <p style="margin-left: 155px; margin-bottom: 0; font-weight: bold; font-size: 200%; padding: 0;">
+                    <a href="{{ path('view_dream', {'slug': dream.slug}) }}" style=" color: #000000;  font-size: 130%">{{ dream.title }}</a>
                 </p>
-                <p  style="margin-left: 155px; margin-bottom: 0; padding: 0; text-align: justify;">
+                <p  style="margin-left: 155px; margin-bottom: 0; padding: 0; text-align: justify; font-size: 130%;">
                     {{ displayLimitWord(dream.description, 27) }}
                 </p>
             </div>
