@@ -1,6 +1,6 @@
 <div class="dream-header">
     <div class="poster">
-        <a class="gallery-item" rel="gallery" href="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}">
+        <a class="gallery-item" rel="gallery" href="{{ dream.mediaPoster|mediaPath }}">
             <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_view_form') }}"/>
         </a>
     </div>
@@ -13,13 +13,13 @@
                 {% for picture in dream.mediaCompletedPictures %}
                     {% if loop.index <= 4 %}
                         <li>
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
                     {% else %}
                         <li class="hidden">
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
@@ -29,13 +29,13 @@
                 {% for picture in dream.mediaPictures %}
                     {% if loop.index <= 4 %}
                         <li>
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
                     {% else %}
                         <li class="hidden">
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
@@ -49,13 +49,13 @@
                 {% for picture in dream.mediaCompletedPictures %}
                     {% if loop.index <= 8 %}
                         <li>
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
                     {% else %}
                         <li class="hidden">
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
@@ -65,13 +65,13 @@
                 {% for picture in dream.mediaPictures %}
                     {% if loop.index <= 8 %}
                         <li>
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
                     {% else %}
                         <li class="hidden">
-                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath|imagine_filter('dream_gallery_view') }}" title="{{ picture.name }}">
+                            <a class="gallery-item" rel="gallery" href="{{ picture|mediaPath }}" title="{{ picture.name }}">
                                 <img src="{{ picture|mediaPath|imagine_filter('dream_pictures_view_form') }}" />
                             </a>
                         </li>
