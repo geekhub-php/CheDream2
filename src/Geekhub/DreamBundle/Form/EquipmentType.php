@@ -30,7 +30,7 @@ class EquipmentType extends AbstractType
                 'label'   => false,
                 'attr' => ['class' => 'resource-field width-2 input-view']
             ])
-            ->add('quantity', 'integer', ['label' => false, 'attr' => ['class' => 'resource-field width-3']]);
+            ->add('quantity', 'money', ['label' => false, 'attr' => ['class' => 'resource-field width-3']]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

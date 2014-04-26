@@ -47,6 +47,15 @@
 {% block javascript %}
     {{ parent() }}
     <script>
+
+        $(document).ready(function() {
+            if ($('.video object').get(0)) {
+                $('.video object').get(0).width=307;
+                $('.video object').get(0).height=173;
+                $('.video object embed').get(0).width=307;
+                $('.video object embed').get(0).height=173;
+            }
+        });
         $(function(){
             $(".dream-header .gallery-item").fancybox();
             $(".dream-header .video").fancybox({
@@ -61,12 +70,6 @@
                 closeEffect	: 'none'
             });
 
-            if ($('#video object').get(0)) {
-                $('#video object').get(0).width='100%';
-                $('#video object').get(0).height=250;
-                $('#video object embed').get(0).width='100%';
-                $('#video object embed').get(0).height=250;
-            }
 
             $("#imgUploadCompleted").click(function(){
                 var url = Routing.generate('dream_ajax_load_completed_image');

@@ -33,5 +33,8 @@ monolog:
 assetic:
     use_controller: true
 
+parameters:
+    hip_mandrill.dispatcher.class: Application\MandrillDispatcherForTestEnv
+
 #swiftmailer:
 #    delivery_address: me@example.com

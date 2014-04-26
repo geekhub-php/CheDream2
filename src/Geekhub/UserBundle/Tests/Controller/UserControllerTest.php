@@ -65,6 +65,8 @@ class UserControllerTest extends WebTestCase
         $avatar = realpath(__DIR__ . '/../../DataFixtures/ORM/images/darthVader.jpg');
 
         $form = $crawler->selectButton('_submit')->form();
+        $form['newUserForm[firstName]'] = 'Darth';
+        $form['newUserForm[lastName]']  = 'Vader';
         $form['newUserForm[email]'] = 'darthVader@yahoo.com';
         $form['newUserForm[about]'] = 'Who is your daddy?';
         $form['newUserForm[phone]'] = '555-5555';
@@ -78,12 +80,6 @@ class UserControllerTest extends WebTestCase
 
         $dart = $client->getContainer()->get('doctrine')->getRepository('GeekhubUserBundle:User')->findOneByUsername('darthVader');
         $crawler = $client->request('GET', '/users/' . $dart->getId());
-
-        $filesystem = new Filesystem;
-        $filesystem->dumpFile(
-            $client->getKernel()->getRootDir() . '/cache/web/test.html',
-            $client->getResponse()->getContent()
-        );
 
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Darth Vader")')->count());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Who is your daddy?")')->count());
