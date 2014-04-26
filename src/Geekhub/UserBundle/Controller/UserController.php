@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\Form\FormError;
 
 class UserController extends Controller
 {
@@ -42,12 +43,8 @@ class UserController extends Controller
                 $em->flush();
 
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
-            } else {
-                return $this->render('GeekhubUserBundle:User:mergeAccounts.html.twig', array(
-                    'mergedUser' => $mergedUser,
-                    'currentUser' => $user,
-                ));
-            }
+            } 
+            $form->get('email')->addError(new FormError('Така адреса вже використовується.'));
         }
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
