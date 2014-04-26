@@ -585,6 +585,15 @@ img                            { vertical-align: middle; }
     border-width: 0 10px 10px;
     border-color: transparent transparent #FFF;
 }
+
+.header .dreams-list .close-block {
+    overflow: hidden;
+    padding: 5px;
+}
+.header .dreams-list .close-block .close {
+    font-size: 14px;
+    font-weight: normal;
+}
 .header .dreams-list .photo-block {
     float: left;
     width: 40px;
@@ -609,7 +618,7 @@ img                            { vertical-align: middle; }
     padding: 7px;
     border-top: 1px solid #E7E7E7;
 }
-.header .dreams-list li:first-child a {
+.header .dreams-list li:nth-child(2) a {
     border-top: 0;
 }
 .header .dreams-list .info-block {
