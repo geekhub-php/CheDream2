@@ -258,6 +258,21 @@ img                            { vertical-align: middle; }
 }
 
 
+body .tooltipster-default {
+	border-radius: 5px !important;
+	border: 0px solid #000 !important;
+	background: #4c4c4c !important;
+	color: #fff !important;
+}
+
+/* Use this next selector to style things like font-size and line-height: */
+body .tooltipster-default .tooltipster-content {
+	font-family: Arial, sans-serif !important;
+	font-size: 12px !important;
+	line-height: 16px !important;
+	padding: 8px 10px !important;
+	overflow: hidden !important;
+}
 /*----------------------------------------------------------------------------------*/
 /*-------------------------------------> Header <-----------------------------------*/
 /*----------------------------------------------------------------------------------*/

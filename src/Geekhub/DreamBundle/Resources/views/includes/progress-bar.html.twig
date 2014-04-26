@@ -1,6 +1,6 @@
 <div class="work-progress">
     {% if showPercentOfCompletionFinancial(dream) is not null %}
-        <div class="financial-radial-progress" data-progress="{{ showPercentOfCompletionFinancial(dream) }}">
+        <div class="financial-radial-progress t-tooltip" data-progress="{{ showPercentOfCompletionFinancial(dream) }}" title="Фінанси">
             <div class="circle">
                 <div class="mask full">
                     <div class="fill"></div>
@@ -17,7 +17,7 @@
         </div>
     {% endif %}
     {% if showPercentOfCompletionEquipment(dream) is not null %}
-        <div class="equipmant-radial-progress" data-progress="{{ showPercentOfCompletionEquipment(dream) }}">
+        <div class="equipmant-radial-progress t-tooltip" data-progress="{{ showPercentOfCompletionEquipment(dream) }}" title="Інструменти">
             <div class="circle">
                 <div class="mask full">
                     <div class="fill"></div>
@@ -34,7 +34,7 @@
         </div>
     {% endif %}
     {% if showPercentOfCompletionWork(dream) is not null %}
-        <div class="work-radial-progress" data-progress="{{ showPercentOfCompletionWork(dream) }}">
+        <div class="work-radial-progress t-tooltip" data-progress="{{ showPercentOfCompletionWork(dream) }}" title="Допомога">
             <div class="circle">
                 <div class="mask full">
                     <div class="fill"></div>

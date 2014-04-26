@@ -1,42 +1,48 @@
-{% set takimBudeNasheMisto = [{'mediaPoster': '/images/main_banner.png', 'title': 'Таким буде наше місто', 'static': true, 'url': '/about' }] %}
-{% set poserDreams = takimBudeNasheMisto|merge(completedDreams|slice(0, 3)) %}
-
-<div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 958px; height: 318px; margin: 0 auto 22px;">
-    <ol class="carousel-indicators">
-        {% for poserDream in poserDreams %}
-            {% if loop.index == 1 %}
-                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index -1}}" class="active">
-                    <p>{{ poserDream.title }}</p>
-                </li>
-            {% else %}
-                <li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1}}">
-                    <p>{{ poserDream.title }}</p>
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ol>
-
-    <div class="carousel-inner" id="dream-slider-container">
-        {% for poserDream in poserDreams %}
-                {% if loop.index == 1 %}
-                    {% set classStyle = 'item active' %}
-                {% else %}
-                    {% set classStyle = 'item' %}
-                {% endif %}
-                <div class="{{ classStyle }}">
-                    {% if poserDream.url is defined %}
-                        {% set url = poserDream.url %}
-                    {% else %}
-                        {% set url = path('view_dream', {'slug': poserDream.slug} ) %}
-                    {% endif %}
-                    <a href="{{ url }}" >
-                    {% if poserDream.mediaPoster.name is defined %}
-                        <img src="{{ poserDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ poserDream.mediaPoster.name }}">
-                    {% else %}
-                        <img src="{{ poserDream.mediaPoster }}" alt="{{ poserDream.title }}">
-                    {% endif %}
-                    </a>
-                </div>
-        {% endfor %}
-    </div>
+<div class="banner-block">
+    <a href="/about" title="Про проект">
+        <img src="/images/about_banner.png" alt="Таким буде наше місто"/>
+    </a>
 </div>
+
+{#{% set takimBudeNasheMisto = [{'mediaPoster': '/images/main_banner.png', 'title': 'Таким буде наше місто', 'static': true, 'url': '/about' }] %}#}
+{#{% set poserDreams = takimBudeNasheMisto|merge(completedDreams|slice(0, 3)) %}#}
+
+{#<div id="dreamCarousel" class="carousel slide" data-ride="carousel" style="width: 958px; height: 318px; margin: 0 auto 22px;">#}
+    {#<ol class="carousel-indicators">#}
+        {#{% for poserDream in poserDreams %}#}
+            {#{% if loop.index == 1 %}#}
+                {#<li data-target="#dreamCarousel" data-slide-to="{{ loop.index -1}}" class="active">#}
+                    {#<p>{{ poserDream.title }}</p>#}
+                {#</li>#}
+            {#{% else %}#}
+                {#<li data-target="#dreamCarousel" data-slide-to="{{ loop.index - 1}}">#}
+                    {#<p>{{ poserDream.title }}</p>#}
+                {#</li>#}
+            {#{% endif %}#}
+        {#{% endfor %}#}
+    {#</ol>#}
+
+    {#<div class="carousel-inner" id="dream-slider-container">#}
+        {#{% for poserDream in poserDreams %}#}
+                {#{% if loop.index == 1 %}#}
+                    {#{% set classStyle = 'item active' %}#}
+                {#{% else %}#}
+                    {#{% set classStyle = 'item' %}#}
+                {#{% endif %}#}
+                {#<div class="{{ classStyle }}">#}
+                    {#{% if poserDream.url is defined %}#}
+                        {#{% set url = poserDream.url %}#}
+                    {#{% else %}#}
+                        {#{% set url = path('view_dream', {'slug': poserDream.slug} ) %}#}
+                    {#{% endif %}#}
+                    {#<a href="{{ url }}" >#}
+                    {#{% if poserDream.mediaPoster.name is defined %}#}
+                        {#<img src="{{ poserDream.mediaPoster|mediaPath|imagine_filter('dream_poster_slider_homePage') }}" alt="{{ poserDream.mediaPoster.name }}">#}
+                    {#{% else %}#}
+                        {#<img src="{{ poserDream.mediaPoster }}" alt="{{ poserDream.title }}">#}
+                    {#{% endif %}#}
+                    {#</a>#}
+                {#</div>#}
+        {#{% endfor %}#}
+    {#</div>#}
+{#</div>#}
