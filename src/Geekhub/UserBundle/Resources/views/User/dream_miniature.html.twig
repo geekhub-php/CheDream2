@@ -1,12 +1,10 @@
-{% if dream.slug is not null %}
-    <a href="{{ path('view_dream', {'slug': dream.slug}) }}" class="photo-block">
-        <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}">
-    </a>
-    <span class="info-block">
-        <span class="title">
-            {{ dream.title }}
-        </span>
-        <span class="description">{{ dream.description|dotdotdot(150)|raw }}</span>
+<a href="{{ path('view_dream', {'slug': dream.slug}) }}" class="photo-block">
+    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}">
+</a>
+<span class="info-block">
+    <span class="title">
+        {{ dream.title }}
     </span>
-{% endif %}
+    <span class="description">{{ dream.description|dotdotdot(150)|raw }}</span>
+</span>
 
