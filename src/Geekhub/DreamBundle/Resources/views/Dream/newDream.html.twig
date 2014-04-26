@@ -10,7 +10,7 @@
                 <div id="dream-poster-image" class="main-photo">
                     <div class="photo-holder">
                         <span class="icon"></span>
-                        <span class="title required">Зображення</span>
+                        <span class="title required">Кавер-зображення</span>
                     </div>
                     <img src="" alt="Main Image">
                     <input id="fileupload-poster" type="file" name="dream-poster">
@@ -35,17 +35,26 @@
                 </div>
                 
                 <div class="upload-buttons">
-                    <span class="upload-resource upload-image" onclick="loadFile()"></span>
+                    <span class="upload-resource upload-image" onclick="loadFile()">
+                        <span class="icon"></span>
+                        <span class="title">Фото</span>
+                    </span>
                     <input id="fileuploadz" type="file" name="files" multiple>
                     
-                    <span class="upload-resource upload-video" onclick="addDreamVideo()"></span>
+                    <span class="upload-resource upload-video" onclick="addDreamVideo()">
+                        <span class="icon"></span>
+                        <span class="title">Відео</span>
+                    </span>
                     
-                    <span class="upload-resource upload-file" onclick="loadFile()"></span>
+                    <span class="upload-resource upload-file" onclick="loadFile()">
+                        <span class="icon"></span>
+                        <span class="title">Файли</span>
+                    </span>
                 </div>
             </div>
             
             <ul class="main-form-list col-md-8">
-                <li class="input-block name-block">
+                <li class="input-block">
                     <label class="label required">Назва</label>
                     {{ form_widget(form.title, {'attr': {'placeholder': 'Без назви'}}) }}
                     {{ form_errors(form.title) }}
@@ -70,7 +79,7 @@
                     <span class="label-hint">Відокремлювати комою</span>
                     {{ form_widget(form.tags) }}
                 </li>
-                <li class="input-block phone-block">
+                <li class="input-block">
                     <label class="label required">Телефон</label>
                     {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
                     {{ form_errors(form.phone)  }}
@@ -116,7 +125,7 @@
                         
                         <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва</span>
-                            <span class="resource-label width-2">Одиниця виміру</span>
+                            <span class="resource-label width-2">Од. виміру</span>
                             <span class="resource-label width-3">Кільк.</span>
                         </li>
                     </ul>
