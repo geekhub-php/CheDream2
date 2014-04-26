@@ -1,12 +1,15 @@
 <li class="clearfix">
     <ul class="attached-resources-list">
         <li class="title-promise">Я обіцяю:</li>
+        {% if dream.dreamFinancialContributions is not null %}
         {% for contribution in dream.dreamFinancialContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor %}
                 <li>{{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})</li>
             {% endif %}
         {% endfor %}
+        {% endif %}
         
+        {% if dream.dreamEquipmentContributions is not null %}
         {% for contribution in dream.dreamEquipmentContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
                 <li>
@@ -14,18 +17,23 @@
                 </li>
             {% endif %}
         {% endfor %}
+        {% endif %}
         
+        {% if dream.dreamWorkContributions is not null %}
         {% for contribution in dream.dreamWorkContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
                 <li>{{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})</li>
             {% endif %}
         {% endfor %}
+        {% endif %}
         
+        {% if dream.dreamOtherContributions is not null %}
         {% for contribution in dream.dreamOtherContributions %}
             {% if contribution.user.id is same as (userId)  and not contribution.hiddenContributor %}
                 <li>{{ contribution.title }}</li>
             {% endif %}
         {% endfor %}
+        {% endif %}
     </ul>
     {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
     <div class="clear"></div>
