@@ -48,7 +48,7 @@
                 {% endif %}
             </div>
             
-            {% if userDreams is not empty %}
+            {% if userDreams|length > 0 %}
                 <div class="caption-block">
                     <ul class="filters-list">
                         <li><a href="#" id="implemented">Втілені</a></li>
@@ -67,7 +67,7 @@
                 </ul>
             {% endif %} 
             
-            {% if contributedDreams is not empty %}
+            {% if contributedDreams|length > 0 %}
                 <div class="caption-block">
                     <h2 class="caption">Учасник проектів</h2>
                 </div>
@@ -79,7 +79,7 @@
                 </ul>
             {% endif %}
             <div id="favorites-block">
-            {% if user.favoriteDreams is not empty %}
+            {% if user.favoriteDreams|length > 0 %}
                 <div class="caption-block">
                     <h2 class="caption">Улюблені</h2>
                 </div>
