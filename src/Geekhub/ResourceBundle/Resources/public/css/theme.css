@@ -187,6 +187,38 @@ img                            { vertical-align: middle; }
 }
 
 
+.media-block a:hover {
+    color: #FFF;
+}
+.media-block .fb:hover {
+    background: #2D4B95;
+}
+.media-block .fb:active {
+    color: #2D4B95;
+}
+.media-block .vk:hover {
+    background: #476A91;
+}
+.media-block .vk:active {
+    color: #476A91;
+}
+.media-block .ok:hover {
+    background: #F58921;
+}
+.media-block .ok:active {
+    color: #F58921;
+}
+.media-block .tw:hover {
+    background: #28AAE1;
+}
+.media-block .tw:active {
+    color: #28AAE1;
+}
+.media-block a:active {
+    background: transparent !important;
+}
+
+
 /*----------------------------------------------------------------------------------*/
 /*---------------------------------> Main structure <-------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -398,57 +430,17 @@ img                            { vertical-align: middle; }
     font-size: 19px;
 }
 
-.header .media-block a:hover,
-.footer .media-block a:hover,
-.page-view-profile .media-block a:hover {
-    color: #FFF;
-}
 .header .media-block .fb {
     width: 31px;
-}
-.header .media-block .fb:hover,
-.footer .media-block .fb:hover,
-.page-view-profile .media-block .fb:hover {
-    background: #2D4B95;
-}
-.header .media-block .fb:active,
-.footer .media-block .fb:active,
-.page-view-profile .media-block .fb:active {
-    color: #2D4B95;
 }
 .header .media-block .vk {
     width: 40px;
     padding-right: 2px;
 }
-.header .media-block .vk:hover,
-.footer .media-block .vk:hover,
-.page-view-profile .media-block .vk:hover {
-    background: #476A91;
-}
-.header .media-block .vk:active,
-.footer .media-block .vk:active,
-.page-view-profile .media-block .vk:active {
-    color: #476A91;
-}
 .header .media-block .ok {
     width: 30px;
 }
-.header .media-block .ok:hover,
-.footer .media-block .ok:hover,
-.page-view-profile .media-block .ok:hover {
-    background: #F58921;
-}
-.header .media-block .ok:active,
-.footer .media-block .ok:active,
-.page-view-profile .media-block .ok:active {
-    color: #F58921;
-}
-.footer .media-block .tw:hover {
-    background: #28AAE1;
-}
-.footer .media-block .tw:active {
-    color: #28AAE1;
-}
+
 .page-view-profile .media-block .phone:hover {
     background: #454545;
 }
@@ -536,30 +528,6 @@ img                            { vertical-align: middle; }
     background: #FCB040;
 }
 
-.page-view-profile .media-block .phone:active,
-.page-view-profile .media-block .skype:active,
-.page-view-profile .media-block .mail:active,
-
-.header .media-block .ok:active,
-.footer .media-block .ok:active,
-.page-view-profile .media-block .ok:active,
-
-.header .media-block .vk:active,
-.footer .media-block .vk:active,
-.page-view-profile .media-block .vk:active,
-
-.header .media-block .fb:active,
-.footer .media-block .fb:active,
-.page-view-profile .media-block .fb:active,
-
-.footer .media-block .tw:active,
-
-.header .user:active,
-.header .logout:active,
-.header .show-dreams:active {
-    background: transparent;
-}
-
 .header .user-dreams-block {
     position: relative;
 }
@@ -585,6 +553,15 @@ img                            { vertical-align: middle; }
     border-width: 0 10px 10px;
     border-color: transparent transparent #FFF;
 }
+
+.header .dreams-list .close-block {
+    overflow: hidden;
+    padding: 5px;
+}
+.header .dreams-list .close-block .close {
+    font-size: 14px;
+    font-weight: normal;
+}
 .header .dreams-list .photo-block {
     float: left;
     width: 40px;
@@ -609,7 +586,7 @@ img                            { vertical-align: middle; }
     padding: 7px;
     border-top: 1px solid #E7E7E7;
 }
-.header .dreams-list li:first-child a {
+.header .dreams-list li:nth-child(2) a {
     border-top: 0;
 }
 .header .dreams-list .info-block {
@@ -1371,6 +1348,56 @@ img                            { vertical-align: middle; }
 }
 .page-about p a {
     font-size: inherit;
+}
+
+
+/*----------------------------------------------------------------------------------*/
+/*-------------------------------------> Modals <-----------------------------------*/
+/*----------------------------------------------------------------------------------*/
+.modal-backdrop {
+    background: #E9E9E9;
+    opacity: 0.71;
+}
+.custom-modal .modal-dialog {
+    width: 556px;
+}
+.custom-modal .modal-content {
+    border-radius: 0;
+    border: 0;
+    -webkit-box-shadow: 0 2px 49px rgba(0,0,0,0.23);
+    box-shadow: 0 2px 49px rgba(0,0,0,0.23);
+}
+.custom-modal .close {
+    font-size: 18px;
+}
+.custom-modal .modal-header {
+    border: 0;
+}
+
+.modal-auth .title {
+    display: block;
+    text-align: center;
+    font-size: 23px;
+}
+.modal-auth .main-icon {
+    display: block;
+    margin: 10px auto 20px;
+    width: 97px;
+    height: 86px;
+    background: url(/images/sprite.png) 0 -320px no-repeat;
+}
+.modal-auth .media-block {
+    text-align: center;
+    margin: 15px 0 35px;
+}
+.modal-auth .media-block a {
+    display: inline-block;
+    width: 59px;
+    height: 59px;
+    padding: 15px 0 0;
+}
+.modal-auth .media-block .icon {
+    font-size: 26px;
 }
 
 

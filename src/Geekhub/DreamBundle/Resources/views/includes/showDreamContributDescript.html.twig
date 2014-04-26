@@ -102,7 +102,32 @@
                 </li>
             </ul>
         {% else %}
-            <p class="warning">Щоб підтримати мрію, Вам потрібно авторизуватися.</p>
+            <p class="warning">Щоб підтримати мрію, Вам потрібно <a href="#" data-toggle="modal" data-target="#authorize-modal">авторизуватися</a>.</p>
+            
+            <div id="authorize-modal" class="custom-modal modal-auth modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <span class="main-icon"></span>
+                            <span class="title">Авторизуватись</span>
+                            <div class="media-block">
+                                <a href="{{ path('facebook_login') }}" class="fb">
+                                    <i class="icon icon-facebook"></i>
+                                </a>
+                                <a href="{{ path('vkontakte_login') }}" class="vk">
+                                    <i class="icon icon-vkontakte"></i>
+                                </a>
+                                <a href="{{ path('odnoklassniki_login') }}" class="ok">
+                                    <i class="icon icon-odnoklassniki"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         {% endif %}
     {% endif %}
 </div>

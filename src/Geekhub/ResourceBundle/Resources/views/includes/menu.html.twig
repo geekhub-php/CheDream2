@@ -67,6 +67,9 @@
                         </a>
                         
                         <ul class="dreams-list">
+                            <li class="close-block">
+                                <span href="#" class="close">&times;</span>
+                            </li>
                             {% if app.user.dreams|length > 0 %}
                                 {% for dream in app.user.dreams %}
                                     {% if (dream.currentStatus not in ['success', 'fail']) and (loop.index <= 5) %}

@@ -19,6 +19,11 @@ $(function() {
         $header.addClass('dreams-active');
     });
     
+    $header.find('.dreams-list .close').on('click', function(e) {
+        e.stopPropagation();
+        $header.removeClass('dreams-active');
+    });
+    
     $(document).on('click', function(e) {
         var $target = $(e.target);
         if ($target.closest('.header').length && $target.closest('.dreams-list').length) return;
