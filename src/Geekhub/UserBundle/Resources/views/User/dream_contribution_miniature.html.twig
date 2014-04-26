@@ -1,7 +1,7 @@
 <li class="clearfix">
     <ul class="attached-resources-list">
         <li class="title-promise">Я обіцяю:</li>
-        {% if dream.dreamFinancialContributions is defined && dream.dreamFinancialContributions is not null %}
+        {% if dream.dreamFinancialContributions is defined and dream.dreamFinancialContributions is not null %}
         {% for contribution in dream.dreamFinancialContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor %}
                 <li>{{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})</li>
@@ -9,7 +9,7 @@
         {% endfor %}
         {% endif %}
         
-        {% if dream.dreamEquipmentContributions is defined && dream.dreamEquipmentContributions is not null %}
+        {% if dream.dreamEquipmentContributions is defined and dream.dreamEquipmentContributions is not null %}
         {% for contribution in dream.dreamEquipmentContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
                 <li>
@@ -19,7 +19,7 @@
         {% endfor %}
         {% endif %}
         
-        {% if dream.dreamWorkContributions is defined && dream.dreamWorkContributions is not null %}
+        {% if dream.dreamWorkContributions is defined and dream.dreamWorkContributions is not null %}
         {% for contribution in dream.dreamWorkContributions %}
             {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
                 <li>{{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})</li>
@@ -27,7 +27,7 @@
         {% endfor %}
         {% endif %}
         
-        {% if dream.dreamOtherContributions is defined && dream.dreamOtherContributions is not null %}
+        {% if dream.dreamOtherContributions is defined and dream.dreamOtherContributions is not null %}
         {% for contribution in dream.dreamOtherContributions %}
             {% if contribution.user.id is same as (userId)  and not contribution.hiddenContributor %}
                 <li>{{ contribution.title }}</li>
