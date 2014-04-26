@@ -281,29 +281,38 @@ class DreamController extends Controller
         /** @var User $user */
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $financialContr = $em->getRepository('GeekhubDreamBundle:Dream')->getFinContr($dream, $user);
-        $equipContr = $em->getRepository('GeekhubDreamBundle:Dream')->getEquipContr($dream, $user);
-        $workContr = $em->getRepository('GeekhubDreamBundle:Dream')->getWorkContr($dream, $user);
-        $otherContr = $em->getRepository('GeekhubDreamBundle:Dream')->getOtherContr($dream, $user);
+
+        $financialContr = $dream->getDreamFinancialContributions()->map($this->getElement($user));
+        $equipContr = $dream->getDreamEquipmentContributions()->map($this->getElement($user));
+        $workContr = $dream->getDreamWorkContributions()->map($this->getElement($user));
+        $otherContr = $dream->getDreamOtherContributions()->map($this->getElement($user));
 
         foreach($financialContr as $finC ) {
-            $dream->removeDreamFinancialContribution($finC);
-            $user->removeFinancialContribution($finC);
+            if (!is_null($finC)) {
+                $dream->removeDreamFinancialContribution($finC);
+                $user->removeFinancialContribution($finC);
+            }
         }
 
         foreach($equipContr as $equipC) {
-            $dream->removeDreamEquipmentContribution($equipC);
-            $user->removeEquipmentContribution($equipC);
+            if (!is_null($equipC)) {
+                $dream->removeDreamEquipmentContribution($equipC);
+                $user->removeEquipmentContribution($equipC);
+            }
         }
 
         foreach($workContr as $workC) {
-            $dream->removeDreamWorkContribution($workC);
-            $user->removeWorkContribution($workC);
+            if (!is_null($workC)) {
+                $dream->removeDreamWorkContribution($workC);
+                $user->removeWorkContribution($workC);
+            }
         }
 
         foreach($otherContr as $otherC) {
-            $dream->removeDreamOtherContribution($otherC);
-            $user->removeOtherContribution($otherC);
+            if (!is_null($otherC)) {
+                $dream->removeDreamOtherContribution($otherC);
+                $user->removeOtherContribution($otherC);
+            }
         }
 
         $em->persist($dream);
@@ -313,6 +322,15 @@ class DreamController extends Controller
         return $this->redirect($this->generateUrl('view_dream', array(
             'slug' => $dream->getSlug()
         )));
+    }
+
+    protected  function getElement($user)
+    {
+        return function($element) use ($user) {
+            if ($element->getUser() == $user) {
+                return $element;
+            }
+        };
     }
 
     /**
