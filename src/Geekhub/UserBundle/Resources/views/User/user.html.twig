@@ -24,27 +24,33 @@
                     <li class="input-block">
                         <label class="label">Телефон</label>
                         {{ form_widget(form.phone) }}
+                        {{ form_errors(form.phone) }}
                     </li>
                     <li class="input-block">
                         <label class="label">Skype</label>
                         {{ form_widget(form.skype) }}
+                        {{ form_errors(form.skype) }}
                     </li>
                     <li class="input-block">
                         <label class="label">Email</label>
                         {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
                     </li>
                     {#
                     <li class="input-block">
                         <label class="label">Facebook</label>
                         {{ form_widget(form.facebookUrl) }}
+                        {{ form_errors(form.facebookUrl) }}
                     </li>
                     <li class="input-block">
                         <label class="label">Vkontakte</label>
                         {{ form_widget(form.vkontakteUrl) }}
+                        {{ form_errors(form.vkontakteUrl) }}
                     </li>
                     <li class="input-block">
                         <label class="label">Odnoklassniki</label>
                         {{ form_widget(form.odnoklassnikiUrl) }}
+                        {{ form_errors(form.odnoklassnikiUrl) }}
                     </li>
                     #}
                 </ul>
@@ -56,10 +62,12 @@
                     <li class="input-block name-block">
                         <label class="label">Ім’я</label>
                         {{ form_widget(form.firstName, {'attr': {'placeholder': "Ім’я"}}) }}
+                        {{ form_errors(form.firstName) }}
                     </li>
                     <li class="input-block name-block">
                         <label class="label">Прізвище</label>
                         {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
+                        {{ form_errors(form.lastName) }}
                     </li>
                     
                     <li class="input-block">
@@ -74,6 +82,7 @@
                             <div class="col-md-2">
                                 {{ form_widget(form.birthday.year, {'attr': {'class': 'input-view'}}) }}
                             </div>
+                            {{ form_errors(form.birthday) }}
                         </div>
                     </li>
                     
@@ -82,6 +91,7 @@
                         <div class="description-wrap">
                             <div class="description">
                                 {{ form_widget(form.about) }}
+                                {{ form_errors(form.about) }}
                             </div>
                         </div>
                     </li>
