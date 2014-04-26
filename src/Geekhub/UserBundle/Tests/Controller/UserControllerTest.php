@@ -49,9 +49,6 @@ class UserControllerTest extends WebTestCase
         $form['newUserForm[email]'] = 'darthVader@gmail.com';
         $client->submit($form);
 
-        $filesystem = new Filesystem();
-        $filesystem->dumpFile('/var/www/test.html', $client->getResponse()->getContent());
-
         $client->followRedirect();
 
         $this->assertEquals("/", $client->getRequest()->getPathInfo());
@@ -83,12 +80,6 @@ class UserControllerTest extends WebTestCase
 
         $dart = $client->getContainer()->get('doctrine')->getRepository('GeekhubUserBundle:User')->findOneByUsername('darthVader');
         $crawler = $client->request('GET', '/users/' . $dart->getId());
-
-        $filesystem = new Filesystem;
-        $filesystem->dumpFile(
-            '/var/www/test.html',
-            $client->getResponse()->getContent()
-        );
 
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Darth Vader")')->count());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Who is your daddy?")')->count());
