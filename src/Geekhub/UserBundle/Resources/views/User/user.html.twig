@@ -91,6 +91,7 @@
                         <div class="description-wrap">
                             <div class="description">
                                 {{ form_widget(form.about) }}
+                                {{ tinymce_init() }}
                                 {{ form_errors(form.about) }}
                             </div>
                         </div>
@@ -113,6 +114,6 @@
 
 {% block javascript %}
   {{ parent() }}
-  {{ tinymce_init() }}
+  {# tinymce_init() #}
 
 {% endblock javascript %}
