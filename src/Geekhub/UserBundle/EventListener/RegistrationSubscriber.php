@@ -53,9 +53,7 @@ class RegistrationSubscriber
         $request = $this->container->get('request');
         $updateContactsAction = $this->container->get('router')->generate(self::UPDATE_CONTACTS_ROUTE, array(), Router::ABSOLUTE_URL);
 
-        $apendEmail = explode('@', trim($user->getEmail()));
-
-        if ($apendEmail[1] == 'example.com' && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
+        if ($user->isFakeEmail() && $request->get('_route') !== self::UPDATE_CONTACTS_ROUTE) {
             $event->setResponse(new RedirectResponse($updateContactsAction));
         }
     }
