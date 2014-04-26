@@ -49,6 +49,9 @@ class UserControllerTest extends WebTestCase
         $form['newUserForm[email]'] = 'darthVader@gmail.com';
         $client->submit($form);
 
+        $filesystem = new Filesystem();
+        $filesystem->dumpFile('/var/www/test.html', $client->getResponse()->getContent());
+
         $client->followRedirect();
 
         $this->assertEquals("/", $client->getRequest()->getPathInfo());
@@ -65,6 +68,8 @@ class UserControllerTest extends WebTestCase
         $avatar = realpath(__DIR__ . '/../../DataFixtures/ORM/images/darthVader.jpg');
 
         $form = $crawler->selectButton('_submit')->form();
+        $form['newUserForm[firstName]'] = 'Darth';
+        $form['newUserForm[lastName]']  = 'Vader';
         $form['newUserForm[email]'] = 'darthVader@yahoo.com';
         $form['newUserForm[about]'] = 'Who is your daddy?';
         $form['newUserForm[phone]'] = '555-5555';
@@ -81,7 +86,7 @@ class UserControllerTest extends WebTestCase
 
         $filesystem = new Filesystem;
         $filesystem->dumpFile(
-            $client->getKernel()->getRootDir() . '/cache/web/test.html',
+            '/var/www/test.html',
             $client->getResponse()->getContent()
         );
 
