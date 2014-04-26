@@ -85,7 +85,7 @@ class UserControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Who is your daddy?")')->count());
     }
 
-    public function testChangeEmailAction()
+    public function testChangeEmailToFakeAction()
     {
         $client = static::createClient();
 
