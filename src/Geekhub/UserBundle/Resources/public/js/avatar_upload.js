@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    //$('#user-avatar-image input').on('click', function(e) {
-    //    e.stopPropagation();
-    //});
+    $('#user-avatar-image input').on('click', function(e) {
+        e.stopPropagation();
+    });
 });
 
 $('#user-avatar-image').click(function() {
