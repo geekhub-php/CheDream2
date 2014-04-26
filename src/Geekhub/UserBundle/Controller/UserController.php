@@ -42,6 +42,10 @@ class UserController extends Controller
             if ($mergedUser == null || $mergedUser->getId() == $user->getId()) {
                 $em->flush();
 
+                $this->get('session')->getFlashBag()->add(
+                    'dream',
+                    'Ваш профіль відредаговано.'
+                );
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
             } 
             $form->get('email')->addError(new FormError('Така адреса вже використовується.'));
