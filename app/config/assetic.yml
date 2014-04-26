@@ -16,12 +16,15 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/base.less
                 - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/dream_details.less
+                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/dreams-tiles.less
+                - %kernel.root_dir%/../src/Geekhub/ResourceBundle/Resources/public/css/main.less
                 - %kernel.root_dir%/../vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/less/form.less
                 - %kernel.root_dir%/../vendor/ahonymous/fontello/css/fontello.css
                 - %kernel.root_dir%/../vendor/bower-components/tag-it/css/jquery.tagit.css
                 - %kernel.root_dir%/../vendor/bower-components/tag-it/css/tagit.ui-zendesk.css
                 - %kernel.root_dir%/../vendor/bower-components/blueimp-gallery/css/blueimp-gallery.css
-                #- %kernel.root_dir%/../vendor/bower-components/fancybox/source/jquery.fancybox.css
+                - %kernel.root_dir%/../vendor/bower-components/fancybox/source/jquery.fancybox.css
+                - %kernel.root_dir%/../vendor/bower-components/tooltipster/css/tooltipster.css
             filters:
                 - cssrewrite
             output: css/style.css

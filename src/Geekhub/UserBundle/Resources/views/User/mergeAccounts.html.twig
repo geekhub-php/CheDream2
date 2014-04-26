@@ -1,0 +1,58 @@
+{% extends "GeekhubUserBundle::layout.html.twig" %}
+
+{% block title %}
+    Черкаська мрія - Об'єднання профілів
+{% endblock title %}
+
+{% block fos_user_content %}
+    <div class="row text-center">
+        <div class="col-sm-5">
+            <div class="row">
+                <img src="{{ mergedUser.avatar|mediaPath|imagine_filter('userAvatar') }}"/>
+            </div>
+
+            <div class="row">{{ mergedUser.firstName ~ ' ' ~ mergedUser.lastName }}</div>
+
+            <div class="row">
+                {% if mergedUser.facebookId %}
+                    <i class="icon icon-facebook"></i>
+                {% endif %}
+                {% if mergedUser.odnoklassnikiId %}
+                    <i class="icon icon-odnoklassniki"></i>
+                {% endif %}
+                {% if mergedUser.vkontakteId %}
+                    <i class="icon icon-vkontakte"></i>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-sm-2"  style="padding-top: 10%">
+            <span class="glyphicon glyphicon-forward"></span>
+        </div>
+
+        <div class="col-sm-5">
+            <div class="row">
+                <img src="{{ currentUser.avatar|mediaPath|imagine_filter('userAvatar') }}" />
+            </div>
+
+            <div class="row">{{ currentUser.firstName ~ ' ' ~ currentUser.lastName }}</div>
+
+            <div class="row">
+                {% if currentUser.facebookId %}
+                    <i class="icon icon-facebook"></i>
+                {% endif %}
+                {% if currentUser.odnoklassnikiId %}
+                    <i class="icon icon-odnoklassniki"></i>
+                {% endif %}
+                {% if currentUser.vkontakteId %}
+                    <i class="icon icon-vkontakte"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="text-align: center;">
+        <a href="{{ path('merge_accounts', {'user': mergedUser.id}) }}" class="btn bg-danger">Merge accounts?</a>
+    </div>
+
+{% endblock fos_user_content %}

@@ -34,7 +34,7 @@ class PageController extends Controller
 
                 $message->setFromEmail($form->get('to')->getData())
                     ->setFromName('Черкаська мрія - зворотна форма звязку')
-                    ->addTo($this->container->getParameter('admin.mail'))
+                    ->addTo($this->container->getParameter('neek.mail'))
                     ->setSubject($form->get('title')->getData())
                     ->setHtml($form->get('body')->getData())
                 ;

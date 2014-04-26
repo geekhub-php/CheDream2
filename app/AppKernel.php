@@ -44,6 +44,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
+            new Geekhub\OAuthBunsle\GeekhubOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

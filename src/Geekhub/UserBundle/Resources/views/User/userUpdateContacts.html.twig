@@ -1,6 +1,8 @@
 {% extends "GeekhubResourceBundle::layout.html.twig" %}
 
-{% block title %}Edit profile{% endblock %}
+{% block title %}
+    Черкаська мрія - Редагування профіля
+{% endblock title %}
 
 {% block content %}
 <div class="content page-edit-profile page-green-shadow">
@@ -9,17 +11,12 @@
             <div class="col-md-4">
                 {# media avatar, 'big' #}
                 {# form_widget(form.avatar) #}
-                {% if user.avatar is not null %}
-                    <div id="user-avatar-image" class="main-photo active">
-                {% else %}
-                    <div id="user-avatar-image" class="main-photo">
-                {% endif %}
+                <div id="user-avatar-image" class="main-photo {{ user.avatar ? 'active' }}">
                     <div class="photo-holder">
                         <span class="icon"></span>
                         <span class="title required">Аватар</span>
                     </div>
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
-                    <input id="dream_poster" type="file" name="dream-poster">
                 </div>
               
                 <div id="errors" class="files"></div>
@@ -27,18 +24,20 @@
             
             <div class="col-md-8">
                 <ul class="user-info-list">
-                    <li class="input-block name-block">
+                    <li class="input-block">
                         <label class="label required">Ім’я</label>
                         {{ form_widget(form.firstName, {'attr': {'placeholder': "Ім’я"}}) }}
                     </li>
-                    <li class="input-block name-block">
+                    <li class="input-block">
                         <label class="label required">Прізвище</label>
                         {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
                     </li>
+                    {#
                     <li class="input-block phone-block">
                         <label class="label required">Телефон</label>
                         {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
                     </li>
+                    #}
                     <li class="input-block">
                         <label class="label required">Email</label>
                         {# set form.vars.value.email = '' #}

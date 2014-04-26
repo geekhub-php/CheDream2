@@ -2,10 +2,10 @@
 
 echo ""
 echo "Выберите необходимое действие:"
-echo "1 - Стандартный reload."
-echo "2 - Перезагрузка БД."
-echo "3 - Перезагрузка БД и запуск тестов."
-echo "0 - Выход. \n"
+echo "    1 - Стандартный reload."
+echo "    2 - Перезагрузка БД."
+echo "    3 - ТЕСТЫ."
+echo "    0 - Выход. \n"
 read reload
 
 case $reload in
@@ -43,26 +43,55 @@ case $reload in
     php app/console doctrine:database:create
     php app/console doctrine:schema:update --force
     php app/console doctrine:fixtures:load --no-interaction
+    php app/console assets:install --symlink
+    php app/console assetic:dump
     php app/console cache:clear
 ;;
 3)
-    echo "Перезагрузка БД и запуск тестов. \n"
-    php app/console doctrine:database:drop --force
-    php app/console doctrine:database:create
-    php app/console doctrine:schema:update --force
-    php app/console cache:clear
-    php app/console doctrine:fixtures:load --no-interaction
-    php app/console cache:clear
+    echo ""
+    echo "ТЕСТЫ: Выберите необходимое действие:"
+    echo "    1 - Запуск всех тестов."
+    echo "    2 - Запуск юнит тестов."
+    echo "    0 - Выход. \n"
+    read testing
 
-    sh bin/tests.sh
+    case $testing in
+    1)
+        echo "Запуск всех тестов. \n"
+        php app/console doctrine:database:drop --force
+        php app/console doctrine:database:create
+        php app/console doctrine:schema:update --force
+        php app/console cache:clear
+        php app/console doctrine:fixtures:load --no-interaction
+        php app/console cache:clear
+
+        sh bin/tests.sh
+    ;;
+    2)
+        echo "Запуск юнит тестов. \n"
+        php app/console doctrine:database:drop --force
+        php app/console doctrine:database:create
+        php app/console doctrine:schema:update --force
+        php app/console cache:clear
+        php app/console doctrine:fixtures:load --no-interaction
+        php app/console cache:clear
+
+        bin/phpunit -c app
+    ;;
+    0)
+        exit 0
+    ;;
+    *)
+        echo "Введите правильное действие! \n"
+        sh bin/reload.sh
+
+    esac
 ;;
 0)
-exit 0
+    exit 0
 ;;
 *)
     echo "Введите правильное действие! \n"
     sh bin/reload.sh
 
 esac
-
-

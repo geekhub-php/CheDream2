@@ -15,6 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const FAKE_EMAIL_PART = "@example.com";
+
     /**
      * @var integer
      *
@@ -67,21 +70,21 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $vkontakteId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $facebookId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $odnoklassnikiId;
 
@@ -440,7 +443,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get financialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFinancialContributions()
     {
@@ -473,7 +476,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get equipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEquipmentContributions()
     {
@@ -516,7 +519,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add otherContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
+     * @param  \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
      * @return User
      */
     public function addOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
@@ -539,10 +542,25 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get otherContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOtherContributions()
     {
         return $this->otherContributions;
+    }
+
+    public function getNotNullSocialIds()
+    {
+        return array_filter([
+                'facebook' => $this->facebookId,
+                'vkontakte' => $this->vkontakteId,
+                'odnoklassniki' => $this->odnoklassnikiId,
+            ], 'strlen')
+        ;
+    }
+
+    public function isFakeEmail()
+    {
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
     }
 }

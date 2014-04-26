@@ -8,12 +8,14 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface,
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserInterface,
-    Symfony\Component\Security\Core\User\UserProviderInterface;
+    Symfony\Component\Security\Core\User\UserProviderInterface,
+    Symfony\Component\PropertyAccess\PropertyAccessor;
 use Doctrine\DBAL\Types,
     Doctrine\DBAL\DBALException;
 use Geekhub\UserBundle\UserProvider\FacebookProvider,
     Geekhub\UserBundle\UserProvider\VkontakteProvider,
-    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider;
+    Geekhub\UserBundle\UserProvider\OdnoklassnikiProvider,
+    Geekhub\UserBundle\Entity\User;
 
 class DreamUserProvider extends BaseClass implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
@@ -33,6 +35,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
+        $property = $this->getProperty($response);
         $username = $response->getUsername();
 
         //on connect - get the access token and the user ID
@@ -42,14 +45,18 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $setterId = $setter.'Id';
 
         //we "disconnect" previously connected users
-        if (null !== $previousUser = $this->loadUserByUsername($username)) {
+        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setterId(null);
-            $this->userManager->updateUser($previousUser);
+            $this->updateEmails($user, $previousUser);
+            $this->updateOtherSocialIds($user, $previousUser);
+            $this->mergeDreams($user, $previousUser);
+            $this->mergeContributions($user, $previousUser);
         }
 
         //we connect current user
         $user->$setterId($username);
 
+        $this->userManager->deleteUser($previousUser);
         $this->userManager->updateUser($user);
     }
 
@@ -59,7 +66,8 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-        $user = $this->loadUserByUsername($username);
+//        $user = $this->loadUserByUsername($username);
+        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
 
         if (null === $user || null === $username) {
             $service = $response->getResourceOwner()->getName();
@@ -74,14 +82,13 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             // for example setVkontakteUser(...),  setFacebookUser(...)
             // the actual name of setter is in the variable $setterUser.
             $user = $this->$userDataServiceName->setUserData($user, $response);
-            $user->setUsername($username);
+            $user->setUsername(uniqid());
             //$user->setEmail($username);
             $user->setPassword($username);
             $user->setEnabled(true);
-            try {
-                $this->userManager->updateUser($user);
-            } catch (DBALException $e) {
-                var_dump("dbal exception");
+
+            if ($hasUser = $this->userManager->findUserByEmail($user->getEmail())) {
+                $user->setEmail($username."@example.com");
             }
 
             return $user;
@@ -120,5 +127,90 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     public function setOdnoklassnikiProvider(OdnoklassnikiProvider $odnoklassnikiProvider)
     {
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
+    }
+
+    protected function updateEmails(User $user, User $previousUser)
+    {
+        if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
+            $realEmail = $previousUser->getEmail();
+
+            $previousUser->setEmail(uniqid() . $previousUser::FAKE_EMAIL_PART);
+            $previousUser->setEmailCanonical($previousUser->getEmail());
+
+            $this->userManager->updateUser($previousUser);
+
+            $user->setEmail($realEmail);
+            $user->setEmailCanonical($realEmail);
+        }
+    }
+
+    protected function updateOtherSocialIds(User $user, User $previousUser)
+    {
+        $propertyAccessor = new PropertyAccessor();
+        $socialIds = $previousUser->getNotNullSocialIds();
+
+        foreach ($socialIds as $socialKey => $socialId) {
+            $socialKey = $socialKey . 'Id';
+            $propertyAccessor->setValue($previousUser, $socialKey, null);
+        }
+
+        $this->userManager->updateUser($previousUser);
+
+        foreach ($socialIds as $socialKey => $socialId) {
+            $socialKey = $socialKey . 'Id';
+            $currentSocialId = $propertyAccessor->getValue($user, $socialKey);
+
+            if ($currentSocialId) {
+                throw new \Exception(sprintf('You already have registred by "%s" social network, and account "%s %s" can\t be merged'), $socialKey, $previousUser->getFirstName(), $previousUser->getLastName());
+            }
+
+            $propertyAccessor->setValue($user, $socialKey, $socialId);
+        }
+
+        $this->userManager->updateUser($user);
+    }
+
+    protected function mergeDreams(User $user, User $previousUser)
+    {
+        foreach ($previousUser->getFavoriteDreams() as $dream) {
+            if (!$user->getFavoriteDreams()->contains($dream)) {
+                $user->addFavoriteDream($dream);
+            }
+        }
+
+        foreach ($previousUser->getDreams() as $dream) {
+            $previousUser->removeDream($dream);
+            $dream->setAuthor($user);
+            $user->addDream($dream);
+        }
+
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
+    }
+
+    protected function mergeContributions(User $user, User $previousUser)
+    {
+        foreach ($previousUser->getEquipmentContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getFinancialContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getWorkContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        foreach ($previousUser->getOtherContributions() as $contribution) {
+            $previousUser->removeDream($contribution);
+            $user->addDream($contribution);
+        }
+
+        $this->userManager->updateUser($previousUser);
+        $this->userManager->updateUser($user);
     }
 }

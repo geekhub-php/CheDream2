@@ -11,7 +11,7 @@
                 </div>
             {% endif %}
             <h4 title="{{ dream.title }}">
-                {{ dream.title }}
+                <a href="{{ path('view_dream', {'slug': dream.slug}) }}">{{ dream.title }}</a>
             </h4>
         </div>
         <div class="dream-homepage-preview-body">
@@ -26,7 +26,7 @@
                             <span>{{ getCountContributors(dream) }}</span> Підтримало
                         </span>
                         <span class="rating">
-                            Рейтинг <span>0</span>
+                            Рейтинг <span>{{ dream.favoritesCount }}</span>
                         </span>
             </div>
         </div>
@@ -40,3 +40,8 @@
         </div>
     </div>
 {% endfor %}
+<script type="text/javascript">
+    jQuery(function(){
+        $('.t-tooltip').tooltipster({maxWidth:250});
+    });
+</script>

@@ -3,13 +3,14 @@
 namespace Geekhub\UserBundle\Controller;
 
 use Geekhub\UserBundle\Entity\User;
-use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
 use Geekhub\UserBundle\Form\UserForUpdateContactsType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\Controller\Annotations\View;
+use Symfony\Component\Form\FormError;
 
 class UserController extends Controller
 {
@@ -30,11 +31,24 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form -> isValid()) {
 
-            $em->flush();
+        if ($form->isValid()) {
+            $mergedUser = $em->getRepository('GeekhubUserBundle:User')
+                ->findOneBy(array(
+                    'email' => trim($form->get('email')->getData())
+                ))
+            ;
 
-            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+            if ($mergedUser == null || $mergedUser->getId() == $user->getId()) {
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'dreamMessage',
+                    'Ваш профіль відредаговано.'
+                );
+                return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+            } 
+            $form->get('email')->addError(new FormError('Така адреса вже використовується.'));
         }
 
         return $this->render("GeekhubUserBundle:User:user.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
@@ -48,16 +62,15 @@ class UserController extends Controller
         if ($this->getUser() == $user) {
             $showHiddenContributedDreams = true;
             $userDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-        }
-        else {
+        } else {
             $showHiddenContributedDreams = false;
             $userDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
         }
         $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user, $showHiddenContributedDreams);
 
-        return $this->render('GeekhubUserBundle:User:view.html.twig', 
+        return $this->render('GeekhubUserBundle:User:view.html.twig',
             array(
-                'user' => $user, 
+                'user' => $user,
                 'contributedDreams' => $contributedDreams,
                 'userDreams' => $userDreams,
             ));
@@ -69,20 +82,18 @@ class UserController extends Controller
      */
     public function userOwnedDreamsViewAction($user, $status = "any")
     {
-        switch ($status){
+        switch ($status) {
             case "any":
                 if ($this->getUser()==$user) {
                     return $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-                }
-                else {
+                } else {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
                 }
                 break;
             case "projects":
                 if ($this->getUser()==$user) {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findMyDreamProjects($user);
-                }
-                else {
+                } else {
                     return $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserDreamProjects($user);
                 }
                 break;
@@ -96,16 +107,25 @@ class UserController extends Controller
         return $this->render('GeekhubUserBundle:User:login.html.twig');
     }
 
+    /**
+     * @param Request $request
+     * @View(template="GeekhubUserBundle:User:userUpdateContacts.html.twig")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function updateContactsAction(Request $request)
     {
-        $userAuth=$this->getUser();
+        $userAuth = $this->getUser();
         if (!$userAuth) {
             return $this->redirect($this->generateUrl('_login'));
         }
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('GeekhubUserBundle:User')->findOneById($userAuth->getId());
-        $user->setEmail('');
+
+        if (strstr($user->getEmail(),'@example.com')) {
+            $user->setEmail('');
+        }
 
         $form = $this->CreateForm(new UserForUpdateContactsType(), $user, array(
                      'user' => $user,
@@ -114,39 +134,43 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form -> isValid()) {
+        if ($form->isValid()) {
+            $mergedUser = $em->getRepository('GeekhubUserBundle:User')
+                ->findOneBy(array(
+                    'email' => trim($form->get('email')->getData())
+                ))
+            ;
 
-            $em->flush();
-            $this->sendEmail($user);
+            if ($mergedUser == null) {
+                $em->flush();
 
-            return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+                return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
+            } else {
+                return $this->render('GeekhubUserBundle:User:mergeAccounts.html.twig', array(
+                    'mergedUser' => $mergedUser,
+                    'currentUser' => $user,
+                ));
+            }
         }
 
-        return $this->render("GeekhubUserBundle:User:userUpdateContacts.html.twig",array('form'=>$form->createView(),'user'=>$user, 'avatar'=>$user->getAvatar()));
+        return array(
+            'form'=>$form->createView(),
+            'user'=>$user,
+            'avatar'=>$user->getAvatar()
+        );
     }
 
     /**
+     * @param  Request $request
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
      * @param User $user
+     * @return mixed
      */
-    protected function sendEmail(User $user)
+    public function mergeAccountsAction(Request $request, User $user)
     {
-        $dispatcher = $this->container->get('hip_mandrill.dispatcher');
+        $socialNetworks = $user->getNotNullSocialIds();
+        $resourceOwner = $this->container->get(sprintf("hwi_oauth.resource_owner.%s", key($socialNetworks)));
 
-        $message = new Message();
-        $body = $this->container->get('templating')->render(
-            'GeekhubResourceBundle:Email:registration.html.twig',
-            array(
-                'user' => $user
-            )
-        );
-
-        $message->setFromEmail('test@gmail.com')
-            ->setFromName('Черкаська мрія')
-            ->addTo($user->getEmail())
-            ->setSubject('REGISTRATION')
-            ->setHtml($body)
-        ;
-
-        $dispatcher->send($message);
+        return $this->container->get('hwi_oauth.connect_controller')->redirectToServiceAction($request, key($socialNetworks));
     }
 }

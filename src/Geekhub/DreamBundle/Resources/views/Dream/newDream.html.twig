@@ -1,23 +1,20 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+{% block title %}
+    Черкаська мрія - Нова мрія
+{% endblock title %}
+
 {% block content %}
     <div class="content page-new-dream page-green-shadow">
         {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate', 'id': 'create-dream-form' }}) }}
         {#{{ form_start(form, {'attr': {'id': 'create-dream-form'} } ) }}#}
         <div class="row">
             <div class="col-md-4">
-                
-                <!--<span class="fileinput-button no-display" id="dream-poster-image">
-                    <div id="dream-poster-container">-->
-                        <!--<img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">-->
-                        <!--<input id="fileupload-poster" type="file" name="dream-poster">
-                    </div>
-                </span>-->
                 <span class="label">Додати</span>
                 <div id="dream-poster-image" class="main-photo">
                     <div class="photo-holder">
                         <span class="icon"></span>
-                        <span class="title required">Зображення</span>
+                        <span class="title required">Кавер-зображення</span>
                     </div>
                     <img src="" alt="Main Image">
                     <input id="fileupload-poster" type="file" name="dream-poster">
@@ -42,28 +39,29 @@
                 </div>
                 
                 <div class="upload-buttons">
-                    <span class="upload-resource upload-image" onclick="loadFile()"></span>
+                    <span class="upload-resource upload-image" onclick="loadFile()">
+                        <span class="icon"></span>
+                        <span class="title">Фото</span>
+                    </span>
                     <input id="fileuploadz" type="file" name="files" multiple>
                     
-                    <span class="upload-resource upload-video" onclick="addDreamVideo()"></span>
+                    <span class="upload-resource upload-video" onclick="addDreamVideo()">
+                        <span class="icon"></span>
+                        <span class="title">Відео</span>
+                    </span>
                     
-                    <span class="upload-resource upload-file" onclick="loadFile()"></span>
+                    <span class="upload-resource upload-file" onclick="loadFile()">
+                        <span class="icon"></span>
+                        <span class="title">Файли</span>
+                    </span>
                 </div>
-                
-                <!--<span class="" onclick="loadFile()">
-                    <span>{{ 'dream.files_add'|trans }}</span>
-                    <input id="fileuploadz" type="file" name="files" multiple>
-                </span>-->
-                
-                <!--<span class="btn btn-xs btn-success pull-right" onclick="addDreamVideo()">{{ 'dream.videos_add'|trans }}</span>-->
-                
-                
             </div>
             
             <ul class="main-form-list col-md-8">
-                <li class="input-block name-block">
+                <li class="input-block">
                     <label class="label required">Назва</label>
                     {{ form_widget(form.title, {'attr': {'placeholder': 'Без назви'}}) }}
+                    {{ form_errors(form.title) }}
                 </li>
                 <li class="input-block">
                     <label class="label required">Опис</label>
@@ -73,19 +71,22 @@
                             {{ tinymce_init() }}
                         </div>
                     </div>
+                    {{ form_errors(form.description)  }}
                 </li>
                 <li class="input-block">
                     <label class="label required">Кінцева дата</label>
-                    {{ form_widget(form.expiredDate) }}
+                    {{ form_widget(form.expiredDate, {'attr': {'placeholder': 'дд.мм.рррр'} } ) }}
+                    {{ form_errors(form.expiredDate)  }}
                 </li>
                 <li class="input-block">
                     <label class="label">Ключові слова</label>
                     <span class="label-hint">Відокремлювати комою</span>
                     {{ form_widget(form.tags) }}
                 </li>
-                <li class="input-block phone-block">
+                <li class="input-block">
                     <label class="label required">Телефон</label>
                     {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
+                    {{ form_errors(form.phone)  }}
                 </li>
                 <li class="no-display">
                     {{ form_widget(form.dreamPictures) }}
@@ -128,7 +129,7 @@
                         
                         <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва</span>
-                            <span class="resource-label width-2">Одиниця виміру</span>
+                            <span class="resource-label width-2">Од. виміру</span>
                             <span class="resource-label width-3">Кільк.</span>
                         </li>
                     </ul>
@@ -170,6 +171,11 @@
         $('#btnDreamSubmit').click(function(){
             $('#create-dream-form').get(0).submit();
         });
+
+        $(function() {
+            $( "#newDreamForm_expiredDate" ).datepicker({"dateFormat": "dd.mm.yy", "regional": "uk"});
+        });
+
         $(document).ready(function() {
             $('ul.help-block li a').hide();
             $('#newDreamForm_dreamPictures').get(0).value = '';

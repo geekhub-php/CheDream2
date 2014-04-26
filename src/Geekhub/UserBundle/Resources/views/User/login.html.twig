@@ -1,6 +1,8 @@
 {% extends "GeekhubUserBundle::layout.html.twig" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}
+    Черкаська мрія - Ви не авторизувалися
+{% endblock title %}
 
 {% block fos_user_content %}
     {% for flashMessage in app.session.flashbag.get('locked') %}
@@ -23,7 +25,6 @@
                 <i class="icon icon-vkontakte"></i>
             </a>
         </p>
-        </div>
     </div>
 
 {% endblock fos_user_content %}
