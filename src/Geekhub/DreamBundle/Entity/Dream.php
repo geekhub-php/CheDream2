@@ -989,6 +989,7 @@ class Dream implements Taggable
     {
         $this->dreamFinancialContributions->removeElement($dreamFinancialContributions);
         $dreamFinancialContributions->setDream(null);
+        $dreamFinancialContributions->setUser(null);
     }
 
     /**
@@ -1023,6 +1024,7 @@ class Dream implements Taggable
     {
         $this->dreamEquipmentContributions->removeElement($dreamEquipmentContributions);
         $dreamEquipmentContributions->setDream(null);
+        $dreamEquipmentContributions->setUser(null);
     }
 
     /**
@@ -1057,6 +1059,7 @@ class Dream implements Taggable
     {
         $this->dreamWorkContributions->removeElement($dreamWorkContributions);
         $dreamWorkContributions->setDream(null);
+        $dreamWorkContributions->setUser(null);
     }
 
     /**
@@ -1090,6 +1093,8 @@ class Dream implements Taggable
     public function removeDreamOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $dreamOtherContributions)
     {
         $this->dreamOtherContributions->removeElement($dreamOtherContributions);
+        $dreamOtherContributions->setDream(null);
+        $dreamOtherContributions->setUser(null);
     }
 
     /**

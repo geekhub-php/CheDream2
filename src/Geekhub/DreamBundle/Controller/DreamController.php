@@ -278,25 +278,36 @@ class DreamController extends Controller
      */
     public function removeSomeContributeAction(Dream $dream)
     {
+        /** @var User $user */
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $financialContr = $em->getRepository('GeekhubDreamBundle:Dream')->getFinContr($dream, $user);
         $equipContr = $em->getRepository('GeekhubDreamBundle:Dream')->getEquipContr($dream, $user);
         $workContr = $em->getRepository('GeekhubDreamBundle:Dream')->getWorkContr($dream, $user);
+        $otherContr = $em->getRepository('GeekhubDreamBundle:Dream')->getOtherContr($dream, $user);
 
         foreach($financialContr as $finC ) {
             $dream->removeDreamFinancialContribution($finC);
+            $user->removeFinancialContribution($finC);
         }
 
         foreach($equipContr as $equipC) {
             $dream->removeDreamEquipmentContribution($equipC);
+            $user->removeEquipmentContribution($equipC);
         }
 
         foreach($workContr as $workC) {
             $dream->removeDreamWorkContribution($workC);
+            $user->removeWorkContribution($workC);
+        }
+
+        foreach($otherContr as $otherC) {
+            $dream->removeDreamOtherContribution($otherC);
+            $user->removeOtherContribution($otherC);
         }
 
         $em->persist($dream);
+        $em->persist($user);
         $em->flush();
 
         return $this->redirect($this->generateUrl('view_dream', array(

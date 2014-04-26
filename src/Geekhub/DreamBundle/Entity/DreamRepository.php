@@ -99,6 +99,17 @@ class DreamRepository extends EntityRepository
             ->getResult();
     }
 
+    public function getOtherContr($dream, $user)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT c
+                            FROM GeekhubDreamBundle:OtherContribute c
+                            where c.user = :user and c.dream = :dream
+                            ')
+            ->setParameter('user', $user)
+            ->setParameter('dream', $dream)
+            ->getResult();
+    }
 
     public function showEquipmentContributors($user, $dream)
     {

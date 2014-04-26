@@ -438,6 +438,8 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeFinancialContribution(\Geekhub\DreamBundle\Entity\FinancialContribute $financialContributions)
     {
         $this->financialContributions->removeElement($financialContributions);
+        $financialContributions->setDream(null);
+        $financialContributions->setUser(null);
     }
 
     /**
@@ -471,6 +473,8 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeEquipmentContribution(\Geekhub\DreamBundle\Entity\EquipmentContribute $equipmentContributions)
     {
         $this->equipmentContributions->removeElement($equipmentContributions);
+        $equipmentContributions->setDream(null);
+        $equipmentContributions->setUser(null);
     }
 
     /**
@@ -504,6 +508,8 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeWorkContribution(\Geekhub\DreamBundle\Entity\WorkContribute $workContributions)
     {
         $this->workContributions->removeElement($workContributions);
+        $workContributions->setDream(null);
+        $workContributions->setUser(null);
     }
 
     /**
@@ -537,6 +543,8 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
     {
         $this->otherContributions->removeElement($otherContributions);
+        $otherContributions->setDream(null);
+        $otherContributions->setUser(null);
     }
 
     /**
