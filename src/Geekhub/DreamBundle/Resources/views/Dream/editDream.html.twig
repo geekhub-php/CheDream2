@@ -1,5 +1,9 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+{% block title %}
+    Черкаська мрія - Редагування {{ dream.title }}
+{% endblock title %}
+
 {% block content %}
     {% if rejectDescription is not null %}
         <div class="alert alert-warning">

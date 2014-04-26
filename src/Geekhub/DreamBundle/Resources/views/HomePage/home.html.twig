@@ -6,6 +6,10 @@
      <link href="{{ asset('bundles/geekhubresource/css/dreams-tiles.css') }}" rel="stylesheet">
  {% endblock %}
 
+{% block title %}
+    Черкаська мрія - Головна
+{% endblock title %}
+
 {% block content %}
 
     {{ include('GeekhubDreamBundle:includes:homePageSlider.html.twig', {completedDreams: completedDreams}) }}

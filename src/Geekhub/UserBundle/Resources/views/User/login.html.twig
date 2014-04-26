@@ -1,6 +1,8 @@
 {% extends "GeekhubUserBundle::layout.html.twig" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}
+    Черкаська мрія - Ви не авторизувалися {{ dream.title }}
+{% endblock title %}
 
 {% block fos_user_content %}
     {% for flashMessage in app.session.flashbag.get('locked') %}
