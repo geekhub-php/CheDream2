@@ -64,7 +64,7 @@ class DreamExtension extends \Twig_Extension
         return $str;
     }
 
-    public function displayLimitWord($text, $limit = 20)
+    public function displayLimitWord($text, $limit = 20, $dot=false)
     {
         $words = explode(' ', strip_tags(trim($text)));
         $countWords = count($words);
@@ -80,7 +80,7 @@ class DreamExtension extends \Twig_Extension
             $strResult .= $words[$i].' ';
         }
 
-        return $strResult.'...';
+        return $dot ? $strResult : $strResult.'...';
     }
 
     public function equipContribute(User $user, Dream $dream)
