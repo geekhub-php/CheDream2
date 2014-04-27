@@ -275,11 +275,12 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
      */
-    public function removeSomeContributeAction(Dream $dream)
+    public function removeSomeContributeAction(Dream $dream, User $user)
     {
         /** @var User $user */
-        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $financialContributions = $dream->getDreamFinancialContributions()->map($this->getContributionElement($user));
