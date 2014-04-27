@@ -5,6 +5,7 @@ namespace Geekhub\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Users
@@ -30,6 +31,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="firstName", type="string", length=50, nullable=true)
      */
     protected $firstName;
@@ -569,6 +571,6 @@ class User extends BaseUser //implements DreamUserInterface
 
     public function isFakeEmail()
     {
-        return false === strpos($this->email, self::FAKE_EMAIL_PART) ? false : true;
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) && $this->email ? false : true;
     }
 }

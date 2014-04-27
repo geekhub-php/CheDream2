@@ -36,7 +36,8 @@ class DreamAdmin extends Admin
             ->add('currentStatus', null, array('editable' => true))
             ->add('_action', 'actions', array(
                     'actions' => array(
-                        array('template' => 'GeekhubDreamBundle:Admin:edit_button.html.twig')
+                        array('template' => 'GeekhubDreamBundle:Admin:edit_button.html.twig'),
+                        'delete' => array()
                     )
                 ))
         ;
@@ -44,6 +45,6 @@ class DreamAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'edit'));
+        $collection->clearExcept(array('list', 'edit', 'delete'));
     }
 }
