@@ -1,8 +1,9 @@
 <?php
 
-namespace Geekhub\DreamBundle\Tests\Controller;
+namespace Geekhub\DreamBundle\Tests\Controller\Api\v1;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DreamControllerTest extends WebTestCase
 {
@@ -13,10 +14,10 @@ class DreamControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', $container->get('router')->generate('api_v1_get_dreams'));
 
-        $this->assertTrue($crawler->count() > 0);
+        $this->assertTrue($crawler->filter('img')->count() > 0);
 
         $crawler = $client->request('GET', $container->get('router')->generate('api_v1_get_dreams', array('statuses' => array('rejected'))));
 
-        $this->assertFalse($crawler->count() > 0);
+        $this->assertFalse($crawler->filter('img')->count() > 0);
     }
 }
