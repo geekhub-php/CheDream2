@@ -290,34 +290,28 @@ class DreamController extends Controller
 
         foreach($financialContributions as $financialContribution ) {
             if (!is_null($financialContribution)) {
-                $dream->removeDreamFinancialContribution($financialContribution);
-                $user->removeFinancialContribution($financialContribution);
+                $em->remove($financialContribution);
             }
         }
 
         foreach($equipContributions as $equipContribution) {
             if (!is_null($equipContribution)) {
-                $dream->removeDreamEquipmentContribution($equipContribution);
-                $user->removeEquipmentContribution($equipContribution);
+                $em->remove($equipContribution);
             }
         }
 
         foreach($workContributions as $workContribution) {
             if (!is_null($workContribution)) {
-                $dream->removeDreamWorkContribution($workContribution);
-                $user->removeWorkContribution($workContribution);
+                $em->remove($workContribution);
             }
         }
 
         foreach($otherContributions as $otherContribution) {
             if (!is_null($otherContribution)) {
-                $dream->removeDreamOtherContribution($otherContribution);
-                $user->removeOtherContribution($otherContribution);
+                $em->remove($otherContribution);
             }
         }
 
-        $em->persist($dream);
-        $em->persist($user);
         $em->flush();
 
         return $this->redirect($this->generateUrl('view_dream', array(

@@ -23,13 +23,15 @@ class RemoveContributionWithNullDreamCommand extends ContainerAwareCommand
         $equipmentContributions = $this->getContainer()->get('doctrine')->getRepository('GeekhubDreamBundle:EquipmentContribute')->findAll();
         $financialContributions = $this->getContainer()->get('doctrine')->getRepository('GeekhubDreamBundle:FinancialContribute')->findAll();
         $workContributions      = $this->getContainer()->get('doctrine')->getRepository('GeekhubDreamBundle:WorkContribute')->findAll();
+        $otherContributions      = $this->getContainer()->get('doctrine')->getRepository('GeekhubDreamBundle:OtherContribute')->findAll();
 
         $progress = $this->getHelperSet()->get('progress');
-        $progress->start($output, count($equipmentContributions) + count($financialContributions) + count($workContributions));
+        $progress->start($output, count($equipmentContributions) + count($financialContributions) + count($workContributions) + count($otherContributions));
 
         array_map($this->removeContributionWithNullDream($progress), $equipmentContributions);
         array_map($this->removeContributionWithNullDream($progress), $financialContributions);
         array_map($this->removeContributionWithNullDream($progress), $workContributions);
+        array_map($this->removeContributionWithNullDream($progress), $otherContributions);
 
 //        foreach ($dreams as $dream) {
 //            $dream->getDreamFinancialContributions()->forAll($this->removeContributionWithNullDream());
