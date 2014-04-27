@@ -282,36 +282,36 @@ class DreamController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $financialContr = $dream->getDreamFinancialContributions()->map($this->getElement($user));
-        $equipContr = $dream->getDreamEquipmentContributions()->map($this->getElement($user));
-        $workContr = $dream->getDreamWorkContributions()->map($this->getElement($user));
-        $otherContr = $dream->getDreamOtherContributions()->map($this->getElement($user));
+        $financialContributions = $dream->getDreamFinancialContributions()->map($this->getContributionElement($user));
+        $equipContributions = $dream->getDreamEquipmentContributions()->map($this->getContributionElement($user));
+        $workContributions = $dream->getDreamWorkContributions()->map($this->getContributionElement($user));
+        $otherContributions = $dream->getDreamOtherContributions()->map($this->getContributionElement($user));
 
-        foreach($financialContr as $finC ) {
-            if (!is_null($finC)) {
-                $dream->removeDreamFinancialContribution($finC);
-                $user->removeFinancialContribution($finC);
+        foreach($financialContributions as $financialContribution ) {
+            if (!is_null($financialContribution)) {
+                $dream->removeDreamFinancialContribution($financialContribution);
+                $user->removeFinancialContribution($financialContribution);
             }
         }
 
-        foreach($equipContr as $equipC) {
-            if (!is_null($equipC)) {
-                $dream->removeDreamEquipmentContribution($equipC);
-                $user->removeEquipmentContribution($equipC);
+        foreach($equipContributions as $equipContribution) {
+            if (!is_null($equipContribution)) {
+                $dream->removeDreamEquipmentContribution($equipContribution);
+                $user->removeEquipmentContribution($equipContribution);
             }
         }
 
-        foreach($workContr as $workC) {
-            if (!is_null($workC)) {
-                $dream->removeDreamWorkContribution($workC);
-                $user->removeWorkContribution($workC);
+        foreach($workContributions as $workContribution) {
+            if (!is_null($workContribution)) {
+                $dream->removeDreamWorkContribution($workContribution);
+                $user->removeWorkContribution($workContribution);
             }
         }
 
-        foreach($otherContr as $otherC) {
-            if (!is_null($otherC)) {
-                $dream->removeDreamOtherContribution($otherC);
-                $user->removeOtherContribution($otherC);
+        foreach($otherContributions as $otherContribution) {
+            if (!is_null($otherContribution)) {
+                $dream->removeDreamOtherContribution($otherContribution);
+                $user->removeOtherContribution($otherContribution);
             }
         }
 
@@ -324,7 +324,7 @@ class DreamController extends Controller
         )));
     }
 
-    protected  function getElement($user)
+    protected  function getContributionElement($user)
     {
         return function($element) use ($user) {
             if ($element->getUser() == $user) {

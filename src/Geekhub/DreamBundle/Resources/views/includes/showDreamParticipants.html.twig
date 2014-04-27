@@ -14,9 +14,13 @@
                             {{ user.firstName }}
                             {{ user.lastName }}
                         </a>
-                        <a href="{{ path('remove_SomeContribute', {'slug': dream.slug}) }}" target="_blank">
-                            X
-                        </a>
+                        {#{% if is_granted("ROLE_SUPER_ADMIN") %}#}
+                            {#{% if dream.currentStatus in ['collecting-resources', 'implementing'] %}#}
+                                {#<a href="{{ path('remove_SomeContribute', {'slug': dream.slug}) }}" target="_blank">#}
+                                    {#X#}
+                                {#</a>#}
+                            {#{% endif %}#}
+                        {#{% endif %}#}
                         <ul class="items">
                             {{ finContribute(user, dream)|raw }}
                             {{ equipContribute(user, dream)|raw }}
