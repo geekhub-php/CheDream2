@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     if (localStorage.getItem('newDreamPoster')) {
         var uploadPoster = localStorage.getItem('newDreamPoster');
-        $('#dream-poster-image').html(localStorage.getItem('newDreamPoster'));
+        $('#newDream-poster-container').html(localStorage.getItem('newDreamPoster'));
     }
 
     if (localStorage.getItem('newDreamMediaFiles')) {
@@ -48,7 +48,7 @@ $('#dream-poster-image').on('click', function(e) {
                     $('#newDreamForm_dreamPoster').get(0).value = file.src;
                 }
             });
-            var posterNewDream = $('#dream-poster-image').html();
+            var posterNewDream = $('#newDream-poster-container').html();
             localStorage.setItem('newDreamPoster', posterNewDream);
         },
         error: function(msg) {
