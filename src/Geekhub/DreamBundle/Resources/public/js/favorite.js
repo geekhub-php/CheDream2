@@ -6,7 +6,7 @@ $('#dreams').on('click', 'span', function(event) {
         $.post(path1, {id : $(event.target).data('idmedia')})
             .done(function(msgDone) {
                 console.log(msgDone);
-                itemObj.css({color:'yellow'});
+                itemObj.css({"background": "#ffffff url('bundles/geekhubresource/images/star_off.png') right top no-repeat"});
                 itemObj.data('sended', 'no');
                 itemObj.attr('title', 'додати до списку улюблених.');
                 $('#added_success').append(
@@ -28,7 +28,7 @@ $('#dreams').on('click', 'span', function(event) {
         $.post(path, {id : $(event.target).data('idmedia')})
             .done(function(msgDone) {
                 console.log(msgDone);
-                itemObj.css({color:'green'});
+                itemObj.css({"background": "#ffffff url('bundles/geekhubresource/images/star_on.png') right top no-repeat"});
                 itemObj.data('sended', 'yes');
                 itemObj.attr('title', 'уже в улюблених.');
                 $('#added_success').append(

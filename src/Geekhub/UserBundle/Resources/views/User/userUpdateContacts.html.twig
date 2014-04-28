@@ -1,43 +1,64 @@
 {% extends "GeekhubResourceBundle::layout.html.twig" %}
 
-{% block title %}Edit profile{% endblock %}
+{% block title %}
+    Черкаська мрія - Редагування профіля
+{% endblock title %}
 
 {% block content %}
-    {% for flashMessage in app.session.flashbag.get('emailIsBusy') %}
-        <div class="alert alert-success">
-            {{ flashMessage|trans|raw }}
-        </div>
-    {% endfor %}
-
-    <div style="padding: 5% 0;">
-        <form method="POST" enctype="multipart/form-data" action="{{ path('profile_update_contacts') }}">
-            <div class="row">
-                <div class="col-md-5">
-                    <div id="user-avatar-container">
-                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail" />
+<div class="content page-edit-profile page-green-shadow">
+    <form method="POST" enctype="multipart/form-data" action="{{ path('profile_update_contacts') }}">
+        <div class="row">
+            <div class="col-md-4">
+                {# media avatar, 'big' #}
+                {# form_widget(form.avatar) #}
+                <div id="user-avatar-image" class="main-photo {{ user.avatar ? 'active' }}">
+                    <div class="photo-holder">
+                        <span class="icon"></span>
+                        <span class="title required">Аватар</span>
                     </div>
-                    {# media avatar, 'big' #}
-                    {# form_widget(form.avatar) #}
+                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
                 </div>
-                <div class="col-md-7">
-                    <label class="control-label">{{ 'user.first_and_lastname'|trans }}</label>
-                    <div class="row">
-                        <div class="col-md-6">
-                          {{ form_widget(form.firstName) }}
-                        </div>
-                        <div class="col-md-6">
-                          {{ form_widget(form.lastName) }}
-                        </div>
-                    </div>
-                    {# set form.vars.value.email = '' #}
-                    {{ form_row(form.email) }}
-                    {{ form_rest(form) }}
-                    {{ form_errors(form) }}
-                    <div class="row center">
-                        <input type="submit" name= "_submit" class="btn btn-primary" value="{{ 'user.save'|trans }}">
-                    </div>
-                </div>
+              
+                <div id="errors" class="files"></div>
             </div>
-        </form>
-    </div>
+            
+            <div class="col-md-8">
+                <ul class="user-info-list">
+                    <li class="input-block">
+                        <label class="label required">Ім’я</label>
+                        {{ form_widget(form.firstName, {'attr': {'placeholder': "Ім’я"}}) }}
+                    </li>
+                    <li class="input-block">
+                        <label class="label required">Прізвище</label>
+                        {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
+                    </li>
+                    {#
+                    <li class="input-block phone-block">
+                        <label class="label required">Телефон</label>
+                        {{ form_widget(form.phone, {'attr': {'placeholder': '(888) 888 88 88'}}) }}
+                    </li>
+                    #}
+                    <li class="input-block">
+                        <label class="label required">Email</label>
+                        {# set form.vars.value.email = '' #}
+                        {{ form_widget(form.email) }}
+                    </li>
+                    <li class="buttons-block">
+                        <button type="submit" class="custom-btn btn-green" name="_submit">Зберегти</button>
+                    </li>
+                    <li>
+                        {{ form_errors(form) }}
+                        {{ form_rest(form) }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div> <!--/Content-->
+
 {% endblock content %}
+
+{% block javascript %}
+  {{ parent() }}
+
+{% endblock javascript %}
