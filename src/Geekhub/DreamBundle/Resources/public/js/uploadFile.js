@@ -1,4 +1,3 @@
-var arrayMediaFiles = [];
 $(document).ready(function() {
     $('#dream-add-video').hide();
     
