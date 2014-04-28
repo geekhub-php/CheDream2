@@ -19,11 +19,13 @@
                     <img src="" alt="Main Image">
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
-                
+
+                <div id="media-block-container">
                 <div id="dream-gallery" class="uploaded-images"></div>
                 <div id="dream-files" class="upload-results"></div>
                 <div id="dream-videos" class="upload-results"></div>
-                
+                </div>
+
                 <div id="errors" class="files upload-results"></div>
                 
                 <div id="dream-add-video" class="add-video-block">
@@ -178,10 +180,10 @@
 
         $(document).ready(function() {
             $('ul.help-block li a').hide();
-            $('#newDreamForm_dreamPictures').get(0).value = '';
-            $('#newDreamForm_dreamFiles').get(0).value = '';
-            $('#newDreamForm_dreamVideos').get(0).value = '';
-            $('#newDreamForm_dreamPoster').get(0).value = '';
+//            $('#newDreamForm_dreamPictures').get(0).value = '';
+//            $('#newDreamForm_dreamFiles').get(0).value = '';
+//            $('#newDreamForm_dreamVideos').get(0).value = '';
+//            $('#newDreamForm_dreamPoster').get(0).value = '';
         });
     </script>
 {% endblock %}
