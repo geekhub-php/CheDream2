@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "510aa85a01974aee302a1759b8d308ec",
+    "hash": "c995532efa8a4881898d58b3c4acbd59",
     "packages": [
         {
             "name": "ahonymous/fontello",
@@ -925,12 +925,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "36629f5976f9f588093bf0bfb5230502fdb0eacf"
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/36629f5976f9f588093bf0bfb5230502fdb0eacf",
-                "reference": "36629f5976f9f588093bf0bfb5230502fdb0eacf",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
+                "reference": "0d4572dbaa0af247f14f6c1c4a80ca4eb4f48f02",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +973,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2014-01-24 08:28:48"
+            "time": "2014-04-25 17:27:17"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
@@ -4241,17 +4241,17 @@
         },
         {
             "name": "willdurand/js-translation-bundle",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "target-dir": "Bazinga/Bundle/JsTranslationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
-                "reference": "92d09cead24cef5e007dfbe1259dadbdeb3e1ab1"
+                "reference": "3d1e0b1fafadcbd10475f05c3db84633eb186c32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/92d09cead24cef5e007dfbe1259dadbdeb3e1ab1",
-                "reference": "92d09cead24cef5e007dfbe1259dadbdeb3e1ab1",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/3d1e0b1fafadcbd10475f05c3db84633eb186c32",
+                "reference": "3d1e0b1fafadcbd10475f05c3db84633eb186c32",
                 "shasum": ""
             },
             "require": {
@@ -4295,7 +4295,7 @@
                 "symfony",
                 "translation"
             ],
-            "time": "2014-03-06 11:43:10"
+            "time": "2014-01-20 16:17:52"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -4391,16 +4391,16 @@
     "packages-dev": [
         {
             "name": "behat/behat",
-            "version": "v2.5.2",
+            "version": "v2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "a12154aae8a09248637fbca8ef3b2ef2ac71f2aa"
+                "reference": "c3a105a3c0457df919879c72b63b910e63739e51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/a12154aae8a09248637fbca8ef3b2ef2ac71f2aa",
-                "reference": "a12154aae8a09248637fbca8ef3b2ef2ac71f2aa",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/c3a105a3c0457df919879c72b63b910e63739e51",
+                "reference": "c3a105a3c0457df919879c72b63b910e63739e51",
                 "shasum": ""
             },
             "require": {
@@ -4449,7 +4449,7 @@
                 "Behat",
                 "Symfony2"
             ],
-            "time": "2014-02-12 17:03:46"
+            "time": "2014-04-26 16:55:16"
         },
         {
             "name": "behat/gherkin",

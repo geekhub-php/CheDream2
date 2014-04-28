@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Geekhub\UserBundle\Entity\User;
 
 /**
  * DreamsRepository

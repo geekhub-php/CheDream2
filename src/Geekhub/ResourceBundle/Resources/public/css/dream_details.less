@@ -1,0 +1,743 @@
+@default-font: 'Daxpro', sans-serif;
+@default-bold-font: 'Daxpro Bold', sans-serif;
+@images-folder: '/bundles/geekhubresource/images';
+
+.fancybox-overlay  {
+  width: 100%;
+}
+
+#dream {
+  #dream-details {
+    background: #fff;
+
+    h3 {
+      padding: 1px 0 9px;
+      margin: 0 0 12px;
+      border-bottom: 1px solid #e1e1e1;
+      font-family: @default-bold-font;
+      font-size: 14px;
+      line-height: 14px;
+      text-transform: uppercase;
+      color: #f2602c;
+    }
+
+    h4 {
+      padding: 0 0 10px;
+      font-family: @default-bold-font;
+      font-size: 14px;
+      line-height: 18px;
+      color: #464646;
+
+      span {
+        font-family: @default-font;
+      }
+    }
+
+    /*================================= HEADER ===============================*/
+    /*================================= HEADER ===============================*/
+    /*================================= HEADER ===============================*/
+    .dream-header {
+      overflow: hidden;
+      height: 357px;
+
+      img {
+        display: block;
+      }
+
+      .poster {
+        position: relative;
+        float: left;
+        width: 649px;
+        height: 357px;
+        background: url("@{images-folder}/placeholder-image.png") no-repeat center #d2d2d2;
+
+        img {
+          position: absolute; left: 0; top: 0;
+          width: 100%;
+        }
+      }
+      .thumbnails {
+        overflow: hidden;
+        float: left;
+        width: 310px;
+        height: 357px;
+        margin: 0 0 0 1px;
+
+        .video {
+          overflow: hidden;
+          position: relative;
+          float: left;
+          width: 310px;
+          height: 176px;
+          margin: 0 0 1px;
+          border: 1px solid #b8b8b8;
+          background: url("@{images-folder}/placeholder-image.png") no-repeat center #d2d2d2;
+
+        }
+        li {
+          overflow: hidden;
+          position: relative;
+          float: left;
+          width: 155px;
+          height: 87px;
+          border: 1px solid #b8b8b8;
+          background: url("@{images-folder}/placeholder-image.png") no-repeat center #d2d2d2;
+
+          img {
+            position: absolute; left: 0; top: 0;
+            width: 100%;
+          }
+        }
+        &.no-video {
+          li {
+            height: 89px;
+          }
+        }
+      }
+    }
+    /*================================= CONTENT ===============================*/
+    /*================================= CONTENT ===============================*/
+    /*================================= CONTENT ===============================*/
+    .details-content {
+      overflow: visible;
+      padding: 0 30px 30px;
+
+      /*================================= SIDEBAR ===============================*/
+      /*================================= SIDEBAR ===============================*/
+      /*================================= SIDEBAR ===============================*/
+      .sidebar {
+        float: left;
+        width: 280px;
+        margin: 0 30px 0 0;
+
+        .creator {
+          position: relative;
+          height: 70px;
+          padding: 28px 0 0 36px;
+
+          a {
+            display: block;
+            font-family: @default-bold-font;
+            font-size: 17px;
+            line-height: 18px;
+            color:#464646;
+          }
+          img {
+            position: absolute; top:-36px; left: -30px; z-index: 2;
+            display: block;
+            width: 66px;
+            height: 66px;
+            border-right:1px solid #fff;
+            border-top:1px solid #fff;
+          }
+        }
+        /*================================= WAYS TO SUPPORT ===============================*/
+        /*================================= WAYS TO SUPPORT ===============================*/
+        /*================================= WAYS TO SUPPORT ===============================*/
+        .ways-to-support {
+          .warning {
+            a {
+              font-family: @default-bold-font;
+            }
+          }
+          > ul {
+            padding: 0 0 15px;
+
+            .financial {
+              span span {
+                background-image: url("@{images-folder}/financial-help.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+              }
+            }
+            .equipment {
+              span span {
+                background-image: url("@{images-folder}/equipment-help.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+              }
+            }
+            .physical {
+              span span {
+                background-image: url("@{images-folder}/physical-help.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+              }
+            }
+            .other {
+              span span {
+                background-image: url("@{images-folder}/other-help.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+              }
+            }
+            > li {
+              height:40px;
+              margin: 0 0 5px;
+
+              background: #ee451e; /* Old browsers */
+              background: -moz-linear-gradient(top, #ff9c38 0%, #ee451e 100%); /* FF3.6+ */
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9c38), color-stop(100%,#ee451e)); /* Chrome,Safari4+ */
+              background: -webkit-linear-gradient(top, #ff9c38 0%,#ee451e 100%); /* Chrome10+,Safari5.1+ */
+              background: -o-linear-gradient(top, #ff9c38 0%,#ee451e 100%); /* Opera 11.10+ */
+              background: -ms-linear-gradient(top, #ff9c38 0%,#ee451e 100%); /* IE10+ */
+              background: linear-gradient(to bottom, #ff9c38 0%,#ee451e 100%); /* W3C */
+
+              -webkit-border-top-left-radius: 20px;
+              -webkit-border-bottom-left-radius: 20px;
+              -moz-border-radius-topleft: 20px;
+              -moz-border-radius-bottomleft: 20px;
+              border-top-left-radius: 20px;
+              border-bottom-left-radius: 20px;
+
+              span.circle {
+                display: block;
+                float: left;
+                width: 40px;
+                height:40px;
+
+                background: #ee451e; /* Old browsers */
+                background: -moz-linear-gradient(top, #ffb550 0%, #f56c2a 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb550), color-stop(100%,#f56c2a)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, #ffb550 0%,#f56c2a 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, #ffb550 0%,#f56c2a 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, #ffb550 0%,#f56c2a 100%); /* IE10+ */
+                background: linear-gradient(to bottom, #ffb550 0%,#f56c2a 100%); /* W3C */
+
+                border-radius: 20px;
+                -moz-border-radius: 20px;
+                -webkit-border-radius: 20px;
+                background-clip: padding-box;
+
+                span {
+                  display: block;
+                  width: 40px;
+                  height:40px;
+                }
+              }
+
+              &:hover {
+                background: #ee451e; /* Old browsers */
+                background: -moz-linear-gradient(top, #ff901f 0%, #ee451e 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff901f), color-stop(100%,#ee451e)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top, #ff901f 0%,#ee451e 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top, #ff901f 0%,#ee451e 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top, #ff901f 0%,#ee451e 100%); /* IE10+ */
+                background: linear-gradient(to bottom, #ff901f 0%,#ee451e 100%); /* W3C */
+
+              }
+
+              > a {
+                display: block;
+                float: left;
+                display: block;
+                padding: 11px 0 0px 9px;
+                width: 230px;
+                height:39px;
+
+                font-family: @default-bold-font;
+                font-size: 16px;
+                line-height: 18px;
+                color:#FFF;
+              }
+              > div {
+                display: none;
+              }
+            }
+          }
+        }
+
+        /*================================= SUPPORT ===============================*/
+        /*================================= SUPPORT ===============================*/
+        /*================================= SUPPORT ===============================*/
+        .support {
+          margin: 0 0 32px;
+
+          p.summary {
+            margin: 0 0 16px;
+            font-family: @default-font;
+            font-size: 17px;
+            line-height: 18px;
+            text-align: center;
+            color:#464646;
+            span {
+              font-family: @default-bold-font;
+              font-size: 40px;
+              line-height: 40px;
+              text-align: center;
+              color:#f2602c !important;
+            }
+          }
+
+          h3 {
+            border: 0;
+            padding: 0;
+            margin: 0 0 12px;
+          }
+
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          .work-progress {
+            width: 200px;
+            height: 58px;
+            margin: 0 auto 35px;
+
+            > div {
+              float: left;
+              margin: 0 13px 0 0;
+            }
+            .financial-radial-progress {
+              @circle-size: 58px;
+              @circle-background: #e0e0e0;
+              @circle-color: #5a5a5a;
+              @inset-size: 44px;
+              @inset-color: #fbfbfb;
+              @transition-length: 1s;
+
+              width:  @circle-size;
+              height: @circle-size;
+
+              background-color: @circle-background;
+              border-radius: 50%;
+              .circle {
+                  .mask, .fill {
+                      width:    @circle-size;
+                      height:   @circle-size;
+                      position: absolute;
+                      border-radius: 50%;
+                  }
+                  .mask, .fill {
+                      -webkit-backface-visibility: hidden;
+                      transition: -webkit-transform @transition-length;
+                      transition: -ms-transform @transition-length;
+                      transition: transform @transition-length;
+                      border-radius: 50%;
+                  }
+                  .mask {
+                      clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+                      .fill {
+                          clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                          background-color: @circle-color;
+                      }
+                  }
+              }
+              .inset {
+                  width:       @inset-size;
+                  height:      @inset-size;
+                  position:    absolute;
+                  margin-left: (@circle-size - @inset-size)/2;
+                  margin-top:  (@circle-size - @inset-size)/2;
+
+                  background: url("@{images-folder}/financial.png") no-repeat center @inset-color;
+                  border-radius: 50%;
+              }
+
+              @i: 0;
+              @increment: 180deg / 100;
+              .loop (@i) when (@i <= 100) {
+                  &[data-progress="@{i}"] {
+                      .circle {
+                          .mask.full, .fill {
+                              -webkit-transform: rotate(@increment * @i);
+                              -ms-transform: rotate(@increment * @i);
+                              transform: rotate(@increment * @i);
+                          }
+                          .fill.fix {
+                              -webkit-transform: rotate(@increment * @i * 2);
+                              -ms-transform: rotate(@increment * @i * 2);
+                              transform: rotate(@increment * @i * 2);
+                          }
+                      }
+                  }
+                  .loop(@i + 1);
+              }
+              .loop(@i);
+            }
+            .equipmant-radial-progress {
+              @circle-size: 58px;
+              @circle-background: #e0e0e0;
+              @circle-color: #5a5a5a;
+              @inset-size: 44px;
+              @inset-color: #fbfbfb;
+              @transition-length: 1s;
+
+              width:  @circle-size;
+              height: @circle-size;
+
+              background-color: @circle-background;
+              border-radius: 50%;
+              .circle {
+                  .mask, .fill {
+                      width:    @circle-size;
+                      height:   @circle-size;
+                      position: absolute;
+                      border-radius: 50%;
+                  }
+                  .mask, .fill {
+                      -webkit-backface-visibility: hidden;
+                      transition: -webkit-transform @transition-length;
+                      transition: -ms-transform @transition-length;
+                      transition: transform @transition-length;
+                      border-radius: 50%;
+                  }
+                  .mask {
+                      clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+                      .fill {
+                          clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                          background-color: @circle-color;
+                      }
+                  }
+              }
+              .inset {
+                  width:       @inset-size;
+                  height:      @inset-size;
+                  position:    absolute;
+                  margin-left: (@circle-size - @inset-size)/2;
+                  margin-top:  (@circle-size - @inset-size)/2;
+
+                  background: url("@{images-folder}/equipment.png") no-repeat center @inset-color;
+                  border-radius: 50%;
+              }
+
+              @i: 0;
+              @increment: 180deg / 100;
+              .loop (@i) when (@i <= 100) {
+                  &[data-progress="@{i}"] {
+                      .circle {
+                          .mask.full, .fill {
+                              -webkit-transform: rotate(@increment * @i);
+                              -ms-transform: rotate(@increment * @i);
+                              transform: rotate(@increment * @i);
+                          }
+                          .fill.fix {
+                              -webkit-transform: rotate(@increment * @i * 2);
+                              -ms-transform: rotate(@increment * @i * 2);
+                              transform: rotate(@increment * @i * 2);
+                          }
+                      }
+                  }
+                  .loop(@i + 1);
+              }
+              .loop(@i);
+            }
+            .work-radial-progress {
+              margin: 0;
+
+              @circle-size: 58px;
+              @circle-background: #e0e0e0;
+              @circle-color: #5a5a5a;
+              @inset-size: 44px;
+              @inset-color: #fbfbfb;
+              @transition-length: 1s;
+
+              width:  @circle-size;
+              height: @circle-size;
+
+              background-color: @circle-background;
+              border-radius: 50%;
+              .circle {
+                  .mask, .fill {
+                      width:    @circle-size;
+                      height:   @circle-size;
+                      position: absolute;
+                      border-radius: 50%;
+                  }
+                  .mask, .fill {
+                      -webkit-backface-visibility: hidden;
+                      transition: -webkit-transform @transition-length;
+                      transition: -ms-transform @transition-length;
+                      transition: transform @transition-length;
+                      border-radius: 50%;
+                  }
+                  .mask {
+                      clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+                      .fill {
+                          clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                          background-color: @circle-color;
+                      }
+                  }
+              }
+              .inset {
+                  width:       @inset-size;
+                  height:      @inset-size;
+                  position:    absolute;
+                  margin-left: (@circle-size - @inset-size)/2;
+                  margin-top:  (@circle-size - @inset-size)/2;
+
+                  background: url("@{images-folder}/work.png") no-repeat center @inset-color;
+                  border-radius: 50%;
+              }
+
+              @i: 0;
+              @increment: 180deg / 100;
+              .loop (@i) when (@i <= 100) {
+                  &[data-progress="@{i}"] {
+                      .circle {
+                          .mask.full, .fill {
+                              -webkit-transform: rotate(@increment * @i);
+                              -ms-transform: rotate(@increment * @i);
+                              transform: rotate(@increment * @i);
+                          }
+                          .fill.fix {
+                              -webkit-transform: rotate(@increment * @i * 2);
+                              -ms-transform: rotate(@increment * @i * 2);
+                              transform: rotate(@increment * @i * 2);
+                          }
+                      }
+                  }
+                  .loop(@i + 1);
+              }
+              .loop(@i);
+            }
+          }//progress
+
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          /*================================= SLIDERS ===============================*/
+          .goals-successes {
+            > div {
+              border-top: 1px solid #e1e1e1;
+            }
+
+            h4 {
+              padding:  11px 0 11px 33px;
+            }
+
+            .finances {
+              h4 {
+                background: url("@{images-folder}/financial-results.png") no-repeat 3px center;
+              }
+            }
+            .equipment {
+              h4 {
+                background: url("@{images-folder}/equipment-results.png") no-repeat 3px center;
+              }
+            }
+            .resources {
+              h4 {
+                background: url("@{images-folder}/physical-results.png") no-repeat 3px center;
+              }
+            }
+
+            table {
+              width: 100%;
+              margin: 0 0 14px;
+
+              tr {
+
+                td {
+                  padding: 5px 9px;
+                  border-bottom: 1px solid #fff;
+                  background: #f4f4f4;
+
+                  font-family: @default-font;
+                  font-size: 12px;
+                  line-height: 14px;
+                  color:#464646;
+
+                  strong {
+                    font-family: @default-bold-font;
+                  }
+                }
+
+                .add {
+                  width: 20px;
+                  padding: 0 5px 0 0;
+                  a {
+                    display: block;
+                    width: 19px;
+                    height: 19px;
+                    background: #f2602c;
+
+                    text-align: center;
+                    font-size: 24px;
+                    line-height: 20px;
+                    color:#fff;
+
+                    border-radius: 20px;
+                    -moz-border-radius: 20px;
+                    -webkit-border-radius: 20px;
+                    background-clip: padding-box;
+
+                    &:hover {
+                      background:#ffb21c;
+                    }
+                  }
+                }
+
+                .right {
+                  width: 30%;
+                  text-align: right;
+
+                  span {
+                    display: block;
+                    width: 100px;
+                  }
+                }
+
+                &:hover {
+                  td {
+                    background: #fde8e2;
+                  }
+                }
+              }
+            }
+          }
+
+        }//support
+      }//sidebar
+
+
+
+
+      /*================================= DETAILS ===============================*/
+      /*================================= DETAILS ===============================*/
+      /*================================= DETAILS ===============================*/
+      .details {
+        float: left;
+        width: 590px;
+        padding: 30px 0 0;
+
+        .admin-controls {
+          a,a:link {
+            margin: 0 10px 0 0;
+            font-size: 12px;
+            color:#fff;
+          }
+          a:first-child {
+            margin: 0 !important;
+          }
+        }
+
+        h2 {
+          overflow: hidden;
+          margin: 0 0 14px;
+          font-family: @default-bold-font;
+          font-size: 30px;
+          line-height: 31px;
+          color:#464646;
+        }
+        .info-details {
+          margin: 0 0 20px;
+          padding: 20px;
+          background:  url("@{images-folder}/dream-info-details-bg.png") #ffd843 no-repeat left 13px;
+          font-family: @default-font;
+          font-size: 14px;
+          line-height: 18px;
+          color: #010000;
+        }
+        .description {
+          margin: 0 0 30px;
+          font-size: 14px;
+          line-height: 18px;
+          color:#464646;
+
+          > span.success {
+            display: block;
+            height: 56px;
+            padding: 20px 0 20px 20px;
+            margin: 0 0 22px;
+
+            background: #26e47e;
+            background: -moz-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, #26e47e), color-stop(100%, #00cbdd));
+            background: -webkit-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -o-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: -ms-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+            background: linear-gradient(to right, #26e47e 0%, #00cbdd 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26e47e', endColorstr='#00cbdd', GradientType=1 );
+
+            em {
+              display: inline-block;
+              height: 19px;
+              padding: 0 0 0 35px;
+
+              line-height: 20px;
+              background: url("@{images-folder}/dream-succeeded.png") no-repeat left center;
+
+              font-family: @default-bold-font;
+              font-style: normal;
+              font-size: 18px;
+              line-height: 20px;
+              color:#202020;
+            }
+          }
+
+          p {
+//            margin: 0 0 21px;
+          }
+
+          .attachments {
+
+            overflow: hidden;
+            margin: 15px 0 0;
+
+            li {
+              float: left;
+              margin: 0 10px 0 0;
+
+              a {
+                display: block;
+                padding: 3px 4px;
+                background: #f4f4f4;
+                border: 1px solid #fde8e2;
+              }
+            }
+          }
+        }
+        /*================================= PARTICIPANTS ===============================*/
+        /*================================= PARTICIPANTS ===============================*/
+        /*================================= PARTICIPANTS ===============================*/
+        .participants {
+          .warning {
+            margin: 0 0 30px;
+          }
+          > ul {
+            overflow: hidden;
+
+            li.even {
+              clear: both;
+            }
+            > li {
+              float: left;
+              width: 50%;
+              padding: 0 22px 22px 0;
+              img {
+                display: block;
+                float: left;
+                width: 44px;
+                margin: 0 12px 0 0;
+              }
+              div {
+                overflow: hidden;
+
+                a {
+                  display: block;
+                  padding: 0 0 3px;
+                  font-family: @default-bold-font;
+                  font-size: 16px;
+                  line-height: 18px;
+                  color: #464646;
+                }
+                ul.items {
+                  li {
+                    padding: 0 0 3px 12px;
+                    background: url("@{images-folder}/list-item-bg.png") no-repeat 1px 6px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        /*================================= COMMENTS ===============================*/
+        /*================================= COMMENTS ===============================*/
+        /*================================= COMMENTS ===============================*/
+        .comments {
+
+        }//.comments
+      }
+    }
+  }
+}
+

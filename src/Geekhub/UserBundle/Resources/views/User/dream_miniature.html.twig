@@ -1,12 +1,10 @@
-<a href="{{ path('view_dream', {'slug': dream.slug}) }}">
-<div class="col-md-2"><img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail"></div>
-<div class="col-md-4">
-
-    <div class="row">
-     <h4>{{ dream.title }}</h4>
-    </div>
-    <div class="row">
-     <p>{{ dream.description|dotdotdot(150)|raw }}</p>
-    </div>
-</div>
+<a href="{{ path('view_dream', {'slug': dream.slug}) }}" class="photo-block">
+    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_thumb') }}">
 </a>
+<span class="info-block">
+    <span class="title">
+        {{ dream.title }}
+    </span>
+    <span class="description">{{ dream.description|dotdotdot(150)|raw }}</span>
+</span>
+
