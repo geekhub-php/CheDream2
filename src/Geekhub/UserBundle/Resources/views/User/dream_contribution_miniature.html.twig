@@ -1,39 +1,12 @@
 <li class="clearfix">
     <ul class="attached-resources-list">
         <li class="title-promise">Я обіцяю:</li>
-        {% if dream.dreamFinancialContributions is defined and dream.dreamFinancialContributions|length > 0 %}
-        {% for contribution in dream.dreamFinancialContributions %}
-            {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor %}
-                <li>{{ contribution.financialResource.title }} ({{ contribution.quantity }} {{'dream.financial.valute'|trans }})</li>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-        
-        {% if dream.dreamEquipmentContributions is defined and dream.dreamEquipmentContributions|length > 0 %}
-        {% for contribution in dream.dreamEquipmentContributions %}
-            {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
-                <li>
-                    {{ contribution.equipmentResource.title }} ({{ contribution.quantity }} {{contribution.equipmentResource.getReadableQuantityTypes()[contribution.equipmentResource.quantityType]|trans }})
-                </li>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-        
-        {% if dream.dreamWorkContributions is defined and dream.dreamWorkContributions|length > 0 %}
-        {% for contribution in dream.dreamWorkContributions %}
-            {% if contribution.user.id is same as (userId) and not contribution.hiddenContributor%}
-                <li>{{ contribution.workResource.title }} ({{ contribution.quantity }} {{'dream.work.days'|trans }})</li>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
-        
-        {% if dream.dreamOtherContributions is defined and dream.dreamOtherContributions|length > 0 %}
-        {% for contribution in dream.dreamOtherContributions %}
-            {% if contribution.user.id is same as (userId)  and not contribution.hiddenContributor %}
-                <li>{{ contribution.title }}</li>
-            {% endif %}
-        {% endfor %}
-        {% endif %}
+
+        {{ finContribute(user, dream)|raw }}
+        {{ equipContribute(user, dream)|raw }}
+        {{ workContribute(user, dream)|raw }}
+        {{ otherContribute(user, dream)|raw }}
+
     </ul>
     {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
     <div class="clear"></div>
