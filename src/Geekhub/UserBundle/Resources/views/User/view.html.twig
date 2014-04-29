@@ -8,7 +8,7 @@
 <div class="content page-view-profile">
     <div class="row"> 
         <div class="col-md-4">
-            <div class="photo-block">
+            <div class="photo-block text-center">
                 <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
             </div>
             
@@ -29,10 +29,10 @@
                     <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
                 {% endif %}
                 
-                {% if user.vkontakteUrl %}
+                {% if user.vkontakteId %}
                     <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
                 {% endif %}
-                {% if user.odnoklassnikiUrl %}
+                {% if user.odnoklassnikiId %}
                     <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
                 {% endif %}
             </div>
