@@ -19,6 +19,7 @@ class UserAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('username')
             ->add('email')
             ->add('facebookId')
             ->add('vkontakteId')
@@ -31,6 +32,7 @@ class UserAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('username')
             ->add('email')
             ->add('facebookId')
             ->add('vkontakteId')
@@ -42,6 +44,7 @@ class UserAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('email')
+            ->add('username')
             ->add('phone')
             ->add('roles')
             ->add('facebookId')
