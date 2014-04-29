@@ -20,7 +20,16 @@ class LiipImagesClearCacheCommand extends ContainerAwareCommand
             ->setName('liip:cache:clear')
             ->setDescription('Crearing Liip Images cache. (This used in version "0.*@dev")')
             ->addArgument('filters', InputArgument::OPTIONAL|InputArgument::IS_ARRAY, 'Images filters.')
-        ;
+            ->setHelp(<<<EOF
+The <info>%command.name%</info> command clear cache by name filters.
+
+If you want to clear all filters, then don't name filters.
+
+Filters should be separated by spaces:
+<info>php app/console %command.name% nameFilter1 nameFilter2</info>
+All cache for a given `filters` will be lost.
+EOF
+            );
     }
 
     /**
