@@ -1,6 +1,9 @@
 <?php
 /**
- * This command can be removed after update LiipImageBundle to 1.0.* version or
+ * Created by PhpStorm.
+ * User: alex
+ * Date: 29.04.14
+ * Time: 10:49
  */
 
 namespace Geekhub\ResourceBundle\Command;
