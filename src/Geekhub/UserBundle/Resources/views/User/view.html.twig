@@ -13,23 +13,27 @@
             </div>
             
             <div class="media-block">
-                {% if user.phone is not null %}
+                {% if user.phone %}
                     <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
                 {% endif %}
-                {% if user.skype is not null %}
-                    <a href="callto:{{ user.skype }}" class="skype"><span class="icon icon-skype"></span></a>
+                
+                {% if user.skype %}
+                    <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span></a>
                 {% endif %}
-                {% if user.email is not null %}
+                
+                {% if user.email %}
                     <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span></a>
                 {% endif %}
-                {% if user.facebookUrl is not null %}
-                    <a href="{{ user.facebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
+                
+                {% if user.facebookId %}
+                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
                 {% endif %}
-                {% if user.vkontakteUrl is not null %}
-                    <a href="{{ user.vkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
+                
+                {% if user.vkontakteId %}
+                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
                 {% endif %}
-                {% if user.odnoklassnikiUrl is not null %}
-                    <a href="{{ user.odnoklassnikiId }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
+                {% if user.odnoklassnikiId %}
+                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
                 {% endif %}
             </div>
         </div>

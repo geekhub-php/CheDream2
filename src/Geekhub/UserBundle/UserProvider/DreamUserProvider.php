@@ -51,12 +51,12 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
             $this->updateOtherSocialIds($user, $previousUser);
             $this->mergeDreams($user, $previousUser);
             $this->mergeContributions($user, $previousUser);
+            $this->userManager->deleteUser($previousUser);
         }
 
         //we connect current user
         $user->$setterId($username);
 
-        $this->userManager->deleteUser($previousUser);
         $this->userManager->updateUser($user);
     }
 
