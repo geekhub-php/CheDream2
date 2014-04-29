@@ -20,30 +20,10 @@ trait ContactsInfo
     protected $skype;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="facebookUrl", type="string", length=150, nullable=true)
-     */
-    protected $facebookUrl;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="vkontakteUrl", type="string", length=150, nullable=true)
-     */
-    protected $vkontakteUrl;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="odnoklassnikiUrl", type="string", length=150, nullable=true)
-     */
-    protected $odnoklassnikiUrl;
-
-    /**
      * Set phone
      *
      * @param string $phone
+     * @return $this
      */
     public function setPhone($phone)
     {
@@ -66,6 +46,7 @@ trait ContactsInfo
      * Set skype
      *
      * @param string $skype
+     * @return $this
      */
     public function setSkype($skype)
     {
@@ -85,37 +66,13 @@ trait ContactsInfo
     }
 
     /**
-     * Set facebookUrl
-     *
-     * @param string $facebookUrl
-     */
-    public function setFacebookUrl($facebookUrl)
-    {
-        $this->facebookUrl = $facebookUrl;
-
-        return $this;
-    }
-
-    /**
      * Get facebookUrl
      *
      * @return string
      */
     public function getFacebookUrl()
     {
-        return $this->facebookUrl;
-    }
-
-    /**
-     * Set vkontakteUrl
-     *
-     * @param string $vkontakteUrl
-     */
-    public function setVkontakteUrl($vkontakteUrl)
-    {
-        $this->vkontakteUrl = $vkontakteUrl;
-
-        return $this;
+        return sprintf('http://www.facebook.com/%d', $this->facebookId);
     }
 
     /**
@@ -125,28 +82,16 @@ trait ContactsInfo
      */
     public function getVkontakteUrl()
     {
-        return $this->vkontakteUrl;
+        return sprintf('http://vk.com/id%d', $this->vkontakteId);
     }
 
     /**
-     * Set odnoklassnikiUrl
-     *
-     * @param string $odnoklassnikiUrl
-     */
-    public function setOdnoklassnikiUrl($odnoklassnikiUrl)
-    {
-        $this->odnoklassnikiUrl = $odnoklassnikiUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get vkontakteUrl
+     * Get odnoklassnikiUrl
      *
      * @return string
      */
     public function getOdnoklassnikiUrl()
     {
-        return $this->odnoklassnikiUrl;
+        return sprintf('http://www.odnoklassniki.ru/profile/%d', $this->odnoklassnikiId);
     }
 }
