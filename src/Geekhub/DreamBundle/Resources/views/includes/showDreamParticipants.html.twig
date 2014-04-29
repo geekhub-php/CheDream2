@@ -14,9 +14,19 @@
                             {{ user.firstName }}
                             {{ user.lastName }}
                         </a>
-                        {#<a href="{{ path('remove_SomeContribute', {'slug': dream.slug}) }}" style="display: none;">#}
-                            {#X#}
-                        {#</a>#}
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                                Видалити
+                            </a>
+                        {% endif %}
+
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                            {% if ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
+                                <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                                    Видалити
+                                </a>
+                            {% endif %}
+                        {% endif %}
                         <ul class="items">
                             {{ finContribute(user, dream)|raw }}
                             {{ equipContribute(user, dream)|raw }}

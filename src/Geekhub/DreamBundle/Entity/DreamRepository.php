@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Geekhub\UserBundle\Entity\User;
 
 /**
  * DreamsRepository
@@ -62,43 +63,6 @@ class DreamRepository extends EntityRepository
             ->setParameter('dream', $dream)
             ->getResult();
     }
-
-    public function getFinContr($dream, $user)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT c
-                            FROM GeekhubDreamBundle:FinancialContribute c
-                            where c.user = :user and c.dream = :dream
-                            ')
-            ->setParameter('user', $user)
-            ->setParameter('dream', $dream)
-            ->getResult();
-    }
-
-    public function getEquipContr($dream, $user)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT c
-                            FROM GeekhubDreamBundle:EquipmentContribute c
-                            where c.user = :user and c.dream = :dream
-                            ')
-            ->setParameter('user', $user)
-            ->setParameter('dream', $dream)
-            ->getResult();
-    }
-
-    public function getWorkContr($dream, $user)
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT c
-                            FROM GeekhubDreamBundle:WorkContribute c
-                            where c.user = :user and c.dream = :dream
-                            ')
-            ->setParameter('user', $user)
-            ->setParameter('dream', $dream)
-            ->getResult();
-    }
-
 
     public function showEquipmentContributors($user, $dream)
     {
