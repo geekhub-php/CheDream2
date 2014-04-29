@@ -38,8 +38,14 @@
                 }
             });
 
-            localStorage.removeItem('newDreamPoster');
-            localStorage.removeItem('newDreamMediaFiles');
+            if (localStorage.getItem('newDreamPoster')) {
+                localStorage.removeItem('newDreamPoster');
+            }
+
+            if (localStorage.getItem('newDreamMediaFiles')) {
+                localStorage.removeItem('newDreamMediaFiles');
+            }
+            
         });
 
     </script>
