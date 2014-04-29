@@ -10,40 +10,28 @@
 
                 <div class="col-md-3">
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-                    {% if user.phone is not null %}
-                        <a href="callto:{{ user.phone }}"><div class="icon-phone-circled"></div></a>
+                    {% if user.phone %}
+                        <a href="callto:{{ user.phone }}"><i class="icon-phone-circled"></i></a>
                     {% endif %}
 
-                    {% if user.skype is not null %}
-                        <a href="callto:{{ user.skype }}"><div class="icon-skype"></div></a>
+                    {% if user.skype %}
+                        <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span></a>
                     {% endif %}
 
-                    {% if user.email is not null %}
-                        <a href="mailto:{{ user.email }}"><div class="icon-mail"></div></a>
+                    {% if user.email %}
+                        <a href="mailto:{{ user.email }}"><i class="icon-mail"></i></a>
                     {% endif %}
 
-                    {% if user.facebookId is not null %}
-                        <a href="{{ user.facebookUrl }}"><div class="icon-facebook-circled"></div></a>
-                    {% else %}
-                        <a href="{{ path('facebook_login') }}">
-                            <i class="icon-facebook-circled" style="color: black"></i>
-                        </a>
+                    {% if user.facebookId %}
+                        <a href="{{ user.getFacebookUrl }}"><i class="icon-facebook"></i></a>
                     {% endif %}
 
-                    {% if user.vkontakteId is not null %}
-                        <a href="{{ user.vkontakteUrl }}"><div class="icon-vkontakte-rect"></div></a>
-                    {% else %}
-                        <a href="{{ path('vkontakte_login') }}">
-                            <i class="icon-vkontakte-rect" style="color: black"></i>
-                        </a>
+                    {% if user.vkontakteId %}
+                        <a href="{{ user.getVkontakteUrl }}"><i class="icon-vkontakte"></i></a>
                     {% endif %}
 
-                    {% if user.odnoklassnikiId is not null %}
-                        <a href="{{ user.odnoklassnikiUrl }}"><div class="icon-odnoklassniki-rect"></div></a>
-                    {% else %}
-                        <a href="{{ path('odnoklassniki_login') }}">
-                            <i class="icon-odnoklassniki-rect" style="color: black"></i>
-                        </a>
+                    {% if user.odnoklassnikiId %}
+                        <a href="{{ user.getOdnoklassnikiUrl }}"><i class="icon-odnoklassniki"></i></a>
                     {% endif %}
                 </div>
 
