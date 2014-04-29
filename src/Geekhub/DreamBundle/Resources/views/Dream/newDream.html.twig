@@ -11,16 +11,18 @@
 
             <span class="fileinput-button" id="dream-poster-image">
                 <div id="dream-poster-container">
-                    <img data-src="holder.js/440x260/text:Main Image" class="img-thumbnail">
+                    <img class="img-thumbnail" id="newDream-poster-image" style="width: 440px; height: 260px;" src="">
                     <input id="fileupload-poster" type="file" name="dream-poster">
                 </div>
             </span>
 
             <br>
-            <div id="dream-gallery"></div>
-            <br/>
-            <div id="dream-files"></div>
-            <div id="dream-videos"></div>
+            <div id="media-block-container">
+                <div id="dream-gallery"></div>
+                <br/>
+                <div id="dream-files"></div>
+                <div id="dream-videos"></div>
+            </div>
 
             <div class="row">
                 <div class="col-md-11">
@@ -127,10 +129,6 @@
         });
         $(document).ready(function() {
             $('ul.help-block li a').hide();
-            $('#newDreamForm_dreamPictures').get(0).value = '';
-            $('#newDreamForm_dreamFiles').get(0).value = '';
-            $('#newDreamForm_dreamVideos').get(0).value = '';
-            $('#newDreamForm_dreamPoster').get(0).value = '';
         });
     </script>
 {% endblock %}

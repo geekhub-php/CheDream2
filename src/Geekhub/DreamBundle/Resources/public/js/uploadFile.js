@@ -1,5 +1,15 @@
 $(document).ready(function() {
     $('#dream-add-video').hide();
+
+    if (localStorage.getItem('newDreamPoster')) {
+        var uploadPoster = localStorage.getItem('newDreamPoster');
+        $('#newDream-poster-image').attr('src', uploadPoster);
+    }
+
+    if (localStorage.getItem('newDreamMediaFiles')) {
+        var uploadMediaPicturesAndFiles = localStorage.getItem('newDreamMediaFiles');
+        $('#media-block-container').html(localStorage.getItem('newDreamMediaFiles'));
+    }
 });
 
 $('#dream-poster-image').click(function() {
@@ -23,6 +33,9 @@ $('#dream-poster-image').click(function() {
                     $('#dream-poster-container').html('<img src="' + file.srcPreview + '" class="img-thumbnail">' +
                         '<input id="fileupload-poster" type="file" name="dream-poster">');
                     $('#newDreamForm_dreamPoster').get(0).value = file.src;
+
+                    var posterNewDream = file.srcPreview;
+                    localStorage.setItem('newDreamPoster', posterNewDream);
                 }
             });
 
@@ -66,6 +79,9 @@ loadFile = function () {
                     $('#newDreamForm_dreamFiles').get(0).value += ',' + file.src;
                 }
             });
+
+            var pictureAndFiles = $('#media-block-container').html();
+            localStorage.setItem('newDreamMediaFiles', pictureAndFiles);
         },
         error: function(msg) {
             console.log('error = ' + msg);
@@ -90,6 +106,9 @@ $('#add-video-button').click(function() {
                 '<i class="icon icon-youtube"></i>' + 'Youtube video' + '</div>'
         );
         $('#dream-add-video-error').html('');
+
+        var pictureAndFiles = $('#media-block-container').html();
+        localStorage.setItem('newDreamMediaFiles', pictureAndFiles);
     } else {
         $('#dream-add-video-error').html(
             '<div class="alert alert-warning alert-dismissable">' +
