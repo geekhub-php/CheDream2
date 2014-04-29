@@ -20,7 +20,7 @@ class LiipImagesClearCacheCommand extends ContainerAwareCommand
     {
         $this
             ->setName('liip:cache:clear')
-            ->setDescription('Crearing Liip Images cache.')
+            ->setDescription('Crearing Liip Images cache. (This used in version "0.*@dev")')
             ->addArgument('filters', InputArgument::OPTIONAL|InputArgument::IS_ARRAY, 'Images filters.')
         ;
     }
