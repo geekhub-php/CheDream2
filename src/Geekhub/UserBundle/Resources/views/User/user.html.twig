@@ -37,20 +37,21 @@
                         {{ form_widget(form.email) }}
                         {{ form_errors(form.email) }}
                     </li>
-                    <li>
+                    <li class="media-block">
                         {% if user.facebookId is null %}
-                            <a href="{{ path('facebook_login') }}" class="fb"><i class="icon-facebook"></i></a>
+                            <a href="{{ path('facebook_login') }}" class="fb">
+                                <i class="icon icon-facebook"></i>
+                            </a>
                         {% endif %}
-                    </li>
-                    <li>
                         {% if user.vkontakteId is null %}
-                            <a href="{{ path('vkontakte_login') }}" class="vk"><i class="icon-vkontakte"></i></a>
+                            <a href="{{ path('vkontakte_login') }}" class="vk">
+                                <i class="icon icon-vkontakte"></i>
+                            </a>
                         {% endif %}
-                    </li>
-                    <li>
                         {% if user.odnoklassnikiId is null %}
-                            <a href="{{ path('odnoklassniki_login') }}" class="ok"><i 
-                                        class="icon-odnoklassniki"></i></a>
+                            <a href="{{ path('odnoklassniki_login') }}" class="ok">
+                                <i class="icon icon-odnoklassniki"></i>
+                            </a>
                         {% endif %}
                     </li>
                 </ul>
