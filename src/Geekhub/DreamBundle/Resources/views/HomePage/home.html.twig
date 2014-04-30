@@ -16,7 +16,7 @@
     <script>
         var loadDreams = function (startIndex) {
             var path = Routing.generate('api_v1_get_dreams');
-            $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing'] })
+            $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing', 'success'], orderBy: 'favoritesCount' })
                     .done(function (response) {
                         $(response).appendTo($('#dreams')).hide().fadeIn(300);
                     })
