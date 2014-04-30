@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-md-4">
                 
-                {# media avatar, 'big' #}
                 <div id="user-avatar-image" class="main-photo {{ user.avatar ? 'active' }}">
                     <div class="photo-holder">
                         <span class="icon"></span>
@@ -38,23 +37,22 @@
                         {{ form_widget(form.email) }}
                         {{ form_errors(form.email) }}
                     </li>
-                    {#
-                    <li class="input-block">
-                        <label class="label">Facebook</label>
-                        {{ form_widget(form.facebookUrl) }}
-                        {{ form_errors(form.facebookUrl) }}
+                    <li>
+                        {% if user.facebookId is null %}
+                            <a href="{{ path('facebook_login') }}" class="fb"><i class="icon-facebook"></i></a>
+                        {% endif %}
                     </li>
-                    <li class="input-block">
-                        <label class="label">Vkontakte</label>
-                        {{ form_widget(form.vkontakteUrl) }}
-                        {{ form_errors(form.vkontakteUrl) }}
+                    <li>
+                        {% if user.vkontakteId is null %}
+                            <a href="{{ path('vkontakte_login') }}" class="vk"><i class="icon-vkontakte"></i></a>
+                        {% endif %}
                     </li>
-                    <li class="input-block">
-                        <label class="label">Odnoklassniki</label>
-                        {{ form_widget(form.odnoklassnikiUrl) }}
-                        {{ form_errors(form.odnoklassnikiUrl) }}
+                    <li>
+                        {% if user.odnoklassnikiId is null %}
+                            <a href="{{ path('odnoklassniki_login') }}" class="ok"><i 
+                                        class="icon-odnoklassniki"></i></a>
+                        {% endif %}
                     </li>
-                    #}
                 </ul>
                 {{ form_widget(form.avatar) }}
             </div>
