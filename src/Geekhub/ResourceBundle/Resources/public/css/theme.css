@@ -429,11 +429,13 @@ body .tooltipster-default .tooltipster-content {
     text-align: center;
     padding-top: 12px;
 }
-.page-view-profile .media-block {
+.page-view-profile .media-block,
+.page-edit-profile .media-block {
     text-align: center;
     margin: 20px 0 0;
 }
-.page-view-profile .media-block a {
+.page-view-profile .media-block a,
+.page-edit-profile .media-block a {
     width: 41px;
     height: 41px;
     display: inline-block;
@@ -441,7 +443,8 @@ body .tooltipster-default .tooltipster-content {
     padding-top: 11px;
     vertical-align: top;
 }
-.page-view-profile .media-block .icon {
+.page-view-profile .media-block .icon,
+.page-edit-profile .media-block .icon {
     font-size: 19px;
 }
 
@@ -637,7 +640,7 @@ body .tooltipster-default .tooltipster-content {
 .header .dreams-list .no-my-dreams {
     height: 180px;
     text-align: center;
-    padding-top: 70px;
+    padding-top: 65px;
     color: #9B9B9B;
 }
 
@@ -1152,7 +1155,9 @@ body .tooltipster-default .tooltipster-content {
 .page-view-profile {
     padding: 30px 30px 60px;
 }
-
+.page-view-profile .photo-block {
+    text-align: center;
+}
 .page-view-profile .photo-block img {
     max-width: 100%;
 }
