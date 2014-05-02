@@ -129,7 +129,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
     }
 
-    protected function updateEmails(User $user, User $previousUser)
+    public function updateEmails(User $user, User $previousUser)
     {
         if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
             $realEmail = $previousUser->getEmail();
@@ -144,7 +144,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         }
     }
 
-    protected function updateOtherSocialIds(User $user, User $previousUser)
+    public function updateOtherSocialIds(User $user, User $previousUser)
     {
         $propertyAccessor = new PropertyAccessor();
         $socialIds = $previousUser->getNotNullSocialIds();
@@ -170,17 +170,18 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->userManager->updateUser($user);
     }
 
-    protected function mergeDreams(User $user, User $previousUser)
+    public function mergeDreams(User $user, User $previousUser)
     {
         foreach ($previousUser->getFavoriteDreams() as $dream) {
             if (!$user->getFavoriteDreams()->contains($dream)) {
                 $user->addFavoriteDream($dream);
+                $previousUser->removeFavoriteDream($dream);
             }
         }
 
         foreach ($previousUser->getDreams() as $dream) {
-            $previousUser->removeDream($dream);
             $dream->setAuthor($user);
+            $previousUser->removeDream($dream);
             $user->addDream($dream);
         }
 
@@ -188,7 +189,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->userManager->updateUser($user);
     }
 
-    protected function mergeContributions(User $user, User $previousUser)
+    public function mergeContributions(User $user, User $previousUser)
     {
         foreach ($previousUser->getEquipmentContributions() as $contribution) {
             $contribution->setUser($user);

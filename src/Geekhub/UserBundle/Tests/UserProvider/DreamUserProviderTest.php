@@ -13,36 +13,48 @@ use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
 use Geekhub\UserBundle\Entity\User;
+use Geekhub\UserBundle\UserProvider\DreamUserProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DreamUserProviderTest extends WebTestCase
 {
     /**
-     * @dataProvider getData
-     * @param User $user1
-     * @param User $user2
-     * @param $expect
+     * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    public function testMergeContributions(User $user1, User $user2, $expect)
-    {
-        $provider = $this->getMockBuilder('Geekhub\UserBundle\UserProvider\DreamUserProvider')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $this->assertInstanceOf('Geekhub\UserBundle\UserProvider\DreamUserProvider', $provider);
+    private $userManager;
 
-        $provider->expects($this->once())
-            ->method('mergeContributions')
-            ->with($this->equalTo($user1), $this->equalTo($user2))
-        ;
-        $this->assertCount($expect, $user1->getFinancialContributions());
+    /**
+     * @var DreamUserProvider
+     */
+    private $userProvider;
+
+    public function setUp()
+    {
+        $this->userManager = $this->getMock('FOS\UserBundle\Model\UserManagerInterface');
+        $this->userProvider = new DreamUserProvider($this->userManager, array());
     }
 
-    protected function getUser($item)
+    /**
+     * @dataProvider getContributionsData
+     * @param User $user1
+     * @param User $user2
+     * @param $expect1
+     * @param $expect2
+     */
+    public function testMergeContributions(User $user1, User $user2, $expect1, $expect2)
+    {
+        $this->userProvider->mergeContributions($user1, $user2);
+
+        $this->assertCount($expect1, $user1->getFinancialContributions());
+        $this->assertCount($expect2, $user2->getFinancialContributions());
+    }
+
+    protected function getContributionsUser($item)
     {
         $user = new User();
-        for ($i = 0; $i < $item; $i++ ) {
-            $user->addFinancialContribution(new FinancialContribute())
+        for ($i = 0; $i < $item; $i++) {
+            $user
+                ->addFinancialContribution(new FinancialContribute())
                 ->addEquipmentContribution(new EquipmentContribute())
                 ->addWorkContribution(new WorkContribute())
                 ->addOtherContribution(new OtherContribute())
@@ -52,10 +64,16 @@ class DreamUserProviderTest extends WebTestCase
         return $user;
     }
 
-    public function getData()
+    public function getContributionsData()
     {
         return array(
-            array($this->getUser(2), $this->getUser(1), 3),
+            array($this->getContributionsUser(2), $this->getContributionsUser(1), 3, 0),
+            array($this->getContributionsUser(1), $this->getContributionsUser(3), 4, 0),
+            array($this->getContributionsUser(0), $this->getContributionsUser(1), 1, 0),
+            array($this->getContributionsUser(5), $this->getContributionsUser(1), 6, 0),
+            array($this->getContributionsUser(25), $this->getContributionsUser(12), 37, 0),
+            array($this->getContributionsUser(99), $this->getContributionsUser(1), 100, 0),
+            array($this->getContributionsUser(5), $this->getContributionsUser(4), 9, 0),
         );
     }
 }
