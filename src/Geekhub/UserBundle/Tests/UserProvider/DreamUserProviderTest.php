@@ -25,7 +25,17 @@ class DreamUserProviderTest extends WebTestCase
      */
     public function testMergeContributions(User $user1, User $user2, $expect)
     {
-        $this->assertEquals($expect, count($user1->getFinancialContributions()));
+        $provider = $this->getMockBuilder('Geekhub\UserBundle\UserProvider\DreamUserProvider')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $this->assertInstanceOf('Geekhub\UserBundle\UserProvider\DreamUserProvider', $provider);
+
+        $provider->expects($this->once())
+            ->method('mergeContributions')
+            ->with($this->equalTo($user1), $this->equalTo($user2))
+        ;
+        $this->assertCount($expect, $user1->getFinancialContributions());
     }
 
     protected function getUser($item)
