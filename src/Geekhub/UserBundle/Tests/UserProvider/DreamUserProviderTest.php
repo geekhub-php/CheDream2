@@ -8,6 +8,7 @@
 
 namespace Geekhub\UserBundle\Tests\UserProvider;
 
+use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
@@ -47,8 +48,55 @@ class DreamUserProviderTest extends WebTestCase
 
         $this->assertCount($expect1, $user1->getFinancialContributions());
         $this->assertCount($expect2, $user2->getFinancialContributions());
+        $this->assertCount($expect1, $user1->getEquipmentContributions());
+        $this->assertCount($expect2, $user2->getEquipmentContributions());
+        $this->assertCount($expect1, $user1->getWorkContributions());
+        $this->assertCount($expect2, $user2->getWorkContributions());
+        $this->assertCount($expect1, $user1->getOtherContributions());
+        $this->assertCount($expect2, $user2->getOtherContributions());
     }
 
+    /**
+     * @dataProvider getDreamsData
+     * @param User $user1
+     * @param User $user2
+     * @param $expect1
+     * @param $expect2
+     * @param $fExpect1
+     * @param $fExpect2
+     */
+    public function testMergeDreams(User $user1, User $user2, $expect1, $expect2, $fExpect1, $fExpect2)
+    {
+        $this->userProvider->mergeDreams($user1, $user2);
+
+        $this->assertCount($expect1, $user1->getDreams());
+        $this->assertCount($expect2, $user2->getDreams());
+        $this->assertCount($fExpect1, $user1->getFavoriteDreams());
+        $this->assertCount($fExpect2, $user2->getFavoriteDreams());
+    }
+
+    /**
+     * @param $item
+     * @return User
+     */
+    protected function getDreamsUser($item)
+    {
+        $user = new User();
+        for ($i = 0; $i < $item; $i++) {
+            $user->addDream(new Dream());
+            if (fmod($i, 3) == 0) {
+                $fDream = new Dream();
+                $user->addFavoriteDream($fDream->setAuthor(new User()));
+            }
+        }
+
+        return $user;
+    }
+
+    /**
+     * @param $item
+     * @return User
+     */
     protected function getContributionsUser($item)
     {
         $user = new User();
@@ -64,6 +112,24 @@ class DreamUserProviderTest extends WebTestCase
         return $user;
     }
 
+    /**
+     * @return array
+     */
+    public function getDreamsData()
+    {
+        return array(
+            array($this->getDreamsUser(2), $this->getDreamsUser(5), 7, 0, 3, 0),
+            array($this->getDreamsUser(5), $this->getDreamsUser(7), 12, 0, 5, 0),
+            array($this->getDreamsUser(0), $this->getDreamsUser(5), 5, 0, 2, 0),
+            array($this->getDreamsUser(10), $this->getDreamsUser(1), 11, 0, 5, 0),
+            array($this->getDreamsUser(6), $this->getDreamsUser(3), 9, 0, 3, 0),
+            array($this->getDreamsUser(0), $this->getDreamsUser(0), 0, 0, 0, 0),
+        );
+    }
+
+    /**
+     * @return array
+     */
     public function getContributionsData()
     {
         return array(
