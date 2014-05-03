@@ -17,8 +17,8 @@ before_script:
     - npm install -g bower
     - npm install -g less
     - npm install -g zombie@1.4.1
-    - sudo ln -s /home/travis/.nvm/v0.10.28/bin/node /usr/local/bin/node
-    - sudo ln -s /home/travis/.nvm/v0.10.28/lib/node_modules /usr/local/lib/node_modules
+    - sudo ln -s /home/travis/.nvm/v0.10.25/bin/node /usr/local/bin/node
+    - sudo ln -s /home/travis/.nvm/v0.10.25/lib/node_modules /usr/local/lib/node_modules
 
     # Create VirtualHost
     - sudo sed -i -e "s,/var/www,$(pwd)/web,g" /etc/apache2/sites-available/default
