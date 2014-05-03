@@ -12,14 +12,11 @@ before_script:
     - cp app/config/parameters.yml.dist app/config/parameters.yml
 
     # Install packages
-    - ls
     - sudo apt-get update > /dev/null
     - sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-curl php5-mysql php5-intl
     - npm install -g bower
     - npm install -g less
     - npm install -g zombie@1.4.1
-    - wget http://nodejs.org/dist/v0.10.28/node-v0.10.28.tar.gz
-    - tar xvfz node-v0.10.28.tar.gz
     - sudo ln -s /home/travis/.nvm/v0.10.25/bin/node /usr/local/bin/node
     - sudo ln -s /home/travis/.nvm/v0.10.25/lib/node_modules /usr/local/lib/node_modules
 
