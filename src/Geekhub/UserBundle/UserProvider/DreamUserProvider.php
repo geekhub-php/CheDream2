@@ -129,7 +129,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->odnoklassnikiProvider = $odnoklassnikiProvider;
     }
 
-    public function updateEmails(User $user, User $previousUser)
+    protected function updateEmails(User $user, User $previousUser)
     {
         if ($user->isFakeEmail() && !$previousUser->isFakeEmail()) {
             $realEmail = $previousUser->getEmail();
@@ -144,7 +144,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         }
     }
 
-    public function updateOtherSocialIds(User $user, User $previousUser)
+    protected function updateOtherSocialIds(User $user, User $previousUser)
     {
         $propertyAccessor = new PropertyAccessor();
         $socialIds = $previousUser->getNotNullSocialIds();
@@ -170,7 +170,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->userManager->updateUser($user);
     }
 
-    public function mergeDreams(User $user, User $previousUser)
+    protected function mergeDreams(User $user, User $previousUser)
     {
         foreach ($previousUser->getFavoriteDreams() as $dream) {
             if (!$user->getFavoriteDreams()->contains($dream)) {
@@ -189,7 +189,7 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         $this->userManager->updateUser($user);
     }
 
-    public function mergeContributions(User $user, User $previousUser)
+    protected function mergeContributions(User $user, User $previousUser)
     {
         foreach ($previousUser->getEquipmentContributions() as $contribution) {
             $contribution->setUser($user);

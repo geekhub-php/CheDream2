@@ -44,7 +44,7 @@ class DreamUserProviderTest extends WebTestCase
      */
     public function testMergeContributions(User $user1, User $user2, $expect1, $expect2)
     {
-        $this->userProvider->mergeContributions($user1, $user2);
+        $this->invokeMethod($this->userProvider, 'mergeContributions', array($user1, $user2));
 
         $this->assertCount($expect1, $user1->getFinancialContributions());
         $this->assertCount($expect2, $user2->getFinancialContributions());
@@ -67,7 +67,7 @@ class DreamUserProviderTest extends WebTestCase
      */
     public function testMergeDreams(User $user1, User $user2, $expect1, $expect2, $fExpect1, $fExpect2)
     {
-        $this->userProvider->mergeDreams($user1, $user2);
+        $this->invokeMethod($this->userProvider, 'mergeDreams', array($user1, $user2));
 
         $this->assertCount($expect1, $user1->getDreams());
         $this->assertCount($expect2, $user2->getDreams());
@@ -141,5 +141,23 @@ class DreamUserProviderTest extends WebTestCase
             array($this->getContributionsUser(99), $this->getContributionsUser(1), 100, 0),
             array($this->getContributionsUser(5), $this->getContributionsUser(4), 9, 0),
         );
+    }
+
+    /**
+     * Call protected/private method of a class.
+     *
+     * @param object &$object    Instantiated object that we will run method on.
+     * @param string $methodName Method name to call
+     * @param array  $parameters Array of parameters to pass into method.
+     *
+     * @return mixed Method return.
+     */
+    public function invokeMethod(&$object, $methodName, array $parameters = array())
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $parameters);
     }
 }
