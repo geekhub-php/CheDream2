@@ -25,6 +25,7 @@ class MediaExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('mediaPath', array($this, 'mediaPath')),
+            new \Twig_SimpleFilter('mediaYouTubeVideoId', array($this, 'mediaYouTubeVideoId')),
         );
     }
 
@@ -40,6 +41,16 @@ class MediaExtension extends \Twig_Extension
         }
 
         return $media;
+    }
+
+    public function mediaYouTubeVideoId($media)
+    {
+        if ($media instanceof Media) {
+
+            return $media->getProviderReference();
+        } else {
+            return '#';
+        }
     }
 
     public function getName()
