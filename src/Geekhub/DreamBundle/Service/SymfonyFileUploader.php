@@ -218,7 +218,7 @@ class SymfonyFileUploader
 //        $randInt = mt_rand(1, 999999);
         $this->fileType = $this->file->getMimeType();
 //        $this->fileName = $randInt.'-'.$this->file->getClientOriginalName();
-        $this->fileName = $this->file->getClientOriginalName();
+        $this->fileName = 'chedream-'.$this->file->getClientOriginalName();
         $this->fileSize = $this->file->getSize();
     }
 

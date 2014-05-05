@@ -5,6 +5,7 @@ namespace Geekhub\UserBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Users
@@ -15,6 +16,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User extends BaseUser //implements DreamUserInterface
 {
     use ContactsInfo;
+
+    const FAKE_EMAIL_PART = "@example.com";
+
     /**
      * @var integer
      *
@@ -27,6 +31,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="firstName", type="string", length=50, nullable=true)
      */
     protected $firstName;
@@ -67,26 +72,26 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $vkontakteId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="facebook_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $facebookId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true)
+     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
      */
     protected $odnoklassnikiId;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites")
+     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites", cascade={"persist", "remove"})
      */
     protected $favoriteDreams;
 
@@ -368,6 +373,7 @@ class User extends BaseUser //implements DreamUserInterface
     public function removeFavoriteDream(\Geekhub\DreamBundle\Entity\Dream $favoriteDreams)
     {
         $this->favoriteDreams->removeElement($favoriteDreams);
+        $favoriteDreams->removeUsersWhoFavorite($this);
     }
 
     /**
@@ -439,7 +445,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get financialContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFinancialContributions()
     {
@@ -472,7 +478,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get equipmentContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEquipmentContributions()
     {
@@ -515,7 +521,7 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Add otherContributions
      *
-     * @param \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
+     * @param  \Geekhub\DreamBundle\Entity\OtherContribute $otherContributions
      * @return User
      */
     public function addOtherContribution(\Geekhub\DreamBundle\Entity\OtherContribute $otherContributions)
@@ -538,10 +544,25 @@ class User extends BaseUser //implements DreamUserInterface
     /**
      * Get otherContributions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOtherContributions()
     {
         return $this->otherContributions;
+    }
+
+    public function getNotNullSocialIds()
+    {
+        return array_filter([
+                'facebook' => $this->facebookId,
+                'vkontakte' => $this->vkontakteId,
+                'odnoklassniki' => $this->odnoklassnikiId,
+            ], 'strlen')
+        ;
+    }
+
+    public function isFakeEmail()
+    {
+        return false === strpos($this->email, self::FAKE_EMAIL_PART) && $this->email ? false : true;
     }
 }

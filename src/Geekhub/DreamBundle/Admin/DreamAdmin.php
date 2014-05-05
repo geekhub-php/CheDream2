@@ -33,7 +33,7 @@ class DreamAdmin extends Admin
             ->add('author.phone')
             ->add('author.firstName')
             ->add('author.lastName')
-            ->add('currentStatus')
+            ->add('currentStatus', null, array('editable' => true))
             ->add('_action', 'actions', array(
                     'actions' => array(
                         array('template' => 'GeekhubDreamBundle:Admin:edit_button.html.twig')

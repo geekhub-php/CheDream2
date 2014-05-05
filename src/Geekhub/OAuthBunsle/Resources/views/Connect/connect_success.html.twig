@@ -1,0 +1,14 @@
+{% extends "GeekhubUserBundle::layout.html.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block fos_user_content %}
+    <div class="row" style="text-align: center;">
+        <div class="row">
+            <h3>{{ 'header.success' | trans({'%name%': userInformation.realName}, 'HWIOAuthBundle') }}</h3>
+        </div>
+        <div class="row">
+            <a href="{{ path('dream_list') }}" class="btn bg-danger">Переглянути мрії</a>
+        </div>
+    </div>
+{% endblock fos_user_content %}

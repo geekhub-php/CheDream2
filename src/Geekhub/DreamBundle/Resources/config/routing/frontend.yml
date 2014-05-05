@@ -60,6 +60,10 @@ dream_search_text:
     pattern:  /dream/search/{text}
     defaults: { _controller: GeekhubDreamBundle:Dream:searchDream, text: 'default-search-text' }
 
+remove_SomeContribute:
+    pattern:  /dream/removeContribute/{slug}/{user}
+    defaults: { _controller: GeekhubDreamBundle:Dream:removeSomeContribute }
+
 dream_ajax_load_image:
     pattern:  /dream/ajaxLoadImage
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:dreamImageLoader }
@@ -87,5 +91,11 @@ dream_ajax_remove_media:
 dream_ajax_dream_toFavorite:
     pattern:  /dream/ajaxAddDreamToFavorite
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:addDreamToFavorite }
+    options:
+        expose: true
+
+dream_ajax_dream_removeFromFavorite:
+    pattern:  /dream/ajaxAddDreamFromFavorite
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:removeDreamFromFavorite }
     options:
         expose: true

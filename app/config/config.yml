@@ -106,6 +106,7 @@ nelmio_api_doc: ~
 hwi_oauth:
     connect:
         account_connector: geekhub.user.dream_user_provider
+        confirmation: false
     # name of the firewall in which this bundle is active, this setting MUST be set
     firewall_name: main
     fosub:
