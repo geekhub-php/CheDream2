@@ -7,15 +7,9 @@
     {% if dream.mediaVideos|length %}
         <ul class="thumbnails">
             <li class="video">
-                {#{% media dream.mediaVideos.0, 'reference' %}#}
-                <iframe id="ytplayer"
-                        type="text/html"
-                        width="307"
-                        height="173"
-                        src="https://www.youtube.com/embed/{{ dream.mediaVideos[0]|mediaYouTubeVideoId }}?fs=1&showinfo=0&iv_load_policy=3"
-                        frameborder="0"
-                        allowfullscreen="1">
-                </iframe>
+
+                {% media dream.mediaVideos.0, 'reference' with {'html5': true, 'player_parameters': {'width': '307', 'height': '173'} } %}
+
             </li>
             {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
                 {% for picture in dream.mediaCompletedPictures %}
