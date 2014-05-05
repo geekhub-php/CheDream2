@@ -30,7 +30,7 @@ class YouTubeProvider extends VendorYouTubeProvider
 
             // Values: 0 or 1. Default is 0. Sets whether or not the initial video will autoplay
             // when the player loads.
-            'autoplay'          => 0,
+            'autoplay'          => 1,
 
             // Values: 0 or 1. Default is 0. In the case of a single video player, a setting of 1
             // will cause the player to play the initial video again and again. In the case of a
