@@ -48,6 +48,21 @@
                             {{ user.lastName }}
                         </a>
                     </p>
+
+                    {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                            Видалити
+                        </a>
+                    {% endif %}
+
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                        {% if ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
+                            <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                                Видалити
+                            </a>
+                        {% endif %}
+                    {% endif %}
+
                 </div>
                 <div style="clear: both;">
                     <ul class="list-unstyled">
