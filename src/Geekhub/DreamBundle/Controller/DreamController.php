@@ -276,37 +276,6 @@ class DreamController extends Controller
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
      */
-    public function removeSomeContributeAction(Dream $dream)
-    {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $financialContr = $em->getRepository('GeekhubDreamBundle:Dream')->getFinContr($dream, $user);
-        $equipContr = $em->getRepository('GeekhubDreamBundle:Dream')->getEquipContr($dream, $user);
-        $workContr = $em->getRepository('GeekhubDreamBundle:Dream')->getWorkContr($dream, $user);
-
-        foreach($financialContr as $finC ) {
-            $dream->removeDreamFinancialContribution($finC);
-        }
-
-        foreach($equipContr as $equipC) {
-            $dream->removeDreamEquipmentContribution($equipC);
-        }
-
-        foreach($workContr as $workC) {
-            $dream->removeDreamWorkContribution($workC);
-        }
-
-        $em->persist($dream);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('view_dream', array(
-            'slug' => $dream->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
-     */
     public function rejectDreamAction(Dream $dream, Request $request)
     {
         if ($this->isSuperAdmin()) {
