@@ -21,6 +21,9 @@ class UserAdmin extends Admin
         $formMapper
             ->add('username')
             ->add('email')
+            ->add('facebookId')
+            ->add('vkontakteId')
+            ->add('odnoklassnikiId')
             ->add('locked', null, array('required' => false))
             ->add('enabled', null, array('required' => false))
         ;
@@ -29,18 +32,24 @@ class UserAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('email')
             ->add('username')
+            ->add('email')
+            ->add('facebookId')
+            ->add('vkontakteId')
+            ->add('odnoklassnikiId')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username')
-            ->add('email')
+            ->addIdentifier('email')
+            ->add('username')
             ->add('phone')
             ->add('roles')
+            ->add('facebookId')
+            ->add('vkontakteId')
+            ->add('odnoklassnikiId')
             ->add('locked', null, array('required' => false))
             ->add('enabled', null, array('required' => false))
         ;

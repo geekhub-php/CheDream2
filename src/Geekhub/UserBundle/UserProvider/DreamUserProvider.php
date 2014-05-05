@@ -175,12 +175,13 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
         foreach ($previousUser->getFavoriteDreams() as $dream) {
             if (!$user->getFavoriteDreams()->contains($dream)) {
                 $user->addFavoriteDream($dream);
+                $previousUser->removeFavoriteDream($dream);
             }
         }
 
         foreach ($previousUser->getDreams() as $dream) {
-            $previousUser->removeDream($dream);
             $dream->setAuthor($user);
+            $previousUser->removeDream($dream);
             $user->addDream($dream);
         }
 
@@ -191,23 +192,27 @@ class DreamUserProvider extends BaseClass implements UserProviderInterface, OAut
     protected function mergeContributions(User $user, User $previousUser)
     {
         foreach ($previousUser->getEquipmentContributions() as $contribution) {
-            $previousUser->removeDream($contribution);
-            $user->addDream($contribution);
+            $contribution->setUser($user);
+            $previousUser->removeEquipmentContribution($contribution);
+            $user->addEquipmentContribution($contribution);
         }
 
         foreach ($previousUser->getFinancialContributions() as $contribution) {
-            $previousUser->removeDream($contribution);
-            $user->addDream($contribution);
+            $contribution->setUser($user);
+            $previousUser->removeFinancialContribution($contribution);
+            $user->addFinancialContribution($contribution);
         }
 
         foreach ($previousUser->getWorkContributions() as $contribution) {
-            $previousUser->removeDream($contribution);
-            $user->addDream($contribution);
+            $contribution->setUser($user);
+            $previousUser->removeWorkContribution($contribution);
+            $user->addWorkContribution($contribution);
         }
 
         foreach ($previousUser->getOtherContributions() as $contribution) {
-            $previousUser->removeDream($contribution);
-            $user->addDream($contribution);
+            $contribution->setUser($user);
+            $previousUser->removeOtherContribution($contribution);
+            $user->addOtherContribution($contribution);
         }
 
         $this->userManager->updateUser($previousUser);

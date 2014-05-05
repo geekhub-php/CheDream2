@@ -17,14 +17,22 @@
                 <div id="errors" class="files">
                 </div>
 
-                {# media avatar, 'big' #}
                 {{ form_widget(form.avatar) }}
                 {{ form_row(form.phone) }}
                 {{ form_row(form.skype) }}
                 {{ form_row(form.email) }}
-                {#{{ form_row(form.facebookUrl) }}#}
-                {#{{ form_row(form.vkontakteUrl) }}#}
-                {#{{ form_row(form.odnoklassnikiUrl) }}#}
+
+                {% if user.facebookId is null %}
+                    <a href="{{ path('facebook_login') }}" class="fb"><i class="icon-facebook"></i></a>
+                {% endif %}
+
+                {% if user.vkontakteId is null %}
+                    <a href="{{ path('vkontakte_login') }}"><i class="icon-vkontakte"></i></a>
+                {% endif %}
+
+                {% if user.odnoklassnikiId is null %}
+                    <a href="{{ path('odnoklassniki_login') }}"><i class="icon-odnoklassniki"></i></a>
+                {% endif %}
             </div>
 
             <div class="col-md-7">
