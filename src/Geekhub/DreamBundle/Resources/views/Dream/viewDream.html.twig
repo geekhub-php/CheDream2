@@ -48,15 +48,6 @@
 {% block javascript %}
     {{ parent() }}
     <script>
-
-        $(document).ready(function() {
-            if ($('.video object').get(0)) {
-                $('.video object').get(0).width=307;
-                $('.video object').get(0).height=173;
-                $('.video object embed').get(0).width=307;
-                $('.video object embed').get(0).height=173;
-            }
-        });
         $(function(){
             $(".dream-header .gallery-item").fancybox();
             $(".dream-header .video").fancybox({
