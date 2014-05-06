@@ -8,8 +8,7 @@
         <ul class="thumbnails">
             <li class="video">
 
-                {% media dream.mediaVideos.0, 'normal' with {'html5': true, } %}
-                {#{% media dream.mediaVideos.0, 'reference' with {'html5': true, 'player_parameters': {'width': '307', 'height': '173'} } %}#}
+                {% media dream.mediaVideos.0, 'normal' with {'html5': true } %}
 
             </li>
             {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
