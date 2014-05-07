@@ -3,47 +3,10 @@
 namespace Geekhub\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Geekhub\DreamBundle\Entity\Status;
 
 class UsersRepository extends EntityRepository
 {
-    private function dreamWithNotHiddenContributionMerge($em, $user, $typeContributionEntityName, ArrayCollection $contributedDreams, $showHiddenContributedDreams)
-    {
-        if ($showHiddenContributedDreams) {
-            $conditions = array(
-                'user'=>$user,
-            );
-        }
-        else {
-            $conditions = array(
-                'user'=>$user,
-                'hiddenContributor'=>false,
-            );
-        }
-
-        $contributions = $em->getRepository('GeekhubDreamBundle:'.$typeContributionEntityName)->findBy($conditions);
-        foreach ($contributions as $contribution) {
-            if (!$contributedDreams->contains($contribution->getDream())) {
-                $contributedDreams->add($contribution->getDream());
-            }
-        }
-
-        return $contributedDreams;
-    }
-
-    public function findAllContributedDreams($user, $showHiddenContributedDreams)
-    {
-        $em = $this->getEntityManager();
-
-        $contributedDreams = new ArrayCollection();
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'FinancialContribute', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'EquipmentContribute', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'WorkContribute', $contributedDreams, $showHiddenContributedDreams);
-        $contributedDreams = $this->dreamWithNotHiddenContributionMerge($em, $user, 'OtherContribute', $contributedDreams, $showHiddenContributedDreams);
-        return $contributedDreams;
-    }
-
     public function findMyDreamProjects($user)
     {
         $em = $this->getEntityManager();

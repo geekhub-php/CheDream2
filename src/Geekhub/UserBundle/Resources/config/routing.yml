@@ -56,7 +56,7 @@ _login:
 
 profile_view:
     pattern: /users/{id}
-    defaults: { _controller: GeekhubUserBundle:User:userView}
+    defaults: { _controller: GeekhubUserBundle:User:view }
 
 profile_view_dreams:
     pattern: /users/{id}/dreams/{status}

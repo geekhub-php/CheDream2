@@ -2,12 +2,25 @@
 
 namespace Geekhub\UserBundle\Tests\Controller;
 
+use Geekhub\DreamBundle\Entity\EquipmentContribute;
+use Geekhub\DreamBundle\Entity\FinancialContribute;
+use Geekhub\DreamBundle\Entity\WorkContribute;
+use Geekhub\DreamBundle\Entity\OtherContribute;
+use Geekhub\UserBundle\Controller\UserController;
+use Geekhub\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UserControllerTest extends WebTestCase
 {
+    private $controller;
+
+    public function setUp()
+    {
+        $this->controller = new UserController();
+    }
+
     public function testFailLoginAction()
     {
         $client = static::createClient();
@@ -124,5 +137,80 @@ class UserControllerTest extends WebTestCase
         $client->submit($form);
 
         return $client->followRedirect();
+    }
+
+    /**
+     * @dataProvider getContributionsData
+     * @param User $user
+     * @param $expect
+     */
+    public function testGetContributions(User $user, $expect)
+    {
+        $contributions = $this->invokeMethod($this->controller, 'getContributions', array($user));
+
+        $this->assertEquals($expect, $contributions->count());
+    }
+
+    /**
+     * @return array
+     */
+    public function getContributionsData()
+    {
+        return array(
+            array($this->getUser(1, 2, 3, 0), 6),
+            array($this->getUser(0, 2, 3, 0), 5),
+            array($this->getUser(1, 2, 3, 1), 7),
+            array($this->getUser(1, 2, 0, 2), 5),
+            array($this->getUser(1, 1, 1, 1), 4),
+            array($this->getUser(66, 22, 13, 20), 121)
+        );
+    }
+
+    /**
+     * @param null $financeItems
+     * @param null $equipmentItems
+     * @param null $workItems
+     * @param null $otherItems
+     * @return User
+     */
+    protected function getUser($financeItems = null, $equipmentItems = null, $workItems = null, $otherItems = null)
+    {
+        $user = new User();
+
+        for ($i = 0; $i < $financeItems; $i++) {
+            $user->addFinancialContribution(new FinancialContribute());
+        }
+
+        for ($i = 0; $i < $equipmentItems; $i++) {
+            $user->addEquipmentContribution(new EquipmentContribute());
+        }
+
+        for ($i = 0; $i < $workItems; $i++) {
+            $user->addWorkContribution(new WorkContribute());
+        }
+
+        for ($i = 0; $i < $otherItems; $i++) {
+            $user->addOtherContribution(new OtherContribute());
+        }
+
+        return $user;
+    }
+
+    /**
+     * Call protected/private method of a class.
+     *
+     * @param object &$object    Instantiated object that we will run method on.
+     * @param string $methodName Method name to call
+     * @param array  $parameters Array of parameters to pass into method.
+     *
+     * @return mixed Method return.
+     */
+    public function invokeMethod(&$object, $methodName, array $parameters = array())
+    {
+        $reflection = new \ReflectionClass(get_class($object));
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $parameters);
     }
 }
