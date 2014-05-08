@@ -6,6 +6,7 @@ use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
+use Geekhub\ResourceBundle\Tests\SecurityMethods;
 use Geekhub\UserBundle\Controller\UserController;
 use Geekhub\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -14,11 +15,20 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UserControllerTest extends WebTestCase
 {
+    /**
+     * @var \Geekhub\UserBundle\Controller\UserController
+     */
     private $controller;
+
+    /**
+     * @var \Geekhub\ResourceBundle\Tests\SecurityMethods
+     */
+    private $securityMethods;
 
     public function setUp()
     {
         $this->controller = new UserController();
+        $this->securityMethods = new SecurityMethods();
     }
 
     public function testFailLoginAction()
@@ -120,9 +130,10 @@ class UserControllerTest extends WebTestCase
     }
 
     /**
-     * @param  Client                                $client
-     * @param  string                                $username
-     * @param  string                                $password
+     * @param  Client $client
+     * @param  string $username
+     * @param  string $password
+     *
      * @return \Symfony\Component\DomCrawler\Crawler
      */
     protected function loginAs(Client $client, $username, $password)
@@ -146,7 +157,7 @@ class UserControllerTest extends WebTestCase
      */
     public function testGetContributions(User $user, $expect)
     {
-        $contributions = $this->invokeMethod($this->controller, 'getContributions', array($user));
+        $contributions = $this->securityMethods->invokeMethod($this->controller, 'getContributions', array($user));
 
         $this->assertEquals($expect, $contributions->count());
     }
@@ -171,6 +182,7 @@ class UserControllerTest extends WebTestCase
      * @param null $equipmentItems
      * @param null $workItems
      * @param null $otherItems
+     *
      * @return User
      */
     protected function getUser($financeItems = null, $equipmentItems = null, $workItems = null, $otherItems = null)
@@ -194,23 +206,5 @@ class UserControllerTest extends WebTestCase
         }
 
         return $user;
-    }
-
-    /**
-     * Call protected/private method of a class.
-     *
-     * @param object &$object    Instantiated object that we will run method on.
-     * @param string $methodName Method name to call
-     * @param array  $parameters Array of parameters to pass into method.
-     *
-     * @return mixed Method return.
-     */
-    public function invokeMethod(&$object, $methodName, array $parameters = array())
-    {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
     }
 }

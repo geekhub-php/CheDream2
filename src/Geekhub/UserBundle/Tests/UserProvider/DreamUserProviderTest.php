@@ -13,6 +13,7 @@ use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\OtherContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
+use Geekhub\ResourceBundle\Tests\SecurityMethods;
 use Geekhub\UserBundle\Entity\User;
 use Geekhub\UserBundle\UserProvider\DreamUserProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -25,6 +26,11 @@ class DreamUserProviderTest extends WebTestCase
     private $userManager;
 
     /**
+     * @var \Geekhub\ResourceBundle\Tests\SecurityMethods
+     */
+    private $securityMethods;
+
+    /**
      * @var DreamUserProvider
      */
     private $userProvider;
@@ -33,6 +39,7 @@ class DreamUserProviderTest extends WebTestCase
     {
         $this->userManager = $this->getMock('FOS\UserBundle\Model\UserManagerInterface');
         $this->userProvider = new DreamUserProvider($this->userManager, array());
+        $this->securityMethods = new SecurityMethods();
     }
 
     /**
@@ -44,7 +51,7 @@ class DreamUserProviderTest extends WebTestCase
      */
     public function testMergeContributions(User $user1, User $user2, $expect1, $expect2)
     {
-        $this->invokeMethod($this->userProvider, 'mergeContributions', array($user1, $user2));
+        $this->securityMethods->invokeMethod($this->userProvider, 'mergeContributions', array($user1, $user2));
 
         $this->assertCount($expect1, $user1->getFinancialContributions());
         $this->assertCount($expect2, $user2->getFinancialContributions());
@@ -67,7 +74,7 @@ class DreamUserProviderTest extends WebTestCase
      */
     public function testMergeDreams(User $user1, User $user2, $expect1, $expect2, $fExpect1, $fExpect2)
     {
-        $this->invokeMethod($this->userProvider, 'mergeDreams', array($user1, $user2));
+        $this->securityMethods->invokeMethod($this->userProvider, 'mergeDreams', array($user1, $user2));
 
         $this->assertCount($expect1, $user1->getDreams());
         $this->assertCount($expect2, $user2->getDreams());
@@ -77,6 +84,7 @@ class DreamUserProviderTest extends WebTestCase
 
     /**
      * @param $item
+     *
      * @return User
      */
     protected function getDreamsUser($item)
@@ -95,6 +103,7 @@ class DreamUserProviderTest extends WebTestCase
 
     /**
      * @param $item
+     *
      * @return User
      */
     protected function getContributionsUser($item)
@@ -141,23 +150,5 @@ class DreamUserProviderTest extends WebTestCase
             array($this->getContributionsUser(99), $this->getContributionsUser(1), 100, 0),
             array($this->getContributionsUser(5), $this->getContributionsUser(4), 9, 0),
         );
-    }
-
-    /**
-     * Call protected/private method of a class.
-     *
-     * @param object &$object    Instantiated object that we will run method on.
-     * @param string $methodName Method name to call
-     * @param array  $parameters Array of parameters to pass into method.
-     *
-     * @return mixed Method return.
-     */
-    public function invokeMethod(&$object, $methodName, array $parameters = array())
-    {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
     }
 }
