@@ -69,7 +69,8 @@ class UserController extends Controller
     }
 
     /**
-     * @param  User            $user
+     * @param  User $user
+     *
      * @return ArrayCollection
      */
     protected function getContributions(User $user)
@@ -104,6 +105,7 @@ class UserController extends Controller
 
     /**
      * @param  ArrayCollection $contributions
+     *
      * @return ArrayCollection
      */
     protected function getContributionsDream(ArrayCollection $contributions)

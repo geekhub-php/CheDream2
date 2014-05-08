@@ -2,6 +2,9 @@
 
 namespace Geekhub\UserBundle\Tests\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Geekhub\DreamBundle\Entity\AbstractContribute;
+use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\EquipmentContribute;
 use Geekhub\DreamBundle\Entity\FinancialContribute;
 use Geekhub\DreamBundle\Entity\WorkContribute;
@@ -206,5 +209,52 @@ class UserControllerTest extends WebTestCase
         }
 
         return $user;
+    }
+
+    /**
+     * @dataProvider getContributionsDreamData
+     * @param ArrayCollection $contributions
+     */
+    public function testGetContributionsDream(ArrayCollection $contributions)
+    {
+        $dreams = $this->securityMethods->invokeMethod($this->controller, 'getContributionsDream', array($contributions));
+
+        var_dump($dreams->count());
+    }
+
+    protected function getContributions($item)
+    {
+        $contributions = new ArrayCollection();
+        $dreams = new ArrayCollection();
+        for ($i = 1; $i <= 10; $i++) {
+            $dreams->add(new Dream());
+        }
+
+        for ($i = 0; $i < $item-2; $i++) {
+            $contribute = new AbstractContribute();
+            $contribute->setDream($dreams->last());
+            $contributions->add($contribute);
+        }
+
+        for ($i = $item-2; $i < $item; $i++) {
+            $contribute = new AbstractContribute();
+            $contribute->setDream($dreams->first());
+            $contributions->add($contribute);
+        }
+
+        for ($i = $item; $i < $item+3; $i++) {
+            $contribute = new AbstractContribute();
+            $contribute->setDream($dreams->get(5));
+            $contributions->add($contribute);
+        }
+
+        return $contributions;
+    }
+
+    public function getContributionsDreamData()
+    {
+        return array(
+            array($this->getContributions(12))
+        );
     }
 }
