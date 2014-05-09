@@ -47,13 +47,6 @@
                             <i class="icon icon-vkontakte"></i>
                         </a>
 
-                        {#<a onclick="Share.vkontakte(#}
-                        {#'{{ url('view_dream', {'slug': dream.slug}) }}',#}
-                        {#'title test VK',#}
-                        {#'http://upload.wikimedia.org/wikipedia/commons/5/59/BMW_328i_F30_2012_vl_2.jpg',#}
-                        {#'Test description Che dream. VK'#}
-                        {#)" style="text-decoration: none; cursor: pointer"> VK </a>#}
-
                         <a onclick="Share.facebook(
                                 '{{ url('view_dream', {'slug': dream.slug}) }}'
                                 )" style="text-decoration: none; cursor: pointer" title="Фейсбук">
@@ -62,13 +55,14 @@
 
                         <a onclick="Share.odnoklassniki(
                                 '{{ url('view_dream', {'slug': dream.slug}) }}',
-                                '{{ displayLimitWord(dream.description, 20) }}'
+                                '{{ dream.title }}'
                                 )" style="text-decoration: none; cursor: pointer" title="Однокласники">
                             <i class="icon icon-odnoklassniki"></i>
                         </a>
 
                         <a onclick="Share.twitter(
-                                '{{ url('view_dream', {'slug': dream.slug}) }}'
+                                '{{ url('view_dream', {'slug': dream.slug}) }}',
+                                '{{ dream.title }}'
                                 )" style="text-decoration: none; cursor: pointer" title="Твіттер">
                             <i class="icon icon-twitter"></i>
                         </a>
@@ -94,22 +88,12 @@
 {% block javascript %}
     {{ parent() }}
     <script>
-
         ;var Share = {
             vkontakte: function(purl, ptitle, pimg, text) {
                 url  = 'http://vk.com/share.php?';
                 url += 'url=' + encodeURIComponent(purl);
                 Share.popup(url);
             },
-//            vkontakte: function(purl, ptitle, pimg, text) {
-//                url  = 'http://vkontakte.ru/share.php?';
-//                url += 'url=' + encodeURIComponent(purl);
-//                url += '&title=' + encodeURIComponent(ptitle);
-//                url += '&description=' + encodeURIComponent(text);
-//                url += '&image=' + encodeURIComponent(pimg);
-//                url += '&noparse=true';
-//                Share.popup(url);
-//            },
             odnoklassniki: function(purl, text) {
                 url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
                 url += '&st.comments=' + encodeURIComponent(text);
@@ -121,18 +105,13 @@
                 url += 'u=' + encodeURIComponent(purl);
                 Share.popup(url);
             },
-            twitter: function(purl) {
+            twitter: function(purl, ptitle) {
                 url  = 'http://twitter.com/share?';
-                url += 'url=' + encodeURIComponent(purl);
+                url += 'text='      + encodeURIComponent(ptitle);
+                url += '&url='      + encodeURIComponent(purl);
+                url += '&counturl=' + encodeURIComponent(purl);
                 Share.popup(url);
             },
-//            twitter: function(purl, ptitle) {
-//                url  = 'http://twitter.com/share?';
-//                url += 'text='      + encodeURIComponent(ptitle);
-//                url += '&url='      + encodeURIComponent(purl);
-//                url += '&counturl=' + encodeURIComponent(purl);
-//                Share.popup(url);
-//            },
             popup: function(url) {
                 window.open(url,'','toolbar=0,status=0,width=626,height=436');
             }
