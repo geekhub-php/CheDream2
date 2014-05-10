@@ -16,6 +16,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * Class UserControllerTest
+ * @package Geekhub\UserBundle\Tests\Controller
+ */
 class UserControllerTest extends WebTestCase
 {
     /**
@@ -214,47 +218,56 @@ class UserControllerTest extends WebTestCase
     /**
      * @dataProvider getContributionsDreamData
      * @param ArrayCollection $contributions
+     * @param $expect
      */
-    public function testGetContributionsDream(ArrayCollection $contributions)
+    public function testGetContributionsDream(ArrayCollection $contributions, $expect)
     {
         $dreams = $this->securityMethods->invokeMethod($this->controller, 'getContributionsDream', array($contributions));
 
-        var_dump($dreams->count());
+        $this->assertEquals($expect, $dreams->count());
     }
 
-    protected function getContributions($item)
+    /**
+     * Count $keyDreams must be count $dreamContributed
+     *
+     * @param $itemDreams
+     * @param array $keyDreams
+     * @param array $dreamContributed
+     *
+     * @return ArrayCollection
+     */
+    protected function getContributions($itemDreams, $keyDreams = array(), $dreamContributed = array())
     {
         $contributions = new ArrayCollection();
         $dreams = new ArrayCollection();
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= $itemDreams; $i++) {
             $dreams->add(new Dream());
         }
 
-        for ($i = 0; $i < $item-2; $i++) {
-            $contribute = new AbstractContribute();
-            $contribute->setDream($dreams->last());
-            $contributions->add($contribute);
-        }
+        if (!empty($keyDreams) && !empty($dreamContributed)) {
+            for ($i = 0; $i < count($keyDreams); $i++) {
+                $dream = $dreams->get($keyDreams[$i]);
 
-        for ($i = $item-2; $i < $item; $i++) {
-            $contribute = new AbstractContribute();
-            $contribute->setDream($dreams->first());
-            $contributions->add($contribute);
-        }
-
-        for ($i = $item; $i < $item+3; $i++) {
-            $contribute = new AbstractContribute();
-            $contribute->setDream($dreams->get(5));
-            $contributions->add($contribute);
+                for ($j = 0; $j < $dreamContributed[$i]; $j++) {
+                    $contribute = new AbstractContribute();
+                    $contribute->setDream($dream);
+                    $contributions->add($contribute);
+                }
+            }
         }
 
         return $contributions;
     }
 
+    /**
+     * @return array
+     */
     public function getContributionsDreamData()
     {
         return array(
-            array($this->getContributions(12))
+            array($this->getContributions(10, array(1, 3, 5), array(7, 1, 4)), 3),
+            array($this->getContributions(3, array(2, 3), array(1, 4)), 2),
+            array($this->getContributions(7, array(5, 3, 1, 7), array(2, 5, 12, 3)), 4),
         );
     }
 }
