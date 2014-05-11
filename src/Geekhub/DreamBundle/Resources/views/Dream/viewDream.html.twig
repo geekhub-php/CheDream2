@@ -88,7 +88,7 @@
 {% block javascript %}
     {{ parent() }}
     <script>
-        ;var Share = {
+        var Share = {
             vkontakte: function(purl, ptitle, pimg, text) {
                 url  = 'http://vk.com/share.php?';
                 url += 'url=' + encodeURIComponent(purl);

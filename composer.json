@@ -25,7 +25,7 @@
         "stof/doctrine-extensions-bundle": "1.1.*@dev",
         "hwi/oauth-bundle": "0.3.*@dev",
         "nervo/yuicompressor": "dev-master",
-        "fpn/doctrine-extensions-taggable": "dev-master",
+        "fpn/doctrine-extensions-taggable": "0.9.*",
         "fpn/tag-bundle":"dev-master",
         "sonata-project/admin-bundle": "2.2.*",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*",
