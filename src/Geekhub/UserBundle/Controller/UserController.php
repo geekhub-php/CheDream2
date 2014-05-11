@@ -2,6 +2,7 @@
 
 namespace Geekhub\UserBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Geekhub\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Geekhub\UserBundle\Form\UserType;
@@ -54,24 +55,71 @@ class UserController extends Controller
 
     /**
      * @ParamConverter("user", class="GeekhubUserBundle:User")
+     * @View()
      */
-    public function userViewAction($user)
+    public function viewAction(User $user)
     {
-        if ($this->getUser() == $user) {
-            $showHiddenContributedDreams = true;
-            $userDreams = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findBy(array('author' => $user));
-        } else {
-            $showHiddenContributedDreams = false;
-            $userDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findUserApprovedDreams($user);
-        }
-        $contributedDreams = $this->getDoctrine()->getRepository('GeekhubUserBundle:User')->findAllContributedDreams($user, $showHiddenContributedDreams);
+        $contributions = $this->getContributions($user);
+        $contributedDreams = $this->getContributionsDream($contributions);
 
-        return $this->render('GeekhubUserBundle:User:view.html.twig',
-            array(
+        return array(
                 'user' => $user,
                 'contributedDreams' => $contributedDreams,
-                'userDreams' => $userDreams,
-            ));
+            );
+    }
+
+    /**
+     * @param  User $user
+     *
+     * @return ArrayCollection
+     */
+    protected function getContributions(User $user)
+    {
+        $contributions = new ArrayCollection();
+        if (!$user->getFinancialContributions()->isEmpty()) {
+            foreach ($user->getFinancialContributions() as $finance) {
+                $contributions->add($finance);
+            }
+        }
+
+        if (!$user->getEquipmentContributions()->isEmpty()) {
+            foreach ($user->getEquipmentContributions() as $equipment) {
+                $contributions->add($equipment);
+            }
+        }
+
+        if (!$user->getWorkContributions()->isEmpty()) {
+            foreach ($user->getWorkContributions() as $work) {
+                $contributions->add($work);
+            }
+        }
+
+        if (!$user->getOtherContributions()->isEmpty()) {
+            foreach ($user->getOtherContributions() as $work) {
+                $contributions->add($work);
+            }
+        }
+
+        return $contributions;
+    }
+
+    /**
+     * @param  ArrayCollection $contributions
+     *
+     * @return ArrayCollection
+     */
+    protected function getContributionsDream(ArrayCollection $contributions)
+    {
+        $contributedDreams = new ArrayCollection();
+        if (!$contributions->isEmpty()) {
+            foreach ($contributions as $contribution) {
+                if (!$contributedDreams->contains($contribution->getDream())) {
+                    $contributedDreams->add($contribution->getDream());
+                }
+            }
+        }
+
+        return $contributedDreams;
     }
 
     /**
@@ -161,7 +209,7 @@ class UserController extends Controller
     /**
      * @param  Request $request
      * @ParamConverter("user", class="GeekhubUserBundle:User")
-     * @param User $user
+     * @param  User    $user
      * @return mixed
      */
     public function mergeAccountsAction(Request $request, User $user)

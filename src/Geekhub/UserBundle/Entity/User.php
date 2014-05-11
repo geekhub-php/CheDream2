@@ -551,6 +551,9 @@ class User extends BaseUser //implements DreamUserInterface
         return $this->otherContributions;
     }
 
+    /**
+     * @return array
+     */
     public function getNotNullSocialIds()
     {
         return array_filter([
@@ -561,6 +564,9 @@ class User extends BaseUser //implements DreamUserInterface
         ;
     }
 
+    /**
+     * @return bool
+     */
     public function isFakeEmail()
     {
         return false === strpos($this->email, self::FAKE_EMAIL_PART) && $this->email ? false : true;

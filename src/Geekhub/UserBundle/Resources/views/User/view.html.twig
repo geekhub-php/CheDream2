@@ -2,7 +2,6 @@
 
 {% block title %}View profile{% endblock %}
 
-
 {% block content %}
     <div style="margin-top: 50px;">
         <div style="padding: 5% 0;">
@@ -53,7 +52,7 @@
                         <p> {{ user.about|raw }} </p>
                     </div>
 
-                    {% if userDreams is not empty %}
+                    {% if user.dreams is not empty %}
                         <div class="row">
                             <div class="col-md-7">
                               <h4>Автор проектів: </h4>
@@ -65,7 +64,7 @@
                         </div>
                         <div class="row">
                             <div id="user-dreams">
-                                {% for dream in userDreams %}
+                                {% for dream in user.dreams %}
                                     {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
                                 {% endfor %}
                             </div>
