@@ -52,7 +52,7 @@
                 {% endif %}
             </div>
             
-            {% if userDreams|length > 0 %}
+            {% if user.dreams|length > 0 %}
                 <div class="caption-block">
                     <ul class="filters-list">
                         <li><a href="#" id="implemented">Втілені</a></li>
@@ -63,7 +63,7 @@
                 </div>
                 
                 <ul id="user-dreams" class="dreams-list row">
-                    {% for dream in userDreams %}
+                    {% for dream in user.dreams %}
                         <li class="col-md-6">
                             {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
                         </li>

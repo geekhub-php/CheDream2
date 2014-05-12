@@ -5,12 +5,12 @@ echo "Выберите необходимое действие:"
 echo "    1 - Стандартный reload."
 echo "    2 - Перезагрузка БД."
 echo "    3 - ТЕСТЫ."
-echo "    0 - Выход. \n"
+echo "    0 - Выход."
 read reload
 
 case $reload in
 1)
-    echo "Стандартный reload. \n"
+    echo "Стандартный reload."
     php composer.phar update
     php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
@@ -38,7 +38,7 @@ case $reload in
     php app/console cache:clear
 ;;
 2)
-    echo "Перезагрузка БД. \n"
+    echo "Перезагрузка БД."
     php app/console doctrine:database:drop --force
     php app/console doctrine:database:create
     php app/console doctrine:schema:update --force
@@ -52,12 +52,12 @@ case $reload in
     echo "ТЕСТЫ: Выберите необходимое действие:"
     echo "    1 - Запуск всех тестов."
     echo "    2 - Запуск юнит тестов."
-    echo "    0 - Выход. \n"
+    echo "    0 - Выход."
     read testing
 
     case $testing in
     1)
-        echo "Запуск всех тестов. \n"
+        echo "Запуск всех тестов."
         php app/console doctrine:database:drop --force
         php app/console doctrine:database:create
         php app/console doctrine:schema:update --force
@@ -68,7 +68,7 @@ case $reload in
         sh bin/tests.sh
     ;;
     2)
-        echo "Запуск юнит тестов. \n"
+        echo "Запуск юнит тестов."
         php app/console doctrine:database:drop --force
         php app/console doctrine:database:create
         php app/console doctrine:schema:update --force
@@ -82,7 +82,7 @@ case $reload in
         exit 0
     ;;
     *)
-        echo "Введите правильное действие! \n"
+        echo "Введите правильное действие!"
         sh bin/reload.sh
 
     esac
@@ -91,7 +91,7 @@ case $reload in
     exit 0
 ;;
 *)
-    echo "Введите правильное действие! \n"
+    echo "Введите правильное действие!"
     sh bin/reload.sh
 
 esac

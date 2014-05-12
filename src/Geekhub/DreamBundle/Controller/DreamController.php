@@ -275,6 +275,61 @@ class DreamController extends Controller
 
     /**
      * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
+     * @ParamConverter("user", class="GeekhubUserBundle:User")
+     */
+    public function removeSomeContributeAction(Dream $dream, User $user)
+    {
+        /** @var User $user */
+
+        $em = $this->getDoctrine()->getManager();
+
+        $financialContributions = $dream->getDreamFinancialContributions()->map($this->getContributionElement($user));
+        $equipContributions = $dream->getDreamEquipmentContributions()->map($this->getContributionElement($user));
+        $workContributions = $dream->getDreamWorkContributions()->map($this->getContributionElement($user));
+        $otherContributions = $dream->getDreamOtherContributions()->map($this->getContributionElement($user));
+
+        foreach($financialContributions as $financialContribution ) {
+            if (!is_null($financialContribution)) {
+                $em->remove($financialContribution);
+            }
+        }
+
+        foreach($equipContributions as $equipContribution) {
+            if (!is_null($equipContribution)) {
+                $em->remove($equipContribution);
+            }
+        }
+
+        foreach($workContributions as $workContribution) {
+            if (!is_null($workContribution)) {
+                $em->remove($workContribution);
+            }
+        }
+
+        foreach($otherContributions as $otherContribution) {
+            if (!is_null($otherContribution)) {
+                $em->remove($otherContribution);
+            }
+        }
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('view_dream', array(
+            'slug' => $dream->getSlug()
+        )));
+    }
+
+    protected  function getContributionElement($user)
+    {
+        return function($element) use ($user) {
+            if ($element->getUser() == $user) {
+                return $element;
+            }
+        };
+    }
+
+    /**
+     * @ParamConverter("dream", class="GeekhubDreamBundle:Dream")
      */
     public function rejectDreamAction(Dream $dream, Request $request)
     {
