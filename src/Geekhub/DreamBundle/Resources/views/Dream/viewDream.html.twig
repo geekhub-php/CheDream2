@@ -117,6 +117,22 @@
             }
         };
 
+        $('#dream-contributions-delete span').click(function() {
+            var itemObj = $(this);
+            var path = Routing.generate('dream_ajax_contribute_removeSomeContribute');
+            $.post(path, {  dreamId : itemObj.data('iddream'),
+                            userId: itemObj.data('iduser'),
+                            resourceId: itemObj.data('idresurce'),
+                            type: itemObj.data('contributetype')
+                         } )
+                    .done(function(){
+                        location.reload();
+                    })
+                    .error(function(msg){
+                        console.log(msg);
+                    });
+        });
+
         $(function(){
             $(".dream-header .gallery-item").fancybox();
             $(".dream-header .video").fancybox({

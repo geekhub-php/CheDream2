@@ -52,13 +52,19 @@ class DreamExtension extends \Twig_Extension
         return $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->getCountContributorsByDream($dream);
     }
 
-    public function finContribute(User $user, Dream $dream)
+    public function finContribute(User $user, Dream $dream, $security='nobody')
     {
         $finContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showFinancialContributors($user, $dream);
 
         $str = '';
-        foreach ($finContr as $fin) {
-            $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($finContr as $fin) {
+                $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.<span data-idResurce="'.$fin['finResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="financial" style="cursor: pointer;" > x </span></li>';
+            }
+        } else {
+            foreach ($finContr as $fin) {
+                $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
+            }
         }
 
         return $str;
@@ -83,50 +89,81 @@ class DreamExtension extends \Twig_Extension
         return $dot ? $strResult : $strResult.'...';
     }
 
-    public function equipContribute(User $user, Dream $dream)
+    public function equipContribute(User $user, Dream $dream, $security='nobody')
     {
         $equipContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showEquipmentContributors($user, $dream);
 
         $str = '';
-        foreach ($equipContr as $equip) {
-            switch ($equip['qType']) {
-                case EquipmentResource::KG:
-                    $qType = 'кг.';
-                    break;
-                case EquipmentResource::PIECE:
-                    $qType = 'шт.';
-                    break;
-                case EquipmentResource::TON:
-                    $qType = 'тон';
-                    break;
-                default:
-                    $qType = '';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($equipContr as $equip) {
+                switch ($equip['qType']) {
+                    case EquipmentResource::KG:
+                        $qType = 'кг.';
+                        break;
+                    case EquipmentResource::PIECE:
+                        $qType = 'шт.';
+                        break;
+                    case EquipmentResource::TON:
+                        $qType = 'тон';
+                        break;
+                    default:
+                        $qType = '';
+                }
+                $str .= '<li>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'<span data-idResurce="'.$equip['equipResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="equipment" style="cursor: pointer;" > x </span></li>';
             }
-            $str .= '<li>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'</li>';
+        } else {
+            foreach ($equipContr as $equip) {
+                switch ($equip['qType']) {
+                    case EquipmentResource::KG:
+                        $qType = 'кг.';
+                        break;
+                    case EquipmentResource::PIECE:
+                        $qType = 'шт.';
+                        break;
+                    case EquipmentResource::TON:
+                        $qType = 'тон';
+                        break;
+                    default:
+                        $qType = '';
+                }
+                $str .= '<li>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'</li>';
+            }
         }
 
         return $str;
     }
 
-    public function workContribute(User $user, Dream $dream)
+    public function workContribute(User $user, Dream $dream, $security='nobody')
     {
         $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
 
         $str = '';
-        foreach ($workContr as $work) {
-            $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($workContr as $work) {
+                $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.<span data-idResurce="'.$work['workResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="work" style="cursor: pointer;" > x </span></li>';
+            }
+        } else {
+            foreach ($workContr as $work) {
+                $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
+            }
         }
 
         return $str;
     }
 
-    public function otherContribute(User $user, Dream $dream)
+    public function otherContribute(User $user, Dream $dream, $security='nobody')
     {
         $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
 
         $str = '';
-        foreach ($otherContribute as $other) {
-            $str .= '<li>'.$other['title'].'</li>';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($otherContribute as $other) {
+                $str .= '<li>'.$other['title'].'<span data-idResurce="'.$other['otherContrId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="other" style="cursor: pointer;" > x </span></li>';
+            }
+        } else {
+            foreach ($otherContribute as $other) {
+                $str .= '<li>'.$other['title'].'</li>';
+            }
         }
 
         return $str;
