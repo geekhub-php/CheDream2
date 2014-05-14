@@ -126,7 +126,7 @@
                             type: itemObj.data('contributetype')
                          } )
                     .done(function(){
-                        location.reload();
+                        itemObj.parent().remove();
                     })
                     .error(function(msg){
                         console.log(msg);
