@@ -2,6 +2,10 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}
+    Черкаська мрія - Вхід в адмінку
+{% endblock title %}
+
 {% block fos_user_content %}
 {% if error %}
     <div>{{ error|trans }}</div>
@@ -36,3 +40,6 @@
     </div>
 </form>
 {% endblock fos_user_content %}
+
+{% block footer%}
+{% endblock footer%}

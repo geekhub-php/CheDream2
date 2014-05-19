@@ -1,153 +1,174 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
-{% block title %}View profile{% endblock %}
+{% block title %}
+    Черкаська мрія - Перегляд профіля
+{% endblock title %}
 
 {% block content %}
-    <div style="margin-top: 50px;">
-        <div style="padding: 5% 0;">
-            <div class="row">
-
-                <div class="col-md-3">
-                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}" class="img-thumbnail">
-                    {% if user.phone %}
-                        <a href="callto:{{ user.phone }}"><i class="icon-phone-circled"></i></a>
-                    {% endif %}
-
-                    {% if user.skype %}
-                        <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span></a>
-                    {% endif %}
-
-                    {% if user.email %}
-                        <a href="mailto:{{ user.email }}"><i class="icon-mail"></i></a>
-                    {% endif %}
-
-                    {% if user.facebookId %}
-                        <a href="{{ user.getFacebookUrl }}"><i class="icon-facebook"></i></a>
-                    {% endif %}
-
-                    {% if user.vkontakteId %}
-                        <a href="{{ user.getVkontakteUrl }}"><i class="icon-vkontakte"></i></a>
-                    {% endif %}
-
-                    {% if user.odnoklassnikiId %}
-                        <a href="{{ user.getOdnoklassnikiUrl }}"><i class="icon-odnoklassniki"></i></a>
-                    {% endif %}
+<div class="content page-view-profile">
+    <div class="row"> 
+        <div class="col-md-4">
+            <div class="photo-block">
+                <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
+            </div>
+            
+            <div class="media-block">
+                {% if user.phone %}
+                    <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
+                {% endif %}
+                
+                {% if user.skype %}
+                    <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span></a>
+                {% endif %}
+                
+                {% if user.email %}
+                    <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span></a>
+                {% endif %}
+                
+                {% if user.facebookId %}
+                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
+                {% endif %}
+                
+                {% if user.vkontakteId %}
+                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
+                {% endif %}
+                {% if user.odnoklassnikiId %}
+                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="user-info">
+                {% if app.user is same as(user) %}
+                    <a href="{{path('profile_edit')}}" class="btn-edit">Редагувати</a>
+                {% endif %}
+                
+                <h1 class="name">{{user.firstName}} {{user.lastName}}</h1>
+                <span class="date">{{ user.birthday|date("d M Y", "Europe/Kiev")|trans }}</span>
+                
+                {% if user.about is not empty %}
+                    <div class="description">{{ user.about|raw }}</div>
+                {% endif %}
+            </div>
+            
+            {% if user.dreams|length > 0 %}
+                <div class="caption-block">
+                    <ul class="filters-list">
+                        <li><a href="#" id="implemented">Втілені</a></li>
+                        <li><a href="#" id="projects">На стадії проекту</a></li>
+                        <li><a href="#" id="any">Усі мрії</a></li>
+                    </ul>
+                    <h2 class="caption">Автор проектів</h2>
                 </div>
-
-                <div class="col-md-8">
-
-                    <div class="row">
-                        <div class="col-md-7">
-                            <h2> {{user.firstName}} {{user.lastName}}</h2>
-                        </div>
-
-                        <div class="col-md-3">
-                            <p> {{ user.birthday|date("d M Y", "Europe/Kiev")|trans }} </p>
-                        </div>
-
-                        {% if app.user is same as(user) %}
-                            <a href="{{path('profile_edit')}}"><div class="btn btn-primary">Редагувати</div></a>
-                        {% endif %}
-
-                        <p> {{ user.about|raw }} </p>
-                    </div>
-
-                    {% if user.dreams is not empty %}
-                        <div class="row">
-                            <div class="col-md-7">
-                              <h4>Автор проектів: </h4>
-                            </div>
-
-                            <div class="btn btn-primary" id="any"> Усі мрії </div>
-                            <div class="btn btn-primary" id="projects"> На стадії проекту </div>
-                            <div class="btn btn-primary" id="implemented"> Втілені </div>
-                        </div>
-                        <div class="row">
-                            <div id="user-dreams">
-                                {% for dream in user.dreams %}
-                                    {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if contributedDreams is not empty %}
-                        <div class="row">
-                            <h4>Учасник проектів: </h4>
-                        </div>
-                        <div class="row">
-                            {% for dream in contributedDreams %}
-                                {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-
-                    {% if user.favoriteDreams is not empty %}
-                        <div class="row">
-                            <h4>Favs: </h4>
-                        </div>
-
-                        <div class="row">
-                            {% for dream in user.favoriteDreams %}
-                                {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div> {# class="col-md-8" right col #}
-            </div> {# class=row (main row) #}
-        </div> {# style=padding 5% #}
-    </div> {# margin-top 50px#}
-
+                
+                <ul id="user-dreams" class="dreams-list row">
+                    {% for dream in user.dreams %}
+                        <li class="col-md-6">
+                            {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %} 
+            
+            {% if contributedDreams|length > 0 %}
+                <div class="caption-block">
+                    <h2 class="caption">Учасник проектів</h2>
+                </div>
+                
+                <ul class="dreams-list">
+                    {% for dream in contributedDreams %}
+                        {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div id="favorites-block">
+            {% if user.favoriteDreams|length > 0 %}
+                <div class="caption-block">
+                    <h2 class="caption">Улюблені</h2>
+                </div>
+                
+                <ul class="dreams-list row">
+                    {% for dream in user.favoriteDreams %}
+                        <li id="dream{{ dream.id }}" class="col-md-6">
+                            {{ include ('GeekhubUserBundle:User:dream_favorite_miniature.html.twig', {'dream': dream}) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div> <!--/Content-->
 {% endblock content %}
 
 {% block javascript %}
 
-    {{ parent() }}
-    <script>
-        $('#any').on("click",function() {
-            $.ajax({
-                type: "POST",
-                url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'any'})}}",
-                data: "data=0",
-                cache: false,
-                success: function(html){
-                    $("#user-dreams").html(html);
-                },
-                error: function (html) {
-                    $("#user-dreams").html('No dreams yet');
-                }
-            });
+   {{ parent() }}
+   <script>
+   $('#any').on("click",function() {
+         $.ajax({
+            type: "POST",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'any'})}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#user-dreams").html(html);
+            },
+            error: function (html) {
+                $("#user-dreams").html('No dreams yet');
+            }
         });
+   });
 
-        $('#projects').on("click",function() {
-            $.ajax({
-                type: "POST",
-                url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'projects'})}}",
-                data: "data=0",
-                cache: false,
-                success: function(html){
-                    $("#user-dreams").html(html);
-                },
-                error: function (html) {
-                    $("#user-dreams").html('No dreams yet');
-                }
-            });
+
+   $('#projects').on("click",function() {
+         $.ajax({
+            type: "POST",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'projects'})}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#user-dreams").html(html);
+            },
+            error: function (html) {
+                $("#user-dreams").html('No dreams yet');
+            }
         });
-
-        $('#implemented').on("click",function() {
-            $.ajax({
-                type: "POST",
-                url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'implemented'})}}",
-                data: "data=0",
-                cache: false,
-                success: function(html){
-                    $("#user-dreams").html(html);
-                },
-                error: function (html) {
-                    $("#user-dreams").html('No dreams yet');
-                }
-            });
+   });
+   $('#implemented').on("click",function() {
+         $.ajax({
+            type: "POST",
+            url: "{{path('profile_view_dreams', {'id': user.id, 'status': 'implemented'})}}",
+            data: "data=0",
+            cache: false,
+            success: function(html){
+                $("#user-dreams").html(html);
+            },
+            error: function (html) {
+                $("#user-dreams").html('No dreams yet');
+            }
         });
+   });
 
-    </script>
+    $('#unfavorite').on('click', function(event) {
+        console.log('remove from fav');
+        var dreamId = $(event.target).data('idmedia')
+        var $this = $(this);
+        var path1 = Routing.generate('dream_ajax_dream_removeFromFavorite');
+        $.post(path1, {id : dreamId})
+            .done(function(msgDone) {
+                console.log(msgDone);
+                if ($this.closest('ul').find('li').length == 1) {
+                    $('#favorites-block').remove();
+                } else 
+                $('#dream'+dreamId).remove();
+            })
+            .error(function(msg) {
+                console.log(msg);
+            }
+        );
+    });
+
+</script>
 {% endblock javascript %}

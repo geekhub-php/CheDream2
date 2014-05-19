@@ -1,5 +1,15 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+ {% block stylesheets %}
+     {{ parent() }}
+     <link href="{{ asset('bundles/geekhubresource/css/main.css') }}" rel="stylesheet">
+     <link href="{{ asset('bundles/geekhubresource/css/dreams-tiles.css') }}" rel="stylesheet">
+ {% endblock %}
+
+{% block title %}
+    Черкаська мрія - Головна
+{% endblock title %}
+
 {% block content %}
 
     {{ include('GeekhubDreamBundle:includes:homePageSlider.html.twig', {completedDreams: completedDreams}) }}
@@ -37,6 +47,13 @@
                     console.log('end document scrolled');
                 }
             });
+            if (localStorage.getItem('newDreamPoster')) {
+                localStorage.removeItem('newDreamPoster');
+            }
+
+            if (localStorage.getItem('newDreamMediaFiles')) {
+                localStorage.removeItem('newDreamMediaFiles');
+            }
         });
 
     </script>

@@ -51,7 +51,7 @@ class DreamRepository extends EntityRepository
     public function showFinancialContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, f.id as finResurceId
                            FROM GeekhubDreamBundle:FinancialContribute c
                            join c.financialResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
@@ -66,7 +66,7 @@ class DreamRepository extends EntityRepository
     public function showEquipmentContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, f.quantityType as qType
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, f.quantityType as qType, f.id as equipResurceId
                            FROM GeekhubDreamBundle:EquipmentContribute c
                            join c.equipmentResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
@@ -81,7 +81,7 @@ class DreamRepository extends EntityRepository
     public function showWorkContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum
+            ->createQuery('SELECT f.title as resource, sum(c.quantity) as totalSum, f.id as workResurceId
                            FROM GeekhubDreamBundle:WorkContribute c
                            join c.workResource f
                            where c.hiddenContributor = 0 and c.user = :user and c.dream = :dream
@@ -96,7 +96,7 @@ class DreamRepository extends EntityRepository
     public function showOtherContributors($user, $dream)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT c.title as title
+            ->createQuery('SELECT c.title as title, c.id as otherContrId
                            FROM GeekhubDreamBundle:OtherContribute c
                            where c.user = :user and c.dream = :dream
                            order by c.id

@@ -147,6 +147,7 @@ stfalcon_tinymce:
     theme:
         simple:
             theme: "modern"
+            content_css: "/bundles/geekhubresource/css/theme_tinymce.css"
 
 braincrafted_bootstrap:
     assets_dir: %kernel.root_dir%/../vendor/bower-components/bootstrap

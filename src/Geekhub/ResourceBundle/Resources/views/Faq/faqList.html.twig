@@ -1,52 +1,34 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        hr {
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-
-        .row {
-            margin: 5px 0;
-        }
-    </style>
-{% endblock %}
+{% block title %}
+    Черкаська мрія - Регламент і поради
+{% endblock title %}
 
 {% block content %}
+<div class="content page-faq">
     <div class="row">
-        <div class="row">
-            <div class='span12'>
-                <h1 class="text-center">Регламент та поради</h1>
-            </div>
+        <div class="col-md-12">
+            <h1 class="main-caption">Регламент та поради</h1>
         </div>
-        <div class="row">
-
-            <div class="tabbable tabs-left">
-                <ul class="nav nav-tabs">
-                    {% for faq in faqs %}
-                        <li {{ faq.slug == slug ? 'class="active"' }}>
-                            <a data-toggle="tab" href="{{ path('faq') }}#{{ faq.slug }}">
-                                {{ faq.title|striptags }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="tab-content">
-                    {% for faq in faqs %}
-                        <div class="tab-pane {{ faq.slug == slug ? 'active' }}" id="{{ faq.slug }}">
-                            <h1>{{ faq.question|striptags }}</h1>
-                            <p>
-                                {{ faq.answer|raw }}
-                            </p>
-                        </div>
-                    {% endfor %}
+        
+        <ul class="faq-menu col-md-4">
+            {% for faq in faqs %}
+                <li {{ faq.slug == slug ? 'class="active"' }}>
+                    <a data-toggle="tab" href="{{ path('faq') }}#{{ faq.slug }}">
+                        <span class="icon"></span>
+                        {{ faq.title|striptags }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content col-md-8">
+            {% for faq in faqs %}
+                <div class="tab-pane {{ faq.slug == slug ? 'active' }}" id="{{ faq.slug }}">
+                    <div class="question"><span class="mark">Питання:</span> {{ faq.question|striptags }}</div>
+                    <div class="answer"><span class="mark">Відповідь:</span> {{ faq.answer|raw }}</div>
                 </div>
-            </div>
-
+            {% endfor %}
         </div>
-        </div>
-        <br/>
     </div>
+</div> <!--/Content-->
 {% endblock %}

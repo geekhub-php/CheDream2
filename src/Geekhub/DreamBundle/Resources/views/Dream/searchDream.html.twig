@@ -1,20 +1,30 @@
 {% extends 'GeekhubResourceBundle::layout.html.twig' %}
 
+{% block title %}
+    Черкаська мрія - Пошук
+{% endblock title %}
+
 {% block content %}
-    <h3 style="display: inline-block;">Ви шукали: <strong>{{ search_text }}</strong></h3> <span style="font-size: 110%; font-style: italic; margin-left: 10px;">( Знайдено: {{ dreams|length }} співпадань.)</span>
-    <div class="row">
-        {% for dream in dreams %}
-            <div class="col-md-6" style="margin-bottom: 10px; height: 105px;">
-                <div style="float: left;">
-                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" width="145" height="100">
-                </div>
-                <p style="margin-left: 155px; margin-bottom: 0; font-weight: bold; font-size: 130%; padding: 0;">
-                    <a href="{{ path('view_dream', {'slug': dream.slug}) }}" style=" color: #000000;">{{ dream.title }}</a>
-                </p>
-                <p  style="margin-left: 155px; margin-bottom: 0; padding: 0; text-align: justify;">
-                    {{ displayLimitWord(dream.description, 27) }}
-                </p>
+    <div id="statics">
+        <div id="search">
+            <h3>Ви шукали: <strong>{{ search_text }}</strong></h3>
+            <span>( Знайдено: {{ dreams|length }} співпадінь.)</span>
+            <ul>
+                {% for dream in dreams %}
+                    <li class="{{ cycle(['odd', 'even'], loop.index) }}">
+                        <a href="{{ path('view_dream', {'slug': dream.slug}) }}">
+                            <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form') }}" class="img-thumbnail" width="145" height="100">
+                        </a>
+                        <div>
+                            <h4><a href="{{ path('view_dream', {'slug': dream.slug}) }}">{{ displayLimitWord(dream.title, 5, true) }}</a></h4>
+                            <p>
+                                {{ displayLimitWord(dream.description, 27) }}
+                            </p>
+
+                        </div>
+                    </li>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
 {% endblock %}

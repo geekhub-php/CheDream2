@@ -31,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DreamController extends Controller
 {
@@ -51,6 +52,7 @@ class DreamController extends Controller
         ));
 
         if ($request->isMethod('POST')) {
+
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -61,6 +63,10 @@ class DreamController extends Controller
                     $em->persist($dream);
                     $em->flush();
 
+                    $this->get('session')->getFlashBag()->add(
+                        'dreamMessage',
+                        'Мрія успішно створена.'
+                    );
                     return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
                 }
 
@@ -71,6 +77,11 @@ class DreamController extends Controller
                 $em->flush();
 
                 $tagManager->saveTagging($dream);
+
+                $this->get('session')->getFlashBag()->add(
+                    'dreamMessage',
+                    'Мрія успішно створена.'
+                );
 
                 return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
             }
@@ -113,6 +124,10 @@ class DreamController extends Controller
                 if (is_null($tags[0])) {
                     $em->flush();
 
+                    $this->get('session')->getFlashBag()->add(
+                        'dreamMessage',
+                        'Мрія відредагована.'
+                    );
                     return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
                 }
                 
@@ -123,6 +138,10 @@ class DreamController extends Controller
 
                 $tagManager->saveTagging($dream);
 
+                $this->get('session')->getFlashBag()->add(
+                    'dreamMessage',
+                    'Мрія відредагована.'
+                );
                 return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
             }
         }
