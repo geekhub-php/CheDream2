@@ -1,10 +1,10 @@
 <li class="clearfix">
     <ul class="attached-resources-list">
         <li class="title-promise">Я обіцяю:</li>
-        {{ finContribute(user, dream)|raw }}
-        {{ equipContribute(user, dream)|raw }}
-        {{ workContribute(user, dream)|raw }}
-        {{ otherContribute(user, dream)|raw }}
+        {{ finContribute(user, dream, 'guest')|raw }}
+        {{ equipContribute(user, dream, 'guest')|raw }}
+        {{ workContribute(user, dream, 'guest')|raw }}
+        {{ otherContribute(user, dream, 'guest')|raw }}
     </ul>
     {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
     <div class="clear"></div>

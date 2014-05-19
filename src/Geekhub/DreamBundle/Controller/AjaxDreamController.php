@@ -87,4 +87,57 @@ class AjaxDreamController extends Controller
 
         return new Response("Removed from favorite with DreamId=$dreamId and UserId=".$user->getId());
     }
+
+    public function removeSomeContributeAction(Request $request)
+    {
+        $dreamId = $request->get('dreamId');
+        $userId = $request->get('userId');
+        $resourceId = $request->get('resourceId');
+        $type = $request->get('type');
+
+        $em = $this->getDoctrine()->getManager();
+
+        switch ($type) {
+            case 'financial':
+                $contributions = $em->getRepository('GeekhubDreamBundle:FinancialContribute')->findBy(array(
+                    'financialResource' => $resourceId,
+                    'user' => $userId,
+                    'dream' => $dreamId
+                ));
+                break;
+            case 'equipment':
+                $contributions = $em->getRepository('GeekhubDreamBundle:EquipmentContribute')->findBy(array(
+                    'equipmentResource' => $resourceId,
+                    'user' => $userId,
+                    'dream' => $dreamId
+                ));
+                break;
+            case 'work':
+                $contributions = $em->getRepository('GeekhubDreamBundle:WorkContribute')->findBy(array(
+                    'workResource' => $resourceId,
+                    'user' => $userId,
+                    'dream' => $dreamId
+                ));
+                break;
+            case 'other':
+                $contributions = $em->getRepository('GeekhubDreamBundle:OtherContribute')->findBy(array(
+                    'id' => $resourceId,
+                    'user' => $userId,
+                    'dream' => $dreamId
+                ));
+                break;
+            default:
+
+                return new Response('empty');
+        }
+
+        foreach($contributions as $contribute)
+        {
+            $em->remove($contribute);
+        }
+
+        $em->flush();
+
+        return new Response('Removed');
+    }
 }
