@@ -135,7 +135,7 @@ class Dream implements Taggable
     protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="favoriteDreams", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Geekhub\UserBundle\Entity\User", inversedBy="favoriteDreams")
      * @ORM\JoinTable(name="favorite_dreams")
      */
     protected $usersWhoFavorites;
@@ -154,7 +154,7 @@ class Dream implements Taggable
     protected $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Status", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Status", mappedBy="dream", cascade={"persist"})
      */
     protected $statuses;
 
@@ -198,37 +198,37 @@ class Dream implements Taggable
     protected $dreamVideos;
 
     /**
-     * @ORM\OneToMany(targetEntity="FinancialResource", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="FinancialResource", mappedBy="dream")
      */
     protected $dreamFinancialResources;
 
     /**
-     * @ORM\OneToMany(targetEntity="EquipmentResource", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EquipmentResource", mappedBy="dream")
      */
     protected $dreamEquipmentResources;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkResource", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="WorkResource", mappedBy="dream")
      */
     protected $dreamWorkResources;
 
     /**
-     * @ORM\OneToMany(targetEntity="FinancialContribute", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="FinancialContribute", mappedBy="dream")
      */
     protected $dreamFinancialContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="EquipmentContribute", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EquipmentContribute", mappedBy="dream")
      */
     protected $dreamEquipmentContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkContribute", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="WorkContribute", mappedBy="dream")
      */
     protected $dreamWorkContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="OtherContribute", mappedBy="dream", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="OtherContribute", mappedBy="dream")
      */
     protected $dreamOtherContributions;
 
