@@ -4,15 +4,18 @@ namespace Geekhub\DreamBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Geekhub\DreamBundle\Entity\AbstractContribute;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
+use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\DependencyInjection\Container;
 
 class DreamSubscriber implements EventSubscriber
 {
+    /** @var Container $container */
     protected $container;
 
     protected $mandrillDispatcher;
@@ -37,8 +40,32 @@ class DreamSubscriber implements EventSubscriber
     {
         return array(
             'prePersist',
-            'postPersist'
+            'postPersist',
+            'preRemove'
         );
+    }
+
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+        /** @var Logger $logger */
+        $logger = $this->container->get('logger');
+
+        if ($object instanceof Dream) {
+            $logger->addWarning(
+                "User with email: " . $this->container->get('security.context')->getToken()->getUser()->getEmail() .
+                " - removed dream " . $object->getTitle() . " from IP: " . $this->container->get('request')
+                    ->getClientIp()
+            );
+        }
+
+        if ($object instanceof AbstractContribute) {
+            $logger->addWarning(
+                "User with email: " . $this->container->get('security.context')->getToken()->getUser()->getEmail() .
+                " - removed contribute in dream" . $object->getDream()->getTitle() . " from IP: " .
+                $this->container->get('request')->getClientIp()
+            );
+        }
     }
 
     public function prePersist(LifecycleEventArgs $args)
