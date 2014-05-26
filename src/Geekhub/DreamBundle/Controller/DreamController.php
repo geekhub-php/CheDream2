@@ -175,6 +175,12 @@ class DreamController extends Controller
     public function viewDreamAction(Dream $dream, Request $request)
     {
         $user = $this->getUser();
+
+        if (($dream->getCurrentStatus() == 'submitted' or $dream->getCurrentStatus() == 'fail') and is_null($user)) return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        if (($dream->getCurrentStatus() == 'submitted' or $dream->getCurrentStatus() == 'fail') and !is_null($user)) {
+            if (($user->getId() != $dream->getAuthor()->getId()) xor ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        }
+
         $financialContribute = new FinancialContribute();
         $equipmentContribute = new EquipmentContribute();
         $workContribute = new WorkContribute();

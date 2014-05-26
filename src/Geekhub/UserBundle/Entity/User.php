@@ -91,27 +91,27 @@ class User extends BaseUser //implements DreamUserInterface
     protected $odnoklassnikiId;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites" )
      */
     protected $favoriteDreams;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\FinancialContribute", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\FinancialContribute", mappedBy="user")
      */
     protected $financialContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\EquipmentContribute", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\EquipmentContribute", mappedBy="user")
      */
     protected $equipmentContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\WorkContribute", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\WorkContribute", mappedBy="user")
      */
     protected $workContributions;
 
     /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\OtherContribute", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\OtherContribute", mappedBy="user")
      */
     protected $otherContributions;
 

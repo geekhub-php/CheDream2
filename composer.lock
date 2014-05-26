@@ -42,17 +42,17 @@
         },
         {
             "name": "braincrafted/bootstrap-bundle",
-            "version": "v2.0.1",
+            "version": "v2.1.0-alpha1",
             "target-dir": "Braincrafted/Bundle/BootstrapBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braincrafted/bootstrap-bundle.git",
-                "reference": "dc6169b1e29d8668cda960aa663fcc4bbd602bd4"
+                "reference": "bd5e2d29080dfdb29f9168e004c749be742fdd76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/dc6169b1e29d8668cda960aa663fcc4bbd602bd4",
-                "reference": "dc6169b1e29d8668cda960aa663fcc4bbd602bd4",
+                "url": "https://api.github.com/repos/braincrafted/bootstrap-bundle/zipball/bd5e2d29080dfdb29f9168e004c749be742fdd76",
+                "reference": "bd5e2d29080dfdb29f9168e004c749be742fdd76",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
             "keywords": [
                 "bootstrap"
             ],
-            "time": "2014-04-03 16:59:23"
+            "time": "2014-05-16 16:23:56"
         },
         {
             "name": "doctrine/annotations",
@@ -317,16 +317,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "ceb18cf9b0230f3ea208b6238130fd415abda0a7"
+                "reference": "5db6ab40e4c531f14dad4ca96a394dfce5d4255b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/ceb18cf9b0230f3ea208b6238130fd415abda0a7",
-                "reference": "ceb18cf9b0230f3ea208b6238130fd415abda0a7",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/5db6ab40e4c531f14dad4ca96a394dfce5d4255b",
+                "reference": "5db6ab40e4c531f14dad4ca96a394dfce5d4255b",
                 "shasum": ""
             },
             "require": {
@@ -336,6 +336,9 @@
                 "doctrine/inflector": "1.*",
                 "doctrine/lexer": "1.*",
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7"
             },
             "type": "library",
             "extra": {
@@ -388,7 +391,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2013-09-07 10:20:34"
+            "time": "2014-05-21 19:28:51"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -1060,12 +1063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "13c173ff60eef8e32c10f76225eacca00a430826"
+                "reference": "3969d7fe39fd58398bf9a00110ca349c000fa05e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/13c173ff60eef8e32c10f76225eacca00a430826",
-                "reference": "13c173ff60eef8e32c10f76225eacca00a430826",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3969d7fe39fd58398bf9a00110ca349c000fa05e",
+                "reference": "3969d7fe39fd58398bf9a00110ca349c000fa05e",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1123,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-05-07 23:51:03"
+            "time": "2014-05-18 21:15:38"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1258,12 +1261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Gregwar/CaptchaBundle.git",
-                "reference": "1fec709d052e0c58a54b430f377b7a6daf6c8d30"
+                "reference": "7dd05f5389cd9471c092b8caee979977a8eb5b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/1fec709d052e0c58a54b430f377b7a6daf6c8d30",
-                "reference": "1fec709d052e0c58a54b430f377b7a6daf6c8d30",
+                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/7dd05f5389cd9471c092b8caee979977a8eb5b31",
+                "reference": "7dd05f5389cd9471c092b8caee979977a8eb5b31",
                 "shasum": ""
             },
             "require": {
@@ -1302,7 +1305,7 @@
                 "spam",
                 "visual"
             ],
-            "time": "2014-05-07 15:19:30"
+            "time": "2014-05-14 09:55:23"
         },
         {
             "name": "guzzle/guzzle",
@@ -2529,17 +2532,17 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "2.5.1",
+            "version": "2.5.2",
             "target-dir": "Nelmio/ApiDocBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "eddba56c66dd740b541d3f4f80dc16b6ab8b098f"
+                "reference": "fa920111260e350ea17942c77c811762e965cbdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/eddba56c66dd740b541d3f4f80dc16b6ab8b098f",
-                "reference": "eddba56c66dd740b541d3f4f80dc16b6ab8b098f",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/fa920111260e350ea17942c77c811762e965cbdc",
+                "reference": "fa920111260e350ea17942c77c811762e965cbdc",
                 "shasum": ""
             },
             "require": {
@@ -2600,7 +2603,7 @@
                 "documentation",
                 "rest"
             ],
-            "time": "2014-03-12 13:46:04"
+            "time": "2014-05-16 09:33:58"
         },
         {
             "name": "nervo/yuicompressor",
@@ -3682,12 +3685,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "f1c7993863f83f22f187f11d2a8eb462b836701e"
+                "reference": "3825a4a1a56805b6adcaf6df1f9ec892a653d377"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/f1c7993863f83f22f187f11d2a8eb462b836701e",
-                "reference": "f1c7993863f83f22f187f11d2a8eb462b836701e",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/3825a4a1a56805b6adcaf6df1f9ec892a653d377",
+                "reference": "3825a4a1a56805b6adcaf6df1f9ec892a653d377",
                 "shasum": ""
             },
             "require": {
@@ -3735,7 +3738,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2014-04-09 14:29:58"
+            "time": "2014-05-24 12:33:49"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4023,16 +4026,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.4.4",
+            "version": "v2.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "4697c33cdfb520dcf83fd6e4f7864fa26ddaebea"
+                "reference": "885b6d17447fcc3cd9c42622321e5af4283dbde1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/4697c33cdfb520dcf83fd6e4f7864fa26ddaebea",
-                "reference": "4697c33cdfb520dcf83fd6e4f7864fa26ddaebea",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/885b6d17447fcc3cd9c42622321e5af4283dbde1",
+                "reference": "885b6d17447fcc3cd9c42622321e5af4283dbde1",
                 "shasum": ""
             },
             "require": {
@@ -4134,7 +4137,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-04-27 13:39:18"
+            "time": "2014-05-22 21:04:05"
         },
         {
             "name": "twig/extensions",
@@ -4342,16 +4345,16 @@
         },
         {
             "name": "willdurand/negotiation",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Negotiation.git",
-                "reference": "cda64e26a980f433ce98200ba1b2301850489aab"
+                "reference": "a98fb6b9808610c1aa326c736893d3d77d9383b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/cda64e26a980f433ce98200ba1b2301850489aab",
-                "reference": "cda64e26a980f433ce98200ba1b2301850489aab",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/a98fb6b9808610c1aa326c736893d3d77d9383b6",
+                "reference": "a98fb6b9808610c1aa326c736893d3d77d9383b6",
                 "shasum": ""
             },
             "require": {
@@ -4388,7 +4391,7 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2014-02-26 13:56:25"
+            "time": "2014-05-16 12:34:51"
         }
     ],
     "packages-dev": [
@@ -4627,26 +4630,27 @@
         },
         {
             "name": "behat/mink-extension",
-            "version": "v1.3.1",
+            "version": "v1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "0642b680b613fdd6cb774debacf65a0d0d1f08e8"
+                "reference": "b885b9407cba50a954f72c69ed1b2f8d3bc694f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/0642b680b613fdd6cb774debacf65a0d0d1f08e8",
-                "reference": "0642b680b613fdd6cb774debacf65a0d0d1f08e8",
+                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/b885b9407cba50a954f72c69ed1b2f8d3bc694f8",
+                "reference": "b885b9407cba50a954f72c69ed1b2f8d3bc694f8",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "~2.5.0",
-                "behat/mink": ">=1.4.3,<1.6-dev",
+                "behat/mink": "~1.5",
                 "php": ">=5.3.2",
                 "symfony/config": "~2.2"
             },
             "require-dev": {
-                "behat/mink-goutte-driver": "~1.0"
+                "behat/mink-goutte-driver": "~1.0",
+                "fabpot/goutte": "~1.0"
             },
             "type": "behat-extension",
             "autoload": {
@@ -4673,7 +4677,7 @@
                 "test",
                 "web"
             ],
-            "time": "2014-04-27 11:55:27"
+            "time": "2014-05-15 19:27:39"
         },
         {
             "name": "behat/mink-selenium2-driver",
