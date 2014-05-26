@@ -128,7 +128,7 @@ class UserController extends Controller
      * @ParamConverter("user", class="GeekhubUserBundle:User")
      * @View(TemplateVar="dreams")
      */
-    public function userOwnedDreamsViewAction($user, $status = "any")
+    public function userOwnedDreamsViewAction(User $user, $status = "any")
     {
         switch ($status) {
             case "any":
