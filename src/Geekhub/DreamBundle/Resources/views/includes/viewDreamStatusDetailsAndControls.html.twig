@@ -1,0 +1,62 @@
+<div class="admin-controls">
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (app.user.id == dream.author.id) %}
+        {% if ((dream.currentStatus == 'success') or (dream.currentStatus == 'completed')) %} {% else %}
+            {% if (dream.currentStatus == 'submitted') or (dream.currentStatus == 'rejected') %}
+                <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs" id="dream-edit-link">{{ 'dream.editDream'|trans }}</a>
+            {% else %}
+                <a href="javascript:void(0)" id="dream-edit-dream-modal" data-toggle="modal" data-target="#dreamNotAllowedAuthorEdit" class="btn btn-warning btn-xs pull-right" title="{{ 'dream.editDream'|trans }}">{{ 'dream.editDream'|trans }}</a>
+            {% endif %}
+
+            {% if dream.currentStatus == 'implementing' %}
+                <a href="javascript:void(0)"  id="dream-edit-yellowBlock-modal" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right">{{ 'dream.editYellowBlock'|trans }}</a>
+            {% endif %}
+         {% endif %}
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted("ROLE_SUPER_ADMIN") %}
+        <a href="{{ path('edit_dream', {'slug': dream.slug}) }}" class="pull-right btn btn-warning btn-xs">{{ 'dream.editDream'|trans }}</a>
+        {% if dream.currentStatus == 'implementing' %}
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#dreamYellowBlockEdit" class="btn btn-warning btn-xs pull-right">{{ 'dream.editYellowBlock'|trans }}</a>
+        {% endif %}
+    {% endif %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id == dream.author.id %}
+        {% if dream.currentStatus == 'collecting-resources' %}
+            <a href="javascript:void(0)" id="dream-start-collect-res-modal" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs pull-right" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</a>
+        {% elseif dream.currentStatus == 'implementing' %}
+            <a href="javascript:void(0)" id="dream-finish-collect-res-modal" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs pull-right" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</a>
+        {% endif %}
+    {% endif %}
+
+    {# ========= POPUPS ========= #}
+    {% if dream.currentStatus == 'implementing' %}
+        {{ include ('GeekhubDreamBundle:includes:dreamYellowBlockEditing.html.twig') }}
+    {% endif %}
+    {% if dream.currentStatus == 'collecting-resources' %}
+        {{ include ('GeekhubDreamBundle:includes:dreamStatusImplementModal.html.twig') }}
+    {% endif %}
+</div>
+
+<h2>{{ dream.title }}</h2>
+
+{% if dream.currentStatus == 'implementing' and dream.implementedDescription is not null %}
+    <div class="info-details" >
+        {{ dream.implementedDescription|raw }}
+    </div>
+{% endif %}
+
+<div class="description">
+    {% if ((dream.currentStatus == 'completed') or (dream.currentStatus == 'success')) and dream.completedDescription is not null %}
+        <span class="success"><em>Мрія успішно завершена</em></span>
+        {{ dream.completedDescription|raw }}
+    {% else  %}
+        {{ dream.description|raw }}
+    {% endif %}
+    <ul class="attachments">
+        {% for file in dream.mediaFiles %}
+            <li><a href="{{ file|mediaPath }}" >{{ file.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+

@@ -22,7 +22,6 @@ class PageController extends Controller
                     'attr' => array('rows' => '15')
                 ))
             ->add('captcha', 'captcha', array('label' => 'contacts.write_us.captcha'))
-            ->add('submit', 'submit', array('label' => 'contacts.write_us.submit'))
             ->setAction($this->generateUrl('page_contacts'))
             ->getForm();
 
@@ -35,7 +34,7 @@ class PageController extends Controller
 
                 $message->setFromEmail($form->get('to')->getData())
                     ->setFromName('Черкаська мрія - зворотна форма звязку')
-                    ->addTo($this->container->getParameter('admin.mail'))
+                    ->addTo($this->container->getParameter('neek.mail'))
                     ->setSubject($form->get('title')->getData())
                     ->setHtml($form->get('body')->getData())
                 ;

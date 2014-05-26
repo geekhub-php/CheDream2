@@ -99,3 +99,9 @@ dream_ajax_dream_removeFromFavorite:
     defaults: { _controller: GeekhubDreamBundle:AjaxDream:removeDreamFromFavorite }
     options:
         expose: true
+
+dream_ajax_contribute_removeSomeContribute:
+    pattern:  /dream/ajaxRemoveSomeContribute
+    defaults: { _controller: GeekhubDreamBundle:AjaxDream:removeSomeContribute }
+    options:
+        expose: true
