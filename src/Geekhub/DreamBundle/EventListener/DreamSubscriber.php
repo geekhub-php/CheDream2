@@ -12,6 +12,9 @@ use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class DreamSubscriber implements EventSubscriber
 {
@@ -49,23 +52,22 @@ class DreamSubscriber implements EventSubscriber
     {
         $object = $args->getObject();
         /** @var Logger $logger */
-        $logger = $this->container->get('logger');
+        $logger  = $this->container->get('logger');
+        /** @var UserInterface $user */
+        $user    = $this->container->get('security.context')->getToken()->getUser();
+        /** @var Request $request */
+        $request = $this->container->get('request');
 
-        if ($object instanceof Dream) {
-            $logger->addWarning(
-                "User with email: " . $this->container->get('security.context')->getToken()->getUser()->getEmail() .
-                " - removed dream " . $object->getTitle() . " from IP: " . $this->container->get('request')
-                    ->getClientIp()
+        if (!is_object($user) || !in_array('Symfony\Component\Security\Core\User\UserInterface', class_implements($user))) {
+            $logger->addError(
+                sprintf('Something that not user, try to delete object "%s", with id: "%s", from ip: "%s", from uri: "%s"', get_class($object), $object->getId(), $request->getClientIp(), $request->getUri())
             );
+            throw new AccessDeniedException('Something went wrong, but don\'t worry - we already work on it!');
         }
 
-        if ($object instanceof AbstractContribute) {
-            $logger->addWarning(
-                "User with email: " . $this->container->get('security.context')->getToken()->getUser()->getEmail() .
-                " - removed contribute in dream" . $object->getDream()->getTitle() . " from IP: " .
-                $this->container->get('request')->getClientIp()
-            );
-        }
+        $logger->addWarning(
+            sprintf('User with username: "%s", delete object "%s", with id: "%s", from ip: "%s", from uri: "%s"', $user->getUsername(), get_class($object), $object->getId(), $request->getClientIp(), $request->getUri())
+        );
     }
 
     public function prePersist(LifecycleEventArgs $args)
