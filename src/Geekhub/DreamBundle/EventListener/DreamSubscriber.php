@@ -44,7 +44,7 @@ class DreamSubscriber implements EventSubscriber
         return array(
             'prePersist',
             'postPersist',
-            'preRemove'
+            'preRemove',
         );
     }
 
