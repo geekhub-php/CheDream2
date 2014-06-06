@@ -13,11 +13,9 @@ class DotDotDotExtension extends \Twig_Extension
 
     public function dotdotdotFilter($text, $number = 20)
     {
-        $decodedText=iconv( mb_detect_encoding($text, mb_detect_order(), true), 'windows-1251//IGNORE', $text);
-
-        if (mb_strlen($decodedText)>$number) {
-            $newText=mb_substr($decodedText,0,$number);
-            $newText=iconv("windows-1251", "utf-8//IGNORE", $newText);
+        $decodedText = $text;
+        if (mb_strlen($decodedText, 'UTF-8')>$number) {
+            $newText=mb_substr($decodedText,0,$number, 'UTF-8');
             $newText=$newText."...";
 
             return $newText;
