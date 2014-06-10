@@ -198,17 +198,17 @@ class Dream implements Taggable
     protected $dreamVideos;
 
     /**
-     * @ORM\OneToMany(targetEntity="FinancialResource", mappedBy="dream")
+     * @ORM\OneToMany(targetEntity="FinancialResource", mappedBy="dream", cascade={"persist"})
      */
     protected $dreamFinancialResources;
 
     /**
-     * @ORM\OneToMany(targetEntity="EquipmentResource", mappedBy="dream")
+     * @ORM\OneToMany(targetEntity="EquipmentResource", mappedBy="dream", cascade={"persist"})
      */
     protected $dreamEquipmentResources;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkResource", mappedBy="dream")
+     * @ORM\OneToMany(targetEntity="WorkResource", mappedBy="dream", cascade={"persist"})
      */
     protected $dreamWorkResources;
 
