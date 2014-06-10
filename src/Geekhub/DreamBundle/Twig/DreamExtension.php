@@ -109,7 +109,7 @@ class DreamExtension extends \Twig_Extension
                     default:
                         $qType = '';
                 }
-                $str .= '<li>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'<span data-idResurce="'.$equip['equipResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="equipment" style="cursor: pointer; float: none; font-size: 15px;" class="close" title="видалити"> ×</span></li>';
+                $str .= '<li><span data-idResurce="'.$equip['equipResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="equipment" class="remove" title="видалити"> видалити</span>'.$equip['resource'].' '.$equip['totalSum'].' '.$qType.'</li>';
             }
         } else {
             foreach ($equipContr as $equip) {
@@ -140,7 +140,7 @@ class DreamExtension extends \Twig_Extension
         $str = '';
         if($security == 'admin' or $security == 'owner') {
             foreach ($workContr as $work) {
-                $str .= '<li>'.$work['resource'].' '.$work['totalSum'].' дн.<span data-idResurce="'.$work['workResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="work" style="cursor: pointer; float: none; font-size: 15px;" class="close" title="видалити"> ×</span></li>';
+                $str .= '<li><span data-idResurce="'.$work['workResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="work" class="remove" title="видалити"> видалити</span>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
             }
         } else {
             foreach ($workContr as $work) {
@@ -158,7 +158,7 @@ class DreamExtension extends \Twig_Extension
         $str = '';
         if($security == 'admin' or $security == 'owner') {
             foreach ($otherContribute as $other) {
-                $str .= '<li>'.$other['title'].'<span data-idResurce="'.$other['otherContrId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="other" style="cursor: pointer; float: none; font-size: 15px;" class="close" title="видалити"> ×</span></li>';
+                $str .= '<li><span data-idResurce="'.$other['otherContrId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="other" class="remove" title="видалити"> видалити</span>'.$other['title'].'</li>';
             }
         } else {
             foreach ($otherContribute as $other) {
