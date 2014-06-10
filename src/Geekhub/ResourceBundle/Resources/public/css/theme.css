@@ -419,6 +419,23 @@ body .tooltipster-default .tooltipster-content {
     padding: 28px 9px 0 0;
 }
 
+.header .media-block > li.photo {
+
+}
+.header .media-block > li.photo a {
+   padding: 17px 4px 0 0;
+}
+.header .media-block > li.photo a:hover {
+    background: none;
+}
+.header .media-block > li.photo a img {
+    /*border: 1px solid #fff;*/
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
+}
+
 .header .media-block a {
     padding-top: 26px;
 }
