@@ -1,0 +1,42 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alex
+ * Date: 30.04.14
+ * Time: 16:37
+ */
+
+namespace Geekhub\UserBundle\Tests\UserProvider;
+
+use Geekhub\ResourceBundle\Tests\SecurityMethods;
+use Geekhub\UserBundle\Entity\User;
+use Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider;
+use Geekhub\UserBundle\UserProvider\FacebookProvider;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class AbstractSocialNetworkProviderTest extends WebTestCase
+{
+    /**
+     * @dataProvider getFileLocationsData
+     */
+    public function testGetMediaFromRemoteImg($remoteImg, $localFileName)
+    {
+        $container = $this->getMock('Symfony\Component\DependencyInjection\Container');
+        $kernelWebDir = '/var/www/CheDream2/app/';
+        $uploadDir = '/uploads/';
+        $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir);
+        $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
+        $fullFileName= $kernelWebDir.'/../web/'.$uploadDir.$localFileName;
+        $this->assertFileExists($fullFileName);
+    }
+
+    public function getFileLocationsData()
+    {
+        return array(
+            //array('http://cs4303.vk.me/u11040263/a_df67310f.jpg', 'avatar1.jpg'),
+            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/a3058274bc3e8fab6bbeae05be45b1f37c3f5dde.jpeg', 'avatar2.jpg'),
+            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/non_existent_avatar.jpeg', 'avatar3.jpg'),
+        );
+    }
+
+}
