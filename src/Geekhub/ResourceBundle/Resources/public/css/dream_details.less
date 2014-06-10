@@ -734,6 +734,30 @@
                 background: url("@{images-folder}/close-button.png") no-repeat center 1px;
               }
 
+              &:hover {
+                .right-info {
+                    .can-remove {
+                    li {
+                      background: url("@{images-folder}/list-item-remove-bg.png") no-repeat 0px 5px !important;
+
+                      &:hover {
+                        span {
+                          cursor: pointer;
+                          display: inline;
+                          color: #FF0000;
+                          font-size: 13px;
+                          margin: 0 4px 0 0;
+
+                          &:hover {
+                            text-decoration: underline;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
               .left-info {
                 float: left;
                 width: 44px;
@@ -765,6 +789,9 @@
                   li {
                     padding: 0 0 3px 12px;
                     background: url("@{images-folder}/list-item-bg.png") no-repeat 1px 6px;
+                    span {
+                      display: none;
+                    }
                   }
                 }
               }

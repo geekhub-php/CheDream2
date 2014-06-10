@@ -59,7 +59,7 @@ class DreamExtension extends \Twig_Extension
         $str = '';
         if($security == 'admin' or $security == 'owner') {
             foreach ($finContr as $fin) {
-                $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.<span data-idResurce="'.$fin['finResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="financial" style="cursor: pointer; float: none; font-size: 15px;" class="close" title="видалити"> ×</span></li>';
+                $str .= '<li><span data-idResurce="'.$fin['finResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="financial" class="remove" title="видалити"> видалити</span>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
             }
         } else {
             foreach ($finContr as $fin) {

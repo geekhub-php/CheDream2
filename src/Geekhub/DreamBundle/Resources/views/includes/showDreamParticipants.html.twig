@@ -30,14 +30,14 @@
                         </a>
 
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
-                            <ul class="items" id="dream-contributions-delete">
+                            <ul class="items can-remove" id="dream-contributions-delete">
                                 {{ finContribute(user, dream, 'admin')|raw }}
                                 {{ equipContribute(user, dream, 'admin')|raw }}
                                 {{ workContribute(user, dream, 'admin')|raw }}
                                 {{ otherContribute(user, dream, 'admin')|raw }}
                             </ul>
                         {% elseif is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
-                            <ul class="items" id="dream-contributions-delete">
+                            <ul class="items can-remove" id="dream-contributions-delete">
                                 {{ finContribute(user, dream, 'owner')|raw }}
                                 {{ equipContribute(user, dream, 'owner')|raw }}
                                 {{ workContribute(user, dream, 'owner')|raw }}
