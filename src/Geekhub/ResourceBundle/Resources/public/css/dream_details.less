@@ -586,6 +586,23 @@
           }
 
         }//support
+
+        /*================================= TAGS ===============================*/
+        /*================================= TAGS ===============================*/
+        /*================================= TAGS ===============================*/
+        .tags {
+          overflow: hidden;
+          margin: 0 0 32px;
+        }
+
+        /*================================= SHARE ===============================*/
+        /*================================= SHARE ===============================*/
+        /*================================= SHARE ===============================*/
+        .share {
+          overflow: hidden;
+          margin: 0 0 32px;
+        }
+
       }//sidebar
 
 
@@ -700,16 +717,40 @@
               clear: both;
             }
             > li {
+              position: relative;
               float: left;
               width: 50%;
               padding: 0 22px 22px 0;
-              img {
+
+              .remove-all {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                overflow: hidden;
                 display: block;
+                width: 26px;
+                height: 26px;
+                text-indent: -300px;
+                background: url("@{images-folder}/close-button.png") no-repeat center 1px;
+              }
+
+              .left-info {
                 float: left;
                 width: 44px;
                 margin: 0 12px 0 0;
+
+                img {
+                  display: block;
+                  width: 44px;
+                }
+                a {
+                  font-family: @default-font;
+                  font-size: 12px;
+                  line-height: 14px;
+                  color: #f2602c;
+                }
               }
-              div {
+              .right-info {
                 overflow: hidden;
 
                 a {
