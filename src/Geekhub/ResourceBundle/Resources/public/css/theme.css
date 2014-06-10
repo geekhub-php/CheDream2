@@ -268,9 +268,9 @@ body .tooltipster-default {
 /* Use this next selector to style things like font-size and line-height: */
 body .tooltipster-default .tooltipster-content {
 	font-family: Arial, sans-serif !important;
-	font-size: 12px !important;
-	line-height: 16px !important;
-	padding: 8px 10px !important;
+	font-size: 11px !important;
+	line-height: 14px !important;
+	padding: 6px 8px !important;
 	overflow: hidden !important;
 }
 /*----------------------------------------------------------------------------------*/
