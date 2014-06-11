@@ -21,18 +21,20 @@
             </div>
             <div>
                 <span class="triangle"></span>
-                <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail">
-                        <span class="supported">
-                            <span>{{ getCountContributors(dream) }}</span> Підтримало
-                        </span>
-                        <span class="rating">
-                            Лайків <span>{{ dream.favoritesCount }}</span>
-                        </span>
+                <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" id="{{ dream.slug }}" >
+                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail" />
+                </a>
+                <span class="supported">
+                    <span>{{ getCountContributors(dream) }}</span> Підтримало
+                </span>
+                <span class="rating">
+                    Лайків <span>{{ dream.favoritesCount }}</span>
+                </span>
             </div>
         </div>
         <div class="dream-homepage-preview-footer">
 
-            {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' %}
+            {% include 'GeekhubDreamBundle:includes:progress-bar.html.twig' with {'show_success': 'true'}  %}
 
             {% block dream_bottom %}
                 <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" id="{{ dream.slug }}">Детальніше</a>
