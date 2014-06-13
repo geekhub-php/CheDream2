@@ -36,11 +36,11 @@
                                 {% elseif user.skype %}
                                     <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span>{{ user.skype }}</a>
                                 {% elseif user.facebookId %}
-                                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i>Профіль</a>
+                                    <a href="{{ user.getFacebookUrl }}" class="fb" target="_blank"><i class="icon icon-facebook"></i>Профіль</a>
                                 {% elseif user.vkontakteId %}
-                                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i>Профіль</a>
+                                    <a href="{{ user.getVkontakteUrl }}" class="vk" target="_blank"><i class="icon icon-vkontakte"></i>Профіль</a>
                                 {% elseif user.odnoklassnikiId %}
-                                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i>Профіль</a>
+                                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok" target="_blank"><i class="icon icon-odnoklassniki"></i>Профіль</a>
                                 {% elseif user.email %}
                                     <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span>{{ user.email }}</a>
                                 {% endif %}
