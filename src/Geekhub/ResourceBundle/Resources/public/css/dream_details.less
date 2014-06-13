@@ -827,13 +827,26 @@
               .right-info {
                 overflow: hidden;
 
-                a {
+                > a {
                   display: block;
                   padding: 0 0 3px;
                   font-family: @default-bold-font;
                   font-size: 16px;
                   line-height: 18px;
                   color: #464646;
+                }
+                .contacts {
+                  a {
+                    display: block;
+                    padding: 0 0 3px;
+                    font-family: @default-font;
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: #464646;
+                    .icon {
+                      font-size: 12px;
+                    }
+                  }
                 }
                 ul.items {
                   li {

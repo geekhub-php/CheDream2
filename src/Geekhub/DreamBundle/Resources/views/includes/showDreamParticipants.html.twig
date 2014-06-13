@@ -29,6 +29,25 @@
                             {{ user.lastName }}
                         </a>
 
+                        {% if is_granted("ROLE_SUPER_ADMIN") or ( is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) )%}
+                            <div class="contacts">
+                                {% if user.phone %}
+                                    <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i>{{ user.phone }}</a>
+                                {% elseif user.skype %}
+                                    <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span>{{ user.skype }}</a>
+                                {% elseif user.facebookId %}
+                                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i>Профіль</a>
+                                {% elseif user.vkontakteId %}
+                                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i>Профіль</a>
+                                {% elseif user.odnoklassnikiId %}
+                                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i>Профіль</a>
+                                {% elseif user.email %}
+                                    <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span>{{ user.email }}</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
                             <ul class="items can-remove" id="dream-contributions-delete">
                                 {{ finContribute(user, dream, 'admin')|raw }}
