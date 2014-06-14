@@ -12,6 +12,7 @@ use Geekhub\ResourceBundle\Tests\SecurityMethods;
 use Geekhub\UserBundle\Entity\User;
 use Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider;
 use Geekhub\UserBundle\UserProvider\FacebookProvider;
+use Sonata\MediaBundle\Entity\MediaManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AbstractSocialNetworkProviderTest extends WebTestCase
@@ -22,6 +23,10 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
     public function testGetMediaFromRemoteImg($remoteImg, $localFileName)
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\Container');
+        $mediaManager = new MediaManager('Sonata\MediaBundle\Model\MediaInterface', $this->createRegistryMock());
+        $container->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($mediaManager));
         $kernelWebDir = '/var/www/CheDream2/app/';
         $uploadDir = '/uploads/';
         $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir);
@@ -38,5 +43,22 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
             array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/non_existent_avatar.jpeg', 'avatar3.jpg'),
         );
     }
+
+    /**
+     * Returns mock of doctrine document manager.
+     *
+     * @return \Sonata\DoctrinePHPCRAdminBundle\Model\ModelManager
+     */
+    protected function createRegistryMock()
+    {
+        $dm = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($dm));
+
+        return $registry;
+    }
+
+
 
 }
