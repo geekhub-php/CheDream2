@@ -79,7 +79,7 @@
           position: relative;
           float: left;
           width: 155px;
-          height: 87px;
+          height: 90px;
           border: 1px solid #b8b8b8;
           background: url("@{images-folder}/placeholder-image.png") no-repeat center #d2d2d2;
 
@@ -278,15 +278,65 @@
           /*================================= SLIDERS ===============================*/
           /*================================= SLIDERS ===============================*/
           /*================================= SLIDERS ===============================*/
+          .work-progress-success {
+            height: 58px;
+            margin: 16px 0;
+            text-align: center;
+
+            > span.success {
+              display: block;
+              height: 58px;
+              padding: 20px 0 20px 0;
+              background: #26e47e;
+              background: -moz-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+              background: -webkit-gradient(left top, right top, color-stop(0%, #26e47e), color-stop(100%, #00cbdd));
+              background: -webkit-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+              background: -o-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+              background: -ms-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+              background: linear-gradient(to right, #26e47e 0%, #00cbdd 100%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26e47e', endColorstr='#00cbdd', GradientType=1 );
+
+              em {
+                display: inline-block;
+                height: 19px;
+                padding: 0 0 0 35px;
+
+                line-height: 20px;
+                background: url("@{images-folder}/dream-succeeded.png") no-repeat left center;
+
+                font-family: @default-bold-font;
+                font-style: normal;
+                font-size: 18px;
+                line-height: 20px;
+                color:#202020;
+              }
+            }
+          }
           .work-progress {
             width: 200px;
             height: 58px;
             margin: 0 auto 35px;
+            text-align: center;
+
+            &.count-1 {
+              width: 60px !important;
+            }
+            &.count-2 {
+              width: 130px !important;
+            }
+            &.count-3 {
+              width: 200px !important;
+            }
+
+            > div:last-child {
+             margin: 0 !important;
+            }
 
             > div {
               float: left;
               margin: 0 13px 0 0;
             }
+
             .financial-radial-progress {
               @circle-size: 58px;
               @circle-background: #e0e0e0;
@@ -586,6 +636,23 @@
           }
 
         }//support
+
+        /*================================= TAGS ===============================*/
+        /*================================= TAGS ===============================*/
+        /*================================= TAGS ===============================*/
+        .tags {
+          overflow: hidden;
+          margin: 0 0 32px;
+        }
+
+        /*================================= SHARE ===============================*/
+        /*================================= SHARE ===============================*/
+        /*================================= SHARE ===============================*/
+        .share {
+          overflow: hidden;
+          margin: 0 0 32px;
+        }
+
       }//sidebar
 
 
@@ -700,19 +767,67 @@
               clear: both;
             }
             > li {
+              position: relative;
               float: left;
               width: 50%;
               padding: 0 22px 22px 0;
-              img {
+
+              .remove-all {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                overflow: hidden;
                 display: block;
+                width: 26px;
+                height: 26px;
+                text-indent: -300px;
+                background: url("@{images-folder}/close-button.png") no-repeat center 1px;
+              }
+
+              &:hover {
+                .right-info {
+                    .can-remove {
+                    li {
+                      background: url("@{images-folder}/list-item-remove-bg.png") no-repeat 0px 5px !important;
+
+                      &:hover {
+                        span {
+                          cursor: pointer;
+                          display: inline;
+                          color: #FF0000;
+                          font-size: 13px;
+                          margin: 0 4px 0 0;
+
+                          &:hover {
+                            text-decoration: underline;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .left-info {
                 float: left;
                 width: 44px;
                 margin: 0 12px 0 0;
+
+                img {
+                  display: block;
+                  width: 44px;
+                }
+                a {
+                  font-family: @default-font;
+                  font-size: 12px;
+                  line-height: 14px;
+                  color: #f2602c;
+                }
               }
-              div {
+              .right-info {
                 overflow: hidden;
 
-                a {
+                > a {
                   display: block;
                   padding: 0 0 3px;
                   font-family: @default-bold-font;
@@ -720,10 +835,26 @@
                   line-height: 18px;
                   color: #464646;
                 }
+                .contacts {
+                  a {
+                    display: block;
+                    padding: 0 0 3px;
+                    font-family: @default-font;
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: #464646;
+                    .icon {
+                      font-size: 12px;
+                    }
+                  }
+                }
                 ul.items {
                   li {
                     padding: 0 0 3px 12px;
                     background: url("@{images-folder}/list-item-bg.png") no-repeat 1px 6px;
+                    span {
+                      display: none;
+                    }
                   }
                 }
               }

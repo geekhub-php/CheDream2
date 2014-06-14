@@ -1,68 +1,88 @@
-<div class="work-progress">
-    {% if showPercentOfCompletionFinancial(dream) is not null %}
-        {% if showPercentOfCompletionFinancial(dream) > 100 %}
-            {% set financialPercent = 100 %}
-        {% else %}
-            {% set financialPercent = showPercentOfCompletionFinancial(dream) %}
-        {% endif %}
-        <div class="financial-radial-progress t-tooltip" data-progress="{{ financialPercent }}" title="Фінанси">
-            <div class="circle">
-                <div class="mask full">
-                    <div class="fill"></div>
-                </div>
-                <div class="mask half">
-                    <div class="fill"></div>
-                    <div class="fill fix"></div>
-                </div>
-            </div>
-            <div class="inset">
-                <div class="percentage">
-                </div>
-            </div>
-        </div>
+{% if (dream.currentStatus == 'success') and (show_success != 'false') %}
+    <div class="work-progress-success">
+        <span class="success"><em>Мрію здійснено</em></span>
+    </div>
+{% else %}
+    {% set count = 0 %}
+    {% set isFinantialPresent = showPercentOfCompletionFinancial(dream) is not null %}
+    {% set isEquipmentPresent = showPercentOfCompletionEquipment(dream) is not null %}
+    {% set isWorkPresent = showPercentOfCompletionWork(dream) is not null %}
+    {% if isFinantialPresent %}
+        {% set count = count+1  %}
     {% endif %}
-    {% if showPercentOfCompletionEquipment(dream) is not null %}
-        {% if showPercentOfCompletionEquipment(dream) > 100 %}
-            {% set equipmentPercent = 100 %}
-        {% else %}
-            {% set equipmentPercent = showPercentOfCompletionEquipment(dream) %}
-        {% endif %}
-        <div class="equipmant-radial-progress t-tooltip" data-progress="{{ equipmentPercent }}" title="Інструменти">
-            <div class="circle">
-                <div class="mask full">
-                    <div class="fill"></div>
-                </div>
-                <div class="mask half">
-                    <div class="fill"></div>
-                    <div class="fill fix"></div>
-                </div>
-            </div>
-            <div class="inset">
-                <div class="percentage">
-                </div>
-            </div>
-        </div>
+    {% if isEquipmentPresent %}
+        {% set count = count+1  %}
     {% endif %}
-    {% if showPercentOfCompletionWork(dream) is not null %}
-        {% if showPercentOfCompletionWork(dream) > 100 %}
-            {% set workPercent = 100 %}
-        {% else %}
-            {% set workPercent = showPercentOfCompletionWork(dream) %}
-        {% endif %}
-        <div class="work-radial-progress t-tooltip" data-progress="{{ workPercent }}" title="Допомога">
-            <div class="circle">
-                <div class="mask full">
-                    <div class="fill"></div>
-                </div>
-                <div class="mask half">
-                    <div class="fill"></div>
-                    <div class="fill fix"></div>
-                </div>
-            </div>
-            <div class="inset">
-                <div class="percentage">
-                </div>
-            </div>
-        </div>
+    {% if isWorkPresent %}
+        {% set count = count+1  %}
     {% endif %}
-</div>
+
+    <div class="work-progress count-{{ count }}">
+        {% if isFinantialPresent %}
+            {% if showPercentOfCompletionFinancial(dream) > 100 %}
+                {% set financialPercent = 100 %}
+            {% else %}
+                {% set financialPercent = showPercentOfCompletionFinancial(dream) %}
+            {% endif %}
+            <div class="financial-radial-progress t-tooltip" data-progress="{{ financialPercent }}" title="Фінанси">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if isEquipmentPresent %}
+            {% if showPercentOfCompletionEquipment(dream) > 100 %}
+                {% set equipmentPercent = 100 %}
+            {% else %}
+                {% set equipmentPercent = showPercentOfCompletionEquipment(dream) %}
+            {% endif %}
+            <div class="equipmant-radial-progress t-tooltip" data-progress="{{ equipmentPercent }}" title="Інструменти">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if isWorkPresent %}
+            {% if showPercentOfCompletionWork(dream) > 100 %}
+                {% set workPercent = 100 %}
+            {% else %}
+                {% set workPercent = showPercentOfCompletionWork(dream) %}
+            {% endif %}
+            <div class="work-radial-progress t-tooltip" data-progress="{{ workPercent }}" title="Допомога">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                        <div class="fill fix"></div>
+                    </div>
+                </div>
+                <div class="inset">
+                    <div class="percentage">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

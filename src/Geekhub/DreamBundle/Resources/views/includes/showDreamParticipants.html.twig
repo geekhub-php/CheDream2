@@ -8,50 +8,61 @@
         <ul>
             {% for user in contributors %}
                 <li class="{{ cycle(['odd', 'even'], loop.index) }}">
-                    <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}">
-                    <div>
+
+                    {% if is_granted("ROLE_SUPER_ADMIN") %}
+                        <a class="remove-all t-tooltip" title="Видалити допомогу" href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                            Видалити все
+                        </a>
+                    {% elseif is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
+                        <a class="remove-all t-tooltip" title="Видалити допомогу" href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
+                            Видалити все
+                        </a>
+                    {% endif %}
+
+                    <div class="left-info">
+                        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}">
+                    </div>
+
+                    <div class="right-info">
                         <a href="{{ path('profile_view', {'id': user.id}) }}">
                             {{ user.firstName }}
                             {{ user.lastName }}
                         </a>
 
-                        {% if is_granted("ROLE_SUPER_ADMIN") %}
-                            <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
-                                Видалити все
-                            </a>
+                        {% if is_granted("ROLE_SUPER_ADMIN") or ( is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) )%}
+                            <div class="contacts">
+                                {% if user.phone %}
+                                    <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i>{{ user.phone }}</a>
+                                {% elseif user.skype %}
+                                    <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span>{{ user.skype }}</a>
+                                {% elseif user.facebookId %}
+                                    <a href="{{ user.getFacebookUrl }}" class="fb" target="_blank"><i class="icon icon-facebook"></i>Профіль</a>
+                                {% elseif user.vkontakteId %}
+                                    <a href="{{ user.getVkontakteUrl }}" class="vk" target="_blank"><i class="icon icon-vkontakte"></i>Профіль</a>
+                                {% elseif user.odnoklassnikiId %}
+                                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok" target="_blank"><i class="icon icon-odnoklassniki"></i>Профіль</a>
+                                {% elseif user.email %}
+                                    <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span>{{ user.email }}</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
 
-                            <ul class="items" id="dream-contributions-delete">
+
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <ul class="items can-remove" id="dream-contributions-delete">
                                 {{ finContribute(user, dream, 'admin')|raw }}
                                 {{ equipContribute(user, dream, 'admin')|raw }}
                                 {{ workContribute(user, dream, 'admin')|raw }}
                                 {{ otherContribute(user, dream, 'admin')|raw }}
                             </ul>
-
-                        {% endif %}
-
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and not is_granted("ROLE_SUPER_ADMIN") %}
-                            {% if ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
-                                <a href="{{ path('remove_SomeContribute', {'slug': dream.slug, 'user': user.id}) }}">
-                                    Видалити все
-                                </a>
-
-                                <ul class="items" id="dream-contributions-delete">
-                                    {{ finContribute(user, dream, 'owner')|raw }}
-                                    {{ equipContribute(user, dream, 'owner')|raw }}
-                                    {{ workContribute(user, dream, 'owner')|raw }}
-                                    {{ otherContribute(user, dream, 'owner')|raw }}
-                                </ul>
-                            {% else %}
-                                <ul class="items" id="dream-contributions-delete">
-                                    {{ finContribute(user, dream, 'guest')|raw }}
-                                    {{ equipContribute(user, dream, 'guest')|raw }}
-                                    {{ workContribute(user, dream, 'guest')|raw }}
-                                    {{ otherContribute(user, dream, 'guest')|raw }}
-                                </ul>
-                            {% endif %}
-                        {% endif %}
-
-                        {% if app.user is null %}
+                        {% elseif is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) %}
+                            <ul class="items can-remove" id="dream-contributions-delete">
+                                {{ finContribute(user, dream, 'owner')|raw }}
+                                {{ equipContribute(user, dream, 'owner')|raw }}
+                                {{ workContribute(user, dream, 'owner')|raw }}
+                                {{ otherContribute(user, dream, 'owner')|raw }}
+                            </ul>
+                        {% else %}
                             <ul class="items" id="dream-contributions-delete">
                                 {{ finContribute(user, dream, 'guest')|raw }}
                                 {{ equipContribute(user, dream, 'guest')|raw }}

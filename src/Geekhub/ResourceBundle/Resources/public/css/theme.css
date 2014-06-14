@@ -268,9 +268,9 @@ body .tooltipster-default {
 /* Use this next selector to style things like font-size and line-height: */
 body .tooltipster-default .tooltipster-content {
 	font-family: Arial, sans-serif !important;
-	font-size: 12px !important;
-	line-height: 16px !important;
-	padding: 8px 10px !important;
+	font-size: 11px !important;
+	line-height: 14px !important;
+	padding: 6px 8px !important;
 	overflow: hidden !important;
 }
 /*----------------------------------------------------------------------------------*/
@@ -417,6 +417,23 @@ body .tooltipster-default .tooltipster-content {
 .header .media-block .media-title {
     color: #9b9b9b;
     padding: 28px 9px 0 0;
+}
+
+.header .media-block > li.photo {
+
+}
+.header .media-block > li.photo a {
+   padding: 17px 4px 0 0;
+}
+.header .media-block > li.photo a:hover {
+    background: none;
+}
+.header .media-block > li.photo a img {
+    /*border: 1px solid #fff;*/
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    border-radius: 25px;
 }
 
 .header .media-block a {
