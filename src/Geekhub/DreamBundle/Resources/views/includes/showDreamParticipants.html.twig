@@ -29,10 +29,11 @@
                             {{ user.lastName }}
                         </a>
 
-                        {% if is_granted("ROLE_SUPER_ADMIN") or ( is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources']) )%}
+                        {% if is_granted("ROLE_SUPER_ADMIN") or ( is_granted("IS_AUTHENTICATED_REMEMBERED") and ((user.id == app.user.id) or (dream.author.id == app.user.id)) and (dream.currentStatus in ['collecting-resources', 'implementing']) )%}
                             <div class="contacts">
-                                {% if user.phone %}
+                                {% if user.phone and user.email %}
                                     <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i>{{ user.phone }}</a>
+                                    <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span>{{ user.email }}</a>
                                 {% elseif user.skype %}
                                     <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span>{{ user.skype }}</a>
                                 {% elseif user.facebookId %}
