@@ -2,8 +2,11 @@
 
 namespace Geekhub\UserBundle\UserProvider;
 
+use Guzzle\Http\Client;
+use Guzzle\Http\Exception\ServerErrorResponseException;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use JMS\Serializer\Serializer;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\Container,
     Symfony\Component\Filesystem\Filesystem;
 use Application\Sonata\MediaBundle\Entity\Media;
@@ -36,9 +39,15 @@ abstract class AbstractSocialNetworkProvider
     {
         $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;
         $localImg = $destination.$localFileName;
+        $defaultImg = $this->kernelWebDir.'/../web/images/default_avatar.png';
 
-        $filesystem = new Filesystem();
-        $filesystem->copy($remoteImg, $localImg);
+        try {
+            $this->copyAvatar($remoteImg, $localImg);
+        }
+        catch (ServerErrorResponseException $e) {
+            $filesystem = new Filesystem();
+            $filesystem->copy($defaultImg, $localImg);
+        }
 
         $media = new Media;
         $media->setBinaryContent($localImg);
@@ -54,6 +63,26 @@ abstract class AbstractSocialNetworkProvider
         }
 
         return $media;
+    }
+
+    private function copyAvatar($remoteImg, $localImg)
+    {
+        $client = new Client();
+        $request = $client->get($remoteImg);
+        $response = $request->send();
+        $responseBody = $response->getBody();
+        $fp = fopen($localImg,'wb');
+        fwrite($fp,$responseBody);
+        fclose($fp);
+
+//        $filesystem = new Filesystem();
+//        try {
+//            $filesystem->copy($remoteImg, $localImg);
+//        }
+//        catch(Exception $e) {
+//            $filesystem->copy($defaultImg, $localImg);
+//        }
+
     }
 
     abstract public function setUserData(User $user, UserResponseInterface $response);

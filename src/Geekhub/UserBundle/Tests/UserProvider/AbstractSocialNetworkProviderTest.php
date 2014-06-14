@@ -27,11 +27,11 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
         $container->expects($this->any())
             ->method('get')
             ->will($this->returnValue($mediaManager));
-        $kernelWebDir = '/var/www/CheDream2/app/';
-        $uploadDir = '/uploads/';
+        $kernelWebDir = '/var/www/CheDream2/app';
+        $uploadDir = '/upload/';
         $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir);
         $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
-        $fullFileName= $kernelWebDir.'/../web/'.$uploadDir.$localFileName;
+        $fullFileName= $kernelWebDir.'/../web'.$uploadDir.$localFileName;
         $this->assertFileExists($fullFileName);
     }
 
