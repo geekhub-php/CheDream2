@@ -26,14 +26,14 @@
                 {% endif %}
                 
                 {% if user.facebookId %}
-                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
+                    <a href="https://facebook.com/{{ user.facebookId }}" class="fb"><i class="icon icon-facebook"></i></a>
                 {% endif %}
                 
                 {% if user.vkontakteId %}
-                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
+                    <a href="https://vk.com/id{{ user.vkontakteId }}" class="vk"><i class="icon icon-vkontakte"></i></a>
                 {% endif %}
                 {% if user.odnoklassnikiId %}
-                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
+                    <a href="http://www.odnoklassniki.ru/profile/{{ user.odnoklassnikiId }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
                 {% endif %}
             </div>
         </div>

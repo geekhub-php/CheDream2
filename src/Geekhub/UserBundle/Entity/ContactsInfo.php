@@ -64,34 +64,4 @@ trait ContactsInfo
     {
         return $this->skype;
     }
-
-    /**
-     * Get facebookUrl
-     *
-     * @return string
-     */
-    public function getFacebookUrl()
-    {
-        return sprintf('http://www.facebook.com/%d', $this->facebookId);
-    }
-
-    /**
-     * Get vkontakteUrl
-     *
-     * @return string
-     */
-    public function getVkontakteUrl()
-    {
-        return sprintf('http://vk.com/id%d', $this->vkontakteId);
-    }
-
-    /**
-     * Get odnoklassnikiUrl
-     *
-     * @return string
-     */
-    public function getOdnoklassnikiUrl()
-    {
-        return sprintf('http://www.odnoklassniki.ru/profile/%d', $this->odnoklassnikiId);
-    }
 }
