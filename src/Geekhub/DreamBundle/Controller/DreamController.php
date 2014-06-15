@@ -241,6 +241,13 @@ class DreamController extends Controller
             $finForm->handleRequest($request);
             if ($finForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
+                if (is_null($user->getPhone())) {
+                    $tel = $request->get('contributor-telephone');
+                    $user->setPhone($tel);
+                    $em->persist($user);
+                }
+
                 $financialContribute->setDream($dream);
                 $financialContribute->setUser($user);
                 $em->persist($financialContribute);
@@ -251,6 +258,13 @@ class DreamController extends Controller
             $equipForm->handleRequest($request);
             if ($equipForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
+                if (is_null($user->getPhone())) {
+                    $tel = $request->get('contributor-telephone');
+                    $user->setPhone($tel);
+                    $em->persist($user);
+                }
+
                 $equipmentContribute->setDream($dream);
                 $equipmentContribute->setUser($user);
                 $em->persist($equipmentContribute);
@@ -261,6 +275,13 @@ class DreamController extends Controller
             $workForm->handleRequest($request);
             if ($workForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
+                if (is_null($user->getPhone())) {
+                    $tel = $request->get('contributor-telephone');
+                    $user->setPhone($tel);
+                    $em->persist($user);
+                }
+
                 $workContribute->setDream($dream);
                 $workContribute->setUser($user);
                 $em->persist($workContribute);
@@ -271,6 +292,13 @@ class DreamController extends Controller
             $otherForm->handleRequest($request);
             if ($otherForm->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+
+                if (is_null($user->getPhone())) {
+                    $tel = $request->get('contributor-telephone');
+                    $user->setPhone($tel);
+                    $em->persist($user);
+                }
+
                 $otherContribute->setDream($dream);
                 $otherContribute->setUser($user);
                 $em->persist($otherContribute);

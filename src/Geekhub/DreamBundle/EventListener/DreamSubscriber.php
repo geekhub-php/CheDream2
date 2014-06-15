@@ -4,15 +4,21 @@ namespace Geekhub\DreamBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Geekhub\DreamBundle\Entity\AbstractContribute;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Geekhub\UserBundle\Entity\User;
 use Hip\MandrillBundle\Dispatcher;
 use Hip\MandrillBundle\Message;
+use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class DreamSubscriber implements EventSubscriber
 {
+    /** @var Container $container */
     protected $container;
 
     protected $mandrillDispatcher;
@@ -37,7 +43,30 @@ class DreamSubscriber implements EventSubscriber
     {
         return array(
             'prePersist',
-            'postPersist'
+            'postPersist',
+            'preRemove',
+        );
+    }
+
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+        /** @var Logger $logger */
+        $logger  = $this->container->get('logger');
+        /** @var UserInterface $user */
+        $user    = $this->container->get('security.context')->getToken()->getUser();
+        /** @var Request $request */
+        $request = $this->container->get('request');
+
+        if (!is_object($user) || !in_array('Symfony\Component\Security\Core\User\UserInterface', class_implements($user))) {
+            $logger->addError(
+                sprintf('Something that not user, try to delete object "%s", with id: "%s", from ip: "%s", from uri: "%s"', get_class($object), $object->getId(), $request->getClientIp(), $request->getUri())
+            );
+            throw new AccessDeniedException('Something went wrong, but don\'t worry - we already work on it!');
+        }
+
+        $logger->addWarning(
+            sprintf('User with username: "%s", delete object "%s", with id: "%s", from ip: "%s", from uri: "%s"', $user->getUsername(), get_class($object), $object->getId(), $request->getClientIp(), $request->getUri())
         );
     }
 
