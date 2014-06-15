@@ -17,7 +17,7 @@
                                         {{ form_row(finForm.hiddenContributor) }}
 
                                         {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required="true"> <br/>
+                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required> <br/>
                                         {% endif %}
 
                                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-fin">
@@ -46,7 +46,7 @@
                                         {{ form_row(equipForm.hiddenContributor) }}
 
                                         {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required="true"> <br/>
+                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required> <br/>
                                         {% endif %}
 
                                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-equip">
@@ -75,7 +75,7 @@
                                         {{ form_row(workForm.hiddenContributor) }}
 
                                         {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id" required="true"> <br/>
+                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id" required> <br/>
                                         {% endif %}
 
                                         <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-work">
@@ -102,7 +102,7 @@
                                     {{ form_row(otherForm.hiddenContributor) }}
 
                                     {% if app.user.phone is null %}
-                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required="true"> <br/>
+                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон" class="form-control" id="contribute-telephone-form-id"  required > <br/>
                                     {% endif %}
 
                                     <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-primary btn-sm" id="sbmt-btn-other">
