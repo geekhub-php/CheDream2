@@ -14,13 +14,14 @@ use Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider;
 use Geekhub\UserBundle\UserProvider\FacebookProvider;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\File\File;
 
 class AbstractSocialNetworkProviderTest extends WebTestCase
 {
     /**
      * @dataProvider getFileLocationsData
      */
-    public function testGetMediaFromRemoteImg($remoteImg, $localFileName)
+    public function testGetMediaFromRemoteImg($remoteImg, $localFileName, $result)
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\Container');
         $mediaManager = new MediaManager('Sonata\MediaBundle\Model\MediaInterface', $this->createRegistryMock());
@@ -30,17 +31,18 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
         $kernelWebDir = '/var/www/CheDream2/app';
         $uploadDir = '/upload/';
         $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir);
-        $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
+        $newMedia = $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
         $fullFileName= $kernelWebDir.'/../web'.$uploadDir.$localFileName;
-        $this->assertFileExists($fullFileName);
+        $mediaFileName = $newMedia->getBinaryContent();
+        $this->assertEquals($mediaFileName, $fullFileName);
     }
 
     public function getFileLocationsData()
     {
         return array(
-            //array('http://cs4303.vk.me/u11040263/a_df67310f.jpg', 'avatar1.jpg'),
-            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/a3058274bc3e8fab6bbeae05be45b1f37c3f5dde.jpeg', 'avatar2.jpg'),
-            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/non_existent_avatar.jpeg', 'avatar3.jpg'),
+            array('http://cs4303.vk.me/u11040263/a_df67310f.jpg', 'avatar1.jpg', true),
+            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/a3058274bc3e8fab6bbeae05be45b1f37c3f5dde.jpeg', 'avatar2.jpg', true),
+            array('http://localhost2/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/non_existent_avatar.jpeg', 'avatar3.jpg', false),
         );
     }
 
