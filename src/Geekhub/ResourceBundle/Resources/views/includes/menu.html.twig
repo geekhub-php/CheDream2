@@ -56,13 +56,18 @@
                     </li>
                     
                 {% else %}
+                    <li class="photo">
+                        <a href="{{ path('profile_view', {'id': app.user.id}) }}" class="user">
+                            <img src="{{ app.user.avatar|mediaPath|imagine_filter('userAvatar_header') }}" class="showAvatar">
+                        </a>
+                    </li>
                     <li>
-                        <a href="{{ path('profile_view', {'id': app.user.id}) }}" class="user" title="{{ app.user.getFirstName() }} {{ app.user.getLastName() }}">
+                        <a href="{{ path('profile_view', {'id': app.user.id}) }}" class="user t-tooltip" title="Ваш профіль">
                             <span class="icon icon-user"></span>
                         </a>
                     </li>
                     <li class="user-dreams-block">
-                        <a href="#" class="show-dreams">
+                        <a href="#" class="show-dreams t-tooltip" title="Ваші мрії">
                             <span class="icon icon-dream"></span>
                         </a>
                         
@@ -105,7 +110,7 @@
                         
                     </li>
                     <li>
-                        <a href="{{ path('_logout') }}" class="logout">
+                        <a href="{{ path('_logout') }}" class="logout t-tooltip" title="Вийти">
                             <span class="icon icon-logout"></span>
                         </a>
                     </li>

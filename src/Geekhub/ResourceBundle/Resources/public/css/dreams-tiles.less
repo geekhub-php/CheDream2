@@ -1,4 +1,7 @@
+@default-font: 'Daxpro', sans-serif;
+@default-bold-font: 'Daxpro Bold', sans-serif;
 @images-folder: '/bundles/geekhubresource/images';
+
 #dreams{
   font-size: 0;
   .dream-homepage-preview{
@@ -121,11 +124,61 @@
     }
 
     .dream-homepage-preview-footer{
+      .work-progress-success {
+        height: 58px;
+        margin: 16px 0;
+        text-align: center;
+
+        > span.success {
+          display: block;
+          height: 58px;
+          padding: 20px 0 20px 0;
+          background: #26e47e;
+          background: -moz-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+          background: -webkit-gradient(left top, right top, color-stop(0%, #26e47e), color-stop(100%, #00cbdd));
+          background: -webkit-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+          background: -o-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+          background: -ms-linear-gradient(left, #26e47e 0%, #00cbdd 100%);
+          background: linear-gradient(to right, #26e47e 0%, #00cbdd 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26e47e', endColorstr='#00cbdd', GradientType=1 );
+
+          em {
+            display: inline-block;
+            height: 19px;
+            padding: 0 0 0 35px;
+
+            line-height: 20px;
+            background: url("@{images-folder}/dream-succeeded.png") no-repeat left center;
+
+            font-family: @default-bold-font;
+            font-style: normal;
+            font-size: 18px;
+            line-height: 20px;
+            color:#202020;
+          }
+        }
+      }
+
       div.work-progress{
         width: 200px;
         height: 58px;
         margin: 16px auto;
         text-align: center;
+
+        &.count-1 {
+          width: 60px !important;
+        }
+        &.count-2 {
+          width: 130px !important;
+        }
+        &.count-3 {
+          width: 200px !important;
+        }
+
+        > div:last-child {
+         margin: 0 !important;
+        }
+
         .financial-radial-progress {
           @circle-size: 58px;
           @circle-background: #e0e0e0;
@@ -134,9 +187,10 @@
           @inset-color: #fbfbfb;
           @transition-length: 1s;
           float: left;
+          margin: 0 13px 0 0;
           width:  @circle-size;
           height: @circle-size;
-          margin: 0 13px 0 0;;
+
 
           background-color: @circle-background;
           border-radius: 50%;
@@ -274,7 +328,7 @@
   float: left;
   width:  @circle-size;
   height: @circle-size;
-  margin: 0;
+  margin: 0 13px 0 0;
 
   background-color: @circle-background;
   border-radius: 50%;

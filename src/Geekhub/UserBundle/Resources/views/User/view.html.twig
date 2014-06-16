@@ -26,14 +26,14 @@
                 {% endif %}
                 
                 {% if user.facebookId %}
-                    <a href="{{ user.getFacebookUrl }}" class="fb"><i class="icon icon-facebook"></i></a>
+                    <a href="https://facebook.com/{{ user.facebookId }}" class="fb"><i class="icon icon-facebook"></i></a>
                 {% endif %}
                 
                 {% if user.vkontakteId %}
-                    <a href="{{ user.getVkontakteUrl }}" class="vk"><i class="icon icon-vkontakte"></i></a>
+                    <a href="https://vk.com/id{{ user.vkontakteId }}" class="vk"><i class="icon icon-vkontakte"></i></a>
                 {% endif %}
                 {% if user.odnoklassnikiId %}
-                    <a href="{{ user.getOdnoklassnikiUrl }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
+                    <a href="http://www.odnoklassniki.ru/profile/{{ user.odnoklassnikiId }}" class="ok"><i class="icon icon-odnoklassniki"></i></a>
                 {% endif %}
             </div>
         </div>
@@ -59,7 +59,7 @@
                         <li><a href="#" id="projects">На стадії проекту</a></li>
                         <li><a href="#" id="any">Усі мрії</a></li>
                     </ul>
-                    <h2 class="caption">Автор проектів</h2>
+                    <h2 class="caption" id="contributed-projects">Автор проектів</h2>
                 </div>
                 
                 <ul id="user-dreams" class="dreams-list row">
@@ -73,7 +73,7 @@
             
             {% if contributedDreams|length > 0 %}
                 <div class="caption-block">
-                    <h2 class="caption">Учасник проектів</h2>
+                    <h2 id="authors-projects" class="caption">Учасник проектів</h2>
                 </div>
                 
                 <ul class="dreams-list">
@@ -84,7 +84,7 @@
             {% endif %}
             <div id="favorites-block">
             {% if user.favoriteDreams|length > 0 %}
-                <div class="caption-block">
+                <div id="favorite-projects" class="caption-block">
                     <h2 class="caption">Улюблені</h2>
                 </div>
                 
