@@ -667,13 +667,40 @@
         padding: 30px 0 0;
 
         .admin-controls {
-          a,a:link {
-            margin: 0 10px 0 0;
-            font-size: 12px;
-            color:#fff;
+          overflow: hidden;
+          float:right;
+          text-align: right;
+
+          li {
+            margin: 0 0 2px;
+
+            a,a:link {
+              margin: 0 10px 0 0;
+              font-size: 12px;
+              color:#fff;
+            }
+            a:first-child {
+              margin: 0 !important;
+            }
           }
-          a:first-child {
-            margin: 0 !important;
+        }
+        .author-controls {
+          clear: both;
+          overflow: hidden;
+          text-align: right;
+
+          li {
+            float:left;
+            margin: 0 2px 0 0;
+
+            a,a:link {
+              margin: 0 10px 0 0;
+              font-size: 12px;
+              color:#fff;
+            }
+            a:first-child {
+              margin: 0 !important;
+            }
           }
         }
 
