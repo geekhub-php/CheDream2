@@ -17,20 +17,34 @@
     <div>
         <div id="added_success"></div>
 
-        <div id="dreams"></div>
+        <div id="dreams" class="loading"></div>
     </div>
 
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
     <script>
+        var isLoading = false;
+
         var loadDreams = function (startIndex) {
+            if (isLoading)
+                return;
+            isLoading = true;
+
+            var container = $('#dreams');
             var path = Routing.generate('api_v1_get_dreams');
+
+            container.addClass('loading');
+
             $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing', 'success'], orderBy: 'favoritesCount' })
                     .done(function (response) {
-                        $(response).appendTo($('#dreams')).hide().fadeIn(300);
+                        isLoading = false;
+                        container.removeClass('loading');
+                        $(response).appendTo(container).hide().fadeIn(300);
                     })
                     .error(function (msg) {
+                        isLoading = false;
+                        container.removeClass('loading');
                         console.log(msg);
                     }
             );
