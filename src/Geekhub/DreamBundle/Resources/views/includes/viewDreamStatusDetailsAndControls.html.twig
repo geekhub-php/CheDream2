@@ -11,9 +11,10 @@
                 <a href="javascript:void(0)" id="dream-finish-collect-res-modal" data-toggle="modal" data-target="#dreamCompletedModal" class="btn btn-info btn-xs" title="Закінчити реалізацію.">{{ 'dream.implementing.stop'|trans }}</a>
             </li>
         {% elseif dream.currentStatus == 'collecting-resources' %}
-            <a href="javascript:void(0)" id="dream-start-collect-res-modal" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</a>
+            <li>
+                <a href="javascript:void(0)" id="dream-start-collect-res-modal" data-toggle="modal" data-target="#dreamImplementingModal" class="btn btn-info btn-xs" title="Розпочати реалізацію.">{{ 'dream.implementing.start'|trans }}</a>
+            </li>
         {% endif %}
-
     </ul>
     {# ========= POPUPS ========= #}
     {% if dream.currentStatus == 'implementing' %}
