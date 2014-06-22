@@ -20,6 +20,10 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         if ($remoteImg = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {
             $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
             $user->setAvatar($profilePicture);
+        } else {
+            //write log's message
+            $profilePicture = $this->getDefaultAvatar();
+            $user->setAvatar($profilePicture);
         }
 
         if ($birthday = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'bdate')) {
@@ -41,8 +45,13 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
     {
         $client = new Client();
         $request = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $response = $request->send();
+        try {
+            $response = $request->send();
+        } catch (RequestException $e) {
+            return null;
+        }
         $responseBody = $response->getBody()->__toString();
+        echo $responseBody;
 
         $result = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 

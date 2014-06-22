@@ -28,29 +28,39 @@ abstract class AbstractSocialNetworkProvider
     /** @var  Container $container */
     protected $container;
 
-    public function __construct(Container $container, $kernelWebDir, $uploadDir)
+    /** @var  string $defaultAvatarPath */
+    protected $defaultAvatarPath;
+
+    public function __construct(Container $container, $kernelWebDir, $uploadDir, $defaultAvatarPath)
     {
         $this->container          = $container;
         $this->serializer         = $container->get('jms_serializer');
         $this->kernelWebDir       = $kernelWebDir;
         $this->uploadDir          = $uploadDir;
+        $this->defaultAvatarPath  = $defaultAvatarPath;
     }
 
     public function getMediaFromRemoteImg($remoteImg, $localFileName)
     {
         $destination = $this->kernelWebDir.'/../web'.$this->uploadDir;
         $localImg = $destination.$localFileName;
-        $defaultImg = $this->kernelWebDir.'/../web/images/default_avatar.png';
+        $defaultImg = $this->kernelWebDir.$this->defaultAvatarPath;//'/../web/images/default_avatar.png';
 
-        $this->copyAvatar($remoteImg, $localImg);
+        if ($flagCopySuccess = $this->copyAvatar($remoteImg, $localImg)) {
+            $media = new Media;
+            $media->setBinaryContent($localImg);
+            $media->setProviderName('sonata.media.provider.image');
+            if ($flagCopySuccess) {
+                $media->setContext('avatar');
+            } else {
+                $media->setContext('default_avatar');
+            }
 
-        $media = new Media;
-        $media->setBinaryContent($localImg);
-        $media->setProviderName('sonata.media.provider.image');
-        $media->setContext('avatar');
-
-        $mediaManager = $this->container->get('sonata.media.manager.media');
-        $mediaManager->save($media);
+            $mediaManager = $this->container->get('sonata.media.manager.media');
+            $mediaManager->save($media);
+        } else {
+            $media = $this->getDefaultAvatar();
+        }
 
         try {
             $filesystem = new Filesystem();
@@ -63,7 +73,7 @@ abstract class AbstractSocialNetworkProvider
 
     private function copyAvatar($remoteImg, $localImg)
     {
-        $defaultImg = $this->kernelWebDir.'/../web/images/default_avatar.png';
+        $defaultImg = $this->kernelWebDir.$this->defaultAvatarPath;//'/../web/images/default_avatar.png';
         $client = new Client();
         $request = $client->get($remoteImg);
         try {
@@ -71,12 +81,29 @@ abstract class AbstractSocialNetworkProvider
         } catch (RequestException $e) {
             $filesystem = new Filesystem();
             $filesystem->copy($defaultImg, $localImg);
-            return;
+
+            return false;
         }
         $responseBody = $response->getBody();
         $fp = fopen($localImg, 'w');
         fwrite($fp, $responseBody);
         fclose($fp);
+
+        return true;
+    }
+
+    public function getDefaultAvatar()
+    {
+        $defaultImg = $this->kernelWebDir.$this->defaultAvatarPath;//'/../web/images/default_avatar.png';
+        $mediaManager = $this->container->get('sonata.media.manager.media');
+        $media = $mediaManager->findOneBy(array('context'=>'default_avatar'));
+        if (!$media) {
+            $media = new Media;
+            $media->setBinaryContent($defaultImg);
+            $media->setProviderName('sonata.media.provider.image');
+        }
+
+        return $media;
     }
 
     abstract public function setUserData(User $user, UserResponseInterface $response);

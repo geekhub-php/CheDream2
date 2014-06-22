@@ -26,6 +26,10 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         if ($photoUrl) {
             $profilePicture = $this->getMediaFromRemoteImg($photoUrl, md5('ok'.$user->getOdnoklassnikiId()).'.jpg');
             $user->setAvatar($profilePicture);
+        } else {
+            //write log's message
+            $profilePicture = $this->getDefaultAvatar();
+            $user->setAvatar($profilePicture);
         }
 
         return $user;
@@ -59,7 +63,11 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
 
         $client = new Client();
         $request = $client->get($url);
-        $response = $request->send();
+        try {
+            $response = $request->send();
+        } catch (RequestException $e) {
+            return null;
+        }
         $responseBody = $response->getBody()->__toString();
 
         $resultObj = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\OdnoklassnikiPhotoResponse', 'json');
