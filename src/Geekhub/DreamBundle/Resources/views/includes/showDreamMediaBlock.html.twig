@@ -11,7 +11,7 @@
                 {% media dream.mediaVideos.0, 'dream_view_video' with {'html5': true } %}
 
             </li>
-            {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
+            {% if (dream.currentStatus == 'completed' or dream.currentStatus == 'success') and dream.mediaCompletedPictures|length %}
                 {% for picture in dream.mediaCompletedPictures %}
                     {% if loop.index <= 4 %}
                         <li>
@@ -47,7 +47,7 @@
         </ul>
     {% else %} {#  else media without video #}
         <ul class="thumbnails no-video">
-            {% if dream.currentStatus == 'completed' or dream.currentStatus == 'success' %}
+            {% if ( dream.currentStatus == 'completed' or dream.currentStatus == 'success') and dream.mediaCompletedPictures|length %}
                 {% for picture in dream.mediaCompletedPictures %}
                     {% if loop.index <= 8 %}
                         <li>

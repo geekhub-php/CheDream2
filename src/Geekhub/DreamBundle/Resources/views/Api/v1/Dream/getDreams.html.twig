@@ -19,7 +19,7 @@
                 <img src="{{ dream.author.avatar|mediaPath|imagine_filter('userAvatar_small') }}">
                 <p class="showHomePageAvatar-fio"><a href="{{ path('profile_view', {'id': dream.author.id}) }}"> {{ dream.author.firstName }} {{ dream.author.lastName }} </a></p>
             </div>
-            <div>
+            <div class="image">
                 <span class="triangle"></span>
                 <a href="{{ path('view_dream', {'slug': dream.slug} ) }}" id="{{ dream.slug }}" >
                     <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_poster_homePage') }}" class="img-thumbnail" />
@@ -30,6 +30,7 @@
                 <span class="rating">
                     Лайків <span>{{ dream.favoritesCount }}</span>
                 </span>
+                <span class="shadow"></span>
             </div>
         </div>
         <div class="dream-homepage-preview-footer">
@@ -42,8 +43,10 @@
         </div>
     </div>
 {% endfor %}
-<script type="text/javascript">
-    jQuery(function(){
-        $('.t-tooltip').tooltipster({maxWidth:250});
-    });
-</script>
+{% if dreams|length %}
+    <script type="text/javascript">
+        jQuery(function(){
+            $('.t-tooltip').tooltipster({maxWidth:250});
+        });
+    </script>
+{% endif %}
