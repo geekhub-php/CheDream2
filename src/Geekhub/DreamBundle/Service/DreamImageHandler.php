@@ -30,7 +30,7 @@ class DreamImageHandler
         $uploader->setLiipImagineFilter('dream_thumb');
         $uploader->setUploadPathForPictures('upload/tmp/image/');
         $uploader->setUploadPathForFiles('');
-        $uploader->setAllowedSizeForPictures(5*1024*1024);
+        $uploader->setAllowedSizeForPictures(15*1024*1024);
         $uploader->setAllowedSizeForFile(0);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
         $uploader->setAllowedFilesTypes(array(''));
@@ -46,8 +46,8 @@ class DreamImageHandler
         $uploader->setLiipImagineFilter('dream_thumb');
         $uploader->setUploadPathForPictures('upload/tmp/image/');
         $uploader->setUploadPathForFiles('upload/tmp/files/');
-        $uploader->setAllowedSizeForPictures(5*1024*1024);
-        $uploader->setAllowedSizeForFile(3*1024*1024);
+        $uploader->setAllowedSizeForPictures(15*1024*1024);
+        $uploader->setAllowedSizeForFile(13*1024*1024);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
         $uploader->setAllowedFilesTypes(array('doc', 'pdf', 'xls','ppt'));
 
@@ -62,7 +62,7 @@ class DreamImageHandler
         $uploader->setLiipImagineFilter('dream_poster');
         $uploader->setUploadPathForPictures('upload/tmp/poster/');
         $uploader->setUploadPathForFiles('');
-        $uploader->setAllowedSizeForPictures(2*1024*1024);
+        $uploader->setAllowedSizeForPictures(15*1024*1024);
         $uploader->setAllowedSizeForFile(0);
         $uploader->setAllowedPictureTypes(array('jpg', 'jpeg', 'png', 'gif'));
         $uploader->setAllowedFilesTypes(array(''));
