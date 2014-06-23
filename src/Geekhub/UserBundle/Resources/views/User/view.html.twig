@@ -53,50 +53,64 @@
             </div>
             
             {% if user.dreams|length > 0 %}
-                <div class="caption-block">
-                    <ul class="filters-list">
-                        <li><a href="#" id="implemented">Втілені</a></li>
-                        <li><a href="#" id="projects">На стадії проекту</a></li>
-                        <li><a href="#" id="any">Усі мрії</a></li>
+                <div id="user-dreams-block">
+                    <div class="caption-block">
+                        <ul class="filters-list">
+                            <li><a href="#" id="implemented">Втілені</a></li>
+                            <li><a href="#" id="projects">На стадії проекту</a></li>
+                            <li><a href="#" id="any">Усі мрії</a></li>
+                        </ul>
+                        <h2 class="caption" id="contributed-projects">Автор проектів</h2>
+                    </div>
+
+                    <ul id="user-dreams" class="dreams-list row">
+                        {% for dream in user.dreams %}
+                            <li class="col-md-6">
+                                {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                            </li>
+                        {% endfor %}
                     </ul>
-                    <h2 class="caption" id="contributed-projects">Автор проектів</h2>
                 </div>
-                
-                <ul id="user-dreams" class="dreams-list row">
-                    {% for dream in user.dreams %}
-                        <li class="col-md-6">
-                            {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %} 
+            {% endif %}
             
             {% if contributedDreams|length > 0 %}
-                <div class="caption-block">
-                    <h2 id="authors-projects" class="caption">Учасник проектів</h2>
+                <div id="user-contributions-block">
+                    <div class="caption-block">
+                        <h2 id="authors-projects" class="caption">Учасник проектів</h2>
+                    </div>
+                    <ul class="dreams-list">
+                        {% for dream in contributedDreams %}
+                            <li class="clearfix">
+                                <ul class="attached-resources-list">
+                                    <li class="title-promise">Я обіцяю:</li>
+                                    {{ finContribute(user, dream, 'guest')|raw }}
+                                    {{ equipContribute(user, dream, 'guest')|raw }}
+                                    {{ workContribute(user, dream, 'guest')|raw }}
+                                    {{ otherContribute(user, dream, 'guest')|raw }}
+                                </ul>
+                                {{ include ('GeekhubUserBundle:User:dream_miniature.html.twig', {'dream': dream}) }}
+                                {#<div class="clear"></div>#}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                
-                <ul class="dreams-list">
-                    {% for dream in contributedDreams %}
-                        {{ include ('GeekhubUserBundle:User:dream_contribution_miniature.html.twig', {'dream': dream, 'userId': user.id}) }}
-                    {% endfor %}
-                </ul>
             {% endif %}
-            <div id="favorites-block">
+
             {% if user.favoriteDreams|length > 0 %}
-                <div id="favorite-projects" class="caption-block">
-                    <h2 class="caption">Улюблені</h2>
+                <div id="favorites-block">
+                    <div id="favorite-projects" class="caption-block">
+                        <h2 class="caption">Улюблені</h2>
+                    </div>
+
+                    <ul class="dreams-list row">
+                        {% for dream in user.favoriteDreams %}
+                            <li id="dream{{ dream.id }}" class="col-md-6">
+                                {{ include ('GeekhubUserBundle:User:dream_favorite_miniature.html.twig', {'dream': dream}) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                
-                <ul class="dreams-list row">
-                    {% for dream in user.favoriteDreams %}
-                        <li id="dream{{ dream.id }}" class="col-md-6">
-                            {{ include ('GeekhubUserBundle:User:dream_favorite_miniature.html.twig', {'dream': dream}) }}
-                        </li>
-                    {% endfor %}
-                </ul>
             {% endif %}
-            </div>
         </div>
     </div>
 </div> <!--/Content-->
