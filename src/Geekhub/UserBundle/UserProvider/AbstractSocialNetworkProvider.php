@@ -81,6 +81,8 @@ abstract class AbstractSocialNetworkProvider
         } catch (RequestException $e) {
             $filesystem = new Filesystem();
             $filesystem->copy($defaultImg, $localImg);
+            $logger = $this->container->get('logger');
+            $logger->addError('Error reading avatar from url:'.$remoteImg.'. Using default image.');
 
             return false;
         }

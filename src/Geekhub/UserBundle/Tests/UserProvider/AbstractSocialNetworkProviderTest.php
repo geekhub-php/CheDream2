@@ -23,11 +23,14 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
      */
     public function testGetMediaFromRemoteImg($remoteImg, $localFileName, $result)
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\Container');
-        $mediaManager = new MediaManager('Sonata\MediaBundle\Model\MediaInterface', $this->createRegistryMock());
-        $container->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($mediaManager));
+        //$container = $this->getMock('Symfony\Component\DependencyInjection\Container');
+        //$mediaManager = new MediaManager('Sonata\MediaBundle\Model\MediaInterface', $this->createRegistryMock());
+        //$container->expects($this->any())
+        //    ->method('get')
+        //    ->will($this->returnValue($mediaManager));
+        $client = static::createClient();
+        $container = $client->getContainer();
+        $mediaManager = $container->get('sonata.media.manager.media');
         $kernelWebDir = '/var/www/CheDream2/app';
         $uploadDir = '/upload/';
         $defaultAvatarPath= '/../web/images/default_avatar.png';

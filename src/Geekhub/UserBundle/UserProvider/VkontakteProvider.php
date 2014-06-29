@@ -48,7 +48,10 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         try {
             $response = $request->send();
         } catch (RequestException $e) {
-            return null;
+            $logger = $this->container->get('logger');
+            $logger->addError('Error requesting data from vkontakte. User id:'.$uid.', field:'.$field.'.');
+ 
+           return null;
         }
         $responseBody = $response->getBody()->__toString();
         echo $responseBody;
@@ -58,7 +61,9 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         if ($result) {
             return $result->getResponse($field);
         }
-
+        $logger = $this->container->get('logger');
+        $logger->addError('Error deserializing data from vkontakte. User id:'.$uid.', field:'.$field.'.');
+ 
         return null;
     }
 }

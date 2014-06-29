@@ -28,6 +28,9 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
             $user->setAvatar($profilePicture);
         } else {
             //write log's message
+            $logger = $this->container->get('logger');
+            $logger->addError('Error requesting data from odnoklassniki. User id:'.$user->getId().'.');
+
             $profilePicture = $this->getDefaultAvatar();
             $user->setAvatar($profilePicture);
         }
