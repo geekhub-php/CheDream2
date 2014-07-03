@@ -36,7 +36,7 @@
 
             container.addClass('loading');
 
-            $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing', 'success'], orderBy: 'favoritesCount' })
+            $.get(path, {offset: startIndex, statuses: ['collecting-resources', 'implementing'], orderBy: 'favoritesCount' })
                     .done(function (response) {
                         isLoading = false;
                         container.removeClass('loading');
