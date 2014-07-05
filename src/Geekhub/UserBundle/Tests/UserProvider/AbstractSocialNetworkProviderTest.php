@@ -38,15 +38,20 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
         $newMedia = $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
         $fullFileName= $kernelWebDir.'/../web'.$uploadDir.$localFileName;
         $mediaFileName = $newMedia->getBinaryContent();
-        $this->assertEquals($mediaFileName, $fullFileName);
+        $defaultAvatarId = $facebookProvider->getDefaultAvatar()->getId();
+        if (!$result){
+            $this->assertEquals($defaultAvatarId, $newMedia->getId());
+        } else {
+            $this->assertNotEquals($defaultAvatarId, $newMedia->getId());
+        }
     }
 
     public function getFileLocationsData()
     {
         return array(
             array('http://cs4303.vk.me/u11040263/a_df67310f.jpg', 'avatar1.jpg', true),
-            array('http://chedream.local/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/a3058274bc3e8fab6bbeae05be45b1f37c3f5dde.jpeg', 'avatar2.jpg', true),
-            array('http://localhost2/upload/dream/image/cache/userAvatarBig/upload/media/avatar/0001/01/non_existent_avatar.jpeg', 'avatar3.jpg', false),
+            array('http://chedream.local/upload/test_existent_avatar.jpeg', 'avatar2.jpg', true),
+            array('http://localhost2/upload/dream/non_existent_avatar.jpeg', 'avatar3.jpg', false),
         );
     }
 
