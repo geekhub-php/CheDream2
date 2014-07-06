@@ -29,7 +29,7 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         } else {
             //write log's message
             $logger = $this->container->get('logger');
-            $logger->addError('Error requesting data from odnoklassniki. User id:'.$user->getId().'.');
+            $logger->addError('Error requesting data from odnoklassniki. User id:'.$user->getOdnoklassnikiId().'.');
 
             $profilePicture = $this->getDefaultAvatar();
             $user->setAvatar($profilePicture);
@@ -69,6 +69,9 @@ class OdnoklassnikiProvider extends AbstractSocialNetworkProvider
         try {
             $response = $request->send();
         } catch (RequestException $e) {
+            $logger = $this->container->get('logger');
+            $logger->addError('Error requesting data from odnoklassniki: guzzle::send(). url:'.$url.'.');
+
             return null;
         }
         $responseBody = $response->getBody()->__toString();

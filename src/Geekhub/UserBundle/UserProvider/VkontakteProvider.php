@@ -24,6 +24,8 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
             //write log's message
             $profilePicture = $this->getDefaultAvatar();
             $user->setAvatar($profilePicture);
+            $logger = $this->container->get('logger');
+            $logger->addError('Error getting avatar from vkontakte: VkontakteProvider::vkontakteGetProfileField(). vkontakteId:'.$user->getVkontakteId().'.');
         }
 
         if ($birthday = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'bdate')) {
@@ -54,7 +56,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
            return null;
         }
         $responseBody = $response->getBody()->__toString();
-        echo $responseBody;
+        var_dump($responseBody);
 
         $result = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 

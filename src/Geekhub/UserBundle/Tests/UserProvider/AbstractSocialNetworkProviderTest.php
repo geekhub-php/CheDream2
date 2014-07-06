@@ -23,11 +23,6 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
      */
     public function testGetMediaFromRemoteImg($remoteImg, $localFileName, $result)
     {
-        //$container = $this->getMock('Symfony\Component\DependencyInjection\Container');
-        //$mediaManager = new MediaManager('Sonata\MediaBundle\Model\MediaInterface', $this->createRegistryMock());
-        //$container->expects($this->any())
-        //    ->method('get')
-        //    ->will($this->returnValue($mediaManager));
         $client = static::createClient();
         $container = $client->getContainer();
         $mediaManager = $container->get('sonata.media.manager.media');
@@ -36,13 +31,14 @@ class AbstractSocialNetworkProviderTest extends WebTestCase
         $defaultAvatarPath= '/../web/images/default_avatar.png';
         $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir, $defaultAvatarPath);
         $newMedia = $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
+        $container->get('doctrine')->getManager()->flush();
         $fullFileName= $kernelWebDir.'/../web'.$uploadDir.$localFileName;
         $mediaFileName = $newMedia->getBinaryContent();
-        $defaultAvatarId = $facebookProvider->getDefaultAvatar()->getId();
-        if (!$result){
-            $this->assertEquals($defaultAvatarId, $newMedia->getId());
+        $defaultAvatarPath = $facebookProvider->getDefaultAvatar()->getBinaryContent();
+        if (!$result) {
+            $this->assertEquals($defaultAvatarPath, $mediaFileName);
         } else {
-            $this->assertNotEquals($defaultAvatarId, $newMedia->getId());
+            $this->assertNotEquals($defaultAvatarPath, $mediaFileName);
         }
     }
 

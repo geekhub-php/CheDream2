@@ -54,12 +54,16 @@ abstract class AbstractSocialNetworkProvider
                 $media->setContext('avatar');
             } else {
                 $media->setContext('default_avatar');
+                $logger = $this->container->get('logger');
+                $logger->addError('Error copying avatar in AbstractSocialNetworkProvider::copyAvatar(..) from url:'.$remoteImg.'. Using default image.');
             }
 
             $mediaManager = $this->container->get('sonata.media.manager.media');
             $mediaManager->save($media);
         } else {
             $media = $this->getDefaultAvatar();
+            $logger = $this->container->get('logger');
+            $logger->addError('Error copying avatar 2 in AbstractSocialNetworkProvider::copyAvatar(..) from url:'.$remoteImg.'. Using default image.');
         }
 
         try {
