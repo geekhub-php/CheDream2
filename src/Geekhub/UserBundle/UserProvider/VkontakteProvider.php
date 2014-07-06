@@ -56,7 +56,6 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
            return null;
         }
         $responseBody = $response->getBody()->__toString();
-        var_dump($responseBody);
 
         $result = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
 
