@@ -41,6 +41,7 @@
                         isLoading = false;
                         container.removeClass('loading');
                         $(response).appendTo(container).hide().fadeIn(300);
+                        $('.t-tooltip').tooltipster({maxWidth:250});
                     })
                     .error(function (msg) {
                         isLoading = false;
