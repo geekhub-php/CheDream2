@@ -16,6 +16,16 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class UserAdmin extends Admin
 {
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC', // reverse order (default = 'ASC')
+        '_sort_by'    => 'lastLogin'  // name of the ordered field
+    );
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -34,9 +44,6 @@ class UserAdmin extends Admin
         $datagridMapper
             ->add('username')
             ->add('email')
-            ->add('facebookId')
-            ->add('vkontakteId')
-            ->add('odnoklassnikiId')
         ;
     }
 
@@ -44,12 +51,13 @@ class UserAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('email')
+            ->add('firstName')
             ->add('username')
             ->add('phone')
-            ->add('roles')
-            ->add('facebookId')
-            ->add('vkontakteId')
-            ->add('odnoklassnikiId')
+            ->add('facebookId', 'boolean', ['label' => 'Fb'])
+            ->add('vkontakteId', 'boolean', ['label' => 'Vk'])
+            ->add('odnoklassnikiId', 'boolean', ['label' => 'Ok'])
+            ->add('lastLogin')
             ->add('locked', null, array('required' => false))
             ->add('enabled', null, array('required' => false))
         ;
