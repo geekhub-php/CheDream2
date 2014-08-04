@@ -16,6 +16,16 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class DreamAdmin extends Admin
 {
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC', // reverse order (default = 'ASC')
+        '_sort_by'    => 'updatedAt'  // name of the ordered field
+    );
+
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $choiceOptions = Status::getStatusesArray();
