@@ -39,7 +39,7 @@ class FacebookProvider extends AbstractSocialNetworkProvider
             $response = $request->send();
         } catch (RequestException $e) {
             $logger = $this->container->get('logger');
-            $logger->addError('Error requesting data from facebook. Token:'.$token.'.');
+            $logger->addError(sprintf('Error requesting data from facebook. Token: %s.', $token));
 
             return null;
         }

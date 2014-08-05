@@ -25,7 +25,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
             $profilePicture = $this->getDefaultAvatar();
             $user->setAvatar($profilePicture);
             $logger = $this->container->get('logger');
-            $logger->addError('Error getting avatar from vkontakte: VkontakteProvider::vkontakteGetProfileField(). vkontakteId:'.$user->getVkontakteId().'.');
+            $logger->addError(sprintf('Error getting avatar from vkontakte: VkontakteProvider::vkontakteGetProfileField(). vkontakteId: %d', $user->getVkontakteId()));
         }
 
         if ($birthday = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'bdate')) {
@@ -51,7 +51,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
             $response = $request->send();
         } catch (RequestException $e) {
             $logger = $this->container->get('logger');
-            $logger->addError('Error requesting data from vkontakte. User id:'.$uid.', field:'.$field.'.');
+            $logger->addError(sprintf('Error requesting data from vkontakte. User id: %d, field: %s', $uid, $field));
  
            return null;
         }
@@ -63,7 +63,7 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
             return $result->getResponse($field);
         }
         $logger = $this->container->get('logger');
-        $logger->addError('Error deserializing data from vkontakte. User id:'.$uid.', field:'.$field.'.');
+        $logger->addError(sprintf('Error deserializing data from vkontakte. User id: %d, field: %s.', $uid, $field));
  
         return null;
     }

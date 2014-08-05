@@ -55,7 +55,7 @@ abstract class AbstractSocialNetworkProvider
             } else {
                 $media->setContext('default_avatar');
                 $logger = $this->container->get('logger');
-                $logger->addError('Error copying avatar in AbstractSocialNetworkProvider::copyAvatar(..) from url:'.$remoteImg.'. Using default image.');
+                $logger->addError(sprintf('Error copying avatar in AbstractSocialNetworkProvider::copyAvatar(..) from url: %s. Using default image.', $remoteImg));
             }
 
             $mediaManager = $this->container->get('sonata.media.manager.media');
@@ -63,13 +63,16 @@ abstract class AbstractSocialNetworkProvider
         } else {
             $media = $this->getDefaultAvatar();
             $logger = $this->container->get('logger');
-            $logger->addError('Error copying avatar 2 in AbstractSocialNetworkProvider::copyAvatar(..) from url:'.$remoteImg.'. Using default image.');
+            $logger->addError(sprintf('Error copying avatar 2 in AbstractSocialNetworkProvider::copyAvatar(..) from url: %s. Using default image.', $remoteImg));
         }
 
         try {
             $filesystem = new Filesystem();
             $filesystem->remove($localImg);
         } catch (IOExceptionInterface $e) {
+            $logger = $this->container->get('logger');
+            $logger->addError(sprintf('Error removing temporary avatar file %s.', $remoteImg));
+
         }
 
         return $media;
@@ -86,7 +89,7 @@ abstract class AbstractSocialNetworkProvider
             $filesystem = new Filesystem();
             $filesystem->copy($defaultImg, $localImg);
             $logger = $this->container->get('logger');
-            $logger->addError('Error reading avatar from url:'.$remoteImg.'. Using default image.');
+            $logger->addError(sprintf('Error reading avatar from url: %s. Using default image.', $remoteImg));
 
             return false;
         }
