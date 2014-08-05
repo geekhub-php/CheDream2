@@ -51,8 +51,7 @@ class UserAdmin extends Admin
     {
         $listMapper
             ->add('avatar', 'string', ['template' => 'GeekhubResourceBundle:Admin:list_image_without_link.html.twig'])
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName', 'string', ['template' => 'GeekhubUserBundle:Admin:user.html.twig', 'label' => 'Name'])
             ->add('email')
             ->add('phone')
             ->add('facebookId', 'boolean', ['label' => 'Fb'])
