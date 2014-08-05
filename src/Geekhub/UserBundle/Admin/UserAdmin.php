@@ -53,7 +53,7 @@ class UserAdmin extends Admin
             ->add('avatar', 'string', ['template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'])
             ->addIdentifier('email')
             ->add('firstName')
-            ->add('username')
+            ->add('lastName')
             ->add('phone')
             ->add('facebookId', 'boolean', ['label' => 'Fb'])
             ->add('vkontakteId', 'boolean', ['label' => 'Vk'])
