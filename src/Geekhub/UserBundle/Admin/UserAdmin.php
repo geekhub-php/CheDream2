@@ -50,6 +50,7 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('avatar', 'string', ['template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'])
             ->addIdentifier('email')
             ->add('firstName')
             ->add('username')
