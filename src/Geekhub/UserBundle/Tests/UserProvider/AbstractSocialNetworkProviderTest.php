@@ -1,0 +1,71 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alex
+ * Date: 30.04.14
+ * Time: 16:37
+ */
+
+namespace Geekhub\UserBundle\Tests\UserProvider;
+
+use Geekhub\ResourceBundle\Tests\SecurityMethods;
+use Geekhub\UserBundle\Entity\User;
+use Geekhub\UserBundle\UserProvider\AbstractSocialNetworkProvider;
+use Geekhub\UserBundle\UserProvider\FacebookProvider;
+use Sonata\MediaBundle\Entity\MediaManager;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\File\File;
+
+class AbstractSocialNetworkProviderTest extends WebTestCase
+{
+    /**
+     * @dataProvider getFileLocationsData
+     */
+    public function testGetMediaFromRemoteImg($remoteImg, $localFileName, $result)
+    {
+        $client = static::createClient();
+        $container = $client->getContainer();
+        $mediaManager = $container->get('sonata.media.manager.media');
+        $kernelWebDir = '/var/www/CheDream2/app';
+        $uploadDir = '/upload/';
+        $defaultAvatarPath= '/../web/images/default_avatar.png';
+        $facebookProvider = new FacebookProvider($container, $kernelWebDir, $uploadDir, $defaultAvatarPath);
+        $newMedia = $facebookProvider->getMediaFromRemoteImg($remoteImg,$localFileName);
+        $container->get('doctrine')->getManager()->flush();
+        $fullFileName= $kernelWebDir.'/../web'.$uploadDir.$localFileName;
+        $mediaFileName = $newMedia->getBinaryContent();
+        $defaultAvatarPath = $facebookProvider->getDefaultAvatar()->getBinaryContent();
+        if (!$result) {
+            $this->assertEquals($defaultAvatarPath, $mediaFileName);
+        } else {
+            $this->assertNotEquals($defaultAvatarPath, $mediaFileName);
+        }
+    }
+
+    public function getFileLocationsData()
+    {
+        return array(
+            array('http://cs4303.vk.me/u11040263/a_df67310f.jpg', 'avatar1.jpg', true),
+            array('http://chedream.local/upload/test_existent_avatar.jpeg', 'avatar2.jpg', true),
+            array('http://localhost2/upload/dream/non_existent_avatar.jpeg', 'avatar3.jpg', false),
+        );
+    }
+
+    /**
+     * Returns mock of doctrine document manager.
+     *
+     * @return \Sonata\DoctrinePHPCRAdminBundle\Model\ModelManager
+     */
+    protected function createRegistryMock()
+    {
+        $dm = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($dm));
+
+        return $registry;
+    }
+
+
+
+}

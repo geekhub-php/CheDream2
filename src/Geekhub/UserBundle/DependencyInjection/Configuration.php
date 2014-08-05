@@ -28,6 +28,11 @@ class Configuration implements ConfigurationInterface
                             ->info('directory in web/ where to place images (avatars etc...)')
                             ->example('uploads/images/')
                          ->end()
+                            ->scalarNode('default_avatar_path')
+                            ->defaultValue('/../web/images/default_avatar.png')
+                            ->info('path to the default avatar image (used when errors occurs while getting original image)')
+                            ->example('/../web/images/default_avatar.png')
+                         ->end()
                     ->end()
                 ->end()
             ->end();
