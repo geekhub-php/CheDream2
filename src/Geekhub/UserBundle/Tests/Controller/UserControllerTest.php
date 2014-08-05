@@ -137,9 +137,9 @@ class UserControllerTest extends WebTestCase
     }
 
     /**
-     * @param  Client $client
-     * @param  string $username
-     * @param  string $password
+     * @param Client $client
+     * @param string $username
+     * @param string $password
      *
      * @return \Symfony\Component\DomCrawler\Crawler
      */

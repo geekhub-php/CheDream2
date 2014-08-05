@@ -4,7 +4,6 @@ namespace Geekhub\UserBundle\UserProvider;
 
 use Guzzle\Http\Client;
 use Guzzle\Http\Exception\RequestException;
-use Guzzle\Http\Exception\ServerErrorResponseException;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -47,7 +46,7 @@ abstract class AbstractSocialNetworkProvider
         $defaultImg = $this->kernelWebDir.$this->defaultAvatarPath;//'/../web/images/default_avatar.png';
 
         if ($flagCopySuccess = $this->copyAvatar($remoteImg, $localImg)) {
-            $media = new Media;
+            $media = new Media();
             $media->setBinaryContent($localImg);
             $media->setProviderName('sonata.media.provider.image');
             if ($flagCopySuccess) {
@@ -107,7 +106,7 @@ abstract class AbstractSocialNetworkProvider
         $mediaManager = $this->container->get('sonata.media.manager.media');
         $media = $mediaManager->findOneBy(array('context'=>'default_avatar'));
         if (!$media) {
-            $media = new Media;
+            $media = new Media();
             $media->setBinaryContent($defaultImg);
             $media->setProviderName('sonata.media.provider.image');
         }
