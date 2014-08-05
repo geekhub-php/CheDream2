@@ -39,10 +39,10 @@ class DreamAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('mediaPoster', 'string', ['template' => 'GeekhubResourceBundle:Admin:list_image_without_link.html.twig'])
             ->add('title')
             ->add('author.phone')
-            ->add('author.firstName')
-            ->add('author.lastName')
+            ->add('author', 'string', ['template' => 'GeekhubDreamBundle:Admin:dream_author.html.twig'])
             ->add('currentStatus', null, array('editable' => true))
             ->add('_action', 'actions', array(
                     'actions' => array(

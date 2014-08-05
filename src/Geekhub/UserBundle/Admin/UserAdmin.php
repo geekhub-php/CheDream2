@@ -50,17 +50,17 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('avatar', 'string', ['template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'])
-            ->addIdentifier('email')
+            ->add('avatar', 'string', ['template' => 'GeekhubResourceBundle:Admin:list_image_without_link.html.twig'])
             ->add('firstName')
             ->add('lastName')
+            ->add('email')
             ->add('phone')
             ->add('facebookId', 'boolean', ['label' => 'Fb'])
             ->add('vkontakteId', 'boolean', ['label' => 'Vk'])
             ->add('odnoklassnikiId', 'boolean', ['label' => 'Ok'])
             ->add('lastLogin')
-            ->add('locked', null, array('required' => false))
-            ->add('enabled', null, array('required' => false))
+            ->add('locked', null, array('required' => false, 'editable' => true))
+            ->add('enabled', null, array('required' => false, 'editable' => true))
         ;
     }
 
