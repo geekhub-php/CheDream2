@@ -20,8 +20,7 @@ class OdnoklassnikiPhotoResponse
     {
         if (($this->photos)&&(array_key_exists('standard_url', $this->photos[0]))) {
             return $this->photos[0]['standard_url'];
-        }
-        else {
+        } else {
             return null;
         }
     }

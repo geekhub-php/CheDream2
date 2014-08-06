@@ -19,6 +19,7 @@
         <argument type="service" id="service_container" />
         <argument type="string">%kernel.root_dir%</argument>
         <argument type="string">%geekhub_user.image.upload_directory%</argument>
+        <argument type="string">%geekhub_user.image.default_avatar_path%</argument>
     </service>
 
     <service id="geekhub.user.dream_user_provider" class="%geekhub.user.dream_user_provider.class%">

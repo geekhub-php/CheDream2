@@ -138,6 +138,7 @@ hwi_oauth:
 geekhub_user:
     image:
         upload_directory:  /upload/users/avatars/
+        default_avatar_path: /../src/Geekhub/UserBundle/Resources/public/images/default_avatar.png
 
 stfalcon_tinymce:
     include_jquery: true

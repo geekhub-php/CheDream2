@@ -20,6 +20,12 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         if ($remoteImg = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'photo_big')) {
             $profilePicture = $this->getMediaFromRemoteImg($remoteImg, md5('fb'.$user->GetVkontakteId()).'.jpg');
             $user->setAvatar($profilePicture);
+        } else {
+            //write log's message
+            $profilePicture = $this->getDefaultAvatar();
+            $user->setAvatar($profilePicture);
+            $logger = $this->container->get('logger');
+            $logger->addError(sprintf('Error getting avatar from vkontakte: VkontakteProvider::vkontakteGetProfileField(). vkontakteId: %d', $user->getVkontakteId()));
         }
 
         if ($birthday = $this->vkontakteGetProfileField($user->GetVkontakteId(), $response->getAccessToken(), 'bdate')) {
@@ -41,7 +47,14 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
     {
         $client = new Client();
         $request = $client->get('https://api.vk.com/method/getProfiles?uid='.$uid.'&fields='.$field.'&access_token='.$token);
-        $response = $request->send();
+        try {
+            $response = $request->send();
+        } catch (RequestException $e) {
+            $logger = $this->container->get('logger');
+            $logger->addError(sprintf('Error requesting data from vkontakte. User id: %d, field: %s', $uid, $field));
+
+           return null;
+        }
         $responseBody = $response->getBody()->__toString();
 
         $result = $this->serializer->deserialize($responseBody, 'Geekhub\UserBundle\Model\VkontakteResponse', 'json');
@@ -49,6 +62,8 @@ class VkontakteProvider extends AbstractSocialNetworkProvider
         if ($result) {
             return $result->getResponse($field);
         }
+        $logger = $this->container->get('logger');
+        $logger->addError(sprintf('Error deserializing data from vkontakte. User id: %d, field: %s.', $uid, $field));
 
         return null;
     }

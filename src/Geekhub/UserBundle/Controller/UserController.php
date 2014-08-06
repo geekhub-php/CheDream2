@@ -32,7 +32,6 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-
         if ($form->isValid()) {
             $mergedUser = $em->getRepository('GeekhubUserBundle:User')
                 ->findOneBy(array(
@@ -47,8 +46,9 @@ class UserController extends Controller
                     'dreamMessage',
                     'Ваш профіль відредаговано.'
                 );
+
                 return $this->redirect($this->generateUrl("geekhub_dream_homepage"));
-            } 
+            }
             $form->get('email')->addError(new FormError('Така адреса вже використовується.'));
         }
 
@@ -71,7 +71,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param  User $user
+     * @param User $user
      *
      * @return ArrayCollection
      */
@@ -106,7 +106,7 @@ class UserController extends Controller
     }
 
     /**
-     * @param  ArrayCollection $contributions
+     * @param ArrayCollection $contributions
      *
      * @return ArrayCollection
      */
