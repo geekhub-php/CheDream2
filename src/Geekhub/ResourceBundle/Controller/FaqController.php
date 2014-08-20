@@ -2,6 +2,7 @@
 
 namespace Geekhub\ResourceBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\Route;
 use Geekhub\ResourceBundle\Entity\Faq;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -46,5 +47,14 @@ class FaqController extends Controller
         return $this->getDoctrine()->getManager()
             ->getRepository('GeekhubResourceBundle:Faq')
             ->findAll();
+    }
+
+    /**
+     * @Route("/email", name="emails")
+     * @Template("GeekhubResourceBundle:Email:registration.html.twig")
+     */
+    public function emailAction()
+    {
+        return ['user' => $this->getUser()];
     }
 }
