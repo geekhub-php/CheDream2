@@ -1,28 +1,37 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
 {% block header %}
-    <b>
-        Щиро вітаємо у
-        <a href="{{ url('geekhub_dream_homepage') }}" class="brand">
-            <img data-src="holder.js/80x20" alt="Черкаській мрії" />
-        </a>
+    <b style="font-size: 32px">
+        Щиро вітаємо
     </b>
 {% endblock header %}
 
 {% block content %}
-    <h3 class="centered">
-        Деталі вашого облікового запису
-        {#Деталі вашого профілю на сайті#}
-    </h3>
+    <div class="centered" style="color: #f2602c; font-size: 18px">
+        <b>Деталі вашого облікового запису</b>
+    </div>
+    <br/>
 
     <div class="layout centered">
+        <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatar') }}" />
+        <div style="margin: -60px 0 50px 89px">
+
+            {% if user.facebookId is not null  %}
+            <img src="/images/fb.png" />
+            {% elseif user.odnoklassnikiId %}
+                <img src="/images/od.png" />
+            {% elseif user.vkontakteId %}
+            <img src="/images/vk.png" />
+            {% endif %}
+
+        </div>
         <h2>
-            <b>{{ user.firstName ~ " " ~ user.lastName  }}</b>
+            <b style="font-size: 30px">{{ user.firstName ~ " " ~ user.lastName  }}</b>
         </h2>
-        <h3>
+        <h3 style="font-size: 18px">
             {{ user.email }}
         </h3>
-        <h4>підключено через
+        <h4 style="font-size: 12px; color: #ababab;">підключено через <br/>
             {% if user.facebookId is not null  %}
                 Facebook
             {% elseif user.odnoklassnikiId %}
@@ -32,24 +41,26 @@
             {% endif %}
         </h4>
     </div>
-    <br/>
-    <hr/>
+
+{% endblock content %}
+
+{% block content2 %}
 
     <div  class="centered">
         <h3>Що далі?</h3>
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#505050; border:1px solid #808080; border-radius:5px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
-                    <a href="{{ url('dream_list') }}" target="_blank" style="color:#FFFFFF; text-decoration:none;">
-                        Подивитися мрії
+                <td align="center" valign="middle" style="">
+                    <a href="{{ url('dream_list') }}" target="_blank">
+                        <img src="/images/btn-email-dream.png" alt="Дивитися мрії"/>
                     </a>
                 </td>
-                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
+                <td align="center" valign="middle">
                     <a href="{{ url('new_dream') }}"  target="_blank" style="color:#FFFFFF; text-decoration:none;">
-                        Створити мрію
+                        <img src="/images/btn-email-create-dream.png" alt="Створити мрію"/>
                     </a>
                 </td>
             </tr>
         </table>
     </div>
-{% endblock content %}
+{% endblock content2 %}

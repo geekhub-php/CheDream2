@@ -2,7 +2,8 @@
 
 namespace Geekhub\ResourceBundle\Controller;
 
-use Geekhub\ResourceBundle\Entity\Faq;
+use FOS\RestBundle\Controller\Annotations\Route;
+use Geekhub\DreamBundle\Entity\Status;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -46,5 +47,23 @@ class FaqController extends Controller
         return $this->getDoctrine()->getManager()
             ->getRepository('GeekhubResourceBundle:Faq')
             ->findAll();
+    }
+
+    /**
+     * @Route("/email/registration", name="email_registration")
+     * @Template("GeekhubResourceBundle:Email:registration.html.twig")
+     */
+    public function emailRegistrationAction()
+    {
+        return ['user' => $this->getUser()];
+    }
+
+    /**
+     * @Route("/email/collecting", name="email_collecting")
+     * @Template("GeekhubResourceBundle:Email:collecting-resources.html.twig")
+     */
+    public function emailCollectingAction()
+    {
+        return ['dream' => $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(['currentStatus' => Status::COLLECTING_RESOURCES])];
     }
 }
