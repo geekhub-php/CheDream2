@@ -1,43 +1,88 @@
 {% extends 'GeekhubResourceBundle:Email:layout.html.twig' %}
 
 {% block header %}
-    Дякуємо за вашу підтримку!
+    <b style="font-size: 32px">
+        Дякуємо за вашу підтримку!
+    </b>
 {% endblock header %}
 
 {% block content %}
-    <div class="centered">
-        <h3>
-            Ви підримали:
-        </h3>
-
-        <table class="layout">
-            <tr>
-                <td>
-                    <img src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form', true) }}" />
-                </td>
-                <td>
-                    <h2><b>{{ dream.title }}</b></h2>
-                    <p><i>створена {{ dream.createdAt|date("m-d-Y") }}</i></p>
-                </td>
-            </tr>
-        </table>
+    <div class="centered" style="color: #f2602c; font-size: 18px">
+        <b>Ви підримали:</b>
     </div>
     <br/>
 
-    <h4 class="centered">Ви обіцяли:</h4>
-
-    <table class="layout">
+    <table class="layout centered" style="background: url('/images/collecting-bg.png') no-repeat; width: 506px; height: 151px; margin: 0 auto">
         <tr>
-            <td>
-                <b><ul>
-                    {{ finContribute(contributor.user, dream)|raw }}
-                    {{ equipContribute(contributor.user, dream)|raw }}
-                    {{ workContribute(contributor.user, dream)|raw }}
-                    {{ otherContribute(contributor.user, dream)|raw }}
-                </ul></b>
+            <td style="width: 204px; padding: 10px 0 10px 10px">
+                <img style="margin: auto" src="{{ dream.mediaPoster|mediaPath|imagine_filter('dream_pictures_view_form', true) }}" />
+            </td>
+            <td style="padding: 10px 20px 10px 10px">
+                <h2 style="font-size: 26px"><b>{{ dream.title }}</b></h2>
+                <hr style="border: 1px double #dcdcdc; margin-bottom: 2px"/>
+                <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+                <p><i style="color: #acacac">створена {{ dream.createdAt|date("d F Y") }}</i></p>
             </td>
         </tr>
     </table>
+    <br/>
+
+    <div class="centered" style="width: 60%; margin: auto">
+        <h4 style="color: #f2602c; font-size: 18px">
+            {% block alert_title %}
+                Ви обіцяли:
+            {% endblock alert_title %}
+        </h4>
+        <hr style="border: 1px double #dcdcdc; margin-bottom: 1px"/>
+        <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+        <table class="layout">
+            {% if eFinContribute(contributor.user, dream) %}
+                <tr>
+                    {{ eFinContribute(contributor.user, dream)|raw }}
+                </tr>
+                <tr>
+                    <td colspan="2">
+                            <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+                    </td>
+                </tr>
+
+            {% endif %}
+
+            {% if eEquipContribute(contributor.user, dream) %}
+                <tr>
+                    {{ eEquipContribute(contributor.user, dream)|raw }}
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if eWorkContribute(contributor.user, dream) %}
+                <tr>
+                    {{ eWorkContribute(contributor.user, dream)|raw }}
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+                    </td>
+                </tr>
+
+            {% endif %}
+            {% if eOtherContribute(contributor.user, dream) %}
+                <tr>
+                    {{ eOtherContribute(contributor.user, dream)|raw }}
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr style="border: 1px double #dcdcdc; margin-top: 0"/>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+
     <br/>
 
     <div class="centered">
@@ -47,3 +92,6 @@
         <h4>Якщо ви хочете зв'язатися з автором зараз, <a href="mailto:{{ dream.author.email }}">напишіть йому листа</a>. </h4>
     </div>
 {% endblock content %}
+
+{% block content2 %}
+{% endblock content2 %}

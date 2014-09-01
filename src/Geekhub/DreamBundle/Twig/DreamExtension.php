@@ -33,9 +33,13 @@ class DreamExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('finContribute', array($this, 'finContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('eFinContribute', array($this, 'eFinContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipContribute', array($this, 'equipContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('eEquipContribute', array($this, 'eEquipContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workContribute', array($this, 'workContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('eWorkContribute', array($this, 'eWorkContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('otherContribute', array($this, 'otherContribute'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('eOtherContribute', array($this, 'eOtherContribute'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('finResource', array($this, 'finResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('equipResource', array($this, 'equipResource'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('workResource', array($this, 'workResource'), array('is_safe' => array('html'))),
@@ -64,6 +68,24 @@ class DreamExtension extends \Twig_Extension
         } else {
             foreach ($finContr as $fin) {
                 $str .= '<li>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
+            }
+        }
+
+        return $str;
+    }
+
+    public function eFinContribute(User $user, Dream $dream, $security='nobody')
+    {
+        $finContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showFinancialContributors($user, $dream);
+
+        $str = '';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($finContr as $fin) {
+                $str .= '<td><span data-idResurce="'.$fin['finResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="financial" class="remove" title="видалити"> видалити</span>'.$fin['resource'].'</td><td>'.$fin['totalSum'].' грн.</td>';
+            }
+        } else {
+            foreach ($finContr as $fin) {
+                $str .= '<td>'.$fin['resource'].'</td><td>'.$fin['totalSum'].' грн.</td>';
             }
         }
 
@@ -133,6 +155,50 @@ class DreamExtension extends \Twig_Extension
         return $str;
     }
 
+    public function eEquipContribute(User $user, Dream $dream, $security='nobody')
+    {
+        $equipContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showEquipmentContributors($user, $dream);
+
+        $str = '';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($equipContr as $equip) {
+                switch ($equip['qType']) {
+                    case EquipmentResource::KG:
+                        $qType = 'кг.';
+                        break;
+                    case EquipmentResource::PIECE:
+                        $qType = 'шт.';
+                        break;
+                    case EquipmentResource::TON:
+                        $qType = 'тон';
+                        break;
+                    default:
+                        $qType = '';
+                }
+                $str .= '<td><span data-idResurce="'.$equip['equipResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="equipment" class="remove" title="видалити"> видалити</span>'.$equip['resource'].'</td><td>'.$equip['totalSum'].' '.$qType.'</td>';
+            }
+        } else {
+            foreach ($equipContr as $equip) {
+                switch ($equip['qType']) {
+                    case EquipmentResource::KG:
+                        $qType = 'кг.';
+                        break;
+                    case EquipmentResource::PIECE:
+                        $qType = 'шт.';
+                        break;
+                    case EquipmentResource::TON:
+                        $qType = 'тон';
+                        break;
+                    default:
+                        $qType = '';
+                }
+                $str .= '<td>'.$equip['resource'].'</td><td>'.$equip['totalSum'].' '.$qType.'</td>';
+            }
+        }
+
+        return $str;
+    }
+
     public function workContribute(User $user, Dream $dream, $security='nobody')
     {
         $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
@@ -151,6 +217,24 @@ class DreamExtension extends \Twig_Extension
         return $str;
     }
 
+    public function eWorkContribute(User $user, Dream $dream, $security='nobody')
+    {
+        $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
+
+        $str = '';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($workContr as $work) {
+                $str .= '<td><span data-idResurce="'.$work['workResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="work" class="remove" title="видалити"> видалити</span>'.$work['resource'].'</td><td>'.$work['totalSum'].' дн.</td>';
+            }
+        } else {
+            foreach ($workContr as $work) {
+                $str .= '<td>'.$work['resource'].'</td><td>'.$work['totalSum'].' дн.</td>';
+            }
+        }
+
+        return $str;
+    }
+
     public function otherContribute(User $user, Dream $dream, $security='nobody')
     {
         $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
@@ -163,6 +247,24 @@ class DreamExtension extends \Twig_Extension
         } else {
             foreach ($otherContribute as $other) {
                 $str .= '<li>'.$other['title'].'</li>';
+            }
+        }
+
+        return $str;
+    }
+
+    public function eOtherContribute(User $user, Dream $dream, $security='nobody')
+    {
+        $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
+
+        $str = '';
+        if($security == 'admin' or $security == 'owner') {
+            foreach ($otherContribute as $other) {
+                $str .= '<td colspan="2><span data-idResurce="'.$other['otherContrId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="other" class="remove" title="видалити"> видалити</span>'.$other['title'].'</td>';
+            }
+        } else {
+            foreach ($otherContribute as $other) {
+                $str .= '<td colspan="2>'.$other['title'].'</td>';
             }
         }
 

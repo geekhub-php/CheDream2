@@ -66,4 +66,16 @@ class FaqController extends Controller
     {
         return ['dream' => $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(['currentStatus' => Status::COLLECTING_RESOURCES])];
     }
+
+    /**
+     * @Route("/email/contribution", name="email_contribution")
+     * @Template("GeekhubResourceBundle:Email:contribution.html.twig")
+     */
+    public function emailContributionAction()
+    {
+        return [
+            'dream' => $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(['id' => 1]),
+            'contributor' => $this->getDoctrine()->getRepository('GeekhubDreamBundle:FinancialContribute')->findOneBy(['user' => $this->getUser()])
+        ];
+    }
 }
