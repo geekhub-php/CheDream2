@@ -176,3 +176,8 @@ monolog:
             token: 4a2f0dae-c59f-4af6-b808-4a01f77c01fe
             level: error
             bubble: true
+
+hype_mailchimp:
+    api_key: %mail_chimp.api_key%
+    default_list: %mail_chimp.list_id%
+    ssl: true

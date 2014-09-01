@@ -25,3 +25,6 @@ parameters:
     count_dreams_on_home_page: 8
     admin.mail: ahonymous@gmail.com
     neek.mail: mr.neek@gmail.com
+
+    mail_chimp.api_key: 1
+    mail_chimp.list_id: 1

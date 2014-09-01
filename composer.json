@@ -41,7 +41,8 @@
         "willdurand/js-translation-bundle": "2.0.*@dev",
         "stfalcon/tinymce-bundle": "0.3.*@dev",
         "gregwar/captcha-bundle": "dev-master",
-        "hipaway-travel/mandrill-bundle": "dev-master"
+        "hipaway-travel/mandrill-bundle": "dev-master",
+        "ahmedsamy/hype-mailchimp-bundle": "1.1.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
