@@ -22,7 +22,7 @@ trait ContactsInfo
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param  string $phone
      * @return $this
      */
     public function setPhone($phone)
@@ -45,7 +45,7 @@ trait ContactsInfo
     /**
      * Set skype
      *
-     * @param string $skype
+     * @param  string $skype
      * @return $this
      */
     public function setSkype($skype)
