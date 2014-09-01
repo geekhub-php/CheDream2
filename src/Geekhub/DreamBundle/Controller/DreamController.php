@@ -575,7 +575,7 @@ class DreamController extends Controller
 
     private function isAuthor(Dream $dream)
     {
-        return $this->getUser()->getId() != $dream->getAuthor()->getId() || $this->isSuperAdmin() ? true : false;
+        return $this->getUser()->getId() != $dream->getAuthor()->getId() ? true : false;
     }
 
     private function isSuperAdmin()
