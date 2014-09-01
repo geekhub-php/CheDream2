@@ -456,7 +456,7 @@ class DreamController extends Controller
      */
     public function completingDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isAuthor($dream)) {
+        if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
             throw new AccessDeniedException();
         }
 
