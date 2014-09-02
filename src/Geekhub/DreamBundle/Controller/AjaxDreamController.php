@@ -88,6 +88,10 @@ class AjaxDreamController extends Controller
         return new Response("Removed from favorite with DreamId={$dream->getId()} and UserId={$user->getId()}");
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function removeSomeContributeAction(Request $request)
     {
         $dreamId = $request->get('dreamId');
