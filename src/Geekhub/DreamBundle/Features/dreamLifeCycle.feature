@@ -6,40 +6,27 @@ Feature: Create dream life cycle  feature
   @javascript
   Scenario: Login as Yoda and create Dream
     Given I am login as "yoda" with password "yoda"
-    And I wait 3 seconds
     Then I am on homepage
-    And I wait 2 seconds
     Given I am on "/dream/new"
-    And I should see "create or edit your dream"
     And I fill in hiddenImage "newDreamForm_dreamPoster" with "../web/upload/tmp/enakin.jpg"
-    And I wait 2 seconds
     And I fill in "newDreamForm_title" with "Dream for testing dream life cycle"
-    And I wait 1 seconds
     And I fill in tinymce "newDreamForm_description" with "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-    And I wait 1 seconds
     And I fill in "newDreamForm_phone" with "+3089666"
-    And I wait 1 seconds
-    And I fill in "newDreamForm_expiredDate" with "2014-07-15"
-    And I wait 1 seconds
+    And I fill in "newDreamForm_expiredDate" with "03.09.2022"
     And I fill in hidden "newDreamForm_tags" with "Hello, world"
-    And I wait 1 seconds
-    And I follow "Додати фінансові витрати"
+    And I follow "add-financial-point"
     And I fill in "newDreamForm_dreamFinancialResources_0_title" with "fin1"
     And I fill in "newDreamForm_dreamFinancialResources_0_quantity" with "1500"
-    And I wait 1 seconds
-    And I follow "Додати фінансові витрати"
+    And I follow "add-financial-point"
     And I fill in "newDreamForm_dreamFinancialResources_1_title" with "fin2"
     And I fill in "newDreamForm_dreamFinancialResources_1_quantity" with "700"
-    And I wait 1 seconds
-    And I follow "Додати абладнання та інструменти"
+    And I follow "add-equipment-point"
     And I fill in "newDreamForm_dreamEquipmentResources_0_title" with "equip1"
     And I fill in "newDreamForm_dreamEquipmentResources_0_quantity" with "9"
     And I select "kg" from "newDreamForm_dreamEquipmentResources_0_quantityType"
-    And I follow "Додати робочі ресурси"
+    And I follow "add-work-point"
     And I fill in "newDreamForm_dreamWorkResources_0_title" with "work1"
     And I fill in "newDreamForm_dreamWorkResources_0_quantity" with "7"
-    And I wait 1 seconds
-    And I wait 1 seconds
     And I press "Створити"
     And I wait 1 seconds
     And I press "btnDreamSubmit"
