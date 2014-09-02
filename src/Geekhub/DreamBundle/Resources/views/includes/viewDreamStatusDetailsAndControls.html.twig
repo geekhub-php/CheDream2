@@ -86,7 +86,7 @@
 {% endif %}
 
 <div class="description">
-    {% if ((dream.currentStatus == 'completed') or (dream.currentStatus == 'success')) %}
+    {% if (dream.currentStatus == 'success') %}
         <span class="success"><em>Мрія успішно завершена</em></span>
 
         {% if dream.completedDescription is not null %}
