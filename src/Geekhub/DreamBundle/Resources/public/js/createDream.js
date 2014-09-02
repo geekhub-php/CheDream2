@@ -1,19 +1,19 @@
 jQuery(document).ready(function() {
     var $collectionFinHolder = $('ul.financialResources');
     var add_fin = Translator.trans("dream.js.add_financial");
-    processCollectionHolder($collectionFinHolder, add_fin);
+    processCollectionHolder($collectionFinHolder, add_fin, 'add-financial-point');
 
     var $collectionEquipHolder = $('ul.equipmentResources');
     var add_equip = Translator.trans("dream.js.add_equipment");
-    processCollectionHolder($collectionEquipHolder, add_equip);
+    processCollectionHolder($collectionEquipHolder, add_equip, 'add-equipment-point');
 
     var $collectionWorkHolder = $('ul.workResources');
     var add_work = Translator.trans("dream.js.add_work");
-    processCollectionHolder($collectionWorkHolder, add_work);
+    processCollectionHolder($collectionWorkHolder, add_work, 'add-work-point');
 });
 
-function processCollectionHolder($collectionHolder, addLinkText) {
-    var $addLink   = $('<a href="#" class="btn-add"><span class="icon-add"></span></a>');
+function processCollectionHolder($collectionHolder, addLinkText, linkId) {
+    var $addLink   = $('<a href="#" id="' + linkId + '" title="' + addLinkText + '" class="btn-add"><span class="icon-add"></span></a>');
     var $newLinkLi = $('<li class=""></li>').append($addLink);
 
     $collectionHolder.find('li.collection-form').each(function() {
