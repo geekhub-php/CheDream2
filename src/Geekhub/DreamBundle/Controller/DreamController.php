@@ -57,33 +57,26 @@ class DreamController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $em->persist($dream);
 
                 $tags = $dream->getTags();
                 if (is_null($tags[0])) {
-                    $em->persist($dream);
+                    $tagManager = $this->get('geekhub.tag.tag_manager');
+                    $tagManager->addTagsToEntity($dream);
+
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add(
-                        'dreamMessage',
-                        'Мрія успішно створена.'
-                    );
-                    return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+                    $tagManager->saveTagging($dream);
                 }
 
-                $tagManager = $this->get('geekhub.tag.tag_manager');
-                $tagManager->addTagsToEntity($dream);
-
-                $em->persist($dream);
                 $em->flush();
-
-                $tagManager->saveTagging($dream);
 
                 $this->get('session')->getFlashBag()->add(
                     'dreamMessage',
                     'Мрія успішно створена.'
                 );
 
-                return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+                return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
             }
         }
 
@@ -96,12 +89,16 @@ class DreamController extends Controller
      */
     public function editDreamAction(Dream $dream, Request $request)
     {
-        if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
-            throw new AccessDeniedException();
+        if (false === $this->canEditDream($dream)) {
+            throw new AccessDeniedException('Мрію дозволено редагувати лише автору та адміністратору');
         }
 
-        if ((!$this->isAuthor($dream)) and (($dream->getCurrentStatus() == Status::SUCCESS) or ($dream->getCurrentStatus() == Status::FAIL))) {
-            throw new AccessDeniedException();
+        if (false === $this->isSuperAdmin() && true === $this->isCloseDream($dream)) {
+            throw new AccessDeniedException('Мрія завершена - ви не можете більше редагувати мрію. Зверніться будь ласка до адміністратора');
+        }
+
+        if (false === $this->isSuperAdmin() && false === $this->isDraftDream($dream)) {
+            throw new AccessDeniedException('Ви не можете більше редагувати мрію. Зверніться будь ласка до адміністратора');
         }
 
         $form = $this->createForm(new DreamType(), $dream, array(
@@ -115,48 +112,44 @@ class DreamController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                if (!$this->isAuthor($dream) and $dream->getCurrentStatus() == Status::REJECTED) {
+                if (true === $this->isAuthor($dream) && $dream->getCurrentStatus() == Status::REJECTED) {
                     $dream->addStatus(new Status(Status::SUBMITTED));
                     $dream->setRejectedDescription(null);
                 }
                 $em = $this->getDoctrine()->getManager();
                 $tags = $dream->getTags();
-                if (is_null($tags[0])) {
+
+                if (false === is_null($tags[0])) {
+                    $tagManager = $this->get('geekhub.tag.tag_manager');
+                    $tagManager->addTagsToEntity($dream);
+
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add(
-                        'dreamMessage',
-                        'Мрія відредагована.'
-                    );
-                    return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+                    $tagManager->saveTagging($dream);
                 }
-                
-                $tagManager = $this->get('geekhub.tag.tag_manager');
-                $tagManager->addTagsToEntity($dream);
 
                 $em->flush();
-
-                $tagManager->saveTagging($dream);
 
                 $this->get('session')->getFlashBag()->add(
                     'dreamMessage',
                     'Мрія відредагована.'
                 );
-                return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+
+                return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
             }
         }
 
         return array(
-            'form'          => $form->createView(),
-            'status'        =>$dream->getCurrentStatus(),
-            'slug'          =>$dream->getSlug(),
-            'rejectDescription' =>$dream->getRejectedDescription(),
-            'poster'        => $dream->getMediaPoster(),
+            'form' => $form->createView(),
+            'status' => $dream->getCurrentStatus(),
+            'slug' => $dream->getSlug(),
+            'rejectDescription' => $dream->getRejectedDescription(),
+            'poster' => $dream->getMediaPoster(),
             'dreamPictures' => $dream->getMediaPictures(),
             'dreamCompletedPictures' => $dream->getMediaCompletedPictures(),
-            'dreamFiles'    => $dream->getMediaFiles(),
-            'dreamVideos'   => $dream->getMediaVideos(),
-            'rejectForm'    =>$rejectForm->createView()
+            'dreamFiles' => $dream->getMediaFiles(),
+            'dreamVideos' => $dream->getMediaVideos(),
+            'rejectForm' => $rejectForm->createView()
         );
     }
 
@@ -176,9 +169,12 @@ class DreamController extends Controller
     {
         $user = $this->getUser();
 
-        if (($dream->getCurrentStatus() == 'submitted' or $dream->getCurrentStatus() == 'fail') and is_null($user)) return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
-        if (($dream->getCurrentStatus() == 'submitted' or $dream->getCurrentStatus() == 'fail') and !is_null($user)) {
-            if (($user->getId() != $dream->getAuthor()->getId()) xor ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN'))) return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        if ($this->isDraftDream($dream) && false === $this->canEditDream($dream)) {
+            $this->get('session')->getFlashBag()->add(
+                'dreamMessage',
+                'Мрія не підтверджена адміністратором'
+            );
+            return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
         }
 
         $financialContribute = new FinancialContribute();
@@ -313,7 +309,9 @@ class DreamController extends Controller
      */
     public function removeSomeContributeAction(Dream $dream, User $user)
     {
-        /** @var User $user */
+        if (false === $this->canEditDream($dream)) {
+            throw new AccessDeniedException('Видаляти контрібути дозволено лише автору та адміністратору');
+        }
 
         $em = $this->getDoctrine()->getManager();
 
@@ -322,25 +320,25 @@ class DreamController extends Controller
         $workContributions = $dream->getDreamWorkContributions()->map($this->getContributionElement($user));
         $otherContributions = $dream->getDreamOtherContributions()->map($this->getContributionElement($user));
 
-        foreach($financialContributions as $financialContribution ) {
+        foreach ($financialContributions as $financialContribution) {
             if (!is_null($financialContribution)) {
                 $em->remove($financialContribution);
             }
         }
 
-        foreach($equipContributions as $equipContribution) {
+        foreach ($equipContributions as $equipContribution) {
             if (!is_null($equipContribution)) {
                 $em->remove($equipContribution);
             }
         }
 
-        foreach($workContributions as $workContribution) {
+        foreach ($workContributions as $workContribution) {
             if (!is_null($workContribution)) {
                 $em->remove($workContribution);
             }
         }
 
-        foreach($otherContributions as $otherContribution) {
+        foreach ($otherContributions as $otherContribution) {
             if (!is_null($otherContribution)) {
                 $em->remove($otherContribution);
             }
@@ -353,9 +351,9 @@ class DreamController extends Controller
         )));
     }
 
-    protected  function getContributionElement($user)
+    protected function getContributionElement($user)
     {
-        return function($element) use ($user) {
+        return function ($element) use ($user) {
             if ($element->getUser() == $user) {
                 return $element;
             }
@@ -367,8 +365,8 @@ class DreamController extends Controller
      */
     public function rejectDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
+        if (false === $this->isSuperAdmin()) {
+            throw new AccessDeniedException('Повернути мрію на доопрацювання може лише адміністратор');
         }
         $form = $this->createForm(new DreamRejectType(), $dream);
         if ($request->isMethod('POST')) {
@@ -377,12 +375,10 @@ class DreamController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $dream->addStatus(new Status(Status::REJECTED));
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
             }
         }
 
-        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -390,19 +386,17 @@ class DreamController extends Controller
      */
     public function confirmDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
+        if (false === $this->isSuperAdmin()) {
+            throw new AccessDeniedException('Помітити мрію як перевірену може тільки адміністратор');
         }
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
             $dream->setRejectedDescription(null);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -410,8 +404,8 @@ class DreamController extends Controller
      */
     public function implementingDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isAuthor($dream)) {
-            throw new AccessDeniedException();
+        if (false === $this->canEditDream($dream)) {
+            throw new AccessDeniedException('Перевести мрію у статус виконання може тільки автор мрії або адміністратор');
         }
         $form = $this->createForm(new DreamImplementingType(), $dream);
         if ($request->isMethod('POST')) {
@@ -419,15 +413,12 @@ class DreamController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $dream->addStatus(new Status(Status::IMPLEMENTING));
-                $em->flush();
 
-                return $this->redirect($this->generateUrl('view_dream', array(
-                    'slug' => $dream->getSlug()
-                )));
+                $em->flush();
             }
         }
 
-        return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -435,20 +426,21 @@ class DreamController extends Controller
      */
     public function editInformationDreamAction(Dream $dream, Request $request)
     {
+        if (false === $this->canEditDream($dream)) {
+            throw new AccessDeniedException('Редагувати мрію може тільки автор мрії або адміністратор');
+        }
+
         $form = $this->createForm(new DreamImplementingType(), $dream);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
+
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('view_dream', array(
-                    'slug' => $dream->getSlug()
-                )));
             }
         }
 
-        return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -456,7 +448,7 @@ class DreamController extends Controller
      */
     public function completingDreamAction(Dream $dream, Request $request)
     {
-        if (($this->isAuthor($dream)) and ($this->isSuperAdmin())) {
+        if (false === $this->canEditDream($dream)) {
             throw new AccessDeniedException();
         }
 
@@ -471,14 +463,10 @@ class DreamController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $dream->addStatus(new Status(Status::COMPLETED));
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('view_dream', array(
-                    'slug' => $dream->getSlug()
-                )));
             }
         }
 
-        return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -486,18 +474,16 @@ class DreamController extends Controller
      */
     public function successDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
+        if (false === $this->isSuperAdmin()) {
+            throw new AccessDeniedException('Підтвердити успішне завершення мрії може тільки адміністратор');
         }
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $dream->addStatus(new Status(Status::SUCCESS));
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     /**
@@ -505,18 +491,16 @@ class DreamController extends Controller
      */
     public function failDreamAction(Dream $dream, Request $request)
     {
-        if ($this->isSuperAdmin()) {
-            throw new AccessDeniedException();
+        if (false === $this->isSuperAdmin()) {
+            throw new AccessDeniedException('Позначити мрію як не виконану може тільки адміністратор');
         }
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
             $dream->addStatus(new Status(Status::FAIL));
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
         }
 
-        return $this->redirect($this->generateUrl('admin_geekhub_dream_dream_list'));
+        return $this->redirect($this->generateUrl('view_dream', ['slug' => $dream->getSlug()]));
     }
 
     public function searchAction(Request $request)
@@ -554,13 +538,13 @@ class DreamController extends Controller
         if ($tag != 'default-tag') {
             $ids = $this->getDoctrine()->getRepository('TagBundle:Tag')->getResourceIdsForTag('dream_tag', strip_tags(trim($tag)));
             $dreams = new ArrayCollection();
-            if (count($ids) > 0 ) {
+            if (count($ids) > 0) {
                 foreach ($ids as $id) {
                     $dream = $this->getDoctrine()->getRepository('GeekhubDreamBundle:Dream')->findOneBy(array(
                         'id' => $id,
                         'currentStatus' => array(Status::COLLECTING_RESOURCES, Status::IMPLEMENTING, Status::SUCCESS)
                     ));
-                    is_null($dream) ? : $dreams->add($dream);
+                    is_null($dream) ?: $dreams->add($dream);
                 }
             }
 
@@ -575,11 +559,30 @@ class DreamController extends Controller
 
     private function isAuthor(Dream $dream)
     {
-        return $this->getUser()->getId() != $dream->getAuthor()->getId() ? true : false;
+        if (!$this->getUser() || !$dream->getAuthor()) {
+            return false;
+        }
+
+        return $this->getUser()->getId() == $dream->getAuthor()->getId();
     }
 
     private function isSuperAdmin()
     {
-        return false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ? true : false;
+        return $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN');
+    }
+
+    private function canEditDream(Dream $dream)
+    {
+        return $this->isAuthor($dream) || $this->isSuperAdmin();
+    }
+
+    private function isCloseDream(Dream $dream)
+    {
+        return in_array($dream->getCurrentStatus(), [Status::SUCCESS, Status::FAIL]);
+    }
+
+    private function isDraftDream(Dream $dream)
+    {
+        return in_array($dream->getCurrentStatus(), [Status::REJECTED, Status::SUBMITTED, Status::COMPLETED]);
     }
 }
