@@ -28,3 +28,6 @@ parameters:
 
     mail_chimp.api_key: 1
     mail_chimp.list_id: 1
+
+    nodejs.path: /usr/local/bin/node
+    nodejs.modules_path: /usr/local/lib/node_modules
