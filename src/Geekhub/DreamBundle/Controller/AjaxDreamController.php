@@ -77,7 +77,7 @@ class AjaxDreamController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function removeDreamFromFavoriteAction(Request $request, Dream $dream)
+    public function removeDreamFromFavoriteAction(Request $request)
     {
         $user = $this->getUser();
         $dream = $this->getDreamFromRequest($request);
@@ -129,7 +129,10 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param $file
+     * @param $type
+     * @param Request $request
+     * @throws NotFoundHttpException
+     * @internal param $file
      * @return JsonResponse
      */
     private function loadFile($type, Request $request)
