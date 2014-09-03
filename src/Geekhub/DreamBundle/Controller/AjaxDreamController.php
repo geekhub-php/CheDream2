@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AjaxDreamController extends Controller
 {
@@ -23,7 +24,7 @@ class AjaxDreamController extends Controller
      */
     public function dreamImageLoaderAction(Request $request)
     {
-        return $this->loadeFile($request->files->get('files'));
+        return new JsonResponse($this->loadFile('files'));
     }
 
     /**
@@ -32,7 +33,7 @@ class AjaxDreamController extends Controller
      */
     public function dreamCompletedPicturesLoaderAction(Request $request)
     {
-        return $this->loadeFile($request->files->get('imgUpl'));
+        return new JsonResponse($this->loadFile('imgUpl'));
     }
 
     /**
@@ -41,7 +42,7 @@ class AjaxDreamController extends Controller
      */
     public function dreamPosterLoaderAction(Request $request)
     {
-        return $this->loadeFile($request->files->get('dream-poster'));
+        return new JsonResponse($this->loadFile('dream-poster'));
     }
 
     /**
@@ -77,7 +78,7 @@ class AjaxDreamController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function removeDreamFromFavoriteAction(Request $request)
+    public function removeDreamFromFavoriteAction(Request $request, Dream $dream)
     {
         $user = $this->getUser();
         $dream = $this->getDreamFromRequest($request);
@@ -132,13 +133,19 @@ class AjaxDreamController extends Controller
      * @param $file
      * @return JsonResponse
      */
-    private function loadeFile($file)
+    private function loadFile($type)
     {
+        $file = $request->files->get($type);
+
+        if (!$file) {
+            throw new NotFoundHttpException("There is no loaded '{$type}' file");
+        }
+
         $imageHandler = $this->get('dream_file_uploader');
         $imageHandler->init($file);
         $result = $imageHandler->loadFiles();
 
-        return new JsonResponse($result);
+        return $result;
     }
 
     /**
