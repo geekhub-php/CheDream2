@@ -23,7 +23,7 @@ class AjaxDreamController extends Controller
      */
     public function dreamImageLoaderAction(Request $request)
     {
-        return new JsonResponse($this->loadFile('files'));
+        return new JsonResponse($this->loadFile('files', $request));
     }
 
     /**
@@ -32,7 +32,7 @@ class AjaxDreamController extends Controller
      */
     public function dreamCompletedPicturesLoaderAction(Request $request)
     {
-        return new JsonResponse($this->loadFile('imgUpl'));
+        return new JsonResponse($this->loadFile('imgUpl', $request));
     }
 
     /**
@@ -41,14 +41,14 @@ class AjaxDreamController extends Controller
      */
     public function dreamPosterLoaderAction(Request $request)
     {
-        return new JsonResponse($this->loadFile('dream-poster'));
+        return new JsonResponse($this->loadFile('dream-poster', $request));
     }
 
     /**
      * @param Request $request
      * @return Response
      */
-    public function dreamPictureRemoveAction(Request$request)
+    public function dreamPictureRemoveAction(Request $request)
     {
         $mediaId = $request->get('id');
         $mediaManager = $this->get('sonata.media.manager.media');
@@ -132,7 +132,7 @@ class AjaxDreamController extends Controller
      * @param $file
      * @return JsonResponse
      */
-    private function loadFile($type)
+    private function loadFile($type, Request $request)
     {
         $file = $request->files->get($type);
 
