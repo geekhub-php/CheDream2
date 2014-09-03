@@ -70,7 +70,7 @@ class AjaxDreamController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        return new Response("Added to favorite with DreamId={$dream->getId()} and UserId={$user->getId()}");
+        return new Response(sprintf('Added to favorite with DreamId=%s and UserId=%s', $dream->getId(), $user->getId()));
     }
 
     /**
@@ -85,7 +85,7 @@ class AjaxDreamController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        return new Response("Removed from favorite with DreamId={$dream->getId()} and UserId={$user->getId()}");
+        return new Response(sprintf('Removed from favorite with DreamId=%s and UserId=%s', $dream->getId(), $user->getId()));
     }
 
     /**
