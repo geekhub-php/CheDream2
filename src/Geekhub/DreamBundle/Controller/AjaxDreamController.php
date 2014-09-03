@@ -10,44 +10,44 @@ namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AjaxDreamController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function dreamImageLoaderAction(Request $request)
     {
-        $file = $request->files->get('files');
-
-        $imageHandler = $this->get('dream_file_uploader');
-        $imageHandler->init($file);
-        $result = $imageHandler->loadFiles();
-
-        return new Response(json_encode($result));
+        return new JsonResponse($this->loadFile('files'));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function dreamCompletedPicturesLoaderAction(Request $request)
     {
-        $file = $request->files->get('imgUpl');
-
-        $imageHandler = $this->get('dream_file_uploader');
-        $imageHandler->init($file);
-        $result = $imageHandler->loadCompletedPictures();
-
-        return new Response(json_encode($result));
+        return new JsonResponse($this->loadFile('imgUpl'));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function dreamPosterLoaderAction(Request $request)
     {
-        $file = $request->files->get('dream-poster');
-
-        $imageHandler = $this->get('dream_file_uploader');
-        $imageHandler->init($file);
-        $result = $imageHandler->loadPoster();
-
-        return new Response(json_encode($result));
+        return new JsonResponse($this->loadFile('dream-poster'));
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function dreamPictureRemoveAction(Request$request)
     {
         $mediaId = $request->get('id');
@@ -58,36 +58,40 @@ class AjaxDreamController extends Controller
         return new Response('ok');
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function addDreamToFavoriteAction(Request $request)
     {
-        $dreamId = $request->get('id');
         $user = $this->getUser();
-
-        $em = $this->getDoctrine()->getManager();
-        /** @var Dream $dream */
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById($dreamId);
+        $dream = $this->getDreamFromRequest($request);
         $dream->addUsersWhoFavorite($user);
-        $em->persist($dream);
-        $em->flush();
 
-        return new Response("Added to favorite with DreamId=$dreamId and UserId=".$user->getId());
+        $this->getDoctrine()->getManager()->flush();
+
+        return new Response("Added to favorite with DreamId={$dream->getId()} and UserId={$user->getId()}");
     }
 
-    public function removeDreamFromFavoriteAction(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function removeDreamFromFavoriteAction(Request $request, Dream $dream)
     {
-        $dreamId = $request->get('id');
         $user = $this->getUser();
-
-        $em = $this->getDoctrine()->getManager();
-        /** @var Dream $dream */
-        $dream = $em->getRepository('GeekhubDreamBundle:Dream')->findOneById($dreamId);
+        $dream = $this->getDreamFromRequest($request);
         $dream->removeUsersWhoFavorite($user);
-        $em->persist($dream);
-        $em->flush();
 
-        return new Response("Removed from favorite with DreamId=$dreamId and UserId=".$user->getId());
+        $this->getDoctrine()->getManager()->flush();
+
+        return new Response("Removed from favorite with DreamId={$dream->getId()} and UserId={$user->getId()}");
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function removeSomeContributeAction(Request $request)
     {
         $dreamId = $request->get('dreamId');
@@ -96,40 +100,23 @@ class AjaxDreamController extends Controller
         $type = $request->get('type');
 
         $em = $this->getDoctrine()->getManager();
+        $acceptedTypes = array(
+            'financial' => 'financialResource',
+            'equipment' => 'equipmentResource',
+            'work'      => 'workResource',
+            'other'     => 'id',
+        );
 
-        switch ($type) {
-            case 'financial':
-                $contributions = $em->getRepository('GeekhubDreamBundle:FinancialContribute')->findBy(array(
-                    'financialResource' => $resourceId,
-                    'user' => $userId,
-                    'dream' => $dreamId
-                ));
-                break;
-            case 'equipment':
-                $contributions = $em->getRepository('GeekhubDreamBundle:EquipmentContribute')->findBy(array(
-                    'equipmentResource' => $resourceId,
-                    'user' => $userId,
-                    'dream' => $dreamId
-                ));
-                break;
-            case 'work':
-                $contributions = $em->getRepository('GeekhubDreamBundle:WorkContribute')->findBy(array(
-                    'workResource' => $resourceId,
-                    'user' => $userId,
-                    'dream' => $dreamId
-                ));
-                break;
-            case 'other':
-                $contributions = $em->getRepository('GeekhubDreamBundle:OtherContribute')->findBy(array(
-                    'id' => $resourceId,
-                    'user' => $userId,
-                    'dream' => $dreamId
-                ));
-                break;
-            default:
-
-                return new Response('empty');
+        if (!in_array($type, $acceptedTypes)) {
+            return new Response('empty');
         }
+
+        $type = ucfirst($type);
+        $contributions = $em->getRepository("GeekhubDreamBundle:{$type}Contribute")->findBy(array(
+            $acceptedTypes[$type] => $resourceId,
+            'user' => $userId,
+            'dream' => $dreamId
+        ));
 
         foreach($contributions as $contribute)
         {
@@ -139,5 +126,50 @@ class AjaxDreamController extends Controller
         $em->flush();
 
         return new Response('Removed');
+    }
+
+    /**
+     * @param $file
+     * @return JsonResponse
+     */
+    private function loadFile($type)
+    {
+        $file = $request->files->get($type);
+
+        if (!$file) {
+            throw new NotFoundHttpException("There is no loaded '{$type}' file");
+        }
+
+        $imageHandler = $this->get('dream_file_uploader');
+        $imageHandler->init($file);
+        $result = $imageHandler->loadFiles();
+
+        return $result;
+    }
+
+    /**
+     * @param Request $request
+     * @return Dream
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     */
+    private function getDreamFromRequest(Request $request)
+    {
+        $dreamId = $request->get('id');
+
+        if (!$dreamId) {
+            throw new \Exception('Not defined id for dream add/remove from favorite actions');
+        }
+
+        $dream = $this->getDoctrine()
+            ->getRepository('GeekhubDreamBundle:Dream')
+            ->find($dreamId)
+        ;
+
+        if (!$dream) {
+            throw new NotFoundHttpException("Not found dream with id {$dreamId}");
+        }
+
+        return $dream;
     }
 }
