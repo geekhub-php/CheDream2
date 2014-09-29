@@ -17,6 +17,10 @@ hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
 
+hwi_oauth_service_redirect:
+    pattern: /connect/{service}
+    defaults: { _controller: GeekhubUserBundle:Connect:redirectToService }
+
 merge_route:
     resource: "@GeekhubUserBundle/Resources/config/routing/merge.yml"
     prefix:   /connect-account

@@ -75,7 +75,7 @@
         </call>
     </service>
 
-    <service id="hwi_oauth.connect_controller" class="HWI\Bundle\OAuthBundle\Controller\ConnectController">
+    <service id="hwi_oauth.connect_controller" class="Geekhub\UserBundle\Controller\ConnectController">
         <call method="setContainer">
             <argument type="service" id="service_container" />
         </call>
