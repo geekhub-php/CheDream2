@@ -16,8 +16,8 @@
                             <td class="right">
                                 <span><strong>{{ finResource(finance, dream) }}</strong>/{{ finance.quantity }} грн.</span>
                             </td>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
-                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".financial-help-popup">+</a></td>
+                            {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.financial-help-popup{% else %}#authorize-modal{% endif %}">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -43,8 +43,8 @@
                             <td class="right">
                                 <span><strong>{{ equipResource(equipment, dream) }}</strong>/{{ equipment.quantity }}{{ eType }}</span>
                             </td>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
-                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".equipment-help-popup">+</a></td>
+                            {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.equipment-help-popup{% else %}#authorize-modal{% endif %}">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -63,8 +63,8 @@
                             <td class="right">
                                 <span><strong>{{ workResource(work, dream) }}</strong>/{{ work.quantity }} дн.</span>
                             </td>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
-                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target=".physical-help-popup">+</a></td>
+                            {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
+                                <td class="add"><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.physical-help-popup{% else %}#authorize-modal{% endif %}">+</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
