@@ -1,157 +1,124 @@
 <div class="ways-to-support">
     {% if (dream.currentStatus != 'completed') and (dream.currentStatus != 'success') %}
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-            <h3>Підтримати:</h3>
-            <ul>
-                {% if dream.dreamFinancialResources|length > 0 %}
-                    <li class="financial">
-                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".financial-help-popup">Фінансово</a>
-                        <div class="financial-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        {{ form_start(finForm, {'attr': {'role': 'form' } } ) }}
-
-                                        {{ form_row(finForm.financialResource) }}
-                                        {{ form_row(finForm.quantity) }}
-                                        {{ form_row(finForm.hiddenContributor) }}
-
-                                        {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id"  required> <br/>
-                                        {% endif %}
-
-                                        <div class="buttons">
-                                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning btn-sm" id="sbmt-btn-fin">
-                                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="finButCancel" data-dismiss="modal">
-                                        </div>
-
-                                        {{ form_errors(finForm) }}
-                                        {{ form_rest(finForm) }}
-                                        {{ form_end(finForm) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endif %}
-                {% if dream.dreamEquipmentResources|length > 0 %}
-                    <li class="equipment">
-                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".equipment-help-popup">Обладнанням / Технікою</a>
-                        <div class="equipment-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        {{ form_start(equipForm, {'attr': {'role': 'form' } } ) }}
-
-                                        {{ form_row(equipForm.equipmentResource) }}
-                                        {{ form_row(equipForm.quantity) }}
-                                        {{ form_row(equipForm.hiddenContributor) }}
-
-                                        {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id"  required> <br/>
-                                        {% endif %}
-
-                                        <div class="buttons">
-                                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning  btn-sm" id="sbmt-btn-equip">
-                                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="equipButCancel" data-dismiss="modal">
-                                        </div>
-
-                                        {{ form_errors(equipForm) }}
-                                        {{ form_rest(equipForm) }}
-                                        {{ form_end(equipForm) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endif %}
-                {% if dream.dreamWorkResources|length > 0 %}
-                    <li class="physical">
-                        <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".physical-help-popup">Провести роботи</a>
-                        <div class="physical-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        {{ form_start(workForm, {'attr': {'role': 'form' } } ) }}
-
-                                        {{ form_row(workForm.workResource) }}
-                                        {{ form_row(workForm.quantity) }}
-                                        {{ form_row(workForm.hiddenContributor) }}
-
-                                        {% if app.user.phone is null %}
-                                            <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id" required> <br/>
-                                        {% endif %}
-
-                                        <div class="buttons">
-                                            <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning btn-sm" id="sbmt-btn-work">
-                                            <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="workButCancel" data-dismiss="modal">
-                                        </div>
-
-                                        {{ form_errors(workForm) }}
-                                        {{ form_rest(workForm) }}
-                                        {{ form_end(workForm) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endif %}
-                <li class="other">
-                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target=".other-help-popup">Інша допомога</a>
-                    <div class="other-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <h3>Підтримати:</h3>
+        <ul>
+            {% if dream.dreamFinancialResources|length > 0 %}
+                <li class="financial">
+                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.financial-help-popup{% else %}#authorize-modal{% endif %}">Фінансово</a>
+                    <div class="financial-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    {{ form_start(otherForm, {'attr': {'role': 'form' } } ) }}
+                                    {{ form_start(finForm, {'attr': {'role': 'form' } } ) }}
 
-                                    {{ form_row(otherForm.title) }}
-                                    {{ form_row(otherForm.hiddenContributor) }}
+                                    {{ form_row(finForm.financialResource) }}
+                                    {{ form_row(finForm.quantity) }}
+                                    {{ form_row(finForm.hiddenContributor) }}
 
-                                    {% if app.user.phone is null %}
-                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id"  required > <br/>
+                                    {% if app.user.phone is defined and app.user.phone is null %}
+                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id"  required> <br/>
                                     {% endif %}
 
                                     <div class="buttons">
-                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning btn-sm" id="sbmt-btn-other">
-                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="otherButCancel" data-dismiss="modal">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning btn-sm" id="sbmt-btn-fin">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="finButCancel" data-dismiss="modal">
                                     </div>
 
-                                    {{ form_errors(otherForm) }}
-                                    {{ form_rest(otherForm) }}
-                                    {{ form_end(otherForm) }}
+                                    {{ form_errors(finForm) }}
+                                    {{ form_rest(finForm) }}
+                                    {{ form_end(finForm) }}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-            </ul>
-        {% else %}
-            <p class="warning">Щоб підтримати мрію, Вам потрібно <a href="#" data-toggle="modal" data-target="#authorize-modal">авторизуватися</a>.</p>
-            
-            <div id="authorize-modal" class="custom-modal modal-auth modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <span class="main-icon"></span>
-                            <span class="title">Авторизуватись</span>
-                            <div class="media-block">
-                                <a href="{{ path('facebook_login') }}" class="fb">
-                                    <i class="icon icon-facebook"></i>
-                                </a>
-                                <a href="{{ path('vkontakte_login') }}" class="vk">
-                                    <i class="icon icon-vkontakte"></i>
-                                </a>
-                                <a href="{{ path('odnoklassniki_login') }}" class="ok">
-                                    <i class="icon icon-odnoklassniki"></i>
-                                </a>
+            {% endif %}
+            {% if dream.dreamEquipmentResources|length > 0 %}
+                <li class="equipment">
+                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.equipment-help-popup{% else %}#authorize-modal{% endif %}">Обладнанням / Технікою</a>
+                    <div class="equipment-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {{ form_start(equipForm, {'attr': {'role': 'form' } } ) }}
+
+                                    {{ form_row(equipForm.equipmentResource) }}
+                                    {{ form_row(equipForm.quantity) }}
+                                    {{ form_row(equipForm.hiddenContributor) }}
+
+                                    {% if app.user.phone is defined and app.user.phone is null %}
+                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id"  required> <br/>
+                                    {% endif %}
+
+                                    <div class="buttons">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning  btn-sm" id="sbmt-btn-equip">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="equipButCancel" data-dismiss="modal">
+                                    </div>
+
+                                    {{ form_errors(equipForm) }}
+                                    {{ form_rest(equipForm) }}
+                                    {{ form_end(equipForm) }}
+                                </div>
                             </div>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        {% endif %}
+                    </div>
+                </li>
+            {% endif %}
+            {% if dream.dreamWorkResources|length > 0 %}
+                <li class="physical">
+                    <span class="circle"><span></span></span><a href="javascript:void(0)" data-toggle="modal" data-target="{% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}.physical-help-popup{% else %}#authorize-modal{% endif %}">Провести роботи</a>
+                    <div class="physical-help-popup modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {{ form_start(workForm, {'attr': {'role': 'form' } } ) }}
+
+                                    {{ form_row(workForm.workResource) }}
+                                    {{ form_row(workForm.quantity) }}
+                                    {{ form_row(workForm.hiddenContributor) }}
+
+                                    {% if app.user.phone is defined and app.user.phone is null %}
+                                        <input type="text" name="contributor-telephone" value="" placeholder="Введіть ваш телефон*" class="form-control" id="contribute-telephone-form-id" required> <br/>
+                                    {% endif %}
+
+                                    <div class="buttons">
+                                        <input type="submit" value="{{ 'dream.support'|trans }}" class="text-center btn btn-warning btn-sm" id="sbmt-btn-work">
+                                        <input type="button" value="{{ 'dream.cancel'|trans }}" class="btn btn-xs btn-link" id="workButCancel" data-dismiss="modal">
+                                    </div>
+
+                                    {{ form_errors(workForm) }}
+                                    {{ form_rest(workForm) }}
+                                    {{ form_end(workForm) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+        <div id="authorize-modal" class="custom-modal modal-auth modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="main-icon"></span>
+                        <span class="title">Авторизуватись</span>
+                        <div class="media-block">
+                            <a href="{{ path('facebook_login') }}" class="fb">
+                                <i class="icon icon-facebook"></i>
+                            </a>
+                            <a href="{{ path('vkontakte_login') }}" class="vk">
+                                <i class="icon icon-vkontakte"></i>
+                            </a>
+                            <a href="{{ path('odnoklassniki_login') }}" class="ok">
+                                <i class="icon icon-odnoklassniki"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 </div>
