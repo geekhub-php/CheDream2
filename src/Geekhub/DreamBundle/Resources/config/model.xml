@@ -1,0 +1,48 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="geekhub.dream.repository.dream.class">Geekhub\DreamBundle\Repository\DreamRepository</parameter>
+        <parameter key="geekhub.dream.repository.common.class">Geekhub\DreamBundle\Repository\CommonRepository</parameter>
+    </parameters>
+
+    <services>
+        <service id="geekhub.dream.repository.dream"
+                 class="%geekhub.dream.repository.dream.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:Dream</argument>
+        </service>
+        <service id="geekhub.dream.repository.status"
+                 class="%geekhub.dream.repository.common.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:Status</argument>
+        </service>
+        <service id="geekhub.dream.repository.financial"
+                 class="%geekhub.dream.repository.common.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:FinancialContribute</argument>
+        </service>
+        <service id="geekhub.dream.repository.equipment"
+                 class="%geekhub.dream.repository.common.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:EquipmentContribute</argument>
+        </service>
+        <service id="geekhub.dream.repository.work"
+                 class="%geekhub.dream.repository.common.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:WorkContribute</argument>
+        </service>
+        <service id="geekhub.dream.repository.other"
+                 class="%geekhub.dream.repository.common.class%"
+                 factory-service="doctrine.orm.entity_manager"
+                 factory-method="getRepository">
+            <argument>GeekhubDreamBundle:OtherContribute</argument>
+        </service>
+    </services>
+</container>

@@ -9,9 +9,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Status
  *
  * @ORM\Table(name="status")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Repository\CommonRepository")
  */
-class Status
+class Status implements EventInterface
 {
     const SUBMITTED            = 'submitted';
     const REJECTED             = 'rejected';
@@ -147,5 +147,15 @@ class Status
             self::SUCCESS => self::SUCCESS,
             self::FAIL => self::FAIL,
         );
+    }
+
+    public function getEventImage()
+    {
+        return $this->getDream()->getMediaPoster();
+    }
+
+    public function getEventTitle()
+    {
+        return sprintf('Dream "%s", has changed status to "%s"', $this->getDream()->getTitle(), $this->getTitle());
     }
 }

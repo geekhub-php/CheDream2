@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Dreams
  *
  * @ORM\Table(name="dreams")
- * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Entity\DreamRepository")
+ * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Repository\DreamRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
  */
 class Dream implements Taggable

@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="geekhub.dream.admin.class">Geekhub\DreamBundle\Admin\DreamAdmin</parameter>
+        <parameter key="geekhub.dream.block.dream_activity.class">Geekhub\DreamBundle\Block\DreamActivityBlockService</parameter>
     </parameters>
 
     <services>
@@ -14,6 +15,17 @@
             <argument />
             <argument>Geekhub\DreamBundle\Entity\Dream</argument>
             <argument />
+        </service>
+        <service id="geekhub.dream.block.dream_activity" class="%geekhub.dream.block.dream_activity.class%">
+            <tag name="sonata.block" />
+            <argument>geekhub.dream.block.dream_activity</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="geekhub.dream.repository.dream" />
+            <argument type="service" id="geekhub.dream.repository.status" />
+            <argument type="service" id="geekhub.dream.repository.financial" />
+            <argument type="service" id="geekhub.dream.repository.equipment" />
+            <argument type="service" id="geekhub.dream.repository.work" />
+            <argument type="service" id="geekhub.dream.repository.other" />
         </service>
     </services>
 

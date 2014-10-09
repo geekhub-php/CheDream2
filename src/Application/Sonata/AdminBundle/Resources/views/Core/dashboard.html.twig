@@ -1,0 +1,14 @@
+{% extends 'SonataAdminBundle:Core:dashboard.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/applicationsonataadmin/css/timeline.css') }}" media="all">
+    <style>
+        .timeline .year, .timeline.v1 .year {
+            font-size: 2em;
+            border-radius: 5px;
+            max-width: 6em;
+            padding: 5px;
+        }
+    </style>
+{% endblock %}

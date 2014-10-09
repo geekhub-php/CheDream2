@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  *
  * @ORM\Table(name="equipment_contributes")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Repository\CommonRepository")
  */
 class EquipmentContribute extends AbstractContribute
 {

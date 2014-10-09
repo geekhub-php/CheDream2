@@ -4,23 +4,24 @@ sonata_admin:
     templates:
         user_block: ApplicationSonataAdminBundle:Core:user_block.html.twig
         edit:       ApplicationSonataAdminBundle:CRUD:edit.html.twig
+        dashboard:  ApplicationSonataAdminBundle:Core:dashboard.html.twig
     dashboard:
         blocks:
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: [CheDream]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: [sonata_media]
+                    groups: [CheDream]
+            -
+                position: right
+                type: geekhub.dream.block.dream_activity
 
 sonata_block:
     default_contexts: [cms]
     blocks:
         sonata.admin.block.admin_list:
+            contexts:   [admin]
+        geekhub.dream.block.dream_activity:
             contexts:   [admin]
 
 sonata_doctrine_orm_admin:

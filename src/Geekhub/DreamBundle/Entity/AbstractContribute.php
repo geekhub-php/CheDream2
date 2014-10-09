@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-class AbstractContribute extends AbstractContributeResource
+class AbstractContribute extends AbstractContributeResource implements EventInterface
 {
     /**
      * @var boolean
@@ -65,5 +65,15 @@ class AbstractContribute extends AbstractContributeResource
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getEventImage()
+    {
+        return $this->getUser()->getAvatar();
+    }
+
+    public function getEventTitle()
+    {
+        return sprintf('%s %s contributed %s', $this->getUser()->getFirstName(), $this->getUser()->getLastName(), $this->getDream()->getTitle());
     }
 }

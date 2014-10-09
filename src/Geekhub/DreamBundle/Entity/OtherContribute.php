@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  *
  * @ORM\Table(name="other_contributes")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Repository\CommonRepository")
  */
 class OtherContribute extends AbstractContribute
 {
