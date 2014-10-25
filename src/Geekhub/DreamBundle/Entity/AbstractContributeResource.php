@@ -22,8 +22,8 @@ abstract class AbstractContributeResource
     /**
      * @var float
      *
-     * @Assert\NotBlank(message="dream.only_numbers")
-     * @Assert\Regex(pattern="/^[0-9.]+$/", message="dream.only_numbers")
+     * @Assert\NotBlank
+     * @Assert\GreaterThan(value = 0)
      * @ORM\Column(name="quantity", type="float")
      */
     protected $quantity;

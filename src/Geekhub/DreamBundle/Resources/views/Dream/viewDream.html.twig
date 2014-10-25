@@ -14,6 +14,18 @@
 {% endblock headTag %}
 
 {% block content %}
+    {% if not finForm.vars.valid or not equipForm.vars.valid or not workForm.vars.valid %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Закрити</span></button>
+            {{ form_errors(finForm.financialResource) }}
+            {{ form_errors(finForm.quantity) }}
+            {{ form_errors(equipForm.equipmentResource) }}
+            {{ form_errors(equipForm.quantity) }}
+            {{ form_errors(workForm.workResource) }}
+            {{ form_errors(workForm.quantity) }}
+        </div>
+    {% endif %}
+
     <div id="dream">
         <div id="dream-details">
             {{ include('GeekhubDreamBundle:includes:showDreamMediaBlock.html.twig', {dream: dream}) }}
