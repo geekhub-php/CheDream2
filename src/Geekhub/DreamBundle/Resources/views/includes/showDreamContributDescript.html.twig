@@ -12,7 +12,7 @@
                                     {{ form_start(finForm, {'attr': {'role': 'form' } } ) }}
 
                                     {{ form_row(finForm.financialResource) }}
-                                    {{ form_row(finForm.quantity) }}
+                                    {{ form_row(finForm.quantity, {'attr': {'min': '1'}}) }}
                                     {{ form_row(finForm.hiddenContributor) }}
 
                                     {% if app.user.phone is defined and app.user.phone is null %}
@@ -41,7 +41,7 @@
                                     {{ form_start(equipForm, {'attr': {'role': 'form' } } ) }}
 
                                     {{ form_row(equipForm.equipmentResource) }}
-                                    {{ form_row(equipForm.quantity) }}
+                                    {{ form_row(equipForm.quantity, {'attr': {'min': '1'}}) }}
                                     {{ form_row(equipForm.hiddenContributor) }}
 
                                     {% if app.user.phone is defined and app.user.phone is null %}
@@ -70,7 +70,7 @@
                                     {{ form_start(workForm, {'attr': {'role': 'form' } } ) }}
 
                                     {{ form_row(workForm.workResource) }}
-                                    {{ form_row(workForm.quantity) }}
+                                    {{ form_row(workForm.quantity, {'attr': {'min': '1'}}) }}
                                     {{ form_row(workForm.hiddenContributor) }}
 
                                     {% if app.user.phone is defined and app.user.phone is null %}
