@@ -207,10 +207,6 @@ class DreamController extends Controller
                 $workContribute,
                 $otherContribute
             );
-
-            return $this->redirect($this->generateUrl('view_dream', array(
-                'slug' => $dream->getSlug()
-            )));
         }
 
         return array(
