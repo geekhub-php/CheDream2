@@ -10,6 +10,7 @@ namespace Geekhub\DreamBundle\Controller;
 
 use Geekhub\DreamBundle\Entity\Dream;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -139,7 +140,7 @@ class AjaxDreamController extends Controller
     {
         $file = $request->files->get($type);
 
-        if (!$file) {
+        if ((!($file instanceof UploadedFile) || !$file->isValid())) {
             throw new NotFoundHttpException("There is no loaded '{$type}' file");
         }
 
