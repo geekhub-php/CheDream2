@@ -56,7 +56,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "bower install",
+            "bower install --allow-root",
             "git apply bin/fix-tagit-russian-separator.patch",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
@@ -67,7 +67,7 @@
             "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ],
         "post-update-cmd": [
-            "bower install",
+            "bower install --allow-root",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
