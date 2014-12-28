@@ -55,7 +55,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "bower install",
+            "bower install --allow-root",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
@@ -65,7 +65,7 @@
             "mkdir -p web/fonts && cp -u vendor/ahonymous/fontello/fonts/* web/fonts/"
         ],
         "post-update-cmd": [
-            "bower install",
+            "bower install --allow-root",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
