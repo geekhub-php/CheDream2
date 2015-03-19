@@ -5,3 +5,7 @@ dreams:
     prefix:   /v1
     options:
         expose: true
+
+app_dream:
+    type: rest
+    resource: "@GeekhubDreamBundle/Controller/Api/DreamController.php"
