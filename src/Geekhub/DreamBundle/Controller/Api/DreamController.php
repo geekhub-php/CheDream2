@@ -34,6 +34,7 @@ class DreamController extends FOSRestController
      * RestView()
      *
      * @QueryParam(name="count", requirements="\d+", default="10", description="Count statuses at one page")
+     * @QueryParam(name="page", requirements="\d+", default="1", description="Number of page to be shown")
      *
      * @param
      * @return mixed
