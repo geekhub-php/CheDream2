@@ -18,7 +18,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 class DreamController extends FOSRestController
 {
     /**
-     * Get single Dream,
+     * Get Dreams,
      *
      * @ApiDoc(
      * resource = true,
@@ -150,20 +150,20 @@ class DreamController extends FOSRestController
     public function putDreamAction(Request $request, $slug)
     {
         $data = $request->request->all();
-        $dm = $this->getDoctrine()->getManager();
-        $dreamOld = $dm->getRepository('GeekhubDreamBundle:Dream')
+        $em = $this->getDoctrine()->getManager();
+        $dreamOld = $em->getRepository('GeekhubDreamBundle:Dream')
             ->findOneBySlug($slug);
         $data = $this->get('serializer')->serialize($data, 'json');
         $dreamNew = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
         $view = View::create();
         if (!$dreamOld) {
             $dreamNew->setAuthor($this->getUser());
-            $dm->persist($dreamNew);
-            $dm->flush();
+            $em->persist($dreamNew);
+            $em->flush();
             $view->setStatusCode(404);
         } else {
             $this->get('services.object_updater_class')->updateObject($dreamOld, $dreamNew);
-            $dm->flush();
+            $em->flush();
             $view->setStatusCode(200);
         }
         return $view;

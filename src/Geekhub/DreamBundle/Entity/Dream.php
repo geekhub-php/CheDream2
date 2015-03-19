@@ -5,6 +5,9 @@ namespace Geekhub\DreamBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use DoctrineExtensions\Taggable\Taggable;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,6 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="dreams")
  * @ORM\Entity(repositoryClass="Geekhub\DreamBundle\Repository\DreamRepository")
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ * @ExclusionPolicy("all")
  */
 class Dream implements Taggable
 {
@@ -40,6 +44,8 @@ class Dream implements Taggable
      *
      * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="description", type="text")
+     * @Expose()
+     * @Type("string")
      */
     protected $description;
 
@@ -70,6 +76,7 @@ class Dream implements Taggable
      * @Assert\NotBlank(message = "dream.not_blank")
      * @Assert\Regex(pattern="/^[+0-9 ()-]+$/", message="dream.only_numbers")
      * @ORM\Column(name="phone", type="string", length=45, nullable=true)
+     * @Expose()
      */
     protected $phone;
 
@@ -101,6 +108,7 @@ class Dream implements Taggable
      * @var \DateTime
      *
      * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     * @Expose()
      */
     protected $deletedAt;
 

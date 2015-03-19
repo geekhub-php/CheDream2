@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations\View as RestView;
 use FOS\RestBundle\Controller\FOSRestController;
 
-class DreamController extends FOSRestController
+class DreamController extends Controller
 {
     /**
      * <strong>Simple example:</strong><br />
