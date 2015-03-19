@@ -18,90 +18,32 @@ use FOS\RestBundle\Controller\FOSRestController;
 class DreamController extends FOSRestController
 {
     /**
-     * Gets Dreams by status,.
+     * Get single Dream,
      *
      * @ApiDoc(
      * resource = true,
-     * description = "Gets Dreams by status",
-     * output =   { "class" = "AppBundle\Document\Dream" },
+     * description = "Gets all Dream",
+     * output = "AppBundle\Document\Dream",
      * statusCodes = {
      *      200 = "Returned when successful",
-     *      404 = "Returned when the status is not found"
+     *      404 = "Returned when the Dream is not found"
      * }
      * )
      *
+     *
      * RestView()
+     * @param
+     * @return mixed
      *
-     * @QueryParam(name="status", strict=true, requirements="[a-z]+", description="Status", nullable=true)
-     * @QueryParam(name="limit", requirements="\d+", default="10", description="Count statuses at one page")
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Number of page to be shown")
-     * @QueryParam(name="sort_by", strict=true, requirements="^[a-zA-Z]+", default="createdAt", description="Sort by", nullable=true)
-     * @QueryParam(name="sort_order", strict=true, requirements="^[a-zA-Z]+", default="DESC", description="Sort order", nullable=true)
-     *
-     * @param ParamFetcher $paramFetcher
-     *
-     * @return View
-     *
-     * @throws NotFoundHttpException when page not exist
+     * @throws NotFoundHttpException when not exist
      */
-    public function getDreamsAction(ParamFetcher $paramFetcher)
+    public function getDreamsAction()
     {
-        $repository = $this->getDoctrine()->getManager()
-                            ->getRepository('GeekhubDreamBundle:Dream')
-        ;
-
-        if (!$paramFetcher->get('status')) {
-            $queryBuilder = $repository->createQueryBuilder('dream')
-                                    ->sort($paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
-                                    ->field('dream.currentStatus')
-                                    ->notEqual('fail')
-                                    ->getQuery()
-                                    ->execute()
-                                    ->toArray()
-            ;
-        } else {
-            $queryBuilder = $repository->createQueryBuilder('dream')
-                                    ->sort($paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
-                                    ->field('currentStatus')
-                                    ->equals($paramFetcher->get('status'))
-                                    ->getQuery()
-                                    ->execute()
-                                    ->toArray()
-            ;
-        }
-
-        $dreamsResponse = new DreamsResponse();
-        $dreamsResponse->setSortOrder($paramFetcher->get('sort_order'));
-
-        $paginator = new Pagerfanta(new ArrayAdapter($queryBuilder));
-        $paginator
-            ->setMaxPerPage($paramFetcher->get('limit'))
-            ->setCurrentPage($paramFetcher->get('page'))
-        ;
-
-        $dreamsResponse->setDreams($paginator->getCurrentPageResults());
-        $dreamsResponse->setPageCount($paginator->getNbPages());
-
-        $nextPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', array(
-                    'limit' => $paramFetcher->get('limit'),
-                    'page' => $paramFetcher->get('page')+1,
-                )
-            ) :
-            'false';
-
-        $previsiousPage = $paginator->hasPreviousPage() ?
-            $this->generateUrl('get_dreams', array(
-                    'limit' => $paramFetcher->get('limit'),
-                    'page' => $paramFetcher->get('page')-1,
-                )
-            ) :
-            'false';
-
-        $dreamsResponse->setNextPage($nextPage);
-        $dreamsResponse->setPreviousPage($previsiousPage);
-
-        return $dreamsResponse;
+        $manager = $this->getDoctrine()->getManager();
+        $dream = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        $restView = View::create();
+        $restView->setData($dream);
+        return $restView;
     }
 
     /**
