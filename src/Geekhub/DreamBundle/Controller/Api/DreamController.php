@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Controller\Api;
 
 
+use Geekhub\DreamBundle\Model\DreamsResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -36,7 +37,7 @@ class DreamController extends FOSRestController
      * @QueryParam(name="count", requirements="\d+", default="10", description="Count statuses at one page")
      * @QueryParam(name="page", requirements="\d+", default="1", description="Number of page to be shown")
      *
-     * @param
+     * @param ParamFetcher $paramFetcher
      * @return mixed
      *
      * @throws NotFoundHttpException when not exist
@@ -44,35 +45,45 @@ class DreamController extends FOSRestController
     public function getDreamsAction(ParamFetcher $paramFetcher)
     {
         $manager = $this->getDoctrine()->getManager();
+
         $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
         $selfPage = $this->generateUrl('api_v1_get_dreams', array(
-            'limit' => $paramFetcher->get('limit'),
+            'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page'),
         ));
 
         $nextPage = $this->generateUrl('api_v1_get_dreams', array(
-            'limit' => $paramFetcher->get('limit'),
+            'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page')+1,
         ));
 
         $prevPage = $this->generateUrl('api_v1_get_dreams', array(
-            'limit' => $paramFetcher->get('limit'),
+            'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page')-1,
         ));
 
         $firstPage = $this->generateUrl('api_v1_get_dreams', array(
-            'limit' => $paramFetcher->get('limit'),
+            'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page'),
         ));
 //
 //        $lastPage = $this->generateUrl('api_v1_get_dreams', array(
-//            'limit' => $paramFetcher->get('limit'),
+//            'count' => $paramFetcher->get('count'),
 //            'page' => $paramFetcher->get('page')-1,
 //        ));
 
+        $dreamsResponse = new DreamsResponse();
+
+        $dreamsResponse->setDreams($dreams);
+        $dreamsResponse->setSelfPage($selfPage);
+        $dreamsResponse->setNextPage($nextPage);
+        $dreamsResponse->setPrevPage($prevPage);
+        $dreamsResponse->setFirstPage($firstPage);
+
         $restView = View::create();
-        $restView->setData($dreams);
+        $restView->setData($dreamsResponse);
+
         return $restView;
     }
 
