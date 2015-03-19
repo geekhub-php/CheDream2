@@ -14,7 +14,7 @@ The project is developed through the efforts of the project [Geekhub][1]
     ```
 2. Install Node.js Download sources from official web [site][2]
     - Extract node.js archive to your local directory
-    - Run terminal and go to extracted node.js directory
+    - Run terminal and go to extracted node.js directory node/lib/node_modules/npm/
     - Enter next commands
 
         ```sh
