@@ -85,7 +85,14 @@ class DreamController extends FOSRestController
      * @ApiDoc(
      *      resource = true,
      *      description = "Create single dream",
-     *      input = "Geekhub\DreamBundle\Entity\Dream",
+     *      parameters={
+     *          {"name"="title", "dataType"="string", "required"=true, "description"="Dream name"},
+     *          {"name"="description", "dataType"="string", "required"=true, "description"="Description about dream"},
+     *          {"name"="phone", "dataType"="integer", "required"=true, "description"="Phone number", "format"="(xxx) xxx xxx xxx"},
+     *          {"name"="dreamEquipmentResources", "dataType"="array<Geekhub\DreamBundle\Entity\EquipmentResource>", "required"=true, "description"="Equipment resources"},
+     *          {"name"="dreamWorkResources", "dataType"="array<Geekhub\DreamBundle\Entity\WorkResource>", "required"=true, "description"="Work resources"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<Geekhub\DreamBundle\Entity\FinancialResource>", "required"=true, "description"="Financial resources"}
+     *      },
      *      output = "string",
      *      statusCodes = {
      *          201 = "Dream sucessful created",
@@ -100,29 +107,18 @@ class DreamController extends FOSRestController
     public function postDreamAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $user = $this->getUser();
-
-        $dream = $this->get('serializer')
-                      ->deserialize($request->getBody(), 'Geekhub\DreamBundle\Entity\Dream', 'json')
-        ;
-
-        if ($errors = $this->get('validator')->validate($dream)) {
-            throw new BadRequestHttpException($errors);
-        }
-
-        $dream->setAuthor($user);
-
+        $data = $request->request->all();
+//        $user = $this->getUser();
+        $data = $this->get('serializer')->serialize($data, 'json');
+        $dream = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
+//        $dream->setAuthor($user);
         $em->persist($dream);
         $em->flush();
-
         $restView = View::create();
         $restView->setStatusCode(201);
-
         $restView->setData([
             "link" => $this->get('router')->generate('get_dream', ['slug' => $dream->getSlug()], true),
         ]);
-
         return $restView;
     }
 
@@ -132,7 +128,14 @@ class DreamController extends FOSRestController
      * @ApiDoc(
      * resource = true,
      * description = "Create/Update single dream",
-     * input = "Geekhub\DreamBundle\Entity",
+     * parameters={
+     *          {"name"="title", "dataType"="string", "required"=true, "description"="Dream name"},
+     *          {"name"="description", "dataType"="string", "required"=true, "description"="Description about dream"},
+     *          {"name"="phone", "dataType"="integer", "required"=true, "description"="Phone number", "format"="(xxx) xxx xxx xxx"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<AppBundle\Document\EquipmentResource>", "required"=true, "description"="Equipment resources"},
+     *          {"name"="dreamWorkResources", "dataType"="array<AppBundle\Document\WorkResource>", "required"=true, "description"="Work resources"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<AppBundle\Document\FinancialResource>", "required"=true, "description"="Financial resources"}
+     * },
      * statusCodes = {
      * 200 = "Dream successful update",
      * 404 = "Return when dream with current slug not isset"
@@ -148,36 +151,21 @@ class DreamController extends FOSRestController
     {
         $data = $request->request->all();
         $dm = $this->getDoctrine()->getManager();
-
         $dreamOld = $dm->getRepository('GeekhubDreamBundle:Dream')
-                        ->findOneBySlug($slug)
-        ;
-
-        $dreamNew = $this->get('serializer')
-                        ->deserialize($request->getBody(), 'Geekhub\DreamBundle\Entity\Dream', 'json')
-        ;
-
+            ->findOneBySlug($slug);
+        $data = $this->get('serializer')->serialize($data, 'json');
+        $dreamNew = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
         $view = View::create();
-
-        if ($errors = $this->get('validator')->validate($dreamNew) || $errors = $this->get('validator')->validate($dreamOld)) {
-            throw new BadRequestHttpException($errors);
-        }
-
         if (!$dreamOld) {
             $dreamNew->setAuthor($this->getUser());
-
             $dm->persist($dreamNew);
             $dm->flush();
-
             $view->setStatusCode(404);
         } else {
-            $this->get('app.services.object_updater')->updateObject($dreamOld, $dreamNew);
-
+            $this->get('services.object_updater_class')->updateObject($dreamOld, $dreamNew);
             $dm->flush();
-
             $view->setStatusCode(200);
         }
-
         return $view;
     }
 }

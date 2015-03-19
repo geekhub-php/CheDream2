@@ -61,38 +61,4 @@ class DreamController extends FOSRestController
             'dreams'=>$dreams,
         ));
     }
-
-    /**
-     * Get single Dream for slug,.
-     *
-     * @ApiDoc(
-     * resource = true,
-     * description = "Gets Dream for slug",
-     * output="Geekhub\DreamBundle\Model\Dreams",
-     * statusCodes = {
-     *      200 = "Returned when successful",
-     *      404 = "Returned when the Dream is not found"
-     * }
-     * )
-     *
-     * @RestView()
-     * @param
-     *
-     * @return View
-     *
-     * @throws NotFoundHttpException when not exist
-     */
-    public function getDreamAction($slug)
-    {
-        $dreams = $this->getDoctrine()->getManager()
-            ->getRepository('GeekhubDreamBundle:Dream')
-            ->findOneBySlug($slug);
-
-        if (!$dreams) {
-            throw new NotFoundHttpException();
-        }
-
-        return $dreams;
-    }
-
 }
