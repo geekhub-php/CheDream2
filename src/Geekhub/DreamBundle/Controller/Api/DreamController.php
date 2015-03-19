@@ -41,10 +41,36 @@ class DreamController extends FOSRestController
      *
      * @throws NotFoundHttpException when not exist
      */
-    public function getDreamsAction()
+    public function getDreamsAction(ParamFetcher $paramFetcher)
     {
         $manager = $this->getDoctrine()->getManager();
         $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
+        $selfPage = $this->generateUrl('api_v1_get_dreams', array(
+            'limit' => $paramFetcher->get('limit'),
+            'page' => $paramFetcher->get('page'),
+        ));
+
+        $nextPage = $this->generateUrl('api_v1_get_dreams', array(
+            'limit' => $paramFetcher->get('limit'),
+            'page' => $paramFetcher->get('page')+1,
+        ));
+
+        $prevPage = $this->generateUrl('api_v1_get_dreams', array(
+            'limit' => $paramFetcher->get('limit'),
+            'page' => $paramFetcher->get('page')-1,
+        ));
+
+        $firstPage = $this->generateUrl('api_v1_get_dreams', array(
+            'limit' => $paramFetcher->get('limit'),
+            'page' => $paramFetcher->get('page'),
+        ));
+//
+//        $lastPage = $this->generateUrl('api_v1_get_dreams', array(
+//            'limit' => $paramFetcher->get('limit'),
+//            'page' => $paramFetcher->get('page')-1,
+//        ));
+
         $restView = View::create();
         $restView->setData($dreams);
         return $restView;
