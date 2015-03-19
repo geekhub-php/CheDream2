@@ -7,8 +7,11 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\RestBundle\Controller\Annotations\View as RestView;
+use FOS\RestBundle\Controller\FOSRestController;
 
-class DreamController extends Controller
+class DreamController extends FOSRestController
 {
     /**
      * <strong>Simple example:</strong><br />
@@ -58,4 +61,38 @@ class DreamController extends Controller
             'dreams'=>$dreams,
         ));
     }
+
+    /**
+     * Get single Dream for slug,.
+     *
+     * @ApiDoc(
+     * resource = true,
+     * description = "Gets Dream for slug",
+     * output="Geekhub\DreamBundle\Model\Dreams",
+     * statusCodes = {
+     *      200 = "Returned when successful",
+     *      404 = "Returned when the Dream is not found"
+     * }
+     * )
+     *
+     * @RestView()
+     * @param
+     *
+     * @return View
+     *
+     * @throws NotFoundHttpException when not exist
+     */
+    public function getDreamAction($slug)
+    {
+        $dreams = $this->getDoctrine()->getManager()
+            ->getRepository('GeekhubDreamBundle:Dream')
+            ->findOneBySlug($slug);
+
+        if (!$dreams) {
+            throw new NotFoundHttpException();
+        }
+
+        return $dreams;
+    }
+
 }
