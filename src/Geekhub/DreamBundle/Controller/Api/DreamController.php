@@ -32,6 +32,9 @@ class DreamController extends FOSRestController
      *
      *
      * RestView()
+     *
+     * @QueryParam(name="count", requirements="\d+", default="10", description="Count statuses at one page")
+     *
      * @param
      * @return mixed
      *
@@ -40,9 +43,9 @@ class DreamController extends FOSRestController
     public function getDreamsAction()
     {
         $manager = $this->getDoctrine()->getManager();
-        $dream = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
         $restView = View::create();
-        $restView->setData($dream);
+        $restView->setData($dreams);
         return $restView;
     }
 
