@@ -46,12 +46,20 @@ class DreamsResponse
     protected $prevPage;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @Type("integer")
+     * @Type("string")
      * @Expose
      */
     protected $firstPage;
+
+    /**
+     * @var string
+     *
+     * @Type("string")
+     * @Expose
+     */
+    protected $lastPage;
 
     /**
      * @param mixed $dreams
@@ -131,5 +139,21 @@ class DreamsResponse
     public function getFirstPage()
     {
         return $this->firstPage;
+    }
+
+    /**
+     * @param mixed $lastPage
+     */
+    public function setLastPage($lastPage)
+    {
+        $this->lastPage = $lastPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastPage()
+    {
+        return $this->lastPage;
     }
 }

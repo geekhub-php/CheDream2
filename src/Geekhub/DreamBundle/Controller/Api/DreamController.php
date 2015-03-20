@@ -57,6 +57,8 @@ class DreamController extends FOSRestController
 
         $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[], $paramFetcher->get('count'));
 
+        $dreamsAll = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+
         $selfPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page'),
@@ -67,20 +69,24 @@ class DreamController extends FOSRestController
             'page' => $paramFetcher->get('page')+1,
         ));
 
-        $prevPage = $this->generateUrl('get_dreams', array(
-            'count' => $paramFetcher->get('count'),
-            'page' => $paramFetcher->get('page')-1,
-        ));
+        if($paramFetcher->get('page') == 1) {
+            $prevPage = 0;
+        } else {
+            $prevPage = $this->generateUrl('get_dreams', array(
+                'count' => $paramFetcher->get('count'),
+                'page' => $paramFetcher->get('page') - 1,
+            ));
+        }
 
         $firstPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page'),
         ));
-//
-//        $lastPage = $this->generateUrl('get_dreams', array(
-//            'count' => $paramFetcher->get('count'),
-//            'page' => $paramFetcher->get('page')-1,
-//        ));
+
+        $lastPage = $this->generateUrl('get_dreams', array(
+            'count' => $paramFetcher->get('count'),
+            'page' => (int) ceil(count($dreamsAll) / $paramFetcher->get('count')),
+        ));
 
         $dreamsResponse = new DreamsResponse();
 
@@ -89,6 +95,7 @@ class DreamController extends FOSRestController
         $dreamsResponse->setNextPage($nextPage);
         $dreamsResponse->setPrevPage($prevPage);
         $dreamsResponse->setFirstPage($firstPage);
+        $dreamsResponse->setLastPage($lastPage);
 
         return $dreamsResponse;
     }
