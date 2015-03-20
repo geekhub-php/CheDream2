@@ -57,7 +57,7 @@ class DreamExtension extends \Twig_Extension
         $finContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showFinancialContributors($user, $dream);
 
         $str = '';
-        if($security == 'admin' or $security == 'owner') {
+        if ($security == 'admin' or $security == 'owner') {
             foreach ($finContr as $fin) {
                 $str .= '<li><span data-idResurce="'.$fin['finResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="financial" class="remove" title="видалити"> видалити</span>'.$fin['resource'].' '.$fin['totalSum'].' грн.</li>';
             }
@@ -94,7 +94,7 @@ class DreamExtension extends \Twig_Extension
         $equipContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showEquipmentContributors($user, $dream);
 
         $str = '';
-        if($security == 'admin' or $security == 'owner') {
+        if ($security == 'admin' or $security == 'owner') {
             foreach ($equipContr as $equip) {
                 switch ($equip['qType']) {
                     case EquipmentResource::KG:
@@ -138,7 +138,7 @@ class DreamExtension extends \Twig_Extension
         $workContr = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showWorkContributors($user, $dream);
 
         $str = '';
-        if($security == 'admin' or $security == 'owner') {
+        if ($security == 'admin' or $security == 'owner') {
             foreach ($workContr as $work) {
                 $str .= '<li><span data-idResurce="'.$work['workResurceId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="work" class="remove" title="видалити"> видалити</span>'.$work['resource'].' '.$work['totalSum'].' дн.</li>';
             }
@@ -156,7 +156,7 @@ class DreamExtension extends \Twig_Extension
         $otherContribute = $this->doctrine->getManager()->getRepository('GeekhubDreamBundle:Dream')->showOtherContributors($user, $dream);
 
         $str = '';
-        if($security == 'admin' or $security == 'owner') {
+        if ($security == 'admin' or $security == 'owner') {
             foreach ($otherContribute as $other) {
                 $str .= '<li><span data-idResurce="'.$other['otherContrId'].'" data-idUser="'.$user->getId().'" data-idDream="'.$dream->getId().'" data-contributeType="other" class="remove" title="видалити"> видалити</span>'.$other['title'].'</li>';
             }
@@ -208,7 +208,6 @@ class DreamExtension extends \Twig_Extension
     public function showPercentOfCompletionFinancial(Dream $dream)
     {
         if (count($dream->getDreamFinancialResources()) == 0) {
-
             return null;
         }
 
@@ -224,7 +223,6 @@ class DreamExtension extends \Twig_Extension
     public function showPercentOfCompletionEquipment(Dream $dream)
     {
         if (count($dream->getDreamEquipmentResources()) == 0) {
-
             return null;
         }
 
@@ -240,7 +238,6 @@ class DreamExtension extends \Twig_Extension
     public function showPercentOfCompletionWork(Dream $dream)
     {
         if (count($dream->getDreamWorkResources()) == 0) {
-
             return null;
         }
 

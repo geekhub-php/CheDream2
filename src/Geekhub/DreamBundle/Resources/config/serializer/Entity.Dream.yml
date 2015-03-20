@@ -7,3 +7,49 @@ Geekhub\DreamBundle\Entity\Dream:
         slug:
             expose: true
             type: string
+        description:
+            expose: true
+            type: string
+        phone:
+           expose: true
+        createdAt:
+           expose: true
+        updatedAt:
+           expose: true
+        deletedAt:
+           expose: true
+        financialCompleted:
+           expose: true
+        workCompleted:
+           expose: true
+        equipmentCompleted:
+           expose: true
+        currentStatus:
+           expose: true
+#        usersWhoFavorites:
+#           expose: true
+#        author:
+#           expose: true
+
+#        mediaPictures:
+#           expose: true
+#        mediaCompletedPictures:
+#           expose: true
+#        mediaPoster:
+#           expose: true
+#        mediaFiles:
+#           expose: true
+#        dreamFinancialResources:
+#           expose: true
+#        dreamEquipmentResources:
+#           expose: true
+#        dreamWorkResources:
+#           expose: true
+#        dreamFinancialContributions:
+#           expose: true
+#        dreamEquipmentContributions:
+#           expose: true
+#        dreamWorkContributions:
+#           expose: true
+#        dreamOtherContributions:
+#           expose: true

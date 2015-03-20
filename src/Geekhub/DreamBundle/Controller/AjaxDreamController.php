@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class AjaxDreamController extends Controller
 {
     /**
-     * @param Request $request
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function dreamImageLoaderAction(Request $request)
@@ -28,7 +28,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function dreamCompletedPicturesLoaderAction(Request $request)
@@ -37,7 +37,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function dreamPosterLoaderAction(Request $request)
@@ -46,7 +46,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function dreamPictureRemoveAction(Request $request)
@@ -60,7 +60,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function addDreamToFavoriteAction(Request $request)
@@ -75,7 +75,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function removeDreamFromFavoriteAction(Request $request)
@@ -90,7 +90,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function removeSomeContributeAction(Request $request)
@@ -119,8 +119,7 @@ class AjaxDreamController extends Controller
             'dream' => $dreamId
         ));
 
-        foreach($contributions as $contribute)
-        {
+        foreach ($contributions as $contribute) {
             $em->remove($contribute);
         }
 
@@ -131,7 +130,7 @@ class AjaxDreamController extends Controller
 
     /**
      * @param $type
-     * @param Request $request
+     * @param  Request               $request
      * @throws NotFoundHttpException
      * @internal param $file
      * @return JsonResponse
@@ -152,7 +151,7 @@ class AjaxDreamController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request               $request
      * @return Dream
      * @throws NotFoundHttpException
      * @throws \Exception
