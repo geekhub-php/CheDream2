@@ -13,6 +13,20 @@ use FOS\RestBundle\Controller\FOSRestController;
 
 class DreamController extends FOSRestController
 {
+//    public function getNb() {
+//
+//        $repository = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream');
+//
+//        return $repository->createQueryBuilder('dreams')
+//
+//            ->select('COUNT(dreams)')
+//
+//            ->getQuery()
+//
+//            ->getSingleScalarResult();
+//
+//    }
+
     /**
      * Get single Dream,
      *
@@ -41,7 +55,7 @@ class DreamController extends FOSRestController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[], $paramFetcher->get('count'));
 
         $selfPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
@@ -63,7 +77,7 @@ class DreamController extends FOSRestController
             'page' => $paramFetcher->get('page'),
         ));
 //
-//        $lastPage = $this->generateUrl('api_v1_get_dreams', array(
+//        $lastPage = $this->generateUrl('get_dreams', array(
 //            'count' => $paramFetcher->get('count'),
 //            'page' => $paramFetcher->get('page')-1,
 //        ));
