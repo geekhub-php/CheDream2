@@ -1,6 +1,9 @@
 Geekhub\DreamBundle\Entity\Dream:
     exclusion_policy: ALL
     properties:
+        id:
+            expose: true
+            type: integer
         title:
             expose: true
             type: string

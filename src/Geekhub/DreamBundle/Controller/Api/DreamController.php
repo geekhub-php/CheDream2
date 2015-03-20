@@ -15,6 +15,8 @@ class DreamController extends FOSRestController
 {
     /**
      * Get single Dream,
+     *      * <strong>Simple example:</strong><br />
+     * http://chedream2/app_dev.php/api/dreams.json?count=2&page=2&sort_by=id&sort_order=ASC
      *
      * @ApiDoc(
      * resource = true,
@@ -29,8 +31,10 @@ class DreamController extends FOSRestController
      *
      * RestView()
      *
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Count statuses at one page")
+     * @QueryParam(name="count", requirements="\d+", default="10", description="Count dreams at one page")
      * @QueryParam(name="page", requirements="\d+", default="1", description="Number of page to be shown")
+     * @QueryParam(name="sort_by", strict=true, requirements="^[a-zA-Z]+", default="createdAt", description="Sort by", nullable=true)
+     * @QueryParam(name="sort_order", strict=true, requirements="^[a-zA-Z]+", default="DESC", description="Sort order", nullable=true)
      *
      * @param  ParamFetcher $paramFetcher
      * @return View
@@ -40,17 +44,19 @@ class DreamController extends FOSRestController
     public function getDreamsAction(ParamFetcher $paramFetcher)
     {
         $manager = $this->getDoctrine()->getManager();
-        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[], $paramFetcher->get('count'));
+        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[$paramFetcher->get('sort_by') => $paramFetcher->get('sort_order')], $paramFetcher->get('count'), $paramFetcher->get('page'));
         $dreamsAll = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
         $selfPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page'),
+            'sort_by' => $paramFetcher->get('sort_by'),
+            'sort_order' => $paramFetcher->get('sort_order'),
         ));
         $nextPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page')+1,
         ));
-        if($paramFetcher->get('page') == 1) {
+        if ($paramFetcher->get('page') == 1) {
             $prevPage = 0;
         } else {
             $prevPage = $this->generateUrl('get_dreams', array(
@@ -104,6 +110,7 @@ class DreamController extends FOSRestController
         if (!$dream) {
             throw new NotFoundHttpException();
         }
+
         return $dream;
     }
 }
