@@ -27,7 +27,7 @@
                 </div>
 
                 <div id="errors" class="files upload-results"></div>
-                
+
                 <div id="dream-add-video" class="add-video-block">
                     <div class="input-block">
                         <label class="label">Youtube url</label>
@@ -39,26 +39,26 @@
                         <button type="button" id="add-video-button-cancel" class="custom-btn btn-orange">{{ 'dream.cancel'|trans }}</button>
                     </div>
                 </div>
-                
+
                 <div class="upload-buttons">
                     <span class="upload-resource upload-image" onclick="loadFile()">
                         <span class="icon"></span>
                         <span class="title">Фото</span>
                     </span>
                     <input id="fileuploadz" type="file" name="files" multiple>
-                    
+
                     <span class="upload-resource upload-video" onclick="addDreamVideo()">
                         <span class="icon"></span>
                         <span class="title">Відео</span>
                     </span>
-                    
+
                     <span class="upload-resource upload-file" onclick="loadFile()">
                         <span class="icon"></span>
                         <span class="title">Файли</span>
                     </span>
                 </div>
             </div>
-            
+
             <ul class="main-form-list col-md-8">
                 <li class="input-block">
                     <label class="label required">Назва</label>
@@ -98,7 +98,7 @@
                 </li>
             </ul>
         </div>
-        
+
         <div class="price-block">
             <span class="label">Кошторис проекту</span>
             <ul class="row form-list">
@@ -111,14 +111,14 @@
                                 {{ form_errors(finance) }}
                             </li>
                         {% endfor %}
-                        
+
                         <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Стаття витрати</span>
                             <span class="resource-label width-2">Сума, грн</span>
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="col-md-4">
                     <span class="resource-caption equipment-caption"><span class="icon-resource icon-equipment"></span>Інструменти / обладнання <br />техніка</span>
                     <ul class="resources-list block-type-2 equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
@@ -128,7 +128,7 @@
                                 {{ form_errors(equipment) }}
                             </li>
                         {% endfor %}
-                        
+
                         <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва</span>
                             <span class="resource-label width-2">Од. виміру</span>
@@ -136,7 +136,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="col-md-4">
                     <span class="resource-caption"><span class="icon-resource icon-people"></span>Роботи та ресурси</span>
                     <ul class="resources-list block-type-3 workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
@@ -146,7 +146,7 @@
                                 {{ form_errors(work) }}
                             </li>
                         {% endfor %}
-                        
+
                         <li class="labels-block" data-labels>
                             <span class="resource-label width-1">Назва робіт</span>
                             <span class="resource-label width-2">Чоловіко-днів</span>
@@ -155,7 +155,7 @@
                 </li>
             </ul>
         </div>
-        
+
         <div class="hidden">
             {{ form_rest(form) }}
         </div>

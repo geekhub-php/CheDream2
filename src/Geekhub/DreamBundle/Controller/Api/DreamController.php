@@ -50,7 +50,7 @@ class DreamController extends FOSRestController
             'count' => $paramFetcher->get('count'),
             'page' => $paramFetcher->get('page')+1,
         ));
-        if($paramFetcher->get('page') == 1) {
+        if ($paramFetcher->get('page') == 1) {
             $prevPage = 0;
         } else {
             $prevPage = $this->generateUrl('get_dreams', array(
@@ -104,6 +104,7 @@ class DreamController extends FOSRestController
         if (!$dream) {
             throw new NotFoundHttpException();
         }
+
         return $dream;
     }
 }
