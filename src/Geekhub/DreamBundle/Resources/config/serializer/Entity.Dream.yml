@@ -13,3 +13,22 @@ Geekhub\DreamBundle\Entity\Dream:
         description:
             expose: true
             type: string
+        phone:
+           expose: true
+           type: integer
+        createdAt:
+           expose: true
+           type: DateTime
+        updatedAt:
+           expose: true
+           type: DateTime
+        deletedAt:
+           expose: true
+        financialCompleted:
+           expose: true
+        workCompleted:
+           expose: true
+        equipmentCompleted:
+           expose: true
+        currentStatus:
+           expose: true
