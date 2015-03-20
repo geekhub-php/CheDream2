@@ -14,7 +14,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 class DreamController extends FOSRestController
 {
     /**
-     * Get single Dream,
+     * Get dreams for parameter,<br />
      *      * <strong>Simple example:</strong><br />
      * http://chedream2/app_dev.php/api/dreams.json?count=2&page=2&sort_by=id&sort_order=ASC
      *
@@ -25,7 +25,8 @@ class DreamController extends FOSRestController
      * statusCodes = {
      *      200 = "Returned when successful",
      *      404 = "Returned when the Dream is not found"
-     * }
+     * },
+     * section="All dreams "
      * )
      *
      *
@@ -92,7 +93,8 @@ class DreamController extends FOSRestController
      * statusCodes = {
      *      200 = "Returned when successful",
      *      404 = "Returned when the Dream is not found"
-     * }
+     * },
+     * section="Dream for slug"
      * )
      *
      * @RestView()

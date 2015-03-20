@@ -170,7 +170,7 @@ hip_mandrill:
         sender_name: Черкаська мрія
 
 fos_js_routing:
-    routes_to_expose: [ api_v1_get_dreams ]
+    routes_to_expose: [ api_get_dreams ]
 
 monolog:
     handlers:
