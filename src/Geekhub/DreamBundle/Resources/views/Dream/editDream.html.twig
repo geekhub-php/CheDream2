@@ -10,12 +10,12 @@
             <strong>Повідомлення від адміністрації: </strong>{{ rejectDescription|raw }}
         </div>
     {% endif %}
-    
+
     <div class="content page-new-dream page-green-shadow">
         {{ form_start(form, {'attr': {'role': 'form', 'novalidate': 'novalidate' } } ) }}
             <div class="row">
                 <div class="col-md-4">
-                    
+
                     <span class="label">Додати</span>
                     <div id="dream-poster-image" class="main-photo active">
                         <div class="photo-holder">
@@ -25,7 +25,7 @@
                         <img src="{{ poster|mediaPath|imagine_filter('dream_poster_view_form') }}" alt="Main Image">
                         <input id="fileupload-poster" type="file" name="dream-poster">
                     </div>
-                    
+
                     <div id="dream-gallery" class="uploaded-images">
                         {% for picture in dreamPictures %}
                             <img src="{{ picture|mediaPath|imagine_filter('dream_thumb') }}" data-idmedia="{{ picture.id }}"/>
@@ -36,7 +36,7 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                    
+
                     <div id="dream-files" class="upload-results">
                         {% for file in dreamFiles %}
                             <a href="{{ file|mediaPath }}"  data-idmedia="{{ file.id }}"> {{ file.name }} </a>
@@ -47,9 +47,9 @@
                             <img src="{{ video|mediaPath|imagine_filter('dream_thumb') }}" class="img-thumbnail" data-idmedia="{{ video.id }}"/>
                         {% endfor %}
                     </div>
-                    
+
                     <div id="errors" class="files upload-results"></div>
-                    
+
                     <div id="dream-add-video" class="add-video-block">
                         <div class="input-block">
                             <label class="label">Youtube url</label>
@@ -61,27 +61,27 @@
                             <button type="button" id="add-video-button-cancel" class="custom-btn btn-orange">{{ 'dream.cancel'|trans }}</button>
                         </div>
                     </div>
-                    
+
                     <div class="upload-buttons">
                         <span class="upload-resource upload-image" onclick="loadFile()">
                             <span class="icon"></span>
                             <span class="title">Фото</span>
                         </span>
                         <input id="fileuploadz" type="file" name="files" multiple>
-                        
+
                         <span class="upload-resource upload-video" onclick="addDreamVideo()">
                             <span class="icon"></span>
                             <span class="title">Відео</span>
                         </span>
-                        
+
                         <span class="upload-resource upload-file" onclick="loadFile()">
                             <span class="icon"></span>
                             <span class="title">Файли</span>
                         </span>
                     </div>
-                    
+
                 </div>
-                
+
                 <ul class="main-form-list col-md-8">
                     <li class="input-block">
                         <label class="label required">Назва</label>
@@ -121,8 +121,8 @@
                     </li>
                 </ul>
             </div>
-            
-            
+
+
             <div class="price-block">
                 <span class="label">Кошторис проекту</span>
                 <ul class="row form-list">
@@ -133,7 +133,7 @@
                                 <span class="resource-label width-1">Стаття витрати</span>
                                 <span class="resource-label width-2">Сума, грн</span>
                             </li>
-                            
+
                             {% for finance in form.dreamFinancialResources %}
                                 <li class="input-block collection-form">
                                     {{ form_widget(finance) }}
@@ -142,7 +142,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    
+
                     <li class="col-md-4">
                         <span class="resource-caption equipment-caption"><span class="icon-resource icon-equipment"></span>Інструменти / обладнання <br />техніка</span>
                         <ul class="resources-list block-type-2 equipmentResources" data-prototype="{{ form_widget(form.dreamEquipmentResources.vars.prototype)|e }}">
@@ -151,7 +151,7 @@
                                 <span class="resource-label width-2">Од. виміру</span>
                                 <span class="resource-label width-3">Кільк.</span>
                             </li>
-                            
+
                             {% for equipment in form.dreamEquipmentResources %}
                                 <li class="input-block collection-form">
                                     {{ form_widget(equipment) }}
@@ -160,7 +160,7 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    
+
                     <li class="col-md-4">
                         <span class="resource-caption"><span class="icon-resource icon-people"></span>Роботи та ресурси</span>
                         <ul class="resources-list block-type-3 workResources" data-prototype="{{ form_widget(form.dreamWorkResources.vars.prototype)|e }}">
@@ -168,7 +168,7 @@
                                 <span class="resource-label width-1">Назва робіт</span>
                                 <span class="resource-label width-2">Чоловіко-днів</span>
                             </li>
-                            
+
                             {% for work in form.dreamWorkResources %}
                                 <li class="input-block collection-form">
                                     {{ form_widget(work) }}
@@ -179,18 +179,18 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="hidden">
                 {{ form_rest(form) }}
             </div>
-            
+
             <div class="buttons-block">
                 <button id="dream-edit-all" type="submit" data-toggle="modal" data-target="#dreamConfirmModal" class="custom-btn btn-green">{{ 'dream.edit'|trans }}</button>
             </div>
             {{ form_row(form._token) }}
         {{ form_end(form) }}
     </div> <!--/Content-->
-    
+
     {% if is_granted("ROLE_SUPER_ADMIN") %}
         {% if (status == 'submitted') or (status == 'rejected') %}
             <div class="col-md-3">
@@ -216,7 +216,7 @@
             </div>
         {% endif %}
     {% endif %}
-    
+
     {{ include ('GeekhubDreamBundle:includes:dreamStatusRejectModal.html.twig') }}
 {% endblock %}
 

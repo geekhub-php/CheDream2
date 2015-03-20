@@ -16,4 +16,4 @@ class GeekhubOAuthBundle extends Bundle
     {
         return 'HWIOAuthBundle';
     }
-} 
+}

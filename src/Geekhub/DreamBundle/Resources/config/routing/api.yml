@@ -1,0 +1,3 @@
+dream:
+    type: rest
+    resource: "@GeekhubDreamBundle/Controller/Api/DreamController.php"

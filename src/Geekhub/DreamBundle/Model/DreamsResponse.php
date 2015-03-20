@@ -53,7 +53,6 @@ class DreamsResponse
      */
     protected $firstPage;
 
-
     /**
      * @param mixed $dreams
      */
@@ -69,7 +68,6 @@ class DreamsResponse
     {
         return $this->dreams;
     }
-
 
     /**
      * @param mixed $selfPage

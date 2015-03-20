@@ -3,9 +3,7 @@
 namespace Geekhub\DreamBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class RemoveContributionWithNullDreamCommand extends ContainerAwareCommand
@@ -49,9 +47,10 @@ class RemoveContributionWithNullDreamCommand extends ContainerAwareCommand
     public function removeContributionWithNullDream($progress)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+
         return function ($element) use ($em, $progress) {
             $progress->advance();
-            
+
             if (!$element->getDream()) {
                 $em->remove($element);
             }
