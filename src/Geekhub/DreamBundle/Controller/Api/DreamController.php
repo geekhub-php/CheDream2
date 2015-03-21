@@ -3,7 +3,6 @@
 namespace Geekhub\DreamBundle\Controller\Api;
 
 use Geekhub\DreamBundle\Model\DreamsResponse;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View as RestView;
@@ -14,25 +13,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 
 class DreamController extends FOSRestController
 {
-//    public function getNbPages($dreamsAll, $count)
-//    {
-//        $nbPages = $this->calculateNbPages($dreamsAll, $count);
-//        if ($nbPages == 0) {
-//            return $this->minimumNbPages();
-//        }
-//        return $nbPages;
-//    }
-//
-//    private function calculateNbPages($dreamsAll, $count)
-//    {
-//        return (int) ceil($dreamsAll / $count);
-//    }
-//
-//    private function minimumNbPages()
-//    {
-//        return 1;
-//    }
-
     /**
      * Get dreams for parameter,<br />
      *      * <strong>Simple example:</strong><br />
@@ -87,7 +67,7 @@ class DreamController extends FOSRestController
         }
         $firstPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
-            'page' => 1,
+            'page' => $paramFetcher->get('page'),
         ));
         $lastPage = $this->generateUrl('get_dreams', array(
             'count' => $paramFetcher->get('count'),
