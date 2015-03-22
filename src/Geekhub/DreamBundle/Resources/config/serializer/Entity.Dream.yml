@@ -37,7 +37,6 @@ Geekhub\DreamBundle\Entity\Dream:
 #           expose: true
 #        author:
 #           expose: true
-
 #        mediaPictures:
 #           expose: true
         mediaCompletedPictures:
