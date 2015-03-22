@@ -31,7 +31,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class DreamController extends Controller
 {
@@ -174,6 +173,7 @@ class DreamController extends Controller
                 'dreamMessage',
                 'Мрія не підтверджена адміністратором'
             );
+
             return $this->redirect($this->generateUrl('geekhub_dream_homepage'));
         }
 

@@ -3,58 +3,58 @@
         <a class="logo" href="{{ path('geekhub_dream_homepage') }}">
             <img src="/images/logo.png" alt="Logo">
         </a>
-        
+
         {% block items %}
             <ul class="main-menu">
                 {#<li>#}
                     {#<a href="{{ path('dream_list') }}">Мрії</a>#}
                 {#</li>#}
-                
+
                 <li>
                     <a href="{{ path('faq') }}">FAQ</a>
                 </li>
-                
+
                 <li>
                     <a href="{{ path('page_contacts') }}">Контакти</a>
                 </li>
             </ul>
-            
+
             <form action="{{ path('dream_search') }}" method="post">
                 <div class="search-block">
                     <button class="icon-search" type="submit"></button>
                     <input type="text" class="field-search" placeholder="Що шукаємо?" name="search_text">
-                    
+
                     <a href="#" class="search-link">
                         <span class="icon-search"></span>
                         <span class="search-title">Пошук</span>
                     </a>
                 </div>
             </form>
-            
+
             <ul class="media-block">
                 {% if app.user is null %}
                     <li>
                         <span class="media-title">Увійти через</span>
                     </li>
-                    
+
                     <li>
                         <a href="{{ path('facebook_login') }}" class="fb">
                             <i class="icon icon-facebook"></i>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="{{ path('vkontakte_login') }}" class="vk">
                             <i class="icon icon-vkontakte"></i>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="{{ path('odnoklassniki_login') }}" class="ok">
                             <i class="icon icon-odnoklassniki"></i>
                         </a>
                     </li>
-                    
+
                 {% else %}
                     <li class="photo">
                         <a href="{{ path('profile_view', {'id': app.user.id}) }}" class="user">
@@ -70,7 +70,7 @@
                         <a href="#" class="show-dreams t-tooltip" title="Ваші мрії">
                             <span class="icon icon-dream"></span>
                         </a>
-                        
+
                         <ul class="dreams-list">
                             <li class="close-block">
                                 <span href="#" class="close">&times;</span>
@@ -105,9 +105,9 @@
                             {% else %}
                                 <li class="no-my-dreams">Ви не додали <br />жодної мрії</li>
                             {% endif %}
-                            
+
                         </ul>
-                        
+
                     </li>
                     <li>
                         <a href="{{ path('_logout') }}" class="logout t-tooltip" title="Вийти">
@@ -115,9 +115,9 @@
                         </a>
                     </li>
                 {% endif %}
-                
+
             </ul>
-            
+
             <a href="{{ path('new_dream') }}" class="add-dream">
                 <span class="icon-bg"></span>
                 Додати мрію

@@ -9,7 +9,7 @@
     <form method="POST" enctype="multipart/form-data" action="{{ path('profile_edit') }}">
         <div class="row">
             <div class="col-md-4">
-                
+
                 <div id="user-avatar-image" class="main-photo {{ user.avatar ? 'active' }}">
                     <div class="photo-holder">
                         <span class="icon"></span>
@@ -18,9 +18,9 @@
                     <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
                     <input id="dream_poster" type="file" name="dream-poster">
                 </div>
-                
+
                 <div id="errors" class="files"></div>
-                
+
                 <ul class="contacts-list">
                     <li class="input-block">
                         <label class="label">Телефон</label>
@@ -57,7 +57,7 @@
                 </ul>
                 {{ form_widget(form.avatar) }}
             </div>
-            
+
             <div class="col-md-8">
                 <ul class="user-info-list">
                     <li class="input-block">
@@ -70,7 +70,7 @@
                         {{ form_widget(form.lastName, {'attr': {'placeholder': 'Прізвище'}}) }}
                         {{ form_errors(form.lastName) }}
                     </li>
-                    
+
                     <li class="input-block">
                         <label class="label">Дата народження</label>
                         <div class="row">
@@ -86,7 +86,7 @@
                             {{ form_errors(form.birthday) }}
                         </div>
                     </li>
-                    
+
                     <li class="input-block">
                         <label class="label">Про себе</label>
                         <div class="description-wrap">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                     </li>
-                    
+
                     <li class="buttons-block">
                         <button name="_submit" type="submit" class="custom-btn btn-green">Зберегти</button>
                     </li>
@@ -106,7 +106,7 @@
                     </li>
                 </ul>
             </div>
-            
+
         </div>
     </form>
 </div> <!--/Content-->

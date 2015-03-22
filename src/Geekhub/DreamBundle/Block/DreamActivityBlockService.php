@@ -31,9 +31,9 @@ class DreamActivityBlockService extends BaseBlockService
     protected $otherRepository;
 
     /**
-     * @param string $name
-     * @param EngineInterface $templating
-     * @param DreamRepository $dreamRepository
+     * @param string           $name
+     * @param EngineInterface  $templating
+     * @param DreamRepository  $dreamRepository
      * @param CommonRepository $statusRepository
      * @param CommonRepository $financialRepository
      * @param CommonRepository $equipmentRepository
@@ -123,6 +123,7 @@ class DreamActivityBlockService extends BaseBlockService
         if ($object1->getCreatedAt() == $object2->getCreatedAt()) {
             return 0;
         }
+
         return ($object1->getCreatedAt() < $object2->getCreatedAt()) ? 1 : -1;
     }
 }

@@ -6,29 +6,29 @@
 
 {% block content %}
 <div class="content page-view-profile">
-    <div class="row"> 
+    <div class="row">
         <div class="col-md-4">
             <div class="photo-block">
                 <img src="{{ user.avatar|mediaPath|imagine_filter('userAvatarBig') }}">
             </div>
-            
+
             <div class="media-block">
                 {% if user.phone %}
                     <a href="callto:{{ user.phone }}" class="phone"><i class="icon icon-phone"></i></a>
                 {% endif %}
-                
+
                 {% if user.skype %}
                     <a href="skype:{{ user.skype }}?call" class="skype"><span class="icon icon-skype"></span></a>
                 {% endif %}
-                
+
                 {% if user.email %}
                     <a href="mailto:{{ user.email }}" class="mail"><span class="icon icon-mail"></span></a>
                 {% endif %}
-                
+
                 {% if user.facebookId %}
                     <a href="https://www.facebook.com/profile.php?id={{ user.facebookId }}" class="fb"><i class="icon icon-facebook"></i></a>
                 {% endif %}
-                
+
                 {% if user.vkontakteId %}
                     <a href="https://vk.com/id{{ user.vkontakteId }}" class="vk"><i class="icon icon-vkontakte"></i></a>
                 {% endif %}
@@ -37,21 +37,21 @@
                 {% endif %}
             </div>
         </div>
-        
+
         <div class="col-md-8">
             <div class="user-info">
                 {% if app.user is same as(user) %}
                     <a href="{{path('profile_edit')}}" class="btn-edit">Редагувати</a>
                 {% endif %}
-                
+
                 <h1 class="name">{{user.firstName}} {{user.lastName}}</h1>
                 <span class="date">{{ user.birthday|date("d M Y", "Europe/Kiev")|trans }}</span>
-                
+
                 {% if user.about is not empty %}
                     <div class="description">{{ user.about|raw }}</div>
                 {% endif %}
             </div>
-            
+
             {% if user.dreams|length > 0 %}
                 <div id="user-dreams-block">
                     <div class="caption-block">
@@ -72,7 +72,7 @@
                     </ul>
                 </div>
             {% endif %}
-            
+
             {% if contributedDreams|length > 0 %}
                 <div id="user-contributions-block">
                     <div class="caption-block">
@@ -175,7 +175,7 @@
                 console.log(msgDone);
                 if ($this.closest('ul').find('li').length == 1) {
                     $('#favorites-block').remove();
-                } else 
+                } else
                 $('#dream'+dreamId).remove();
             })
             .error(function(msg) {
