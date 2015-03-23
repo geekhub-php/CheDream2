@@ -16,7 +16,7 @@ class PaginatorService
     }
 
     public function getPaginated(
-       Dream $dreams,
+       $dreams,
        $count,
        $pages,
        $sortBy,
