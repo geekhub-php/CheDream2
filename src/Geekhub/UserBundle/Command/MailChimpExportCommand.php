@@ -5,8 +5,6 @@ namespace Geekhub\UserBundle\Command;
 use Doctrine\ORM\EntityManager;
 use Geekhub\UserBundle\Entity\ExportedUser;
 use Geekhub\UserBundle\Entity\User;
-use Geekhub\UserBundle\Entity\UsersRepository;
-use Guzzle\Http\Client;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,6 +33,7 @@ class MailChimpExportCommand extends ContainerAwareCommand
 
         if (empty($notExportedUsers)) {
             $output->writeln('<comment>Can\'t find not subscribed users</comment>');
+
             return;
         }
 

@@ -3,7 +3,6 @@
 namespace Geekhub\DreamBundle\Tests\Controller\Api\v1;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 
 class DreamControllerTest extends WebTestCase
 {

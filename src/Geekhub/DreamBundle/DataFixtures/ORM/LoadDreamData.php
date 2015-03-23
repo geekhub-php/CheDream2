@@ -58,16 +58,16 @@ class LoadDreamData extends AbstractMediaLoader implements OrderedFixtureInterfa
             if ($dream->getCurrentStatus() != $dreamData['status']) {
                 switch ($dreamData['status']) {
                     case 'success':
-                        $dream-> addStatus(new Status(Status::SUCCESS));
+                        $dream->addStatus(new Status(Status::SUCCESS));
                         break;
                     case 'collecting-resources':
-                        $dream-> addStatus(new Status(Status::COLLECTING_RESOURCES));
+                        $dream->addStatus(new Status(Status::COLLECTING_RESOURCES));
                         break;
                     case 'implementing':
-                        $dream-> addStatus(new Status(Status::IMPLEMENTING));
+                        $dream->addStatus(new Status(Status::IMPLEMENTING));
                         break;
                     default:
-                        $dream-> addStatus(new Status(Status::SUBMITTED));
+                        $dream->addStatus(new Status(Status::SUBMITTED));
                 }
                 $manager->persist($dream);
             }
