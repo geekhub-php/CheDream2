@@ -50,58 +50,19 @@ class DreamController extends FOSRestController
         $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[$paramFetcher->get('sort_by') => $paramFetcher->get('sort_order')], $paramFetcher->get('count'), $paramFetcher->get('page'));
         $dreamsAll = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
-        $paginator = new PaginatorService($dreamsAll, $paramFetcher->get('count'), $paramFetcher->get('page'));
+        $paginator = $this->get('paginator');
 
-        $selfPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', [
-                    'count' => $paramFetcher->get('count'),
-                    'page' => $paramFetcher->get('page'),
-                    'sort_by' => $paramFetcher->get('sort_by'),
-                    'sort_order' => $paramFetcher->get('sort_order'),
-                ]
-            ) :
-            'false';
-
-        $nextPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', [
-                    'count' => $paramFetcher->get('count'),
-                    'page' => $paramFetcher->get('page') + 1,
-                ]
-            ) :
-            'false';
-
-        $prevPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', [
-                    'count' => $paramFetcher->get('count'),
-                    'page' => $paramFetcher->get('page') - 1,
-                ]
-            ) :
-            'false';
-
-        $firstPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', [
-            'count' => $paramFetcher->get('count'),
-            'page' => $paginator->minimumNbPages(),
-                ]
-            ) :
-            'false';
-
-        $lastPage = $paginator->hasNextPage() ?
-            $this->generateUrl('get_dreams', [
-            'count' => $paramFetcher->get('count'),
-            'page' => $paginator->calculateNbPages(),
-                ]
-            ) :
-            'false';
+        $paginator->getPaginated(
+            $paramFetcher->get('count'),
+            $paramFetcher->get('page'),
+            $paramFetcher->get('sort_by'),
+            $paramFetcher->get('sort_order'),
+            $dreamsAll
+        );
 
         $dreamsResponse = new DreamsResponse();
 
         $dreamsResponse->setDreams($dreams);
-        $dreamsResponse->setSelfPage($selfPage);
-        $dreamsResponse->setNextPage($nextPage);
-        $dreamsResponse->setPrevPage($prevPage);
-        $dreamsResponse->setFirstPage($firstPage);
-        $dreamsResponse->setLastPage($lastPage);
 
         return $dreamsResponse;
     }

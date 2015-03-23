@@ -7,11 +7,17 @@
         <parameter key="dream_file_uploader.class">Geekhub\DreamBundle\Service\DreamImageHandler</parameter>
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
         <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
+        <parameter key="paginator_service.class">Geekhub\DreamBundle\Service\PaginatorService</parameter>
     </parameters>
 
     <services>
         <service id="dream_file_uploader" class="%dream_file_uploader.class%">
             <argument type="service" id="liip_imagine.cache.manager"/>
+        </service>
+
+        <service id="paginator" class="%paginator_service.class%">
+            <argument type="service" id="session"/>
+            <argument type="service" id="router" />
         </service>
 
         <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">
