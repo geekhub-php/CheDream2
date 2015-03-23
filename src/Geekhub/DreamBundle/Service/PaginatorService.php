@@ -4,6 +4,7 @@ namespace Geekhub\DreamBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Request\ParamFetcher;
+use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Model\DreamsResponse;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
@@ -14,11 +15,13 @@ class PaginatorService
         $this->router = $router;
     }
 
-    public function getPaginated($count,
-                                 $pages,
-                                 $sortBy,
-                                 $sortOrder,
-                                 $dreamsAll
+    public function getPaginated(
+       Dream $dreams,
+       $count,
+       $pages,
+       $sortBy,
+       $sortOrder,
+       $dreamsAll
     ) {
         $this->count = $count;
         $this->pages = $pages;
@@ -29,6 +32,7 @@ class PaginatorService
 
         $dreamsResponse = new DreamsResponse();
 
+        $dreamsResponse->setDreams($dreams);
         $dreamsResponse->setSelfPage($this->getSelfPage());
         $dreamsResponse->setNextPage($this->getNextPage());
         $dreamsResponse->setPrevPage($this->getPrevPage());
