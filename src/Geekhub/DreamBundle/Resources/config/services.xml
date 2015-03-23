@@ -16,7 +16,6 @@
         </service>
 
         <service id="paginator" class="%paginator_service.class%">
-            <argument type="service" id="session"/>
             <argument type="service" id="router" />
         </service>
 
