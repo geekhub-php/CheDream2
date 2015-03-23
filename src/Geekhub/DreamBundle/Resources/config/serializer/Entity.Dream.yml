@@ -37,12 +37,12 @@ Geekhub\DreamBundle\Entity\Dream:
 #           expose: true
 #        author:
 #           expose: true
-#        mediaPictures:
-#           expose: true
+        mediaPictures:
+           expose: true
         mediaCompletedPictures:
            expose: true
-#        mediaPoster:
-#           expose: true
+        mediaPoster:
+           expose: true
         mediaFiles:
            expose: true
         dreamFinancialResources:
@@ -53,8 +53,8 @@ Geekhub\DreamBundle\Entity\Dream:
            expose: true
 #        dreamFinancialContributions:
 #           expose: true
-#        dreamEquipmentContributions:
-#           expose: true
+        dreamEquipmentContributions:
+           expose: true
 #        dreamWorkContributions:
 #           expose: true
         dreamOtherContributions:
