@@ -11,31 +11,31 @@ use FOS\RestBundle\View\View;
 class UserController extends FOSRestController
 {
     /**
-     * Get single Dream,
+     * Gets all User,
      *
      * @ApiDoc(
      * resource = true,
-     * description = "Gets all Dream",
+     * description = "Gets all User",
      * output = "AppBundle\Document\Dream",
      * statusCodes = {
      *      200 = "Returned when successful",
      *      404 = "Returned when the Dream is not found"
-     * }
+     * },
+     * section="All Users"
      * )
      *
      *
      * RestView()
      * @param
-     * @return mixed
+     * @return View
      *
      * @throws NotFoundHttpException when not exist
      */
     public function getUserAction()
     {
         $manager = $this->getDoctrine()->getManager();
-        $dream = $manager->getRepository('GeekhubUserBundle:User')->findAll();
-        $restView = View::create();
-        $restView->setData($dream);
-        return $restView;
+        $user = $manager->getRepository('GeekhubUserBundle:User')->findAll();
+
+        return $user;
     }
 }
