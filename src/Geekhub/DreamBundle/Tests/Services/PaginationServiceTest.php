@@ -14,7 +14,7 @@ class PaginationServiceTest extends WebTestCase
      */
     public function testPaginationService($path, $count1, $pages1, $sortBy1, $sortOrder1, $count2, $pages2, $sortBy2, $sortOrder2)
     {
-//        , $count2, $page2, $sortBy2, $sortOrder2
+
         $client = static::createClient();
 
         $manager = static::$kernel->getContainer()
