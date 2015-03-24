@@ -4,14 +4,37 @@ Geekhub\UserBundle\Entity\User:
         id:
             expose: true
             type: integer
-#        firstName:
+        firstName:
+            expose: true
+            type: string
+        middleName:
+            expose: true
+            type: string
+        lastName:
+            expose: true
+            type: string
+        avatar:
+            expose: true
+        birthday:
+            expose: true
+            type: DateTime
+        about:
+            expose: true
+            type: string
+        vkontakteId:
+            expose: true
+            type: string
+        facebookId:
+            expose: true
+            type: string
+        odnoklassnikiId:
+            expose: true
+            type: string
+        financialContributions:
+            expose: true
+#        equipmentContributions:
 #            expose: true
-#            type: string
-#        middleName:
+#        workContributions:
 #            expose: true
-#            type: string
-#        lastName:
-#            expose: true
-#            type: string
-#        avatar:
-#            expose: true
+        otherContributions:
+            expose: true

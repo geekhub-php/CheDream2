@@ -33,10 +33,10 @@ Geekhub\DreamBundle\Entity\Dream:
            expose: true
         currentStatus:
            expose: true
-#        usersWhoFavorites:
-#           expose: true
-#        author:
-#           expose: true
+        usersWhoFavorites:
+           expose: true
+        author:
+           expose: true
         mediaPictures:
            expose: true
         mediaCompletedPictures:
