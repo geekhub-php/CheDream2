@@ -35,8 +35,8 @@ Geekhub\DreamBundle\Entity\Dream:
            expose: true
 #        usersWhoFavorites:
 #           expose: true
-#        author:
-#           expose: true
+        author:
+           expose: true
         mediaPictures:
            expose: true
         mediaCompletedPictures:
