@@ -16,7 +16,6 @@ class PaginatorService
     }
 
     public function getPaginated(
-       $dreams,
        $count,
        $pages,
        $sortBy,
@@ -32,7 +31,6 @@ class PaginatorService
 
         $dreamsResponse = new DreamsResponse();
 
-        $dreamsResponse->setDreams($dreams);
         $dreamsResponse->setSelfPage($this->getSelfPage());
         $dreamsResponse->setNextPage($this->getNextPage());
         $dreamsResponse->setPrevPage($this->getPrevPage());

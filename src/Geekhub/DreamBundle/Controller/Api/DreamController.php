@@ -52,14 +52,24 @@ class DreamController extends FOSRestController
 
         $paginator = $this->get('paginator');
 
-        return $paginator->getPaginated(
-            $dreams,
+        $pagination = $paginator->getPaginated(
             $paramFetcher->get('count'),
             $paramFetcher->get('page'),
             $paramFetcher->get('sort_by'),
             $paramFetcher->get('sort_order'),
             $dreamsAll
         );
+
+        $dreamsResponse = new DreamsResponse();
+
+        $dreamsResponse->setDreams($dreams);
+        $dreamsResponse->setSelfPage($pagination->getSelfPage());
+        $dreamsResponse->setNextPage($pagination->getNextPage());
+        $dreamsResponse->setPrevPage($pagination->getPrevPage());
+        $dreamsResponse->setFirstPage($pagination->getFirstPage());
+        $dreamsResponse->setLastPage($pagination->getLastPage());
+
+        return $dreamsResponse;
     }
     /**
      * Get single Dream for slug,.
