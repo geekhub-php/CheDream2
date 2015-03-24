@@ -9,4 +9,5 @@ Geekhub\DreamBundle\Entity\AbstractContributeResource:
            type: integer
         dream:
            expose: true
+           type: array<Geekhub\DreamBundle\Entity\Dream>
 

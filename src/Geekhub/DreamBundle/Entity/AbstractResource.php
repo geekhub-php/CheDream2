@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,6 +16,7 @@ class AbstractResource extends AbstractContributeResource
      *
      * @Assert\NotBlank(message = "dream.not_blank")
      * @ORM\Column(name="title", type="string", length=100)
+     * @Type("string")
      */
     protected $title;
 
