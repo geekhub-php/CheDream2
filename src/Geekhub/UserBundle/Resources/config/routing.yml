@@ -25,6 +25,11 @@ merge_route:
     resource: "@GeekhubUserBundle/Resources/config/routing/merge.yml"
     prefix:   /connect-account
 
+api_route:
+    resource: "@GeekhubUserBundle/Resources/config/routing/api.yml"
+    prefix:   /api
+    type:     rest
+
 hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix:   /login-social
@@ -65,3 +70,5 @@ profile_view:
 profile_view_dreams:
     pattern: /users/{id}/dreams/{status}
     defaults: { _controller: GeekhubUserBundle:User:userOwnedDreamsView}
+
+

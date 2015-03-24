@@ -1,0 +1,3 @@
+geek_user:
+    type: rest
+    resource: "@GeekhubUserBundle/Controller/Api/UserController.php"
