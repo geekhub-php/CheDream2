@@ -51,11 +51,11 @@ Geekhub\DreamBundle\Entity\Dream:
            expose: true
         dreamWorkResources:
            expose: true
-#        dreamFinancialContributions:
-#           expose: true
-#        dreamEquipmentContributions:
-#           expose: true
-#        dreamWorkContributions:
-#           expose: true
+        dreamFinancialContributions:
+           expose: true
+        dreamEquipmentContributions:
+           expose: true
+        dreamWorkContributions:
+           expose: true
         dreamOtherContributions:
            expose: true

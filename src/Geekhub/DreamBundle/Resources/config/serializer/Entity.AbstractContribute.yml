@@ -1,0 +1,8 @@
+Geekhub\DreamBundle\Entity\AbstractContribute:
+    exclusion_policy: ALL
+    properties:
+        hiddenContributor:
+           expose: true
+           type: boolean
+#        user:
+#           expose: true
