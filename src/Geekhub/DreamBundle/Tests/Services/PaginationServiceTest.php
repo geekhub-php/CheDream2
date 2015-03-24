@@ -44,11 +44,9 @@ class PaginationServiceTest extends WebTestCase
 
         $dreamsAll = $manager->getRepository("GeekhubDreamBundle:Dream")->findAll();
 
-        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([], [$sortBy1 => $sortOrder1], $count1, $pages1);
+        $paginationResponse1 =  $paginator->getPaginated($count1, $pages1, $sortBy1, $sortOrder1, $dreamsAll);
 
-        $paginationResponse1 =  $paginator->getPaginated($dreams, $count1, $pages1, $sortBy1, $sortOrder1, $dreamsAll);
-
-        $paginationResponse2 =  $paginator->getPaginated($dreams, $count2, $pages2, $sortBy2, $sortOrder2, $dreamsAll);
+        $paginationResponse2 =  $paginator->getPaginated($count2, $pages2, $sortBy2, $sortOrder2, $dreamsAll);
 
         $serializer = $container->get('serializer');
 
