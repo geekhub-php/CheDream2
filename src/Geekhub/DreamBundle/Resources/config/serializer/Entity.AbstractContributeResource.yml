@@ -1,0 +1,12 @@
+Geekhub\DreamBundle\Entity\AbstractContributeResource:
+    exclusion_policy: ALL
+    properties:
+        createdAt:
+           expose: true
+           type: DateTime
+        quantity:
+           expose: true
+           type: integer
+        dream:
+           expose: true
+

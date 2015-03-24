@@ -47,7 +47,14 @@ class DreamController extends FOSRestController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->findBy([],[$paramFetcher->get('sort_by') => $paramFetcher->get('sort_order')], $paramFetcher->get('count'), $paramFetcher->get('page'));
+        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->
+        findBy(
+            [],
+            [$paramFetcher->get('sort_by') => $paramFetcher->get('sort_order')],
+            $paramFetcher->get('count'),
+            $paramFetcher->get('count') * ($paramFetcher->get('page') - 1)
+        );
+
         $dreamsAll = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
 
         $paginator = $this->get('paginator');

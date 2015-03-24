@@ -1,0 +1,40 @@
+Geekhub\UserBundle\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: integer
+        firstName:
+            expose: true
+            type: string
+        middleName:
+            expose: true
+            type: string
+        lastName:
+            expose: true
+            type: string
+        avatar:
+            expose: true
+        birthday:
+            expose: true
+            type: DateTime
+        about:
+            expose: true
+            type: string
+        vkontakteId:
+            expose: true
+            type: string
+        facebookId:
+            expose: true
+            type: string
+        odnoklassnikiId:
+            expose: true
+            type: string
+        financialContributions:
+            expose: true
+#        equipmentContributions:
+#            expose: true
+#        workContributions:
+#            expose: true
+        otherContributions:
+            expose: true
