@@ -5,3 +5,7 @@ NelmioApiDocBundle:
 dream:
     type: rest
     resource: "@GeekhubDreamBundle/Controller/Api/DreamController.php"
+
+_monitor:
+    resource: "@LiipMonitorBundle/Resources/config/routing.xml"
+    prefix: /monitor/health
