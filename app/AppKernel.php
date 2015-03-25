@@ -47,6 +47,7 @@ class AppKernel extends Kernel
             new Geekhub\OAuthBunsle\GeekhubOAuthBundle(),
             new Hype\MailchimpBundle\HypeMailchimpBundle(),
             new \GeekHub\DomainRoutingBundle\DomainRoutingBundle(),
+            new Liip\MonitorBundle\LiipMonitorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
