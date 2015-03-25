@@ -1,3 +1,4 @@
+services:
     monitor.check.php_extensions:
         class: Geekhub\DreamBundle\Check\TravisCheck
         arguments:

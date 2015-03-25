@@ -5,6 +5,7 @@ imports:
     - { resource: jms_serializer.yml }
     - { resource: twig.yml }
     - { resource: liip_imagine.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
