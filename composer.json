@@ -33,6 +33,7 @@
         "ahonymous/fontello": "dev-master",
         "guzzle/guzzle": "*@dev",
         "guzzlehttp/streams": "dev-master",
+        "guzzlehttp/guzzle": "~5.0",
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev",
         "jms/serializer-bundle": "0.13.*",
         "friendsofsymfony/rest-bundle": "1.3.*@dev",
