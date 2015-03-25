@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: assetic.yml }
     - { resource: sonata.yml }
     - { resource: jms_serializer.yml }
     - { resource: twig.yml }
@@ -19,7 +18,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        hinclude_default_template: GeekhubResourceBundle::hinclude.html.twig
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -155,10 +153,6 @@ stfalcon_tinymce:
         simple:
             theme: "modern"
             content_css: "/bundles/geekhubresource/css/theme_tinymce.css"
-
-braincrafted_bootstrap:
-    assets_dir: %kernel.root_dir%/../vendor/bower-components/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/bower-components/jquery/jquery.js
 
 hip_mandrill:
 #prod mail API
