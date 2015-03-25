@@ -1,8 +1,3 @@
 geekhub_dream_forntend:
     resource: "@GeekhubDreamBundle/Resources/config/routing/frontend.yml"
     prefix:   /
-
-geekhub_dream_api:
-    resource: "@GeekhubDreamBundle/Resources/config/routing/api.yml"
-    prefix:   /api
-    type:     rest

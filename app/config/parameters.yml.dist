@@ -31,3 +31,6 @@ parameters:
 
     nodejs.path: /usr/local/bin/node
     nodejs.modules_path: /usr/local/lib/node_modules
+
+    api_domain: api.chedream.local
+    admin_domain: admin.chedream.local

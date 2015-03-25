@@ -188,3 +188,8 @@ hype_mailchimp:
     api_key: %mail_chimp.api_key%
     default_list: %mail_chimp.list_id%
     ssl: true
+
+domain_routing:
+    include_routes:
+        %api_domain%: ['config/routing_api.yml']
+        %admin_domain%: ['config/routing_sonata_admin.yml']

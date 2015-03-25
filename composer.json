@@ -42,7 +42,8 @@
         "stfalcon/tinymce-bundle": "0.3.*@dev",
         "gregwar/captcha-bundle": "dev-master",
         "hipaway-travel/mandrill-bundle": "dev-master",
-        "ahmedsamy/hype-mailchimp-bundle": "1.1.*@dev"
+        "ahmedsamy/hype-mailchimp-bundle": "1.1.*@dev",
+        "geek-hub/domain-routing-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
@@ -57,7 +58,6 @@
     "scripts": {
         "post-install-cmd": [
             "bower install --allow-root",
-            "git apply bin/fix-tagit-russian-separator.patch",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
