@@ -14,6 +14,16 @@ use Geekhub\DreamBundle\Service\PaginatorService;
 
 class DreamController extends FOSRestController
 {
+    public function findByNot($field, $value)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where($qb->expr()->not($qb->expr()->eq('a.'.$field, '?1')));
+        $qb->setParameter(1, $value);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
     /**
      * Get dreams for parameter,<br />
      *      * <strong>Simple example:</strong><br />
@@ -33,6 +43,7 @@ class DreamController extends FOSRestController
      *
      * RestView()
      *
+     * @QueryParam(name="status", strict=true, requirements="[a-z]+", description="Status", nullable=true)
      * @QueryParam(name="count", requirements="\d+", default="10", description="Count dreams at one page")
      * @QueryParam(name="page", requirements="\d+", default="1", description="Number of page to be shown")
      * @QueryParam(name="sort_by", strict=true, requirements="^[a-zA-Z]+", default="createdAt", description="Sort by", nullable=true)
@@ -47,15 +58,31 @@ class DreamController extends FOSRestController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $dreams = $manager->getRepository('GeekhubDreamBundle:Dream')->
-        findBy(
-            [],
-            [$paramFetcher->get('sort_by') => $paramFetcher->get('sort_order')],
-            $paramFetcher->get('count'),
-            $paramFetcher->get('count') * ($paramFetcher->get('page') - 1)
-        );
+        $repository = $manager->getRepository('GeekhubDreamBundle:Dream');
 
-        $dreamsAll = $manager->getRepository('GeekhubDreamBundle:Dream')->findAll();
+        if(!$paramFetcher->get('status')){
+            $queryBuilder = $repository->createQueryBuilder('dream')
+                ->where('dream.currentStatus != :identifier')
+                ->setParameter('identifier', 'fail')
+                ->orderBy('dream.'.$paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
+                ->setFirstResult($paramFetcher->get('count') * ($paramFetcher->get('page') - 1))
+                ->setMaxResults($paramFetcher->get('count'))
+                ->getQuery()
+                ->getResult()
+            ;
+        } else {
+            $queryBuilder = $repository->createQueryBuilder('dream')
+                ->where('dream.currentStatus = :identifier')
+                ->setParameter('identifier', $paramFetcher->get('status'))
+                ->orderBy('dream.'.$paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
+                ->setFirstResult($paramFetcher->get('count') * ($paramFetcher->get('page') - 1))
+                ->setMaxResults($paramFetcher->get('count'))
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+        $dreamsAll = $repository->findAll();
 
         $paginator = $this->get('paginator');
 
@@ -69,7 +96,7 @@ class DreamController extends FOSRestController
 
         $dreamsResponse = new DreamsResponse();
 
-        $dreamsResponse->setDreams($dreams);
+        $dreamsResponse->setDreams($queryBuilder);
         $dreamsResponse->setSelfPage($pagination->getSelfPage());
         $dreamsResponse->setNextPage($pagination->getNextPage());
         $dreamsResponse->setPrevPage($pagination->getPrevPage());
