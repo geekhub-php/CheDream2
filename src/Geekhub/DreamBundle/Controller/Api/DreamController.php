@@ -14,16 +14,6 @@ use Geekhub\DreamBundle\Service\PaginatorService;
 
 class DreamController extends FOSRestController
 {
-    public function findByNot($field, $value)
-    {
-        $qb = $this->createQueryBuilder('a');
-        $qb->where($qb->expr()->not($qb->expr()->eq('a.'.$field, '?1')));
-        $qb->setParameter(1, $value);
-
-        return $qb->getQuery()
-            ->getResult();
-    }
-
     /**
      * Get dreams for parameter,<br />
      *      * <strong>Simple example:</strong><br />
@@ -62,8 +52,9 @@ class DreamController extends FOSRestController
 
         if(!$paramFetcher->get('status')){
             $queryBuilder = $repository->createQueryBuilder('dream')
-                ->where('dream.currentStatus != :identifier')
-                ->setParameter('identifier', 'fail')
+                ->where('dream.currentStatus != :identifier1','dream.currentStatus != :identifier2')
+                ->setParameter('identifier1', 'fail')
+                ->setParameter('identifier2', 'rejected')
                 ->orderBy('dream.'.$paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
                 ->setFirstResult($paramFetcher->get('count') * ($paramFetcher->get('page') - 1))
                 ->setMaxResults($paramFetcher->get('count'))
