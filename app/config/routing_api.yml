@@ -5,3 +5,7 @@ NelmioApiDocBundle:
 dream:
     type: rest
     resource: "@GeekhubDreamBundle/Controller/Api/DreamController.php"
+
+faq:
+    type: rest
+    resource: "@GeekhubResourceBundle/Controller/Api/FaqController.php"
