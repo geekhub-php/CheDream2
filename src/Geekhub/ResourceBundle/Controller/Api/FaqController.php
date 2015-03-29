@@ -4,7 +4,6 @@ namespace Geekhub\ResourceBundle\Controller\Api;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use FOS\RestBundle\Controller\Annotations\View as RestView;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -13,9 +12,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 class FaqController extends FOSRestController
 {
     /**
-     * Get faqs for parameter,<br />
+     * Get Faqs for parameter,<br />
      *      * <strong>Simple example:</strong><br />
-     * http://chedream2/app_dev.php/api/faqs.json?count=2&page=2
+     * http://api.chedream.local/app_dev.php/faqs.json?count=2&page=2
      *
      * @ApiDoc(
      * resource = true,
@@ -50,5 +49,38 @@ class FaqController extends FOSRestController
         );
 
         return $faqsQuery;
+    }
+
+    /**
+     * Get single Faq for slug,.
+     *
+     * @ApiDoc(
+     * resource = true,
+     * description = "Gets Dream for Faq",
+     * output="Geekhub\ResourceBundle\Entity\Faq",
+     * statusCodes = {
+     *      200 = "Returned when successful",
+     *      404 = "Returned when the faq is not found"
+     * },
+     * section="Faq for slug"
+     * )
+     *
+     * RestView()
+     * @param
+     *
+     * @return View
+     *
+     * @throws NotFoundHttpException when not exist
+     */
+    public function getFaqAction($slug)
+    {
+        $faq = $this->getDoctrine()->getManager()
+            ->getRepository('GeekhubResourceBundle:Faq')
+            ->findOneBySlug($slug);
+        if (!$faq) {
+            throw new NotFoundHttpException();
+        }
+
+        return $faq;
     }
 }
