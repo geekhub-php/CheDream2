@@ -159,10 +159,10 @@ class DreamController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $data = $request->request->all();
-//        $user = $this->getUser();
+        $user = $this->getUser();
         $data = $this->get('serializer')->serialize($data, 'json');
         $dream = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
-//        $dream->setAuthor($user);
+        $dream->setAuthor($user);
         $em->persist($dream);
         $em->flush();
         $restView = View::create();
@@ -171,5 +171,53 @@ class DreamController extends FOSRestController
             "link" => $this->get('router')->generate('get_dream', ['slug' => $dream->getSlug()], true),
         ]);
         return $restView;
+    }
+
+    /**
+     * Update existing dream from the submitted data or create a new dream at a specific location.
+     *
+     * @ApiDoc(
+     * resource = true,
+     * description = "Create/Update single dream",
+     * parameters={
+     *          {"name"="title", "dataType"="string", "required"=true, "description"="Dream name"},
+     *          {"name"="description", "dataType"="string", "required"=true, "description"="Description about dream"},
+     *          {"name"="phone", "dataType"="integer", "required"=true, "description"="Phone number", "format"="(xxx) xxx xxx xxx"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<AppBundle\Document\EquipmentResource>", "required"=true, "description"="Equipment resources"},
+     *          {"name"="dreamWorkResources", "dataType"="array<AppBundle\Document\WorkResource>", "required"=true, "description"="Work resources"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<AppBundle\Document\FinancialResource>", "required"=true, "description"="Financial resources"}
+     *      },
+     *      section="Put Dream",
+     *          statusCodes = {
+     *          200 = "Dream successful update",
+     *          404 = "Return when dream with current slug not isset"
+     *          }
+     * )
+     *
+     *
+     * @param  Request $request the request object
+     * @param  string  $slug    the page id
+     * @return mixed
+     */
+    public function putDreamAction(Request $request, $slug)
+    {
+        $data = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $dreamOld = $em->getRepository('GeekhubDreamBundle:Dream')
+            ->findOneBySlug($slug);
+        $data = $this->get('serializer')->serialize($data, 'json');
+        $dreamNew = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
+        $view = View::create();
+        if (!$dreamOld) {
+            $dreamNew->setAuthor($this->getUser());
+            $em->persist($dreamNew);
+            $em->flush();
+            $view->setStatusCode(404);
+        } else {
+            $this->get('services.object_updater_class')->updateObject($dreamOld, $dreamNew);
+            $em->flush();
+            $view->setStatusCode(200);
+        }
+        return $view;
     }
 }
