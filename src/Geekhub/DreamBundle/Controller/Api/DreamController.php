@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 
 class DreamController extends FOSRestController
 {
@@ -126,5 +127,49 @@ class DreamController extends FOSRestController
         }
 
         return $dream;
+    }
+
+    /**
+     * Create dream
+     *
+     * @ApiDoc(
+     *      resource = true,
+     *      description = "Create single dream",
+     *      parameters={
+     *          {"name"="title", "dataType"="string", "required"=true, "description"="Dream name"},
+     *          {"name"="description", "dataType"="string", "required"=true, "description"="Description about dream"},
+     *          {"name"="phone", "dataType"="integer", "required"=true, "description"="Phone number", "format"="(xxx) xxx xxx xxx"},
+     *          {"name"="dreamEquipmentResources", "dataType"="array<Geekhub\DreamBundle\Entity\EquipmentResource>", "required"=true, "description"="Equipment resources"},
+     *          {"name"="dreamWorkResources", "dataType"="array<Geekhub\DreamBundle\Entity\WorkResource>", "required"=true, "description"="Work resources"},
+     *          {"name"="dreamFinancialResources", "dataType"="array<Geekhub\DreamBundle\Entity\FinancialResource>", "required"=true, "description"="Financial resources"}
+     *      },
+     *      output = "string",
+     *      statusCodes = {
+     *          201 = "Dream sucessful created",
+     *          400 = "When dream not created"
+     *      },
+     * section="Post Dream"
+     * )
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function postDreamAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->request->all();
+//        $user = $this->getUser();
+        $data = $this->get('serializer')->serialize($data, 'json');
+        $dream = $this->get('serializer')->deserialize($data, 'Geekhub\DreamBundle\Entity\Dream', 'json');
+//        $dream->setAuthor($user);
+        $em->persist($dream);
+        $em->flush();
+        $restView = View::create();
+        $restView->setStatusCode(201);
+        $restView->setData([
+            "link" => $this->get('router')->generate('get_dream', ['slug' => $dream->getSlug()], true),
+        ]);
+        return $restView;
     }
 }
