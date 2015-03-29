@@ -10,14 +10,13 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\FOSRestController;
-use Geekhub\DreamBundle\Service\PaginatorService;
 
 class DreamController extends FOSRestController
 {
     /**
      * Get dreams for parameter,<br />
      *      * <strong>Simple example:</strong><br />
-     * http://chedream2/app_dev.php/api/dreams.json?count=2&page=2&sort_by=id&sort_order=ASC
+     * http://api.chedream.local/app_dev.php/dreams.json?status=submitted&count=2&page=2&sort_by=id&sort_order=ASC
      *
      * @ApiDoc(
      * resource = true,
