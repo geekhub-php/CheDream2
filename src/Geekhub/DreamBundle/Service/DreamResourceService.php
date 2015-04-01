@@ -5,9 +5,10 @@ namespace Geekhub\DreamBundle\Service;
 class DreamResourceService
 {
 
-    public function getResource($financialContributions)
+    public function getResource($financialContributions, $equipmentContributions)
     {
         $this->financialContributions = $financialContributions;
+        $this->equipmentContributions = $equipmentContributions;
 
         return $this->getFinancialProgress();
 
@@ -27,49 +28,19 @@ class DreamResourceService
 
         return round((count($user)/$progressAll)*100);
     }
+
+    private function getEquipmentProgress()
+    {
+        foreach ($this->equipmentContributions as $key => $equipmentContributionsData) {
+            $user[$key] = $equipmentContributionsData->getUser();
+            $equipmentContributionsHidden[$key] = $equipmentContributionsData->getQuantity();
+            $financialResourceHidden[$key] = $equipmentContributionsData->getEquipmentResource()->getQuantity();
+
+            $progress[$key] = round(($equipmentContributionsHidden[$key]/$financialResourceHidden[$key])*100);
+        }
+
+        $progressAll = array_sum($progress);
+
+        return $progress;
+    }
 }
-//
-//[
-//  {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//    "quantity": 10,
-//    "dream": [],
-//    "hidden_contributor": true,
-//    "id": 12,
-//    "financial_resource": {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//      "quantity": 50,
-//      "dream": [],
-//      "title": "фінанс3",
-//      "id": 35
-//    }
-//  },
-//  {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//    "quantity": 50,
-//    "dream": [],
-//    "hidden_contributor": true,
-//    "id": 13,
-//    "financial_resource": {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//      "quantity": 50,
-//      "dream": [],
-//      "title": "фінанс3",
-//      "id": 35
-//    }
-//  },
-//  {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//    "quantity": 50,
-//    "dream": [],
-//    "hidden_contributor": true,
-//    "id": 14,
-//    "financial_resource": {
-//      "created_at": "2015-03-23T20:20:48+0200",
-//      "quantity": 50,
-//      "dream": [],
-//      "title": "фінанс3",
-//      "id": 35
-//    }
-//  }
-//]
