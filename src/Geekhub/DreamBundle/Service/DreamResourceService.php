@@ -5,10 +5,11 @@ namespace Geekhub\DreamBundle\Service;
 class DreamResourceService
 {
 
-    public function getResource($financialContributions, $equipmentContributions)
+    public function getResource($financialContributions, $equipmentContributions, $workContributions)
     {
         $this->financialContributions = $financialContributions;
         $this->equipmentContributions = $equipmentContributions;
+        $this->workContributions = $workContributions;
 
         return $this->getFinancialProgress();
 
@@ -37,6 +38,21 @@ class DreamResourceService
             $financialResourceHidden[$key] = $equipmentContributionsData->getEquipmentResource()->getQuantity();
 
             $progress[$key] = round(($equipmentContributionsHidden[$key]/$financialResourceHidden[$key])*100);
+        }
+
+        $progressAll = array_sum($progress);
+
+        return $progress;
+    }
+
+    private function getWorkProgress()
+    {
+        foreach ($this->workContributions as $key => $workContributionsData) {
+            $user[$key] = $workContributionsData->getUser();
+            $workContributionsHidden[$key] = $workContributionsData->getQuantity();
+            $financialResourceHidden[$key] = $workContributionsData->getEquipmentResource()->getQuantity();
+
+            $progress[$key] = round(($workContributionsHidden[$key]/$financialResourceHidden[$key])*100);
         }
 
         $progressAll = array_sum($progress);
