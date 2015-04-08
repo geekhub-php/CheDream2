@@ -22,6 +22,30 @@ class DreamsResponse extends AbstractPagination
     protected $dreams;
 
     /**
+     * @var Array[]
+     *
+     * @Type("array<Geekhub\DreamBundle\Entity\EquipmentResource>")
+     * @Expose
+     */
+    protected  $dream_equipment_progress;
+
+    /**
+     * @var Array[]
+     *
+     * @Type("array<Geekhub\DreamBundle\Entity\FinancialResource>")
+     * @Expose
+     */
+    protected  $dream_financial_progress;
+
+    /**
+     * @var Array[]
+     *
+     * @Type("array<Geekhub\DreamBundle\Entity\WorkResource>")
+     * @Expose
+     */
+    protected  $dream_work_progress;
+
+    /**
      * @param mixed $dreams
      */
     public function setDreams($dreams)
