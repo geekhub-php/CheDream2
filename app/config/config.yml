@@ -5,7 +5,6 @@ imports:
     - { resource: jms_serializer.yml }
     - { resource: twig.yml }
     - { resource: liip_imagine.yml }
-    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -106,18 +105,7 @@ fos_rest:
     routing_loader:
         default_format: json
 
-nelmio_api_doc:
-    name: CheDream
-    sandbox:
-        accept_type: application/json
-        body_format:
-            formats: [ json ]
-        request_format:
-            formats:
-                json: application/json
-            default_format: json
-    html_template: NelmioApiDocBundle::monitors.html.twig
-
+nelmio_api_doc: CheDream
 
 hwi_oauth:
     connect:
