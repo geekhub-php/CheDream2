@@ -218,6 +218,19 @@ liip_monitor:
                 status_code:          200
                 content:              null
 
+            faqs:
+                host:                 %api_domain%
+                port:                 80
+                path:                 /faqs
+                status_code:          200
+                content:              null
+
+            faqs_by_slug:
+                host:                 %api_domain%
+                port:                 80
+                path:                 /faqs/pitannia-1
+                status_code:          200
+                content:              null
 nelmio_cors:
     defaults:
         allow_credentials: false
