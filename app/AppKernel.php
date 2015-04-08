@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new Geekhub\DreamBundle\GeekhubDreamBundle(),
+            new Geekhub\ResourceBundle\GeekhubResourceBundle(),
             new Geekhub\UserBundle\GeekhubUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FPN\TagBundle\FPNTagBundle(),
@@ -48,6 +49,8 @@ class AppKernel extends Kernel
             new Hype\MailchimpBundle\HypeMailchimpBundle(),
             new \GeekHub\DomainRoutingBundle\DomainRoutingBundle(),
             new Liip\MonitorBundle\LiipMonitorBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
