@@ -8,6 +8,7 @@
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
         <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
         <parameter key="paginator_service.class">Geekhub\DreamBundle\Service\PaginatorService</parameter>
+        <parameter key="dream_resource_service.class">Geekhub\DreamBundle\Service\DreamResourceService</parameter>
     </parameters>
 
     <services>
@@ -17,6 +18,10 @@
 
         <service id="paginator" class="%paginator_service.class%">
             <argument type="service" id="router" />
+        </service>
+
+        <service id="dream_resource" class="%dream_resource_service.class%">
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">

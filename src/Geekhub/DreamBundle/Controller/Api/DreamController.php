@@ -73,6 +73,7 @@ class DreamController extends FOSRestController
         }
 
         $dreamsAll = $repository->findAll();
+//        $dreamsAll = $this->get('dream_resource');
 
         $paginator = $this->get('paginator');
 
@@ -93,7 +94,7 @@ class DreamController extends FOSRestController
         $dreamsResponse->setFirstPage($pagination->getFirstPage());
         $dreamsResponse->setLastPage($pagination->getLastPage());
 
-        return $dreamsResponse;
+        return $this->container->get('dream_resource');
     }
     /**
      * Get single Dream for slug,.
