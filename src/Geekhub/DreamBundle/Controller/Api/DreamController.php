@@ -49,7 +49,7 @@ class DreamController extends FOSRestController
 
         $repository = $manager->getRepository('GeekhubDreamBundle:Dream');
 
-        if(!$paramFetcher->get('status')){
+        if (!$paramFetcher->get('status')) {
             $queryBuilder = $repository->createQueryBuilder('dream')
                 ->where('dream.currentStatus != :identifier1','dream.currentStatus != :identifier2')
                 ->setParameter('identifier1', 'fail')

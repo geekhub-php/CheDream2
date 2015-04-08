@@ -5,7 +5,6 @@ namespace Geekhub\DreamBundle\Model;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
-use Geekhub\DreamBundle\Model\AbstractPagination;
 
 /**
  * Class DreamResponse

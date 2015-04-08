@@ -188,6 +188,36 @@ domain_routing:
         %api_domain%: ['config/routing_api.yml']
         %admin_domain%: ['config/routing_sonata_admin.yml']
 
+liip_monitor:
+    enable_controller: true
+    checks:
+         disk_usage:
+             warning:              70
+             critical:             90
+             path:                 '%kernel.cache_dir%'
+
+         apc_memory:
+             warning:              70
+             critical:             90
+
+         security_advisory:
+             lock_file:            '%kernel.root_dir%/../composer.lock'
+
+         http_service:
+            dreams:
+                host:                 %api_domain%
+                port:                 80
+                path:                 /dreams
+                status_code:          200
+                content:              null
+
+            dreams_by_slug:
+                host:                 %api_domain%
+                port:                 80
+                path:                 /dreams/znaiti-bat-ka-moyikh-ditiei
+                status_code:          200
+                content:              null
+
 nelmio_cors:
     defaults:
         allow_credentials: false
@@ -204,3 +234,4 @@ nelmio_cors:
             allow_headers: ['*']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
+
