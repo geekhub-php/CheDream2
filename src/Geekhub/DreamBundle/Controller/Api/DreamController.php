@@ -92,6 +92,7 @@ class DreamController extends FOSRestController
         $dreamsResponse->setPrevPage($pagination->getPrevPage());
         $dreamsResponse->setFirstPage($pagination->getFirstPage());
         $dreamsResponse->setLastPage($pagination->getLastPage());
+        $dreamsResponse->setDream_equipment_progress($pagination->getDream_equipment_progress());
 
         return $dreamsResponse;
     }
