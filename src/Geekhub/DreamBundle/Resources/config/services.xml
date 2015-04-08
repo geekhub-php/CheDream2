@@ -8,6 +8,7 @@
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
         <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
         <parameter key="paginator_service.class">Geekhub\DreamBundle\Service\PaginatorService</parameter>
+        <parameter key="services.object_updater_class">Geekhub\DreamBundle\Service\ObjectUpdater</parameter>
     </parameters>
 
     <services>
@@ -33,6 +34,11 @@
             <argument type="service" id="doctrine" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="services.object_updater_class" class="%services.object_updater_class%">
+
+        </service>
+        
     </services>
 
 </container>
