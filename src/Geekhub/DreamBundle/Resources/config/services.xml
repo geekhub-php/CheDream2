@@ -38,6 +38,7 @@
         <service id="services.object_updater_class" class="%services.object_updater_class%">
 
         </service>
+        
     </services>
 
 </container>

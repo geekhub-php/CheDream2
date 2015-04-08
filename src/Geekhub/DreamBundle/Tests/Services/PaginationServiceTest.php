@@ -5,7 +5,6 @@ namespace Geekhub\DreamBundle\Tests\Services;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Geekhub\DreamBundle\Model\DreamsResponse;
-use Geekhub\DreamBundle\Service\PaginatorService;
 
 class PaginationServiceTest extends WebTestCase
 {

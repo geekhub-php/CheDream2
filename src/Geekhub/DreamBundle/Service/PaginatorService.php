@@ -2,9 +2,6 @@
 
 namespace Geekhub\DreamBundle\Service;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use FOS\RestBundle\Request\ParamFetcher;
-use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Model\DreamsResponse;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 

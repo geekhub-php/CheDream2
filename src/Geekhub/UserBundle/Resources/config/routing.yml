@@ -70,5 +70,3 @@ profile_view:
 profile_view_dreams:
     pattern: /users/{id}/dreams/{status}
     defaults: { _controller: GeekhubUserBundle:User:userOwnedDreamsView}
-
-

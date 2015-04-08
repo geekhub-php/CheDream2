@@ -21,6 +21,7 @@ class ObjectUpdater
                 $accessor->setValue($objectOld, $propertyName, $newValue);
             }
         }
+
         return $objectOld;
     }
 }
