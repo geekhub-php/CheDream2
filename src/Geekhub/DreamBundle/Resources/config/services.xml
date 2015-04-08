@@ -21,6 +21,7 @@
         </service>
 
         <service id="dream_resource" class="%dream_resource_service.class%">
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="geekhub.dream.dream_subscriber" class="%geekhub.dream.dream_subscriber.class%">

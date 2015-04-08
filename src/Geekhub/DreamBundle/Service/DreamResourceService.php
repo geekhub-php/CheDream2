@@ -2,61 +2,64 @@
 
 namespace Geekhub\DreamBundle\Service;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Geekhub\DreamBundle\Entity\Dream;
+use Geekhub\DreamBundle\Entity\EquipmentResource;
+use Geekhub\DreamBundle\Entity\FinancialResource;
+use Geekhub\DreamBundle\Entity\WorkResource;
+
 class DreamResourceService
 {
+    protected $doctrine;
 
-    public function getResource($financialContributions, $equipmentContributions, $workContributions)
+    public function __construct(Registry $doctrine)
     {
-        $this->financialContributions = $financialContributions;
-        $this->equipmentContributions = $equipmentContributions;
-        $this->workContributions = $workContributions;
-
-        return $this->getFinancialProgress();
-
+        $this->doctrine = $doctrine;
     }
-
-    private function getFinancialProgress()
+    
+    public function showPercentOfCompletionFinancial(Dream $dream)
     {
-        foreach ($this->financialContributions as $key => $financialContributionsData) {
-            $user[$key] = $financialContributionsData->getUser();
-            $financialContributionsHidden[$key] = $financialContributionsData->getQuantity();
-            $financialResourceHidden[$key] = $financialContributionsData->getFinancialResource()->getQuantity();
-
-            $progress[$key] = round(($financialContributionsHidden[$key]/$financialResourceHidden[$key])*100);
+        if (count($dream->getDreamFinancialResources()) == 0) {
+            return null;
         }
 
-        $progressAll = array_sum($progress);
+        $arrayResourcesQuantity = $dream->getDreamFinancialResources()->map($this->getQuantity())->toArray();
+        $financialResourcesSum = array_sum($arrayResourcesQuantity);
 
-        return round((count($user)/$progressAll)*100);
+        $arrayContributionsQuantity = $dream->getDreamFinancialContributions()->map($this->getQuantity())->toArray();
+        $financialContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($financialResourcesSum, $financialContributionsSum);
     }
 
-    private function getEquipmentProgress()
+    public function showPercentOfCompletionEquipment(Dream $dream)
     {
-        foreach ($this->equipmentContributions as $key => $equipmentContributionsData) {
-            $user[$key] = $equipmentContributionsData->getUser();
-            $equipmentContributionsHidden[$key] = $equipmentContributionsData->getQuantity();
-            $financialResourceHidden[$key] = $equipmentContributionsData->getEquipmentResource()->getQuantity();
-
-            $progress[$key] = round(($equipmentContributionsHidden[$key]/$financialResourceHidden[$key])*100);
+        if (count($dream->getDreamEquipmentResources()) == 0) {
+            return null;
         }
 
-        $progressAll = array_sum($progress);
+        $arrayResourcesQuantity = $dream->getDreamEquipmentResources()->map($this->getQuantity())->toArray();
+        $equipmentResourcesSum = array_sum($arrayResourcesQuantity);
 
-        return $progress;
+        $arrayContributionsQuantity = $dream->getDreamEquipmentContributions()->map($this->getQuantity())->toArray();
+        $equipmentContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($equipmentResourcesSum, $equipmentContributionsSum);
     }
 
-    private function getWorkProgress()
+    public function showPercentOfCompletionWork(Dream $dream)
     {
-        foreach ($this->workContributions as $key => $workContributionsData) {
-            $user[$key] = $workContributionsData->getUser();
-            $workContributionsHidden[$key] = $workContributionsData->getQuantity();
-            $financialResourceHidden[$key] = $workContributionsData->getEquipmentResource()->getQuantity();
-
-            $progress[$key] = round(($workContributionsHidden[$key]/$financialResourceHidden[$key])*100);
+        if (count($dream->getDreamWorkResources()) == 0) {
+            return null;
         }
 
-        $progressAll = array_sum($progress);
+        $arrayResourcesQuantity = $dream->getDreamWorkResources()->map($this->getQuantity())->toArray();
+        $workResourcesSum = array_sum($arrayResourcesQuantity);
 
-        return $progress;
+        $arrayContributionsQuantity = $dream->getDreamWorkContributions()->map($this->getQuantity())->toArray();
+        $workContributionsSum = array_sum($arrayContributionsQuantity);
+
+        return $this->arithmeticMeanInPercent($workResourcesSum, $workContributionsSum);
     }
+
 }
