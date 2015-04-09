@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Users
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Geekhub\UserBundle\Entity\UsersRepository")
  */
-class User extends BaseUser //implements DreamUserInterface
+class User extends BaseUser implements UserInterface, \Serializable//implements DreamUserInterface
 {
     use ContactsInfo;
 
@@ -28,12 +29,58 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $id;
 
+//    /**
+//     * @ORM\Column(type="string", length=25, unique=true)
+//     */
+//    protected  $username;
+
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $resourceUsername;
+
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $realname;
+
+//    /**
+//     * @ORM\Column(type="string", length=64, nullable=true)
+//     */
+//    protected $password;
+
+//    /**
+//     * @ORM\Column(type="string", length=100, unique=true)
+//     */
+//    protected  $email;
+
+//    /**
+//     * @ORM\Column(type="string", length=100, unique=false)
+//     */
+//    protected $salt;
+
+//    /**
+//     * @ORM\Column(name="is_active", type="boolean")
+//     */
+//    private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $resource;
+
+//    /**
+//     * @ORM\Column(type="datetime")
+//     */
+//    private $lastLogin;
+
     /**
      * @var string
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="firstName", type="string", length=50, nullable=true)
      */
+
     protected $firstName;
 
     /**
@@ -41,6 +88,7 @@ class User extends BaseUser //implements DreamUserInterface
      *
      * @ORM\Column(name="middleName", type="string", length=50, nullable=true)
      */
+
     protected $middleName;
 
     /**
@@ -62,19 +110,19 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $birthday;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="about", type="text", nullable=true)
-     */
-    protected $about;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
-     */
-    protected $vkontakteId;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="about", type="text", nullable=true)
+//     */
+//    protected $about;
+//
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="vkontakte_id", type="string", length=45, nullable=true, unique=true)
+//     */
+//    protected $vkontakteId;
 
     /**
      * @var string
@@ -83,42 +131,42 @@ class User extends BaseUser //implements DreamUserInterface
      */
     protected $facebookId;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
-     */
-    protected $odnoklassnikiId;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites" )
-     */
-    protected $favoriteDreams;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\FinancialContribute", mappedBy="user")
-     */
-    protected $financialContributions;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\EquipmentContribute", mappedBy="user")
-     */
-    protected $equipmentContributions;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\WorkContribute", mappedBy="user")
-     */
-    protected $workContributions;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\OtherContribute", mappedBy="user")
-     */
-    protected $otherContributions;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
-     */
-    protected $dreams;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="odnoklassniki_id", type="string", length=45, nullable=true, unique=true)
+//     */
+//    protected $odnoklassnikiId;
+//
+//    /**
+//     * @ORM\ManyToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="usersWhoFavorites" )
+//     */
+//    protected $favoriteDreams;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\FinancialContribute", mappedBy="user")
+//     */
+//    protected $financialContributions;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\EquipmentContribute", mappedBy="user")
+//     */
+//    protected $equipmentContributions;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\WorkContribute", mappedBy="user")
+//     */
+//    protected $workContributions;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\OtherContribute", mappedBy="user")
+//     */
+//    protected $otherContributions;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Geekhub\DreamBundle\Entity\Dream", mappedBy="author")
+//     */
+//    protected $dreams;
 
     /**
      * Constructor
@@ -132,6 +180,10 @@ class User extends BaseUser //implements DreamUserInterface
         $this->workContributions = new ArrayCollection();
         $this->otherContributions = new ArrayCollection();
         parent::__construct();
+
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->roles = array();
+        $this->setIsActive(true);
     }
 
     /**
@@ -570,5 +622,189 @@ class User extends BaseUser //implements DreamUserInterface
     public function isFakeEmail()
     {
         return false === strpos($this->email, self::FAKE_EMAIL_PART) && $this->email ? false : true;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set resourceUsername
+     *
+     * @param string $resourceUsername
+     * @return User
+     */
+    public function setResourceUsername($resourceUsername)
+    {
+        $this->resourceUsername = $resourceUsername;
+
+        return $this;
+    }
+
+    /**
+     * Get resourceUsername
+     *
+     * @return string
+     */
+    public function getResourceUsername()
+    {
+        return $this->resourceUsername;
+    }
+
+    /**
+     * Set realname
+     *
+     * @param string $realname
+     * @return User
+     */
+    public function setRealname($realname)
+    {
+        $this->realname = $realname;
+
+        return $this;
+    }
+
+    /**
+     * Get realname
+     *
+     * @return string
+     */
+    public function getRealname()
+    {
+        return $this->realname;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set resource
+     *
+     * @param string $resource
+     * @return User
+     */
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+
+        return $this;
+    }
+
+    /**
+     * Get resource
+     *
+     * @return string
+     */
+    public function getResource()
+    {
+        return $this->resource;
     }
 }

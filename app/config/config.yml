@@ -5,6 +5,7 @@ imports:
     - { resource: jms_serializer.yml }
     - { resource: twig.yml }
     - { resource: liip_imagine.yml }
+    - { resource: service.yml }
 
 framework:
     #esi:             ~
@@ -108,9 +109,9 @@ fos_rest:
 nelmio_api_doc: CheDream
 
 hwi_oauth:
-    connect:
-        account_connector: geekhub.user.dream_user_provider
-        confirmation: false
+#    connect:
+#        account_connector: geekhub.user.dream_user_provider
+#        confirmation: false
     # name of the firewall in which this bundle is active, this setting MUST be set
     firewall_name: main
     fosub:
@@ -118,26 +119,28 @@ hwi_oauth:
         properties:
             # these properties will be used/redefined later in the custom FOSUBUserProvider service.
             facebook: facebook_id
-            vkontakte: vkontakte_id
-            odnoklassniki: odnoklassniki_id
+#            vkontakte: vkontakte_id
+#            odnoklassniki: odnoklassniki_id
     resource_owners:
         facebook:
             type:                facebook
             client_id:           "%facebook_app_id%"
             client_secret:       "%facebook_app_secret%"
             scope:               "email, user_photos, user_website, user_birthday"
-        vkontakte:
-            type:                vkontakte
-            client_id:           "%vkontakte_app_id%"
-            client_secret:       "%vkontakte_app_secret%"
-            scope:               "photos"
-        odnoklassniki:
-            type:                odnoklassniki
-            client_id:           "%odnoklassniki_app_id%"
-            client_secret:       "%odnoklassniki_app_secret%"
-            scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
             options:
-                application_key: "%odnoklassniki_app_key%"
+                display: popup
+#        vkontakte:
+#            type:                vkontakte
+#            client_id:           "%vkontakte_app_id%"
+#            client_secret:       "%vkontakte_app_secret%"
+#            scope:               "photos"
+#        odnoklassniki:
+#            type:                odnoklassniki
+#            client_id:           "%odnoklassniki_app_id%"
+#            client_secret:       "%odnoklassniki_app_secret%"
+#            scope:               "VALUABLE_ACCESS;PHOTO CONTENT"
+#            options:
+#                application_key: "%odnoklassniki_app_key%"
 
 geekhub_user:
     image:

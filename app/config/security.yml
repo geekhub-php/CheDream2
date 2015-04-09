@@ -12,6 +12,8 @@ security:
             id: fos_user.user_provider.username
         my_custom_hwi_provider:
             id: geekhub.user.dream_user_provider
+        _hwi_provider:
+             id: aouth_user_provider
 
     firewalls:
         main:
@@ -25,19 +27,20 @@ security:
                 path:   /logout
                 target: /
             anonymous:    true
+
             oauth:
                 resource_owners:
-                    facebook: "/login-social/check-facebook"
-                    vkontakte: "/login-social/check-vkontakte"
-                    odnoklassniki: "/login-social/check-odnoklassniki"
-                login_path:   /
-                failure_path: /nologin
+                    facebook:           "/login/check-facebook"
+                login_path:        /login
+                failure_path:      /login
 
                 oauth_user_provider:
-                    service: geekhub.user.dream_user_provider
+                    service: aouth_user_provider
+            anonymous: true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: [ROLE_MODERATOR, ROLE_SUPER_ADMIN]}
         - { path: ^/dream/edit, role: ROLE_USER }
