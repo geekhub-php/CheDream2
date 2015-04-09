@@ -75,6 +75,7 @@ class DreamController extends FOSRestController
         $dreamsAll = $repository->findAll();
 
         $paginator = $this->get('paginator');
+        $count = $this->get('dream.twig.contribution_extension');
 
         $pagination = $paginator->getPaginated(
             $paramFetcher->get('count'),
@@ -92,7 +93,7 @@ class DreamController extends FOSRestController
         $dreamsResponse->setPrevPage($pagination->getPrevPage());
         $dreamsResponse->setFirstPage($pagination->getFirstPage());
         $dreamsResponse->setLastPage($pagination->getLastPage());
-        $dreamsResponse->setDream_equipment_progress($pagination->getDream_equipment_progress());
+        $dreamsResponse->setDream_equipment_progress($count->showPercentOfCompletionEquipment($dreamsAll));
 
         return $dreamsResponse;
     }
