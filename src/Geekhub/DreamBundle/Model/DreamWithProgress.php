@@ -7,11 +7,11 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Type;
 
 /**
- * Class DreamResponse
+ * Class DreamWithProgress
  * @package Geekhub\DreamBundle\Model
  * @ExclusionPolicy("all")
  */
-class DreamResponse
+class DreamWithProgress
 {
     /**
      *
@@ -21,19 +21,25 @@ class DreamResponse
     protected $dream;
 
     /**
+     * @var integer
+     *
      * @Expose
      */
-    protected  $dream_equipment_progress;
+    protected $dreamEquipmentProgress;
 
     /**
+     * @var integer
+     *
      * @Expose
      */
-    protected  $dream_financial_progress;
+    protected $dreamFinancialProgress;
 
     /**
+     * @var integer
+     *
      * @Expose
      */
-    protected  $dream_work_progress;
+    protected $dreamWorkProgress;
 
     /**
      * @return mixed
@@ -56,15 +62,15 @@ class DreamResponse
      */
     public function getDreamEquipmentProgress()
     {
-        return $this->dream_equipment_progress;
+        return $this->dreamEquipmentProgress;
     }
 
     /**
-     * @param mixed $dream_equipment_progress
+     * @param mixed $dreamEquipmentProgress
      */
-    public function setDreamEquipmentProgress($dream_equipment_progress)
+    public function setDreamEquipmentProgress($dreamEquipmentProgress)
     {
-        $this->dream_equipment_progress = $dream_equipment_progress;
+        $this->dreamEquipmentProgress = $dreamEquipmentProgress;
     }
 
     /**
@@ -72,15 +78,15 @@ class DreamResponse
      */
     public function getDreamFinancialProgress()
     {
-        return $this->dream_financial_progress;
+        return $this->dreamFinancialProgress;
     }
 
     /**
-     * @param mixed $dream_financial_progress
+     * @param mixed $dreamFinancialProgress
      */
-    public function setDreamFinancialProgress($dream_financial_progress)
+    public function setDreamFinancialProgress($dreamFinancialProgress)
     {
-        $this->dream_financial_progress = $dream_financial_progress;
+        $this->dreamFinancialProgress = $dreamFinancialProgress;
     }
 
     /**
@@ -88,15 +94,15 @@ class DreamResponse
      */
     public function getDreamWorkProgress()
     {
-        return $this->dream_work_progress;
+        return $this->dreamWorkProgress;
     }
 
     /**
-     * @param mixed $dream_work_progress
+     * @param mixed $dreamWorkProgress
      */
-    public function setDreamWorkProgress($dream_work_progress)
+    public function setDreamWorkProgress($dreamWorkProgress)
     {
-        $this->dream_work_progress = $dream_work_progress;
+        $this->dreamWorkProgress = $dreamWorkProgress;
     }
 
 }
