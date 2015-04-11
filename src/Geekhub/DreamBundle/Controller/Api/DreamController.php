@@ -3,7 +3,7 @@
 namespace Geekhub\DreamBundle\Controller\Api;
 
 use Geekhub\DreamBundle\Model\DreamsResponse;
-use Geekhub\DreamBundle\Model\DreamResponse;
+use Geekhub\DreamBundle\Model\DreamWithProgress;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View as RestView;
@@ -76,6 +76,7 @@ class DreamController extends FOSRestController
         $dreamsAll = $repository->findAll();
 
         $paginator = $this->get('paginator');
+
         $count = $this->get('dream.twig.contribution_extension');
 
         $pagination = $paginator->getPaginated(
@@ -86,17 +87,27 @@ class DreamController extends FOSRestController
             $dreamsAll
         );
 
+        $dreamWithProgress = new DreamWithProgress();
+
+        foreach($queryBuilder as $key => $dream) {
+            $dreamWithProgress->setDream($queryBuilder[$key]);
+            $dreamWithProgress->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
+            $dreamWithProgress->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
+            $dreamWithProgress->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
+
+            $dreamsAllWithProgress[$key] = $dreamWithProgress;
+        }
+
         $dreamsResponse = new DreamsResponse();
 
-        $dreamsResponse->setDreams($queryBuilder);
+        $dreamsResponse->setDreams($dreamsAllWithProgress);
         $dreamsResponse->setSelfPage($pagination->getSelfPage());
         $dreamsResponse->setNextPage($pagination->getNextPage());
         $dreamsResponse->setPrevPage($pagination->getPrevPage());
         $dreamsResponse->setFirstPage($pagination->getFirstPage());
         $dreamsResponse->setLastPage($pagination->getLastPage());
-        $dreamsResponse->setDream_equipment_progress($count->showPercentOfCompletionEquipment($dreamsAll));
 
-        return $dreamsResponse;
+        return $dreamsAllWithProgress;
     }
     /**
      * Get single Dream for slug,.
@@ -124,19 +135,20 @@ class DreamController extends FOSRestController
         $dream = $this->getDoctrine()->getManager()
             ->getRepository('GeekhubDreamBundle:Dream')
             ->findOneBySlug($slug);
+
         if (!$dream) {
             throw new NotFoundHttpException();
         }
 
         $count = $this->get('dream.twig.contribution_extension');
 
-        $dreamResponse = new DreamResponse();
+        $dreamWithProgress = new DreamWithProgress();
 
-        $dreamResponse->setDream($dream);
-        $dreamResponse->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
-        $dreamResponse->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
-        $dreamResponse->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
+        $dreamWithProgress->setDream($dream);
+        $dreamWithProgress->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
+        $dreamWithProgress->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
+        $dreamWithProgress->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
 
-        return $dreamResponse;
+        return $dreamWithProgress;
     }
 }
