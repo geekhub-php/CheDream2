@@ -16,7 +16,7 @@ class DreamsResponse extends AbstractPagination
     /**
      * @var Array[]
      *
-     * @Type("array<Geekhub\DreamBundle\Entity\Dream>")
+     * @Type("array<Geekhub\DreamBundle\Model\DreamWithProgress>")
      * @Expose
      */
     protected $dreams;
@@ -138,51 +138,6 @@ class DreamsResponse extends AbstractPagination
     public function getLastPage()
     {
         return $this->lastPage;
-    }
-
-    /**
-     * @param mixed $dream_equipment_progress
-     */
-    public function setDream_equipment_progress($dream_equipment_progress)
-    {
-        $this->dream_equipment_progress = $dream_equipment_progress;
-    }
-    /**
-     * @return mixed
-     */
-    public function getDream_equipment_progress()
-    {
-        return $this->dream_equipment_progress;
-    }
-
-    /**
-     * @param mixed $dream_financial_progress
-     */
-    public function setDream_financial_progress($dream_financial_progress)
-    {
-        $this->dream_financial_progress = $dream_financial_progress;
-    }
-    /**
-     * @return mixed
-     */
-    public function getDream_financial_progress()
-    {
-        return $this->dream_financial_progress;
-    }
-
-    /**
-     * @param mixed $dream_work_progress
-     */
-    public function setDream_work_progress($dream_work_progress)
-    {
-        $this->dream_work_progress = $dream_work_progress;
-    }
-    /**
-     * @return mixed
-     */
-    public function getDream_work_progress()
-    {
-        return $this->dream_work_progress;
     }
 
 }
