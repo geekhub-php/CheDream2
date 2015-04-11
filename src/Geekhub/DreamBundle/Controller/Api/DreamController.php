@@ -3,6 +3,7 @@
 namespace Geekhub\DreamBundle\Controller\Api;
 
 use Geekhub\DreamBundle\Model\DreamsResponse;
+use Geekhub\DreamBundle\Model\DreamResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View as RestView;
@@ -127,6 +128,15 @@ class DreamController extends FOSRestController
             throw new NotFoundHttpException();
         }
 
-        return $dream;
+        $count = $this->get('dream.twig.contribution_extension');
+
+        $dreamResponse = new DreamResponse();
+
+        $dreamResponse->setDream($dream);
+        $dreamResponse->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
+        $dreamResponse->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
+        $dreamResponse->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
+
+        return $dreamResponse;
     }
 }
