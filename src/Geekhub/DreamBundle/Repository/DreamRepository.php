@@ -185,4 +185,17 @@ class DreamRepository extends CommonRepository
             ->getResult()
         ;
     }
+
+    public function getIfStatusExists($status, $count, $page, $sort_by, $sort_order)
+    {
+        return $this->createQueryBuilder('dream')
+            ->where('dream.currentStatus = :identifier')
+            ->setParameter('identifier', $status)
+            ->orderBy('dream.'.$sort_by, $sort_order)
+            ->setFirstResult($count * ($page - 1))
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
