@@ -89,8 +89,8 @@ class DreamController extends FOSRestController
 
         $dreamWithProgress = new DreamWithProgress();
 
-        foreach($queryBuilder as $key => $dream) {
-            $dreamWithProgress->setDream($queryBuilder[$key]);
+        foreach ($queryBuilder as $key => $dream) {
+            $dreamWithProgress->setDream($dream);
             $dreamWithProgress->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
             $dreamWithProgress->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
             $dreamWithProgress->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
@@ -107,7 +107,7 @@ class DreamController extends FOSRestController
         $dreamsResponse->setFirstPage($pagination->getFirstPage());
         $dreamsResponse->setLastPage($pagination->getLastPage());
 
-        return $dreamsAllWithProgress;
+        return $dreamsResponse;
     }
     /**
      * Get single Dream for slug,.
