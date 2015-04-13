@@ -71,8 +71,6 @@ class DreamController extends FOSRestController
 
         $paginator = $this->get('paginator');
 
-        $count = $this->get('dream.twig.contribution_extension');
-
         $pagination = $paginator->getPaginated(
             $paramFetcher->get('count'),
             $paramFetcher->get('page'),
@@ -81,20 +79,11 @@ class DreamController extends FOSRestController
             $dreamsAll
         );
 
-        foreach ($queryBuilder as $key => $dream) {
-            $dreamWithProgress = new DreamWithProgress();
-
-            $dreamWithProgress->setDream($dream);
-            $dreamWithProgress->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
-            $dreamWithProgress->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
-            $dreamWithProgress->setDreamWorkProgress($count->showPercentOfCompletionWork($dream));
-
-            $dreamsAllWithProgress[$key] = $dreamWithProgress;
-        }
+        $dreamsParsing = $this->get('dreams.parsing');
 
         $dreamsResponse = new DreamsResponse();
 
-        $dreamsResponse->setDreams($dreamsAllWithProgress);
+        $dreamsResponse->setDreams($dreamsParsing->getDreamsParsing($queryBuilder));
         $dreamsResponse->setSelfPage($pagination->getSelfPage());
         $dreamsResponse->setNextPage($pagination->getNextPage());
         $dreamsResponse->setPrevPage($pagination->getPrevPage());
