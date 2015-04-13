@@ -3,7 +3,7 @@
 {% block header %}
     <b>
         Щиро вітаємо у
-        <a href="{{ url('geekhub_dream_homepage') }}" class="brand">
+        <a href="{{ url('get_dreams') }}" class="brand">
             <img data-src="holder.js/80x20" alt="Черкаській мрії" />
         </a>
     </b>
@@ -25,31 +25,31 @@
         <h4>підключено через
             {% if user.facebookId is not null  %}
                 Facebook
-            {% elseif user.odnoklassnikiId %}
-                Однокласники
-            {% elseif user.vkontakteId %}
-                ВКонтакте
+            {#{% elseif user.odnoklassnikiId %}#}
+                {#Однокласники#}
+            {#{% elseif user.vkontakteId %}#}
+                {#ВКонтакте#}
             {% endif %}
         </h4>
     </div>
     <br/>
     <hr/>
 
-    <div  class="centered">
-        <h3>Що далі?</h3>
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#505050; border:1px solid #808080; border-radius:5px;">
-            <tr>
-                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
-                    <a href="{{ url('dream_list') }}" target="_blank" style="color:#FFFFFF; text-decoration:none;">
-                        Подивитися мрії
-                    </a>
-                </td>
-                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">
-                    <a href="{{ url('new_dream') }}"  target="_blank" style="color:#FFFFFF; text-decoration:none;">
-                        Створити мрію
-                    </a>
-                </td>
-            </tr>
-        </table>
-    </div>
+    {#<div  class="centered">#}
+        {#<h3>Що далі?</h3>#}
+        {#<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#505050; border:1px solid #808080; border-radius:5px;">#}
+            {#<tr>#}
+                {#<td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">#}
+                    {#<a href="{{ url('dream_list') }}" target="_blank" style="color:#FFFFFF; text-decoration:none;">#}
+                        {#Подивитися мрії#}
+                    {#</a>#}
+                {#</td>#}
+                {#<td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:16px; font-weight:bold; letter-spacing:-.5px; line-height:150%; padding-top:15px; padding-right:30px; padding-bottom:15px; padding-left:30px;">#}
+                    {#<a href="{{ url('new_dream') }}"  target="_blank" style="color:#FFFFFF; text-decoration:none;">#}
+                        {#Створити мрію#}
+                    {#</a>#}
+                {#</td>#}
+            {#</tr>#}
+        {#</table>#}
+    {#</div>#}
 {% endblock content %}
