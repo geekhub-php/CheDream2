@@ -171,4 +171,18 @@ class DreamRepository extends CommonRepository
     {
         return function ($contribute) {return $contribute->getUser(); };
     }
+
+    public function getIfStatusNotExists($count, $page, $sort_by, $sort_order)
+    {
+        return $this->createQueryBuilder('dream')
+            ->where('dream.currentStatus != :identifier1','dream.currentStatus != :identifier2')
+            ->setParameter('identifier1', 'fail')
+            ->setParameter('identifier2', 'rejected')
+            ->orderBy('dream.'.$sort_by, $sort_order)
+            ->setFirstResult($count * ($page - 1))
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
