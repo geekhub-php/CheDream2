@@ -87,9 +87,9 @@ class DreamController extends FOSRestController
             $dreamsAll
         );
 
-        $dreamWithProgress = new DreamWithProgress();
-
         foreach ($queryBuilder as $key => $dream) {
+            $dreamWithProgress = new DreamWithProgress();
+
             $dreamWithProgress->setDream($dream);
             $dreamWithProgress->setDreamEquipmentProgress($count->showPercentOfCompletionEquipment($dream));
             $dreamWithProgress->setDreamFinancialProgress($count->showPercentOfCompletionFinancial($dream));
