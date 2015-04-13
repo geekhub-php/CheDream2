@@ -51,26 +51,20 @@ class DreamController extends FOSRestController
         $repository = $manager->getRepository('GeekhubDreamBundle:Dream');
 
         if (!$paramFetcher->get('status')) {
-            $queryBuilder = $repository->createQueryBuilder('dream')
-                ->where('dream.currentStatus != :identifier1','dream.currentStatus != :identifier2')
-                ->setParameter('identifier1', 'fail')
-                ->setParameter('identifier2', 'rejected')
-                ->orderBy('dream.'.$paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
-                ->setFirstResult($paramFetcher->get('count') * ($paramFetcher->get('page') - 1))
-                ->setMaxResults($paramFetcher->get('count'))
-                ->getQuery()
-                ->getResult()
-            ;
+            $queryBuilder = $repository->getIfStatusNotExists(
+                $paramFetcher->get('count'),
+                $paramFetcher->get('page'),
+                $paramFetcher->get('sort_by'),
+                $paramFetcher->get('sort_order')
+            );
         } else {
-            $queryBuilder = $repository->createQueryBuilder('dream')
-                ->where('dream.currentStatus = :identifier')
-                ->setParameter('identifier', $paramFetcher->get('status'))
-                ->orderBy('dream.'.$paramFetcher->get('sort_by'), $paramFetcher->get('sort_order'))
-                ->setFirstResult($paramFetcher->get('count') * ($paramFetcher->get('page') - 1))
-                ->setMaxResults($paramFetcher->get('count'))
-                ->getQuery()
-                ->getResult()
-            ;
+            $queryBuilder = $repository->getIfStatusExists(
+                $paramFetcher->get('status'),
+                $paramFetcher->get('count'),
+                $paramFetcher->get('page'),
+                $paramFetcher->get('sort_by'),
+                $paramFetcher->get('sort_order')
+            );
         }
 
         $dreamsAll = $repository->findAll();
