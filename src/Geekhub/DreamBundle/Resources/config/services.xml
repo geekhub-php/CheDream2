@@ -8,9 +8,14 @@
         <parameter key="geekhub.dream.dream_subscriber.class">Geekhub\DreamBundle\EventListener\DreamSubscriber</parameter>
         <parameter key="dream.twig.contribution_extension.class">Geekhub\DreamBundle\Twig\DreamExtension</parameter>
         <parameter key="paginator_service.class">Geekhub\DreamBundle\Service\PaginatorService</parameter>
+        <parameter key="dreams.parsing_service.class">Geekhub\DreamBundle\Service\DreamsParsingService</parameter>
     </parameters>
 
     <services>
+        <service id="dreams.parsing" class="%dreams.parsing_service.class%">
+            <argument type="service" id="dream.twig.contribution_extension" />
+        </service>
+
         <service id="dream_file_uploader" class="%dream_file_uploader.class%">
             <argument type="service" id="liip_imagine.cache.manager"/>
         </service>
