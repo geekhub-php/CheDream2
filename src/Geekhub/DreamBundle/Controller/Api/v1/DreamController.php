@@ -7,9 +7,12 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class DreamController extends Controller
 {
+    const INTERVAL_IN_MONTHS = 1;
+
     /**
      * <strong>Simple example:</strong><br />
      * http://chedream.local/api/v1/dreams.json?limit=15&statuses[]=implementing&statuses[]=collecting-resources
@@ -36,19 +39,54 @@ class DreamController extends Controller
      */
     public function getDreamsAction(ParamFetcher $paramFetcher)
     {
-        $criteria = array(
-            'user' => $paramFetcher->get('user'),
-            'currentStatus' => $paramFetcher->get('statuses'),
-        );
+        $em = $this->getDoctrine()->getManager();
+        $resultSetMapper = new ResultSetMappingBuilder($em);
+        $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
 
-        $orderArray = $paramFetcher->get('orderBy') ? [$paramFetcher->get('orderBy') => $paramFetcher->get('orderDirection')] : array();
+        $limit = $paramFetcher->get('limit') ?: 5;
+        $offset = $paramFetcher->get('offset') ?: 0;
+        $queryString =
+            'SELECT
+                dreams.*,
+                COUNT(fc.id)+COUNT(ec.id)+COUNT(wc.id)+COUNT(oc.id) AS contributesCount
+            FROM dreams
+                LEFT JOIN financial_contributes AS fc ON (dreams.id=fc.dream_id and fc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
+                LEFT JOIN equipment_contributes AS ec ON (dreams.id=ec.dream_id and ec.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
+                LEFT JOIN work_contributes AS wc ON (dreams.id=wc.dream_id and wc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
+                LEFT JOIN other_contributes AS oc ON (dreams.id=oc.dream_id and oc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
+            GROUP BY dreams.id
+            ';
+        $userId = $paramFetcher->get('user');
+        $currentStatuses = $paramFetcher->get('statuses');
+        if ($userId || $currentStatuses) {
+            $queryString .= 'HAVING ';
+            if ($userId) {
+                $queryString .= 'dreams.author_id = ?';
+            }
+            if ($userId && $currentStatuses) {
+                $queryString .= ' AND ';
+            }
+            if ($currentStatuses) {
+                $queryString .= 'dreams.currentStatus in ("'.implode('", "', $currentStatuses).'")';
+            }
+        }
+        $queryString .= ' ORDER BY ? ?
+            LIMIT '.$limit.'
+            OFFSET '.$offset;
 
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
-            array_filter($criteria),
-            $orderArray,
-            $paramFetcher->get('limit'),
-            $paramFetcher->get('offset')
-        );
+        $query = $em->createNativeQuery($queryString, $resultSetMapper);
+        $monthsNumber = self::INTERVAL_IN_MONTHS;
+        $query->setParameter(1, $monthsNumber); // months
+        $query->setParameter(2, $monthsNumber); // months
+        $query->setParameter(3, $monthsNumber); // months
+        $query->setParameter(4, $monthsNumber); // months
+        $paramsNumber = 4;
+        if ($userId) {
+            $query->setParameter(++$paramsNumber, $paramFetcher->get('user'));
+        }
+        $query->setParameter(++$paramsNumber, $paramFetcher->get('orderBy') ?: 'contributesCount');
+        $query->setParameter(++$paramsNumber, $paramFetcher->get('orderDirection') ?: 'DESC');
+        $dreams = $query->getResult();
 
         if (!$paramFetcher->get('template')) {
             return $dreams;
