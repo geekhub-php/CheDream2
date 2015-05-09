@@ -43,49 +43,29 @@ class DreamController extends Controller
         $resultSetMapper = new ResultSetMappingBuilder($em);
         $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
 
-        $limit = $paramFetcher->get('limit') ?: 5;
-        $offset = $paramFetcher->get('offset') ?: 0;
-        $queryString =
-            'SELECT
-                dreams.*,
-                COUNT(fc.id)+COUNT(ec.id)+COUNT(wc.id)+COUNT(oc.id) AS contributesCount
-            FROM dreams
-                LEFT JOIN financial_contributes AS fc ON (dreams.id=fc.dream_id and fc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
-                LEFT JOIN equipment_contributes AS ec ON (dreams.id=ec.dream_id and ec.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
-                LEFT JOIN work_contributes AS wc ON (dreams.id=wc.dream_id and wc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
-                LEFT JOIN other_contributes AS oc ON (dreams.id=oc.dream_id and oc.createdAt > DATE_SUB(NOW(), INTERVAL ? MONTH))
-            GROUP BY dreams.id
-            ';
-        $userId = $paramFetcher->get('user');
-        $currentStatuses = $paramFetcher->get('statuses');
-        if ($userId || $currentStatuses) {
-            $queryString .= 'HAVING ';
-            if ($userId) {
-                $queryString .= 'dreams.author_id = ?';
-            }
-            if ($userId && $currentStatuses) {
-                $queryString .= ' AND ';
-            }
-            if ($currentStatuses) {
-                $queryString .= 'dreams.currentStatus in ("'.implode('", "', $currentStatuses).'")';
-            }
+        $query = $em->createQueryBuilder()
+            ->select('dreams.*')
+            ->addSelect('COUNT(fc.id)+COUNT(ec.id)+COUNT(wc.id)+COUNT(oc.id) as contributesCount')
+            ->from('dreams', 'dreams')
+            ->leftJoin('financial_contributes', 'fc', 'on', 'dreams.id=fc.dream_id and fc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
+            ->leftJoin('equipment_contributes', 'ec', 'on', 'dreams.id=ec.dream_id and ec.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
+            ->leftJoin('work_contributes', 'wc', 'on', 'dreams.id=wc.dream_id and wc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
+            ->leftJoin('other_contributes', 'oc', 'on', 'dreams.id=oc.dream_id and oc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
+            ->groupBy('dreams.id')
+            ->orderBy($paramFetcher->get('orderBy') ?: 'contributesCount', $paramFetcher->get('orderDirection') ?: 'DESC')
+        ;
+
+        if ($userId = $paramFetcher->get('user')) {
+            $query->andWhere('dreams.author_id = :user_id');
+            $query->setParameter(':user_id', $userId);
         }
-        $queryString .= ' ORDER BY ? ?
-            LIMIT '.$limit.'
-            OFFSET '.$offset;
+        if ($currentStatuses = $paramFetcher->get('statuses')) {
+            $query->andWhere('dreams.currentStatus in ("'.implode('", "', $currentStatuses).'")');
+        }
+        $queryString = $query->getDql();
+        $queryString .= ' LIMIT '.($paramFetcher->get('limit') ?: 8).' OFFSET '.($paramFetcher->get('offset') ?: 0);
 
         $query = $em->createNativeQuery($queryString, $resultSetMapper);
-        $monthsNumber = self::INTERVAL_IN_MONTHS;
-        $query->setParameter(1, $monthsNumber); // months
-        $query->setParameter(2, $monthsNumber); // months
-        $query->setParameter(3, $monthsNumber); // months
-        $query->setParameter(4, $monthsNumber); // months
-        $paramsNumber = 4;
-        if ($userId) {
-            $query->setParameter(++$paramsNumber, $paramFetcher->get('user'));
-        }
-        $query->setParameter(++$paramsNumber, $paramFetcher->get('orderBy') ?: 'contributesCount');
-        $query->setParameter(++$paramsNumber, $paramFetcher->get('orderDirection') ?: 'DESC');
         $dreams = $query->getResult();
 
         if (!$paramFetcher->get('template')) {
