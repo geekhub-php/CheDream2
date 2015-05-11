@@ -2,6 +2,7 @@
 
 namespace Geekhub\DreamBundle\Repository;
 
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Geekhub\DreamBundle\Entity\Dream;
 use Geekhub\DreamBundle\Entity\Status;
 use Doctrine\ORM\Query\Expr as Expr;
@@ -171,37 +172,37 @@ class DreamRepository extends CommonRepository
 
     public function getPopularDreamsPaginated($limit = 8, $offset = 0, array $statuses = [], $orderBy = 'contributesCount', $orderDirection = 'DESC', $userId = null)
     {
-        $qb = $this->createQueryBuilder('d');
-        $qb
-            ->groupBy('d.id')
-            ->orderBy($orderBy, $orderDirection)
-            ->addSelect('COUNT(fc.id)+COUNT(ec.id)+COUNT(wc.id)+COUNT(oc.id) as contributesCount')
-            ->leftJoin('d.dreamFinancialContributions', 'fc')
-            ->orWhere('d.id=fc.dream and fc.createdAt > :datetime')
-            ->leftJoin('d.dreamEquipmentContributions', 'ec')
-            ->orWhere('d.id=ec.dream and ec.createdAt > :datetime')
-            ->leftJoin('d.dreamWorkContributions', 'wc')
-            ->orWhere('d.id=wc.dream and wc.createdAt > :datetime')
-            ->leftJoin('d.dreamOtherContributions', 'oc')
-            ->orWhere('d.id=oc.dream and oc.createdAt > :datetime')
-            ->setParameter('datetime', new \DateTime('-10 day'));
-        ;
-
+        $em = $this->getEntityManager();
+        $resultSetMapper = new ResultSetMappingBuilder($em);
+        $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
+        $usersCondition = '';
         if ($userId) {
-            $qb->andWhere('d.author_id = :user_id')->setParameter(':user_id', $userId);
+            $usersCondition = ' AND dreams.author_id = '.$userId;
         }
-
-        if ($statuses) {
-            $qb->andWhere($qb->expr()->in('d.currentStatus', $statuses));
-        }
-
-        $qb->setFirstResult($offset)->setMaxResults($limit);
-//        echo $qb->getQuery()->getSQL();exit;
-        $result = $qb->getQuery()->getResult();
-        $result = array_map(function ($el) {
-//            var_dump($el['contributesCount'].';title: '.$el[0]->getTitle().';id: '.$el[0]->getId());
-            return $el[0];
-        }, $result);
+        $statuses = implode('\', \'', $statuses);
+        $queryString =
+            'select dreams.*, count(user_id) AS contributesCount from
+                dreams LEFT JOIN
+                (
+                    select distinct dream_id, user_id from financial_contributes WHERE createdAt > :last_considered_date
+                    union distinct
+                    select distinct dream_id, user_id from equipment_contributes WHERE createdAt > :last_considered_date
+                    union distinct
+                    select distinct dream_id, user_id from work_contributes WHERE createdAt > :last_considered_date
+                    union distinct
+                    select distinct dream_id, user_id from other_contributes WHERE createdAt > :last_considered_date
+                ) AS contr_users
+            ON (dreams.id=contr_users.dream_id)
+            WHERE dreams.currentStatus in (\''.$statuses.'\')
+            '.$usersCondition.'
+            GROUP BY dreams.id
+            ORDER BY '.$orderBy.' '.$orderDirection.'
+            LIMIT '.$limit.'
+            OFFSET '.$offset;
+        $query = $em->createNativeQuery($queryString, $resultSetMapper);
+        $lastConsideredDate = new \DateTime('-10 day');
+        $query->setParameter('last_considered_date', $lastConsideredDate);
+        $result = $query->getResult();
 
         return $result;
     }
