@@ -11,8 +11,6 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class DreamController extends Controller
 {
-    const INTERVAL_IN_MONTHS = 1;
-
     /**
      * <strong>Simple example:</strong><br />
      * http://chedream.local/api/v1/dreams.json?limit=15&statuses[]=implementing&statuses[]=collecting-resources
@@ -40,33 +38,14 @@ class DreamController extends Controller
     public function getDreamsAction(ParamFetcher $paramFetcher)
     {
         $em = $this->getDoctrine()->getManager();
-        $resultSetMapper = new ResultSetMappingBuilder($em);
-        $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
+//        $resultSetMapper = new ResultSetMappingBuilder($em);
+//        $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
 
-        $query = $em->createQueryBuilder()
-            ->select('dreams.*')
-            ->addSelect('COUNT(fc.id)+COUNT(ec.id)+COUNT(wc.id)+COUNT(oc.id) as contributesCount')
-            ->from('dreams', 'dreams')
-            ->leftJoin('financial_contributes', 'fc', 'on', 'dreams.id=fc.dream_id and fc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
-            ->leftJoin('equipment_contributes', 'ec', 'on', 'dreams.id=ec.dream_id and ec.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
-            ->leftJoin('work_contributes', 'wc', 'on', 'dreams.id=wc.dream_id and wc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
-            ->leftJoin('other_contributes', 'oc', 'on', 'dreams.id=oc.dream_id and oc.createdAt > DATE_SUB(NOW(), INTERVAL ' . self::INTERVAL_IN_MONTHS . ' MONTH)')
-            ->groupBy('dreams.id')
-            ->orderBy($paramFetcher->get('orderBy') ?: 'contributesCount', $paramFetcher->get('orderDirection') ?: 'DESC')
+        $dreams = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('GeekhubDreamBundle:Dream')
+            ->getPopularDreamsPaginated($paramFetcher->get('limit'), $paramFetcher->get('offset'), ['collecting-resources', 'implementing'])
         ;
-
-        if ($userId = $paramFetcher->get('user')) {
-            $query->andWhere('dreams.author_id = :user_id');
-            $query->setParameter(':user_id', $userId);
-        }
-        if ($currentStatuses = $paramFetcher->get('statuses')) {
-            $query->andWhere('dreams.currentStatus in ("'.implode('", "', $currentStatuses).'")');
-        }
-        $queryString = $query->getDql();
-        $queryString .= ' LIMIT '.($paramFetcher->get('limit') ?: 8).' OFFSET '.($paramFetcher->get('offset') ?: 0);
-
-        $query = $em->createNativeQuery($queryString, $resultSetMapper);
-        $dreams = $query->getResult();
 
         if (!$paramFetcher->get('template')) {
             return $dreams;
