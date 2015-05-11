@@ -15,7 +15,29 @@ use Doctrine\ORM\Query\Expr as Expr;
  */
 class DreamRepository extends CommonRepository
 {
-    const INTERVAL_IN_MONTHS = 1;
+
+    /**
+     * Intervals array and corresponding coefficients to calculate dream rating based on contribures
+     * dreamRating = sum (contributesCount(days)*coefficient(days))
+     */
+    private $intervals = [
+        [
+            'last_days' => 30,
+            'coefficient' => 10,
+        ],
+        [
+            'last_days' => 90,
+            'coefficient' => 5,
+        ],
+        [
+            'last_days' => 180,
+            'coefficient' => 2,
+        ],
+        [
+            'last_days' => 360,
+            'coefficient' => 1,
+        ],
+    ];
 
     public function getCountContributorsByDream(Dream $dream)
     {
@@ -176,21 +198,36 @@ class DreamRepository extends CommonRepository
         $resultSetMapper = new ResultSetMappingBuilder($em);
         $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
         $usersCondition = '';
+
+        $unionQueryString =
+            '(SELECT dream_id, count(user_id)*%lf as contribute FROM  (
+                    select distinct dream_id, user_id from financial_contributes WHERE createdAt > "%s"
+                    union distinct
+                    select distinct dream_id, user_id from equipment_contributes WHERE createdAt > "%s"
+                    union distinct
+                    select distinct dream_id, user_id from work_contributes WHERE createdAt > "%s"
+                    union distinct
+                    select distinct dream_id, user_id from other_contributes WHERE createdAt > "%s"
+                    ) as query%d
+            GROUP BY dream_id)
+                    ';
+        $allUnionQueries = [];
+        foreach ($this->intervals as $interval) {
+            $lastDate = new \DateTime('-'.$interval['last_days'].' day');
+            $lastDate = $lastDate->format('Y-m-d h:i:s');
+            $allUnionQueries[] = sprintf($unionQueryString, $interval['coefficient'], $lastDate, $lastDate, $lastDate, $lastDate, $interval['last_days']);
+        }
+        $allUnionQueryStrings = implode (' UNION ',$allUnionQueries);
+
         if ($userId) {
             $usersCondition = ' AND dreams.author_id = '.$userId;
         }
         $statuses = implode('\', \'', $statuses);
         $queryString =
-            'select dreams.*, count(user_id) AS contributesCount from
+            'select dreams.*, sum(contribute) AS contributesCount from
                 dreams LEFT JOIN
                 (
-                    select distinct dream_id, user_id from financial_contributes WHERE createdAt > :last_considered_date
-                    union distinct
-                    select distinct dream_id, user_id from equipment_contributes WHERE createdAt > :last_considered_date
-                    union distinct
-                    select distinct dream_id, user_id from work_contributes WHERE createdAt > :last_considered_date
-                    union distinct
-                    select distinct dream_id, user_id from other_contributes WHERE createdAt > :last_considered_date
+                '.$allUnionQueryStrings.'
                 ) AS contr_users
             ON (dreams.id=contr_users.dream_id)
             WHERE dreams.currentStatus in (\''.$statuses.'\')
