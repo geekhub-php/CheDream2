@@ -44,7 +44,7 @@ class DreamController extends Controller
         $dreams = $this->getDoctrine()
             ->getManager()
             ->getRepository('GeekhubDreamBundle:Dream')
-            ->getPopularDreamsPaginated($paramFetcher->get('limit'), $paramFetcher->get('offset'), ['collecting-resources', 'implementing'])
+            ->getPopularDreamsPaginated($paramFetcher->get('limit'), $paramFetcher->get('offset'), $paramFetcher->get('statuses'))
         ;
 
         if (!$paramFetcher->get('template')) {
