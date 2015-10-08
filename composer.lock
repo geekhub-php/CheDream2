@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4f05b615e8c4401d1540cfe2f879462",
+    "hash": "dadd481c7e1699e8d66751e78356ce66",
+    "content-hash": "4645feef85c57065fd8d4f693c54a189",
     "packages": [
         {
             "name": "ahmedsamy/hype-mailchimp-bundle",
@@ -17,7 +18,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AhmedSamy/HypeMailchimpBundle/zipball/aa0813c8c317501220c53281db978ee9adffb810",
+                "url": "https://api.github.com/repos/AhmedSamy/HypeMailchimpBundle/zipball/89980e9b56d1ad073da6cce65a0edda1b43322e1",
                 "reference": "aa0813c8c317501220c53281db978ee9adffb810",
                 "shasum": ""
             },
@@ -654,7 +655,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/3ffa2184c94d94477d5bb625b94597ed0d44ebe0",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/817c2d233fde0fe85cb7e4d25d43fbfcd028aef8",
                 "reference": "3ffa2184c94d94477d5bb625b94597ed0d44ebe0",
                 "shasum": ""
             },
@@ -819,16 +820,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.4.4",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "fc19c3b53dcd00e6584db40669fdd699c4671f97"
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/fc19c3b53dcd00e6584db40669fdd699c4671f97",
-                "reference": "fc19c3b53dcd00e6584db40669fdd699c4671f97",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
+                "reference": "bebacf79d8d4dae9168f0f9bc6811e6c2cb6a4d9",
                 "shasum": ""
             },
             "require": {
@@ -866,23 +867,20 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
                 }
             ],
             "description": "Object-Relational-Mapper for PHP",
@@ -891,7 +889,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-07-11 03:05:53"
+            "time": "2014-10-06 13:22:50"
         },
         {
             "name": "fpn/doctrine-extensions-taggable",
@@ -986,7 +984,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/9b956552a55e180a83824a59cc3aff6dde32b656",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/cc33cfd500cb056808a9f937d6c2e589b23ba936",
                 "reference": "9b956552a55e180a83824a59cc3aff6dde32b656",
                 "shasum": ""
             },
@@ -1121,7 +1119,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/094bea6f318fbb067db3ddf6d26a62af0bf13442",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/d5b28c367d393f9d9fbc48c4138b2a74d51c0c83",
                 "reference": "094bea6f318fbb067db3ddf6d26a62af0bf13442",
                 "shasum": ""
             },
@@ -1183,12 +1181,12 @@
             "version": "v2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "reference": "35adcaae1a3f50d0d5b73aa50ed8fd28ee35ce54",
                 "shasum": ""
             },
@@ -1318,7 +1316,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/62e44cd3881da905ba70563181e8df5537e53c05",
+                "url": "https://api.github.com/repos/Gregwar/CaptchaBundle/zipball/476530a2128ca81221cc88583be77dce7b94a677",
                 "reference": "62e44cd3881da905ba70563181e8df5537e53c05",
                 "shasum": ""
             },
@@ -1372,7 +1370,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/305592b667786335ce6f438ac4b352932be703d1",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/b3f5050cb6270c7a728a0b74ac2de50a262b3e02",
                 "reference": "305592b667786335ce6f438ac4b352932be703d1",
                 "shasum": ""
             },
@@ -1464,7 +1462,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/1a00b163e414b72b0155e35e81f3b116d6a1d07c",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/d1f8a6c55f0f753cfd6f6755856473eb02cedb19",
                 "reference": "1a00b163e414b72b0155e35e81f3b116d6a1d07c",
                 "shasum": ""
             },
@@ -1518,7 +1516,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Hipaway-Travel/HipMandrillBundle/zipball/e12f7105cf94ca0ff31954d817b46f2555f73d24",
+                "url": "https://api.github.com/repos/Hipaway-Travel/HipMandrillBundle/zipball/c3dadc6dd24166adf1cac8aeacbe051caa68d255",
                 "reference": "e12f7105cf94ca0ff31954d817b46f2555f73d24",
                 "shasum": ""
             },
@@ -1570,7 +1568,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/25b60de3ec06ea6f12cfa561466f37ff8a938bb9",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/e5995827e95cb6401f050010469f4c4f2e11bd93",
                 "reference": "25b60de3ec06ea6f12cfa561466f37ff8a938bb9",
                 "shasum": ""
             },
@@ -2676,7 +2674,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nervo/yuicompressor/zipball/e6e3b215c3998cf6092613c002ae533ae75d7ada",
+                "url": "https://api.github.com/repos/nervo/yuicompressor/zipball/89f757673bb612f66d3de9deb50760ffc39ad857",
                 "reference": "e6e3b215c3998cf6092613c002ae533ae75d7ada",
                 "shasum": ""
             },
@@ -3696,7 +3694,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/d686b5de27d7dfcee81cf8527931d5ace5390141",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/758c19947b04d93d9d79e0ae8432beaccc0097f2",
                 "reference": "d686b5de27d7dfcee81cf8527931d5ace5390141",
                 "shasum": ""
             },
@@ -3864,12 +3862,12 @@
             "target-dir": "Symfony/Bundle/AsseticBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/AsseticBundle.git",
+                "url": "https://github.com/symfony/assetic-bundle.git",
                 "reference": "146dd3cb46b302bd471560471c6aaa930483dac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/146dd3cb46b302bd471560471c6aaa930483dac1",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/146dd3cb46b302bd471560471c6aaa930483dac1",
                 "reference": "146dd3cb46b302bd471560471c6aaa930483dac1",
                 "shasum": ""
             },
@@ -3927,12 +3925,12 @@
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Icu.git",
+                "url": "https://github.com/symfony/icu.git",
                 "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
+                "url": "https://api.github.com/repos/symfony/icu/zipball/d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
                 "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
                 "shasum": ""
             },
@@ -3975,12 +3973,12 @@
             "version": "v2.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/MonologBundle.git",
+                "url": "https://github.com/symfony/monolog-bundle.git",
                 "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
                 "reference": "227bbeefe30f2d95e3fe5fbd1ccda414287a957a",
                 "shasum": ""
             },
@@ -4035,12 +4033,12 @@
             "target-dir": "Symfony/Bundle/SwiftmailerBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/SwiftmailerBundle.git",
+                "url": "https://github.com/symfony/swiftmailer-bundle.git",
                 "reference": "e98defd402f72e8b54a029ba4d3ac4cb51dc3577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/e98defd402f72e8b54a029ba4d3ac4cb51dc3577",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/e98defd402f72e8b54a029ba4d3ac4cb51dc3577",
                 "reference": "e98defd402f72e8b54a029ba4d3ac4cb51dc3577",
                 "shasum": ""
             },
@@ -4205,12 +4203,12 @@
             "version": "v1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig-extensions.git",
+                "url": "https://github.com/twigphp/Twig-extensions.git",
                 "reference": "c0ab818595338dd5569369bfce2552d02cec5d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig-extensions/zipball/c0ab818595338dd5569369bfce2552d02cec5d50",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/c0ab818595338dd5569369bfce2552d02cec5d50",
                 "reference": "c0ab818595338dd5569369bfce2552d02cec5d50",
                 "shasum": ""
             },
@@ -4253,12 +4251,12 @@
             "version": "v1.16.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabpot/Twig.git",
+                "url": "https://github.com/twigphp/Twig.git",
                 "reference": "8ce37115802e257a984a82d38254884085060024"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/8ce37115802e257a984a82d38254884085060024",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8ce37115802e257a984a82d38254884085060024",
                 "reference": "8ce37115802e257a984a82d38254884085060024",
                 "shasum": ""
             },
@@ -4583,12 +4581,12 @@
             "version": "v1.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/Mink.git",
+                "url": "https://github.com/minkphp/Mink.git",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Mink/zipball/0769e6d9726c140a54dbf827a438c0f9912749fe",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "reference": "0769e6d9726c140a54dbf827a438c0f9912749fe",
                 "shasum": ""
             },
@@ -4638,12 +4636,12 @@
             "version": "v1.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/MinkBrowserKitDriver.git",
+                "url": "https://github.com/minkphp/MinkBrowserKitDriver.git",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkBrowserKitDriver/zipball/63960c8fcad4529faad1ff33e950217980baa64c",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/63960c8fcad4529faad1ff33e950217980baa64c",
                 "reference": "63960c8fcad4529faad1ff33e950217980baa64c",
                 "shasum": ""
             },
@@ -4744,12 +4742,12 @@
             "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/MinkSelenium2Driver.git",
+                "url": "https://github.com/minkphp/MinkSelenium2Driver.git",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkSelenium2Driver/zipball/bcf1b537de37db6db0822d9e7bd97e600fd7a476",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "reference": "bcf1b537de37db6db0822d9e7bd97e600fd7a476",
                 "shasum": ""
             },
@@ -5277,9 +5275,7 @@
             "time": "2013-01-13 10:24:48"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "liip/imagine-bundle": 20,
@@ -5308,10 +5304,9 @@
         "behat/mink-browserkit-driver": 0
     },
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
