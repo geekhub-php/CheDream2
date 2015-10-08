@@ -11,7 +11,7 @@ read reload
 case $reload in
 1)
     echo "Стандартный reload."
-    php composer.phar update
+    php composer.phar install
     php vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/bin/build_bootstrap.php
 
     rm -rf app/cache/*
