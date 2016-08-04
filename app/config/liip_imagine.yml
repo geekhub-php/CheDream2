@@ -46,4 +46,7 @@ liip_imagine:
                 thumbnail: { size: [145, 100], mode: outbound }
 #                upscale: { max: [220, 150] }
 #                relative_resize: { widen: 680 }
-
+        social_share_image:
+            quality: 90
+            filters:
+                thumbnail: { size: [350, 350], mode: outbound }

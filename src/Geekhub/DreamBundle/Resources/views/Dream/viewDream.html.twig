@@ -8,20 +8,27 @@
 
     <div class="row">
         <div class="col-md-4">
-            {# Resources start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
-            {# Resources end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamResource.html.twig', {dream: dream}) }}
+
+            <div style="clear: both;">
+                <h3>Поділитись через:</h3>
+                <div class="yashare-auto-init" data-yashareL10n="uk"
+                    data-yashareQuickServices="vkontakte,facebook,odnoklassniki,twitter,gplus"
+                    data-yashareTheme="counter"
+                    data-yashareTitle="{{ dream.title }}"
+                    data-yashareLink="{{ app.request.uri }}"
+                    data-yashareDescription="{{ displayLimitWord(dream.description, 30) }}"
+                    data-yashareImage="{{ dream.mediaPoster|mediaPath|imagine_filter('social_share_image', true) }}">
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-8">
 
-            {# participants start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
-            {# participants end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamParticipants.html.twig', {dream: dream}) }}
             <br/>
-            {# comments start #}
-                {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
-            {# comments end #}
+            {{ include('GeekhubDreamBundle:includes:showDreamComments.html.twig', {dream: dream}) }}
 
         </div>
 
