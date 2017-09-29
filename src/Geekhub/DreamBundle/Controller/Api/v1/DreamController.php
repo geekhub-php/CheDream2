@@ -7,6 +7,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class DreamController extends Controller
 {
@@ -36,19 +37,15 @@ class DreamController extends Controller
      */
     public function getDreamsAction(ParamFetcher $paramFetcher)
     {
-        $criteria = array(
-            'user' => $paramFetcher->get('user'),
-            'currentStatus' => $paramFetcher->get('statuses'),
-        );
+        $em = $this->getDoctrine()->getManager();
+//        $resultSetMapper = new ResultSetMappingBuilder($em);
+//        $resultSetMapper->addRootEntityFromClassMetadata('GeekhubDreamBundle:Dream', 'dreams');
 
-        $orderArray = $paramFetcher->get('orderBy') ? [$paramFetcher->get('orderBy') => $paramFetcher->get('orderDirection')] : array();
-
-        $dreams = $this->getDoctrine()->getManager()->getRepository('GeekhubDreamBundle:Dream')->findBy(
-            array_filter($criteria),
-            $orderArray,
-            $paramFetcher->get('limit'),
-            $paramFetcher->get('offset')
-        );
+        $dreams = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('GeekhubDreamBundle:Dream')
+            ->getPopularDreamsPaginated($paramFetcher->get('limit'), $paramFetcher->get('offset'), $paramFetcher->get('statuses'))
+        ;
 
         if (!$paramFetcher->get('template')) {
             return $dreams;
